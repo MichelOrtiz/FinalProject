@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpVelocity = 15f;
     private Rigidbody2D rigidbody2d;
+    public Animator animator;
     
     void Start()
     {
@@ -16,8 +17,17 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Jump();
+        if (Input.anyKey)
+        {
+            animator.SetBool("Is Walking", true);
+        }
+        else
+        {
+            animator.SetBool("Is Walking", false);
+
+        }
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
-        transform.position += movement * Time.deltaTime * moveSpeed * 5;     
+        transform.position += movement * Time.deltaTime * moveSpeed * 5;
     }
 
     void Jump()
