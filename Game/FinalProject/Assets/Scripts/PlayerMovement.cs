@@ -55,14 +55,14 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(FeetPos.position, checkRadius, whatIsGround);
         if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
-            rigidbody2d.velocity = Vector2.up * jumpForce;
+            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
             isJumping = true;
             jumpTimeCounter = jumpTime;
         }   
         if (Input.GetKey(KeyCode.Space) && isJumping == true)
         {
             if (jumpTimeCounter>0){
-                rigidbody2d.velocity = Vector2.up * jumpForce;
+                rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             }
             else{
