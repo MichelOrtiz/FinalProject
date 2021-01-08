@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public float runningSpeed;
     public float walkingSpeed;
     public Animator animator;
+    public bool isFlying;
+    public GameObject camara;
 
     void Start()
     {
@@ -27,18 +29,34 @@ public class PlayerMovement : MonoBehaviour
     }
     
     void FixedUpdate(){
-        
     }
 
     void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
-        Move();
-        Jump();
+        camara.transform.position = new Vector3 (transform.position.x, transform.position.y, -10f);
+        if (!isFlying)
+        {
+            rigidbody2d.gravityScale = 26;
+            Move(); // y esto ? 
+            Jump();
+        }
+        else
+        {
+            rigidbody2d.gravityScale = 0;
+            Flying();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.RightShift))
+        {
+            isFlying = !isFlying; //proGamer move
+        } // no funciona bien. no puedo moverme normalmente
+        
         animator.SetBool("Is Grounded", isGrounded);//yeah
         animator.SetBool("Is Walking", moveInput!=0 && isGrounded); // Walking animation
         animator.SetBool("Is Jumping", isJumping); // Jumping animation
         animator.SetBool("Is Falling", rigidbody2d.velocity.y < -0.1);
+        animator.SetBool("Is Flying", isFlying);
         if (moveInput>0)
         {
             transform.eulerAngles = new Vector3(0,0,0);
@@ -47,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
             transform.eulerAngles = new Vector3(0,180,0);
         }
         // animator.SetBool("Turn Left", moveInput<0 ); // Checks if the player turned left to start the turning animation
-    }
+    } // tomen en cuenta el jefe final. si lo hacemos como en minecraft, va a estar muuuy difícil ganar. yes
 
     void Jump()
     {
@@ -84,10 +102,17 @@ public class PlayerMovement : MonoBehaviour
             rigidbody2d.velocity = new Vector2(movement.x, movement.y)*runningSpeed;
 
         }
-        else
+        else // es en otro archivo
         {
             //transform.position += movement * Time.deltaTime * moveSpeed * 5;   
             rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
         }
+    }
+    void Flying()
+    {
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
+        //rigidbody2d.gravityScale(isFlying? 0:26 )// no recuerdo como iba estp no puedo hacer nada, solo flotar cuando salto
+        
+        rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
     }
 }
