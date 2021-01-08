@@ -27,13 +27,15 @@ public class PlayerMovement : MonoBehaviour
     }
     
     void FixedUpdate(){
-        moveInput = Input.GetAxisRaw("Horizontal");
-        Move();
-        Jump();
+        
     }
 
     void Update()
     {
+        moveInput = Input.GetAxisRaw("Horizontal");
+        Move();
+        Jump();
+        animator.SetBool("Is Grounded", isGrounded);//yeah
         animator.SetBool("Is Walking", moveInput!=0 && isGrounded); // Walking animation
         animator.SetBool("Is Jumping", isJumping); // Jumping animation
         animator.SetBool("Is Falling", rigidbody2d.velocity.y < -0.1);
@@ -49,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        Move();
         isGrounded = Physics2D.OverlapCircle(FeetPos.position, checkRadius, whatIsGround);
         if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
@@ -74,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
+        
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);   
         if(Input.GetKey(KeyCode.LeftShift)){
             //transform.position += movement * Time.deltaTime * moveSpeedSprint * 5;     
