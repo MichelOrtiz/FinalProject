@@ -22,9 +22,11 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public bool isFlying;
     public GameObject camara;
-    public int maxStamina = 100;
-    public int currentStamina;
+    public float maxStamina = 100;
+    public float currentStamina;
     public StaminaBar staminaBar;
+    public bool isRunning;
+    public bool isStruggling;
 
     void Start()
     {
@@ -38,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        isStruggling = false;
         moveInput = Input.GetAxisRaw("Horizontal");
         camara.transform.position = new Vector3 (transform.position.x, transform.position.y, -10f);
         if (!isFlying)
@@ -73,12 +76,9 @@ public class PlayerMovement : MonoBehaviour
         {
             TakeTirement(5);
         }
-        if (!isJumping && isGrounded && !Input.GetKey(KeyCode.LeftShift))
-        {
-            RegenStamina(3);
-        }
+        Timer(1,.01f,.005f);
         // animator.SetBool("Turn Left", moveInput<0 ); // Checks if the player turned left to start the turning animation
-    } // tomen en cuenta el jefe final. si lo hacemos como en minecraft, va a estar muuuy difícil ganar. yes
+    } 
 
     void Jump()
     {
@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
             isJumping = true;
             jumpTimeCounter = jumpTime;
-            TakeTirement(2);
+            
         }   
         if (Input.GetKey(KeyCode.Space) && isJumping == true)
         {
@@ -111,15 +111,22 @@ public class PlayerMovement : MonoBehaviour
         
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);   
         if(Input.GetKey(KeyCode.LeftShift)){
+            if(currentStamina>10){
             //transform.position += movement * Time.deltaTime * moveSpeedSprint * 5;     
-            rigidbody2d.velocity = new Vector2(movement.x, movement.y)*runningSpeed;
-            TakeTirement(1);
-
+                rigidbody2d.velocity = new Vector2(movement.x, movement.y)*runningSpeed;
+                isRunning = true;
+            }
+            else
+            {
+                rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
+                isRunning = true;
+            }
         }
         else // es en otro archivo
         {
             //transform.position += movement * Time.deltaTime * moveSpeed * 5;   
             rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
+            isRunning = false;
         }
     }
     void Flying()
@@ -130,8 +137,9 @@ public class PlayerMovement : MonoBehaviour
         rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
         
     }
-    void TakeTirement(int damage){
-        if (currentStamina>=0)
+    void TakeTirement(float damage){
+        isStruggling = true;
+        if (currentStamina>0)
         {
             currentStamina -= damage;
             staminaBar.SetStamina(currentStamina);
@@ -141,8 +149,8 @@ public class PlayerMovement : MonoBehaviour
             staminaBar.SetStamina(0);
         }
     }
-    void RegenStamina(int regen){
-        if (currentStamina<=100)
+    void RegenStamina(float regen){
+        if (currentStamina<100)
         {
         currentStamina += regen;
         staminaBar.SetStamina(currentStamina);
@@ -150,6 +158,35 @@ public class PlayerMovement : MonoBehaviour
         if (currentStamina>100)
         {
             staminaBar.SetStamina(100);
+        }
+    }
+    IEnumerator Tirement(int timeTired, float damage){
+        yield return new WaitForSeconds (timeTired);
+        if (isRunning)
+        {
+            TakeTirement(damage);
+        }
+        yield return null;
+    }
+    IEnumerator Regeneration(int timeRegen, float regen){
+        
+        yield return new WaitForSeconds (timeRegen);
+        if (!isRunning)
+        {
+            RegenStamina(regen);
+        }
+        yield return new WaitForSeconds(timeRegen);
+    }
+    void Timer(int time, float damage, float regen){
+        if(isRunning){
+            StartCoroutine (Tirement(time,damage));
+        }
+        else{
+            StopCoroutine (Tirement(time, damage));
+            if (!isStruggling)
+            {
+                StartCoroutine (Regeneration(time,regen));
+            }
         }
     }
 }
