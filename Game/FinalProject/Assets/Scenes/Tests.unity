@@ -187,7 +187,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &217701019
 GameObject:
@@ -282,7 +282,7 @@ RectTransform:
   m_Children:
   - {fileID: 1814756559}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2660,7 +2660,7 @@ GameObject:
   - component: {fileID: 444150472}
   - component: {fileID: 444150473}
   - component: {fileID: 444150474}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Nico-nor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2731,7 +2731,7 @@ Transform:
   m_Children:
   - {fileID: 1962095654}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &444150470
 Rigidbody2D:
@@ -2792,20 +2792,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b123ea456edab91b7788590a8a8f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWalking: 0
   isGrounded: 0
   isJumping: 0
-  FeetPos: {fileID: 1962095654}
-  checkRadius: 0.2
+  isFlying: 0
+  isParalized: 0
+  isCaptured: 0
+  isInFear: 0
+  isDizzy: 0
+  isBrainFrozen: 0
+  isResting: 0
+  isChasing: 0
+  walkingSpeed: 7
+  jumpForce: 17
+  jumpTime: 0.25
+  rigidbody2d: {fileID: 444150470}
+  animator: {fileID: 444150473}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  jumpTime: 0.25
-  jumpForce: 17
   runningSpeed: 12
-  walkingSpeed: 7
-  animator: {fileID: 444150473}
-  isFlying: 0
   camara: {fileID: 1329290214}
+  maxStamina: 100
+  currentStamina: 0
+  staminaBar: {fileID: 1814756560}
+  isRunning: 0
+  isStruggling: 0
+  feetPos: {fileID: 1962095654}
+  checkRadius: 0.2
 --- !u!95 &444150473
 Animator:
   serializedVersion: 3
@@ -2884,6 +2898,36 @@ PolygonCollider2D:
       - {x: -0.046875, y: -0.9375}
       - {x: -0.0625, y: -0.921875}
       - {x: -0.109375, y: -0.921875}
+--- !u!1 &531428115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 531428116}
+  m_Layer: 9
+  m_Name: castPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &531428116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531428115}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.628, y: -0.326, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1108425744}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747901471
 GameObject:
   m_ObjectHideFlags: 0
@@ -2913,7 +2957,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1396421651}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &747901473
@@ -3128,9 +3172,9 @@ Transform:
   m_LocalPosition: {x: 19.05, y: 1.339, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2027468527}
+  - {fileID: 531428116}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &1108425745
 PolygonCollider2D:
@@ -3210,100 +3254,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce5c839b2324944b81386da4ac9c882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingRight: 0
-  collisionChecker: {fileID: 2027468527}
-  ground:
+  isWalking: 0
+  isGrounded: 0
+  isJumping: 0
+  isFlying: 0
+  isParalized: 0
+  isCaptured: 0
+  isInFear: 0
+  isDizzy: 0
+  isBrainFrozen: 0
+  isResting: 0
+  isChasing: 0
+  walkingSpeed: 7
+  jumpForce: 17
+  jumpTime: 0.25
+  rigidbody2d: {fileID: 1108425746}
+  animator: {fileID: 1108425742}
+  damageAmount: 0
+  normalSpeed: 1
+  chaseSpeed: 0
+  fieldView: 0
+  collisionCheckRadius: 2
+  groundCheckRadius: 2
+  collisionChecker: {fileID: 0}
+  groundChecker: {fileID: 0}
+  castPos: {fileID: 531428116}
+  baseCastDistance: 2
+  whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  jumpTime: 0.25
-  jumpForce: 17
-  runningSpeed: 12
-  walkingSpeed: 7
-  animator: {fileID: 444150473}
-  isFlying: 0
-  camara: {fileID: 1329290214}
-  maxStamina: 100
-  currentStamina: 0
-  staminaBar: {fileID: 1814756560}
-  isRunning: 0
---- !u!95 &444150473
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444150467}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3c1425836074800cc986f9acab94c27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!60 &444150474
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444150467}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 0010d2ae498d464458d17989aa8f8404, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.015625, y: -0.59375}
-      - {x: -0.015625, y: -1}
-      - {x: 0.203125, y: -1}
-      - {x: 0.2109375, y: -0.9296875}
-      - {x: 0.1484375, y: -0.90625}
-      - {x: 0.265625, y: -0.5234375}
-      - {x: 0.34375, y: -0.3828125}
-      - {x: 0.3359375, y: -0.2421875}
-      - {x: 0.2734375, y: -0.1171875}
-      - {x: 0.3359375, y: 0.0234375}
-      - {x: 0.390625, y: 0.125}
-      - {x: 0.515625, y: 0.5}
-      - {x: 0.515625, y: 0.6015625}
-      - {x: 0.453125, y: 0.734375}
-      - {x: 0.4765625, y: 0.890625}
-      - {x: 0.3671875, y: 0.8984375}
-      - {x: 0.34375, y: 0.84375}
-      - {x: 0.1328125, y: 0.953125}
-      - {x: -0.2734375, y: 0.953125}
-      - {x: -0.328125, y: 0.90625}
-      - {x: -0.4609375, y: 0.7578125}
-      - {x: -0.578125, y: 0.5078125}
-      - {x: -0.578125, y: 0.28125}
-      - {x: -0.5234375, y: 0.1796875}
-      - {x: -0.578125, y: -0.25}
-      - {x: -0.578125, y: -0.640625}
-      - {x: -0.4921875, y: -0.65625}
-      - {x: -0.4296875, y: -0.5859375}
-      - {x: -0.265625, y: -0.515625}
-      - {x: -0.265625, y: -1}
-      - {x: -0.046875, y: -1}
-      - {x: -0.046875, y: -0.9375}
-      - {x: -0.0625, y: -0.921875}
-      - {x: -0.109375, y: -0.921875}
+  movingRight: 0
 --- !u!1 &1168329762
 GameObject:
   m_ObjectHideFlags: 0
@@ -3347,7 +3327,7 @@ Transform:
   - {fileID: 233102681}
   - {fileID: 302490832}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1329290214
 GameObject:
@@ -3430,7 +3410,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1369910216
 GameObject:
@@ -3555,7 +3535,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1369910221
 BoxCollider2D:
@@ -3845,7 +3825,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1962095654}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FeetPos
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -3864,35 +3844,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 444150469}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2027468526
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2027468527}
-  m_Layer: 9
-  m_Name: CollisionChecker
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2027468527
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027468526}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.649, y: -0.425, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1108425744}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

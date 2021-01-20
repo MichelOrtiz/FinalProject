@@ -2,31 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerManager : Entity
 {
-    private Rigidbody2D rigidbody2d;
-    private float moveSpeed;
-    private float moveSpeedSprint;
-    private float moveInput;
-    public bool isGrounded;    
-    public bool isJumping;
-    private float jumpTimeCounter;
-
-    public Transform FeetPos;
-    public float checkRadius;
-    public LayerMask whatIsGround;
-    public float jumpTime;
-    public float jumpForce;
-    public float runningSpeed;
-    public float walkingSpeed;
-    public Animator animator;
-    public bool isFlying;
-    public GameObject camara;
+    #region Main Parameters
     public float maxStamina = 100;
+    public float runningSpeed;
+
+    #endregion
+
+    #region Constant change Parameters
     public float currentStamina;
-    public StaminaBar staminaBar;
+    private float moveInput; 
+    private float jumpTimeCounter;
+    #endregion
+
+    #region States
     public bool isRunning;
     public bool isStruggling;
+    #endregion
+
+    #region Layers, rigids, etc
+    public LayerMask whatIsGround;
+    public GameObject camara;
+    public StaminaBar staminaBar;
+    public Transform feetPos;
+    public float checkRadius;
+    #endregion
+
+    
+    static int lCount = 0;
+    static int rCount = 0;
+
 
     void Start()
     {
@@ -43,10 +49,10 @@ public class PlayerMovement : MonoBehaviour
         isStruggling = false;
         moveInput = Input.GetAxisRaw("Horizontal");
         camara.transform.position = new Vector3 (transform.position.x, transform.position.y, -10f);
-        if (!isFlying)
+        if (!isFlying && !isCaptured)
         {
             rigidbody2d.gravityScale = 26;
-            Move(); // y esto ? 
+            Move();
             Jump();
         }
         else
@@ -57,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
-            isFlying = !isFlying; //proGamer move
-        } // no funciona bien. no puedo moverme normalmente
+            isFlying = !isFlying;
+        }
         
         animator.SetBool("Is Grounded", isGrounded);//yeah
         animator.SetBool("Is Walking", moveInput!=0 && isGrounded); // Walking animation
@@ -78,11 +84,12 @@ public class PlayerMovement : MonoBehaviour
         }
         Timer(1,.01f,.005f);
         // animator.SetBool("Turn Left", moveInput<0 ); // Checks if the player turned left to start the turning animation
+    
     } 
 
     void Jump()
     {
-        isGrounded = Physics2D.OverlapCircle(FeetPos.position, checkRadius, whatIsGround);
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
         if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
@@ -168,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
         }
         yield return null;
     }
+
     IEnumerator Regeneration(int timeRegen, float regen){
         
         yield return new WaitForSeconds (timeRegen);
@@ -177,6 +185,7 @@ public class PlayerMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(timeRegen);
     }
+
     void Timer(int time, float damage, float regen){
         if(isRunning){
             StartCoroutine (Tirement(time,damage));
@@ -187,6 +196,26 @@ public class PlayerMovement : MonoBehaviour
             {
                 StartCoroutine (Regeneration(time,regen));
             }
+        }
+    }
+
+    public IEnumerator Captured(int nTaps, int damagePerSecond)
+    {
+        int halfTaps = nTaps / 2;
+        
+        StartCoroutine(Tirement(damagePerSecond, 1));
+        lCount += Input.GetKeyDown(KeyCode.A) ? 1:0;
+        rCount += Input.GetKeyDown(KeyCode.D) ? 1:0;
+
+        isCaptured = lCount < halfTaps && rCount < halfTaps;
+
+        if (isCaptured)
+        {
+            return new WaitUntil(()=>!isCaptured);
+        }
+        else
+        {
+            return null;
         }
     }
 }
