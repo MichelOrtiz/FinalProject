@@ -4,37 +4,25 @@ using UnityEngine;
 
 public class Squirrel : Enemy
 {
-    
-    
-
     new void Start()
     {
-        facingDirection = LEFT;
+        base.Start();
     }
-
-    // Update is called once per frame
     new void Update()
     {
-        //groundInfo = Physics2D.Raycast(groundChecker.position, Vector2.down, whatIsGround);
-        //inFrontOfObstacle = !collisionInfo.collider;
-        //collisionInfo = Physics2D.Raycast(collisionChecker.position, Vector2.zero, collisionCheckRadius);
-        //inFrontOfObstacle = collisionInfo.collider && !groundInfo.collider;
-        //UpdateAnimationState();
-
-        UpdateAnimation();
-
-        //animator.SetBool("Is Walking", isWalking);
-    
+        base.Update();
+        
         if (CanSeePlayer(agroRange))
         {
-            Debug.Log("Can see player indeed");
+            //Debug.Log("Can see player indeed");
+            isChasing = true;
             ChasePlayer();
         }
         else
         {
             isChasing = false;
             StartCoroutine(MainRoutine());
-            Debug.Log("Can't see player indeed");
+            //Debug.Log("Can't see player indeed");
         }
 
         /*if (TouchingPlayer())
@@ -66,7 +54,6 @@ public class Squirrel : Enemy
 
     protected override void ChasePlayer()
     {
-        isChasing = true;
         if (!IsNearEdge())
         {
             transform.Translate(Vector3.left * Time.deltaTime * chaseSpeed);
@@ -76,4 +63,25 @@ public class Squirrel : Enemy
             isWalking = false;
         }
     }
+
+   
+   
+    /*void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("Collision witdfad");
+            
+        }
+    }*/
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            
+            
+        }
+    }
+
 }

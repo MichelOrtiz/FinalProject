@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public abstract class Enemy : Entity
 {
 
@@ -16,15 +17,6 @@ public abstract class Enemy : Entity
 
     #region Layers, rigids, etc
 
-    //  Using 2 raycasts to check: Obstacles and Ground that may be on its way
-    [SerializeField] protected float collisionCheckRadius;
-    [SerializeField] protected float groundCheckRadius;
-    
-    [SerializeField] protected Transform collisionChecker;
-    [SerializeField] protected Transform groundChecker;
-    [SerializeField] protected RaycastHit2D collisionInfo;
-    [SerializeField] protected RaycastHit2D groundInfo;
-
     [SerializeField] protected Transform castPos;
     [SerializeField] protected float baseCastDistance;
     protected string facingDirection;
@@ -32,16 +24,33 @@ public abstract class Enemy : Entity
 
     protected Vector3 baseScale;
 
-    [SerializeField]protected LayerMask whatIsGround;
     #endregion
 
     #region Status
     //public bool inFrontOfObstacle;
     protected bool playerSighted;
+    
+    //ActionHandler action;
+    public delegate void EnemyTouchedPlayer();
+    public event EnemyTouchedPlayer OnEnemyTouchedPlayer;
 
     #endregion
 
     [SerializeField]protected PlayerManager player;
+
+    new protected void Start()
+    {
+        base.Start();
+
+        baseScale = transform.localScale;
+        player = SceneManager.Instance.player;
+    }
+
+
+    new protected void Update()
+    {
+        base.UpdateAnimation();
+    }
 
     protected bool InFrontOfObstacle()
     {
@@ -62,31 +71,11 @@ public abstract class Enemy : Entity
 
         return !Physics2D.Linecast(castPos.position, targetPos, 1 << LayerMask.NameToLayer("Ground"));
     }
-    
-    protected bool TouchingPlayer()
-    {
-        Vector3 targetPos = castPos.position;
-
-        return Physics2D.Linecast(castPos.position, targetPos, 1 << LayerMask.NameToLayer("Player"));
-    }
 
     protected abstract IEnumerator MainRoutine();
     protected abstract void ChasePlayer();
 
-    protected void Start()
-    {
-        rigidbody2d = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        baseScale = transform.localScale;
-        player = SceneManager.Instance.player;
-    }
-
-    protected void Update()
-    {
-        //float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-
-        //playerSighted = distanceToPlayer < agroRange;
-    }
+    
 
     protected void ChangeFacingDirection()
     {
@@ -118,4 +107,5 @@ public abstract class Enemy : Entity
         return hit.collider.gameObject.CompareTag("Player");
     }
 
+    
 }

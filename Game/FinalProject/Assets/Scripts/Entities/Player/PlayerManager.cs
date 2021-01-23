@@ -22,11 +22,10 @@ public class PlayerManager : Entity
     #endregion
 
     #region Layers, rigids, etc
-    public LayerMask whatIsGround;
+    
     public GameObject camara;
     public StaminaBar staminaBar;
-    public Transform feetPos;
-    public float checkRadius;
+    
     #endregion
 
     
@@ -34,9 +33,9 @@ public class PlayerManager : Entity
     static int rCount = 0;
 
 
-    void Start()
+    new void Start()
     {
-        rigidbody2d = GetComponent<Rigidbody2D>();
+        base.Start();
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
     }
@@ -44,8 +43,9 @@ public class PlayerManager : Entity
     void FixedUpdate(){
     }
 
-    void Update()
+    new void Update()
     {
+        base.Update();
         isStruggling = false;
         moveInput = Input.GetAxisRaw("Horizontal");
         camara.transform.position = new Vector3 (transform.position.x, transform.position.y, -10f);
@@ -69,7 +69,7 @@ public class PlayerManager : Entity
         animator.SetBool("Is Grounded", isGrounded);//yeah
         animator.SetBool("Is Walking", moveInput!=0 && isGrounded); // Walking animation
         animator.SetBool("Is Jumping", isJumping); // Jumping animation
-        animator.SetBool("Is Falling", rigidbody2d.velocity.y < -0.1);
+        animator.SetBool("Is Falling", isFalling);
         animator.SetBool("Is Flying", isFlying);
         if (moveInput>0)
         {
@@ -89,8 +89,7 @@ public class PlayerManager : Entity
 
     void Jump()
     {
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
-        if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
             isJumping = true;
@@ -129,7 +128,7 @@ public class PlayerManager : Entity
                 isRunning = true;
             }
         }
-        else // es en otro archivo
+        else
         {
             //transform.position += movement * Time.deltaTime * moveSpeed * 5;   
             rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
@@ -139,7 +138,7 @@ public class PlayerManager : Entity
     void Flying()
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
-        //rigidbody2d.gravityScale(isFlying? 0:26 )// no recuerdo como iba estp no puedo hacer nada, solo flotar cuando salto
+        //rigidbody2d.gravityScale(isFlying? 0:26 )// no recuerdo como iba esto
         
         rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
         
@@ -218,4 +217,5 @@ public class PlayerManager : Entity
             return null;
         }
     }
+
 }

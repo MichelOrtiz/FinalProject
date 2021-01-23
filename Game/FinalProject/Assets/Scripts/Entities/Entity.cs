@@ -8,61 +8,52 @@ public class Entity : MonoBehaviour
     protected const string RIGHT = "right";
 
     #region Normal States
-    public bool isWalking;
-    public bool isGrounded;
-    public bool isJumping;
-    public bool isFlying;
+    public bool isWalking = false;
+    public bool isGrounded = false;
+    public bool isJumping = false;
+    public bool isFlying = false;
+    public bool isFalling = false;
     #endregion
 
     #region Special States
-    public bool isParalized;
-    public bool isCaptured;
-    public bool isInFear;
-    public bool isDizzy;
-    public bool isBrainFrozen;
-    public bool isResting;
-    public bool isChasing;
+    public bool isParalized = false;
+    public bool isCaptured = false;
+    public bool isInFear = false;
+    public bool isDizzy = false;
+    public bool isBrainFrozen = false;
+    public bool isResting = false;
+    public bool isChasing = false;
     #endregion
 
     #region Physic Parameters
-    public float walkingSpeed;
-    public float jumpForce;
-    public float jumpTime;
+    [SerializeField] protected float walkingSpeed;
+    [SerializeField] protected float jumpForce;
+    [SerializeField] protected float jumpTime;
+    [SerializeField] protected float fallingCriteria;
+    
     #endregion
     
-    #region Layers and rigids
+    #region Layers, rigids, etc...
     public Rigidbody2D rigidbody2d;
-    public Animator animator;
-    
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected LayerMask whatIsGround;
+    [SerializeField] protected Transform feetPos;    
+    [SerializeField] protected float checkFeetRadius;
     #endregion
 
-    void Start()
+    protected void Start()
     {
         animator = GetComponent<Animator>();
+        rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    protected void Update()
     {
-        //UpdateAnimation();
-    }
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
+        isFalling = rigidbody2d.velocity.y < - fallingCriteria;
+        UpdateAnimation();
 
-    /*public IEnumerator Paralized(int time)
-    {
-        yield return new WaitForSeconds(time);
-    }*/
-    
-    /*IEnumerator Fear(int time)
-    {
-        ushort jumps = NewRandom(3, 10);
-        for (int i = 0; i < jumps; i++)
-        {
-            rigidbody2d.velocity = new Vector2(NewRandom(3,10), jumpForce);
-        }
     }
-    IEnumerator Dizzy(int time);
-    IEnumerator FrozenBragvin(int time);
-    IEnumerator Rest(int time);
-    IEnumerator Chase(int time);*/
 
     public void UpdateAnimation()
     {
@@ -74,4 +65,6 @@ public class Entity : MonoBehaviour
         animator.SetBool("Is Resting", isResting);
         animator.SetBool("Is Chasing", isChasing);
     }
+
+    
 }
