@@ -27,12 +27,7 @@ public abstract class Enemy : Entity
     #endregion
 
     #region Status
-    //public bool inFrontOfObstacle;
     protected bool playerSighted;
-    
-    //ActionHandler action;
-    public delegate void EnemyTouchedPlayer();
-    public event EnemyTouchedPlayer OnEnemyTouchedPlayer;
 
     #endregion
 
@@ -107,5 +102,27 @@ public abstract class Enemy : Entity
         return hit.collider.gameObject.CompareTag("Player");
     }
 
-    
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            if (!player.isImmune)
+            {
+                Attack();
+                player.transform.position = this.transform.position;
+            }
+        }
+    }
+
+    public IEnumerator AfterPlayerReleasedFromCapture()
+    {
+        isParalized = true;
+        rigidbody2d.Sleep();
+        yield return new WaitForSeconds(2);
+        rigidbody2d.WakeUp();
+        isParalized = false;
+    }
+
+    protected abstract void Attack();
+
 }

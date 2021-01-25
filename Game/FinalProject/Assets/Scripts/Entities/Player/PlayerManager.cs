@@ -28,14 +28,27 @@ public class PlayerManager : Entity
     
     #endregion
 
+    #region states params // might be in a different class
+    private float buttonCool = 0.8f;
+    private static int lButtonCount = 0;
+    private static int rButtonCount = 0;
     
-    static int lCount = 0;
-    static int rCount = 0;
+    [SerializeField] private float coolDownAfterAttack;
+    [SerializeField] private float immunityTime;
+    public bool isImmune;
+
+    private bool tirementRunning = false;
+    #endregion
+
+
+    
+    
 
 
     new void Start()
     {
         base.Start();
+
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
     }
@@ -45,36 +58,53 @@ public class PlayerManager : Entity
 
     new void Update()
     {
-        base.Update();
+        
         isStruggling = false;
+        
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
+        isFalling = rigidbody2d.velocity.y < - fallingCriteria;
+        //UpdateAnimation();
+
         moveInput = Input.GetAxisRaw("Horizontal");
+
         camara.transform.position = new Vector3 (transform.position.x, transform.position.y, -10f);
-        if (!isFlying && !isCaptured)
+
+        if (!isCaptured)
         {
-            rigidbody2d.gravityScale = 26;
-            Move();
-            Jump();
+            if (!isFlying)
+            {
+                rigidbody2d.gravityScale = 26;
+                Move();
+                Jump();
+            }
+            else
+            {
+                rigidbody2d.gravityScale = 0;
+                Flying();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                isFlying = !isFlying;
+            }
         }
         else
         {
-            rigidbody2d.gravityScale = 0;
-            Flying();
+            rigidbody2d.Sleep();
         }
         
-        if (Input.GetKeyDown(KeyCode.RightShift))
-        {
-            isFlying = !isFlying;
-        }
         
         animator.SetBool("Is Grounded", isGrounded);//yeah
         animator.SetBool("Is Walking", moveInput!=0 && isGrounded); // Walking animation
         animator.SetBool("Is Jumping", isJumping); // Jumping animation
         animator.SetBool("Is Falling", isFalling);
         animator.SetBool("Is Flying", isFlying);
+
         if (moveInput>0)
         {
             transform.eulerAngles = new Vector3(0,0,0);
-        }else if (moveInput<0)
+        }
+        else if (moveInput<0)
         {
             transform.eulerAngles = new Vector3(0,180,0);
         }
@@ -84,7 +114,7 @@ public class PlayerManager : Entity
         }
         Timer(1,.01f,.005f);
         // animator.SetBool("Turn Left", moveInput<0 ); // Checks if the player turned left to start the turning animation
-    
+        
     } 
 
     void Jump()
@@ -166,12 +196,12 @@ public class PlayerManager : Entity
             staminaBar.SetStamina(100);
         }
     }
-    IEnumerator Tirement(int timeTired, float damage){
+    public IEnumerator Tirement(int timeTired, float damage)
+    {
+        tirementRunning = true;
         yield return new WaitForSeconds (timeTired);
-        if (isRunning)
-        {
-            TakeTirement(damage);
-        }
+        TakeTirement(damage);
+        tirementRunning = false;
         yield return null;
     }
 
@@ -198,24 +228,51 @@ public class PlayerManager : Entity
         }
     }
 
-    public IEnumerator Captured(int nTaps, int damagePerSecond)
+    public void Captured(int nTaps, int damagePerSecond)
     {
-        int halfTaps = nTaps / 2;
-        
-        StartCoroutine(Tirement(damagePerSecond, 1));
-        lCount += Input.GetKeyDown(KeyCode.A) ? 1:0;
-        rCount += Input.GetKeyDown(KeyCode.D) ? 1:0;
-
-        isCaptured = lCount < halfTaps && rCount < halfTaps;
-
-        if (isCaptured)
+        if(!tirementRunning)
         {
-            return new WaitUntil(()=>!isCaptured);
+            StartCoroutine(Tirement(1, damagePerSecond));
+        }
+        isCaptured = true;
+        int halfTaps = nTaps/2;
+        Debug.Log(Input.GetAxisRaw("Horizontal"));
+        Debug.Log($"left: {lButtonCount} right: {rButtonCount}");
+
+        if (Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Horizontal") == 1)
+        {
+            if (buttonCool > 0 && lButtonCount >= halfTaps && rButtonCount >= halfTaps)
+            {
+                isCaptured = false;
+                rigidbody2d.WakeUp();
+                StartCoroutine(Immunity());
+                lButtonCount = 0;
+                rButtonCount = 0;
+            }
+            else
+            {
+
+                buttonCool = 0.8f;
+                lButtonCount += Input.GetAxisRaw("Horizontal") ==-1? 1 : 0;
+                rButtonCount += Input.GetAxisRaw("Horizontal") == 1? 1 : 0;
+            }
+        }
+        if ( buttonCool > 0 )
+        {
+            buttonCool -= 1 * Time.deltaTime ;
         }
         else
         {
-            return null;
+            rButtonCount = 0;
+            lButtonCount = 0;
         }
+    }
+
+    private IEnumerator Immunity()
+    {
+        isImmune = true;
+        yield return new WaitForSeconds(immunityTime);
+        isImmune = false;
     }
 
 }

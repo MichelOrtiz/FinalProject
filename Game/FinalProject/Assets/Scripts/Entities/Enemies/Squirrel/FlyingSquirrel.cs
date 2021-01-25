@@ -50,11 +50,27 @@ public class FlyingSquirrel : Enemy
 
     void FixedUpdate()
     {
-        if (CanSeePlayer(agroRange))
+        if (!isParalized)
         {
-            isChasing = true;
-            playerY = player.transform.position.y;
-            ChasePlayer();
+            if(!player.isCaptured)
+            {
+                if (CanSeePlayer(agroRange))
+                {
+                    rigidbody2d.WakeUp();
+                    isChasing = true;
+                    playerY = player.transform.position.y;
+                    ChasePlayer();
+                }
+            }
+            else
+            {
+                rigidbody2d.Sleep();
+            }
         }
+    }
+
+    protected override void Attack()
+    {
+        player.Captured(nTaps: 6, damagePerSecond: 10);
     }
 }

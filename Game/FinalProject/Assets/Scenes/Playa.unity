@@ -179,7 +179,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   feetPos: {fileID: 1973797915}
-  checkFeetRadius: 0.2
+  checkFeetRadius: 0.25
   damageAmount: 0
   normalSpeed: 0
   chaseSpeed: 10
@@ -357,7 +357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80680097}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 17.63, y: 10.49, z: 0}
+  m_LocalPosition: {x: 23.72, y: 3.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 140581247}
@@ -41708,6 +41708,9 @@ MonoBehaviour:
   isStruggling: 0
   camara: {fileID: 410369129}
   staminaBar: {fileID: 380020897}
+  coolDownAfterAttack: 0
+  immunityTime: 2
+  isImmune: 0
 --- !u!50 &934300703
 Rigidbody2D:
   serializedVersion: 4
@@ -42089,7 +42092,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.00000023841858, y: -0.34046322}

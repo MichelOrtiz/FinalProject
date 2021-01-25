@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,23 +13,24 @@ public class Squirrel : Enemy
     {
         base.Update();
         
-        if (CanSeePlayer(agroRange))
+        if (!isParalized)
         {
-            //Debug.Log("Can see player indeed");
-            isChasing = true;
-            ChasePlayer();
+            if (!player.isCaptured)
+            {
+                if (CanSeePlayer(agroRange))
+                {
+                    //Debug.Log("Can see player indeed");
+                    isChasing = true;
+                    ChasePlayer();
+                }
+                else
+                {
+                    isChasing = false;
+                    StartCoroutine(MainRoutine());
+                    //Debug.Log("Can't see player indeed");
+                }
+            }
         }
-        else
-        {
-            isChasing = false;
-            StartCoroutine(MainRoutine());
-            //Debug.Log("Can't see player indeed");
-        }
-
-        /*if (TouchingPlayer())
-        {
-            SceneManager.Instance.player.Captured(10, 10);
-        }*/
     }
 
 
@@ -64,24 +66,9 @@ public class Squirrel : Enemy
         }
     }
 
-   
-   
-    /*void OnCollisionEnter2D(Collision2D other)
+    protected override void Attack()
     {
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("Collision witdfad");
-            
-        }
-    }*/
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            
-            
-        }
+        player.Captured(nTaps: 6, damagePerSecond: 0);
     }
 
 }
