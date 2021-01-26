@@ -14,6 +14,16 @@ public static class RandomGenerator
 
         return num; 
     }
+
+    public static ushort NewRandom(short min, short max)
+    {
+        ushort num;
+        System.Random random = new System.Random();
+        
+        num = (ushort) random.Next(min, max);
+
+        return num; 
+    }
     public static ushort NewRandom(List<ushort> list, ushort min, ushort max)
     {
         ushort num;

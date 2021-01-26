@@ -37,10 +37,12 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rigidbody2d;
     [SerializeField] protected Animator animator;
     [SerializeField] protected LayerMask whatIsGround;
+    [SerializeField] protected LayerMask whatIsObstacle;
     [SerializeField] protected Transform feetPos;    
     [SerializeField] protected float checkFeetRadius;
     #endregion
 
+    #region Unity stuff
     protected void Start()
     {
         animator = GetComponent<Animator>();
@@ -65,6 +67,28 @@ public class Entity : MonoBehaviour
         animator.SetBool("Is Resting", isResting);
         animator.SetBool("Is Chasing", isChasing);
     }
+    #endregion
 
-    
+    #region Self state methods
+
+    // not working
+    public void Fear()
+    {
+        isInFear = true;
+        StopAllCoroutines();
+        var jumpForce = RandomGenerator.NewRandom(2, 7);
+        var jumps = RandomGenerator.NewRandom(2, 5);
+
+        //Vector3 vector;
+        for (int i = 0; i < jumps; i++)
+        {
+            var x = RandomGenerator.NewRandom(-5, 5);
+            if (isGrounded)
+            {
+                rigidbody2d.velocity = new Vector3(rigidbody2d.velocity.x, jumpForce);
+            }
+        }
+        isInFear = false;
+    }
+    #endregion
 }

@@ -8,13 +8,47 @@ public class FlyingSquirrel : Enemy
     float lastY; // last y pos of the enemy (before jumping)
     float playerY; // when player sighted
 
+    #region Unity stuff
     new void Start()
     {
         base.Start();
-
         jump = new Vector3(0f, jumpForce, 0f);
         facingDirection = transform.eulerAngles.y == 0? LEFT:RIGHT;
     }
+
+    new void Update()
+    {
+        base.Update();
+        isChasing = false;
+    
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
+        isFalling = rigidbody2d.velocity.y < - fallingCriteria;
+        UpdateAnimation();
+
+        isResting = !isChasing;
+        
+    }
+
+    void FixedUpdate()
+    {
+        if (!isParalized && !player.isCaptured)
+        {
+            if (CanSeePlayer(agroRange))
+            {
+                rigidbody2d.WakeUp();
+                isChasing = true;
+                playerY = player.transform.position.y;
+                ChasePlayer();
+            }
+            else
+            {
+                rigidbody2d.Sleep();
+            }
+        }
+    }
+    #endregion
+
+    #region Behaviour methods
     protected override void ChasePlayer()
     {
         if (isGrounded)
@@ -35,42 +69,10 @@ public class FlyingSquirrel : Enemy
         return null;
     }
 
-    new void Update()
-    {
-        base.Update();
-        isChasing = false;
-    
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
-        isFalling = rigidbody2d.velocity.y < - fallingCriteria;
-        UpdateAnimation();
-
-        isResting = !isChasing;
-        
-    }
-
-    void FixedUpdate()
-    {
-        if (!isParalized)
-        {
-            if(!player.isCaptured)
-            {
-                if (CanSeePlayer(agroRange))
-                {
-                    rigidbody2d.WakeUp();
-                    isChasing = true;
-                    playerY = player.transform.position.y;
-                    ChasePlayer();
-                }
-            }
-            else
-            {
-                rigidbody2d.Sleep();
-            }
-        }
-    }
-
     protected override void Attack()
     {
         player.Captured(nTaps: 6, damagePerSecond: 10);
+        player.transform.position = this.transform.position;
     }
+    #endregion
 }

@@ -5,39 +5,37 @@ using UnityEngine;
 
 public class Squirrel : Enemy
 {
+
+    #region Unity stuff
     new void Start()
     {
         base.Start();
     }
+
     new void Update()
     {
         base.Update();
-        
-        if (!isParalized)
-        {
-            if (!player.isCaptured)
-            {
-                if (CanSeePlayer(agroRange))
-                {
-                    //Debug.Log("Can see player indeed");
-                    isChasing = true;
-                    ChasePlayer();
-                }
-                else
-                {
-                    isChasing = false;
-                    StartCoroutine(MainRoutine());
-                    //Debug.Log("Can't see player indeed");
-                }
-            }
-        }
     }
-
 
     void FixedUpdate()
     {
+        if (!isParalized && !player.isCaptured)
+        {
+            if (CanSeePlayer(agroRange))
+            {
+                isChasing = true;
+                ChasePlayer();
+            }
+            else
+            {
+                isChasing = false;
+                StartCoroutine(MainRoutine());
+            }
+        }
     }
+    #endregion
 
+    #region Behaviour methods
     protected override IEnumerator MainRoutine()
     {
         if (InFrontOfObstacle() || IsNearEdge())
@@ -69,6 +67,7 @@ public class Squirrel : Enemy
     protected override void Attack()
     {
         player.Captured(nTaps: 6, damagePerSecond: 0);
+        player.transform.position = this.transform.position;
     }
-
+    #endregion
 }

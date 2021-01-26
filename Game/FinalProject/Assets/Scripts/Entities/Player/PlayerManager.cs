@@ -19,13 +19,13 @@ public class PlayerManager : Entity
     #region States
     public bool isRunning;
     public bool isStruggling;
+    public bool isImmune;
+
     #endregion
 
     #region Layers, rigids, etc
-    
     public GameObject camara;
     public StaminaBar staminaBar;
-    
     #endregion
 
     #region states params // might be in a different class
@@ -35,14 +35,10 @@ public class PlayerManager : Entity
     
     [SerializeField] private float coolDownAfterAttack;
     [SerializeField] private float immunityTime;
-    public bool isImmune;
 
     private bool tirementRunning = false;
     #endregion
 
-
-    
-    
 
 
     new void Start()
@@ -53,7 +49,8 @@ public class PlayerManager : Entity
         staminaBar.SetMaxStamina(maxStamina);
     }
     
-    void FixedUpdate(){
+    void FixedUpdate()
+    {
     }
 
     new void Update()
@@ -94,9 +91,9 @@ public class PlayerManager : Entity
         }
         
         
-        animator.SetBool("Is Grounded", isGrounded);//yeah
-        animator.SetBool("Is Walking", moveInput!=0 && isGrounded); // Walking animation
-        animator.SetBool("Is Jumping", isJumping); // Jumping animation
+        animator.SetBool("Is Grounded", isGrounded);
+        animator.SetBool("Is Walking", moveInput!=0 && isGrounded);
+        animator.SetBool("Is Jumping", isJumping);
         animator.SetBool("Is Falling", isFalling);
         animator.SetBool("Is Flying", isFlying);
 
@@ -115,6 +112,7 @@ public class PlayerManager : Entity
         Timer(1,.01f,.005f);
         // animator.SetBool("Turn Left", moveInput<0 ); // Checks if the player turned left to start the turning animation
         
+       
     } 
 
     void Jump()
@@ -132,7 +130,8 @@ public class PlayerManager : Entity
                 rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             }
-            else{
+            else
+            {
                 isJumping = false;
             }
         }
@@ -173,7 +172,46 @@ public class PlayerManager : Entity
         rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
         
     }
-    void TakeTirement(float damage){
+
+    // Call these methods to decrease or increase stamina periodically
+    #region Periodic stamina change
+    /// <summary>
+    /// Decreases a certain amount of stamina through given time
+    /// </summary>
+    /// <param name="timeTired"></param>
+    /// <param name="damage"></param>
+    /// <returns></returns>
+    public IEnumerator Tirement(int timeTired, float damage)
+    {
+        tirementRunning = true;
+        yield return new WaitForSeconds(timeTired);
+        TakeTirement(damage);
+        tirementRunning = false;
+        yield return null;
+    }
+
+    /// <summary>
+    /// Increases a certain amount of stamina through given time
+    /// </summary>
+    /// <param name="timeTired"></param>
+    /// <param name="damage"></param>
+    /// <returns></returns>
+    IEnumerator Regeneration(int timeRegen, float regen)
+    {
+        
+        yield return new WaitForSeconds (timeRegen);
+        if (!isRunning)
+        {
+            RegenStamina(regen);
+        }
+        yield return new WaitForSeconds(timeRegen);
+    }
+    #endregion
+
+    // Call these methods to increase or decrease stamina directly
+    #region Direct stamina changes
+    void TakeTirement(float damage)
+    {
         isStruggling = true;
         if (currentStamina>0)
         {
@@ -185,7 +223,8 @@ public class PlayerManager : Entity
             staminaBar.SetStamina(0);
         }
     }
-    void RegenStamina(float regen){
+    void RegenStamina(float regen)
+    {
         if (currentStamina<100)
         {
         currentStamina += regen;
@@ -196,30 +235,16 @@ public class PlayerManager : Entity
             staminaBar.SetStamina(100);
         }
     }
-    public IEnumerator Tirement(int timeTired, float damage)
+    #endregion
+
+    void Timer(int time, float damage, float regen)
     {
-        tirementRunning = true;
-        yield return new WaitForSeconds (timeTired);
-        TakeTirement(damage);
-        tirementRunning = false;
-        yield return null;
-    }
-
-    IEnumerator Regeneration(int timeRegen, float regen){
-        
-        yield return new WaitForSeconds (timeRegen);
-        if (!isRunning)
+        if(isRunning)
         {
-            RegenStamina(regen);
-        }
-        yield return new WaitForSeconds(timeRegen);
-    }
-
-    void Timer(int time, float damage, float regen){
-        if(isRunning){
             StartCoroutine (Tirement(time,damage));
         }
-        else{
+        else
+        {
             StopCoroutine (Tirement(time, damage));
             if (!isStruggling)
             {
@@ -228,6 +253,7 @@ public class PlayerManager : Entity
         }
     }
 
+    #region Self state methods
     public void Captured(int nTaps, int damagePerSecond)
     {
         if(!tirementRunning)
@@ -268,11 +294,12 @@ public class PlayerManager : Entity
         }
     }
 
-    private IEnumerator Immunity()
+    public IEnumerator Immunity()
     {
         isImmune = true;
         yield return new WaitForSeconds(immunityTime);
         isImmune = false;
     }
+    #endregion
 
 }
