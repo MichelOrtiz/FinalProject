@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Squirrel : NormalType
+public class Gnome : NormalType
 {
-    protected new void Start()
+   protected new void Start()
     {
         base.Start();
     }

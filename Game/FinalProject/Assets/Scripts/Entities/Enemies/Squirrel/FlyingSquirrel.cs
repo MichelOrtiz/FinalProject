@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingSquirrel : Enemy
+public class FlyingSquirrel : Squirrel
 {
+
     Vector3 jump;
     float lastY; // last y pos of the enemy (before jumping)
     float playerY; // when player sighted
+
 
     #region Unity stuff
     new void Start()
@@ -14,6 +16,7 @@ public class FlyingSquirrel : Enemy
         base.Start();
         jump = new Vector3(0f, jumpForce, 0f);
         facingDirection = transform.eulerAngles.y == 0? LEFT:RIGHT;
+
     }
 
     new void Update()
@@ -25,15 +28,22 @@ public class FlyingSquirrel : Enemy
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
         UpdateAnimation();
 
+        if (meshFov != null)
+        {
+            meshFov.SetOrigin(transform.position);
+            meshFov.SetAimDirection(transform.eulerAngles);
+        }
+        
+
         isResting = !isChasing;
         
     }
 
-    void FixedUpdate()
+    new void FixedUpdate()
     {
         if (!isParalized && !player.isCaptured)
         {
-            if (CanSeePlayer(agroRange))
+            if (PlayerSighted())
             {
                 rigidbody2d.WakeUp();
                 isChasing = true;
@@ -64,9 +74,9 @@ public class FlyingSquirrel : Enemy
         }
     }
 
-    protected override IEnumerator MainRoutine()
+    protected override void MainRoutine()
     {
-        return null;
+        return;
     }
 
     protected override void Attack()
@@ -74,5 +84,12 @@ public class FlyingSquirrel : Enemy
         player.Captured(nTaps: 6, damagePerSecond: 10);
         player.transform.position = this.transform.position;
     }
+
+    public void UpdateDirection()
+    {
+        throw new System.NotImplementedException();
+    }
     #endregion
+
+    
 }

@@ -16,6 +16,7 @@ public class Entity : MonoBehaviour
     #endregion
 
     #region Special States
+    [SerializeField] protected State state;
     public bool isParalized = false;
     public bool isCaptured = false;
     public bool isInFear = false;
@@ -26,10 +27,12 @@ public class Entity : MonoBehaviour
     #endregion
 
     #region Physic Parameters
-    [SerializeField] protected float walkingSpeed;
     [SerializeField] protected float jumpForce;
     [SerializeField] protected float jumpTime;
     [SerializeField] protected float fallingCriteria;
+    
+    // Velocidad promedio
+    [SerializeField] protected const float averageSpeed = 5f;
     
     #endregion
     
@@ -54,7 +57,6 @@ public class Entity : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
         UpdateAnimation();
-
     }
 
     public void UpdateAnimation()

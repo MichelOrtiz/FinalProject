@@ -1,33 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public abstract class Enemy : Entity
 {
+    public enum FovType
+    {
+        LinearFov, 
+        CircularFov
+    }
 
     #region Main Parameters
+    [SerializeField] public EnemyName enemyName;
     [SerializeField] protected float damageAmount;
     [SerializeField] protected float normalSpeed;
     [SerializeField] protected float chaseSpeed;
-    [SerializeField] protected float agroRange; // for linear field of view
-
-    protected bool movingRight;
-    protected int yAngle;
+    [SerializeField] protected FovType fovType;
     #endregion
 
     #region Layers, rigids, etc
-    [SerializeField] protected Transform castPos;
+    [SerializeField] protected Transform groundCheck;
+
+    [SerializeField] protected float viewDistance;
+    [SerializeField] protected Transform fovOrigin; // LinearFov
+
     [SerializeField] protected float baseCastDistance;
-    protected string facingDirection;
+    [SerializeField] protected string facingDirection;
     protected Vector3 baseScale;
+    [SerializeField] protected MeshFov meshFov;
+    [SerializeField] protected float fov;
     #endregion
 
     #region Status
-    protected bool playerSighted;
+    [SerializeField] protected bool touchingPlayer;
     #endregion    
 
     #region Abstract methods
-    protected abstract IEnumerator MainRoutine();
+    protected abstract void MainRoutine();
     protected abstract void ChasePlayer();
     protected abstract void Attack();
     #endregion
@@ -40,17 +48,59 @@ public abstract class Enemy : Entity
     new protected void Start()
     {
         base.Start();
-
         baseScale = transform.localScale;
         player = SceneManager.Instance.player;
+        if (fovType == FovType.CircularFov)
+        {
+            meshFov.SetFov(fov);
+            meshFov.SetViewDistance(viewDistance);
+        }
     }
 
     new protected void Update()
     {
-        base.UpdateAnimation();
+        facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
+        UpdateState();
+        base.Update();
     }
 
+    protected void FixedUpdate()
+    {
+        switch (state)
+        {
+            case State.Chasing:
+                ChasePlayer();
+                break;
+            case State.Paralized:
+                //Paralized();
+                break;
+            case State.Fear:
+                Fear();
+                break;
+            case State.Patrolling:
+                MainRoutine();
+                break;
+        }        
+    }
+    
     private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            touchingPlayer = true;
+            if (!player.isImmune)
+            {
+                Attack();
+            }
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        touchingPlayer = false;
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -67,43 +117,33 @@ public abstract class Enemy : Entity
     {
 
         float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
-        Vector3 targetPos = castPos.position;
+        Vector3 targetPos = fovOrigin.position;
         targetPos.x += castDistance;
 
-        return Physics2D.Linecast(castPos.position, targetPos, 1 << LayerMask.NameToLayer("Ground"));
+        return Physics2D.Linecast(fovOrigin.position, targetPos, 1 << whatIsObstacle);
     }
 
     protected bool IsNearEdge()
     {
 
         //float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
-        Vector3 targetPos = castPos.position;
-        targetPos.y -= baseCastDistance;
+        //Vector3 targetPos = fovOrigin.position;
+        //targetPos.y -= baseCastDistance;
 
-        return !Physics2D.Linecast(castPos.position, targetPos, 1 << LayerMask.NameToLayer("Ground"));
+        //return !(Physics2D.Raycast(fovOrigin.position, Vector2.down, 0.2f)).collider;
+        return !(Physics2D.Raycast(groundCheck.position, Vector3.down,0.2f)).collider;
     }
 
-    protected bool CanSeePlayer(float distance)
+    protected bool PlayerSighted()
     {
-        Vector2 endPos;
-        //endPos = castPos.position + Vector3.left * distance;
-        if (facingDirection == LEFT)
+        if (fovType == FovType.LinearFov)
         {
-            endPos = castPos.position + Vector3.left * distance;
+            return CanSeePlayerLinearFov(viewDistance);
         }
         else
         {
-            endPos = castPos.position + Vector3.right * distance;
+            return CanSeePlayerMeshFov();
         }
-
-        RaycastHit2D hit = Physics2D.Linecast(castPos.position, endPos, 1 << LayerMask.NameToLayer("Action"));
-        
-        if (hit.collider == null)
-        {
-            return false;
-        }
-        Debug.DrawLine(castPos.position, endPos, Color.blue);
-        return hit.collider.gameObject.CompareTag("Player");
     }
 
     public IEnumerator AfterPlayerReleasedFromCapture()
@@ -117,13 +157,20 @@ public abstract class Enemy : Entity
 
     protected void ChangeFacingDirection()
     {
-        transform.eulerAngles = new Vector3(0, yAngle, 0);
-        facingDirection = facingDirection ==  LEFT? RIGHT:LEFT;
-        movingRight = !movingRight;
+        transform.eulerAngles = new Vector3(0, facingDirection == LEFT? 0:180);
     }
     #endregion
 
     #region Self state methods
+    protected void UpdateState()
+    {
+        state =
+            isChasing? State.Chasing :
+            isInFear? State.Fear :
+            isResting? State.Resting :
+            isParalized? State.Paralized :
+            State.Patrolling;
+    }
     // To call IEnumerators use StartCoroutine() pls
     public IEnumerator Paralized(float time)
     {
@@ -139,9 +186,53 @@ public abstract class Enemy : Entity
     {
         isResting = true;
         rigidbody2d.Sleep();
-        yield return new WaitUntil(()=>CanSeePlayer(agroRange));
+        yield return new WaitUntil(()=>PlayerSighted());
         rigidbody2d.WakeUp();
         isResting = false;
     }
+    #endregion
+
+
+    #region Fov stuff
+    public bool CanSeePlayerLinearFov(float distance)
+    {
+        Vector2 endPos;
+        //endPos = fovOrigin.position + Vector3.left * distance;
+        if (facingDirection == LEFT)
+        {
+            endPos = fovOrigin.position + Vector3.left * distance;
+        }
+        else
+        {
+            endPos = fovOrigin.position + Vector3.right * distance;
+        }
+
+        RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Action"));
+        
+        Debug.DrawLine(fovOrigin.position, endPos, Color.blue);
+        
+        if (hit.collider == null)
+        {
+            return false;
+        }
+        return hit.collider.gameObject.CompareTag("Player");
+    }
+
+    public bool CanSeePlayerMeshFov()
+    {
+        if (Vector3.Distance(transform.position, player.transform.position) < viewDistance)
+        {
+            Vector3 dirToPlayer = (player.transform.position - transform.position).normalized;
+            Debug.DrawLine(transform.position, dirToPlayer);
+            
+            if (Vector3.Angle(transform.eulerAngles, dirToPlayer) < fov / 2f)
+            {
+                RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, dirToPlayer, viewDistance);
+                return raycastHit2D.collider != null;
+            }
+        }
+        return false;
+    }
+
     #endregion
 }

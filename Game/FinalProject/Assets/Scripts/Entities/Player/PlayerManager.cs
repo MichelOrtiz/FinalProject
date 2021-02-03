@@ -6,7 +6,10 @@ public class PlayerManager : Entity
 {
     #region Main Parameters
     public float maxStamina = 100;
-    public float runningSpeed;
+    [SerializeField] protected float walkingSpeed;
+
+    [SerializeField] public float runningSpeed;
+
 
     #endregion
 
@@ -44,7 +47,7 @@ public class PlayerManager : Entity
     new void Start()
     {
         base.Start();
-
+        //walkingSpeed = AverageSpeed-3f;
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
     }
@@ -70,7 +73,7 @@ public class PlayerManager : Entity
         {
             if (!isFlying)
             {
-                rigidbody2d.gravityScale = 26;
+                rigidbody2d.gravityScale = 2.5f;
                 Move();
                 Jump();
             }
@@ -119,7 +122,7 @@ public class PlayerManager : Entity
     {
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
+            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
             isJumping = true;
             jumpTimeCounter = jumpTime;
             
@@ -127,7 +130,7 @@ public class PlayerManager : Entity
         if (Input.GetKey(KeyCode.Space) && isJumping == true)
         {
             if (jumpTimeCounter>0){
-                rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
+                rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             }
             else
@@ -144,23 +147,21 @@ public class PlayerManager : Entity
     void Move()
     {
         
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);   
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), rigidbody2d.velocity.y, 0f);   
         if(Input.GetKey(KeyCode.LeftShift)){
-            if(currentStamina>10){
-            //transform.position += movement * Time.deltaTime * moveSpeedSprint * 5;     
-                rigidbody2d.velocity = new Vector2(movement.x, movement.y)*runningSpeed;
+            if(currentStamina>10){   
+                rigidbody2d.velocity = new Vector2(movement.x *runningSpeed, movement.y);
                 isRunning = true;
             }
             else
             {
-                rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
+                rigidbody2d.velocity = new Vector2(movement.x * walkingSpeed, movement.y);
                 isRunning = true;
             }
         }
         else
         {
-            //transform.position += movement * Time.deltaTime * moveSpeed * 5;   
-            rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
+            rigidbody2d.velocity = new Vector2(movement.x * walkingSpeed, movement.y);
             isRunning = false;
         }
     }
