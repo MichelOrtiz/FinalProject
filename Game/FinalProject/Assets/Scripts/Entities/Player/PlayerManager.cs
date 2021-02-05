@@ -255,7 +255,7 @@ public class PlayerManager : Entity
     }
 
     #region Self state methods
-    public void Captured(int nTaps, int damagePerSecond)
+    public void Captured(int nTaps, float damagePerSecond)
     {
         if(!tirementRunning)
         {

@@ -60,6 +60,10 @@ public abstract class Enemy : Entity
     new protected void Update()
     {
         facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
+        if (InFrontOfObstacle())
+        {
+            ChangeFacingDirection();
+        }
         UpdateState();
         base.Update();
     }
@@ -169,6 +173,8 @@ public abstract class Enemy : Entity
             isInFear? State.Fear :
             isResting? State.Resting :
             isParalized? State.Paralized :
+            isJumping? State.Jumping :
+            isFalling? State.Falling :
             State.Patrolling;
     }
     // To call IEnumerators use StartCoroutine() pls
@@ -194,29 +200,7 @@ public abstract class Enemy : Entity
 
 
     #region Fov stuff
-    public bool CanSeePlayerLinearFov(float distance)
-    {
-        Vector2 endPos;
-        //endPos = fovOrigin.position + Vector3.left * distance;
-        if (facingDirection == LEFT)
-        {
-            endPos = fovOrigin.position + Vector3.left * distance;
-        }
-        else
-        {
-            endPos = fovOrigin.position + Vector3.right * distance;
-        }
-
-        RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Action"));
-        
-        Debug.DrawLine(fovOrigin.position, endPos, Color.blue);
-        
-        if (hit.collider == null)
-        {
-            return false;
-        }
-        return hit.collider.gameObject.CompareTag("Player");
-    }
+    public abstract bool CanSeePlayerLinearFov(float distance);
 
     public bool CanSeePlayerMeshFov()
     {

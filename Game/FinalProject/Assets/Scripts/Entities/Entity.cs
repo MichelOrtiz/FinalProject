@@ -69,6 +69,12 @@ public class Entity : MonoBehaviour
         animator.SetBool("Is Resting", isResting);
         animator.SetBool("Is Chasing", isChasing);
     }
+
+    public Vector3 GetPosition()
+    {
+        return this.transform.position;
+    }
+
     #endregion
 
     #region Self state methods

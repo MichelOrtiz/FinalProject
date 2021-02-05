@@ -12,5 +12,6 @@ public enum State
     Chasing,     
     Dizzy, 
     CapturedPlayer, 
-    Patrolling
+    Patrolling, 
+    Falling
 }

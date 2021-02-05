@@ -66,5 +66,29 @@ public class NormalType : Enemy
     {
         player.Captured(nTaps: 9, damagePerSecond: 0);
     }
+
+    public override bool CanSeePlayerLinearFov(float distance)
+    {
+        Vector2 endPos;
+        //endPos = fovOrigin.position + Vector3.left * distance;
+        if (facingDirection == LEFT)
+        {
+            endPos = fovOrigin.position + Vector3.left * distance;
+        }
+        else
+        {
+            endPos = fovOrigin.position + Vector3.right * distance;
+        }
+
+        RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Action"));
+        
+        Debug.DrawLine(fovOrigin.position, endPos, Color.blue);
+        
+        if (hit.collider == null)
+        {
+            return false;
+        }
+        return hit.collider.gameObject.CompareTag("Player");
+    }
     #endregion
 }
