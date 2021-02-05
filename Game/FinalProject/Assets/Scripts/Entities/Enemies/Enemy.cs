@@ -49,7 +49,7 @@ public abstract class Enemy : Entity
     {
         base.Start();
         baseScale = transform.localScale;
-        player = SceneManager.Instance.player;
+        player = ScenesManagers.Instance.player;
         if (fovType == FovType.CircularFov)
         {
             meshFov.SetFov(fov);

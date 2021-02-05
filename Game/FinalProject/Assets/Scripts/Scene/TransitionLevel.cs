@@ -5,9 +5,6 @@ using UnityEngine;
 public class TransitionLevel : MonoBehaviour
 {
     public int iLevelToLoad;
-    public string sLevelToLoad;
-
-    public bool useIntrigerToLoadLevel = false;
     void Start()
     {
 
@@ -29,12 +26,6 @@ public class TransitionLevel : MonoBehaviour
 
     void LoadScene()
     {
-       if(useIntrigerToLoadLevel){
-             UnityEngine.SceneManagement.SceneManager.LoadScene(iLevelToLoad);
-        }
-        else
-        {
-             UnityEngine.SceneManagement.SceneManager.LoadScene(sLevelToLoad);
-        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene(iLevelToLoad);
     }
 }
