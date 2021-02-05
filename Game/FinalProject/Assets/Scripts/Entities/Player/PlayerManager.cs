@@ -46,6 +46,7 @@ public class PlayerManager : Entity
 
     new void Start()
     {
+        DontDestroyOnLoad(gameObject);
         base.Start();
         //walkingSpeed = AverageSpeed-3f;
         currentStamina = maxStamina;
