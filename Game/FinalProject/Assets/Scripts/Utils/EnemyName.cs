@@ -98,6 +98,13 @@ public enum EnemyName
     NormalMedufin, 
     FatMedufin, 
     BubbleMedufin, 
-    ElectricMedufin
+    ElectricMedufin,
+    #endregion
+
+    #region Fox and dogs
+    NormalDog, 
+    FatDog, 
+    ThiefFox, 
+    SpyFox
 }
 #endregion

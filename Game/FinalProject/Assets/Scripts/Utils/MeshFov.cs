@@ -39,11 +39,11 @@ public class MeshFov : MonoBehaviour
         for (int i = 0; i <= rayCount; i++)
         {
             Vector3 vertex;
-            RaycastHit2D raycastHit2D = Physics2D.Raycast(origin, GetVectorFromAngle(angle), viewDistance, layerMask);
+            RaycastHit2D raycastHit2D = Physics2D.Raycast(origin, MathUtils.GetVectorFromAngle(angle), viewDistance, layerMask);
 
             if (raycastHit2D.collider == null)
             {
-                vertex = origin + GetVectorFromAngle(angle) * viewDistance;
+                vertex = origin + MathUtils.GetVectorFromAngle(angle) * viewDistance;
             }
             else
             {
@@ -82,7 +82,7 @@ public class MeshFov : MonoBehaviour
 
     public void SetAimDirection(Vector3 aimDirection)
     {
-        startingAngle = GetAngleFromVectorFloat(aimDirection) - fov / 2f;
+        startingAngle = MathUtils.GetAngleFromVectorFloat(aimDirection) - fov / 2f;
     }
 
     public void SetFov(float fov)
@@ -94,18 +94,5 @@ public class MeshFov : MonoBehaviour
         this.viewDistance = viewDistance;
     }
 
-    private Vector3 GetVectorFromAngle(float angle)
-    {
-        float angleRad = angle * (Mathf.PI/180f);
-        return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
-    }
-
-    private float GetAngleFromVectorFloat(Vector3 dir)
-    {
-        dir = dir.normalized;
-        float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        if (n < 0) n += 360;
-        
-        return n;
-    }
+    
 }

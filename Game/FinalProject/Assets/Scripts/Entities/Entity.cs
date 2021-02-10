@@ -6,8 +6,12 @@ public class Entity : MonoBehaviour
 {
     protected const string LEFT = "left";
     protected const string RIGHT = "right";
+    [SerializeField] public string facingDirection;
+
 
     #region Normal States
+    [Header("Normal states")]
+    [SerializeField] protected State state;
     public bool isWalking = false;
     public bool isGrounded = false;
     public bool isJumping = false;
@@ -16,7 +20,7 @@ public class Entity : MonoBehaviour
     #endregion
 
     #region Special States
-    [SerializeField] protected State state;
+    [Header("Special states")]
     public bool isParalized = false;
     public bool isCaptured = false;
     public bool isInFear = false;
@@ -27,6 +31,7 @@ public class Entity : MonoBehaviour
     #endregion
 
     #region Physic Parameters
+    [Header("Physic parameters")]
     [SerializeField] protected float jumpForce;
     [SerializeField] protected float jumpTime;
     [SerializeField] protected float fallingCriteria;
@@ -37,6 +42,7 @@ public class Entity : MonoBehaviour
     #endregion
     
     #region Layers, rigids, etc...
+    [Header ("General additions")]
     public Rigidbody2D rigidbody2d;
     [SerializeField] protected Animator animator;
     [SerializeField] protected LayerMask whatIsGround;
@@ -54,14 +60,27 @@ public class Entity : MonoBehaviour
 
     protected void Update()
     {
+        facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
-        UpdateAnimation();
+        try
+        {
+            UpdateAnimation();
+        }
+        catch (System.Exception)
+        {
+            throw;
+        }
+        //UpdateAnimation();
     }
 
     public void UpdateAnimation()
     {
+        animator.SetBool("Is Grounded", isGrounded);
         animator.SetBool("Is Walking", isWalking);
+        animator.SetBool("Is Falling", isFalling);
+        animator.SetBool("Is Jumping", isJumping);
+        animator.SetBool("Is Flying", isFlying);
         animator.SetBool("Is Paralized", isParalized);
         animator.SetBool("Is Captured", isCaptured);
         animator.SetBool("Is In Fear", isInFear);
@@ -80,7 +99,7 @@ public class Entity : MonoBehaviour
     #region Self state methods
 
     // not working
-    public void Fear()
+    /*public void Fear()
     {
         isInFear = true;
         StopAllCoroutines();
@@ -97,6 +116,6 @@ public class Entity : MonoBehaviour
             }
         }
         isInFear = false;
-    }
+    }*/
     #endregion
 }

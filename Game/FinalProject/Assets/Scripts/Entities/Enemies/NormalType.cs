@@ -6,11 +6,12 @@ using UnityEngine;
 public class NormalType : Enemy
 {
     // Waiting patrolling time
-    float timer = 1f;
+    protected float waitTime;
 
     #region Unity stuff
     protected new void Start()
     {
+        waitTime = 1f;
         normalSpeed = averageSpeed/2;
         chaseSpeed = normalSpeed;
         base.Start();
@@ -18,7 +19,7 @@ public class NormalType : Enemy
 
     protected new void Update()
     {
-        isChasing = PlayerSighted();
+        isChasing = CanSeePlayer();
         base.Update();
     }
 
@@ -34,14 +35,14 @@ public class NormalType : Enemy
     {
         if (InFrontOfObstacle() || IsNearEdge())
         {
-            if (timer > 0)
+            if (waitTime > 0)
             {
                 isWalking = false;
-                timer -= Time.deltaTime;
+                waitTime -= Time.deltaTime;
                 return;
             }
             ChangeFacingDirection();
-            timer = 1f;
+            waitTime = 1f;
         }
         else
         {
@@ -65,30 +66,6 @@ public class NormalType : Enemy
     protected override void Attack()
     {
         player.Captured(nTaps: 9, damagePerSecond: 0);
-    }
-
-    public override bool CanSeePlayerLinearFov(float distance)
-    {
-        Vector2 endPos;
-        //endPos = fovOrigin.position + Vector3.left * distance;
-        if (facingDirection == LEFT)
-        {
-            endPos = fovOrigin.position + Vector3.left * distance;
-        }
-        else
-        {
-            endPos = fovOrigin.position + Vector3.right * distance;
-        }
-
-        RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Action"));
-        
-        Debug.DrawLine(fovOrigin.position, endPos, Color.blue);
-        
-        if (hit.collider == null)
-        {
-            return false;
-        }
-        return hit.collider.gameObject.CompareTag("Player");
     }
     #endregion
 }

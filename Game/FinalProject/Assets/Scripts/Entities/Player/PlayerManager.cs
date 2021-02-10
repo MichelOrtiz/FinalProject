@@ -61,6 +61,7 @@ public class PlayerManager : Entity
     {
         
         isStruggling = false;
+        isWalking = moveInput!=0 && isGrounded;
         
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
@@ -95,11 +96,11 @@ public class PlayerManager : Entity
         }
         
         
-        animator.SetBool("Is Grounded", isGrounded);
+        /*animator.SetBool("Is Grounded", isGrounded);
         animator.SetBool("Is Walking", moveInput!=0 && isGrounded);
         animator.SetBool("Is Jumping", isJumping);
         animator.SetBool("Is Falling", isFalling);
-        animator.SetBool("Is Flying", isFlying);
+        animator.SetBool("Is Flying", isFlying);*/
 
         if (moveInput>0)
         {
@@ -116,7 +117,7 @@ public class PlayerManager : Entity
         Timer(1,.01f,.005f);
         // animator.SetBool("Turn Left", moveInput<0 ); // Checks if the player turned left to start the turning animation
         
-       
+        base.Update();
     } 
 
     void Jump()
@@ -304,4 +305,13 @@ public class PlayerManager : Entity
     }
     #endregion
 
+    /// <summary>
+    /// Sent when a collider on another object stops touching this
+    /// object's collider (2D physics only).
+    /// </summary>
+    /// <param name="other">The Collision2D data associated with this collision.</param>
+    void OnCollisionExit2D(Collision2D other)
+    {
+        isCaptured = false;
+    }
 }

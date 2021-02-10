@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class FlyingSquirrel : Squirrel
 {
-
-    Vector3 jump;
-    float lastY; // last y pos of the enemy (before jumping)
     float playerY; // when player sighted
     float initialY;
 
@@ -14,25 +11,23 @@ public class FlyingSquirrel : Squirrel
     new void Start()
     {
         base.Start();
-        jump = new Vector3(0f, jumpForce, 0f);   
         chaseSpeed = averageSpeed*2;
         damageAmount = 10f;
     }
 
     new void Update()
     {
-        isChasing = PlayerSighted();
-        if (isChasing)
+        isJumping = !isFalling && !isGrounded;
+        isChasing = CanSeePlayer();
+        if (!isGrounded)
         {
-            if ((player.GetPosition().x < this.GetPosition().x && facingDirection == RIGHT)
-            || (player.GetPosition().x > this.GetPosition().x && facingDirection == LEFT)
-            || InFrontOfObstacle()) {
+            if ((player.GetPosition().x < this.GetPosition().x && facingDirection == RIGHT) // player is left to the enemy
+            || (player.GetPosition().x > this.GetPosition().x && facingDirection == LEFT)) // player is right
+            {
                 ChangeFacingDirection();
             }
         }
-        UpdateState();
         base.Update();
-
     }
 
     new void FixedUpdate()
@@ -49,7 +44,7 @@ public class FlyingSquirrel : Squirrel
                 //Paralized();
                 break;
             case State.Fear:
-                Fear();
+                //Fear();
                 break;
             case State.Patrolling:
                 MainRoutine();
@@ -67,10 +62,8 @@ public class FlyingSquirrel : Squirrel
         Vector3 playerPosition;
         if (isGrounded)
         {
-            isJumping = true;
-            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
-            isJumping = false;
-
+            // Jumps
+            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce * rigidbody2d.gravityScale);
         }
         if (isFalling)
         {
@@ -85,9 +78,10 @@ public class FlyingSquirrel : Squirrel
             {
                 playerPosition = new Vector3(player.GetPosition().x, this.GetPosition().y);
             }
+
             if (!touchingPlayer)
             {
-                rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, chaseSpeed * Time.deltaTime);
+                rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, chaseSpeed * Time.deltaTime * rigidbody2d.gravityScale);
             }
         }
     }
@@ -106,29 +100,7 @@ public class FlyingSquirrel : Squirrel
 
     protected override void Attack()
     {
-        player.Captured(nTaps: 6, damagePerSecond: damageAmount);
-    }
-
-    public void UpdateDirection()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool CanSeePlayerLinearFov(float distance)
-    {
-        Vector3 endPos = Vector3.MoveTowards(fovOrigin.position, player.GetPosition(), distance);// * ;;
-        RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Action"));
-    
-        Debug.DrawLine(fovOrigin.position, endPos, (Vector3.Angle(fovOrigin.position, endPos) <= 180? Color.red : Color.green));
-    
-        if (hit.collider == null)
-        {
-            return false;
-        }
-        Debug.Log($"Can see player:{hit.collider.gameObject.CompareTag("Player")}");
-        return hit.collider.gameObject.CompareTag("Player") && Vector3.Angle(fovOrigin.position, endPos) <= 180;
+        player.Captured(nTaps: 9, damagePerSecond: damageAmount);
     }
     #endregion
-
-    
 }
