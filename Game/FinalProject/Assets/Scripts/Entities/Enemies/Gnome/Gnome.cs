@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gnome : NormalType
 {
-   protected new void Start()
+    protected new void Start()
     {
         base.Start();
     }

@@ -11,6 +11,7 @@ public class NormalType : Enemy
     #region Unity stuff
     protected new void Start()
     {
+        damageAmount = 20;
         waitTime = 1f;
         normalSpeed = averageSpeed/2;
         chaseSpeed = normalSpeed;

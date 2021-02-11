@@ -3,7 +3,7 @@ public enum EnemyName
     #region Gnomes
     NormalGnome, 
     FatGnome,
-    SpottterGnome, 
+    SpotterGnome, 
     FastGnome,
     #endregion
 
