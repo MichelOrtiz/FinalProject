@@ -40,7 +40,7 @@ public abstract class Enemy : Entity
 
     #region Status
     [SerializeField] protected bool touchingPlayer;
-    #endregion    
+    #endregion
 
     #region Abstract methods
     protected abstract void MainRoutine();
@@ -61,7 +61,7 @@ public abstract class Enemy : Entity
 
     new protected void Update()
     {
-        if (InFrontOfObstacle() && !isChasing)
+        if (InFrontOfObstacle() && isChasing)
         {
             ChangeFacingDirection();
         }
@@ -85,7 +85,7 @@ public abstract class Enemy : Entity
             case State.Patrolling:
                 MainRoutine();
                 break;
-        }        
+        }
     }
 
     /// <summary>
@@ -249,8 +249,6 @@ public abstract class Enemy : Entity
                 endPos = Vector3.MoveTowards(fovOrigin.position, player.GetPosition(), viewDistance);
                 break;
         }
-
-        Debug.Log(angle);
         Debug.DrawLine(fovOrigin.position, endPos, Color.red);
 
         RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Action"));
