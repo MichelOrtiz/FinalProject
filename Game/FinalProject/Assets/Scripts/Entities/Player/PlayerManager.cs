@@ -19,24 +19,26 @@ public class PlayerManager : Entity
     private float angle;
     private void SearchInteraction()
         {
+            Vector2 startPoint = transform.position;
             Vector2 interactPoint = transform.position;
 
             if(transform.rotation.y == 0)
             {
+                startPoint.x += 0.3f;
                 interactPoint.x += 5f;
             }
             else
             {
+                startPoint.x -= 0.3f;
                 interactPoint.x -= 5f;
             }
             
-            hit = Physics2D.Raycast(transform.position, interactPoint, Vector2.Distance(transform.position, interactPoint));
-            if (hit.collider != null)
+            hit = Physics2D.Raycast(startPoint, interactPoint, Vector2.Distance(transform.position, interactPoint));
+            if (hit.collider != null && !hit.collider.gameObject.CompareTag("Player"))
             {
-                Debug.DrawLine(transform.position, interactPoint, Color.blue, 5f);
-                DialogueTrigger chat = hit.collider.GetComponent<DialogueTrigger>();
 
-                chat.TriggerDialogue();
+                Debug.DrawLine(startPoint, interactPoint, Color.blue, 5f);
+                DialogueTrigger chat = hit.collider.GetComponent<DialogueTrigger>();
                 
                 dialogue = chat;
 

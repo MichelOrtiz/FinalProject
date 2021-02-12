@@ -18,7 +18,7 @@ public class loadlevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.name == "Player")
+        if (collisionGameObject.tag == "Player")
         {
             LoadScene();
         }
