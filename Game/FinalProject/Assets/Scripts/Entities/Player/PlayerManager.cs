@@ -13,6 +13,59 @@ public class PlayerManager : Entity
     private GameObject[] players;
     #endregion
 
+    #region Dialogue Trigger
+    public DialogueTrigger dialogue;
+    private RaycastHit2D hit;
+    private float angle;
+    private void SearchInteraction()
+        {
+            Vector2 startPoint = transform.position;
+            Vector2 interactPoint = transform.position;
+
+            if(transform.rotation.y == 0)
+            {
+                startPoint.x += 0.3f;
+                interactPoint.x += 5f;
+            }
+            else
+            {
+                startPoint.x -= 0.3f;
+                interactPoint.x -= 5f;
+            }
+            
+            hit = Physics2D.Raycast(startPoint, interactPoint, Vector2.Distance(transform.position, interactPoint));
+            if (hit.collider != null && !hit.collider.gameObject.CompareTag("Player"))
+            {
+
+                Debug.DrawLine(startPoint, interactPoint, Color.blue, 5f);
+                DialogueTrigger chat = hit.collider.GetComponent<DialogueTrigger>();
+                
+                dialogue = chat;
+
+                if(chat != null)
+                {
+                    SetFocus(chat);
+                    return;
+                }
+                else
+                {
+                    RemoveFocus();
+                }
+            }
+
+
+        }
+    private void SetFocus(DialogueTrigger newFocus)
+        {
+            newFocus.TriggerDialogue();
+        }
+        private void RemoveFocus()
+        {
+            dialogue = null;
+        }
+
+    #endregion
+
     #region Constant change Parameters
     public float currentStamina;
     private float moveInput; 
@@ -64,6 +117,7 @@ public class PlayerManager : Entity
     new void Start()
     {
         base.Start();
+        angle = transform.position.z;
         //walkingSpeed = AverageSpeed-3f;
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
@@ -129,6 +183,12 @@ public class PlayerManager : Entity
         {
             TakeTirement(5);
         }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            SearchInteraction(); 
+        }
+
         Timer(1,.01f,.005f);
         // animator.SetBool("Turn Left", moveInput<0 ); // Checks if the player turned left to start the turning animation
         
