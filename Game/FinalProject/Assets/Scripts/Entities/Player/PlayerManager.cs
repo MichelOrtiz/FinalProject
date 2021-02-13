@@ -10,7 +10,7 @@ public class PlayerManager : Entity
 
     [SerializeField] public float runningSpeed;
 
-
+    private GameObject[] players;
     #endregion
 
     #region Constant change Parameters
@@ -43,14 +43,31 @@ public class PlayerManager : Entity
     #endregion
 
 
+    public static PlayerManager instance = null;
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this);
+    }
 
     new void Start()
     {
-        DontDestroyOnLoad(gameObject);
         base.Start();
         //walkingSpeed = AverageSpeed-3f;
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
+        FindStartPos();
     }
     
     void FixedUpdate()
@@ -68,8 +85,6 @@ public class PlayerManager : Entity
         //UpdateAnimation();
 
         moveInput = Input.GetAxisRaw("Horizontal");
-
-        camara.transform.position = new Vector3 (transform.position.x, transform.position.y, -10f);
 
         if (!isCaptured)
         {
@@ -314,4 +329,20 @@ public class PlayerManager : Entity
     {
         isCaptured = false;
     }
+
+
+    private void OnLevelWasLoaded(int level){
+        base.Start();
+        FindStartPos();
+        players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length >1)
+        {
+            Destroy(players[1]);
+        }
+    }
+
+    void FindStartPos(){
+        transform.position = GameObject.FindWithTag("StartPos").transform.position; //GameObject.FindWithTag("StartPos").transform.position;
+    }
+
 }

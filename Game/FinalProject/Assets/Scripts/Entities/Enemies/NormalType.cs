@@ -11,10 +11,12 @@ public class NormalType : Enemy
     #region Unity stuff
     protected new void Start()
     {
+        waitTime = 2f;
+
+        /*viewDistance = 3f;
         damageAmount = 20;
-        waitTime = 1f;
-        normalSpeed = averageSpeed/2;
-        chaseSpeed = normalSpeed;
+        waitTime = 2f;
+        chaseSpeed = normalSpeed;*/
         base.Start();
     }
 
@@ -43,7 +45,7 @@ public class NormalType : Enemy
                 return;
             }
             ChangeFacingDirection();
-            waitTime = 1f;
+            waitTime = 2f;
         }
         else
         {
@@ -54,7 +56,7 @@ public class NormalType : Enemy
 
     protected override void ChasePlayer()
     {
-        if (!IsNearEdge() && !touchingPlayer)
+        if (!IsNearEdge() && !touchingPlayer && isGrounded)
         {
             rigidbody2d.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
         }

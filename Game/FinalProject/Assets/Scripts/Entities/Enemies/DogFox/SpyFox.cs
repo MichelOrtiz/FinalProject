@@ -7,8 +7,6 @@ public class SpyFox : DogFox
     new void Start()
     {
         base.Start();
-        chaseSpeed = averageSpeed * 1.5f;
-        damageAmount = 50f;
     }
 
     new void Update()

@@ -44,7 +44,7 @@ public class Entity : MonoBehaviour
     #region Layers, rigids, etc...
     [Header ("General additions")]
     public Rigidbody2D rigidbody2d;
-    [SerializeField] protected Animator animator;
+    protected Animator animator;
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] protected LayerMask whatIsObstacle;
     [SerializeField] protected Transform feetPos;    

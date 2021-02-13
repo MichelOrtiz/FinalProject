@@ -18,8 +18,11 @@ public abstract class Enemy : Entity
     [SerializeField] protected FovType fovType;
     [SerializeField] public EnemyName enemyName;
     [SerializeField] protected float damageAmount;
-    [SerializeField] protected float normalSpeed;
-    [SerializeField] protected float chaseSpeed;
+    [SerializeField] protected float normalSpeedMultiplier;
+    [SerializeField] protected float chaseSpeedMultiplier;
+
+    protected float normalSpeed;
+    protected float chaseSpeed;
 
     #endregion
 
@@ -57,10 +60,13 @@ public abstract class Enemy : Entity
     {
         base.Start();
         player = ScenesManagers.Instance.player;
+        chaseSpeed = chaseSpeedMultiplier * averageSpeed;
+        normalSpeed = normalSpeedMultiplier * averageSpeed;
     }
 
     new protected void Update()
     {
+        Debug.Log($"Can see player: {CanSeePlayer()}");
         if (InFrontOfObstacle() && isChasing)
         {
             ChangeFacingDirection();
@@ -251,7 +257,7 @@ public abstract class Enemy : Entity
         }
         Debug.DrawLine(fovOrigin.position, endPos, Color.red);
 
-        RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Action"));
+        RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Default"));
 
         if (hit.collider == null)
         {

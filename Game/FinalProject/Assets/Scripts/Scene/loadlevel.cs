@@ -6,6 +6,23 @@ using UnityEngine.SceneManagement;
 public class loadlevel : MonoBehaviour
 {
     public int iLevelToLoad;
+    public static loadlevel instance = null;
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this);
+    }
     void Start()
     {
         
@@ -18,7 +35,7 @@ public class loadlevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.name == "Player")
+        if (collisionGameObject.tag == "Player")
         {
             LoadScene();
         }
@@ -26,5 +43,6 @@ public class loadlevel : MonoBehaviour
 
     void LoadScene(){
         SceneManager.LoadScene(iLevelToLoad);
+        Camera.instance.gameObject.SetActive(false);
     }
 }

@@ -11,8 +11,6 @@ public class FlyingSquirrel : Squirrel
     new void Start()
     {
         base.Start();
-        chaseSpeed = averageSpeed*2;
-        damageAmount = 10f;
     }
 
     new void Update()

@@ -13,11 +13,7 @@ public class SpotterGnome : Gnome
     {
         base.Start();
         waitTime = 2; // to wait 2 seconds before changing facing direction
-        damageAmount = 15;
-        normalSpeed = 0.75f * averageSpeed;
-        chaseSpeed = 2 * averageSpeed;
-        viewDistance = 20f;
-        fovType = FovType.Linear;
+        
     }
 
     protected new void Update()
@@ -78,6 +74,6 @@ public class SpotterGnome : Gnome
 
     protected override void Attack()
     {
-        player.Captured(10, damageAmount);
+        player.Captured(nTaps: 10, damageAmount);
     }
 }
