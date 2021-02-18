@@ -20,12 +20,11 @@ public class Camera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3 (PlayerManager.instance.GetPosition().x, PlayerManager.instance.GetPosition().y, -10f); 
+        this.transform.position = new Vector3 (PlayerManager.instance.GetPosition().x, PlayerManager.instance.GetPosition().y, -10f);
     }
 }

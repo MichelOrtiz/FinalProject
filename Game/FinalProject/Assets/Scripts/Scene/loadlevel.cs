@@ -11,7 +11,7 @@ public class loadlevel : MonoBehaviour
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    void Awake()
+    /*void Awake()
     {
         if (instance == null)
         {
@@ -22,7 +22,7 @@ public class loadlevel : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this);
-    }
+    }*/
     void Start()
     {
         
