@@ -6998,9 +6998,15 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
+<<<<<<< Updated upstream
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 39973ae06a825f740993f89e28271cfc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+=======
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: e3225a7c36c8e1d58bf5a2130829da96, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+>>>>>>> Stashed changes
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7326,6 +7332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
@@ -7346,6 +7353,29 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &894198409
 CanvasRenderer:
+=======
+--- !u!95 &444150473
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444150467}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c1425836074800cc986f9acab94c27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!60 &444150474
+PolygonCollider2D:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7784,8 +7814,55 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1134861286}
   m_CullTransparentMesh: 1
+=======
+  m_GameObject: {fileID: 1108425741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce5c839b2324944b81386da4ac9c882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facingDirection: 
+  state: 0
+  isWalking: 0
+  isGrounded: 0
+  isJumping: 0
+  isFlying: 0
+  isFalling: 0
+  isParalized: 0
+  isCaptured: 0
+  isInFear: 0
+  isDizzy: 0
+  isBrainFrozen: 0
+  isResting: 0
+  isChasing: 0
+  jumpForce: 17
+  jumpTime: 0.25
+  fallingCriteria: 0
+  rigidbody2d: {fileID: 1108425746}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 0
+  feetPos: {fileID: 0}
+  checkFeetRadius: 0
+  fovType: 0
+  enemyName: 0
+  damageAmount: 0
+  normalSpeedMultiplier: 0
+  chaseSpeedMultiplier: 0
+  groundCheck: {fileID: 0}
+  fovOrigin: {fileID: 0}
+  baseCastDistance: 2
+  viewDistance: 0
+  fovAngle: 0
+  touchingPlayer: 0
+  player: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1 &1168329762
 GameObject:
   m_ObjectHideFlags: 0
