@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement player;
     private Rigidbody2D rigidbody2d;
     private float moveSpeed;
     private float moveSpeedSprint;
@@ -17,7 +18,13 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
     public float jumpTime;
     public float jumpForce;
-
+    private void Awake() {
+        if(player!=null){
+            Debug.Log("HOW!!!");
+            return;
+        }
+        player = this;
+    }
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();

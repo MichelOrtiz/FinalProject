@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
-    public int capacidad = 5;
+    public List<Item> items = new List<Item>();
+    public Item[] hotkey;
+    public int capacidad = 2;
     private void Awake() {
         if(instance!=null){
             Debug.Log("HOW!!!");
@@ -13,12 +14,53 @@ public class Inventory : MonoBehaviour
         }
         instance = this;
     }
-    public List<Item> items = new List<Item>();
-
-    public void Add(Item item){
-        items.Add(item);
+    private void Start() {
+        hotkey = new Item[4];
     }
+    
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallBack;
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.Alpha1)){
+            if(hotkey[0]!=null){
+               hotkey[0].Use();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2)){
+            if(hotkey[1]!=null){
+               hotkey[1].Use();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3)){
+            if(hotkey[2]!=null){
+               hotkey[2].Use();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha4)){
+            if(hotkey[3]!=null){
+               hotkey[3].Use();
+            }
+        }
+    }
+    public bool Add(Item item){  
+        if(items.Count<capacidad){
+            items.Add(item);
+            if(onItemChangedCallBack != null){
+                onItemChangedCallBack.Invoke();
+            }
+            return true;
+        }
+        else{
+            Debug.Log("No hay espacio");
+            return false;
+        }
+    }
+    
     public void Remove(Item item){
         items.Remove(item);
+        if(onItemChangedCallBack != null){
+            onItemChangedCallBack.Invoke();
+        }
     }
+    
 }

@@ -13,8 +13,10 @@ public class Inter : MonoBehaviour
         if(distance <= radius){
             if(Input.GetKeyDown(KeyCode.E)){
                 Debug.Log("Agarrando " + item.nombre);
-                Inventory.instance.Add(item);
-                Destroy(gameObject);
+                bool IsPicked = Inventory.instance.Add(item);
+                if(IsPicked){
+                    Destroy(gameObject);
+                }
             }
         }
     }
