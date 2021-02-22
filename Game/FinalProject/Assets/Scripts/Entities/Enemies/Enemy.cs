@@ -43,6 +43,7 @@ public abstract class Enemy : Entity
 
     #region Status
     [SerializeField] protected bool touchingPlayer;
+    [SerializeField] protected bool justCapturedPlayer;
     #endregion
 
     #region Abstract methods
@@ -66,7 +67,6 @@ public abstract class Enemy : Entity
 
     new protected void Update()
     {
-        Debug.Log($"Can see player: {CanSeePlayer()}");
         if (InFrontOfObstacle() && isChasing)
         {
             ChangeFacingDirection();
@@ -83,7 +83,7 @@ public abstract class Enemy : Entity
                 ChasePlayer();
                 break;
             case State.Paralized:
-                //Paralized();
+                //justCapturedPlayer;
                 break;
             case State.Fear:
                 //Fear();
@@ -177,9 +177,11 @@ public abstract class Enemy : Entity
     {
         isParalized = true;
         rigidbody2d.Sleep();
+        Debug.Log("Paralized");
         yield return new WaitForSeconds(time);
         rigidbody2d.WakeUp();
         isParalized = false;
+        Debug.Log("Not paralized");
     }
     
     // not tested yet

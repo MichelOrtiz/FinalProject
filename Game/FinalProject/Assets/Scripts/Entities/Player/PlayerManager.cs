@@ -6,9 +6,7 @@ public class PlayerManager : Entity
 {
     #region Main Parameters
     public float maxStamina = 100;
-    [SerializeField] protected float walkingSpeed;
-
-    [SerializeField] public float runningSpeed;
+    public float walkingSpeed;
 
     private GameObject[] players;
     #endregion
@@ -17,6 +15,10 @@ public class PlayerManager : Entity
     public DialogueTrigger dialogue;
     private RaycastHit2D hit;
     private float angle;
+
+    [SerializeField]private bool loosingStamina;
+    private float regenCooldown;
+
     private void SearchInteraction()
         {
             Vector2 startPoint = transform.position;
@@ -122,6 +124,7 @@ public class PlayerManager : Entity
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
         FindStartPos();
+        regenCooldown = 5;
     }
     
     void FixedUpdate()
@@ -154,10 +157,6 @@ public class PlayerManager : Entity
                 Flying();
             }
             
-            if (Input.GetKeyDown(KeyCode.RightShift))
-            {
-                isFlying = !isFlying;
-            }
         }
         else
         {
@@ -189,9 +188,24 @@ public class PlayerManager : Entity
             SearchInteraction(); 
         }
 
-        Timer(1,.01f,.005f);
+
         // animator.SetBool("Turn Left", moveInput<0 ); // Checks if the player turned left to start the turning animation
-        
+        if (loosingStamina)
+        {
+            if (regenCooldown > 0)
+            {
+                regenCooldown -= Time.deltaTime;
+            }
+            else
+            {
+                regenCooldown = 7;
+                loosingStamina = false;
+            }
+        }
+        else
+        {
+            StartCoroutine(Regeneration(1f, 0.05f));
+        }
         base.Update();
     } 
 
@@ -224,24 +238,11 @@ public class PlayerManager : Entity
     void Move()
     {
         
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), rigidbody2d.velocity.y, 0f);   
-        if(Input.GetKey(KeyCode.LeftShift)){
-            if(currentStamina>10){   
-                rigidbody2d.velocity = new Vector2(movement.x *runningSpeed, movement.y);
-                isRunning = true;
-            }
-            else
-            {
-                rigidbody2d.velocity = new Vector2(movement.x * walkingSpeed, movement.y);
-                isRunning = true;
-            }
-        }
-        else
-        {
-            rigidbody2d.velocity = new Vector2(movement.x * walkingSpeed, movement.y);
-            isRunning = false;
-        }
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), rigidbody2d.velocity.y, 0f);  
+        
+        rigidbody2d.velocity = new Vector2(movement.x * walkingSpeed, movement.y);
     }
+
     void Flying()
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
@@ -274,11 +275,10 @@ public class PlayerManager : Entity
     /// <param name="timeTired"></param>
     /// <param name="damage"></param>
     /// <returns></returns>
-    IEnumerator Regeneration(int timeRegen, float regen)
+    IEnumerator Regeneration(float timeRegen, float regen)
     {
-        
         yield return new WaitForSeconds (timeRegen);
-        if (!isRunning)
+        if (!loosingStamina)
         {
             RegenStamina(regen);
         }
@@ -288,12 +288,13 @@ public class PlayerManager : Entity
 
     // Call these methods to increase or decrease stamina directly
     #region Direct stamina changes
-    void TakeTirement(float damage)
+    public void TakeTirement(float damage)
     {
         isStruggling = true;
         if (currentStamina>0)
         {
             currentStamina -= damage;
+            loosingStamina = true;
             staminaBar.SetStamina(currentStamina);
         }
         if (currentStamina<0)
@@ -315,7 +316,7 @@ public class PlayerManager : Entity
     }
     #endregion
 
-    void Timer(int time, float damage, float regen)
+    /*void Timer(int time, float damage, float regen)
     {
         if(isRunning)
         {
@@ -329,7 +330,7 @@ public class PlayerManager : Entity
                 StartCoroutine (Regeneration(time,regen));
             }
         }
-    }
+    }*/
 
     #region Self state methods
     public void Captured(int nTaps, float damagePerSecond)
@@ -340,8 +341,6 @@ public class PlayerManager : Entity
         }
         isCaptured = true;
         int halfTaps = nTaps/2;
-        Debug.Log(Input.GetAxisRaw("Horizontal"));
-        Debug.Log($"left: {lButtonCount} right: {rButtonCount}");
 
         if (Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Horizontal") == 1)
         {

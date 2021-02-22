@@ -43,6 +43,6 @@ public class loadlevel : MonoBehaviour
 
     void LoadScene(){
         SceneManager.LoadScene(iLevelToLoad);
-        Camera.instance.gameObject.SetActive(false);
+        //Camera.instance.gameObject.SetActive(true);
     }
 }
