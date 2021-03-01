@@ -61,7 +61,7 @@ public class SpyFox : DogFox
         {
             isWalking = true;
             if (!isJumping) rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, chaseSpeed * Time.deltaTime);
-            Debug.Log($"In Front Of Obstacle: {InFrontOfObstacle()}");
+            //Debug.Log($"In Front Of Obstacle: {InFrontOfObstacle()}");
             if (InFrontOfObstacle() && isGrounded)
             {
                 //rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x +

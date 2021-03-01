@@ -6,6 +6,8 @@ public class Entity : MonoBehaviour
 {
     protected const string LEFT = "left";
     protected const string RIGHT = "right";
+    protected const string UP = "up";
+    protected const string DOWN = "down";
     [SerializeField] public string facingDirection;
 
 
