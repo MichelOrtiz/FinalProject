@@ -3,20 +3,28 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public static InventoryUI instance;
-    public Text nametxt;
-    public Text description;
-    public Item moveItem;
-    public int moveItemIndex;
-    public GameObject menuDesplegable;
-    public GameObject invetoryUI;
-    public Transform itemsParent;
-    private InventorySlot focusedSlot;
-    public Button nextButton;
-    public Button prevButton;
-    Inventory inventory;
-    InventorySlot[] slots;
-    private int invPage;
+    #region Objects
+        public static InventoryUI instance;
+         public Text nametxt;
+        public Text description;
+        public Item moveItem;
+        public GameObject menuDesplegable;
+        public GameObject invetoryUI;
+        public Transform itemsParent;
+        public Transform itemsParentHotbar0;
+        private InventorySlot focusedSlot;
+        public Button nextButton;
+        public Button prevButton;
+        Inventory inventory;
+        InventorySlot[] slots;
+        InventorySlot[] slotsHotbar0;
+    #endregion
+    
+    #region variables
+        public int moveItemIndex;
+        private int invPage;
+    #endregion
+    
     private void Awake() {
         if(instance!=null){
             Debug.Log("HOW!!!");
@@ -33,6 +41,7 @@ public class InventoryUI : MonoBehaviour
         inventory.onItemChangedCallBack += UpdateUI;
         menuDesplegable.SetActive(false);
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        slotsHotbar0 = itemsParentHotbar0.GetComponentsInChildren<InventorySlot>();
         invPage = 0;
         UpdateUI();
     }
@@ -94,6 +103,32 @@ public class InventoryUI : MonoBehaviour
         }else{
             nametxt.text = "";
             description.text = "Selecciona un objeto";
+        }
+    }
+    public void UpdateHotbar0UI(){
+        for(int i=0;i<slotsHotbar0.Length;i++)
+        {
+            if(inventory.hotbar0[i]!=null)
+            {
+                slotsHotbar0[i].SetItem(inventory.hotbar0[0]);
+                if(!inventory.items.Contains(inventory.hotbar0[0]))
+                {
+                    inventory.hotbar0[0] = null;
+                    slotsHotbar0[i].ClearSlot();
+                }
+            }
+        }
+    }
+    public void SetItemHotbar(int i)
+    {
+        if(moveItem!=null)
+        {
+            inventory.hotbar0[i] = moveItem;
+            UpdateHotbar0UI();
+        }
+        else
+        {
+            moveItem = null;
         }
     }
     public InventorySlot GetFocusSlot(){

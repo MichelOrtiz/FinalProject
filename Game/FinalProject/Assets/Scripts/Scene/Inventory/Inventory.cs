@@ -6,8 +6,9 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
     public List<Item> items = new List<Item>();
-    public Item[] hotkey;
-    public int capacidad = 2;
+    public Item[] hotbar0 = new Item[5];
+    //public UnityEngine.Object[] hotbar1;
+    public int capacidad;
     private void Awake() {
         if(instance!=null){
             Debug.Log("HOW!!!");
@@ -16,32 +17,14 @@ public class Inventory : MonoBehaviour
         instance = this;
     }
     private void Start() {
-        hotkey = new Item[4];
+        
     }
     
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallBack;
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.Alpha1)){
-            if(hotkey[0]!=null){
-               hotkey[0].Use();
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2)){
-            if(hotkey[1]!=null){
-               hotkey[1].Use();
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha3)){
-            if(hotkey[2]!=null){
-               hotkey[2].Use();
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha4)){
-            if(hotkey[3]!=null){
-               hotkey[3].Use();
-            }
-        }
+    private void Update() 
+    {
+        
     }
     public bool Add(Item item){  
         if(items.Count<capacidad){
