@@ -34,8 +34,8 @@ public class HangingArandana : Arandaña
     new void Update()
     {
         isChasing = CanSeePlayer() || justChasedPlayer;
-        Debug.DrawLine(fovOrigin.position, fovOrigin.position + Vector3.down * maxViewDistance, Color.blue);
-
+        //Debug.DrawLine(fovOrigin.position, fovOrigin.position + Vector3.down * maxViewDistance, Color.blue);
+        Debug.Log(lastSeenPlayerPosition);
         base.Update();
     }
 
@@ -87,7 +87,6 @@ public class HangingArandana : Arandaña
         if (!touchingPlayer)
         {
             rigidbody2d.position = Vector3.MoveTowards(GetPosition(), lastSeenPlayerPosition, chaseSpeed * Time.deltaTime);
-            //rigidbody2d.AddForce(Vector3.down + lastSeenPlayerPosition * chaseSpeed * Time.deltaTime, ForceMode2D.Impulse);
         }
         justChasedPlayer = true;
         
