@@ -44565,7 +44565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202708791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 9.749421}
+  m_LocalPosition: {x: 0.35, y: 0.1, z: 9.749421}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1800270463}
@@ -46430,6 +46430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1800270463}
   - component: {fileID: 1800270462}
+  - component: {fileID: 1800270464}
   m_Layer: 0
   m_Name: Obj
   m_TagString: Untagged
@@ -46460,13 +46461,39 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800270461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.220003, y: 4.299999, z: -9.749421}
+  m_LocalPosition: {x: 60.24, y: 6.01, z: -9.749421}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1202708792}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1800270464
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800270461}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!224 &1886021732 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5897520343088184235, guid: 08a4d2bdb3194b14ba9bbd62e1acf752, type: 3}
@@ -47402,6 +47429,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HangingArandana
       objectReference: {fileID: 0}
+    - target: {fileID: 884248132953188834, guid: c8227177e6ab4c64ab7ea1680c911fdf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 884248132953188836, guid: c8227177e6ab4c64ab7ea1680c911fdf, type: 3}
       propertyPath: m_RootOrder
       value: 33
@@ -47905,6 +47936,10 @@ PrefabInstance:
     - target: {fileID: 8647063263483198496, guid: fd6e9c17393599d438c0c1e0f8c07cbc, type: 3}
       propertyPath: m_Name
       value: Spotter Gnome
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647063263483198498, guid: fd6e9c17393599d438c0c1e0f8c07cbc, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8647063263483198510, guid: fd6e9c17393599d438c0c1e0f8c07cbc, type: 3}
       propertyPath: m_RootOrder

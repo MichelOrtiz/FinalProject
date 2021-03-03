@@ -70,5 +70,9 @@ public class NormalType : Enemy
     {
         player.Captured(nTaps: 9, damagePerSecond: 0);
     }
+
+    public override void ConsumeItem(Item item){
+        Debug.Log("Consumiendo "+ item.nombre);
+    }
     #endregion
 }

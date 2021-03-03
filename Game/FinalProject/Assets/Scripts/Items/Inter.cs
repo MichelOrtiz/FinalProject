@@ -20,8 +20,18 @@ public class Inter : MonoBehaviour
             }
         }
     }
+    
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("Kill MEEEE!");
+        Enemy enemigo = other.GetComponent<Enemy>();
+        if(enemigo!=null)
+        {
+            enemigo.ConsumeItem(item);
+            Destroy(gameObject);
+        }
     }
 }

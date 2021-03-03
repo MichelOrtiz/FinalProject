@@ -50,6 +50,7 @@ public abstract class Enemy : Entity
     protected abstract void MainRoutine();
     protected abstract void ChasePlayer();
     protected abstract void Attack();
+    public  abstract void ConsumeItem(Item item);
     #endregion
 
     #region Utils
@@ -111,7 +112,7 @@ public abstract class Enemy : Entity
             }
         }
     }
-
+    
     /// <summary>
     /// Sent when a collider on another object stops touching this
     /// object's collider (2D physics only).
@@ -195,6 +196,7 @@ public abstract class Enemy : Entity
     }
     #endregion
 
+    
 
     #region Fov stuff
     /// <summary>
