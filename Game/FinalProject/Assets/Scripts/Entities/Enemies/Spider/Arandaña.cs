@@ -44,9 +44,9 @@ public class Arandaña : NormalType
             verticalDirection = "";
             gravityDirection = transform.rotation.z == 0 ? Vector3.down : Vector3.up;
         }
-        //gravityDirection += feetPos.position;
+        gravityDirection += feetPos.position;
         //gravityDirection = Vector3.MoveTowards(feetPos.position, feetPos.position + gravityDirection, relativeGravity);
-        gravityDirection = Vector3.MoveTowards(feetPos.position, feetPos.position + gravityDirection, relativeGravity);
+        gravityDirection = Vector3.MoveTowards(feetPos.position, gravityDirection,  relativeGravity);
         Debug.DrawLine(feetPos.position, gravityDirection, Color.green);
         base.Update();
     }
@@ -65,9 +65,9 @@ public class Arandaña : NormalType
             //rigidbody2d.velocity = new Vector3(feetPos.position + Vector3.down * Time.deltaTime;
             //transform.Translate(feetPos.position + gravityDirection * Time.deltaTime);
 
-            //rigidbody2d.AddForce(gravityDirection , ForceMode2D.Impulse);
+            rigidbody2d.AddForce(gravityDirection, ForceMode2D.Impulse);
             //transform.Translate(facingDirection == RIGHT? Vector3.right : Vector3.left * Time.deltaTime * normalSpeed); 
-            rigidbody2d.velocity = Vector3.MoveTowards(GetPosition(), gravityDirection, 0.2f);
+            //rigidbody2d.velocity = Vector3.MoveTowards(GetPosition(), feetPos.position + gravityDirection, relativeGravity * Time.deltaTime);
         }
         /*else
         {

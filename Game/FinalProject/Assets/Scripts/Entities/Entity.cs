@@ -39,7 +39,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float fallingCriteria;
     
     // Velocidad promedio
-    [SerializeField] protected const float averageSpeed = 5f;
+    [SerializeField] public static float averageSpeed = 5f;
     
     #endregion
     

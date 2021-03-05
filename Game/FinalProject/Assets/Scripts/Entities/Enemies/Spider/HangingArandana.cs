@@ -34,8 +34,6 @@ public class HangingArandana : Arandaña
     new void Update()
     {
         isChasing = CanSeePlayer() || justChasedPlayer;
-        //Debug.DrawLine(fovOrigin.position, fovOrigin.position + Vector3.down * maxViewDistance, Color.blue);
-        Debug.Log(lastSeenPlayerPosition);
         base.Update();
     }
 

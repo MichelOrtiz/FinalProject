@@ -74,6 +74,6 @@ public class SpotterGnome : Gnome
 
     protected override void Attack()
     {
-        player.Captured(nTaps: 10, damageAmount);
+        player.TakeTirement(damageAmount);
     }
 }
