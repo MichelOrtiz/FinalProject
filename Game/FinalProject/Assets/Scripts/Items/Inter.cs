@@ -26,10 +26,11 @@ public class Inter : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("Kill MEEEE!");
+        //Debug.Log("Kill MEEEE!");
         Enemy enemigo = other.GetComponent<Enemy>();
         if(enemigo!=null)
         {
+            Debug.Log(enemigo.gameObject.name);
             enemigo.ConsumeItem(item);
             Destroy(gameObject);
         }
