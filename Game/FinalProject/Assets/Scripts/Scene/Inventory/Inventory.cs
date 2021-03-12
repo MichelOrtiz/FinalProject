@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
+    public static int money;
+    public Text moneyText;
     public static Inventory instance;
     public List<Item> items = new List<Item>();
     public Item[] hotbar0 = new Item[5];
@@ -24,7 +27,31 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallBack;
     private void Update() 
     {
-        
+        if(Input.GetKeyDown(KeyCode.P)){
+            AddMoney(1);
+        }
+        if(Input.GetKeyDown(KeyCode.O)){
+            RemoveMoney(1);
+        }
+    }
+    
+    public void AddMoney(int i){
+        money+=i;
+        UpdateMoneyUI();
+        return;
+    }
+    public bool RemoveMoney(int i){
+        if(money<i){
+            Debug.Log("No hay suficiente dinero");
+            return false;
+        }
+        money-=i;
+        UpdateMoneyUI();
+        return true;
+    }
+    public void UpdateMoneyUI(){
+        moneyText.text = "Dinero:"+money+"G";
+        return;
     }
     public bool Add(Item item){  
         if(items.Count<capacidad){
@@ -57,6 +84,10 @@ public class Inventory : MonoBehaviour
         if(onItemChangedCallBack != null){
             onItemChangedCallBack.Invoke();
         }
+    }
+    
+    public void AssignItemHotbar0(){
+        
     }
     
 }

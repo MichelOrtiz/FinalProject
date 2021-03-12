@@ -126,10 +126,6 @@ public class InventoryUI : MonoBehaviour
             inventory.hotbar0[i] = moveItem;
             UpdateHotbar0UI();
         }
-        else
-        {
-            moveItem = null;
-        }
     }
     public InventorySlot GetFocusSlot(){
         if(focusedSlot!=null){
