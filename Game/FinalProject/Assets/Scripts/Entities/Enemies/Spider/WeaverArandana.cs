@@ -16,7 +16,6 @@ public class WeaverArandana : Arandaña
 
     new void Update()
     {
-
         base.Update();
     }
 
