@@ -7,17 +7,17 @@ public class InventoryUI : MonoBehaviour
         public static InventoryUI instance;
          public Text nametxt;
         public Text description;
-        public Item moveItem;
+        private Item moveItem;
         public GameObject menuDesplegable;
         public GameObject invetoryUI;
         public Transform itemsParent;
-        public Transform itemsParentHotbar0;
+        
         private InventorySlot focusedSlot;
         public Button nextButton;
         public Button prevButton;
         Inventory inventory;
         InventorySlot[] slots;
-        InventorySlot[] slotsHotbar0;
+        
     #endregion
     
     #region variables
@@ -41,7 +41,7 @@ public class InventoryUI : MonoBehaviour
         inventory.onItemChangedCallBack += UpdateUI;
         menuDesplegable.SetActive(false);
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
-        slotsHotbar0 = itemsParentHotbar0.GetComponentsInChildren<InventorySlot>();
+        
         invPage = 0;
         UpdateUI();
     }
@@ -75,7 +75,7 @@ public class InventoryUI : MonoBehaviour
     }
     public void UpdateUI(){
         for(int i=0; i<slots.Length;i++){
-            slots[i].inventoryIndex = i+invPage;
+            slots[i].SetIndex(i+invPage);
             if(i+invPage < inventory.items.Count){
                 slots[i].SetItem(inventory.items.ToArray()[i+invPage]);
             }else{
@@ -98,35 +98,15 @@ public class InventoryUI : MonoBehaviour
         if(focusedSlot!=null){
             focusedSlot.icon.color = Color.yellow;
             focusedSlot.background.color = Color.red;
-            description.text = focusedSlot.item.descripcion;
-            nametxt.text = focusedSlot.item.name;
+            description.text = focusedSlot.GetItem().descripcion;
+            nametxt.text = focusedSlot.GetItem().name;
         }else{
             nametxt.text = "";
             description.text = "Selecciona un objeto";
         }
     }
-    public void UpdateHotbar0UI(){
-        for(int i=0;i<slotsHotbar0.Length;i++)
-        {
-            if(inventory.hotbar0[i]!=null)
-            {
-                slotsHotbar0[i].SetItem(inventory.hotbar0[0]);
-                if(!inventory.items.Contains(inventory.hotbar0[0]))
-                {
-                    inventory.hotbar0[0] = null;
-                    slotsHotbar0[i].ClearSlot();
-                }
-            }
-        }
-    }
-    public void SetItemHotbar(int i)
-    {
-        if(moveItem!=null)
-        {
-            inventory.hotbar0[i] = moveItem;
-            UpdateHotbar0UI();
-        }
-    }
+   
+    
     public InventorySlot GetFocusSlot(){
         if(focusedSlot!=null){
             return focusedSlot;
@@ -163,7 +143,7 @@ public class InventoryUI : MonoBehaviour
         menuDesplegable.SetActive(false);
     }
     public void UseButton(){
-        Item item = focusedSlot.item;
+        Item item = focusedSlot.GetItem();
         RemoveFocusSlot();
         item.Use();
         HideMenuDesp();
@@ -171,12 +151,12 @@ public class InventoryUI : MonoBehaviour
     public void MoveButton(){
         HideMenuDesp();
         if(focusedSlot!=null){
-            SetMoveItem(focusedSlot.item,focusedSlot.inventoryIndex);
+            SetMoveItem(focusedSlot.GetItem(),focusedSlot.GetIndex());
             RemoveFocusSlot();
         }
     }
     public void DeleteButton(){
-        Item item = focusedSlot.item;
+        Item item = focusedSlot.GetItem();
         RemoveFocusSlot();
         item.RemoveFromInventory();
         HideMenuDesp();
@@ -192,5 +172,12 @@ public class InventoryUI : MonoBehaviour
     public void MoveItems(int destination){
         inventory.SwapItems(moveItemIndex,destination);
         RemoveMoveItem();
+    }
+    public void SetMoveItem(Item i){
+        moveItem = i;
+        return;
+    }
+    public Item GetMoveItem(){
+        return moveItem;
     }
 }

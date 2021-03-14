@@ -9,7 +9,6 @@ public class Inventory : MonoBehaviour
     public Text moneyText;
     public static Inventory instance;
     public List<Item> items = new List<Item>();
-    public Item[] hotbar0 = new Item[5];
     //public UnityEngine.Object[] hotbar1;
     public int capacidad;
     private void Awake() {
@@ -33,6 +32,7 @@ public class Inventory : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.O)){
             RemoveMoney(1);
         }
+        
     }
     
     public void AddMoney(int i){
@@ -84,10 +84,6 @@ public class Inventory : MonoBehaviour
         if(onItemChangedCallBack != null){
             onItemChangedCallBack.Invoke();
         }
-    }
-    
-    public void AssignItemHotbar0(){
-        
     }
     
 }
