@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Inter : MonoBehaviour
 {
+    public SpriteRenderer imagen;
     public float radius = 3f;
     public Item item;
-    public Transform player;
-
+    private PlayerManager player;
+    private void Start() {
+        player = PlayerManager.instance;
+        imagen.sprite = item.icon;
+    }
     private void Update() {
-        float distance = Vector2.Distance(player.position, transform.position);
+        float distance = Vector2.Distance(player.transform.position, transform.position);
         if(distance <= radius){
             if(Input.GetKeyDown(KeyCode.E)){
                 Debug.Log("Agarrando " + item.nombre);
@@ -34,5 +38,9 @@ public class Inter : MonoBehaviour
             enemigo.ConsumeItem(item);
             Destroy(gameObject);
         }
+    }
+    public void SetItem(Item newItem){
+        item = newItem;
+        imagen.sprite = item.icon;
     }
 }
