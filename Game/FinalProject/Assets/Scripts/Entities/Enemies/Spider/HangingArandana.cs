@@ -6,10 +6,10 @@ public class HangingArandana : Arandaña
 {
     private bool justChasedPlayer;
     private bool goingBack;
-    private bool waiting;
+    [SerializeField] private bool waiting;
     private Vector3 startPosition;
     private Vector3 lastSeenPlayerPosition;
-    private float timer = 5;
+    [SerializeField] private float startWaitTime;
 
     [SerializeField] float maxViewDistance;
 
@@ -17,6 +17,7 @@ public class HangingArandana : Arandaña
     new void Start()
     {
         base.Start();
+        waitTime = startWaitTime;
         startPosition = this.GetPosition();
 
         RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, fovOrigin.position + Vector3.down * maxViewDistance, 1 << LayerMask.NameToLayer("Ground"));
@@ -39,20 +40,21 @@ public class HangingArandana : Arandaña
 
     new void FixedUpdate()
     {
+        base.FixedUpdate();
         if (justChasedPlayer)
         {
-            if (this.GetPosition() != lastSeenPlayerPosition)
+            if (!touchingPlayer && this.GetPosition() != lastSeenPlayerPosition)
             {
                 rigidbody2d.position = Vector3.MoveTowards(GetPosition(), lastSeenPlayerPosition, chaseSpeed * Time.deltaTime);
             }
 
-            if (timer > 0)
+            if (waitTime > 0)
             {
                 waiting = true;
-                timer -= Time.deltaTime;
+                waitTime -= Time.deltaTime;
                 return;
             }
-            timer = 5f;
+            waitTime = startWaitTime;
             waiting = false;
             goingBack = true;
             justChasedPlayer = false;
@@ -66,7 +68,7 @@ public class HangingArandana : Arandaña
             }
             goingBack = false;
         }
-        base.FixedUpdate();
+        
     }
 
     void LateUpdate()
@@ -86,8 +88,7 @@ public class HangingArandana : Arandaña
         {
             rigidbody2d.position = Vector3.MoveTowards(GetPosition(), lastSeenPlayerPosition, chaseSpeed * Time.deltaTime);
         }
-        justChasedPlayer = true;
-        
+        justChasedPlayer = true;  
     }
 
     protected override void MainRoutine()

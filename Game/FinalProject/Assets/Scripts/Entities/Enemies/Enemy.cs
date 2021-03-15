@@ -120,7 +120,10 @@ public abstract class Enemy : Entity
     /// <param name="other">The Collision2D data associated with this collision.</param>
     void OnCollisionExit2D(Collision2D other)
     {
-        touchingPlayer = false;
+        if (other.gameObject.tag == "Player")
+        {
+            touchingPlayer = false;
+        }
     }
     #endregion
 
