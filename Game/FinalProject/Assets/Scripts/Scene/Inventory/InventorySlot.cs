@@ -1,28 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : Slot
 {
-    public Image icon;
-    public Image background;
-    public Item item;
     private InventoryUI inventoryUI;
-
-    public int inventoryIndex;
-
     private void Start() {
         inventoryUI = InventoryUI.instance;
-        inventoryIndex = 0;
+        index = 0;
     }
-    public void SetItem (Item newItem){
-        item = newItem;
-        icon.sprite = item.icon;
-        icon.enabled = true;
-        background.color = Color.white;
-    }
-
-    public void OnButtonPress(){
-        if(inventoryUI.moveItem!=null){
-            inventoryUI.MoveItems(this.inventoryIndex);
+    public override void OnButtonPress(){
+        if(inventoryUI.GetMoveItem()!=null){
+            inventoryUI.MoveItems(this.index);
         }
         if(inventoryUI.GetFocusSlot()!=this){
             inventoryUI.FocusSlot(this);
@@ -31,21 +18,12 @@ public class InventorySlot : MonoBehaviour
         }
         
     }
-    public void UseItem(){
+    public override void UseItem(){
         item.Use();
         inventoryUI.RemoveFocusSlot();
     }
-    public void RemoveItem(){
-        Inventory.instance.Remove(item);
+    public override void RemoveItem(){
+        item.RemoveFromInventory();
         inventoryUI.RemoveFocusSlot();
     }
-
-    public void ClearSlot(){
-        item = null;
-        icon.sprite = null;
-        icon.enabled = false;
-        background.color = Color.clear;
-    }
-
-
 }
