@@ -14,7 +14,6 @@ public class PlayerManager : Entity
     #region Dialogue Trigger
     public DialogueTrigger dialogue;
     private RaycastHit2D hit;
-    private float angle;
 
     [SerializeField]private bool loosingStamina;
     private float regenCooldown;
@@ -119,7 +118,6 @@ public class PlayerManager : Entity
     new void Start()
     {
         base.Start();
-        angle = transform.position.z;
         //walkingSpeed = AverageSpeed-3f;
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);

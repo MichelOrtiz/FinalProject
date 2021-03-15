@@ -9,6 +9,7 @@ public class HotbarUI : MonoBehaviour
     InventoryUI inventoryUI;
     public Transform itemsParentHotbar0;
     HotbarSlot[] slotsHotbar0;
+    private float timeKeyPressed;
     private void Awake() {
         if(instance!=null){
             Debug.Log("NANI!!!");
@@ -19,6 +20,7 @@ public class HotbarUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timeKeyPressed=0;
         inventory = Inventory.instance;
         inventoryUI = InventoryUI.instance;
         slotsHotbar0 = itemsParentHotbar0.GetComponentsInChildren<HotbarSlot>(); 
@@ -32,30 +34,77 @@ public class HotbarUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("HotbarObj0")){
-            if(slotsHotbar0[0].GetItem()!=null){
+        if(Input.GetButtonUp("HotbarObj0") && slotsHotbar0[0].GetItem()!=null){
+            if(timeKeyPressed <= 0.5){
                 slotsHotbar0[0].UseItem();
             }
+            if(timeKeyPressed > 0.5){
+                GunProjectile.instance.ShotObject(slotsHotbar0[0].GetItem());
+                slotsHotbar0[0].RemoveItem();
+            }
+            timeKeyPressed = 0;
         }
-        if(Input.GetButtonDown("HotbarObj1")){
-            if(slotsHotbar0[1].GetItem()!=null){
+        if(Input.GetButtonUp("HotbarObj1") && slotsHotbar0[1].GetItem()!=null){
+            if(timeKeyPressed <= 0.5){
                 slotsHotbar0[1].UseItem();
             }
+            if(timeKeyPressed > 0.5){
+                GunProjectile.instance.ShotObject(slotsHotbar0[1].GetItem());
+                slotsHotbar0[1].RemoveItem();
+            }
+            timeKeyPressed = 0;
         }
-        if(Input.GetButtonDown("HotbarObj2")){
-            if(slotsHotbar0[2].GetItem()!=null){
+        if(Input.GetButtonUp("HotbarObj2") && slotsHotbar0[2].GetItem()!=null){
+            if(timeKeyPressed <= 0.5){
                 slotsHotbar0[2].UseItem();
             }
-        }
-        if(Input.GetButtonDown("HotbarObj3")){
-            if(slotsHotbar0[2].GetItem()!=null){
-                slotsHotbar0[2].UseItem();
+            if(timeKeyPressed > 0.5){
+                GunProjectile.instance.ShotObject(slotsHotbar0[2].GetItem());
+                slotsHotbar0[2].RemoveItem();
             }
+            timeKeyPressed = 0;
         }
-        if(Input.GetButtonDown("HotbarObj4")){
-            if(slotsHotbar0[3].GetItem()!=null){
+        if(Input.GetButtonUp("HotbarObj3") && slotsHotbar0[3].GetItem()!=null){
+            if(timeKeyPressed <= 0.5){
                 slotsHotbar0[3].UseItem();
             }
+            if(timeKeyPressed > 0.5){
+                GunProjectile.instance.ShotObject(slotsHotbar0[3].GetItem());
+                slotsHotbar0[3].RemoveItem();
+            }
+            timeKeyPressed = 0;
+        }
+        if(Input.GetButtonUp("HotbarObj4") && slotsHotbar0[4].GetItem()!=null){
+            if(timeKeyPressed <= 0.5){
+                slotsHotbar0[4].UseItem();
+            }
+            if(timeKeyPressed > 0.5){
+                GunProjectile.instance.ShotObject(slotsHotbar0[4].GetItem());
+                slotsHotbar0[4].RemoveItem();
+            }
+            timeKeyPressed = 0;
+        }
+
+
+        if(Input.GetButton("HotbarObj0") && slotsHotbar0[0].GetItem()!=null){
+            Debug.Log("timeKey1Pressed:" + timeKeyPressed);
+            timeKeyPressed += Time.deltaTime;
+        }
+        if(Input.GetButton("HotbarObj1") && slotsHotbar0[1].GetItem()!=null){
+            Debug.Log("timeKey2Pressed:" + timeKeyPressed);
+            timeKeyPressed += Time.deltaTime;
+        }
+        if(Input.GetButton("HotbarObj2") && slotsHotbar0[2].GetItem()!=null){
+            Debug.Log("timeKe3yPressed:" + timeKeyPressed);
+            timeKeyPressed += Time.deltaTime;
+        }
+        if(Input.GetButton("HotbarObj3") && slotsHotbar0[3].GetItem()!=null){
+            Debug.Log("timeKey4Pressed:" + timeKeyPressed);
+            timeKeyPressed += Time.deltaTime;
+        }
+        if(Input.GetButton("HotbarObj4") && slotsHotbar0[4].GetItem()!=null){
+            Debug.Log("timeKey5Pressed:" + timeKeyPressed);
+            timeKeyPressed += Time.deltaTime;
         }
     }
      public void UpdateHotbar0UI(){
