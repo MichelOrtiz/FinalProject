@@ -13,7 +13,7 @@ public class Entity : MonoBehaviour
 
     #region Normal States
     [Header("Normal states")]
-    [SerializeField] protected State state;
+    public State state;
     public bool isWalking = false;
     public bool isGrounded = false;
     public bool isJumping = false;
@@ -73,6 +73,17 @@ public class Entity : MonoBehaviour
         {
             throw;
         }
+
+        /*switch (state)
+        {
+            case State.Paralized:
+                rigidbody2d.velocity = new Vector3(0, 0, 0);
+                break;
+            case State.Fear:
+                          
+            default:
+        }*/
+
         //UpdateAnimation();
     }
 
@@ -119,5 +130,8 @@ public class Entity : MonoBehaviour
         }
         isInFear = false;
     }*/
+
+    
+
     #endregion
 }

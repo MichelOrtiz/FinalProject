@@ -28,7 +28,6 @@ public class NormalType : Enemy
 
     new protected void FixedUpdate()
     {
-        
         base.FixedUpdate();
     }
     #endregion
