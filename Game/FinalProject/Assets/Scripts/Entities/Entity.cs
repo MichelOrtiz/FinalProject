@@ -104,6 +104,7 @@ public class Entity : MonoBehaviour
 
     public Vector3 GetPosition()
     {
+        //return rigidbody2d.position;
         return this.transform.position;
     }
 

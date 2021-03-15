@@ -85,5 +85,13 @@ public class Inventory : MonoBehaviour
             onItemChangedCallBack.Invoke();
         }
     }
-    
+    public Item GetRandomEdibleItem()
+    {
+        Item item = new Item();
+        if (items.Count != 0)
+        {
+            item = items[RandomGenerator.NewRandom(0, items.Count -1)];
+        }
+        return item;
+    }
 }

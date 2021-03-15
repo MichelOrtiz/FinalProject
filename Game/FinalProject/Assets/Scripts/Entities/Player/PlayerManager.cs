@@ -386,7 +386,11 @@ public class PlayerManager : Entity
     /// <param name="other">The Collision2D data associated with this collision.</param>
     void OnCollisionExit2D(Collision2D other)
     {
-        isCaptured = false;
+        if (other.gameObject.tag == "Enemy")
+        {
+            isCaptured = false;
+            StartCoroutine(Immunity());
+        }
     }
 
 

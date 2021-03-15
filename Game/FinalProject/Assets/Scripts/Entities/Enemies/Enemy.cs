@@ -28,8 +28,8 @@ public abstract class Enemy : Entity
 
     #region Layers, rigids, etc
     [Header("Layers, rigids, etc")]
-    [SerializeField] protected Transform groundCheck;
-    [SerializeField] protected Transform fovOrigin;
+    [SerializeField] protected Transform? groundCheck;
+    [SerializeField] protected Transform? fovOrigin;
     
     // Distance from fovOrigin to check if in front of obstacle
     [SerializeField] protected float baseCastDistance;
@@ -48,6 +48,10 @@ public abstract class Enemy : Entity
 
     #region Abstract methods
     protected abstract void MainRoutine();
+    
+    /// <summary>
+    /// What happens when the enemy sees the player
+    /// </summary>
     protected abstract void ChasePlayer();
     protected abstract void Attack();
     public  abstract void ConsumeItem(Item item);

@@ -16,7 +16,6 @@ public class Projectile : MonoBehaviour
     private Vector3 playerPosition;
     private Vector3 target;
 
-
     void Start()
     {
         speedMultiplier *= Entity.averageSpeed;

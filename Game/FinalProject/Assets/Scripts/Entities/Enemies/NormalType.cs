@@ -6,6 +6,7 @@ using UnityEngine;
 public class NormalType : Enemy
 {
     // Waiting patrolling time
+    protected float startWaitTime = 2f;
     protected float waitTime;
 
     #region Unity stuff
@@ -44,7 +45,7 @@ public class NormalType : Enemy
                 return;
             }
             ChangeFacingDirection();
-            waitTime = 2f;
+            waitTime = startWaitTime;
         }
         else
         {

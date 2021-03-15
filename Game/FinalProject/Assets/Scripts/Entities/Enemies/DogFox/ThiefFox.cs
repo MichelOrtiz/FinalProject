@@ -2,17 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThiefFox : MonoBehaviour
+public class ThiefFox : DogFox
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private Inventory inventory;
+    private Item stolenItem;
+    [SerializeField] Transform leaveItemPosition;
+    [SerializeField] float afterStealVelocity;
+
+    new void Start()
     {
-        
+        inventory = Inventory.instance;
+        base.Start();
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
-        
+        base.Update();
     }
+
+    protected override void ChasePlayer()
+    {
+        rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime);
+        if (InFrontOfObstacle())
+        {
+            rigidbody2d.position = rigidbody2d.position = Vector3.MoveTowards(GetPosition(), new Vector3(GetPosition().x, jumpForce), chaseSpeed * Time.deltaTime * rigidbody2d.gravityScale);
+        }
+    }
+
+    protected override void Attack()
+    {
+        if (stolenItem != null)
+        {
+            Instantiate(stolenItem, leaveItemPosition.position, Quaternion.identity);
+        }
+        stolenItem = inventory.GetRandomEdibleItem();
+        inventory.Remove(stolenItem);
+    }
+
+    
 }
