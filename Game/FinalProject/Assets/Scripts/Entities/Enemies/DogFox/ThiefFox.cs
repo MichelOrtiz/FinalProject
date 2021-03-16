@@ -33,13 +33,18 @@ public class ThiefFox : DogFox
 
     protected override void Attack()
     {
+        player.TakeTirement(damageAmount);
         if (stolenItem != null)
         {
             Instantiate(stolenItem, leaveItemPosition.position, Quaternion.identity);
         }
         stolenItem = inventory.GetRandomEdibleItem();
         inventory.Remove(stolenItem);
+        rigidbody2d.velocity = player.GetPosition().normalized * afterStealVelocity * Time.deltaTime;
     }
 
-    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        
+    }
 }

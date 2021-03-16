@@ -30,21 +30,21 @@ public class FlyingSquirrel : Squirrel
 
     new void FixedUpdate()
     {
-        switch (state)
+        switch (currentState)
         {
-            case State.Chasing:
+            case StateNames.Chasing:
                 ChasePlayer();
                 break;
-            case State.Falling:
+            case StateNames.Falling:
                 //ChasePlayer();
                 break;
-            case State.Paralized:
+            case StateNames.Paralized:
                 //Paralized();
                 break;
-            case State.Fear:
+            case StateNames.Fear:
                 //Fear();
                 break;
-            case State.Patrolling:
+            case StateNames.Patrolling:
                 MainRoutine();
                 break;
             default:

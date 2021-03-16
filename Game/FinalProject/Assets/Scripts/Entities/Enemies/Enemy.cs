@@ -82,18 +82,18 @@ public abstract class Enemy : Entity
 
     protected void FixedUpdate()
     {
-        switch (state)
+        switch (currentState)
         {
-            case State.Chasing:
+            case StateNames.Chasing:
                 ChasePlayer();
                 break;
-            case State.Paralized:
+            case StateNames.Paralized:
                 //justCapturedPlayer;
                 break;
-            case State.Fear:
+            case StateNames.Fear:
                 //Fear();
                 break;
-            case State.Patrolling:
+            case StateNames.Patrolling:
                 MainRoutine();
                 break;
         }
@@ -171,14 +171,14 @@ public abstract class Enemy : Entity
     #region Self state methods
     protected void UpdateState()
     {
-        state =
-            isChasing? State.Chasing :
-            isInFear? State.Fear :
-            isResting? State.Resting :
-            isParalized? State.Paralized :
-            isJumping? State.Jumping :
-            isFalling? State.Falling :
-            State.Patrolling;
+        currentState =
+            isChasing? StateNames.Chasing :
+            isInFear? StateNames.Fear :
+            isResting? StateNames.Resting :
+            isParalized? StateNames.Paralized :
+            isJumping? StateNames.Jumping :
+            isFalling? StateNames.Falling :
+            StateNames.Patrolling;
     }
     // To call IEnumerators use StartCoroutine() pls
     public IEnumerator Paralized(float time)

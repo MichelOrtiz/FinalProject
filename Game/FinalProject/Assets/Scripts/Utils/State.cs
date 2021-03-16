@@ -1,17 +1,22 @@
-public enum State
+using UnityEngine;
+
+public abstract class State
 {
-    Walking, 
-    Running, 
-    Jumping, 
-    Flying,  
-    Paralized, 
-    Captured,
-    Fear, 
-    BrainFrozen, 
-    Resting, 
-    Chasing,     
-    Dizzy, 
-    CapturedPlayer, 
-    Patrolling, 
-    Falling
+    [SerializeField] private StateNames name;
+    [SerializeField] private float duration;
+    private Entity entity;
+
+    public abstract void Affect();
+
+    public void ActivateEffect(Entity entity)
+    {
+        
+        entity.statusCheck += Affect;
+    }
+
+    public void DeactivateEffect(Entity entity)
+    {
+        entity.statusCheck -= Affect;
+    }
+    
 }

@@ -11,6 +11,39 @@ public class PlayerManager : Entity
     private GameObject[] players;
     #endregion
 
+    #region Constant change Parameters
+    public float currentStamina;
+    private float moveInput; 
+    private float jumpTimeCounter;
+    #endregion
+
+    #region States
+    public bool isRunning;
+    public bool isStruggling;
+    public bool isImmune;
+
+    #endregion
+
+    #region Layers, rigids, etc
+    public GameObject camara;
+    public StaminaBar staminaBar;
+    #endregion
+
+    #region states params // might be in a different class
+    private float buttonCool = 0.8f;
+    private static int lButtonCount = 0;
+    private static int rButtonCount = 0;
+    
+    [SerializeField] private float coolDownAfterAttack;
+    [SerializeField] private float immunityTime;
+
+    private bool tirementRunning = false;
+    #endregion
+
+    
+
+
+
     #region Dialogue Trigger
     public DialogueTrigger dialogue;
     private RaycastHit2D hit;
@@ -67,34 +100,7 @@ public class PlayerManager : Entity
 
     #endregion
 
-    #region Constant change Parameters
-    public float currentStamina;
-    private float moveInput; 
-    private float jumpTimeCounter;
-    #endregion
-
-    #region States
-    public bool isRunning;
-    public bool isStruggling;
-    public bool isImmune;
-
-    #endregion
-
-    #region Layers, rigids, etc
-    public GameObject camara;
-    public StaminaBar staminaBar;
-    #endregion
-
-    #region states params // might be in a different class
-    private float buttonCool = 0.8f;
-    private static int lButtonCount = 0;
-    private static int rButtonCount = 0;
     
-    [SerializeField] private float coolDownAfterAttack;
-    [SerializeField] private float immunityTime;
-
-    private bool tirementRunning = false;
-    #endregion
 
 
     public static PlayerManager instance = null;

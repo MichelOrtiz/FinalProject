@@ -13,7 +13,7 @@ public class Entity : MonoBehaviour
 
     #region Normal States
     [Header("Normal states")]
-    public State state;
+    public StateNames currentState;
     public bool isWalking = false;
     public bool isGrounded = false;
     public bool isJumping = false;
@@ -53,6 +53,10 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float checkFeetRadius;
     #endregion
 
+    public delegate void StatusCheck();
+    public StatusCheck statusCheck;
+
+
     #region Unity stuff
     protected void Start()
     {
@@ -73,18 +77,6 @@ public class Entity : MonoBehaviour
         {
             throw;
         }
-
-        /*switch (state)
-        {
-            case State.Paralized:
-                rigidbody2d.velocity = new Vector3(0, 0, 0);
-                break;
-            case State.Fear:
-                          
-            default:
-        }*/
-
-        //UpdateAnimation();
     }
 
     public void UpdateAnimation()
