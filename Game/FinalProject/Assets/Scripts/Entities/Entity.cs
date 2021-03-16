@@ -66,6 +66,9 @@ public class Entity : MonoBehaviour
 
     protected void Update()
     {
+        if(statusCheck!=null){
+            statusCheck.Invoke();
+        }
         facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;

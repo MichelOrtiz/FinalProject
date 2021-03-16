@@ -48,6 +48,7 @@ public class HunterCentaur : Centaur
 
     protected override void Attack()
     {
-        player.Captured(10, damageAmount);
+        Debug.Log("CENTAURO ATACANDO");
+        player.Captured(10, damageAmount,this);
     }
 }
