@@ -9,7 +9,6 @@ public class HangingArandana : Arandaña
     [SerializeField] private bool waiting;
     private Vector3 startPosition;
     private Vector3 lastSeenPlayerPosition;
-    [SerializeField] private float startWaitTime;
 
     [SerializeField] float maxViewDistance;
 

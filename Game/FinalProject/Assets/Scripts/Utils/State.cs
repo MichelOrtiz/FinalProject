@@ -10,7 +10,7 @@ public abstract class State
 
     public void ActivateEffect(Entity entity)
     {
-        
+
         entity.statusCheck += Affect;
     }
 
