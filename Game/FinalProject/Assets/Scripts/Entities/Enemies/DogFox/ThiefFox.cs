@@ -8,8 +8,9 @@ public class ThiefFox : DogFox
     private Inventory inventory;
     private Item stolenItem;
     private bool hasItem;
+    [SerializeField] private GameObject leaveItem;
     [SerializeField] private Transform leaveItemPosition;
-    [SerializeField] private float afterStealVelocity;
+    [SerializeField] private float afterStealSpeed;
     [SerializeField] private float startEscapeTime;
     [SerializeField] GameObject stolenItemIcon;
 
@@ -25,11 +26,26 @@ public class ThiefFox : DogFox
     new void Update()
     {
         hasItem = stolenItem != null;
+        if (touchingPlayer)
+        {
+            ChangeFacingDirection();
+        }
+        if (InFrontOfObstacle())
+        {
+            //rigidbody2d.position = Vector3.MoveTowards(GetPosition(), new Vector3(GetPosition().x, jumpForce), chaseSpeed * Time.deltaTime * rigidbody2d.gravityScale);
+            //rigidbody2d.AddForce(Vector3.up * jumpForce * Time.deltaTime * rigidbody2d.gravityScale, ForceMode2D.Force);
+            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x * afterStealSpeed * Time.deltaTime, jumpForce * rigidbody2d.gravityScale);
+
+        }
         if (hasItem)
         {
+            if (CanSeePlayer())
+            {
+                ChangeFacingDirection();
+            }
             if (escapeTime < startEscapeTime)
             {
-                rigidbody2d.velocity = player.GetPosition().normalized * afterStealVelocity * Time.deltaTime;
+                transform.Translate(Vector3.right * Time.deltaTime * afterStealSpeed);
                 escapeTime += Time.deltaTime;
             }
             else
@@ -39,11 +55,14 @@ public class ThiefFox : DogFox
             stolenItemIcon.GetComponent<SpriteRenderer>().sprite = stolenItem.icon;
             // Move the opposite direction of the player
         }
-        else
-        {
-            escapeTime = startEscapeTime;
-        }
         base.Update();
+    }
+    
+    
+    new void FixedUpdate()
+    {
+        
+        base.FixedUpdate();
     }
 
     protected override void MainRoutine()
@@ -55,40 +74,50 @@ public class ThiefFox : DogFox
     {
         if (!hasItem)
         {
-            rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime);
-            if (InFrontOfObstacle())
+            if (!touchingPlayer)
             {
-                rigidbody2d.position = rigidbody2d.position = Vector3.MoveTowards(GetPosition(), new Vector3(GetPosition().x, jumpForce), chaseSpeed * Time.deltaTime * rigidbody2d.gravityScale);
+                rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime);
             }
         }
+        /*else
+        {
+            rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), afterStealVelocity * Time.deltaTime);
+            ChangeFacingDirection();
+        }*/
     }
 
     protected override void Attack()
     {
         player.TakeTirement(damageAmount);
-        Item droppedItem = inventory.GetRandomEdibleItem();
-
-        //DropItem(droppedItem, new Vector3(GetPosition().x, GetPosition().y + 1f));
-        //Instantiate(droppedItem, new Vector3(GetPosition().x, GetPosition().y + 1f), Quaternion.identity);
-        //droppedItem.RemoveFromInventory();
-        stolenItem = droppedItem;
+        Item item = inventory.GetRandomEdibleItem();
         
-        inventory.Remove(droppedItem);
+        if (hasItem)
+        {
+            ConsumeItem(item);
+        }
+        else
+        {
+            stolenItem = item;
+            escapeTime = 0;
+        }
+        //stolenItem.RemoveFromInventory();
+        inventory.Remove(stolenItem);
+        
     }
 
     public override void ConsumeItem(Item item)
     {
         if (hasItem)
         {
-            //DropItem(stolenItem, leaveItemPosition.position);
+            DropItem(stolenItem, leaveItemPosition.position);
         }
         stolenItem = item;
+        escapeTime = 0;
     }
 
-    /*private void DropItem(Item item, Vector3 position)
+    private void DropItem(Item item, Vector3 position)
     {
-        GameObject objProjectile = Instantiate(objPrefab, player.GetPosition(), transform.rotation);
-        objProjectile.GetComponent<ObjProjectile>().SetItem(item);
-        objProjectile.GetComponent<Rigidbody2D>().position = Vector3.MoveTowards(objProjectile.transform.position, position, 10 * Time.deltaTime);
-    }*/
+        leaveItem.GetComponent<Inter>().SetItem(item);
+        Instantiate(leaveItem, position, Quaternion.identity);
+    }
 }

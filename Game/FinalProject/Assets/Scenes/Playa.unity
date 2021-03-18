@@ -171,6 +171,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &50018258 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5569523306954500312, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+  m_PrefabInstance: {fileID: 682736573}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &74254052
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +399,11 @@ RectTransform:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5193769848945909687, guid: 7a0b76e1ae4c6a14f9144daf2644ab6d, type: 3}
   m_PrefabInstance: {fileID: 1313384403}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &233292390 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5569523306035468772, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+  m_PrefabInstance: {fileID: 682736573}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &234153806
 GameObject:
@@ -41822,17 +41832,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5569523305346644509, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569523305346644509, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569523306035468772, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569523306035468772, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569523306035468775, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: m_Name
+      value: leaveItemPosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569523306785028900, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.195
+      objectReference: {fileID: 0}
     - target: {fileID: 5569523307059912474, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
       propertyPath: m_RootOrder
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5569523307059912474, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.9
+      value: 26.18
       objectReference: {fileID: 0}
     - target: {fileID: 5569523307059912474, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.12
+      value: 4.16
       objectReference: {fileID: 0}
     - target: {fileID: 5569523307059912474, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -41869,6 +41903,30 @@ PrefabInstance:
     - target: {fileID: 5569523307059912480, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
       propertyPath: m_Name
       value: ThiefFox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569523307059912481, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: jumpForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569523307059912481, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: leaveItem
+      value: 
+      objectReference: {fileID: 672203435031506042, guid: f5c8ea2754b4f174a929d5bb9faf3086, type: 3}
+    - target: {fileID: 5569523307059912481, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: stolenItemIcon
+      value: 
+      objectReference: {fileID: 50018258}
+    - target: {fileID: 5569523307059912481, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: baseCastDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569523307059912481, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: leaveItemPosition
+      value: 
+      objectReference: {fileID: 233292390}
+    - target: {fileID: 5569523307059912481, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
+      propertyPath: chaseSpeedMultiplier
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
@@ -42522,7 +42580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &847413549
 MonoBehaviour:
   m_ObjectHideFlags: 0
