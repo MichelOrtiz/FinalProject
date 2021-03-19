@@ -91,7 +91,8 @@ public class Inventory : MonoBehaviour
         if (items.Count != 0)
         {
             item = items[RandomGenerator.NewRandom(0, items.Count -1)];
+            return item;
         }
-        return item;
+        return null;
     }
 }

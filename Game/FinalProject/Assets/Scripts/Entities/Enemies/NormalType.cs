@@ -6,14 +6,13 @@ using UnityEngine;
 public class NormalType : Enemy
 {
     // Waiting patrolling time
-    protected float startWaitTime = 2f;
-    protected float waitTime;
+    
 
     #region Unity stuff
     protected new void Start()
     {
-        waitTime = 2f;
-
+        startWaitTime = 2f;
+        waitTime = startWaitTime;
         /*viewDistance = 3f;
         damageAmount = 20;
         waitTime = 2f;

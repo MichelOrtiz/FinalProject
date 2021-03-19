@@ -21,6 +21,8 @@ public abstract class Enemy : Entity
     [SerializeField] protected float normalSpeedMultiplier;
     [SerializeField] protected float chaseSpeedMultiplier;
 
+    [SerializeField] protected float startWaitTime;
+    protected float waitTime;
     protected float normalSpeed;
     protected float chaseSpeed;
 
@@ -54,7 +56,7 @@ public abstract class Enemy : Entity
     /// </summary>
     protected abstract void ChasePlayer();
     protected abstract void Attack();
-    public  abstract void ConsumeItem(Item item);
+    public abstract void ConsumeItem(Item item);
     #endregion
 
     #region Utils
