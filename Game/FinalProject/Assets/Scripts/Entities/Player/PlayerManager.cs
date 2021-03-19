@@ -337,7 +337,7 @@ public class PlayerManager : Entity
     }*/
 
     #region Self state methods
-    public void Captured(int nTaps, float damagePerSecond)
+    public void Captured(int nTaps, float damagePerSecond,Enemy capturing)
     {
         if(!tirementRunning)
         {
@@ -345,14 +345,17 @@ public class PlayerManager : Entity
         }
         isCaptured = true;
         int halfTaps = nTaps/2;
-
+        //revisar el funcionamiento
         if (Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Horizontal") == 1)
         {
             if (buttonCool > 0 && lButtonCount >= halfTaps && rButtonCount >= halfTaps)
             {
                 isCaptured = false;
+                Debug.Log("Jugador liberado");
                 rigidbody2d.WakeUp();
                 StartCoroutine(Immunity());
+                Paralized s = new Paralized();
+                s.ActivateEffect(capturing);
                 lButtonCount = 0;
                 rButtonCount = 0;
             }
