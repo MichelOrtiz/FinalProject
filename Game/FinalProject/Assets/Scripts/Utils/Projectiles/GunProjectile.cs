@@ -27,6 +27,13 @@ public class GunProjectile : MonoBehaviour
         }
         */
     }
+    public void StartAiming(){
+        PlayerManager.instance.isAiming = true;
+    }
+    public void StopAiming(){
+        PlayerManager.instance.isAiming = false;
+    }
+    
     public void ShotObject(Item item){
         GameObject projectile = Instantiate(projectilePrefab,shotPoint.position,transform.rotation);
         projectile.GetComponent<ObjProjectile>().SetItem(item);

@@ -21,6 +21,7 @@ public class PlayerManager : Entity
     public bool isRunning;
     public bool isStruggling;
     public bool isImmune;
+    public bool isAiming;
 
     #endregion
 
@@ -138,6 +139,7 @@ public class PlayerManager : Entity
     new void Update()
     {
         animator.SetBool("Is Running", isRunning);
+        animator.SetBool("Is Aiming", isAiming);
         isStruggling = false;
         isWalking = moveInput!=0 && isGrounded;
         

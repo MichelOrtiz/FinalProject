@@ -34,14 +34,18 @@ public class HotbarUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(timeKeyPressed > 0.5){
+            GunProjectile.instance.StartAiming();
+        }
         if(Input.GetButtonUp("HotbarObj0") && slotsHotbar0[0].GetItem()!=null){
             if(timeKeyPressed <= 0.5){
                 slotsHotbar0[0].UseItem();
             }
             if(timeKeyPressed > 0.5){
+                GunProjectile.instance.StopAiming();
                 GunProjectile.instance.ShotObject(slotsHotbar0[0].GetItem());
                 slotsHotbar0[0].RemoveItem();
-            }
+            } 
             timeKeyPressed = 0;
         }
         if(Input.GetButtonUp("HotbarObj1") && slotsHotbar0[1].GetItem()!=null){
@@ -50,6 +54,7 @@ public class HotbarUI : MonoBehaviour
             }
             if(timeKeyPressed > 0.5){
                 GunProjectile.instance.ShotObject(slotsHotbar0[1].GetItem());
+                GunProjectile.instance.StopAiming();
                 slotsHotbar0[1].RemoveItem();
             }
             timeKeyPressed = 0;
@@ -59,6 +64,7 @@ public class HotbarUI : MonoBehaviour
                 slotsHotbar0[2].UseItem();
             }
             if(timeKeyPressed > 0.5){
+                GunProjectile.instance.StopAiming();
                 GunProjectile.instance.ShotObject(slotsHotbar0[2].GetItem());
                 slotsHotbar0[2].RemoveItem();
             }
@@ -70,6 +76,7 @@ public class HotbarUI : MonoBehaviour
             }
             if(timeKeyPressed > 0.5){
                 GunProjectile.instance.ShotObject(slotsHotbar0[3].GetItem());
+                GunProjectile.instance.StopAiming();
                 slotsHotbar0[3].RemoveItem();
             }
             timeKeyPressed = 0;
@@ -80,6 +87,7 @@ public class HotbarUI : MonoBehaviour
             }
             if(timeKeyPressed > 0.5){
                 GunProjectile.instance.ShotObject(slotsHotbar0[4].GetItem());
+                GunProjectile.instance.StopAiming();
                 slotsHotbar0[4].RemoveItem();
             }
             timeKeyPressed = 0;
