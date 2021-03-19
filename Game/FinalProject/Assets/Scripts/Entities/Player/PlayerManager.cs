@@ -137,7 +137,7 @@ public class PlayerManager : Entity
 
     new void Update()
     {
-        
+        animator.SetBool("Is Running", isRunning);
         isStruggling = false;
         isWalking = moveInput!=0 && isGrounded;
         

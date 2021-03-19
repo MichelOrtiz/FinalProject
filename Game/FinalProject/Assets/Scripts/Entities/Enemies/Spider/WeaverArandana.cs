@@ -21,11 +21,13 @@ public class WeaverArandana : Arandaña
     {
         if (timeBtwShot <= 0)
         {
+            animator.SetBool("Is Shooting", true);
             Instantiate(projectile, GetPosition(), Quaternion.identity);
             timeBtwShot = startTimeBtwShot;
         }
         else
         {
+            animator.SetBool("Is Shooting", false);
             timeBtwShot -= Time.deltaTime;
         }
     }
