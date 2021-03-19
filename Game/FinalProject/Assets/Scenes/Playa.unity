@@ -171,6 +171,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &36087658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3829738360394267735, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+  m_PrefabInstance: {fileID: 3829738359378127795}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &36087660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36087658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd0bb8305923b94c801993205931f39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 2
+  hotkey: 100
+  staminaCost: 30
+  duration: 0.25
+  isInCooldown: 0
+  abilityName: 2
+  isUnlocked: 1
+  body: {fileID: 119346909}
+  movimiento: 3
+  speed: 0.5
+--- !u!114 &36087663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36087658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd0bb8305923b94c801993205931f39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 2
+  hotkey: 97
+  staminaCost: 30
+  duration: 0.25
+  isInCooldown: 0
+  abilityName: 2
+  isUnlocked: 1
+  body: {fileID: 119346909}
+  movimiento: -3
+  speed: 0.5
 --- !u!1 &50018258 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5569523306954500312, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
@@ -294,6 +343,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a0b76e1ae4c6a14f9144daf2644ab6d, type: 3}
+--- !u!50 &119346909 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 3829738358529845164, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+  m_PrefabInstance: {fileID: 3829738359378127795}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &146428257 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5193769848945909687, guid: 7a0b76e1ae4c6a14f9144daf2644ab6d, type: 3}
@@ -42580,7 +42634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &847413549
 MonoBehaviour:
   m_ObjectHideFlags: 0
