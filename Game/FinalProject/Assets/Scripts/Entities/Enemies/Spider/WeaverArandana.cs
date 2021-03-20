@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
-public class WeaverArandana : Arandaña
+public class WeaverArandana : Arandaña, IProjectile
 {
-    [SerializeField] private float projectileDamage;
-    [SerializeField] private GameObject projectile;
+    [SerializeField] private Transform shotProjectilePos;
+    [SerializeField] private GameObject projectilePrefab;
+    private Projectile projectile;
     [SerializeField] private float startTimeBtwShot;
     private float timeBtwShot;
 
@@ -22,7 +24,7 @@ public class WeaverArandana : Arandaña
         if (timeBtwShot <= 0)
         {
             animator.SetBool("Is Shooting", true);
-            Instantiate(projectile, GetPosition(), Quaternion.identity);
+            ShotProjectile(shotProjectilePos, player.GetPosition());
             timeBtwShot = startTimeBtwShot;
         }
         else
@@ -39,13 +41,22 @@ public class WeaverArandana : Arandaña
 
     protected override void Attack()
     {
-        
+        return;
     }
 
-    public void ProjectileAtack()
-    {
-        player.TakeTirement(projectileDamage);
 
+    public void ProjectileAttack()
+    {
+        player.TakeTirement(projectile.damage);
+        // player decrease speed to 0.6 for 2 seconds
+        projectile.Destroy();
+    }
+
+
+    public void ShotProjectile(Transform from, Vector3 to)
+    {
+        projectile = Instantiate(projectilePrefab, from.transform.position, Quaternion.identity).GetComponent<Projectile>();
+        projectile.Setup(from, to, this);
     }
 
 }

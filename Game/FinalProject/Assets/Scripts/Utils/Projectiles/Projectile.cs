@@ -4,29 +4,41 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    #region Rigids, colliders, layers, etc
+    [Header("Rigids, colliders, layers, etc")]
+    [SerializeField] private Rigidbody2D rigidbody2d;
+    [SerializeField] private LayerMask whatIsObstacle;
+    [SerializeField] private GameObject warning;
+    [SerializeField] private bool targetWarningAvailable;
+    #endregion
+
+    #region Main Params
+    [Header("MainParams")]
     [SerializeField] private float speedMultiplier;
     [SerializeField] private float maxShotDistance;
     public float damage;
-    
-    // To see where the projectile will go to
-    [SerializeField] private bool targetWarningAvailable; 
-    [SerializeField] private GameObject warning;
-    
     // Time until destroyed
     [SerializeField] private float waitTime;
-
-    private Vector3 playerPosition;
-    private Vector3 preTarget;
-    private Vector3 target;
     public bool touchingPlayer;
+    public bool touchingObstacle;
+    #endregion
+
+    #region Misc
+    private IProjectile enemy;
+    private Vector3 shootDir;
+    private Vector3 target;
+    #endregion
+
+    public void Setup(Transform startPoint, Vector3 target, IProjectile enemy)
+    {
+        this.target = target;
+        this.enemy = enemy;
+        shootDir = (target - startPoint.position).normalized;
+    }
 
     void Start()
     {
         speedMultiplier *= Entity.averageSpeed;
-        playerPosition = PlayerManager.instance.GetPosition();
-        preTarget = playerPosition;
-        SetTarget();
-        
         if (targetWarningAvailable)
         {
             Instantiate(warning, target, Quaternion.identity);
@@ -35,54 +47,36 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, speedMultiplier * Time.deltaTime);
-        if (transform.position == target)
+        //rigidbody2d.position = Vector3.MoveTowards(transform.position, shootDir, speedMultiplier * Time.deltaTime);
+        
+        transform.position += shootDir * speedMultiplier * Time.deltaTime;
+        
+        if (touchingObstacle)
         {
-            // wait certain time until the object is destroyed
-            if (waitTime <= 0)
+           if (waitTime <= 0)
             {
-                DestroyProjectile();
+                Destroy();
             }
             else
             {
                 waitTime -= Time.deltaTime;
-            }
+            } 
         }
-        Debug.DrawLine(transform.position, target, Color.blue);
-
+        if (touchingPlayer)
+        {
+            enemy.ProjectileAttack();
+        }
     }
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            touchingPlayer = true;
-            //DestroyProjectile();
-        }
-        else
-        {
-            touchingPlayer = false;
-        }
+        touchingPlayer = other.gameObject.tag == "Player";
+        touchingObstacle = other.gameObject.tag == "Ground";
     }
 
-    private void DestroyProjectile()
+    public void Destroy()
     {
         Destroy(gameObject);
     }
 
-    private void SetTarget()
-    {
-        
-        Vector3 maxShotTarget = Vector3.MoveTowards(transform.position, preTarget, maxShotDistance);
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, maxShotTarget, 1 << LayerMask.NameToLayer("Ground"));
-        if (hit.collider == null)
-        {
-            target = maxShotTarget;
-        }
-        else 
-        {
-            target = hit.point;
-        }
-
-    }
 }

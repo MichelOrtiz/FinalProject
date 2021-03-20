@@ -1,9 +1,11 @@
 using UnityEngine;
 
-public class FlyingDragon : Dragon
+public class FlyingDragon : Dragon, IProjectile
 {
-    [SerializeField] private float projectileDamage;
-    [SerializeField] private GameObject projectile;
+    [SerializeField] private Transform shotProjectilePos;
+    [SerializeField] private GameObject projectilePrefab;
+    private Projectile projectile;
+    
     [SerializeField] private float startTimeBtwShot;
     private float timeBtwShot;
 
@@ -41,12 +43,24 @@ public class FlyingDragon : Dragon
     {
         if (timeBtwShot <= 0)
         {
-            Instantiate(projectile, this.GetPosition(), Quaternion.identity);
+            ShotProjectile(shotProjectilePos, player.GetPosition());
             timeBtwShot = startTimeBtwShot;
         }
         else
         {
             timeBtwShot -= Time.deltaTime;
         }
+    }
+
+    public void ProjectileAttack()
+    {
+        player.TakeTirement(projectile.damage);
+        projectile.Destroy();
+    }
+
+    public void ShotProjectile(Transform from, Vector3 to)
+    {
+        projectile = Instantiate(projectilePrefab, from.transform.position, Quaternion.identity).GetComponent<Projectile>();
+        projectile.Setup(from, to, this);
     }
 }

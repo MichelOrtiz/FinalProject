@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6524594571814338891}
   - component: {fileID: 1091648305553625287}
   - component: {fileID: 53733825894341834}
-  m_Layer: 9
+  - component: {fileID: -6107770864380526211}
+  m_Layer: 0
   m_Name: BubbleProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,8 +123,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205510935acb3634f9508ca3bdb385d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody2d: {fileID: -6107770864380526211}
   speedMultiplier: 0.2
   maxShotDistance: 20
+  damage: 10
   targetWarningAvailable: 1
   warning: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
   waitTime: 0.5
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 256
+  touchingPlayer: 0
+  touchingObstacle: 0
+--- !u!50 &-6107770864380526211
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805213487483752607}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
