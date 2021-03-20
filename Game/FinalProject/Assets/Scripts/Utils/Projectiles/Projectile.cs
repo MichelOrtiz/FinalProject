@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speedMultiplier;
     [SerializeField] private float maxShotDistance;
+    public float damage;
     
     // To see where the projectile will go to
     [SerializeField] private bool targetWarningAvailable; 
@@ -17,6 +18,7 @@ public class Projectile : MonoBehaviour
     private Vector3 playerPosition;
     private Vector3 preTarget;
     private Vector3 target;
+    public bool touchingPlayer;
 
     void Start()
     {
@@ -54,7 +56,12 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            DestroyProjectile();
+            touchingPlayer = true;
+            //DestroyProjectile();
+        }
+        else
+        {
+            touchingPlayer = false;
         }
     }
 

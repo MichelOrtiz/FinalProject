@@ -371,7 +371,7 @@ public class PlayerManager : Entity
         }
         if ( buttonCool > 0 )
         {
-            buttonCool -= 1 * Time.deltaTime ;
+            buttonCool -= Time.deltaTime ;
         }
         else
         {
