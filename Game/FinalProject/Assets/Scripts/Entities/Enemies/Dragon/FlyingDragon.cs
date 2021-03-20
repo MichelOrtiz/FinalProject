@@ -55,7 +55,6 @@ public class FlyingDragon : Dragon, IProjectile
     public void ProjectileAttack()
     {
         player.TakeTirement(projectile.damage);
-        projectile.Destroy();
     }
 
     public void ShotProjectile(Transform from, Vector3 to)

@@ -65,6 +65,7 @@ public class Projectile : MonoBehaviour
         if (touchingPlayer)
         {
             enemy.ProjectileAttack();
+            Destroy();
         }
     }
     

@@ -56,7 +56,6 @@ public class HunterCentaur : Centaur, IProjectile
     {
         // player paralized 1s
         // player captured 10 damage
-        projectile.Destroy();
     }
 
     public void ShotProjectile(Transform from, Vector3 to)

@@ -49,7 +49,6 @@ public class WeaverArandana : Arandaña, IProjectile
     {
         player.TakeTirement(projectile.damage);
         // player decrease speed to 0.6 for 2 seconds
-        projectile.Destroy();
     }
 
 
