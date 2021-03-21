@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6524594571814338891}
   - component: {fileID: 1091648305553625287}
   - component: {fileID: 53733825894341834}
-  - component: {fileID: -279079442944144716}
+  - component: {fileID: -6107770864380526211}
   m_Layer: 0
-  m_Name: HunterCentaurProjectile
+  m_Name: GhostTear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0031676441, y: -0.0009050444}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -109,7 +109,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.15565288, y: 0.16379829}
   m_EdgeRadius: 0
 --- !u!114 &53733825894341834
 MonoBehaviour:
@@ -123,19 +123,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205510935acb3634f9508ca3bdb385d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody2d: {fileID: -279079442944144716}
+  rigidbody2d: {fileID: -6107770864380526211}
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 256
   warning: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
   targetWarningAvailable: 1
-  speedMultiplier: 2.5
-  maxShotDistance: 15
-  damage: 0
-  waitTime: 0.5
+  speedMultiplier: 1.5
+  maxShotDistance: 25
+  damage: 15
+  waitTime: 0.01
   touchingPlayer: 0
   touchingObstacle: 0
---- !u!50 &-279079442944144716
+--- !u!50 &-6107770864380526211
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -154,5 +154,5 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0

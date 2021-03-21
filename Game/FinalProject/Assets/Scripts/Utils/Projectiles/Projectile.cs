@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour
     {
         //rigidbody2d.position = Vector3.MoveTowards(transform.position, shootDir, speedMultiplier * Time.deltaTime);
         
-        transform.position += shootDir * speedMultiplier * Time.deltaTime;
+        transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
         
         if (touchingObstacle)
         {

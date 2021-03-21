@@ -41,6 +41,10 @@ public class FlyingDragon : Dragon, IProjectile
 
     protected override void ChasePlayer()
     {
+        if (facingDirection == LEFT && player.GetPosition().x > this.GetPosition().x || facingDirection == RIGHT && player.GetPosition().x < this.GetPosition().x)
+        {
+            ChangeFacingDirection();
+        }
         if (timeBtwShot <= 0)
         {
             ShotProjectile(shotProjectilePos, player.GetPosition());
