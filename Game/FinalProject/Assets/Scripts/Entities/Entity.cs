@@ -49,7 +49,7 @@ public class Entity : MonoBehaviour
     protected Animator animator;
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] protected LayerMask whatIsObstacle;
-    [SerializeField] protected Transform feetPos;    
+    [SerializeField] public Transform feetPos;    
     [SerializeField] protected float checkFeetRadius;
     #endregion
 
