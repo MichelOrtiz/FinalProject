@@ -11,6 +11,8 @@ public class HangingArandana : Arandaña
     private Vector3 lastSeenPlayerPosition;
 
     [SerializeField] float maxViewDistance;
+    [SerializeField] LineRenderer thread;
+    [SerializeField] Transform threadPosition;
 
     #region Unity stuff
     new void Start()
@@ -34,6 +36,9 @@ public class HangingArandana : Arandaña
     new void Update()
     {
         isChasing = CanSeePlayer() || justChasedPlayer;
+        thread.SetPosition(0, threadPosition.position);
+        RaycastHit2D hit = Physics2D.Linecast(threadPosition.position, threadPosition.position + Vector3.up * maxViewDistance, 1 << LayerMask.NameToLayer("Ground"));
+        thread.SetPosition(1, hit.point);
         base.Update();
     }
 
@@ -85,7 +90,9 @@ public class HangingArandana : Arandaña
         }
         if (!touchingPlayer)
         {
+            
             rigidbody2d.position = Vector3.MoveTowards(GetPosition(), lastSeenPlayerPosition, chaseSpeed * Time.deltaTime);
+            
         }
         justChasedPlayer = true;  
     }

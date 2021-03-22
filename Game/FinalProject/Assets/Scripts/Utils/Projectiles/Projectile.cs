@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Rigidbody2D rigidbody2d;
     [SerializeField] private LayerMask whatIsObstacle;
     [SerializeField] private GameObject warning;
+    [SerializeField] private GameObject impactEffect;
+
     [SerializeField] private bool targetWarningAvailable;
     #endregion
 
@@ -19,6 +21,7 @@ public class Projectile : MonoBehaviour
     public float damage;
     // Time until destroyed
     [SerializeField] private float waitTime;
+    [SerializeField] private float impactEffectExitTime;
     public bool touchingPlayer;
     public bool touchingObstacle;
     #endregion
@@ -29,6 +32,10 @@ public class Projectile : MonoBehaviour
     private Vector3 target;
     private string colliderTag;
     private bool isOnCollider;
+
+    private bool aboutToDestroy;
+
+    //private Animator animator;
     #endregion
 
     public void Setup(Transform startPoint, Vector3 target, IProjectile enemy)
@@ -48,6 +55,7 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
+        impactEffect.SetActive(false);
         speedMultiplier *= Entity.averageSpeed;
         if (targetWarningAvailable)
         {
@@ -58,10 +66,13 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         //rigidbody2d.position = Vector3.MoveTowards(transform.position, shootDir, speedMultiplier * Time.deltaTime); 
-        
+        //animator.SetBool("Is Destroying", aboutToDestroy);
         if (colliderTag == null)
         {
-            transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
+            if (!touchingObstacle)
+            {
+                transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
+            }
         }
         else
         {
@@ -85,9 +96,22 @@ public class Projectile : MonoBehaviour
         }
         if (touchingPlayer)
         {
+            aboutToDestroy = true;
             enemy.ProjectileAttack();
             Destroy();
         }
+
+        /*if (impactEffect.activeInHierarchy)
+        {
+            if (impactEffectExitTime <= 0)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                impactEffectExitTime -= Time.deltaTime;
+            }
+        }*/
     }
     
     void OnTriggerEnter2D(Collider2D other)
@@ -114,6 +138,9 @@ public class Projectile : MonoBehaviour
 
     public void Destroy()
     {
+        impactEffect.SetActive(true);
+        
+        Instantiate(impactEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
