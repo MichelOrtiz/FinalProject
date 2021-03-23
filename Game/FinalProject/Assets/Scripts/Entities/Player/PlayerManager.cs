@@ -22,6 +22,7 @@ public class PlayerManager : Entity
     public bool isStruggling;
     public bool isImmune;
     public bool isAiming;
+    public bool isDashing;
 
     #endregion
 
@@ -151,13 +152,13 @@ public class PlayerManager : Entity
 
         if (!isCaptured)
         {
-            if (!isFlying)
+            if (!isFlying && !isDashing)
             {
                 rigidbody2d.gravityScale = 2.5f;
                 Move();
                 Jump();
             }
-            else
+            else if(!isDashing)
             {
                 rigidbody2d.gravityScale = 0;
                 Flying();
@@ -175,7 +176,7 @@ public class PlayerManager : Entity
         animator.SetBool("Is Jumping", isJumping);
         animator.SetBool("Is Falling", isFalling);
         animator.SetBool("Is Flying", isFlying);*/
-
+        
         if (moveInput>0)
         {
             transform.eulerAngles = new Vector3(0,0,0);
@@ -184,6 +185,7 @@ public class PlayerManager : Entity
         {
             transform.eulerAngles = new Vector3(0,180,0);
         }
+        
         if (Input.GetKeyDown(KeyCode.Minus))
         {
             TakeTirement(5);
