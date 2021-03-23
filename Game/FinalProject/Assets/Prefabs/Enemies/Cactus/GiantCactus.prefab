@@ -158,7 +158,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2020415388813460393
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -237,6 +237,10 @@ MonoBehaviour:
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}
+  items:
+  - {fileID: 11400000, guid: c9818b8b6e6f49d4e8041cc49e66a96c, type: 2}
+  - {fileID: 11400000, guid: 87cdb9e94580b56459a394e00f3b3487, type: 2}
+  - {fileID: 11400000, guid: d137fafc42811c546b667a1fe95b2c07, type: 2}
 --- !u!1 &2020415388974143899
 GameObject:
   m_ObjectHideFlags: 0
