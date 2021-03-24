@@ -19,6 +19,7 @@ public class Entity : MonoBehaviour
     public bool isJumping = false;
     public bool isFlying = false;
     public bool isFalling = false;
+    public bool isInWater = false;
     #endregion
 
     #region Special States

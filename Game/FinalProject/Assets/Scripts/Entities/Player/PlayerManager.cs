@@ -7,6 +7,11 @@ public class PlayerManager : Entity
     #region Main Parameters
     public float maxStamina = 100;
     public float walkingSpeed;
+    public float defaultwalkingSpeed = 7;
+    public float defaultGravity = 2.5f;
+    public float currentGravity;
+    public float defaultMass = 10;
+    public float currentMass;
 
     private GameObject[] players;
     #endregion
@@ -19,6 +24,7 @@ public class PlayerManager : Entity
 
     #region States
     public bool isRunning;
+    public bool isSwiming;
     public bool isStruggling;
     public bool isImmune;
     public bool isAiming;
@@ -132,6 +138,8 @@ public class PlayerManager : Entity
         staminaBar.SetMaxStamina(maxStamina);
         FindStartPos();
         regenCooldown = 5;
+        currentGravity = defaultGravity;
+        currentMass = defaultMass;
     }
     
     void FixedUpdate()
@@ -140,6 +148,7 @@ public class PlayerManager : Entity
 
     new void Update()
     {
+        rigidbody2d.mass = currentMass;
         animator.SetBool("Is Running", isRunning);
         animator.SetBool("Is Aiming", isAiming);
         isStruggling = false;
@@ -155,7 +164,7 @@ public class PlayerManager : Entity
         {
             if (!isFlying && !isDashing)
             {
-                rigidbody2d.gravityScale = 2.5f;
+                rigidbody2d.gravityScale = currentGravity;
                 Move();
                 Jump();
             }
@@ -220,7 +229,7 @@ public class PlayerManager : Entity
 
     public void Jump()
     {
-        if ((isGrounded && Input.GetKeyDown(KeyCode.Space)))
+        if ((isGrounded && Input.GetKeyDown(KeyCode.Space))||(isInWater && Input.GetKeyDown(KeyCode.Space)))
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
             isJumping = true;
@@ -420,4 +429,5 @@ public class PlayerManager : Entity
         transform.position = GameObject.FindWithTag("StartPos").transform.position; //GameObject.FindWithTag("StartPos").transform.position;
     }
 
+    
 }

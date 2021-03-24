@@ -22,6 +22,7 @@ public class DashV : Ability
         prevGravity = body.gravityScale;
         body.gravityScale = 0;
         isInCooldown = true;
+        player.isJumping = true;
     }
 
         

@@ -42058,9 +42058,12 @@ MonoBehaviour:
   normalSpeedMultiplier: 0
   chaseSpeedMultiplier: 0
   startWaitTime: 0
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 1117609663}
   fovOrigin: {fileID: 645042239}
   baseCastDistance: 0.5
+  downDistanceGroundCheck: 0
   viewDistance: 5
   fovAngle: 0
   touchingPlayer: 0
@@ -42618,9 +42621,12 @@ MonoBehaviour:
   normalSpeedMultiplier: 1
   chaseSpeedMultiplier: 1
   startWaitTime: 2
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 766575593}
   fovOrigin: {fileID: 931650676}
   baseCastDistance: 0.5
+  downDistanceGroundCheck: 0
   viewDistance: 3
   fovAngle: 0
   touchingPlayer: 0
@@ -43195,11 +43201,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041223213}
   m_CullTransparentMesh: 1
---- !u!50 &1058229712 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 3829738358529845164, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-  m_PrefabInstance: {fileID: 3829738359378127795}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1082449557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44649,33 +44650,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583916230}
   m_CullTransparentMesh: 1
---- !u!1 &1618878727 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3829738360394267735, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-  m_PrefabInstance: {fileID: 3829738359378127795}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1618878735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1618878727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7980d91f4088ec6498e40c8644e6d288, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 0
-  hotkey: 32
-  staminaCost: 0
-  duration: 0
-  isInCooldown: 0
-  abilityName: 4
-  isUnlocked: 1
-  body: {fileID: 1058229712}
-  speed: 0
-  jumpForce: 20
 --- !u!1001 &1664118727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45437,14 +45411,6 @@ PrefabInstance:
     - target: {fileID: 3829738358529845160, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_Name
       value: Nico-nor
-      objectReference: {fileID: 0}
-    - target: {fileID: 3829738358529845165, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-      propertyPath: jumpTime
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3829738358529845165, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-      propertyPath: jumpForce
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845165, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: staminaBar

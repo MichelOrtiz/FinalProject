@@ -12,7 +12,8 @@ public class DoubleJump : Ability
     {
         base.UseAbility();
         body.velocity = new Vector2(0f, 0f);
-        body.AddForce(new Vector2(0f, jumpForce * speed), ForceMode2D.Impulse);
+        body.velocity = new Vector2(body.velocity.x, body.gravityScale + jumpForce);
+        //body.AddForce(new Vector2(0f, jumpForce * speed), ForceMode2D.Impulse);
         player.isJumping = true;
         prevGravity = body.gravityScale;
         body.gravityScale = 0;
@@ -20,28 +21,6 @@ public class DoubleJump : Ability
         player.isDoubleJumping = true;
     }
 
-    public void Jump()
-    {
-        
-            /*jumpTimeCounter = jumpTime;
-            
-      
-        if ((Input.GetKey(KeyCode.Space) && isJumping == true))
-        {
-            if (jumpTimeCounter>0){
-                body.velocity = new Vector2(body.velocity.x, body.gravityScale + jumpForce);
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-            {
-                player.isJumping = false;
-            }
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            player.isJumping = false;
-        }*/
-    }
         
     protected override void Update(){
         if (player.isGrounded)
@@ -54,7 +33,7 @@ public class DoubleJump : Ability
             return;   
         }
         this.enabled = isUnlocked;
-        if((Input.GetKeyDown(hotkey) && !player.isGrounded)){
+        if((Input.GetKeyDown(hotkey) && !player.isJumping)){
             UseAbility();
         }
     }

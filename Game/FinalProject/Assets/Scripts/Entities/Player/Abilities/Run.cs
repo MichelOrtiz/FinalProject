@@ -5,7 +5,7 @@ using UnityEngine;
 public class Run : Ability
 {
     [SerializeField] private float speedMultiplier;
-    [SerializeField] private float runningSpeed;
+    [SerializeField] public float runningSpeed;
     public override void UseAbility()
     {
         if (isInCooldown)
