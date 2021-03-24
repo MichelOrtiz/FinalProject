@@ -127,7 +127,13 @@ public class Entity : MonoBehaviour
         isInFear = false;
     }*/
 
-    
+    public void Push(float xForce, float yForce)
+    {
+        //rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, 0f);
+        Vector2 force = GetPosition() * new Vector2(xForce, yForce);
+        rigidbody2d.AddForce(force, ForceMode2D.Force);
+    }
 
+    
     #endregion
 }

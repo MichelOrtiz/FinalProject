@@ -107,7 +107,7 @@ public abstract class Enemy : Entity
     /// that is touching rigidbody/collider.
     /// </summary>
     /// <param name="other">The Collision data associated with this collision.</param>
-    private void OnCollisionEnter2D(Collision2D other)
+    protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         // if the enemy is touching the player
         if (other.gameObject.tag == "Player")
@@ -125,7 +125,7 @@ public abstract class Enemy : Entity
     /// object's collider (2D physics only).
     /// </summary>
     /// <param name="other">The Collision2D data associated with this collision.</param>
-    void OnCollisionExit2D(Collision2D other)
+    protected virtual void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -281,4 +281,6 @@ public abstract class Enemy : Entity
     }
 
     #endregion
+
+    //public void push
 }

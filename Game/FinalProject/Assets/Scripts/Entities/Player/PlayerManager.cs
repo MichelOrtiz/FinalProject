@@ -419,4 +419,6 @@ public class PlayerManager : Entity
         transform.position = GameObject.FindWithTag("StartPos").transform.position; //GameObject.FindWithTag("StartPos").transform.position;
     }
 
+    
+
 }
