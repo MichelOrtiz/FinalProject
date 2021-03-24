@@ -17,16 +17,24 @@ public class DashH : Ability
     {
         base.UseAbility();
         player.isDashing=true;
-        Debug.Log("DASHH!!!!");
         body.velocity = new Vector2(body.velocity.x, 0f);
         body.AddForce(new Vector2(movimiento * speed, 0f), ForceMode2D.Impulse);
         prevGravity = body.gravityScale;
         body.gravityScale = 0;
-        
+        isInCooldown = true;
     }
 
         
         protected override void Update(){
+            if (isInCooldown)
+            {
+                time += Time.deltaTime;
+                if (time >= cooldownTime)
+                {
+                    isInCooldown = false;
+                    time = 0;
+                }
+            }
             this.enabled = isUnlocked;
             if(player.isDashing){
                 currentDashTime += Time.deltaTime;

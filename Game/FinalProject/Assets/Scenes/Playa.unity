@@ -41938,6 +41938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElectricMedufin
       objectReference: {fileID: 0}
+    - target: {fileID: 9004599920161459142, guid: 1e11da130e9b6b34a8a32b5fdad037b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9004599920161459144, guid: 1e11da130e9b6b34a8a32b5fdad037b2, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -44650,7 +44654,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3829738360394267735, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
   m_PrefabInstance: {fileID: 3829738359378127795}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1618878728
+--- !u!114 &1618878735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44659,20 +44663,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1618878727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd0bb8305923b94c801993205931f39, type: 3}
+  m_Script: {fileID: 11500000, guid: 7980d91f4088ec6498e40c8644e6d288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTime: 10
-  hotkey: 100
-  staminaCost: 20
-  duration: 0.2
+  cooldownTime: 0
+  hotkey: 32
+  staminaCost: 0
+  duration: 0
   isInCooldown: 0
-  abilityName: 2
-  isUnlocked: 0
+  abilityName: 4
+  isUnlocked: 1
   body: {fileID: 1058229712}
-  doubleTimeTap: 0.25
-  movimiento: 10
-  speed: 20
+  speed: 0
+  jumpForce: 20
 --- !u!1001 &1664118727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45436,21 +45439,17 @@ PrefabInstance:
       value: Nico-nor
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845165, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: jumpTime
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3829738358529845165, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: jumpForce
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3829738358529845165, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 380020897}
-    - target: {fileID: 8716125286967460233, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-      propertyPath: speed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8716125286967460233, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-      propertyPath: duration
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8716125286967460233, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-      propertyPath: doubleTimeTap
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
 --- !u!1001 &6009055735298182085
@@ -45604,6 +45603,10 @@ PrefabInstance:
     - target: {fileID: 6363311133194938774, guid: 233a1e3f12e3fc54c925263a1c8d3999, type: 3}
       propertyPath: m_Name
       value: Bubble Medufin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363311133194938774, guid: 233a1e3f12e3fc54c925263a1c8d3999, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 233a1e3f12e3fc54c925263a1c8d3999, type: 3}
