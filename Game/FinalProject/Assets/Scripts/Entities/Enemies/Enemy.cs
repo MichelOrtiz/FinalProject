@@ -23,8 +23,8 @@ public abstract class Enemy : Entity
 
     [SerializeField] protected float startWaitTime;
     protected float waitTime;
-    protected float normalSpeed;
-    protected float chaseSpeed;
+    [SerializeField] protected float normalSpeed;
+    [SerializeField] protected float chaseSpeed;
 
     #endregion
 
@@ -35,6 +35,7 @@ public abstract class Enemy : Entity
     
     // Distance from fovOrigin to check if in front of obstacle
     [SerializeField] protected float baseCastDistance;
+    [SerializeField] protected float downDistanceGroundCheck;
     
     // Fov distance
     [SerializeField] protected float viewDistance;
