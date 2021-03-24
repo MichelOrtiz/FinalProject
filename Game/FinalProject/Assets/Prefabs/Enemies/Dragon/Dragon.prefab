@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 8820404769766784073}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fae2d3ebc3749b74fadb5ed2e290e671, type: 2}
+  m_Controller: {fileID: 9100000, guid: 78aa3d1feacc95d41a5274aff4076394, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingDirection: 
-  state: 0
+  currentState: 0
   isWalking: 0
   isGrounded: 0
   isJumping: 0
@@ -198,12 +198,17 @@ MonoBehaviour:
   damageAmount: 40
   normalSpeedMultiplier: 0.5
   chaseSpeedMultiplier: 0.5
+  startWaitTime: 0
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 8820404769992884187}
   fovOrigin: {fileID: 8820404770288824892}
   baseCastDistance: 0.5
+  downDistanceGroundCheck: 0
   viewDistance: 3
   fovAngle: 0
   touchingPlayer: 0
+  justCapturedPlayer: 0
   player: {fileID: 0}
 --- !u!1 &8820404769837982578
 GameObject:

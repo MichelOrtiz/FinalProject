@@ -19,7 +19,7 @@ public class DashV : Ability
         player.isDashing=true;
         Debug.Log("DASHH!!!!");
         body.velocity = new Vector2(0f, body.velocity.y);
-        body.AddForce(new Vector2(0f, movimiento * speeda), ForceMode2D.Impulse);
+        body.AddForce(new Vector2(0f, movimiento * speed), ForceMode2D.Impulse);
         prevGravity = body.gravityScale;
         body.gravityScale = 0;
         
