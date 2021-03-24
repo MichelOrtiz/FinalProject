@@ -23,6 +23,7 @@ public class PlayerManager : Entity
     public bool isImmune;
     public bool isAiming;
     public bool isDashing;
+    public bool isDoubleJumping;
 
     #endregion
 
@@ -217,16 +218,16 @@ public class PlayerManager : Entity
         base.Update();
     } 
 
-    void Jump()
+    public void Jump()
     {
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if ((isGrounded && Input.GetKeyDown(KeyCode.Space)))
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
             isJumping = true;
             jumpTimeCounter = jumpTime;
             
         }   
-        if (Input.GetKey(KeyCode.Space) && isJumping == true)
+        if ((Input.GetKey(KeyCode.Space) && isJumping == true))
         {
             if (jumpTimeCounter>0){
                 rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
