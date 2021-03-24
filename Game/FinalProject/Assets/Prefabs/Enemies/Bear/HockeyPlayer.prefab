@@ -290,9 +290,12 @@ MonoBehaviour:
   normalSpeedMultiplier: 2.3
   chaseSpeedMultiplier: 0
   startWaitTime: 1
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 525320774434334401}
   fovOrigin: {fileID: 525320776076346201}
   baseCastDistance: 1
+  downDistanceGroundCheck: 0
   viewDistance: 0
   fovAngle: 0
   touchingPlayer: 0
@@ -304,7 +307,7 @@ MonoBehaviour:
   whatIsIce:
     serializedVersion: 2
     m_Bits: 256
-  pushForce: 5
+  pushForce: 500
   maxViewDistance: 25
 --- !u!1 &525320776076346182
 GameObject:
