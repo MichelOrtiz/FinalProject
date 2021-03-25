@@ -12,7 +12,7 @@ public class Item : ScriptableObject
     public bool isDefault = false;
 
     public virtual void Use(){
-        Debug.Log("Usando "+nombre);
+        //Debug.Log("Usando "+nombre);
         PlayerManager.instance.currentStamina += staminaGain;
         RemoveFromInventory();
     }

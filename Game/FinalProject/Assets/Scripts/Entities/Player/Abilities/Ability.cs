@@ -35,12 +35,12 @@ public class Ability : MonoBehaviour
 
     public virtual void UseAbility()
     {
-        Debug.Log($"Usando {abilityName.ToString()}");
+        //Debug.Log($"Usando {abilityName.ToString()}");
         if (isInCooldown)
         {
             player.TakeTirement(staminaCost);
             time = 0;
-            Debug.Log("Usando en cooldown");
+            //Debug.Log("Usando en cooldown");
         }
     }
 

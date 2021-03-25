@@ -1,21 +1,22 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName="New Paralisis", menuName = "States/new Paralisis")]
 public class Paralized : State
 {
-    
     Vector3 paralizatedPos;
-    public override void ActivateEffect(Entity newEntity)
+    public override void StartAffect(StatesManager newManager)
     {
+        base.StartAffect(newManager);
         duration=5f;
-        base.ActivateEffect(newEntity);
-        paralizatedPos = entity.GetPosition();
+        paralizatedPos = manager.hostEntity.GetPosition();
     }
     public override void Affect()
     {
+        Debug.Log(currentTime);
         currentTime += Time.deltaTime;
         if(currentTime >= duration){
-            RemoveEffect(entity);
+            StopAffect();
         }
-        entity.gameObject.transform.position = paralizatedPos;
+        manager.hostEntity.gameObject.transform.position = paralizatedPos;
     }
 }

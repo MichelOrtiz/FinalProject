@@ -56,7 +56,7 @@ public class DashV : Ability
                 if(Input.GetKeyDown(hotkey)){
                     nKeyPressed++;
                     timeKeyPressed+=Time.deltaTime;
-                    Debug.Log("Presionado "+hotkey.ToString()+" nTimes: " + nKeyPressed);
+                    //Debug.Log("Presionado "+hotkey.ToString()+" nTimes: " + nKeyPressed);
                 }
                 
                 if(nKeyPressed>=2){

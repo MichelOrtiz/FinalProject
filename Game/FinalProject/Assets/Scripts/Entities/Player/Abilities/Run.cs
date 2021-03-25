@@ -11,7 +11,7 @@ public class Run : Ability
         if (isInCooldown)
         {
             player.TakeTirement(staminaCost);
-            Debug.Log("Usando en cooldown");
+            //Debug.Log("Usando en cooldown");
         }
         player.walkingSpeed = runningSpeed;
     }

@@ -31,6 +31,7 @@ public class Entity : MonoBehaviour
     public bool isBrainFrozen = false;
     public bool isResting = false;
     public bool isChasing = false;
+    public StatesManager statesManager;
     #endregion
 
     #region Physic Parameters
@@ -54,22 +55,16 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float checkFeetRadius;
     #endregion
 
-    public delegate void StatusCheck();
-    public StatusCheck statusCheck;
-
-
     #region Unity stuff
     protected void Start()
     {
         animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
+        statesManager = gameObject.GetComponent<StatesManager>();
     }
 
     protected void Update()
     {
-        if(statusCheck!=null){
-            statusCheck.Invoke();
-        }
         facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;

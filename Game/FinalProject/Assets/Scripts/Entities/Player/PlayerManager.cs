@@ -369,7 +369,7 @@ public class PlayerManager : Entity
                 rigidbody2d.WakeUp();
                 StartCoroutine(Immunity());
                 Paralized s = new Paralized();
-                s.ActivateEffect(capturing);
+                statesManager.AddState(s);
                 lButtonCount = 0;
                 rButtonCount = 0;
             }
