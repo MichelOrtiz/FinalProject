@@ -67,7 +67,9 @@ public class NormalType : Enemy
 
     protected override void Attack()
     {
-        player.Captured(nTaps: 9, damagePerSecond: 0,this);
+        if(atackEffect != null){
+            player.statesManager.AddState(atackEffect,this);
+        }
     }
 
     public override void ConsumeItem(Item item)

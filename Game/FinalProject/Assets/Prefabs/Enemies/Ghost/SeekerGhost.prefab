@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 3441190773335274251}
   - component: {fileID: 3441190773335274250}
   - component: {fileID: 3441190773335274245}
+  - component: {fileID: -2901240179451968318}
   m_Layer: 11
   m_Name: SeekerGhost
   m_TagString: Enemy
@@ -307,6 +308,20 @@ MonoBehaviour:
   baseStartTimeUntilDivide: 30
   baseMainTimeUntilDivide: 5
   maxGhosts: 12
+--- !u!114 &-2901240179451968318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441190773335274244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a10b0e024d509479a276cdedbec9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostEntity: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1 &3441190773498171935
 GameObject:
   m_ObjectHideFlags: 0

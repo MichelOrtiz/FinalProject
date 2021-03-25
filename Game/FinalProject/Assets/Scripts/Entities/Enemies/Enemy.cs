@@ -14,6 +14,8 @@ public abstract class Enemy : Entity
     [SerializeField] protected float damageAmount;
     [SerializeField] protected float normalSpeedMultiplier;
     [SerializeField] protected float chaseSpeedMultiplier;
+    [SerializeField]protected State atackEffect;
+    [SerializeField]protected State projectileEffect;
 
     [SerializeField] protected float startWaitTime;
     protected float waitTime;
