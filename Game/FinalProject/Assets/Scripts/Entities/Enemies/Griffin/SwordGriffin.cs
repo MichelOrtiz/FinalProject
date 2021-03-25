@@ -39,14 +39,12 @@ public class SwordGriffin : Griffin
             // first fov
             if (!CanSeePlayerSecondFov())
             {
-                Debug.Log("should move");
                 MoveTowardsPlayerInGround(firstFovSpeed);
             }
             else
             {
                 MoveTowardsPlayerInGround(secondFovSpeed);
             }
-            Debug.Log("should move");
             //rigidbody2d.velocity = Vector3.MoveTowards(GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime);
             if (touchingBreakableObject)
             {

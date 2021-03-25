@@ -6,27 +6,17 @@ public class PatrollGriffin : Griffin
     [SerializeField] private Material meshRenderSawPlayer;
     [SerializeField] private MeshFov meshFov;
     private Material currentMeshMaterial;
-    //private bool reachedDestination;
+    private bool reachedDestinationPatrol;
+    private Vector2 destinationPatrol;
     new void Start()
     {
         base.Start();
-        /*fovOrigin.GetComponent<MeshFov>().ViewDistance = viewDistance;
-        fovOrigin.GetComponent<MeshFov>().FovAngle = fovAngle;
-        fovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderDefault;
-        fovOrigin.GetComponent<MeshFov>().AngleFromPlayer = GetAngleFromPlayer();*/
-       //fovOrigin.GetComponent<MeshFov>().Origin = fovOrigin.position.normalized;
         fovOrigin.GetComponent<MeshFov>().Setup(fovAngle, viewDistance, meshRenderDefault, fovType);
-
-        //MeshFov mesh = fovOrigin.GetComponent<MeshFov>().;
-        //mesh = new MeshFov(fovAngle, viewDistance, meshRenderDefault);
-        //meshFov = mesh;//new MeshFov(fovAngle, viewDistance, meshRenderDefault);
         currentMeshMaterial = meshRenderDefault;
     }
 
     new void Update()
     {
-        //fovOrigin.GetComponent<MeshFov>().AngleFromPlayer = GetAngleFromPlayer();
-
         if (CanSeePlayer() && currentMeshMaterial != meshRenderSawPlayer)
         {
             fovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderSawPlayer;
@@ -42,11 +32,24 @@ public class PatrollGriffin : Griffin
 
     protected override void MainRoutine()
     {
-        /*if (isGrounded && !InFrontOfObstacle() && !IsNearEdge())
+        //base.MainRoutine();
+        if (isGrounded && !InFrontOfObstacle() && !IsNearEdge())
         {
-            rigidbody2d.position = Vector3.MoveTowards(GetPosition(), Vector2.right * patrolDistance, normalSpeed * Time.deltaTime);
-        }*/
-        base.MainRoutine();
+            if (waitTime > startWaitTime)
+            {
+                ChangeFacingDirection();
+                reachedDestinationPatrol = true;
+                destinationPatrol = new Vector2(GetPosition().x +(facingDirection == RIGHT?  -patrolDistance : +patrolDistance), GetPosition().y);
+                waitTime = 0;
+            }
+            else
+            {
+                reachedDestinationPatrol = false;
+                rigidbody2d.position = Vector3.MoveTowards(GetPosition(), destinationPatrol, normalSpeed * Time.deltaTime);
+                waitTime += Time.deltaTime;
+            }
+        }
+        
     }
 
     protected override void ChasePlayer()

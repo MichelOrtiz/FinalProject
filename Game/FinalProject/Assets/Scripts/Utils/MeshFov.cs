@@ -55,11 +55,7 @@ public class MeshFov : MonoBehaviour
     {
         SetAngle();
         //mesh.RecalculateBounds();
-        //Vector3 origin = Vector3.zero;
-        //float angle = MathUtils.GetAngleBetween(this.transform.position, PlayerManager.instance.GetPosition());
         int rayCount = 12;
-        //meshAngle = FovAngle;// / 1.5f;
-        //meshAngle = (180 - FovAngle)/2;
         float angleIncrease = FovAngle / rayCount;
 
         Vector3[] vertices = new Vector3[rayCount + 1 + 1];
@@ -72,18 +68,7 @@ public class MeshFov : MonoBehaviour
         for (int i = 0; i <= rayCount; i++)
         {
             Vector3 vertex;
-            //RaycastHit2D raycastHit2D = Physics2D.Raycast(Origin, MathUtils.GetVectorFromAngle(meshAngle), ViewDistance);
-            
-            
             vertex = Origin + MathUtils.GetVectorFromAngle(meshAngle) * ViewDistance;
-            /*if (raycastHit2D.collider == null)
-            {
-                vertex = origin + MathUtils.GetVectorFromAngle(angle) * viewDistance;
-            }
-            else
-            {
-                vertex = raycastHit2D.point;
-            }*/
 
             vertices[vertexIndex] = vertex;
 
@@ -133,15 +118,5 @@ public class MeshFov : MonoBehaviour
                 break;
         }
     }
-
-    /*public void SetOrigin(Vector3 origin)
-    {
-        this.origin = origin;
-    }*/
-
-    /*public void SetAimDirection(Vector3 aimDirection)
-    {
-        startingAngle = MathUtils.GetAngleFromVectorFloat(aimDirection) - fov / 2f;
-    }*/
     
 }
