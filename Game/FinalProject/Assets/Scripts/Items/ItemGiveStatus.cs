@@ -8,7 +8,7 @@ public class ItemGiveStatus : Item
 
     public override void Use()
     {
-        
+        //base.Use();
         PlayerManager.instance.statesManager.AddState(statusForPlayer);
     }
 }

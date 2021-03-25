@@ -7,12 +7,11 @@ public class Paralized : State
     public override void StartAffect(StatesManager newManager)
     {
         base.StartAffect(newManager);
-        duration=5f;
         paralizatedPos = manager.hostEntity.GetPosition();
     }
     public override void Affect()
     {
-        Debug.Log(currentTime);
+        //Debug.Log(currentTime);
         currentTime += Time.deltaTime;
         if(currentTime >= duration){
             StopAffect();

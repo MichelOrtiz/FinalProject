@@ -16,6 +16,7 @@ public class DashH : Ability
     public override void UseAbility()
     {
         base.UseAbility();
+        if(player.currentStamina < staminaCost)return;
         player.isDashing=true;
         body.velocity = new Vector2(body.velocity.x, 0f);
         body.AddForce(new Vector2(movimiento * speed, 0f), ForceMode2D.Impulse);

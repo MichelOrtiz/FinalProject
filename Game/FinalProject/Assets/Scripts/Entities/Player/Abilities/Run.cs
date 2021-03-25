@@ -8,6 +8,7 @@ public class Run : Ability
     [SerializeField] public float runningSpeed;
     public override void UseAbility()
     {
+        if(player.currentStamina < staminaCost)return;
         if (isInCooldown)
         {
             player.TakeTirement(staminaCost);

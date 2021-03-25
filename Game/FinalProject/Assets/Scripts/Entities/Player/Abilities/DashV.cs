@@ -16,6 +16,7 @@ public class DashV : Ability
     public override void UseAbility()
     {
         base.UseAbility();
+        if(player.currentStamina < staminaCost)return;
         player.isDashing=true;
         body.velocity = new Vector2(0f, 0f);
         body.AddForce(new Vector2(0f, movimiento * speed), ForceMode2D.Impulse);

@@ -7,6 +7,7 @@ public class Fly : Ability
     public override void UseAbility()
     {
         base.UseAbility();
+        if(player.currentStamina < staminaCost)return;
         player.isFlying = !player.isFlying;
     }
 }

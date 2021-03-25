@@ -19,6 +19,7 @@ public abstract class State : ScriptableObject
         Debug.Log(this.name.ToString()+" ended in "+ manager.hostEntity.name.ToString());
         onEffect=false;
         manager.statusCheck-=Affect;
+        manager.RemoveState(this);
     }
     
 }
