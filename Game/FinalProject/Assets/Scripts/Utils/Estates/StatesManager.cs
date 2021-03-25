@@ -5,6 +5,7 @@ using UnityEngine;
 public class StatesManager : MonoBehaviour
 {
     public Entity hostEntity;
+    public Entity enemy;
     private List<State> currentStates = new List<State>();
     public delegate void StatusCheck();
     public StatusCheck statusCheck;   
@@ -20,6 +21,13 @@ public class StatesManager : MonoBehaviour
 
     public void AddState(State newState){
         if(newState != null){
+            newState.StartAffect(this);
+            currentStates.Add(newState);
+        }
+    }
+    public void AddState(State newState, Entity newEnemy){
+        if(newState != null){
+            enemy=newEnemy;
             newState.StartAffect(this);
             currentStates.Add(newState);
         }

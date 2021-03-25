@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 3339866858326962273}
   - component: {fileID: 3339866858326962272}
   - component: {fileID: 3339866858326962207}
+  - component: {fileID: 2557539626730686301}
   m_Layer: 9
   m_Name: Fast Gnome
   m_TagString: Enemy
@@ -228,12 +229,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingDirection: 
-  state: 0
+  currentState: 0
   isWalking: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
   isFalling: 0
+  isInWater: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -241,9 +243,11 @@ MonoBehaviour:
   isBrainFrozen: 0
   isResting: 0
   isChasing: 0
+  statesManager: {fileID: 0}
   jumpForce: 0
   jumpTime: 0
   fallingCriteria: 0.1
+  rigidbody2d: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -257,13 +261,32 @@ MonoBehaviour:
   damageAmount: 10
   normalSpeedMultiplier: 1.5
   chaseSpeedMultiplier: 1.5
+  startWaitTime: 0
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 3339866856916399876}
   fovOrigin: {fileID: 3339866858443574593}
   baseCastDistance: 0.5
+  downDistanceGroundCheck: 0
   viewDistance: 3
   fovAngle: 0
   touchingPlayer: 0
+  justCapturedPlayer: 0
   player: {fileID: 0}
+--- !u!114 &2557539626730686301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3339866858326962206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a10b0e024d509479a276cdedbec9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostEntity: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1 &3339866858443574592
 GameObject:
   m_ObjectHideFlags: 0
