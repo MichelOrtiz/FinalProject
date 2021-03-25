@@ -55,7 +55,10 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        impactEffect.SetActive(false);
+        if (impactEffect != null)
+        {
+            impactEffect.SetActive(false);
+        }
         speedMultiplier *= Entity.averageSpeed;
         if (targetWarningAvailable)
         {

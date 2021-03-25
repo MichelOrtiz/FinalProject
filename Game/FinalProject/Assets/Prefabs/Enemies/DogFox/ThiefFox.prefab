@@ -378,6 +378,7 @@ MonoBehaviour:
   isJumping: 0
   isFlying: 0
   isFalling: 0
+  isInWater: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -385,6 +386,7 @@ MonoBehaviour:
   isBrainFrozen: 0
   isResting: 0
   isChasing: 0
+  statesManager: {fileID: 0}
   jumpForce: 5
   jumpTime: 0
   fallingCriteria: 0.1
@@ -393,8 +395,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 0
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 128
   feetPos: {fileID: 5569523306496975727}
   checkFeetRadius: 0.3
   fovType: 0
@@ -403,15 +407,19 @@ MonoBehaviour:
   normalSpeedMultiplier: 1.5
   chaseSpeedMultiplier: 3
   startWaitTime: 2
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 5569523306785028900}
   fovOrigin: {fileID: 5569523305346644509}
   baseCastDistance: 0.5
+  downDistanceGroundCheck: 0
   viewDistance: 7
   fovAngle: 0
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}
+  leaveItem: {fileID: 0}
   leaveItemPosition: {fileID: 5569523306035468772}
-  afterStealVelocity: 0.75
+  afterStealSpeed: 0
   startEscapeTime: 5
   stolenItemIcon: {fileID: 0}

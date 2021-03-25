@@ -50,7 +50,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rigidbody2d;
     protected Animator animator;
     [SerializeField] protected LayerMask whatIsGround;
-    [SerializeField] protected LayerMask whatIsObstacle;
+    [SerializeField] protected LayerMask[] whatIsObstacle;
     [SerializeField] public Transform feetPos;    
     [SerializeField] protected float checkFeetRadius;
     #endregion

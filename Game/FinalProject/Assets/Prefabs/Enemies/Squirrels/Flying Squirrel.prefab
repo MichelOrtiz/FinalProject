@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2197297656629908557}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 12.46, y: 11.96, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 2197297656837396883}
   - {fileID: 2197297656883283191}
@@ -213,12 +213,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingDirection: 
-  state: 0
+  currentState: 0
   isWalking: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
   isFalling: 0
+  isInWater: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -226,17 +227,19 @@ MonoBehaviour:
   isBrainFrozen: 0
   isResting: 0
   isChasing: 0
+  statesManager: {fileID: 0}
   jumpForce: 8
   jumpTime: 0.2
   fallingCriteria: 0.001
   rigidbody2d: {fileID: 2197297656629908553}
-  animator: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 384
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 128
   feetPos: {fileID: 2197297656883283191}
   checkFeetRadius: 0.25
   fovType: 2
@@ -244,12 +247,17 @@ MonoBehaviour:
   damageAmount: 10
   normalSpeedMultiplier: 0
   chaseSpeedMultiplier: 2
+  startWaitTime: 0
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 0}
   fovOrigin: {fileID: 2197297656837396883}
   baseCastDistance: 1
+  downDistanceGroundCheck: 0
   viewDistance: 8
   fovAngle: 180
   touchingPlayer: 0
+  justCapturedPlayer: 0
   player: {fileID: 0}
 --- !u!1 &2197297656837396882
 GameObject:

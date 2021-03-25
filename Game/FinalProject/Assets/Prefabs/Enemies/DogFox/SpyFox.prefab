@@ -228,12 +228,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingDirection: 
-  state: 0
+  currentState: 0
   isWalking: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
   isFalling: 0
+  isInWater: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -241,6 +242,7 @@ MonoBehaviour:
   isBrainFrozen: 0
   isResting: 0
   isChasing: 0
+  statesManager: {fileID: 0}
   jumpForce: 8
   jumpTime: 0
   fallingCriteria: 0.1
@@ -249,8 +251,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 384
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 128
   feetPos: {fileID: 5327901374617602159}
   checkFeetRadius: 0.3
   fovType: 0
@@ -258,12 +262,17 @@ MonoBehaviour:
   damageAmount: 50
   normalSpeedMultiplier: 1.25
   chaseSpeedMultiplier: 1.25
+  startWaitTime: 0
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 5327901373678350523}
   fovOrigin: {fileID: 5327901373667214874}
   baseCastDistance: 0.5
+  downDistanceGroundCheck: 0
   viewDistance: 15
   fovAngle: 0
   touchingPlayer: 0
+  justCapturedPlayer: 0
   player: {fileID: 0}
 --- !u!1 &5327901374617602156
 GameObject:

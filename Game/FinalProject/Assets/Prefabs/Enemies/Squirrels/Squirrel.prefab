@@ -119,9 +119,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3995145655655089015}
-  m_LocalRotation: {x: 0.0066412715, y: -0, z: -0, w: 0.999978}
+  m_LocalRotation: {x: 0.0066408967, y: 0, z: 0, w: 0.99997795}
   m_LocalPosition: {x: 17.56, y: 10.71, z: 0.04}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 3995145655363388561}
   - {fileID: 3995145654773326705}
@@ -278,12 +278,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingDirection: 
-  state: 0
+  currentState: 0
   isWalking: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
   isFalling: 0
+  isInWater: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -291,17 +292,19 @@ MonoBehaviour:
   isBrainFrozen: 0
   isResting: 0
   isChasing: 0
+  statesManager: {fileID: 0}
   jumpForce: 0
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 3995145655655089012}
-  animator: {fileID: 3995145655655088907}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 384
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 128
   feetPos: {fileID: 3995145654773326705}
   checkFeetRadius: 0.3
   fovType: 0
@@ -309,12 +312,17 @@ MonoBehaviour:
   damageAmount: 0
   normalSpeedMultiplier: 0.5
   chaseSpeedMultiplier: 0.5
+  startWaitTime: 0
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 3995145654071809700}
   fovOrigin: {fileID: 3995145655363388561}
   baseCastDistance: 0.5
+  downDistanceGroundCheck: 0
   viewDistance: 3
   fovAngle: 0
   touchingPlayer: 0
+  justCapturedPlayer: 0
   player: {fileID: 0}
 --- !u!61 &3995145655655088904
 BoxCollider2D:

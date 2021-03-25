@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &145935643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 145935644}
+  m_Layer: 9
+  m_Name: shotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &145935644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145935643}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.74, y: -2.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5830214563889771408}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5830214563889771422
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,11 +60,12 @@ Transform:
   m_GameObject: {fileID: 5830214563889771422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.85, y: 35.5, z: -1.5819737}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 5830214563938247850}
   - {fileID: 5830214564504064571}
   - {fileID: 5830214564628095505}
+  - {fileID: 145935644}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -168,12 +199,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingDirection: 
-  state: 0
+  currentState: 0
   isWalking: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
   isFalling: 0
+  isInWater: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -181,6 +213,7 @@ MonoBehaviour:
   isBrainFrozen: 0
   isResting: 0
   isChasing: 0
+  statesManager: {fileID: 0}
   jumpForce: 0
   jumpTime: 0
   fallingCriteria: 0.1
@@ -189,8 +222,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 0
+  - serializedVersion: 2
+    m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 256
   feetPos: {fileID: 5830214564504064571}
   checkFeetRadius: 0
   fovType: 3
@@ -198,16 +233,20 @@ MonoBehaviour:
   damageAmount: 10
   normalSpeedMultiplier: 0.75
   chaseSpeedMultiplier: 0.75
+  startWaitTime: 0
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 5830214563938247850}
   fovOrigin: {fileID: 5830214564628095505}
   baseCastDistance: 2
+  downDistanceGroundCheck: 0
   viewDistance: 10
   fovAngle: 180
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}
-  projectileDamage: 10
-  projectile: {fileID: 8805213487483752607, guid: b69da6cbf6e0f104f92e5ec877dfe01a, type: 3}
+  shotProjectilePos: {fileID: 145935644}
+  projectilePrefab: {fileID: 8805213487483752607, guid: b69da6cbf6e0f104f92e5ec877dfe01a, type: 3}
   startTimeBtwShot: 3
 --- !u!1 &5830214563938247851
 GameObject:

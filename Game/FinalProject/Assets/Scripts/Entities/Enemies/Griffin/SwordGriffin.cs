@@ -40,11 +40,11 @@ public class SwordGriffin : Griffin
             if (!CanSeePlayerSecondFov())
             {
                 Debug.Log("should move");
-                MoveTowardsPlayer(firstFovSpeed);
+                MoveTowardsPlayerInGround(firstFovSpeed);
             }
             else
             {
-                MoveTowardsPlayer(secondFovSpeed);
+                MoveTowardsPlayerInGround(secondFovSpeed);
             }
             Debug.Log("should move");
             //rigidbody2d.velocity = Vector3.MoveTowards(GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime);
@@ -70,15 +70,7 @@ public class SwordGriffin : Griffin
         
     }
 
-    private void MoveTowardsPlayer(float speed)
-    {
-        Vector3 playerPosition = (player.isGrounded? player.GetPosition(): new Vector3(player.GetPosition().x, GetPosition().y));
-        if (!InFrontOfObstacle() && isGrounded && !touchingPlayer)
-        {
-            rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, speed * Time.deltaTime);
-        }
-        //rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), speed * Time.deltaTime);
-    }
+    
 
     protected override void OnCollisionEnter2D(Collision2D other)
     {

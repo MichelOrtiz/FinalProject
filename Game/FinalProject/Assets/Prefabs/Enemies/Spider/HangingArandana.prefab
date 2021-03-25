@@ -395,6 +395,7 @@ MonoBehaviour:
   isJumping: 0
   isFlying: 0
   isFalling: 0
+  isInWater: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -402,6 +403,7 @@ MonoBehaviour:
   isBrainFrozen: 0
   isResting: 0
   isChasing: 0
+  statesManager: {fileID: 0}
   jumpForce: 0
   jumpTime: 0
   fallingCriteria: 0.1
@@ -410,8 +412,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 0
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 128
   feetPos: {fileID: 884248131156096981}
   checkFeetRadius: 0.3
   fovType: 3
@@ -420,9 +424,12 @@ MonoBehaviour:
   normalSpeedMultiplier: 3
   chaseSpeedMultiplier: 2.5
   startWaitTime: 0
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 884248131135160087}
   fovOrigin: {fileID: 884248131141105296}
   baseCastDistance: 1
+  downDistanceGroundCheck: 0
   viewDistance: 0
   fovAngle: 7
   touchingPlayer: 0
