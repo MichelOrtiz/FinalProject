@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,7 @@ public abstract class Enemy : Entity
 
     #region Layers, rigids, etc
     [Header("Layers, rigids, etc")]
+    private RaycastHit2D hit;
     [SerializeField] protected Transform? groundCheck;
     [SerializeField] protected Transform? fovOrigin;
     
@@ -271,13 +273,18 @@ public abstract class Enemy : Entity
         }
         Debug.DrawLine(fovOrigin.position, endPos, Color.red);
 
-        RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Default"));
-
+        hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Default"));
+        
         if (hit.collider == null)
         {
             return false;
         }
         return hit.collider.gameObject.CompareTag("Player");
+    }
+
+    public float GetDistanceFromPlayerFov()
+    {
+        return Math.Abs(hit.distance);
     }
 
     #endregion
