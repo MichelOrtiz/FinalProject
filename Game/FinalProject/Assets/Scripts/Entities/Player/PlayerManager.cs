@@ -47,15 +47,10 @@ public class PlayerManager : Entity
     private static int rButtonCount = 0;
     
     [SerializeField] private float coolDownAfterAttack;
-    [SerializeField] private float immunityTime;
 
     private bool tirementRunning = false;
     private bool tirementDrowning = false;
     #endregion
-
-    
-
-
 
     #region Dialogue Trigger
     public DialogueTrigger dialogue;
@@ -114,9 +109,11 @@ public class PlayerManager : Entity
 
     #endregion
 
-    
-
-
+    #region Inputs
+        PlayerInputs inputs;
+    #endregion
+    [SerializeField]private State inmunityState;
+    public AbilityManager abilityManager;
     public static PlayerManager instance = null;
 
     /// <summary>
@@ -147,10 +144,7 @@ public class PlayerManager : Entity
         regenCooldown = 5;
         currentGravity = defaultGravity;
         currentMass = defaultMass;
-    }
-    
-    void FixedUpdate()
-    {
+        inputs=gameObject.GetComponent<PlayerInputs>();
     }
 
     new void Update()
@@ -159,13 +153,10 @@ public class PlayerManager : Entity
         animator.SetBool("Is Running", isRunning);
         animator.SetBool("Is Aiming", isAiming);
         isStruggling = false;
-        isWalking = moveInput!=0 && isGrounded;
-        
+        isWalking = inputs.movementX!=0 && isGrounded;
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
         //UpdateAnimation();
-
-        moveInput = Input.GetAxisRaw("Horizontal");
 
         if (!isCaptured)
         {
@@ -187,25 +178,13 @@ public class PlayerManager : Entity
             rigidbody2d.Sleep();
         }
         
-        
-        /*animator.SetBool("Is Grounded", isGrounded);
-        animator.SetBool("Is Walking", moveInput!=0 && isGrounded);
-        animator.SetBool("Is Jumping", isJumping);
-        animator.SetBool("Is Falling", isFalling);
-        animator.SetBool("Is Flying", isFlying);*/
-        
-        if (moveInput>0)
+        if (inputs.movementX>0)
         {
             transform.eulerAngles = new Vector3(0,0,0);
         }
-        else if (moveInput<0)
+        else if (inputs.movementX<0)
         {
             transform.eulerAngles = new Vector3(0,180,0);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Minus))
-        {
-            TakeTirement(5);
         }
 
         if(Input.GetKeyDown(KeyCode.E))
@@ -256,14 +235,13 @@ public class PlayerManager : Entity
 
     public void Jump()
     {
-        if ((isGrounded && Input.GetKeyDown(KeyCode.Space))||(isInWater && Input.GetKeyDown(KeyCode.Space)))
+        if ((isGrounded && inputs.jump) || (isInWater && inputs.jump))
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
             isJumping = true;
             jumpTimeCounter = jumpTime;
-            
         }   
-        if ((Input.GetKey(KeyCode.Space) && isJumping == true))
+        if (inputs.jump)
         {
             if (jumpTimeCounter>0){
                 rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
@@ -274,26 +252,23 @@ public class PlayerManager : Entity
                 isJumping = false;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            isJumping = false;
-        }
+        if(isGrounded)isJumping=false;
     }
 
     void Move()
     {
         
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), rigidbody2d.velocity.y, 0f);  
+        //Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), rigidbody2d.velocity.y, 0f);  
         
-        rigidbody2d.velocity = new Vector2(movement.x * walkingSpeed, movement.y);
+        rigidbody2d.velocity = new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y);
     }
 
     void Flying()
     {
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
+        //Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
         //rigidbody2d.gravityScale(isFlying? 0:26 )// no recuerdo como iba esto
         
-        rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
+        rigidbody2d.velocity = new Vector2(inputs.movementX, inputs.movementY)*walkingSpeed;
         
     }
 
@@ -377,9 +352,9 @@ public class PlayerManager : Entity
     #region Direct stamina changes
     public void TakeTirement(float damage)
     {
-        isStruggling = true;
         if (currentStamina>0)
         {
+            statesManager.AddState(inmunityState);
             currentStamina -= damage;
             loosingStamina = true;
             staminaBar.SetStamina(currentStamina);
@@ -390,7 +365,7 @@ public class PlayerManager : Entity
         }
         
     }
-    void RegenStamina(float regen)
+    public void RegenStamina(float regen)
     {
         if (currentStamina<100)
         {
@@ -416,85 +391,6 @@ public class PlayerManager : Entity
     }
     #endregion
 
-    /*void Timer(int time, float damage, float regen)
-    {
-        if(isRunning)
-        {
-            StartCoroutine (Tirement(time,damage));
-        }
-        else
-        {
-            StopCoroutine (Tirement(time, damage));
-            if (!isStruggling)
-            {
-                StartCoroutine (Regeneration(time,regen));
-            }
-        }
-    }*/
-
-    #region Self state methods
-    public void Captured(int nTaps, float damagePerSecond,Enemy capturing)
-    {
-        if(!tirementRunning)
-        {
-            StartCoroutine(Tirement(1, damagePerSecond));
-        }
-        isCaptured = true;
-        int halfTaps = nTaps/2;
-        //revisar el funcionamiento
-        if (Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Horizontal") == 1)
-        {
-            if (buttonCool > 0 && lButtonCount >= halfTaps && rButtonCount >= halfTaps)
-            {
-                isCaptured = false;
-                Debug.Log("Jugador liberado");
-                rigidbody2d.WakeUp();
-                StartCoroutine(Immunity());
-                Paralized s = new Paralized();
-                statesManager.AddState(s);
-                lButtonCount = 0;
-                rButtonCount = 0;
-            }
-            else
-            {
-
-                buttonCool = 0.8f;
-                lButtonCount += Input.GetAxisRaw("Horizontal") ==-1? 1 : 0;
-                rButtonCount += Input.GetAxisRaw("Horizontal") == 1? 1 : 0;
-            }
-        }
-        if ( buttonCool > 0 )
-        {
-            buttonCool -= Time.deltaTime ;
-        }
-        else
-        {
-            rButtonCount = 0;
-            lButtonCount = 0;
-        }
-    }
-
-    public IEnumerator Immunity()
-    {
-        isImmune = true;
-        yield return new WaitForSeconds(immunityTime);
-        isImmune = false;
-    }
-    #endregion
-
-    /// <summary>
-    /// Sent when a collider on another object stops touching this
-    /// object's collider (2D physics only).
-    /// </summary>
-    /// <param name="other">The Collision2D data associated with this collision.</param>
-    void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            isCaptured = false;
-            StartCoroutine(Immunity());
-        }
-    }
 
 
     private void OnLevelWasLoaded(int level){

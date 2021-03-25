@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5753084710183935056}
   - component: {fileID: 5753084710183935057}
   - component: {fileID: 5753084710183935070}
+  - component: {fileID: 8286788012969100117}
   m_Layer: 9
   m_Name: HunterCentaur
   m_TagString: Enemy
@@ -198,12 +199,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingDirection: 
-  state: 0
+  currentState: 0
   isWalking: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
   isFalling: 0
+  isInWater: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -211,6 +213,7 @@ MonoBehaviour:
   isBrainFrozen: 0
   isResting: 0
   isChasing: 0
+  statesManager: {fileID: 0}
   jumpForce: 0
   jumpTime: 0
   fallingCriteria: 0.1
@@ -228,16 +231,37 @@ MonoBehaviour:
   damageAmount: 10
   normalSpeedMultiplier: 1
   chaseSpeedMultiplier: 1
+  startWaitTime: 0
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 5753084709910051675}
   fovOrigin: {fileID: 5753084710838525926}
   baseCastDistance: 1
+  downDistanceGroundCheck: 0
   viewDistance: 15
   fovAngle: 25
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}
-  projectile: {fileID: 53733825894341834, guid: 41cc107f741f3e84f990ddd143adda98, type: 3}
+  shotProjectilePos: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  atackEffect: {fileID: 0}
+  projectileEffect: {fileID: 0}
   startTimeBtwShot: 5
+--- !u!114 &8286788012969100117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753084710183935071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a10b0e024d509479a276cdedbec9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostEntity: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1 &5753084710838525927
 GameObject:
   m_ObjectHideFlags: 0

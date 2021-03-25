@@ -3,11 +3,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName="New Paralisis", menuName = "States/new Paralisis")]
 public class Paralized : State
 {
-    Vector3 paralizatedPos;
     public override void StartAffect(StatesManager newManager)
     {
         base.StartAffect(newManager);
-        paralizatedPos = manager.hostEntity.GetPosition();
+        bool isPlayer = manager.hostEntity.GetComponent<PlayerManager>() != null;
+        if(isPlayer){
+            manager.hostEntity.GetComponent<PlayerInputs>().enabled=false;
+        }else{
+            manager.hostEntity.enabled=false;
+        }
     }
     public override void Affect()
     {
@@ -16,6 +20,15 @@ public class Paralized : State
         if(currentTime >= duration){
             StopAffect();
         }
-        manager.hostEntity.gameObject.transform.position = paralizatedPos;
+    }
+    public override void StopAffect()
+    {
+        base.StopAffect();
+        bool isPlayer = manager.hostEntity.GetComponent<PlayerManager>() != null;
+        if(isPlayer){
+            manager.hostEntity.GetComponent<PlayerInputs>().enabled=true;
+        }else{
+            manager.hostEntity.enabled=true;
+        }
     }
 }

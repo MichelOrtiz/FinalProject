@@ -13,5 +13,6 @@ public enum StateNames
     Dizzy, 
     CapturedPlayer, 
     Patrolling, 
-    Falling
+    Falling,
+    Invulnerable
 }
