@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 968054569061175536}
   - component: {fileID: 4908436090636543554}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Thread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 884248131135160087}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -168,7 +168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 884248131141105296}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: fovOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 884248131156096981}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: FeetPos
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -234,9 +234,9 @@ GameObject:
   - component: {fileID: 884248132953188832}
   - component: {fileID: 884248132953188835}
   - component: {fileID: -734228048671128966}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: HangingArandana
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 256
   - serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 512
   feetPos: {fileID: 884248131156096981}
   checkFeetRadius: 0.3
   fovType: 3
@@ -424,6 +424,8 @@ MonoBehaviour:
   damageAmount: 22
   normalSpeedMultiplier: 3
   chaseSpeedMultiplier: 2.5
+  atackEffect: {fileID: 0}
+  projectileEffect: {fileID: 0}
   startWaitTime: 0
   normalSpeed: 0
   chaseSpeed: 0
@@ -465,7 +467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7013372414152494164}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: threadPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

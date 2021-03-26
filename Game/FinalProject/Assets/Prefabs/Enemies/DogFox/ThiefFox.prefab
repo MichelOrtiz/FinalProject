@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5569523305346644509}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: fovOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5569523306035468772}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: leaveItem
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5569523306496975727}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: FeetPos
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5569523306785028900}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5569523306954500313}
   - component: {fileID: 5569523306954500318}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: StolenItemIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 5569523307059912486}
   - component: {fileID: 5569523307059912481}
   - component: {fileID: -7741865598002738719}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: ThiefFox
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 256
   - serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 512
   feetPos: {fileID: 5569523306496975727}
   checkFeetRadius: 0.3
   fovType: 0
@@ -407,6 +407,8 @@ MonoBehaviour:
   damageAmount: 20
   normalSpeedMultiplier: 1.5
   chaseSpeedMultiplier: 3
+  atackEffect: {fileID: 0}
+  projectileEffect: {fileID: 0}
   startWaitTime: 2
   normalSpeed: 0
   chaseSpeed: 0

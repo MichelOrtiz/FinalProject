@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6363311131820688002}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: fovOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6363311132394634061}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: FeetPos
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6363311132473047341}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 6363311133194938772}
   - component: {fileID: 6363311133194938775}
   - component: {fileID: -3608849001850943604}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Bubble Medufin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 256
   - serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 512
   feetPos: {fileID: 6363311132394634061}
   checkFeetRadius: 0.3
   fovType: 1
@@ -294,6 +294,8 @@ MonoBehaviour:
   damageAmount: 30
   normalSpeedMultiplier: 0
   chaseSpeedMultiplier: 0
+  atackEffect: {fileID: 0}
+  projectileEffect: {fileID: 0}
   startWaitTime: 0
   normalSpeed: 0
   chaseSpeed: 0
@@ -336,7 +338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6363311133538750734}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: shotProjectilePos
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
