@@ -54,7 +54,7 @@ public class PatrollGriffin : Griffin
 
     protected override void ChasePlayer()
     {
-        // capture player
+        player.statesManager.AddState(atackEffect);
     }
     protected override void Attack()
     {

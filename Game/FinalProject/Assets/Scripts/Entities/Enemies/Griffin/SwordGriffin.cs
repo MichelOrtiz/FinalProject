@@ -51,6 +51,10 @@ public class SwordGriffin : Griffin
                 Destroy(breakableObject);
                 destroyedObject = true;
                 // paralized 2 seg
+                if (!touchingPlayer)
+                {
+                    statesManager.AddState(atackEffect);
+                }
             }
         }
         else
