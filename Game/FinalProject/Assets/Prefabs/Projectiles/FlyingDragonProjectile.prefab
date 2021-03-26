@@ -128,11 +128,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   warning: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
+  impactEffect: {fileID: 0}
   targetWarningAvailable: 1
   speedMultiplier: 0.75
   maxShotDistance: 20
   damage: 10
   waitTime: 0.01
+  impactEffectExitTime: 0
   touchingPlayer: 0
   touchingObstacle: 0
 --- !u!50 &2347107957581602761
@@ -150,7 +152,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

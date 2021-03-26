@@ -91,7 +91,7 @@ Transform:
   m_GameObject: {fileID: 5689324310269302991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 137.95, y: -4.23, z: -1.5819737}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 5689324309852061195}
   - {fileID: 5689324310114716425}
@@ -190,7 +190,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &5689324310269302977
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -253,8 +253,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 0
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 128
   feetPos: {fileID: 5689324310114716425}
   checkFeetRadius: 0.3
   fovType: 3

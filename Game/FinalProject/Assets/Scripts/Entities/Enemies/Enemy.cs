@@ -5,14 +5,7 @@ using UnityEngine;
 
 public abstract class Enemy : Entity
 {
-    public enum FovType
-    {
-        Linear, 
-        CompleteCircle,
-        CircularFront,
-        CircularDown, 
-        CircularUp
-    }
+    
 
     #region Main Parameters
     [Header("Main parameters")]
@@ -151,10 +144,19 @@ public abstract class Enemy : Entity
 
         float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
         Vector3 targetPos = fovOrigin.position + (facingDirection == LEFT? Vector3.left : Vector3.right) * castDistance;
+        return RayHitObstacle(fovOrigin.position, targetPos);
         //targetPos.x += castDistance;
 
-        return //Physics2D.Linecast(fovOrigin.position, targetPos, 1 << LayerMask.NameToLayer("Obstacles")) || 
-                Physics2D.Linecast(fovOrigin.position, targetPos, 1 << LayerMask.NameToLayer("Ground"));
+        /*foreach (var obstacle in whatIsObstacle)
+        {
+            if (Physics2D.Linecast(fovOrigin.position, targetPos, obstacle))
+            {
+                return true;
+            }
+        }
+        return false;
+        /*return //Physics2D.Linecast(fovOrigin.position, targetPos, 1 << LayerMask.NameToLayer("Obstacles")) || 
+                Physics2D.Linecast(fovOrigin.position, targetPos, 1 << LayerMask.NameToLayer("Ground"));*/
     }
 
     protected bool IsNearEdge()
@@ -173,6 +175,20 @@ public abstract class Enemy : Entity
         isParalized = false;
     }
 
+    protected void MoveTowardsPlayerInGround(float speed)
+    {
+        Vector3 playerPosition = (player.isGrounded? player.GetPosition(): new Vector3(player.GetPosition().x, GetPosition().y));
+        if (!InFrontOfObstacle() && isGrounded && !touchingPlayer)
+        {
+            rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, speed * Time.deltaTime);
+        }
+        //rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), speed * Time.deltaTime);
+    }
+
+    public void Jump(float xForce)
+    {
+        rigidbody2d.AddForce(new Vector2(xForce,jumpForce),ForceMode2D.Impulse);
+    }
     #endregion
 
     #region Self state methods
@@ -226,7 +242,7 @@ public abstract class Enemy : Entity
         //      90
         //  180     0 or 360
         //      270       
-        float angle = MathUtils.GetAngleBetween(fovOrigin.position, player.GetPosition());
+        float angle = GetAngleFromPlayer();
 
         switch (fovType)
         {
@@ -251,7 +267,7 @@ public abstract class Enemy : Entity
                 }
                 else
                 {
-                    if (angle > 90 && angle < 270 && angle < 180 + fovAngle/2 && angle < 180 + fovAngle/2) 
+                    if (angle > (180 - fovAngle/2) && angle < 270 && angle < 180 + fovAngle/2 && angle < 180 + fovAngle/2) 
                     {
                         endPos = Vector3.MoveTowards(fovOrigin.position, player.GetPosition(), viewDistance);
                     }
@@ -275,18 +291,39 @@ public abstract class Enemy : Entity
         }
         Debug.DrawLine(fovOrigin.position, endPos, Color.red);
 
-        hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Default"));
-        
-        if (hit.collider == null)
+        if (!RayHitObstacle(fovOrigin.position, endPos))
         {
-            return false;
+            hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Default"));
+            if (hit.collider == null)
+            {
+                return false;
+            }
+            return hit.collider.gameObject.CompareTag("Player");
         }
-        return hit.collider.gameObject.CompareTag("Player");
+        return false;
+        
     }
 
     public float GetDistanceFromPlayerFov()
     {
         return Math.Abs(hit.distance);
+    }
+
+    public float GetAngleFromPlayer()
+    {
+        return MathUtils.GetAngleBetween(fovOrigin.position, player.GetPosition());
+    }
+
+    private bool RayHitObstacle(Vector2 start, Vector2 end)
+    {
+        foreach (var obstacle in whatIsObstacle)
+        {
+            if (Physics2D.Linecast(start, end, obstacle))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     #endregion

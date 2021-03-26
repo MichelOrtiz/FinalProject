@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 2197297656629908557}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 12.46, y: 11.96, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 2197297656837396883}
   - {fileID: 2197297656883283191}
@@ -237,8 +237,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 384
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 128
   feetPos: {fileID: 2197297656883283191}
   checkFeetRadius: 0.25
   fovType: 2
