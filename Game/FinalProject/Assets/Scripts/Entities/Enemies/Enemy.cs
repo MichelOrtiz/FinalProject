@@ -184,6 +184,11 @@ public abstract class Enemy : Entity
         }
         //rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), speed * Time.deltaTime);
     }
+
+    public void Jump(float xForce)
+    {
+        rigidbody2d.AddForce(new Vector2(xForce,jumpForce),ForceMode2D.Impulse);
+    }
     #endregion
 
     #region Self state methods
