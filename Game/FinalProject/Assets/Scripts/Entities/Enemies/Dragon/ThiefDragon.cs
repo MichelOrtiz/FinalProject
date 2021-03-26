@@ -5,6 +5,7 @@ public class ThiefDragon : Dragon
     [SerializeField] private float startTimeBtwJump;
     [SerializeField] private float percentageMoneySteal;
     [SerializeField] private int minMoneyToSteal;
+    [SerializeField] private Transform stolenItemIcon;
     private float timeBtwFloat;
     //private Inventory inventory;
     new void Start()
@@ -25,6 +26,8 @@ public class ThiefDragon : Dragon
             Jump(facingDirection == RIGHT? jumpForceX : -jumpForceX);
             timeBtwFloat = startTimeBtwJump;
             ChangeFacingDirection();
+            stolenItemIcon.GetComponent<SpriteRenderer>().sprite = null;
+
         }
         else
         {
@@ -47,6 +50,7 @@ public class ThiefDragon : Dragon
         {
             Item itemToRemove = inventory.GetRandomEdibleItem();
             inventory.Remove(itemToRemove);
+            stolenItemIcon.GetComponent<SpriteRenderer>().sprite = itemToRemove.icon;
             // poner item en cierta tienda del bazar 7u7
         }
         else
