@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 525320775802754288}
   - component: {fileID: 525320775802754289}
   - component: {fileID: 525320775802754302}
+  - component: {fileID: -4814519534972694386}
   m_Layer: 9
   m_Name: HockeyPlayer
   m_TagString: Enemy
@@ -265,6 +266,7 @@ MonoBehaviour:
   isJumping: 0
   isFlying: 0
   isFalling: 0
+  isInWater: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -272,6 +274,7 @@ MonoBehaviour:
   isBrainFrozen: 0
   isResting: 0
   isChasing: 0
+  statesManager: {fileID: 0}
   jumpForce: 0
   jumpTime: 0
   fallingCriteria: 0
@@ -280,8 +283,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 0
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 128
   feetPos: {fileID: 525320774841720435}
   checkFeetRadius: 0.3
   fovType: 0
@@ -290,9 +295,12 @@ MonoBehaviour:
   normalSpeedMultiplier: 2.3
   chaseSpeedMultiplier: 0
   startWaitTime: 1
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 525320774434334401}
   fovOrigin: {fileID: 525320776076346201}
   baseCastDistance: 1
+  downDistanceGroundCheck: 0
   viewDistance: 0
   fovAngle: 0
   touchingPlayer: 0
@@ -304,8 +312,22 @@ MonoBehaviour:
   whatIsIce:
     serializedVersion: 2
     m_Bits: 256
-  pushForce: 5
+  pushForce: 500
   maxViewDistance: 25
+--- !u!114 &-4814519534972694386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525320775802754303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a10b0e024d509479a276cdedbec9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostEntity: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1 &525320776076346182
 GameObject:
   m_ObjectHideFlags: 0

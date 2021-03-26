@@ -19,7 +19,8 @@ public class Entity : MonoBehaviour
     public bool isJumping = false;
     public bool isFlying = false;
     public bool isFalling = false;
-    #endregion
+    public bool isInWater = false;
+    #endregion 
 
     #region Special States
     [Header("Special states")]
@@ -30,6 +31,7 @@ public class Entity : MonoBehaviour
     public bool isBrainFrozen = false;
     public bool isResting = false;
     public bool isChasing = false;
+    public StatesManager statesManager;
     #endregion
 
     #region Physic Parameters
@@ -48,27 +50,21 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rigidbody2d;
     protected Animator animator;
     [SerializeField] protected LayerMask whatIsGround;
-    [SerializeField] protected LayerMask whatIsObstacle;
+    [SerializeField] protected LayerMask[] whatIsObstacle;
     [SerializeField] public Transform feetPos;    
     [SerializeField] protected float checkFeetRadius;
     #endregion
-
-    public delegate void StatusCheck();
-    public StatusCheck statusCheck;
-
 
     #region Unity stuff
     protected void Start()
     {
         animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
+        statesManager = gameObject.GetComponent<StatesManager>();
     }
 
     protected void Update()
     {
-        if(statusCheck!=null){
-            statusCheck.Invoke();
-        }
         facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
@@ -127,7 +123,13 @@ public class Entity : MonoBehaviour
         isInFear = false;
     }*/
 
-    
+    public void Push(float xForce, float yForce)
+    {
+        //rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, 0f);
+        Vector2 force = GetPosition() * new Vector2(xForce, yForce);
+        rigidbody2d.AddForce(force, ForceMode2D.Force);
+    }
 
+    
     #endregion
 }

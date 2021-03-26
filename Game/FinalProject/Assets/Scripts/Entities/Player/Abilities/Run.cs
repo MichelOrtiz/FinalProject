@@ -5,13 +5,14 @@ using UnityEngine;
 public class Run : Ability
 {
     [SerializeField] private float speedMultiplier;
-    [SerializeField] private float runningSpeed;
+    [SerializeField] public float runningSpeed;
     public override void UseAbility()
     {
+        if(player.currentStamina < staminaCost)return;
         if (isInCooldown)
         {
             player.TakeTirement(staminaCost);
-            Debug.Log("Usando en cooldown");
+            //Debug.Log("Usando en cooldown");
         }
         player.walkingSpeed = runningSpeed;
     }

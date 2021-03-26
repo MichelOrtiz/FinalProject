@@ -48,7 +48,7 @@ public class SeekerGhost : Ghost
 
     protected override void MainRoutine()
     {
-        return;
+        rigidbody2d.Sleep();
     }
 
     protected override void ChasePlayer()

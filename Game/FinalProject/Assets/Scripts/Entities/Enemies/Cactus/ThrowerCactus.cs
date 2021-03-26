@@ -22,10 +22,10 @@ public class ThrowerCactus : Cactus, IProjectile
         base.Update();
     }
 
-    protected override void MainRoutine()
+    /*protected override void MainRoutine()
     {
         return;
-    }
+    }*/
 
     protected override void ChasePlayer()
     {

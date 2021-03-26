@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 8647063263483198499}
   - component: {fileID: 8647063263483198498}
   - component: {fileID: 8647063263483198497}
+  - component: {fileID: 6875942488527130172}
   m_Layer: 9
   m_Name: Spotter Gnome
   m_TagString: Enemy
@@ -258,12 +259,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingDirection: 
-  state: 0
+  currentState: 0
   isWalking: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
   isFalling: 0
+  isInWater: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -271,15 +273,19 @@ MonoBehaviour:
   isBrainFrozen: 0
   isResting: 0
   isChasing: 0
+  statesManager: {fileID: 0}
   jumpForce: 0
   jumpTime: 0
   fallingCriteria: 0
+  rigidbody2d: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
-    m_Bits: 384
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 128
   feetPos: {fileID: 8647063263394020807}
   checkFeetRadius: 0.4
   fovType: 0
@@ -287,10 +293,29 @@ MonoBehaviour:
   damageAmount: 15
   normalSpeedMultiplier: 0.25
   chaseSpeedMultiplier: 2
+  startWaitTime: 0
+  normalSpeed: 0
+  chaseSpeed: 0
   groundCheck: {fileID: 8647063262858222130}
   fovOrigin: {fileID: 8647063262188154505}
   baseCastDistance: 0.5
+  downDistanceGroundCheck: 0
   viewDistance: 20
   fovAngle: 0
   touchingPlayer: 0
+  justCapturedPlayer: 0
   player: {fileID: 0}
+--- !u!114 &6875942488527130172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8647063263483198496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a10b0e024d509479a276cdedbec9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostEntity: {fileID: 0}
+  enemy: {fileID: 0}

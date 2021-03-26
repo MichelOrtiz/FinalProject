@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Rigidbody2D rigidbody2d;
     [SerializeField] private LayerMask whatIsObstacle;
     [SerializeField] private GameObject warning;
-    [SerializeField] private GameObject impactEffect;
+    [SerializeField] private GameObject? impactEffect;
 
     [SerializeField] private bool targetWarningAvailable;
     #endregion
@@ -55,7 +55,10 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        impactEffect.SetActive(false);
+        if (impactEffect != null)
+        {
+            impactEffect.SetActive(false);
+        }
         speedMultiplier *= Entity.averageSpeed;
         if (targetWarningAvailable)
         {
@@ -67,20 +70,24 @@ public class Projectile : MonoBehaviour
     {
         //rigidbody2d.position = Vector3.MoveTowards(transform.position, shootDir, speedMultiplier * Time.deltaTime); 
         //animator.SetBool("Is Destroying", aboutToDestroy);
-        if (colliderTag == null)
+        if (!touchingPlayer)
         {
-            if (!touchingObstacle)
+            if (colliderTag == null)
             {
-                transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
+                if (!touchingObstacle)
+                {
+                    transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
+                }
+            }
+            else
+            {
+                if (isOnCollider)
+                {
+                    transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
+                }
             }
         }
-        else
-        {
-            if (isOnCollider)
-            {
-                transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
-            }
-        }
+        
         
         if (touchingObstacle)
         {
@@ -94,12 +101,7 @@ public class Projectile : MonoBehaviour
                 waitTime -= Time.deltaTime;
             } 
         }
-        if (touchingPlayer)
-        {
-            aboutToDestroy = true;
-            enemy.ProjectileAttack();
-            Destroy();
-        }
+        
 
         /*if (impactEffect.activeInHierarchy)
         {
@@ -112,8 +114,19 @@ public class Projectile : MonoBehaviour
                 impactEffectExitTime -= Time.deltaTime;
             }
         }*/
+        
     }
     
+    void FixedUpdate()
+    {
+        if (touchingPlayer)
+        {
+            aboutToDestroy = true;
+            enemy.ProjectileAttack();
+            Destroy();
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
@@ -136,11 +149,38 @@ public class Projectile : MonoBehaviour
         isOnCollider = other.gameObject.tag == colliderTag;
     }
 
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            touchingPlayer = false;
+        }
+        else if (other.gameObject.tag == "Ground")
+        {
+            touchingObstacle = false;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            touchingPlayer = false;
+        }
+        else if (other.gameObject.tag == "Ground")
+        {
+            touchingObstacle = false;
+        }
+    }
+
     public void Destroy()
     {
-        impactEffect.SetActive(true);
+        if (impactEffect != null)
+        {
+            impactEffect.SetActive(true);
+            Instantiate(impactEffect, transform.position, Quaternion.identity);
+        }
         
-        Instantiate(impactEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

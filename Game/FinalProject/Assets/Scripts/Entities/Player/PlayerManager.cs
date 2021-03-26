@@ -6,29 +6,39 @@ public class PlayerManager : Entity
 {
     #region Main Parameters
     public float maxStamina = 100;
+    public float maxOxygen = 100;
     public float walkingSpeed;
+    public float defaultwalkingSpeed = 7;
+    public float defaultGravity = 2.5f;
+    public float currentGravity;
+    public float defaultMass = 10;
+    public float currentMass;
 
     private GameObject[] players;
     #endregion
 
     #region Constant change Parameters
     public float currentStamina;
+    public float currentOxygen;
     private float moveInput; 
     private float jumpTimeCounter;
     #endregion
 
     #region States
     public bool isRunning;
+    public bool isSwiming;
     public bool isStruggling;
     public bool isImmune;
     public bool isAiming;
     public bool isDashing;
+    public bool isDoubleJumping;
 
     #endregion
 
     #region Layers, rigids, etc
     public GameObject camara;
     public StaminaBar staminaBar;
+    public OxygenBar oxygenBar;
     #endregion
 
     #region states params // might be in a different class
@@ -37,20 +47,17 @@ public class PlayerManager : Entity
     private static int rButtonCount = 0;
     
     [SerializeField] private float coolDownAfterAttack;
-    [SerializeField] private float immunityTime;
 
     private bool tirementRunning = false;
+    private bool tirementDrowning = false;
     #endregion
-
-    
-
-
 
     #region Dialogue Trigger
     public DialogueTrigger dialogue;
     private RaycastHit2D hit;
 
     [SerializeField]private bool loosingStamina;
+    [SerializeField]private bool loosingOxygen;
     private float regenCooldown;
 
     private void SearchInteraction()
@@ -102,9 +109,11 @@ public class PlayerManager : Entity
 
     #endregion
 
-    
-
-
+    #region Inputs
+        PlayerInputs inputs;
+    #endregion
+    [SerializeField]private State inmunityState;
+    public AbilityManager abilityManager;
     public static PlayerManager instance = null;
 
     /// <summary>
@@ -129,32 +138,31 @@ public class PlayerManager : Entity
         //walkingSpeed = AverageSpeed-3f;
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
+        currentOxygen = maxOxygen;
+        oxygenBar.SetMaxOxygen(maxOxygen);
         FindStartPos();
         regenCooldown = 5;
-    }
-    
-    void FixedUpdate()
-    {
+        currentGravity = defaultGravity;
+        currentMass = defaultMass;
+        inputs=gameObject.GetComponent<PlayerInputs>();
     }
 
     new void Update()
     {
+        rigidbody2d.mass = currentMass;
         animator.SetBool("Is Running", isRunning);
         animator.SetBool("Is Aiming", isAiming);
         isStruggling = false;
-        isWalking = moveInput!=0 && isGrounded;
-        
+        isWalking = inputs.movementX!=0 && isGrounded;
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
         //UpdateAnimation();
-
-        moveInput = Input.GetAxisRaw("Horizontal");
 
         if (!isCaptured)
         {
             if (!isFlying && !isDashing)
             {
-                rigidbody2d.gravityScale = 2.5f;
+                rigidbody2d.gravityScale = currentGravity;
                 Move();
                 Jump();
             }
@@ -170,25 +178,13 @@ public class PlayerManager : Entity
             rigidbody2d.Sleep();
         }
         
-        
-        /*animator.SetBool("Is Grounded", isGrounded);
-        animator.SetBool("Is Walking", moveInput!=0 && isGrounded);
-        animator.SetBool("Is Jumping", isJumping);
-        animator.SetBool("Is Falling", isFalling);
-        animator.SetBool("Is Flying", isFlying);*/
-        
-        if (moveInput>0)
+        if (inputs.movementX>0)
         {
             transform.eulerAngles = new Vector3(0,0,0);
         }
-        else if (moveInput<0)
+        else if (inputs.movementX<0)
         {
             transform.eulerAngles = new Vector3(0,180,0);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Minus))
-        {
-            TakeTirement(5);
         }
 
         if(Input.GetKeyDown(KeyCode.E))
@@ -214,19 +210,38 @@ public class PlayerManager : Entity
         {
             StartCoroutine(Regeneration(1f, 0.05f));
         }
+        if (loosingOxygen)
+        {
+            if (regenCooldown > 0)
+            {
+                regenCooldown -= Time.deltaTime;
+            }
+            else
+            {
+                regenCooldown = 7;
+                loosingOxygen = false;
+            }
+        }
+        else
+        {
+            StartCoroutine(Regeneration(1f, 0.05f));
+        }
+        if (isInWater)
+        {
+            StartCoroutine(Drowning(1f, 0.05f));
+        }
         base.Update();
     } 
 
-    void Jump()
+    public void Jump()
     {
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if ((isGrounded && inputs.jump) || (isInWater && inputs.jump))
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
             isJumping = true;
             jumpTimeCounter = jumpTime;
-            
         }   
-        if (Input.GetKey(KeyCode.Space) && isJumping == true)
+        if (inputs.jump)
         {
             if (jumpTimeCounter>0){
                 rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
@@ -237,26 +252,23 @@ public class PlayerManager : Entity
                 isJumping = false;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            isJumping = false;
-        }
+        if(isGrounded)isJumping=false;
     }
 
     void Move()
     {
         
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), rigidbody2d.velocity.y, 0f);  
+        //Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), rigidbody2d.velocity.y, 0f);  
         
-        rigidbody2d.velocity = new Vector2(movement.x * walkingSpeed, movement.y);
+        rigidbody2d.velocity = new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y);
     }
 
     void Flying()
     {
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
+        //Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
         //rigidbody2d.gravityScale(isFlying? 0:26 )// no recuerdo como iba esto
         
-        rigidbody2d.velocity = new Vector2(movement.x, movement.y)*walkingSpeed;
+        rigidbody2d.velocity = new Vector2(inputs.movementX, inputs.movementY)*walkingSpeed;
         
     }
 
@@ -275,8 +287,45 @@ public class PlayerManager : Entity
         TakeTirement(damage);
         tirementRunning = false;
         yield return null;
+        if (isInWater)
+        {
+            tirementDrowning = true;
+            yield return new WaitForSeconds(timeTired);
+            TakeTirement(damage);
+            tirementDrowning = false;
+            yield return null;
+        }
     }
-
+    public IEnumerator Drowning(float timeDrowned, float drown)
+    {
+        yield return new WaitForSeconds (timeDrowned);
+        if (!loosingOxygen)
+        {
+            if (currentOxygen>0)
+            {
+            currentOxygen -= drown;
+            oxygenBar.SetOxygen(currentOxygen);
+            }
+            if (currentOxygen<0)
+            {
+                oxygenBar.SetOxygen(0);
+            }
+        }
+        yield return new WaitForSeconds(timeDrowned);
+    }
+        /*if (isInWater)
+        {
+            if (currentOxygen>0)
+            {
+                currentOxygen -= 3;
+                loosingOxygen = true;
+                oxygenBar.SetOxygen(currentOxygen);
+            }
+            if (currentOxygen<0)
+            {
+                oxygenBar.SetOxygen(0);
+            }
+        }*/
     /// <summary>
     /// Increases a certain amount of stamina through given time
     /// </summary>
@@ -291,6 +340,11 @@ public class PlayerManager : Entity
             RegenStamina(regen);
         }
         yield return new WaitForSeconds(timeRegen);
+        if (!isInWater)
+        {
+             yield return new WaitForSeconds (timeRegen);
+            RegenOxygen(regen);
+        }
     }
     #endregion
 
@@ -298,9 +352,9 @@ public class PlayerManager : Entity
     #region Direct stamina changes
     public void TakeTirement(float damage)
     {
-        isStruggling = true;
         if (currentStamina>0)
         {
+            statesManager.AddState(inmunityState);
             currentStamina -= damage;
             loosingStamina = true;
             staminaBar.SetStamina(currentStamina);
@@ -309,8 +363,9 @@ public class PlayerManager : Entity
         {
             staminaBar.SetStamina(0);
         }
+        
     }
-    void RegenStamina(float regen)
+    public void RegenStamina(float regen)
     {
         if (currentStamina<100)
         {
@@ -322,87 +377,20 @@ public class PlayerManager : Entity
             staminaBar.SetStamina(100);
         }
     }
-    #endregion
-
-    /*void Timer(int time, float damage, float regen)
+    void RegenOxygen(float regen)
     {
-        if(isRunning)
+        if (currentOxygen<100)
         {
-            StartCoroutine (Tirement(time,damage));
+        currentOxygen += regen;
+        oxygenBar.SetOxygen(currentOxygen);
         }
-        else
+        if (currentOxygen>100)
         {
-            StopCoroutine (Tirement(time, damage));
-            if (!isStruggling)
-            {
-                StartCoroutine (Regeneration(time,regen));
-            }
+            oxygenBar.SetOxygen(100);
         }
-    }*/
-
-    #region Self state methods
-    public void Captured(int nTaps, float damagePerSecond,Enemy capturing)
-    {
-        if(!tirementRunning)
-        {
-            StartCoroutine(Tirement(1, damagePerSecond));
-        }
-        isCaptured = true;
-        int halfTaps = nTaps/2;
-        //revisar el funcionamiento
-        if (Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Horizontal") == 1)
-        {
-            if (buttonCool > 0 && lButtonCount >= halfTaps && rButtonCount >= halfTaps)
-            {
-                isCaptured = false;
-                Debug.Log("Jugador liberado");
-                rigidbody2d.WakeUp();
-                StartCoroutine(Immunity());
-                Paralized s = new Paralized();
-                s.ActivateEffect(capturing);
-                lButtonCount = 0;
-                rButtonCount = 0;
-            }
-            else
-            {
-
-                buttonCool = 0.8f;
-                lButtonCount += Input.GetAxisRaw("Horizontal") ==-1? 1 : 0;
-                rButtonCount += Input.GetAxisRaw("Horizontal") == 1? 1 : 0;
-            }
-        }
-        if ( buttonCool > 0 )
-        {
-            buttonCool -= Time.deltaTime ;
-        }
-        else
-        {
-            rButtonCount = 0;
-            lButtonCount = 0;
-        }
-    }
-
-    public IEnumerator Immunity()
-    {
-        isImmune = true;
-        yield return new WaitForSeconds(immunityTime);
-        isImmune = false;
     }
     #endregion
 
-    /// <summary>
-    /// Sent when a collider on another object stops touching this
-    /// object's collider (2D physics only).
-    /// </summary>
-    /// <param name="other">The Collision2D data associated with this collision.</param>
-    void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            isCaptured = false;
-            StartCoroutine(Immunity());
-        }
-    }
 
 
     private void OnLevelWasLoaded(int level){
@@ -418,5 +406,4 @@ public class PlayerManager : Entity
     void FindStartPos(){
         transform.position = GameObject.FindWithTag("StartPos").transform.position; //GameObject.FindWithTag("StartPos").transform.position;
     }
-
 }

@@ -78,6 +78,6 @@ public class SpyFox : DogFox
 
     protected override void Attack()
     {
-        player.Captured(nTaps: 12, damagePerSecond: damageAmount,this);
+        //player.Captured(nTaps: 12, damagePerSecond: damageAmount,this);
     }
 }

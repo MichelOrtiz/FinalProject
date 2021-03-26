@@ -98,7 +98,9 @@ public class FlyingSquirrel : Squirrel
 
     protected override void Attack()
     {
-        player.Captured(nTaps: 9, damagePerSecond: damageAmount,this);
+        if(atackEffect != null){
+            player.statesManager.AddState(atackEffect,this);
+        }
     }
     #endregion
 }

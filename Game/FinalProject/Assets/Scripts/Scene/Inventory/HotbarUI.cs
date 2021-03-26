@@ -95,23 +95,23 @@ public class HotbarUI : MonoBehaviour
 
 
         if(Input.GetButton("HotbarObj0") && slotsHotbar0[0].GetItem()!=null){
-            Debug.Log("timeKey1Pressed:" + timeKeyPressed);
+            //Debug.Log("timeKey1Pressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }
         if(Input.GetButton("HotbarObj1") && slotsHotbar0[1].GetItem()!=null){
-            Debug.Log("timeKey2Pressed:" + timeKeyPressed);
+            //Debug.Log("timeKey2Pressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }
         if(Input.GetButton("HotbarObj2") && slotsHotbar0[2].GetItem()!=null){
-            Debug.Log("timeKe3yPressed:" + timeKeyPressed);
+            //Debug.Log("timeKe3yPressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }
         if(Input.GetButton("HotbarObj3") && slotsHotbar0[3].GetItem()!=null){
-            Debug.Log("timeKey4Pressed:" + timeKeyPressed);
+            //Debug.Log("timeKey4Pressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }
         if(Input.GetButton("HotbarObj4") && slotsHotbar0[4].GetItem()!=null){
-            Debug.Log("timeKey5Pressed:" + timeKeyPressed);
+            //Debug.Log("timeKey5Pressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }
     }

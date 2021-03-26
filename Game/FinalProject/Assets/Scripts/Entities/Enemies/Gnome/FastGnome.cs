@@ -14,6 +14,6 @@ public class FastGnome : Gnome
 
     protected override void Attack()
     {
-        player.Captured(10, damageAmount,this);
+        //player.Captured(10, damageAmount,this);
     }
 }

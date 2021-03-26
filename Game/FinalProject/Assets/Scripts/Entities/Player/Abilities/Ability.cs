@@ -35,12 +35,14 @@ public class Ability : MonoBehaviour
 
     public virtual void UseAbility()
     {
-        Debug.Log($"Usando {abilityName.ToString()}");
+        if(player.currentStamina < staminaCost)return;
+        isInCooldown = true; 
+        //Debug.Log($"Usando {abilityName.ToString()}");
         if (isInCooldown)
         {
             player.TakeTirement(staminaCost);
             time = 0;
-            Debug.Log("Usando en cooldown");
+            //Debug.Log("Usando en cooldown");
         }
     }
 
@@ -48,21 +50,18 @@ public class Ability : MonoBehaviour
     {
         player = PlayerManager.instance;
         time = 0;
+        gameObject.GetComponent<AbilityManager>().AddAbility(this);
     }
 
     protected virtual void Update()
     {
         if (!isUnlocked)
         {
-            this.enabled = false;
+            return;
         }
         if (Input.GetKeyDown(hotkey))
         {
-            if (player.currentStamina > staminaCost)
-            {
-                UseAbility();
-                isInCooldown = true;
-            }
+            UseAbility();
         }
         if (isInCooldown)
         {

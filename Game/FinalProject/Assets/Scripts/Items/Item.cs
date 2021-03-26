@@ -12,8 +12,13 @@ public class Item : ScriptableObject
     public bool isDefault = false;
 
     public virtual void Use(){
-        Debug.Log("Usando "+nombre);
-        PlayerManager.instance.currentStamina += staminaGain;
+        //Debug.Log("Usando "+nombre);
+        if(staminaGain<0){
+            PlayerManager.instance.TakeTirement(staminaGain);
+        }else{
+            PlayerManager.instance.RegenStamina(staminaGain);
+        }
+        
         RemoveFromInventory();
     }
     public void RemoveFromInventory(){

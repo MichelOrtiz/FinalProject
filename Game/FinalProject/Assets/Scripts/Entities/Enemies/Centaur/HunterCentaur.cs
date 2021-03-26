@@ -49,13 +49,13 @@ public class HunterCentaur : Centaur, IProjectile
     protected override void Attack()
     {
         Debug.Log("CENTAURO ATACANDO");
-        player.Captured(10, damageAmount,this);
+        player.statesManager.AddState(atackEffect);
     }
 
     public void ProjectileAttack()
     {
-        // player paralized 1s
-        // player captured 10 damage
+        player.statesManager.AddState(projectileEffect);
+        player.TakeTirement(projectile.damage);
     }
 
     public void ShotProjectile(Transform from, Vector3 to)

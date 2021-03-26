@@ -88,24 +88,8 @@ public class HockeyPlayer : Bear, IProjectile
     public void ProjectileAttack()
     {
         player.TakeTirement(projectile.damage);
-        //player.rigidbody2d.AddForce(player.GetPosition() * (facingDirection == RIGHT? Vector2.left : Vector2.right) * pushForce * Time.deltaTime, ForceMode2D.Force);
-        /*Vector3 pushFinalPoint;
-        if (facingDirection == RIGHT)
-        {
-            pushFinalPoint = new Vector3 (player.GetPosition().x + pushForce, player.GetPosition().y, 0);
-        }
-        else
-        {
-            pushFinalPoint = new Vector3 (player.GetPosition().x - pushForce, player.GetPosition().y, 0);
-
-        }
+        player.Push((facingDirection == RIGHT? -pushForce : pushForce), 0f);
         
-            if (player.GetPosition() != pushFinalPoint)
-            {
-                player.rigidbody2d.position = Vector3.MoveTowards(player.GetPosition(), pushFinalPoint, pushForce);
-                //player.transform.Translate(pushFinalPoint * Time.deltaTime * normalSpeed);
-            }*/
-        //player.transform.Translate(Vector3.right * Time.deltaTime * normalSpeed);
     }
 
     public void ShotProjectile(Transform from, Vector3 to)

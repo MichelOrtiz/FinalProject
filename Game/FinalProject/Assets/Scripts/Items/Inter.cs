@@ -16,7 +16,7 @@ public class Inter : MonoBehaviour
         float distance = Vector2.Distance(player.transform.position, transform.position);
         if(distance <= radius){
             if(Input.GetKeyDown(KeyCode.E)){
-                Debug.Log("Agarrando " + item.nombre);
+                //Debug.Log("Agarrando " + item.nombre);
                 bool IsPicked = Inventory.instance.Add(item);
                 if(IsPicked){
                     Destroy(gameObject);
