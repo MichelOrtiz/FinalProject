@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9004599919360624990}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: FeetPos
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 9004599920161459140}
   - component: {fileID: 9004599920161459141}
   - component: {fileID: -7592608426817299255}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: ElectricMedufin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 256
   - serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 512
   feetPos: {fileID: 9004599919360624990}
   checkFeetRadius: 0.3
   fovType: 0
@@ -233,6 +233,8 @@ MonoBehaviour:
   damageAmount: 15
   normalSpeedMultiplier: 0.5
   chaseSpeedMultiplier: 2
+  atackEffect: {fileID: 0}
+  projectileEffect: {fileID: 0}
   startWaitTime: 1
   normalSpeed: 0
   chaseSpeed: 0
@@ -268,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9004599920602650820}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: fovOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -298,7 +300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9004599921057462269}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}

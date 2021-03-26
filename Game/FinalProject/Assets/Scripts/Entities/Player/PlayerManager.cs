@@ -144,7 +144,7 @@ public class PlayerManager : Entity
         regenCooldown = 5;
         currentGravity = defaultGravity;
         currentMass = defaultMass;
-        inputs=gameObject.GetComponent<PlayerInputs>();
+        inputs = gameObject.GetComponent<PlayerInputs>();
     }
 
     new void Update()
@@ -354,7 +354,7 @@ public class PlayerManager : Entity
     {
         if (currentStamina>0)
         {
-            statesManager.AddState(inmunityState);
+            //statesManager.AddState(inmunityState);
             currentStamina -= damage;
             loosingStamina = true;
             staminaBar.SetStamina(currentStamina);

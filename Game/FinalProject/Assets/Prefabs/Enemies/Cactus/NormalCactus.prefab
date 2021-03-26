@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3079129482674021788}
   - component: {fileID: 4021547035451562199}
   - component: {fileID: -6023950300535432569}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: NormalCactus
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 256
   - serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 512
   feetPos: {fileID: 849624854334333823}
   checkFeetRadius: 0.3
   fovType: 0
@@ -203,6 +203,8 @@ MonoBehaviour:
   damageAmount: 0
   normalSpeedMultiplier: 1
   chaseSpeedMultiplier: 1
+  atackEffect: {fileID: 0}
+  projectileEffect: {fileID: 0}
   startWaitTime: 1
   normalSpeed: 0
   chaseSpeed: 0

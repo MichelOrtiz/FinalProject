@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3441190772633519342}
-  m_Layer: 11
+  m_Layer: 7
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3441190772893541718}
-  m_Layer: 11
+  m_Layer: 7
   m_Name: FeetPos
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3441190773300546306}
-  m_Layer: 11
+  m_Layer: 7
   m_Name: fovOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 3441190773335274250}
   - component: {fileID: 3441190773335274245}
   - component: {fileID: -2901240179451968318}
-  m_Layer: 11
+  m_Layer: 7
   m_Name: SeekerGhost
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ MonoBehaviour:
     m_Bits: 256
   whatIsObstacle:
   - serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 512
   feetPos: {fileID: 3441190772893541718}
   checkFeetRadius: 0.3
   fovType: 1
@@ -292,6 +292,8 @@ MonoBehaviour:
   damageAmount: 25
   normalSpeedMultiplier: 0
   chaseSpeedMultiplier: 0.9
+  atackEffect: {fileID: 0}
+  projectileEffect: {fileID: 0}
   startWaitTime: 0.5
   normalSpeed: 0
   chaseSpeed: 0
@@ -331,7 +333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3441190773498171932}
-  m_Layer: 11
+  m_Layer: 7
   m_Name: dividePos
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
