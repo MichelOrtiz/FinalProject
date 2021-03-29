@@ -7,6 +7,7 @@ public class Stage : ScriptableObject
 {
     //[SerializeField]private List<GameObject> stageObject;
     //[SerializeField] private SerializableDictionary<Vector3, GameObject> stageObjects;
+    
     [SerializeField] private List<GameObject> gameObjects;
     [SerializeField] private List<Vector2> positions;
     private List<GameObject> currentObjects;
