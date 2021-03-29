@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Fov3 : GnomeFov
 {
-    [SerializeField] private GameObject mesh;
     [SerializeField] private Transform center;
     [SerializeField] private float radius;
     private Vector2 endPoint;
@@ -43,26 +42,11 @@ public class Fov3 : GnomeFov
         direction = Direction.Clockwise;
         //base.Start();
     }
-
-    // Update is called once per frame
-    /*new void Update()
-    {
-        for (int i = 0; i < 360; i++)
-        {   
-            center.rotation = 
-            center.Rotate(new Vector3(0, 0, i), Space.Self);
-            endPoint = center.position.normalized * radius;
-            Debug.DrawLine(center.position, endPoint, Color.red);
-        }
-
-        //base.Update();
-    }*/
-
     
     new void Update()
     {
          //if you want to switch direction, use -= instead of +=
-        if (mesh.GetComponent<MeshCollision>().touchingPlayer)
+        if (touchingPlayer)
         {
             ChangeDirection();
         }

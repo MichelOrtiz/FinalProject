@@ -5,16 +5,6 @@ using UnityEngine;
 public class MeshCollision : MonoBehaviour
 {
     public bool touchingPlayer;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     protected void OnTriggerEnter2D(Collider2D other)
     {

@@ -4,11 +4,26 @@ using UnityEngine;
 
 public abstract class GnomeFov : MonoBehaviour
 {
+
+    [SerializeField] protected GameObject mesh;
+    [SerializeField] protected Material normalMaterial;
+    [SerializeField] protected Material afterAttackMaterial;
+    [SerializeField] protected Transform groundCheck;
+
+    [SerializeField] protected float damage;
+    [SerializeField] protected float baseTimeBeforeAttack;
+    [SerializeField] protected float baseTimeAfterAttack;
+    [SerializeField] protected float baseTimeUntilChange;
     [SerializeField] protected float speedMultiplier;
     //[SerializeField] private float interval;
     [SerializeField] protected List<Vector2> positions;
-    [SerializeField] protected Transform groundCheck;
+    protected float timeUntilChange;
+    protected float timeBeforeAttack;
+    protected float timeAfterAttack;
     protected bool touchingPlayer;
+    protected bool justAttacked;
+    protected MeshCollision meshCollision;
+    protected Vector2 lastPosition;
     //protected float speed;
     int index = 0;
     //private float currentTime;
@@ -19,47 +34,54 @@ public abstract class GnomeFov : MonoBehaviour
     protected void Start()
     {
         //speed = speed * Entity.averageSpeed;
-        /*Mesh mesh = new Mesh();
-
-        GetComponent<MeshFilter>().mesh = mesh;*/
+        //Mesh mesh = new Mesh();
+        
+        //GetComponent<MeshFilter>().mesh = mesh;
+        mesh.GetComponent<MeshRenderer>().material = normalMaterial;
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        if (!IsNearEdge())
+        touchingPlayer = mesh.GetComponent<MeshCollision>().touchingPlayer;
+        if (justAttacked)
         {
-            Move();
+            if (timeAfterAttack > baseTimeAfterAttack)
+            {
+                Debug.Log("just attacked false");
+                timeAfterAttack = 0;
+                justAttacked = false;
+                mesh.GetComponent<MeshRenderer>().material = normalMaterial;
+            }
+            else
+            {
+                timeAfterAttack += Time.deltaTime;
+            }
         }
-        else
+        else if (touchingPlayer)
         {
-            ChangePosition();
+            if (timeBeforeAttack > baseTimeBeforeAttack)
+            {
+                Attack();
+                mesh.GetComponent<MeshRenderer>().material = afterAttackMaterial;
+                lastPosition = transform.position;
+                timeBeforeAttack = 0;
+            }
+            else
+            {
+                timeBeforeAttack += Time.deltaTime;
+            }
+            
         }
+
+        //Debug.Log(touchingPlayer? "yesyes":"nono");
     }
 
-    protected void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            touchingPlayer = true;
-            Debug.Log("Fov touching player");
-        }
-
-    }
-
-    protected void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            touchingPlayer = false;
-            Debug.Log("Fov stopped touching player");
-        }
-    }
 
     protected void ChangePosition()
     {
         transform.position = positions[index];
-
+        //Debug.Log(index);
         if (index < positions.Count-1)
         {
             index++;
@@ -74,4 +96,12 @@ public abstract class GnomeFov : MonoBehaviour
     {
         return !(Physics2D.Raycast(groundCheck.position, Vector3.down, 1f)).collider;
     }
+
+    protected void Attack()
+    {
+        PlayerManager.instance.TakeTirement(damage);
+        justAttacked = true;
+    }
+
+
 }
