@@ -2,54 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GnomeFov : MonoBehaviour
+public abstract class GnomeFov : MonoBehaviour
 {
-    [SerializeField] private float interval;
-    [SerializeField] private List<Vector2> positions;
-    [SerializeField] private Transform groundCheck;
+    [SerializeField] protected float speedMultiplier;
+    //[SerializeField] private float interval;
+    [SerializeField] protected List<Vector2> positions;
+    [SerializeField] protected Transform groundCheck;
+    protected bool touchingPlayer;
+    //protected float speed;
     int index = 0;
-    private float currentTime;
+    //private float currentTime;
+
+    protected abstract void Move();
+
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
+        //speed = speed * Entity.averageSpeed;
         /*Mesh mesh = new Mesh();
 
         GetComponent<MeshFilter>().mesh = mesh;*/
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-        Debug.Log("is near edge: " + IsNearEdge());
-        if (currentTime <= 0)
+        if (!IsNearEdge())
         {
-            ChangePosition();
-            currentTime = interval;
+            Move();
         }
         else
         {
-            currentTime -= Time.deltaTime; 
+            ChangePosition();
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    protected void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
+            touchingPlayer = true;
             Debug.Log("Fov touching player");
         }
 
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    protected void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
+            touchingPlayer = false;
             Debug.Log("Fov stopped touching player");
         }
     }
 
-    void ChangePosition()
+    protected void ChangePosition()
     {
         transform.position = positions[index];
 
