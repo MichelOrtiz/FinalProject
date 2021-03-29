@@ -18,6 +18,25 @@ public class Fov2 : GnomeFov
     // Update is called once per frame
     new void Update()
     {
+        if (!justAttacked)
+        {
+            if (!IsNearEdge())
+            {
+                Move();
+            }
+            else
+            {
+                if (timeUntilChange > baseTimeUntilChange)
+                {
+                    ChangePosition();
+                    timeUntilChange = 0;
+                }
+                else
+                {
+                    timeUntilChange += Time.deltaTime;
+                }
+            }
+        }
         base.Update();
     }
 
