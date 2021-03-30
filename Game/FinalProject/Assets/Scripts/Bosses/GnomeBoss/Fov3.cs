@@ -5,11 +5,11 @@ using UnityEngine;
 public class Fov3 : GnomeFov
 {
     [SerializeField] private Transform center;
-    [SerializeField] private float radius;
+    [SerializeField] private  float radius;
+
     private Vector2 endPoint;
     private float angle =0;
-    private float speed=(2*Mathf.PI)/5 ;//2*PI in degress is 360, so you get 5 seconds to complete a circle
-    private  float radiuss=5;
+    private float speed=(2*Mathf.PI)/4 ;//2*PI in degress is 360, so you get 5 seconds to complete a circle
 
 
     private enum Direction
@@ -29,8 +29,8 @@ public class Fov3 : GnomeFov
         {
             angle += speed*Time.deltaTime;
         }
-        endPoint.x = Mathf.Cos(angle)*radiuss+center.position.x;
-        endPoint.y = Mathf.Sin(angle)*radiuss+center.position.y;
+        endPoint.x = Mathf.Cos(angle)*radius+center.position.x;
+        endPoint.y = Mathf.Sin(angle)*radius+center.position.y;
         mesh.transform.position = endPoint;
         Debug.DrawLine(center.position, endPoint, Color.red);
         return;
@@ -46,11 +46,20 @@ public class Fov3 : GnomeFov
     new void Update()
     {
          //if you want to switch direction, use -= instead of +=
-        if (touchingPlayer)
+        if (!justAttacked)
         {
-            ChangeDirection();
+            Debug.Log("not attacked!!");
+            Move();
         }
-        Move();
+        else if (timeAfterAttack > baseTimeAfterAttack)
+        {
+
+            ChangeDirection();
+            Debug.Log("attacked!!");
+            endPoint.x = Mathf.Cos(90)*radius+center.position.x;
+            endPoint.y = Mathf.Sin(90)*radius+center.position.y;
+        }
+        base.Update();
     }
 
     private void ChangeDirection()

@@ -11,7 +11,7 @@ public class MeshCollision : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = true;
-            Debug.Log("Fov touching player");
+            //Debug.Log("Fov touching player");
         }
 
     }
@@ -21,7 +21,7 @@ public class MeshCollision : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = false;
-            Debug.Log("Fov stopped touching player");
+            //Debug.Log("Fov stopped touching player");
         }
     }
 }
