@@ -27,6 +27,7 @@ public class Edge : MonoBehaviour
         {
             return false;
         }
+        Debug.Log(colliderObject.GetComponent<Entity>() == entity);
         return colliderObject.GetComponent<Entity>() == entity;
     }
 

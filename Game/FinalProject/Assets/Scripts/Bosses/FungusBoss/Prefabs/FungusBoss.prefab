@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 905165567}
   - component: {fileID: 905165566}
   - component: {fileID: 905165565}
+  - component: {fileID: 7822427819288941291}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -865,7 +866,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -3630,13 +3631,14 @@ ParticleSystem:
   CollisionModule:
     enabled: 1
     serializedVersion: 4
-    type: 0
-    collisionMode: 0
+    type: 1
+    collisionMode: 1
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
     multiplyColliderForceByCollisionAngle: 1
-    m_Planes: []
+    m_Planes:
+    - {fileID: 0}
     m_Dampen:
       serializedVersion: 2
       minMaxState: 0
@@ -3805,7 +3807,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -4796,7 +4798,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4822,6 +4824,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &7822427819288941291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905165564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d922eb6bd7cd1418e23b861ebc29fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 0
+  effectOnPlayer: {fileID: 11400000, guid: 8666c37dbf9d12047882b98fe93e1059, type: 2}
 --- !u!1 &8777826608310906894
 GameObject:
   m_ObjectHideFlags: 0
@@ -4906,7 +4922,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8777826609643569717}
   m_LocalRotation: {x: 0.015367009, y: -0, z: -0, w: 0.9998819}
-  m_LocalPosition: {x: 3.83, y: -2.93, z: 1.85}
+  m_LocalPosition: {x: 5.59, y: -2.99, z: 1.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8777826609967360629}
@@ -4941,8 +4957,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8777826609967360619}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.9, y: 55.61, z: -1.5819737}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 32.9, y: 55.61, z: 0}
+  m_LocalScale: {x: 0.16, y: 0.14, z: 0}
   m_Children:
   - {fileID: 8777826609643569714}
   - {fileID: 8777826608387957389}
@@ -5096,7 +5112,7 @@ MonoBehaviour:
   isResting: 0
   isChasing: 0
   statesManager: {fileID: 0}
-  jumpForce: 50
+  jumpForce: 10
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
@@ -5105,16 +5121,16 @@ MonoBehaviour:
     m_Bits: 256
   whatIsObstacle:
   - serializedVersion: 2
-    m_Bits: 256
-  - serializedVersion: 2
     m_Bits: 512
+  - serializedVersion: 2
+    m_Bits: 256
   feetPos: {fileID: 8777826608387957389}
   checkFeetRadius: 0.3
   fovType: 1
   enemyName: 0
   damageAmount: 0
   normalSpeedMultiplier: 1
-  chaseSpeedMultiplier: 1
+  chaseSpeedMultiplier: 1.5
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 1
@@ -5129,9 +5145,3 @@ MonoBehaviour:
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}
-  baseTimeUntilJump: 2
-  edges_1:
-  - {fileID: 0}
-  edges_2:
-  - {fileID: 0}
-  jumpYOffset: 1

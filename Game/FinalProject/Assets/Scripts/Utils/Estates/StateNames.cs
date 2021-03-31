@@ -14,5 +14,6 @@ public enum StateNames
     CapturedPlayer, 
     Patrolling, 
     Falling,
-    Invulnerable
+    Invulnerable, 
+    Slow
 }
