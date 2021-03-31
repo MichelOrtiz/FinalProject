@@ -6,7 +6,7 @@ public class StatesManager : MonoBehaviour
 {
     public Entity hostEntity;
     public Entity enemy;
-    private List<State> currentStates = new List<State>();
+    public List<State> currentStates = new List<State>();
     public delegate void StatusCheck();
     public StatusCheck statusCheck;   
     private void Start() {

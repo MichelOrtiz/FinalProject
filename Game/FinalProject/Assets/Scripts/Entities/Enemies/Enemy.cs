@@ -19,8 +19,8 @@ public abstract class Enemy : Entity
 
     [SerializeField] protected float startWaitTime;
     protected float waitTime;
-    [SerializeField] protected float normalSpeed;
-    [SerializeField] protected float chaseSpeed;
+    public float normalSpeed;
+    public float chaseSpeed;
 
     #endregion
 

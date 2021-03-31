@@ -38,4 +38,18 @@ public class ScenesManagers : MonoBehaviour
         }
         return objects;
     }
+
+    public static List<GameObject> FindMatchedObjects(List<GameObject> objects)
+    {
+        List<GameObject> result = new List<GameObject>();
+        List<GameObject> sceneObjects = new List<GameObject>(FindObjectsOfType<GameObject>());
+        foreach (var obj in objects)
+        {
+            if (sceneObjects.Contains(obj))
+            {
+                result.Add(sceneObjects[sceneObjects.IndexOf(obj)]);
+            }
+        }
+        return result;
+    }
 }
