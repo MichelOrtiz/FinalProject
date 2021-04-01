@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1783232387648241131}
   - component: {fileID: 5462119853605893442}
   - component: {fileID: 6383745145743483263}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 6507998447054114858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.1, z: 0}
   m_Children: []
   m_Father: {fileID: 3088791119822092690}
   m_RootOrder: 0
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3088791119822092690}
   - component: {fileID: 4814693414143766122}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: door 1-4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ Transform:
   m_GameObject: {fileID: 8495956940960780534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 113.2, y: 158, z: -2.9653592}
-  m_LocalScale: {x: 0.3, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 1783232387648241131}
   m_Father: {fileID: 0}
@@ -153,7 +153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f095eeb6aa3dc43aa0722312885a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orientation: 1
   door: {fileID: 6507998447054114858}
   openSprite: {fileID: 0}
   closedSprite: {fileID: 21300000, guid: 3c23b95481c5eda43a47120842b11881, type: 3}
   isOpen: 1
+  pushForce: 8
+  radius: 1.5

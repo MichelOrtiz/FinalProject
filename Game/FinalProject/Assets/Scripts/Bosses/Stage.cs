@@ -12,6 +12,7 @@ public class Stage : ScriptableObject
     [SerializeField] private List<Vector2> positions;
     private List<GameObject> currentObjects;
     public void Generate(){
+        Debug.Log(gameObjects.Count);
         for (int i = 0; i < gameObjects.Count; i++)
         {
             currentObjects.Add(Instantiate(gameObjects[i], positions[i],Quaternion.identity));

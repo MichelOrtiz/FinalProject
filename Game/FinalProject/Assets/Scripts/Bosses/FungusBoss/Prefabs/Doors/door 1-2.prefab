@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1875826078242182114}
   - component: {fileID: 1875826078242182115}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: door 1-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1875826078242182112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 94.2, y: 158.11, z: -2.9653592}
-  m_LocalScale: {x: 0.3, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 1875826078414334712}
   m_Father: {fileID: 0}
@@ -44,10 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f095eeb6aa3dc43aa0722312885a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orientation: 1
   door: {fileID: 1875826078414334695}
   openSprite: {fileID: 0}
   closedSprite: {fileID: 21300000, guid: 3c23b95481c5eda43a47120842b11881, type: 3}
   isOpen: 1
+  pushForce: 5
+  radius: 1.5
 --- !u!1 &1875826078414334695
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +62,7 @@ GameObject:
   - component: {fileID: 1875826078414334712}
   - component: {fileID: 1875826078414334713}
   - component: {fileID: 1875826078414334694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +78,7 @@ Transform:
   m_GameObject: {fileID: 1875826078414334695}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.1, z: 0}
   m_Children: []
   m_Father: {fileID: 1875826078242182114}
   m_RootOrder: 0

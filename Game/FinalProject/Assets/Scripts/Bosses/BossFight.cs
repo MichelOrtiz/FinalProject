@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BossFight : MonoBehaviour
 {
-    [SerializeField]private List<Stage> stages;
+    [SerializeField] private List<Stage> stages;
+    [SerializeField] private GameObject abilityObject;
     Stage currentStage;
     bool isCleared;
     int indexStage;
-    [SerializeField]private Ability reward;
 
     void Start()
     {
@@ -19,6 +19,10 @@ public class BossFight : MonoBehaviour
     private void Update() {
         if(Input.GetKeyDown(KeyCode.L)){
             NextStage();
+        }
+        if (isCleared)
+        {
+
         }
     }
     public void NextStage(){
@@ -33,7 +37,7 @@ public class BossFight : MonoBehaviour
             currentStage.Destroy();
             isCleared=true;
             //give ability
-            AbilityManager.instance.AddAbility(reward);
+            //AbilityManager.instance.AddAbility(reward);
         }
     }
 }

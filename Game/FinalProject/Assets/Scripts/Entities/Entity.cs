@@ -56,6 +56,7 @@ public class Entity : MonoBehaviour
     #endregion
 
     #region Unity stuff
+
     protected void Start()
     {
         animator = GetComponent<Animator>();

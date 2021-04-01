@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Enemy : Entity
 {
-    
+    //public static Enemy instance = null;
 
     #region Main Parameters
     [Header("Main parameters")]
@@ -62,6 +62,17 @@ public abstract class Enemy : Entity
     #endregion
 
     #region Unity stuff
+    /*void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }*/
     new protected void Start()
     {
         base.Start();
