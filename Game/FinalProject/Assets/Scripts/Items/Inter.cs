@@ -34,7 +34,6 @@ public class Inter : MonoBehaviour
         Enemy enemigo = other.GetComponent<Enemy>();
         if(enemigo!=null)
         {
-            Debug.Log(enemigo.gameObject.name);
             enemigo.ConsumeItem(item);
             Destroy(gameObject);
         }

@@ -13,6 +13,7 @@ public class SpitMantis : Mantis, IProjectile
     [SerializeField] private int minChases;
     [SerializeField] private int maxChases;
     [SerializeField] private int chasesToDo;
+    [SerializeField] private List<Transform> targetPlatformsInScene;
 
     private Projectile projectile;
     public Transform targetPlatform;
@@ -23,8 +24,16 @@ public class SpitMantis : Mantis, IProjectile
 
     new void Start()
     {
-        chasesToDo = RandomGenerator.NewRandom(minChases, maxChases);
         base.Start();
+        chasesToDo = RandomGenerator.NewRandom(minChases, maxChases);
+        /*for (int i = 0; i < targetPlatforms.Count; i++)
+        {
+            
+        }
+        foreach (var platform in targetPlatforms)
+        {
+            platform = ScenesManagers.GetObjectsOfType<Platform>().Find(p => p == platform);
+        }*/
     }
 
     // Update is called once per frame
@@ -42,8 +51,8 @@ public class SpitMantis : Mantis, IProjectile
                 timeAfterShot += Time.deltaTime;
             }
         }
-        
         base.Update();
+        
     }
 
     new void FixedUpdate()
@@ -60,7 +69,6 @@ public class SpitMantis : Mantis, IProjectile
                 {
                     targetPlatform = GetProjectileTarget();
                     targetPlatform.GetComponent<Platform>().isTarget = true;
-                    Debug.Log(targetPlatform.gameObject.name + " " + targetPlatform.GetComponent<Platform>().isTarget);
                     ShotProjectile(shotProjectilePos, targetPlatform.position);
                     chasesToDo = RandomGenerator.NewRandom(minChases, maxChases);
                     timeBeforeShot = 0;
@@ -103,5 +111,15 @@ public class SpitMantis : Mantis, IProjectile
     {
         int chosenPlatform = RandomGenerator.NewRandom(0, targetPlatforms.Count - 1);
         return targetPlatforms[chosenPlatform];
+    }
+
+    protected override void OnCollisionEnter2D(Collision2D other)
+    {
+        base.OnCollisionEnter2D(other);
+    }
+
+    protected override void OnCollisionExit2D(Collision2D other)
+    {
+        base.OnCollisionExit2D(other);
     }
 }

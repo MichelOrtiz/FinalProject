@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class BossFight : MonoBehaviour
 {
-    [SerializeField] private List<Stage> stages;
-    [SerializeField] private GameObject abilityObject;
-    Stage currentStage;
+    [SerializeField] protected List<Stage> stages;
+    [SerializeField] protected GameObject abilityObject;
+    protected Stage currentStage;
     bool isCleared;
     int indexStage;
 
-    void Start()
+    protected void Start()
     {
         indexStage = 0;
         currentStage=stages[indexStage];
         currentStage.Generate();
     }
-    private void Update() {
+    protected void Update() {
         if(Input.GetKeyDown(KeyCode.L)){
             NextStage();
         }

@@ -12,6 +12,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private GameObject? impactEffect;
 
     [SerializeField] private bool targetWarningAvailable;
+    [SerializeField] private bool collidesWithPlayer;
+    private LayerMask defaultLayer;
     #endregion
 
     #region Main Params
@@ -55,6 +57,7 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
+        defaultLayer = gameObject.layer;
         if (impactEffect != null)
         {
             impactEffect.SetActive(false);
@@ -88,7 +91,6 @@ public class Projectile : MonoBehaviour
             }
         }
         
-        Debug.Log("projectile touching obstacle: " + touchingObstacle);
         if (touchingObstacle)
         {
             rigidbody2d.Sleep();
@@ -121,17 +123,19 @@ public class Projectile : MonoBehaviour
     {
         if (touchingPlayer)
         {
-            aboutToDestroy = true;
-            enemy.ProjectileAttack();
-            Destroy();
+                
+                aboutToDestroy = true;
+                enemy.ProjectileAttack();
+                Destroy();
+            
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
-        //touchingObstacle = other.gameObject.tag == "Ground";
-        touchingObstacle = other.gameObject.layer == whatIsObstacle;
+        touchingObstacle = other.gameObject.tag == "Ground";
+        //touchingObstacle = other.gameObject.layer == whatIsObstacle;
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -142,8 +146,8 @@ public class Projectile : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
-        //touchingObstacle = other.gameObject.tag == "Ground";
-        touchingObstacle = other.gameObject.layer == whatIsObstacle;
+        touchingObstacle = other.gameObject.tag == "Ground";
+        //touchingObstacle = other.gameObject.layer == whatIsObstacle;
     }
 
     void OnCollisionStay2D(Collision2D other)
@@ -156,15 +160,16 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = false;
+            gameObject.layer = defaultLayer;
         }
-        else if(other.gameObject.layer == whatIsObstacle)
-        {
-            touchingObstacle = false;
-        }
-        /*else if (other.gameObject.tag == "Ground")
+        /*else if(other.gameObject.layer == whatIsObstacle)
         {
             touchingObstacle = false;
         }*/
+        else if (other.gameObject.tag == "Ground")
+        {
+            touchingObstacle = false;
+        }
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -172,15 +177,16 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = false;
+            gameObject.layer = defaultLayer;
         }
-        else if(other.gameObject.layer == whatIsObstacle)
-        {
-            touchingObstacle = false;
-        }
-        /*else if (other.gameObject.tag == "Ground")
+        /*else if(other.gameObject.layer == whatIsObstacle)
         {
             touchingObstacle = false;
         }*/
+        else if (other.gameObject.tag == "Ground")
+        {
+            touchingObstacle = false;
+        }
     }
 
     public void Destroy()
