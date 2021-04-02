@@ -87,6 +87,11 @@ public abstract class Enemy : Entity
         {
             ChangeFacingDirection();
         }
+        if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
+            || GetPosition().x < player.GetPosition().x && facingDirection == LEFT)
+            {
+                ChangeFacingDirection();
+            }
         UpdateState();
         base.Update();
     }

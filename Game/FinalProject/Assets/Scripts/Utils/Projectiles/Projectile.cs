@@ -88,7 +88,7 @@ public class Projectile : MonoBehaviour
             }
         }
         
-        
+        Debug.Log("projectile touching obstacle: " + touchingObstacle);
         if (touchingObstacle)
         {
             rigidbody2d.Sleep();
@@ -130,7 +130,8 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
-        touchingObstacle = other.gameObject.tag == "Ground";
+        //touchingObstacle = other.gameObject.tag == "Ground";
+        touchingObstacle = other.gameObject.layer == whatIsObstacle;
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -141,7 +142,8 @@ public class Projectile : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
-        touchingObstacle = other.gameObject.tag == "Ground";
+        //touchingObstacle = other.gameObject.tag == "Ground";
+        touchingObstacle = other.gameObject.layer == whatIsObstacle;
     }
 
     void OnCollisionStay2D(Collision2D other)
@@ -155,10 +157,14 @@ public class Projectile : MonoBehaviour
         {
             touchingPlayer = false;
         }
-        else if (other.gameObject.tag == "Ground")
+        else if(other.gameObject.layer == whatIsObstacle)
         {
             touchingObstacle = false;
         }
+        /*else if (other.gameObject.tag == "Ground")
+        {
+            touchingObstacle = false;
+        }*/
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -167,10 +173,14 @@ public class Projectile : MonoBehaviour
         {
             touchingPlayer = false;
         }
-        else if (other.gameObject.tag == "Ground")
+        else if(other.gameObject.layer == whatIsObstacle)
         {
             touchingObstacle = false;
         }
+        /*else if (other.gameObject.tag == "Ground")
+        {
+            touchingObstacle = false;
+        }*/
     }
 
     public void Destroy()
