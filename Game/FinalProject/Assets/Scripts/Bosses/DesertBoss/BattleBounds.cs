@@ -15,20 +15,21 @@ public class BattleBounds : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    /*void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Debug.Log(other.gameObject.name + " inside");
+            other.gameObject.layer = LayerMask.NameToLayer("Ghost");
+        }
+    }*/
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.layer = LayerMask.NameToLayer("Ghost");
         }
     }
-    /*void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            other.gameObject.layer = LayerMask.NameToLayer("Ghost");
-        }
-    }*/
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")

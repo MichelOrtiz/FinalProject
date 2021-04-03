@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class Mantis : Enemy
 {
-    [SerializeField] protected float xPushForce;
-    [SerializeField] protected float yPushForce;
     [SerializeField] protected float baseTimeBeforeChase;
     [SerializeField] protected Item itemToGive;
     [SerializeField] protected float decreaseSpeedMultiplier;
     [SerializeField] protected float increaseDamage;
+    [SerializeField] private int timesToGiveItem;
 
     protected float timeBeforeChase;
-    protected bool canChasePlayer;
     protected bool touchingGround;
     public int timesItemGiven;
 
     new void Start()
     {
+        timesItemGiven = 0;
         base.Start();
     }
 
@@ -28,10 +27,6 @@ public class Mantis : Enemy
         {
             rigidbody2d.velocity = new Vector2();
             touchingGround = false;
-        }
-        if (touchingPlayer)
-        {
-            gameObject.layer = LayerMask.NameToLayer("Fake");
         }
         base.Update();
     }
@@ -57,15 +52,23 @@ public class Mantis : Enemy
     {
         if (item == itemToGive)
         {
-            timesItemGiven++;
-            chaseSpeed *= decreaseSpeedMultiplier;
-            damageAmount += increaseDamage;
+            if (timesItemGiven < timesToGiveItem-1)
+            {
+                timesItemGiven++;
+                chaseSpeed *= decreaseSpeedMultiplier;
+                damageAmount += increaseDamage;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            
         }
     }
 
     protected override void Attack()
     {
-        player.TakeTirement(damageAmount);
+        PlayerManager.instance.TakeTirement(damageAmount);
     }
 
     protected override void ChasePlayer()
@@ -82,16 +85,25 @@ public class Mantis : Enemy
     {
         //throw new System.NotImplementedException();
     }
-    new protected void OnCollisionEnter2D(Collision2D other)
+    protected override void OnCollisionEnter2D(Collision2D other)
     {
-        base.OnCollisionEnter2D(other);
-        if (other.gameObject.tag == "Fake")
+        //base.OnCollisionEnter2D(other);
+        if (other.gameObject.tag == "Ground")
         {
             touchingGround = true;
         }
+        if (other.gameObject.tag == "Player")
+        {
+            touchingPlayer = true;
+            if (!PlayerManager.instance.isImmune)
+            {
+                Attack();
+            }
+            gameObject.layer = LayerMask.NameToLayer("Fake");
+        }
     }
 
-    new protected void OnCollisionExit2D(Collision2D other)
+    protected override void OnCollisionExit2D(Collision2D other)
     {
         base.OnCollisionExit2D(other);
         if (other.gameObject.tag == "Ground")
@@ -100,7 +112,7 @@ public class Mantis : Enemy
         }
         if (other.gameObject.tag == "Player")
         {
-            gameObject.layer = LayerMask.NameToLayer("Ghost");
+            gameObject.layer = LayerMask.NameToLayer("Enemies");
         }
     }
 
