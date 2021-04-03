@@ -5,14 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class levelTP : MonoBehaviour
 {
-    public int posx, posy;
+    public PlayerManager player;
+    public float posx, posy;
     public static loadlevel instance = null;
 
     private void OnTriggerEnter2D(Collider2D collision){
+        
+        player = PlayerManager.instance;
         GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Player")
         {
-           transform.position = new Vector2(posx,posy);
+           player.transform.position = new Vector2(posx,posy);
         }
     }
 }
