@@ -1211,7 +1211,7 @@ GameObject:
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &374626206
 Transform:
   m_ObjectHideFlags: 0
@@ -2128,7 +2128,7 @@ GameObject:
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &805782544
 Transform:
   m_ObjectHideFlags: 0
@@ -2604,7 +2604,7 @@ GameObject:
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1040118673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7476,14 +7476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f18b3d44bbe40647b31e8af03379765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stages:
-  - {fileID: 11400000, guid: cbd3ebf0a770c6642a344b5ddf0a512d, type: 2}
-  - {fileID: 11400000, guid: 00f4479aa1c3921439a2f4ac5a0a9a58, type: 2}
-  abilityObject: {fileID: 0}
   itemToSpawn: {fileID: 1790547588287836006, guid: 92a916e2b0d4ff049b40719b24c86b08, type: 3}
   spawnPos: {fileID: 1880928872}
-  timeToRespawnItem: 20
-  timesToGiveItem: 3
+  timeToRespawnItem: 2
+  allPlatforms: []
 --- !u!114 &1648240388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7491,14 +7487,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648240386}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a0dc1f377096634f8a8776ad665e758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stages:
   - {fileID: 11400000, guid: cbd3ebf0a770c6642a344b5ddf0a512d, type: 2}
+  - {fileID: 11400000, guid: 00f4479aa1c3921439a2f4ac5a0a9a58, type: 2}
   abilityObject: {fileID: 0}
+  currentStage: {fileID: 0}
 --- !u!4 &1648240389
 Transform:
   m_ObjectHideFlags: 0
@@ -8641,7 +8639,7 @@ GameObject:
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1985660334
 Transform:
   m_ObjectHideFlags: 0

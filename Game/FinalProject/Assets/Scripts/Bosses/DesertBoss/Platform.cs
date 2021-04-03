@@ -20,6 +20,7 @@ public class Platform : MonoBehaviour
         player = PlayerManager.instance;
         //defaultMaterial = gameObject.GetComponent<SpriteRenderer>().material;
         //ScenesManagers.GetObjectsOfType<Platform>().Find(p => p.gameObject.name == this.gameObject.name).GetComponent<Platform>() = this;
+        isTarget = false;
         defaultColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
 

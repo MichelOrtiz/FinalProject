@@ -6,7 +6,7 @@ public class BossFight : MonoBehaviour
 {
     [SerializeField] protected List<Stage> stages;
     [SerializeField] protected GameObject abilityObject;
-    protected Stage currentStage;
+    public Stage currentStage;
     bool isCleared;
     int indexStage;
 

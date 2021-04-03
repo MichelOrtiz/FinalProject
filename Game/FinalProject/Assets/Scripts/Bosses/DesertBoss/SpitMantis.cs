@@ -9,14 +9,13 @@ public class SpitMantis : Mantis, IProjectile
     [SerializeField] private float startTimeBeforeShot;
 
     [SerializeField] private float startTimeAfterShot;
-    [SerializeField] private List<Transform> targetPlatforms;
+    //[SerializeField] private List<GameObject> targetPlatforms;
     [SerializeField] private int minChases;
     [SerializeField] private int maxChases;
     [SerializeField] private int chasesToDo;
-    [SerializeField] private List<Transform> targetPlatformsInScene;
 
     private Projectile projectile;
-    public Transform targetPlatform;
+    public GameObject targetPlatform;
     private float timeBeforeShot;
     private float timeAfterShot;
     private int chasesDone;
@@ -26,11 +25,8 @@ public class SpitMantis : Mantis, IProjectile
     {
         base.Start();
         chasesToDo = RandomGenerator.NewRandom(minChases, maxChases);
-        /*for (int i = 0; i < targetPlatforms.Count; i++)
-        {
-            
-        }
-        foreach (var platform in targetPlatforms)
+
+        /*foreach (var platform in targetPlatforms)
         {
             platform = ScenesManagers.GetObjectsOfType<Platform>().Find(p => p == platform);
         }*/
@@ -51,6 +47,11 @@ public class SpitMantis : Mantis, IProjectile
                 timeAfterShot += Time.deltaTime;
             }
         }
+        if (touchingGround)
+        {
+            rigidbody2d.velocity = new Vector2();
+            touchingGround = false;
+        }
         base.Update();
         
     }
@@ -69,7 +70,7 @@ public class SpitMantis : Mantis, IProjectile
                 {
                     targetPlatform = GetProjectileTarget();
                     targetPlatform.GetComponent<Platform>().isTarget = true;
-                    ShotProjectile(shotProjectilePos, targetPlatform.position);
+                    ShotProjectile(shotProjectilePos, targetPlatform.transform.position);
                     chasesToDo = RandomGenerator.NewRandom(minChases, maxChases);
                     timeBeforeShot = 0;
                     chasesDone = 0;
@@ -107,10 +108,10 @@ public class SpitMantis : Mantis, IProjectile
         projectile.Setup(from, to, this);
     }
 
-    private Transform GetProjectileTarget()
+    private GameObject GetProjectileTarget()
     {
-        int chosenPlatform = RandomGenerator.NewRandom(0, targetPlatforms.Count - 1);
-        return targetPlatforms[chosenPlatform];
+        int chosenPlatform = RandomGenerator.NewRandom(0, ScenesManagers.FindObjectOfType<MantisBoss>().allPlatforms.Count);
+        return ScenesManagers.FindObjectOfType<MantisBoss>().allPlatforms[chosenPlatform].gameObject;
     }
 
     protected override void OnCollisionEnter2D(Collision2D other)

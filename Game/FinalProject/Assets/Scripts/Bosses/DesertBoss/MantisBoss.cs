@@ -2,32 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MantisBoss : BossFight
+public class MantisBoss : MonoBehaviour
 {
     [SerializeField] private GameObject itemToSpawn;
     [SerializeField] private Transform spawnPos;
     [SerializeField] private float timeToRespawnItem;
-    [SerializeField] private int timesToGiveItem;
+    
     private GameObject spawnedItem;
     private float currentTime;
     private List<Mantis> mantises;
     private Inventory inventory;
     private bool pickedUpItem;
 
-    new void Start()
+    public List<Platform> allPlatforms;
+
+    void Start()
     {
-        base.Start();
         inventory = Inventory.instance;
-        spawnPos.position = currentStage.positions[currentStage.gameObjects.IndexOf(itemToSpawn)];
         UpdateMantisList();
+        UpdatePlatformsList();
     }
 
-    new void Update()
+    void Update()
     {
-        if (!mantises.Exists(m => m.timesItemGiven < timesToGiveItem))
+        /****/
+        // uncomment if want to test with 'L' to change stage 
+        // UpdatePlatformsList();
+        /****/
+        if (ScenesManagers.GetObjectsOfType<Mantis>().Count == 0)
         {
-            NextStage();
+            GetComponent<BossFight>().NextStage();
             UpdateMantisList();
+            UpdatePlatformsList();
+            spawnPos.position = GetComponent<BossFight>().currentStage.positions[GetComponent<BossFight>().currentStage.gameObjects.IndexOf(itemToSpawn)];
         }
 
         if (!SpawnedItem())
@@ -42,9 +49,6 @@ public class MantisBoss : BossFight
                 currentTime += Time.deltaTime;
             }
         }
-
-
-        base.Update();
     }
 
     bool SpawnedItem()
@@ -58,5 +62,10 @@ public class MantisBoss : BossFight
     private void UpdateMantisList()
     {
         mantises = ScenesManagers.GetObjectsOfType<Mantis>();
+    }
+
+    private void UpdatePlatformsList()
+    {
+        allPlatforms = ScenesManagers.GetObjectsOfType<Platform>();
     }
 }

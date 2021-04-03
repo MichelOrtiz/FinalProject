@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class Mantis : Enemy
 {
-    [SerializeField] protected float xPushForce;
-    [SerializeField] protected float yPushForce;
     [SerializeField] protected float baseTimeBeforeChase;
     [SerializeField] protected Item itemToGive;
     [SerializeField] protected float decreaseSpeedMultiplier;
     [SerializeField] protected float increaseDamage;
+    [SerializeField] private int timesToGiveItem;
 
     protected float timeBeforeChase;
-    protected bool canChasePlayer;
     protected bool touchingGround;
     public int timesItemGiven;
 
     new void Start()
     {
+        timesItemGiven = 0;
         base.Start();
     }
 
@@ -53,9 +52,17 @@ public class Mantis : Enemy
     {
         if (item == itemToGive)
         {
-            timesItemGiven++;
-            chaseSpeed *= decreaseSpeedMultiplier;
-            damageAmount += increaseDamage;
+            if (timesItemGiven < timesToGiveItem-1)
+            {
+                timesItemGiven++;
+                chaseSpeed *= decreaseSpeedMultiplier;
+                damageAmount += increaseDamage;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            
         }
     }
 
