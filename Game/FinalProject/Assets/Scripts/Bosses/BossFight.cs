@@ -22,7 +22,7 @@ public class BossFight : MonoBehaviour
         }
         if (isCleared)
         {
-
+            
         }
     }
     public void NextStage(){

@@ -155,7 +155,7 @@ public class PlayerManager : Entity
         isStruggling = false;
         isWalking = inputs.movementX!=0 && isGrounded;
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
-        isFalling = rigidbody2d.velocity.y < - fallingCriteria;
+        isFalling = rigidbody2d.velocity.y < 0f;
         //UpdateAnimation();
 
         if (!isCaptured)
@@ -241,9 +241,10 @@ public class PlayerManager : Entity
             isJumping = true;
             jumpTimeCounter = jumpTime;
         }   
-        if (inputs.jump)
+        if (inputs.jump && isJumping)
         {
-            if (jumpTimeCounter>0){
+            if (jumpTimeCounter>0)
+            {
                 rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             }
@@ -252,7 +253,12 @@ public class PlayerManager : Entity
                 isJumping = false;
             }
         }
-        if(isGrounded)isJumping=false;
+        else
+        {
+            //isFalling = true;
+            isJumping = false;
+        }
+        //if(isGrounded)isJumping=false;
     }
 
     void Move()
