@@ -168,18 +168,21 @@ MonoBehaviour:
   isChasing: 0
   statesManager: {fileID: 0}
   jumpForce: 6
-  jumpTime: 0.5
+  jumpTime: 0.35
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   whatIsObstacle:
-    serializedVersion: 2
+  - serializedVersion: 2
+    m_Bits: 0
+  - serializedVersion: 2
     m_Bits: 0
   feetPos: {fileID: 3829738358953819176}
   checkFeetRadius: 0.275
   maxStamina: 100
+  maxOxygen: 100
   walkingSpeed: 7
   defaultwalkingSpeed: 7
   defaultGravity: 2.5
@@ -187,6 +190,7 @@ MonoBehaviour:
   defaultMass: 10
   currentMass: 0
   currentStamina: 0
+  currentOxygen: 0
   isRunning: 0
   isSwiming: 0
   isStruggling: 0
@@ -196,9 +200,11 @@ MonoBehaviour:
   isDoubleJumping: 0
   camara: {fileID: 0}
   staminaBar: {fileID: 0}
+  oxygenBar: {fileID: 0}
   coolDownAfterAttack: 0
   dialogue: {fileID: 0}
   loosingStamina: 0
+  loosingOxygen: 0
   inmunityState: {fileID: 11400000, guid: 8c5ce0ce2397d3a4db178116f24195fc, type: 2}
   abilityManager: {fileID: 1180875131347066391}
 --- !u!95 &3829738358529845166
@@ -247,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hostEntity: {fileID: 0}
   enemy: {fileID: 0}
+  currentStates: []
 --- !u!114 &6562861816641404763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +406,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3829738360394267733}
   - component: {fileID: 3829738360394267734}
-  - component: {fileID: 3829738360394267732}
   - component: {fileID: 8716125286967460233}
   - component: {fileID: 1618878728}
   - component: {fileID: 1618878730}
@@ -448,25 +454,6 @@ MonoBehaviour:
   isUnlocked: 1
   speedMultiplier: 2
   runningSpeed: 0
---- !u!114 &3829738360394267732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279c7c088dcf7af4780f57fce50b9328, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 0
-  hotkey: 303
-  staminaCost: 0
-  duration: 0
-  isInCooldown: 0
-  abilityName: 14
-  isUnlocked: 1
 --- !u!114 &8716125286967460233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,7 +553,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7980d91f4088ec6498e40c8644e6d288, type: 3}
   m_Name: 
@@ -593,6 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1295dc957455bf44c8ab30b47e22d016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abiltySystem: {fileID: 0}
 --- !u!1 &3829738360406266949
 GameObject:
   m_ObjectHideFlags: 0

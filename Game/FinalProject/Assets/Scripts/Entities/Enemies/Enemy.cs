@@ -83,15 +83,15 @@ public abstract class Enemy : Entity
 
     new protected void Update()
     {
-        if (InFrontOfObstacle() && isChasing)
+        /*if (InFrontOfObstacle())
         {
             ChangeFacingDirection();
-        }
-        if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
+        }*/
+        /*if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
             || GetPosition().x < player.GetPosition().x && facingDirection == LEFT)
             {
                 ChangeFacingDirection();
-            }
+            }*/
         UpdateState();
         base.Update();
     }

@@ -23,6 +23,11 @@ public class Mantis : Enemy
     // Update is called once per frame
     new void Update()
     {
+        if (InFrontOfObstacle() ||( (GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
+            || GetPosition().x < player.GetPosition().x && facingDirection == LEFT) )
+            {
+                ChangeFacingDirection();
+            }
         if (touchingGround)
         {
             rigidbody2d.velocity = new Vector2();
