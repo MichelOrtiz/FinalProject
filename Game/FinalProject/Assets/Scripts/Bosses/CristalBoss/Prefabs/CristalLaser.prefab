@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 930200629135861536}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: endPoint
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,8 @@ GameObject:
   m_Component:
   - component: {fileID: 930200629637541265}
   - component: {fileID: 930200629637541266}
-  m_Layer: 2
+  - component: {fileID: 5896100059345284874}
+  m_Layer: 10
   m_Name: CristalLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,6 +79,28 @@ MonoBehaviour:
   ray: {fileID: 930200630163608275}
   endPoint: {fileID: 930200629135861536}
   lifeTime: 4
+--- !u!68 &5896100059345284874
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930200629637541267}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &930200630163608276
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 930200630163608274}
   - component: {fileID: 930200630163608275}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: LaserRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,10 +195,10 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.8867924, g: 0.24141346, b: 0.12130654, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.9056604, g: 0.14397678, b: 0, a: 1}
+      key1: {r: 0.9056604, g: 0.14397678, b: 0, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 1}
+      key3: {r: 0, g: 0, b: 0, a: 1}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
@@ -190,13 +213,13 @@ LineRenderer:
       ctime7: 0
       atime0: 0
       atime1: 65535
-      atime2: 0
-      atime3: 0
+      atime2: 65535
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

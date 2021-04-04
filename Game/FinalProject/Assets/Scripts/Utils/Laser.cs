@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 public class Laser : MonoBehaviour
 {
     [SerializeField] private LineRenderer ray;
@@ -16,7 +17,10 @@ public class Laser : MonoBehaviour
     
     private bool touchingPlayer;
     private ILaser summoner;
+    private PlayerManager player;
 
+
+    private EdgeCollider2D edge;
 
     public Laser(){}
 
@@ -41,12 +45,14 @@ public class Laser : MonoBehaviour
 
     void Start()
     {
+        player = PlayerManager.instance;
         ray.SetPosition(0, startPos);
         ray.SetPosition(1, startPos);
+
+        edge = GetComponent<EdgeCollider2D>();
     }
     void Update()
     {
-        Debug.Log(endPos);
         if (currentTime > lifeTime)
         {
             Destroy(gameObject);
@@ -56,14 +62,21 @@ public class Laser : MonoBehaviour
             currentTime += Time.deltaTime;
         }
 
+
+        ExtendRay();
+        
+        
+        edge.SetPoints(new List<Vector2>()
+            {transform.InverseTransformPoint(startPos) , transform.InverseTransformPoint(endPoint.position)}
+        );
+
         if (touchingPlayer)
         {
             summoner.LaserAttack();
+            touchingPlayer = false;
         }
-
-        ExtendRay();
     }
-
+ 
     void ExtendRay()
     {
         //endPoint.transform.position = Vector2.MoveTowards(startPos, endPos, speed * Time.deltaTime);

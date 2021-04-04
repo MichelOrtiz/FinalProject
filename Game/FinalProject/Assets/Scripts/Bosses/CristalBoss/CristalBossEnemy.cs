@@ -81,7 +81,6 @@ public class CristalBossEnemy : NormalType, ILaser
 
     public void ShootLaser(Vector2 from, Vector2 to)
     {
-        Debug.Log("shot laser");
         laser = Instantiate(laserPrefab, from, Quaternion.identity).GetComponent<Laser>();
         laser.Setup(from, to, laserSpeed, this);
     }
