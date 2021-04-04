@@ -6,12 +6,17 @@ public class CristalBoss : MonoBehaviour
 {
     [SerializeField] private GameObject cristalBarPrefab;
     [SerializeField] private GameObject cristalBarWarning;
+    
     [SerializeField] private float intervalCristalBars;
     [SerializeField] private float warningTime;
+    
+    
     private float currentTimeAfterWarning;
     private float currentTimeBeforeWarning;
+    
     private Vector2 cristalBarSpawnPosPlayer;
     private Vector2 cristalBarSpawnPosCristal;
+
     private GameObject currentWarningPlayer;
     private GameObject currentWarningCristal;
 
@@ -30,44 +35,6 @@ public class CristalBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (intervalCristalBars - currentTime < warningTime)
-        {
-            if (player.isGrounded && currentWarning == null)
-            {
-                cristalBarSpawnPos = new Vector2(player.GetPosition().x, player.GetPosition().y -0.5f);
-                currentWarning = Instantiate(cristalBarWarning, cristalBarSpawnPos, Quaternion.identity).gameObject;
-            }
-        }*/
-        /*if (currentTimeBeforeWarning > intervalCristalBars)
-        {
-            if (currentTimeAfterWarning > intervalCristalBars + warningTime)
-            {
-                Destroy(currentWarning);
-                Instantiate(cristalBarPrefab, cristalBarSpawnPos,  Quaternion.identity);
-                currentTimeAfterWarning = 0;
-                currentTimeBeforeWarning = 0;
-            }
-            else
-            {
-                if (currentWarning == null)
-                {
-                    if (player.isGrounded)
-                    {
-                        Debug.Log("warning warning");
-                        cristalBarSpawnPos = new Vector2(player.GetPosition().x, player.GetPosition().y -0.5f);
-                        currentWarning = Instantiate(cristalBarWarning, cristalBarSpawnPos, Quaternion.identity).gameObject;
-                    }
-                }
-                else
-                {
-                    currentTimeAfterWarning += Time.deltaTime;
-                }
-            }
-        }
-        else
-        {
-            currentTimeBeforeWarning += Time.deltaTime;
-        }*/
 
         if (currentTimeBeforeWarning > intervalCristalBars)
         {
