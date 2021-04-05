@@ -243,7 +243,7 @@ public class PlayerManager : Entity
         }   
         if (inputs.jump)
         {
-            if (jumpTimeCounter>0){
+            if (jumpTimeCounter>0&&inputs.jump){
                 rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             }
