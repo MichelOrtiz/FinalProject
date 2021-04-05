@@ -16,7 +16,7 @@ public class UnpoweredWireBehaviour : MonoBehaviour
     {
         ManageLight();
     }
-    void OnTriggerEnter2d(Collider2D collision){
+    void OnTriggerEnter2D(Collider2D collision){
         if (collision.GetComponent<PoweredWireStats>())
         {
             prueba = true;
@@ -29,7 +29,7 @@ public class UnpoweredWireBehaviour : MonoBehaviour
             }
         }
     }
-    void OnTriggerExit2d(Collider2D collision){
+    void OnTriggerExit2D(Collider2D collision){
         if (collision.GetComponent<PoweredWireStats>())
         {
             PoweredWireStats poweredWireS = collision.GetComponent<PoweredWireStats>();
