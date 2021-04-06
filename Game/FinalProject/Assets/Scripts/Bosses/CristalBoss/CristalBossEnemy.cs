@@ -11,11 +11,19 @@ public class CristalBossEnemy : NormalType, ILaser
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private float laserDamage;
     [SerializeField] private float laserSpeed;
+
+    [SerializeField] private float minDistanceToPlayer;
+
+    [SerializeField] private List<Transform> platformPositions;
+
     private float timeToShot;
     private float distanceToPlayer;
     private Laser laser;
 
+    RaycastHit2D hit;
+    private bool runningFromPlayer;
 
+    private Transform nearestPlatform;
     // Start is called before the first frame update
     new void Start()
     {
@@ -27,11 +35,23 @@ public class CristalBossEnemy : NormalType, ILaser
     // Update is called once per frame
     new void Update()
     {
-        if (InFrontOfObstacle() ||( (GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
+        if (!runningFromPlayer)
+        {
+            if (InFrontOfObstacle() ||( (GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
             || GetPosition().x < player.GetPosition().x && facingDirection == LEFT) )
             {
                 ChangeFacingDirection();
             }
+        }
+        else
+        {
+            if (InFrontOfObstacle() ||( (GetPosition().x > player.GetPosition().x && facingDirection == LEFT)
+            || GetPosition().x < player.GetPosition().x && facingDirection == RIGHT ))
+            {
+                ChangeFacingDirection();
+            }
+        }
+        
         base.Update();
     }
 
@@ -71,11 +91,32 @@ public class CristalBossEnemy : NormalType, ILaser
         {
             timeToShot = 0;
         }
+
+            if (distanceToPlayer <= minDistanceToPlayer)
+            {
+                if (nearestPlatform == null)
+                {
+                    nearestPlatform = FindNearestPlatform();
+                    runningFromPlayer = true;
+                }
+
+
+            }
+            if (runningFromPlayer)
+            {
+                rigidbody2d.position = Vector2.MoveTowards(GetPosition(), nearestPlatform.position, chaseSpeed * Time.deltaTime);
+
+                runningFromPlayer = rigidbody2d.position != (Vector2)nearestPlatform.position;
+            }        
+            else
+            {
+                nearestPlatform = null;
+            }
     }
 
     protected override void MainRoutine()
     {
-        return;
+
     }
 
 
@@ -87,5 +128,58 @@ public class CristalBossEnemy : NormalType, ILaser
     public void LaserAttack()
     {
         player.TakeTirement(laserDamage);
+    }
+
+    private void Jump()
+    {
+        if (isGrounded)
+        {
+            rigidbody2d.AddForce(new Vector2((facingDirection == RIGHT? 5000f : -5000f), jumpForce * 450), ForceMode2D.Impulse);
+        }
+    }
+
+    private bool OnPlatform()
+    {
+        return Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround).gameObject.CompareTag("Platform");
+    }
+    
+
+    private Transform FindNearestPlatform()
+    {
+        Transform pos;
+        
+        float curDistance;
+        List<Transform> platforms;
+        if (facingDirection == LEFT)
+        {
+            platforms = platformPositions.FindAll(p => p.position.x > GetPosition().x);
+        }
+        else
+        {
+            platforms = platformPositions.FindAll(p => p.position.x < GetPosition().x);
+        }
+        
+        float shortestDistance = 10f;//Vector2.Distance(GetPosition(), platformPositions[0].position);
+        
+        if (platforms.Count == 0)
+        {
+            platforms = platformPositions;
+        }
+
+        pos = platforms[0];
+
+
+        foreach (var platformPos in platforms)
+        {   
+            curDistance = Vector2.Distance(GetPosition(), platformPos.position);
+            if (curDistance < shortestDistance && curDistance > 2f && !( 
+                    (platformPos.position.x < GetPosition().x && player.GetPosition().x < GetPosition().x) &&
+                    (platformPos.position.x > GetPosition().x && player.GetPosition().x > GetPosition().x) ) )
+            {
+                shortestDistance = curDistance;
+                pos = platformPos;
+            }
+        }
+        return pos;
     }
 }
