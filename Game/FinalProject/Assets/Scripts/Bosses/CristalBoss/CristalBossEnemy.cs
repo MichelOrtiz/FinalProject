@@ -4,35 +4,46 @@ using UnityEngine;
 
 public class CristalBossEnemy : NormalType, ILaser
 {
+    #region LaserBeam
+    [Header("Laser Beam")]
     [SerializeField] private Transform shotPos;
+    public Transform ShotPos { get => shotPos; }
     [SerializeField] private float minDistanceToShotRay;
     [SerializeField] private float intervalToShot;
+    private float timeToShot;
+
     //[SerializeField] private LineRenderer laser;
     [SerializeField] private GameObject laserPrefab;
+    private Laser laser;
     [SerializeField] private float laserDamage;
     [SerializeField] private float laserSpeed;
 
+    #endregion
+
+    #region RunFromPlayerParams
+    [Header("Run from player")]
     [SerializeField] private float minDistanceToPlayer;
+    private float distanceToPlayer;
 
     [SerializeField] private List<Transform> platformPositions;
-
-    private float timeToShot;
-    private float distanceToPlayer;
-    private Laser laser;
-
-    RaycastHit2D hit;
-    private bool runningFromPlayer;
-
     private Transform nearestPlatform;
-    // Start is called before the first frame update
+    private bool runningFromPlayer;
+    #endregion
+
+    #region Player Interaction
+    [Header("Player Interaction")]
+    [SerializeField] private float interactionRadius;
+    [SerializeField] private int interactionsToDestroy;
+    private int interactions;
+
+    #endregion
+
     new void Start()
     {
         base.Start();
         laserSpeed *= averageSpeed;
-        //ShootLaser(shotPos.position, player.GetPosition());
     }
 
-    // Update is called once per frame
     new void Update()
     {
         if (!runningFromPlayer)
@@ -52,6 +63,22 @@ public class CristalBossEnemy : NormalType, ILaser
             }
         }
         
+        distanceToPlayer = Vector2.Distance(GetPosition(), player.GetPosition());
+
+        if (distanceToPlayer <= interactionRadius)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                interactions++;
+            }
+        }
+        
+
+        if (interactions == interactionsToDestroy)
+        {
+            Destroy(gameObject);
+        }
+
         base.Update();
     }
 
@@ -68,7 +95,6 @@ public class CristalBossEnemy : NormalType, ILaser
 
     protected override void ChasePlayer()
     {
-        distanceToPlayer = Vector2.Distance(GetPosition(), player.GetPosition());
         if (distanceToPlayer >= minDistanceToShotRay)
         {
             if (timeToShot > intervalToShot)
@@ -77,8 +103,6 @@ public class CristalBossEnemy : NormalType, ILaser
                 {
                     ShootLaser(shotPos.position, player.GetPosition());
                 }
-
-
                 timeToShot = 0;
             }
             else
@@ -114,11 +138,7 @@ public class CristalBossEnemy : NormalType, ILaser
             }
     }
 
-    protected override void MainRoutine()
-    {
-
-    }
-
+    protected override void MainRoutine(){}
 
     public void ShootLaser(Vector2 from, Vector2 to)
     {

@@ -10,7 +10,6 @@ public class CristalBoss : MonoBehaviour
     [SerializeField] private float intervalCristalBars;
     [SerializeField] private float warningTime;
     
-    
     private float currentTimeAfterWarning;
     private float currentTimeBeforeWarning;
     
@@ -26,6 +25,8 @@ public class CristalBoss : MonoBehaviour
     private RaycastHit2D groundHitForPlayer;
     private RaycastHit2D groundHitForCristal;
 
+    
+
     void Start()
     {
         player = PlayerManager.instance;
@@ -35,10 +36,14 @@ public class CristalBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (FindObjectOfType<CristalBossEnemy>() == null)
+        {
+            GetComponent<BossFight>().NextStage();
+            return;
+        }
 
         if (currentTimeBeforeWarning > intervalCristalBars)
         {
-            
             if (currentTimeAfterWarning > warningTime)
             {
                 Destroy(currentWarningPlayer);
