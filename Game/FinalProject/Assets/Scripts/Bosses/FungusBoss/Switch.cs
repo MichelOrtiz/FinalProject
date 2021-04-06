@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour
 {
+    public bool activado;
     [SerializeField] private float radius;
     [SerializeField] private List<GameObject> doorsAttached;
     private List<Door> allDoors;
@@ -24,6 +25,8 @@ public class Switch : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                activado = !activado;
+                GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
                 foreach (var door in doorsAttached)
                 {
                     if (allDoors.Exists(d => d.name == door.name))
