@@ -104,26 +104,6 @@ public class Entity : MonoBehaviour
 
     #region Self state methods
 
-    // not working
-    /*public void Fear()
-    {
-        isInFear = true;
-        StopAllCoroutines();
-        var jumpForce = RandomGenerator.NewRandom(2, 7);
-        var jumps = RandomGenerator.NewRandom(2, 5);
-
-        //Vector3 vector;
-        for (int i = 0; i < jumps; i++)
-        {
-            var x = RandomGenerator.NewRandom(-5, 5);
-            if (isGrounded)
-            {
-                rigidbody2d.velocity = new Vector3(rigidbody2d.velocity.x, jumpForce);
-            }
-        }
-        isInFear = false;
-    }*/
-
     public void Push(float xForce, float yForce)
     {
         //rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, 0f);

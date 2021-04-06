@@ -80,6 +80,7 @@ public class Laser : MonoBehaviour
     void ExtendRay()
     {
         //endPoint.transform.position = Vector2.MoveTowards(startPos, endPos, speed * Time.deltaTime);
+        ray.SetPosition(0, summoner.ShotPos.position);
         float distanceToEndPos = Vector2.Distance(endPos, startPos);
         float currentDistanceFromStart = Vector2.Distance(endPoint.position, startPos);
         if (currentDistanceFromStart < distanceToEndPos)
