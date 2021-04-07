@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameCamera : MonoBehaviour
 {
     public static GameCamera instance = null;
-    [SerializeField]
     private Vector3 mousePosition;
     void Awake()
     {

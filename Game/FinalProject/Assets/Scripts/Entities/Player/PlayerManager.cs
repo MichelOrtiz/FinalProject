@@ -110,7 +110,7 @@ public class PlayerManager : Entity
     #endregion
 
     #region Inputs
-        PlayerInputs inputs;
+    PlayerInputs inputs;
     #endregion
     [SerializeField]private State inmunityState;
     public AbilityManager abilityManager;
@@ -235,6 +235,7 @@ public class PlayerManager : Entity
 
     public void Jump()
     {
+        if(!inputs.enabled)return;
         if ((isGrounded && inputs.jump) || (isInWater && inputs.jump))
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
@@ -263,19 +264,14 @@ public class PlayerManager : Entity
 
     void Move()
     {
-        
-        //Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), rigidbody2d.velocity.y, 0f);  
-        
+        if(!inputs.enabled)return;
         rigidbody2d.velocity = new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y);
     }
 
     void Flying()
     {
-        //Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
-        //rigidbody2d.gravityScale(isFlying? 0:26 )// no recuerdo como iba esto
-        
+        if(!inputs.enabled)return;
         rigidbody2d.velocity = new Vector2(inputs.movementX, inputs.movementY)*walkingSpeed;
-        
     }
 
     // Call these methods to decrease or increase stamina periodically
