@@ -20,6 +20,7 @@ public class Spawner : MonoBehaviour
         }else{
             Instantiate(bomb, new Vector2(Random.Range(xBound1, xBound2), yBounds), Quaternion.identity);
         }
+        DestroyGameOnject();
         StartCoroutine(SpawnRandomGameObject());
     }
     IEnumerator DestroyGameOnject(){

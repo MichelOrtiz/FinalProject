@@ -7,26 +7,14 @@ using UnityEngine.SceneManagement;
 public class ScoreController : MonoBehaviour
 {
     public Text scoreText;
-    private int score;
+    public static int score { get; set; }
     void Start()
     {
-        
+        scoreText.text = 0.ToString();
+
     }
     void Update()
     {
-        scoreText.text = score.ToString();
+        scoreText.text ="Puntaje: "+ score.ToString();
     }
-    void OnTriggerEnter2D(Collider2D target){
-        if (target.tag == "Bomb")
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
-    void OnTriggerExit2D(Collider2D target){
-        if(target.tag == "Fruit"){
-            Destroy(target.gameObject);
-            score++;
-        }
-    }
-
 }
