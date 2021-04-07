@@ -29,6 +29,7 @@ public class Projectile : MonoBehaviour
     #endregion
 
     #region Misc
+    private Vector3 startPoint;
     private IProjectile enemy;
     private Vector3 shootDir;
     private Vector3 target;
@@ -42,6 +43,7 @@ public class Projectile : MonoBehaviour
 
     public void Setup(Transform startPoint, Vector3 target, IProjectile enemy)
     {
+        this.startPoint = startPoint.position;
         this.target = target;
         this.enemy = enemy;
         shootDir = (target - startPoint.position).normalized;
@@ -49,6 +51,7 @@ public class Projectile : MonoBehaviour
 
     public void Setup(Transform startPoint, Vector3 target, IProjectile enemy, string colliderTag)
     {
+        this.startPoint = startPoint.position;
         this.target = target;
         this.enemy = enemy;
         shootDir = (target - startPoint.position).normalized;
@@ -73,6 +76,12 @@ public class Projectile : MonoBehaviour
     {
         //rigidbody2d.position = Vector3.MoveTowards(transform.position, shootDir, speedMultiplier * Time.deltaTime); 
         //animator.SetBool("Is Destroying", aboutToDestroy);
+        Vector3 distance = startPoint - transform.position;
+        float hipotenusa = Mathf.Sqrt((distance.x * distance.x) + (distance.y * distance.y));
+        if(hipotenusa > maxShotDistance)
+        {
+            Destroy();
+        }
         if (!touchingPlayer)
         {
             if (colliderTag == null)
@@ -89,6 +98,10 @@ public class Projectile : MonoBehaviour
                     transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
                 }
             }
+        }
+        else
+        {
+            FixedUpdate();
         }
         
         if (touchingObstacle)
@@ -130,26 +143,26 @@ public class Projectile : MonoBehaviour
             
         }
     }
-
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
-        touchingObstacle = other.gameObject.tag == "Ground";
-        //touchingObstacle = other.gameObject.layer == whatIsObstacle;
+        touchingObstacle = other.gameObject.layer == whatIsObstacle;
     }
-
+    
     void OnTriggerStay2D(Collider2D other)
     {
         isOnCollider = other.gameObject.tag == colliderTag;
     }
+    
 
     void OnCollisionEnter2D(Collision2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
-        touchingObstacle = other.gameObject.tag == "Ground";
+        touchingObstacle = other.gameObject.layer == whatIsObstacle;
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
     }
-
+    
     void OnCollisionStay2D(Collision2D other)
     {
         isOnCollider = other.gameObject.tag == colliderTag;
