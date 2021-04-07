@@ -36,6 +36,10 @@ public class CristalBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (cristal == null)
+        {
+            cristal = FindObjectOfType<CristalBossEnemy>();
+        }
         if (FindObjectOfType<CristalBossEnemy>() == null)
         {
             GetComponent<BossFight>().NextStage();
