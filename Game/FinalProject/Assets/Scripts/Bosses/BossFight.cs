@@ -7,7 +7,7 @@ public class BossFight : MonoBehaviour
     [SerializeField] protected List<Stage> stages;
     [SerializeField] protected GameObject abilityObject;
     public Stage currentStage;
-    bool isCleared;
+    private bool isCleared;
     int indexStage;
 
     protected void Start()
@@ -25,7 +25,7 @@ public class BossFight : MonoBehaviour
             
         }
     }
-    public void NextStage(){
+    public virtual void NextStage(){
         if(indexStage<stages.Count-1){
             indexStage++;
             currentStage.Destroy();
@@ -39,5 +39,11 @@ public class BossFight : MonoBehaviour
             //give ability
             //AbilityManager.instance.AddAbility(reward);
         }
+    }
+
+    public virtual void EndBattle()
+    {
+        currentStage.Destroy();
+        isCleared=true;
     }
 }
