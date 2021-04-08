@@ -37,4 +37,9 @@ public class PlayerInputs : MonoBehaviour
             jump=false;
         }
     }
+    private void OnDisable() {
+        movementX=0;
+        movementY=0;
+        jump=false;
+    }
 }

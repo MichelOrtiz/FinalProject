@@ -15,7 +15,8 @@ public class Paralized : State
     }
     public override void Affect()
     {
-        //Debug.Log(currentTime);
+        Rigidbody2D rb = manager.hostEntity.GetComponent<Rigidbody2D>(); 
+        rb.velocity = new Vector2(0f,-rb.gravityScale);
         currentTime += Time.deltaTime;
         if(currentTime >= duration){
             StopAffect();
