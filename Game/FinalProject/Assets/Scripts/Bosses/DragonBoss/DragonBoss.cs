@@ -19,6 +19,9 @@ public class DragonBoss : MonoBehaviour,IProjectile
     private float rockTime;
     private int prevNRocks = 0;
     private int currentFallingRocks;
+    private bool haveRocksFallen;
+    [SerializeField]private GameObject smokePrefab;
+    [SerializeField]private float smokeInterval;
     private PlayerManager player;
     private Projectile projectile;
     private float currentTime;
@@ -48,12 +51,18 @@ public class DragonBoss : MonoBehaviour,IProjectile
             currentProjectiles=0;
         }
         if(maxFallingRocks>0 && minFallingRocks>0){
-            if(rockTime>=fallingRockInterval){
+            if(rockTime>=fallingRockInterval && !haveRocksFallen){
                 rockTime=0;
+                haveRocksFallen = true;
                 int n = RandomGenerator.NewRandom(minFallingRocks,maxFallingRocks);
                 if(n==prevNRocks)n = RandomGenerator.NewRandom(minFallingRocks,maxFallingRocks);
                 for(int i=0;i<n;i++)
                 SwingTail();
+            }
+            if(rockTime>=smokeInterval && haveRocksFallen){
+                rockTime = 0;
+                haveRocksFallen = false;
+                ShotSmoke();
             }
         }
         
@@ -75,8 +84,14 @@ public class DragonBoss : MonoBehaviour,IProjectile
         }
     }
     void SwingTail(){
-        Debug.Log("Rock");
+        //Debug.Log("Rock");
         //Maybe animation??
         fallingRocks.GenerateRandomRock();
+    }
+    void ShotSmoke(){
+        Vector3 startPos = new Vector3(head.position.x,PlayerManager.instance.GetPosition().y,head.position.z);
+        GameObject smoke = Instantiate(smokePrefab,startPos,Quaternion.identity);
+        Smoke smk = smoke.GetComponent<Smoke>();
+        smk.SetTarget(PlayerManager.instance.GetPosition());
     }
 }
