@@ -29,6 +29,18 @@ public class Projectile : MonoBehaviour
     #endregion
 
     #region Misc
+    [Header("Size")]
+    [SerializeField] private bool changeSizeByDistance;
+    [SerializeField] private float distanceToIncrease;
+    private float currentDistanceToSize;
+    [SerializeField] private float sizeByDistanceMultiplier;
+    [SerializeField] private bool changeSizeByTime;
+    [SerializeField] private float timeToIncrease;
+    private float currentTimeToSize;
+    [SerializeField] private float sizeByTimeMultiplier;
+
+
+    private Vector2 distance;
     private Vector3 startPoint;
     private IProjectile enemy;
     private Vector3 shootDir;
@@ -76,7 +88,9 @@ public class Projectile : MonoBehaviour
     {
         //rigidbody2d.position = Vector3.MoveTowards(transform.position, shootDir, speedMultiplier * Time.deltaTime); 
         //animator.SetBool("Is Destroying", aboutToDestroy);
-        Vector3 distance = startPoint - transform.position;
+        Vector2 distance = startPoint - transform.position;
+        
+        // Hipotenusa
         float hipotenusa = Mathf.Sqrt((distance.x * distance.x) + (distance.y * distance.y));
         if(hipotenusa > maxShotDistance)
         {
@@ -117,25 +131,10 @@ public class Projectile : MonoBehaviour
             } 
         }
         
-        /*if (touchingPlayer)
+        if (changeSizeByTime)
         {
-                
-                aboutToDestroy = true;
-                enemy.ProjectileAttack();
-                Destroy();
-            
-        }*/
-        /*if (impactEffect.activeInHierarchy)
-        {
-            if (impactEffectExitTime <= 0)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                impactEffectExitTime -= Time.deltaTime;
-            }
-        }*/
+            ChangeSizeByTime();
+        }
         
     }
     
@@ -148,6 +147,33 @@ public class Projectile : MonoBehaviour
                 enemy.ProjectileAttack();
                 Destroy();
             
+        }
+    }
+
+    /*private void ChangeSizeByDistance()
+    {
+        float currentDistance = Vector2.Distance(transform.position, startPoint.position);
+        if (currentDistanceToSize >= currentDistance + distanceToIncrease)
+        {
+            transform.localScale *= sizeByDistanceMultiplier;
+            currentDistanceToSize = 0;
+        }
+        else
+        {
+            currentDistanceToSize = 
+        }
+    }*/
+
+    private void ChangeSizeByTime()
+    {
+        if (currentTimeToSize> timeToIncrease)
+        {
+            transform.localScale = transform.localScale + transform.localScale * sizeByTimeMultiplier;
+            currentTimeToSize = 0;
+        }
+        else
+        {
+            currentTimeToSize += Time.deltaTime;
         }
     }
     

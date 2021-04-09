@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class FireBossEnemy : Entity, IProjectile
 {
     private FireBoss fireBoss;
-    protected PlayerManager player;
+    private PlayerManager player;
     [SerializeField] protected float TimeBeforeStart;
    
 
@@ -73,10 +73,10 @@ public abstract class FireBossEnemy : Entity, IProjectile
             if (currentHits < maxHits)
             {
                 currentHits++;
-                TimeBeforeStart *= timeChangeMultiplier;
+                TimeBeforeStart = TimeBeforeStart + TimeBeforeStart * timeChangeMultiplier;
                 if (projectile != null)
                 {
-                    projectile.damage *= damageChangeIncrease;
+                    projectile.damage +=  damageChangeIncrease;
                 }
             }
             else
