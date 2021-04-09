@@ -30,12 +30,18 @@ public class Inter : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        //Debug.Log("Kill MEEEE!");
         Enemy enemigo = other.GetComponent<Enemy>();
         if(enemigo!=null)
         {
             enemigo.ConsumeItem(item);
             Destroy(gameObject);
+        }
+        ItemGetter getter = other.gameObject.GetComponent<ItemGetter>();
+        if(getter!=null){
+            if(getter.GetItem(item)){
+                Destroy(gameObject);
+                return;
+            }
         }
     }
     public void SetItem(Item newItem){

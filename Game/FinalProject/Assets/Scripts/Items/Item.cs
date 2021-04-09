@@ -9,9 +9,10 @@ public class Item : ScriptableObject
 
     public int staminaGain; 
     public Sprite icon = null;
-    public bool isDefault = false;
+    public bool isConsumable = true;
 
     public virtual void Use(){
+        if(!isConsumable)return;
         //Debug.Log("Usando "+nombre);
         if(staminaGain<0){
             PlayerManager.instance.TakeTirement(staminaGain);

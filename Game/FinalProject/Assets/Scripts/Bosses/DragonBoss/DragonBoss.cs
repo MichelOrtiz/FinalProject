@@ -6,36 +6,57 @@ public class DragonBoss : MonoBehaviour,IProjectile
 {
     [SerializeField]private Transform head;
     [SerializeField]private Transform tail;
-    [SerializeField]private float shootInterval;
-    [SerializeField]private float roarInterval;
     [SerializeField]private GameObject projectilePrefab;
+    [SerializeField]private float shootInterval;
+    [SerializeField]private int nProjectiles;
+    private int currentProjectiles;
+    [SerializeField]private float roarInterval;
     [SerializeField]private State roarEffect;
     [SerializeField]private FallingRocks fallingRocks;
+    [SerializeField]private float fallingRockInterval;
+    [SerializeField]private int minFallingRocks;
+    [SerializeField]private int maxFallingRocks;
+    private float rockTime;
+    private int prevNRocks = 0;
+    private int currentFallingRocks;
     private PlayerManager player;
     private Projectile projectile;
     private float currentTime;
-    private int nProjectiles;
+    
 
     void Start()
     {
         player = PlayerManager.instance;
-        nProjectiles = 0;
+        fallingRocks = FallingRocks.instance;
+        currentProjectiles = 0;
+        currentFallingRocks = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         currentTime += Time.deltaTime;
-        if(currentTime>=shootInterval && nProjectiles<3){
+        rockTime += Time.deltaTime;
+        if(currentTime>=shootInterval && currentProjectiles<nProjectiles){
             currentTime=0;
             ShotProjectile(head,player.transform.position);
-            nProjectiles++;
+            currentProjectiles++;
         }
         if(currentTime>=roarInterval){
             currentTime=0;
             Roar();
-            nProjectiles=0;
+            currentProjectiles=0;
         }
+        if(maxFallingRocks>0 && minFallingRocks>0){
+            if(rockTime>=fallingRockInterval){
+                rockTime=0;
+                int n = RandomGenerator.NewRandom(minFallingRocks,maxFallingRocks);
+                if(n==prevNRocks)n = RandomGenerator.NewRandom(minFallingRocks,maxFallingRocks);
+                for(int i=0;i<n;i++)
+                SwingTail();
+            }
+        }
+        
     }
     public void ProjectileAttack()
     {
@@ -48,9 +69,14 @@ public class DragonBoss : MonoBehaviour,IProjectile
         projectile.Setup(from, to, this);
     }
     void Roar(){
-        Debug.Log("ROARRR");
+        //Debug.Log("ROARRR");
         if(player.isGrounded){
             player.statesManager.AddState(roarEffect);
         }
+    }
+    void SwingTail(){
+        Debug.Log("Rock");
+        //Maybe animation??
+        fallingRocks.GenerateRandomRock();
     }
 }

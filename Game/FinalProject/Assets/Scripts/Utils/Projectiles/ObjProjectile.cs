@@ -14,7 +14,22 @@ public class ObjProjectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(!other.CompareTag("Player")){
-            Debug.Log(other.name);
+            //Debug.Log(other.name);
+            if(!other.CompareTag("Enemy")){
+                Enemy enemy = other.gameObject.GetComponent<Enemy>();
+                if(enemy!=null){
+                    enemy.ConsumeItem(item);
+                    Destroy(gameObject);
+                    return;
+                }
+                ItemGetter getter = other.gameObject.GetComponent<ItemGetter>();
+                if(getter!=null){
+                    if(getter.GetItem(item)){
+                        Destroy(gameObject);
+                        return;
+                    }
+                }
+            }
             Destroy(gameObject);
             Vector3 newPosition = new Vector3 (transform.position.x,transform.position.y + 0.5f,transform.position.z);
             GameObject x = Instantiate(itemPickPrefab,newPosition,Quaternion.Euler(0f,0f,0f));
