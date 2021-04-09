@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class FireBossEnemy : Entity, IProjectile
 {
     private FireBoss fireBoss;
-    private PlayerManager player;
+    protected PlayerManager player;
     [SerializeField] protected float TimeBeforeStart;
    
 
@@ -30,21 +30,30 @@ public abstract class FireBossEnemy : Entity, IProjectile
     [SerializeField] protected float damageChangeIncrease;
     #endregion
     // Start is called before the first frame update
-    new void Start()
+    protected new void Start()
     {
+        base.Start();
+
         fireBoss = GetComponent<FireBoss>();
         player = PlayerManager.instance;
-        maxHits = fireBoss.maxHits;
+
+        if (fireBoss != null)
+        {
+            maxHits = fireBoss.maxHits;
+        }
+
     }
 
     // Update is called once per frame
-    new void Update()
+    protected new void Update()
     {
+
         if (TimeBeforeStart > 0)
         {
             TimeBeforeStart -= Time.deltaTime;
             return;
         }
+        base.Update();
     }
 
     public void ProjectileAttack()

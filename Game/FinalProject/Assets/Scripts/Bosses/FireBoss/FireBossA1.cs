@@ -15,6 +15,7 @@ public class FireBossA1 : FireBossEnemy
     new void Update()
     {
         base.Update();
+
         if (timeBtwShot > baseTimeBtwShot)
         {
             ShotProjectiles();
@@ -24,6 +25,7 @@ public class FireBossA1 : FireBossEnemy
         {
             timeBtwShot += Time.deltaTime;
         }
+
     }
 
 

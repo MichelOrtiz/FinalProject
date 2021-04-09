@@ -11,7 +11,7 @@ public class Diana : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update(Collider2D target)
+    void Update()
     {
     }
     void OnTriggerEnter2D(Collider2D target){

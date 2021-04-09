@@ -117,7 +117,14 @@ public class Projectile : MonoBehaviour
             } 
         }
         
-
+        /*if (touchingPlayer)
+        {
+                
+                aboutToDestroy = true;
+                enemy.ProjectileAttack();
+                Destroy();
+            
+        }*/
         /*if (impactEffect.activeInHierarchy)
         {
             if (impactEffectExitTime <= 0)
