@@ -6,26 +6,33 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] fruits;
     public GameObject bomb;
-    public float xBound1, xBound2, yBounds;
+    public GameObject square;
+    public float xBound1, xBound2, xBounds, yBound1, yBound2, yBounds;
     public float speed;
+    public bool cuadradito;
     void Start()
     {
         StartCoroutine(SpawnRandomGameObject());
     }
     IEnumerator SpawnRandomGameObject(){
         yield return new WaitForSeconds(Random.Range(1,2));
-        int randomFruit = Random.Range(0,fruits.Length);
+        if(cuadradito){
+            Instantiate(square, new Vector2(Random.Range(xBound1, xBound2), Random.Range(yBound1, yBound2)), Quaternion.identity);
+        }else
+        {
+            int randomFruit = Random.Range(0,fruits.Length);
         if(Random.value <= .6f){
-            Instantiate(fruits[randomFruit], new Vector2(Random.Range(xBound1, xBound2), yBounds), Quaternion.identity);
+            Instantiate(fruits[randomFruit], new Vector2(Random.Range(xBound1, xBound2), Random.Range(yBound1, yBound2)), Quaternion.identity);
         }else{
-            Instantiate(bomb, new Vector2(Random.Range(xBound1, xBound2), yBounds), Quaternion.identity);
+            Instantiate(bomb, new Vector2(Random.Range(xBound1, xBound2), Random.Range(yBound1, yBound2)), Quaternion.identity);
+        }
         }
         DestroyGameOnject();
         StartCoroutine(SpawnRandomGameObject());
     }
     IEnumerator DestroyGameOnject(){
         yield return new WaitForSeconds(10);
-        if(tag == "Fruit"){
+        if(tag == "Fruit" || tag == "Square"){
             Destroy(gameObject);
         }
     }
