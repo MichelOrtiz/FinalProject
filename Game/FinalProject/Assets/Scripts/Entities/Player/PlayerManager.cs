@@ -30,7 +30,8 @@ public class PlayerManager : Entity
     public bool isStruggling;
     public bool isImmune;
     public bool isAiming;
-    public bool isDashing;
+    public bool isDashingH;
+    public bool isDashingV;
     public bool isDoubleJumping;
 
     #endregion
@@ -160,13 +161,13 @@ public class PlayerManager : Entity
 
         if (!isCaptured)
         {
-            if (!isFlying && !isDashing)
+            if (!isFlying && !isDashingH && !isDashingV)
             {
                 rigidbody2d.gravityScale = currentGravity;
                 Move();
                 Jump();
             }
-            else if(!isDashing)
+            else if(!isDashingH && !isDashingV)
             {
                 rigidbody2d.gravityScale = 0;
                 Flying();

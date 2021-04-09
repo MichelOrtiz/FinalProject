@@ -196,7 +196,8 @@ MonoBehaviour:
   isStruggling: 0
   isImmune: 0
   isAiming: 0
-  isDashing: 0
+  isDashingH: 0
+  isDashingV: 0
   isDoubleJumping: 0
   camara: {fileID: 0}
   staminaBar: {fileID: 0}
@@ -405,13 +406,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3829738360394267733}
+  - component: {fileID: 1180875131347066391}
   - component: {fileID: 3829738360394267734}
   - component: {fileID: 8716125286967460233}
-  - component: {fileID: 1618878728}
-  - component: {fileID: 1618878730}
-  - component: {fileID: 1618878733}
+  - component: {fileID: 37527897504467979}
   - component: {fileID: 1618878735}
-  - component: {fileID: 1180875131347066391}
+  - component: {fileID: 1225996928}
   m_Layer: 0
   m_Name: AbilitySystem
   m_TagString: Untagged
@@ -433,6 +433,19 @@ Transform:
   m_Father: {fileID: 3829738358529845137}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1180875131347066391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829738360394267735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1295dc957455bf44c8ab30b47e22d016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abiltySystem: {fileID: 3829738360394267735}
 --- !u!114 &3829738360394267734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,17 +480,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 2
-  hotkey: 97
-  staminaCost: 30
-  duration: 0.2
+  hotkey: 100
+  staminaCost: 20
+  duration: 0.25
   isInCooldown: 0
   abilityName: 2
   isUnlocked: 1
   body: {fileID: 3829738358529845164}
-  doubleTimeTap: 0.25
-  movimiento: -10
-  speed: 20
---- !u!114 &1618878728
+  altHotkey: 97
+  doubleTimeTap: 0.5
+  movimiento: 15
+  speed: 100
+--- !u!114 &37527897504467979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -486,66 +500,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3829738360394267735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd0bb8305923b94c801993205931f39, type: 3}
+  m_Script: {fileID: 11500000, guid: 1efcc23986bb3614b8a475e5db3acc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 2
-  hotkey: 100
-  staminaCost: 30
-  duration: 0.2
-  isInCooldown: 0
-  abilityName: 2
-  isUnlocked: 1
-  body: {fileID: 3829738358529845164}
-  doubleTimeTap: 0.25
-  movimiento: 10
-  speed: 20
---- !u!114 &1618878730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1efcc23986bb3614b8a475e5db3acc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 4
-  hotkey: 115
-  staminaCost: 60
-  duration: 0.2
-  isInCooldown: 0
-  abilityName: 7
-  isUnlocked: 1
-  body: {fileID: 3829738358529845164}
-  doubleTimeTap: 0.25
-  movimiento: -5
-  speed: 20
---- !u!114 &1618878733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1efcc23986bb3614b8a475e5db3acc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 4
   hotkey: 119
   staminaCost: 60
-  duration: 0.2
+  duration: 0.25
   isInCooldown: 0
   abilityName: 7
   isUnlocked: 1
   body: {fileID: 3829738358529845164}
-  doubleTimeTap: 0.25
-  movimiento: 5
-  speed: 20
+  altHotkey: 115
+  doubleTimeTap: 0.5
+  movimiento: 10
+  speed: 50
 --- !u!114 &1618878735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,7 +537,7 @@ MonoBehaviour:
   body: {fileID: 3829738358529845164}
   speed: 0
   jumpForce: 8
---- !u!114 &1180875131347066391
+--- !u!114 &1225996928
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -577,10 +546,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3829738360394267735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1295dc957455bf44c8ab30b47e22d016, type: 3}
+  m_Script: {fileID: 11500000, guid: 279c7c088dcf7af4780f57fce50b9328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abiltySystem: {fileID: 0}
+  cooldownTime: 0
+  hotkey: 303
+  staminaCost: 0
+  duration: 0
+  isInCooldown: 0
+  abilityName: 14
+  isUnlocked: 1
 --- !u!1 &3829738360406266949
 GameObject:
   m_ObjectHideFlags: 0

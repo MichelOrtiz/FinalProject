@@ -9,6 +9,7 @@ public class Paralized : State
         bool isPlayer = manager.hostEntity.GetComponent<PlayerManager>() != null;
         if(isPlayer){
             manager.hostEntity.GetComponent<PlayerInputs>().enabled=false;
+            manager.hostEntity.GetComponent<PlayerManager>().abilityManager.SetActive(false);
         }else{
             manager.hostEntity.enabled=false;
         }
@@ -28,6 +29,7 @@ public class Paralized : State
         bool isPlayer = manager.hostEntity.GetComponent<PlayerManager>() != null;
         if(isPlayer){
             manager.hostEntity.GetComponent<PlayerInputs>().enabled=true;
+            manager.hostEntity.GetComponent<PlayerManager>().abilityManager.SetActive(true);
         }else{
             manager.hostEntity.enabled=true;
         }

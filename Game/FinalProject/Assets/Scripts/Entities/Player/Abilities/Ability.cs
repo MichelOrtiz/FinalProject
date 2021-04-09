@@ -50,7 +50,6 @@ public class Ability : MonoBehaviour
     {
         player = PlayerManager.instance;
         time = 0;
-        gameObject.GetComponent<AbilityManager>().AddAbility(this);
     }
 
     protected virtual void Update()

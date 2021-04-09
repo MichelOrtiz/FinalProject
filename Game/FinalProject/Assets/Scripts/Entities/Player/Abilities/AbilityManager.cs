@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
+    List<Ability> abilities = new List<Ability>();
     public static AbilityManager instance;
     public GameObject abiltySystem;
     private void Awake() {
@@ -13,14 +14,16 @@ public class AbilityManager : MonoBehaviour
         }
         instance=this;
     }
-    List<Ability> abilities = new List<Ability>();
-    public void AddAbility(Ability newAbility){
-        abilities.Add(newAbility);
-        //añadir componenste
+    private void Start() {
+        Ability[] abs = abiltySystem.GetComponents<Ability>();
+        for(int i=0;i<abs.Length;i++){
+            abilities.Add(abs[i]);
+        }
     }
     public void SetActive(bool active){
         foreach(Ability a in abilities){
             a.isUnlocked=active;
+            a.enabled=active;
         }
     }
 }
