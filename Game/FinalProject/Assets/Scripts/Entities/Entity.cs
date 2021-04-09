@@ -111,6 +111,18 @@ public class Entity : MonoBehaviour
         rigidbody2d.AddForce(force, ForceMode2D.Force);
     }
 
+
+    protected bool RayHitObstacle(Vector2 start, Vector2 end)
+    {
+        foreach (var obstacle in whatIsObstacle)
+        {
+            if (Physics2D.Linecast(start, end, obstacle))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     
     #endregion
 }

@@ -330,17 +330,7 @@ public abstract class Enemy : Entity
         return MathUtils.GetAngleBetween(fovOrigin.position, player.GetPosition());
     }
 
-    private bool RayHitObstacle(Vector2 start, Vector2 end)
-    {
-        foreach (var obstacle in whatIsObstacle)
-        {
-            if (Physics2D.Linecast(start, end, obstacle))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     #endregion
 

@@ -7,6 +7,8 @@ public abstract class FireBossEnemy : Entity, IProjectile
     private FireBoss fireBoss;
     private PlayerManager player;
     [SerializeField] protected float TimeBeforeStart;
+    [SerializeField] private Transform collisionCheck;
+    [SerializeField] private float baseCastDistance;
    
 
     #region Projectile Stuff
@@ -53,9 +55,27 @@ public abstract class FireBossEnemy : Entity, IProjectile
             TimeBeforeStart -= Time.deltaTime;
             return;
         }
+
+        if (InFrontOfObstacle())
+        {
+            ChangeFacingDirection();
+        }
         base.Update();
     }
 
+    protected bool InFrontOfObstacle()
+    {
+
+        float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
+        Vector3 targetPos = collisionCheck.position + (facingDirection == LEFT? Vector3.left : Vector3.right) * castDistance;
+        return RayHitObstacle(collisionCheck.position, targetPos);
+    }
+
+    protected void ChangeFacingDirection()
+    {
+        transform.eulerAngles = new Vector3(0, facingDirection == LEFT? 0:180);
+    }
+    
     public void ProjectileAttack()
     {
         player.TakeTirement(projectile.damage);
