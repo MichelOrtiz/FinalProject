@@ -15,7 +15,6 @@ public class FireBossA2 : FireBossEnemy
         base.Update();
         if (TimeBeforeStart <= 0)
         {
-            Debug.DrawLine(shotPoint.position, PlayerManager.instance.GetPosition());
             if (timeBtwShot > baseTimeBtwShot)
             {
                 base.ShotProjectile(shotPoint, shotPoint.position + facingDirection == LEFT? Vector2.left : Vector2.right);

@@ -101,7 +101,6 @@ public class Projectile : MonoBehaviour
         float hipotenusa = Mathf.Sqrt((distance.x * distance.x) + (distance.y * distance.y));
         if(hipotenusa > maxShotDistance)
         {
-            Debug.Log("Destroy");
             Destroy();
         }
         if (!touchingPlayer)

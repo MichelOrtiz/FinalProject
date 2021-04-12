@@ -36,7 +36,6 @@ public class FireBossA1 : FireBossEnemy
     private void ShotProjectiles()
     {
         float angle = facingDirection == LEFT ? 180 : 0;
-        Debug.Log(angle);
         for (int i = 0; i < projectiles; i++)
         {
             Vector3 target = MathUtils.GetVectorFromAngle(angle);

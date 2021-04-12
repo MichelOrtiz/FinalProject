@@ -8,6 +8,7 @@ public class FireBoss : BossFight
     
     // Hits until the boss gets beaten
     public int maxHits;
+    private int currentHits;
     private float timeBtwStages;
     private enum Zone
     {
@@ -26,45 +27,24 @@ public class FireBoss : BossFight
     // Update is called once per frame
     new void Update()
     {
-        if (timeBtwStages >= intervalBwtStages)
+        if (!isCleared)
         {
-            int randomStage = RandomGenerator.NewRandom(0, stages.Count-1);
-            ChangeToStage(stages[randomStage]);
-            
-            timeBtwStages = 0;
+            if (timeBtwStages >= intervalBwtStages)
+            {
+                int randomStage = RandomGenerator.NewRandom(0, stages.Count-1);
+                ChangeToStage(stages[randomStage]);
+                
+                timeBtwStages = 0;
+            }
+            else
+            {
+                timeBtwStages += Time.deltaTime;
+            }
         }
-        else
-        {
-            timeBtwStages += Time.deltaTime;
-        }
+        
         base.Update();        
     }
     
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (stages.Count > 0)
-        {
-            switch (other.tag)
-            {
-                case "fireboss-a1":
-                    ChangeToStage(stages[0]);
-                    break;
-                case "fireboss-a2":
-                    ChangeToStage(stages[1]);
-                    break;
-                case "fireboss-a3":
-                    ChangeToStage(stages[2]);
-                    break;
-            }
-        }
-    }
-
-
-    /*public override void NextStage()
-    {
-
-    }*/
-
     void ChangeToStage(Stage stage)
     {
         currentStage.Destroy();
@@ -76,5 +56,17 @@ public class FireBoss : BossFight
     {
         base.EndBattle();
         stages.Clear();
+    }
+
+    public void AddHit()
+    {
+        if (currentHits < maxHits)
+        {
+            currentHits++;
+        }
+        else
+        {
+            EndBattle();
+        }
     }
 }

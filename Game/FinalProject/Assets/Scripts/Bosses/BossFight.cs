@@ -7,7 +7,7 @@ public class BossFight : MonoBehaviour
     [SerializeField] protected List<Stage> stages;
     [SerializeField] protected GameObject abilityObject;
     public Stage currentStage;
-    private bool isCleared;
+    public bool isCleared;
     int indexStage;
 
     protected void Start()
@@ -45,5 +45,6 @@ public class BossFight : MonoBehaviour
     {
         currentStage.Destroy();
         isCleared=true;
+        Debug.Log("Lo hiciste ganaste!!!1");
     }
 }

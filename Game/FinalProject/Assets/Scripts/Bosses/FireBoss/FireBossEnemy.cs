@@ -30,13 +30,14 @@ public abstract class FireBossEnemy : Entity, IProjectile
 
     // To increase the damage each time the enemy gets hit
     [SerializeField] protected float damageChangeIncrease;
+    [SerializeField] protected float speedChangeIncrease;
     #endregion
     // Start is called before the first frame update
     protected new void Start()
     {
         base.Start();
 
-        fireBoss = GetComponent<FireBoss>();
+        fireBoss = FindObjectOfType<FireBoss>();
         player = PlayerManager.instance;
 
         if (fireBoss != null)
@@ -87,22 +88,16 @@ public abstract class FireBossEnemy : Entity, IProjectile
     }
     protected void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other);
         if (other.tag == "Projectile")
         {
-            Debug.Log("enemy hit by projectile");
-            if (currentHits < maxHits)
+            fireBoss.AddHit();
+            TimeBeforeStart = TimeBeforeStart + TimeBeforeStart * timeChangeMultiplier;
+            if (projectile != null)
             {
-                currentHits++;
-                TimeBeforeStart = TimeBeforeStart + TimeBeforeStart * timeChangeMultiplier;
-                if (projectile != null)
-                {
-                    projectile.damage +=  damageChangeIncrease;
-                }
-            }
-            else
-            {
-                fireBoss.EndBattle();
+                projectile.damage +=  damageChangeIncrease;
+                projectile.speedMultiplier += speedChangeIncrease;
+                projectile.speedMultiplier *= Entity.averageSpeed;
+
             }
         }
     }

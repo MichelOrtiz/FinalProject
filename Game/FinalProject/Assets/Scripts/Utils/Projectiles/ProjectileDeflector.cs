@@ -32,7 +32,9 @@ public class ProjectileDeflector : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 float speed = currentVelocity.magnitude;
-                var direction = GameCamera.instance.GetMousePosition(); //Vector2.Reflect(currentVelocity.normalized, transform.position.normalized); 
+                var direction = GameCamera.instance.GetMousePosition();
+
+                 //Vector2.Reflect(currentVelocity.normalized, transform.position.normalized); 
                 GetComponent<Projectile>().Setup(player.transform,  direction);
                 rb.velocity = direction.normalized * GetComponent<Projectile>().speedMultiplier * 1.5f;
 
