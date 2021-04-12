@@ -30,7 +30,7 @@ public static class RandomGenerator
         int num;
         System.Random random = new System.Random();
         
-        num = new System.Random().Next(min,max);
+        num = new System.Random().Next(min,max+1);
 
         return num; 
     }

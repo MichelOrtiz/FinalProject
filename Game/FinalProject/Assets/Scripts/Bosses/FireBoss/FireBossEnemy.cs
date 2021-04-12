@@ -85,11 +85,12 @@ public abstract class FireBossEnemy : Entity, IProjectile
         projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<Projectile>();
         projectile.Setup(from, to, this);
     }
-
-    void OnTriggerEnter2D(Collider2D other)
+    protected void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other);
         if (other.tag == "Projectile")
         {
+            Debug.Log("enemy hit by projectile");
             if (currentHits < maxHits)
             {
                 currentHits++;

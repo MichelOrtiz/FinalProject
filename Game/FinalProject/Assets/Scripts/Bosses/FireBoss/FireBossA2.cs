@@ -13,15 +13,18 @@ public class FireBossA2 : FireBossEnemy
     new void Update()
     {
         base.Update();
-
-        if (timeBtwShot > baseTimeBtwShot)
+        if (TimeBeforeStart <= 0)
         {
-            base.ShotProjectile(shotPoint, Vector2.right);
-            timeBtwShot = 0;
-        }
-        else
-        {
-            timeBtwShot += Time.deltaTime;
+            Debug.DrawLine(shotPoint.position, PlayerManager.instance.GetPosition());
+            if (timeBtwShot > baseTimeBtwShot)
+            {
+                base.ShotProjectile(shotPoint, shotPoint.position + facingDirection == LEFT? Vector2.left : Vector2.right);
+                timeBtwShot = 0;
+            }
+            else
+            {
+                timeBtwShot += Time.deltaTime;
+            }
         }
 
     }

@@ -16,27 +16,40 @@ public class FireBossA1 : FireBossEnemy
     {
         base.Update();
 
-        if (timeBtwShot > baseTimeBtwShot)
+        if (TimeBeforeStart <= 0)
         {
-            ShotProjectiles();
-            timeBtwShot = 0;
+            if (timeBtwShot > baseTimeBtwShot)
+            {
+                ShotProjectiles();
+                timeBtwShot = 0;
+            }
+            else
+            {
+                timeBtwShot += Time.deltaTime;
+            }
         }
-        else
-        {
-            timeBtwShot += Time.deltaTime;
-        }
+        
 
     }
 
 
     private void ShotProjectiles()
     {
-        float angle = 180;
+        float angle = facingDirection == LEFT ? 180 : 0;
+        Debug.Log(angle);
         for (int i = 0; i < projectiles; i++)
         {
             Vector3 target = MathUtils.GetVectorFromAngle(angle);
             base.ShotProjectile(shotPoint, shotPoint.position + target);
-            angle -= angleBtwProjectiles;
+            
+            if (facingDirection == LEFT)
+            {
+                angle -= angleBtwProjectiles;
+            }
+            else
+            {
+                angle += angleBtwProjectiles;
+            }
         }
     }
 }

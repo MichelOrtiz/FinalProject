@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
 
     #region Main Params
     [Header("MainParams")]
-    [SerializeField] private float speedMultiplier;
+    [SerializeField] public float speedMultiplier;
     [SerializeField] private float maxShotDistance;
     public float damage;
     // Time until destroyed
@@ -43,7 +43,7 @@ public class Projectile : MonoBehaviour
     private Vector2 distance;
     private Vector3 startPoint;
     private IProjectile enemy;
-    private Vector3 shootDir;
+    public Vector3 shootDir { get; set; }
     private Vector3 target;
     private string colliderTag;
     private bool isOnCollider;
@@ -52,6 +52,13 @@ public class Projectile : MonoBehaviour
 
     //private Animator animator;
     #endregion
+
+    public void Setup(Transform startPoint, Vector3 target)
+    {
+        this.startPoint = startPoint.position;
+        this.target = target;
+        shootDir = (target - startPoint.position).normalized;
+    }
 
     public void Setup(Transform startPoint, Vector3 target, IProjectile enemy)
     {
@@ -94,6 +101,7 @@ public class Projectile : MonoBehaviour
         float hipotenusa = Mathf.Sqrt((distance.x * distance.x) + (distance.y * distance.y));
         if(hipotenusa > maxShotDistance)
         {
+            Debug.Log("Destroy");
             Destroy();
         }
         if (!touchingPlayer)
@@ -142,9 +150,11 @@ public class Projectile : MonoBehaviour
     {
         if (touchingPlayer)
         {
-                
                 aboutToDestroy = true;
-                enemy.ProjectileAttack();
+                if (enemy != null)
+                {
+                    enemy.ProjectileAttack();
+                }
                 Destroy();
             
         }
@@ -242,8 +252,6 @@ public class Projectile : MonoBehaviour
             impactEffect.SetActive(true);
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         }
-        
         Destroy(gameObject);
     }
-
 }

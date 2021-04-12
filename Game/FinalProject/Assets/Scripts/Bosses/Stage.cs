@@ -14,7 +14,7 @@ public class Stage : ScriptableObject
     public void Generate(){
         for (int i = 0; i < gameObjects.Count; i++)
         {
-            currentObjects.Add(Instantiate(gameObjects[i], positions[i],Quaternion.identity));
+            currentObjects.Add(Instantiate(gameObjects[i], positions[i], gameObjects[i].transform.rotation));
         }
     }
     public void Destroy(){

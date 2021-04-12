@@ -20,12 +20,23 @@ public class FireBoss : BossFight
     // Start is called before the first frame update
     new void Start()
     {
-
+        base.Start();
     }
 
     // Update is called once per frame
     new void Update()
     {
+        if (timeBtwStages >= intervalBwtStages)
+        {
+            int randomStage = RandomGenerator.NewRandom(0, stages.Count-1);
+            ChangeToStage(stages[randomStage]);
+            
+            timeBtwStages = 0;
+        }
+        else
+        {
+            timeBtwStages += Time.deltaTime;
+        }
         base.Update();        
     }
     

@@ -59,6 +59,8 @@ public class Entity : MonoBehaviour
 
     protected void Start()
     {
+        facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
+
         animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         statesManager = gameObject.GetComponent<StatesManager>();

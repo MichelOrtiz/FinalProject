@@ -19,15 +19,19 @@ public class FireBossA3 : FireBossEnemy
     {
         base.Update();
 
-        if (timeBtwShot > baseTimeBtwShot)
+        if (TimeBeforeStart <= 0)
         {
-            base.ShotProjectile(shotPoint, shotPoint.position + Vector3.down);
-            timeBtwShot = 0;
+            if (timeBtwShot > baseTimeBtwShot)
+            {
+                base.ShotProjectile(shotPoint, shotPoint.position + Vector3.down);
+                timeBtwShot = 0;
+            }
+            else
+            {
+                timeBtwShot += Time.deltaTime;
+            }
         }
-        else
-        {
-            timeBtwShot += Time.deltaTime;
-        }
+        
 
     }
 
