@@ -4,6 +4,32 @@ using UnityEngine;
 
 public class GhostBossEnemy : Entity, IProjectile
 {
+    #region Params
+    [Header("Params")]
+    [SerializeField] private float timeBeforeStart;
+    [SerializeField] private float speedMultiplier;
+    private float speed;
+    [SerializeField] private float damageAmount;
+    private bool touchingPlayer;
+
+    private PlayerManager player;
+    #endregion
+
+    #region Division
+    [Header("Division")]
+    private bool alreadyDivided;
+    [SerializeField] private Transform divisionPoint;
+    [SerializeField] private float maxDivisions;
+    private static float currentDivisions;
+    [SerializeField] private float speedIncrease;
+    [SerializeField] private float projectileSpeedIncrease;
+    
+    // Maybe temporary
+    [SerializeField] private float sizeDecreaseMultiplier;
+    #endregion
+    
+    #region Projectile Stuff
+    [Header("Projectile stuff")]
     [SerializeField] private Transform shotPoint;
     [SerializeField] private GameObject projectilePrefab;
     private SeekerProjectile projectile;
@@ -11,19 +37,14 @@ public class GhostBossEnemy : Entity, IProjectile
 
     [SerializeField] private float timeBtwShot;
     private float curTimeBtwShot;
+    #endregion
     
-    [SerializeField] private float timeBeforeStart;
-    [SerializeField] private float speedMultiplier;
-    [SerializeField] private float damageAmount;
-    private bool touchingPlayer;
-
-    private PlayerManager player;
     
     new void Start()
     {
         base.Start();
         player = PlayerManager.instance;
-        speedMultiplier *= averageSpeed;
+        speed = averageSpeed * speedMultiplier;
     }
 
     new void Update()
@@ -44,6 +65,8 @@ public class GhostBossEnemy : Entity, IProjectile
                 curTimeBtwShot += Time.deltaTime;
             }
         }
+
+
         base.Update();
     }
 
@@ -95,6 +118,37 @@ public class GhostBossEnemy : Entity, IProjectile
         }
     }
 
+    void Divide()
+    {
+        if (currentDivisions < maxDivisions)
+        {
+            if (!alreadyDivided)
+            {
+
+
+                transform.localScale *= sizeDecreaseMultiplier;
+            
+                speedMultiplier += speedIncrease;
+
+                if (projectile != null)
+                {
+                    projectile.speedMultiplier += projectileSpeedIncrease;
+                }
+
+                Instantiate(this, divisionPoint.position, Quaternion.identity);
+
+
+
+                //alreadyDivided = true;
+                currentDivisions++;
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void ProjectileAttack()
     {
         player.GetComponent<StatesManager>().AddState(projectileEffectOnPlayer);
@@ -104,5 +158,10 @@ public class GhostBossEnemy : Entity, IProjectile
     {
         projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<SeekerProjectile>();
         projectile.Setup(from, player.transform, this);
+    }
+
+    void OnMouseDown()
+    {
+        Divide();
     }
 }

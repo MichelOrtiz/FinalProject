@@ -150,11 +150,6 @@ public class PlayerManager : Entity
 
     new void Update()
     {
-        if (currentStamina == 0)
-        {
-            Debug.Log("I'm die thank u for evah");
-
-        }
         rigidbody2d.mass = currentMass;
         animator.SetBool("Is Running", isRunning);
         animator.SetBool("Is Aiming", isAiming);

@@ -1367,6 +1367,36 @@ Transform:
   m_Father: {fileID: 511880028}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &516620585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 516620586}
+  m_Layer: 7
+  m_Name: divisionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &516620586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516620585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.34, y: -0.27, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 695789656}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &544150962 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5193769848945909687, guid: 7a0b76e1ae4c6a14f9144daf2644ab6d, type: 3}
@@ -1528,13 +1558,18 @@ MonoBehaviour:
   whatIsObstacle: []
   feetPos: {fileID: 359386861}
   checkFeetRadius: 0.3
+  timeBeforeStart: 3
+  speedMultiplier: 0.3
+  damageAmount: 1
+  divisionPoint: {fileID: 516620586}
+  maxDivisions: 3
+  speedIncrease: 0.3
+  projectileSpeedIncrease: 0.5
+  sizeDecreaseMultiplier: 0.8
   shotPoint: {fileID: 1000153867}
   projectilePrefab: {fileID: 8805213487483752607, guid: 741b6521573af3c4086683bf467ab2ba, type: 3}
   projectileEffectOnPlayer: {fileID: 11400000, guid: 74c30f4bd51be744fad40415a09362a1, type: 2}
   timeBtwShot: 5
-  timeBeforeStart: 3
-  speedMultiplier: 0.3
-  damageAmount: 1
 --- !u!61 &695789652
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1665,6 +1700,7 @@ Transform:
   m_Children:
   - {fileID: 359386861}
   - {fileID: 1000153867}
+  - {fileID: 516620586}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

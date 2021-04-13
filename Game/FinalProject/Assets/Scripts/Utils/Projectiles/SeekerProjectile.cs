@@ -7,7 +7,7 @@ public class SeekerProjectile : Projectile
     [SerializeField] private float lifeTime;
 
     PlayerManager player;
-    new private Transform target;
+    private Transform target;
 
     public void Setup(Transform startPoint, Transform target)
     {
