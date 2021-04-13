@@ -6,49 +6,49 @@ public class Projectile : MonoBehaviour
 {
     #region Rigids, colliders, layers, etc
     [Header("Rigids, colliders, layers, etc")]
-    [SerializeField] private Rigidbody2D rigidbody2d;
-    [SerializeField] private LayerMask whatIsObstacle;
-    [SerializeField] private GameObject warning;
-    [SerializeField] private GameObject? impactEffect;
+    [SerializeField] protected Rigidbody2D rigidbody2d;
+    [SerializeField] protected LayerMask whatIsObstacle;
+    [SerializeField] protected GameObject warning;
+    [SerializeField] protected GameObject? impactEffect;
 
-    [SerializeField] private bool targetWarningAvailable;
-    [SerializeField] private bool collidesWithPlayer;
-    private LayerMask defaultLayer;
+    [SerializeField] protected bool targetWarningAvailable;
+    [SerializeField] protected bool collidesWithPlayer;
+    protected LayerMask defaultLayer;
     #endregion
 
     #region Main Params
     [Header("MainParams")]
     [SerializeField] public float speedMultiplier;
-    [SerializeField] private float maxShotDistance;
+    [SerializeField] protected float maxShotDistance;
     public float damage;
     // Time until destroyed
-    [SerializeField] private float waitTime;
-    [SerializeField] private float impactEffectExitTime;
+    [SerializeField] protected float waitTime;
+    [SerializeField] protected float impactEffectExitTime;
     public bool touchingPlayer;
     public bool touchingObstacle;
     #endregion
 
     #region Misc
     [Header("Size")]
-    [SerializeField] private bool changeSizeByDistance;
-    [SerializeField] private float distanceToIncrease;
-    private float currentDistanceToSize;
-    [SerializeField] private float sizeByDistanceMultiplier;
-    [SerializeField] private bool changeSizeByTime;
-    [SerializeField] private float timeToIncrease;
-    private float currentTimeToSize;
-    [SerializeField] private float sizeByTimeMultiplier;
+    [SerializeField] protected bool changeSizeByDistance;
+    [SerializeField] protected float distanceToIncrease;
+    protected float currentDistanceToSize;
+    [SerializeField] protected float sizeByDistanceMultiplier;
+    [SerializeField] protected bool changeSizeByTime;
+    [SerializeField] protected float timeToIncrease;
+    protected float currentTimeToSize;
+    [SerializeField] protected float sizeByTimeMultiplier;
 
 
-    private Vector2 distance;
-    private Vector3 startPoint;
-    private IProjectile enemy;
+    protected Vector2 distance;
+    protected Vector3 startPoint;
+    protected IProjectile enemy;
     public Vector3 shootDir { get; set; }
-    private Vector3 target;
-    private string colliderTag;
-    private bool isOnCollider;
+    protected Vector3 target;
+    protected string colliderTag;
+    protected bool isOnCollider;
 
-    private bool aboutToDestroy;
+    protected bool aboutToDestroy;
 
     //private Animator animator;
     #endregion
@@ -145,7 +145,7 @@ public class Projectile : MonoBehaviour
         
     }
     
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (touchingPlayer)
         {
@@ -173,7 +173,7 @@ public class Projectile : MonoBehaviour
         }
     }*/
 
-    private void ChangeSizeByTime()
+    protected void ChangeSizeByTime()
     {
         if (currentTimeToSize> timeToIncrease)
         {
@@ -186,31 +186,31 @@ public class Projectile : MonoBehaviour
         }
     }
     
-    void OnTriggerEnter2D(Collider2D other)
+    protected void OnTriggerEnter2D(Collider2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
         touchingObstacle = other.gameObject.layer == whatIsObstacle;
     }
     
-    void OnTriggerStay2D(Collider2D other)
+    protected void OnTriggerStay2D(Collider2D other)
     {
         isOnCollider = other.gameObject.tag == colliderTag;
     }
     
 
-    void OnCollisionEnter2D(Collision2D other)
+    protected void OnCollisionEnter2D(Collision2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
         touchingObstacle = other.gameObject.layer == whatIsObstacle;
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
     }
     
-    void OnCollisionStay2D(Collision2D other)
+    protected void OnCollisionStay2D(Collision2D other)
     {
         isOnCollider = other.gameObject.tag == colliderTag;
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    protected void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -227,7 +227,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D other)
+    protected void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
         {
