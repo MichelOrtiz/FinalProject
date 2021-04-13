@@ -231,6 +231,14 @@ public class PlayerManager : Entity
         {
             StartCoroutine(Drowning(1f, 0.05f));
         }
+        if (currentStamina<1)
+        {
+            FindRespawnPos();
+            currentStamina = maxStamina;
+            staminaBar.SetMaxStamina(maxStamina);
+            currentOxygen = maxOxygen;
+            oxygenBar.SetMaxOxygen(maxOxygen);
+        }
         base.Update();
     } 
 
@@ -407,6 +415,9 @@ public class PlayerManager : Entity
     }
 
     void FindStartPos(){
-        transform.position = GameObject.FindWithTag("StartPos").transform.position; //GameObject.FindWithTag("StartPos").transform.position;
+        transform.position = GameObject.FindWithTag("StartPos").transform.position;
+    }
+    void FindRespawnPos(){
+        transform.position = GameObject.FindWithTag("RespawnPos").transform.position;
     }
 }

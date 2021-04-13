@@ -10,23 +10,19 @@ public class SquareMinijuego : MonoBehaviour
     private enum Tipo{Cuadrado}
     [SerializeField] Tipo tipo;
     [SerializeField] Vector2 rotation;
-    [SerializeField] int speed;
+    int speed;
     Rigidbody2D Body;
     private int score;
-    public UnityEvent buttonClick;
-    void Awake(){
-        if (buttonClick==null)
-        {
-            buttonClick = new UnityEvent();
-        }
-    }
+    private int dif;
+
     void Start()
     {
         Body = GetComponent<Rigidbody2D>();
+        dif = 0;
+        speed = Random.Range(10,15);
     }
     void Update()
     {
-        speed = Random.Range(10,15);
         transform.position += (Vector3)rotation * speed * Time.deltaTime;
     }
     void OnTriggerEnter2D(Collider2D target){
@@ -35,7 +31,16 @@ public class SquareMinijuego : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void onMouseUp(){
-        buttonClick.Invoke();
+    void OnMouseDown(){
+        dif++;
+        if (dif == 2)
+        {
+            Destroy(gameObject);
+            ScoreController.score++;
+        }else
+        {
+            speed = speed/2;
+            transform.position += (Vector3)rotation * speed * Time.deltaTime;
+        }
     }
 }
