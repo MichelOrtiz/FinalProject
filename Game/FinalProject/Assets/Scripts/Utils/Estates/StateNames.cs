@@ -15,5 +15,6 @@ public enum StateNames
     Patrolling, 
     Falling,
     Invulnerable, 
-    Slow
+    Slow, 
+    StaminaReduced
 }

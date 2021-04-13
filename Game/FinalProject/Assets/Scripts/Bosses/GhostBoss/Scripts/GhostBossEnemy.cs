@@ -7,10 +7,14 @@ public class GhostBossEnemy : Entity, IProjectile
     [SerializeField] private Transform shotPoint;
     [SerializeField] private GameObject projectilePrefab;
     private SeekerProjectile projectile;
+    [SerializeField] private State projectileEffectOnPlayer;
+
     [SerializeField] private float timeBtwShot;
     private float curTimeBtwShot;
+    
     [SerializeField] private float timeBeforeStart;
     [SerializeField] private float speedMultiplier;
+    [SerializeField] private float damageAmount;
     private bool touchingPlayer;
 
     private PlayerManager player;
@@ -69,6 +73,17 @@ public class GhostBossEnemy : Entity, IProjectile
         if (other.tag == "Player")
         {
             touchingPlayer = true;
+
+            if (player.GetComponent<StatesManager>().currentStates.Contains(projectileEffectOnPlayer))
+            {
+                projectileEffectOnPlayer.StopAffect();
+                //player.GetComponent<StatesManager>().RemoveState(projectileEffectOnPlayer);
+                player.currentStamina = 0;
+            }
+            else
+            {
+                player.TakeTirement(damageAmount);
+            }
         }
     }
 
@@ -82,12 +97,12 @@ public class GhostBossEnemy : Entity, IProjectile
 
     public void ProjectileAttack()
     {
-        
+        player.GetComponent<StatesManager>().AddState(projectileEffectOnPlayer);
     }
 
     public void ShotProjectile(Transform from, Vector3 to)
     {
         projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<SeekerProjectile>();
-        projectile.Setup(from, player.transform);
+        projectile.Setup(from, player.transform, this);
     }
 }
