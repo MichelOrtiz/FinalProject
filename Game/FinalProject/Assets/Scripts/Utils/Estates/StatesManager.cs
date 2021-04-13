@@ -21,8 +21,11 @@ public class StatesManager : MonoBehaviour
 
     public void AddState(State newState){
         if(newState != null){
-            newState.StartAffect(this);
-            currentStates.Add(newState);
+            if (!currentStates.Contains(newState))
+            {
+                newState.StartAffect(this);
+                currentStates.Add(newState);
+            }
         }
     }
     public void AddState(State newState, Entity newEnemy){
@@ -34,6 +37,7 @@ public class StatesManager : MonoBehaviour
     }
     public void RemoveState(State state){
         if(currentStates.Contains(state)){
+            //state.StopAffect();
             currentStates.Remove(state);
         }
     }

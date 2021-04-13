@@ -5,6 +5,8 @@ using UnityEngine;
 public class SeekerProjectile : Projectile
 {
     [SerializeField] private float lifeTime;
+
+    PlayerManager player;
     new private Transform target;
 
     public void Setup(Transform startPoint, Transform target)
@@ -22,6 +24,8 @@ public class SeekerProjectile : Projectile
 
     void Start()
     {
+        player = PlayerManager.instance;
+
         defaultLayer = gameObject.layer;
         if (impactEffect != null)
         {
@@ -63,6 +67,14 @@ public class SeekerProjectile : Projectile
         if (changeSizeByTime)
         {
             ChangeSizeByTime();
+        }
+
+        if (touchingPlayer)
+        {
+            if (enemy != null)
+            {
+                enemy.ProjectileAttack();
+            }
         }
         
     }

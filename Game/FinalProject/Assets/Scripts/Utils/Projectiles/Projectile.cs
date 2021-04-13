@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
     protected Vector3 startPoint;
     protected IProjectile enemy;
     public Vector3 shootDir { get; set; }
-    protected Vector3 target;
+    private Vector3 target;
     protected string colliderTag;
     protected bool isOnCollider;
 
