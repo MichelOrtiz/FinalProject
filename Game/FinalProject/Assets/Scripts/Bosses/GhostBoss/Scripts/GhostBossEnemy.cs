@@ -20,7 +20,7 @@ public class GhostBossEnemy : Entity, IProjectile
     private bool alreadyDivided;
     [SerializeField] private Transform divisionPoint;
     [SerializeField] private float maxDivisions;
-    private static float currentDivisions;
+    private float currentDivisions;
     [SerializeField] private float speedIncrease;
     [SerializeField] private float projectileSpeedIncrease;
     
@@ -108,6 +108,11 @@ public class GhostBossEnemy : Entity, IProjectile
                 player.TakeTirement(damageAmount);
             }
         }
+
+        if (other.tag == "Light")
+        {
+            Divide();
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -135,12 +140,12 @@ public class GhostBossEnemy : Entity, IProjectile
                     projectile.speedMultiplier += projectileSpeedIncrease;
                 }
 
-                Instantiate(this, divisionPoint.position, Quaternion.identity);
+                currentDivisions++;
+                Instantiate(this, divisionPoint.position, Quaternion.identity).currentDivisions = currentDivisions;
 
 
 
                 //alreadyDivided = true;
-                currentDivisions++;
             }
         }
         else
