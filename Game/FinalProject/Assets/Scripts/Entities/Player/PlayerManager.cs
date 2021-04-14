@@ -33,6 +33,7 @@ public class PlayerManager : Entity
     public bool isDashingH;
     public bool isDashingV;
     public bool isDoubleJumping;
+    public bool DeathActive;
 
     #endregion
 
@@ -231,13 +232,15 @@ public class PlayerManager : Entity
         {
             StartCoroutine(Drowning(1f, 0.05f));
         }
-        if (currentStamina<1)
-        {
-            FindRespawnPos();
-            currentStamina = maxStamina;
-            staminaBar.SetMaxStamina(maxStamina);
-            currentOxygen = maxOxygen;
-            oxygenBar.SetMaxOxygen(maxOxygen);
+        if(DeathActive){
+            if (currentStamina<1)
+            {
+                FindRespawnPos();
+                currentStamina = maxStamina;
+                staminaBar.SetMaxStamina(maxStamina);
+                currentOxygen = maxOxygen;
+                oxygenBar.SetMaxOxygen(maxOxygen);
+            }
         }
         base.Update();
     } 
