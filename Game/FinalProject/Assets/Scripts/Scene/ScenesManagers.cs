@@ -39,6 +39,34 @@ public class ScenesManagers : MonoBehaviour
         return objects;
     }
 
+    public static List<GameObject> GetGameObjectsOfScript<T>()
+    {
+        List<T> objects = GetObjectsOfType<T>();
+        GameObject[] allGameObjects = FindObjectsOfType<GameObject>();
+
+        List<GameObject> gameObjects = new List<GameObject>();
+
+        foreach (var gameObject in allGameObjects)
+        {
+            if (gameObject.GetComponent<T>() != null)
+            {
+                gameObjects.Add(gameObject);
+            }
+        }
+
+        return gameObjects;
+    }
+
+    public static List<T> ArrayToList<T>(T[] array)
+    {
+        List<T> objects = new List<T>();
+        foreach (var element in array)
+        {
+            objects.Add(element);
+        }
+        return objects;
+    }
+
     public static List<GameObject> FindMatchedObjects(List<GameObject> objects)
     {
         List<GameObject> result = new List<GameObject>();

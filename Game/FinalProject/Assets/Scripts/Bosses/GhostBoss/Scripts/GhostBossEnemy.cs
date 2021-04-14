@@ -17,15 +17,20 @@ public class GhostBossEnemy : Entity, IProjectile
 
     #region Division
     [Header("Division")]
-    private bool alreadyDivided;
     [SerializeField] private Transform divisionPoint;
     [SerializeField] private float maxDivisions;
     private float currentDivisions;
+    private bool alreadyDivided;
+    [SerializeField] private float timeUntilDivide;
+    private float timeInLight;
     [SerializeField] private float speedIncrease;
     [SerializeField] private float projectileSpeedIncrease;
     
     // Maybe temporary
     [SerializeField] private float sizeDecreaseMultiplier;
+
+
+    private bool InLight;
     #endregion
     
     #region Projectile Stuff
@@ -55,6 +60,12 @@ public class GhostBossEnemy : Entity, IProjectile
         }
         else
         {
+            if (( facingDirection == RIGHT && player.GetPosition().x < GetPosition().x )
+                || ( facingDirection == LEFT && player.GetPosition().x > GetPosition().x ))
+            {
+                transform.eulerAngles = new Vector3(0, facingDirection == LEFT? 0:180); 
+            }
+
             if (curTimeBtwShot > timeBtwShot)
             {
                 ShotProjectile(shotPoint, player.GetPosition());
@@ -64,8 +75,24 @@ public class GhostBossEnemy : Entity, IProjectile
             {
                 curTimeBtwShot += Time.deltaTime;
             }
+
+            if (InLight)
+            {
+                if (timeInLight > timeUntilDivide)
+                {
+                    Divide();
+                    InLight = false;
+                    timeInLight = 0;
+                }
+                else
+                {
+                    timeInLight += Time.deltaTime;
+                }
+            }
+            
         }
 
+        
 
         base.Update();
     }
@@ -111,7 +138,7 @@ public class GhostBossEnemy : Entity, IProjectile
 
         if (other.tag == "Light")
         {
-            Divide();
+            InLight = true;
         }
     }
 
@@ -120,6 +147,11 @@ public class GhostBossEnemy : Entity, IProjectile
         if (other.tag == "Player")
         {
             touchingPlayer = false;
+        }
+
+        if (other.tag == "Light")
+        {
+            InLight = false;
         }
     }
 
@@ -165,8 +197,8 @@ public class GhostBossEnemy : Entity, IProjectile
         projectile.Setup(from, player.transform, this);
     }
 
-    void OnMouseDown()
+    void OnDestroy()
     {
-        Divide();
+        
     }
 }
