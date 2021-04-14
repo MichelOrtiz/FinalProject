@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class GhostBoss : MonoBehaviour
 {
-    private List<Door> doors;
+    [SerializeField] private List<Door> doors;
     void Start()
     {
+        //UpdateDoorList();
         doors = ScenesManagers.GetObjectsOfType<Door>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (var door in doors)
+        Door door = doors.Find(d => d.isOpen);
+        if (door != null)
         {
-            if (door.isOpen)
-            {
-                doors.Remove(door);
-                Destroy(door.GetComponentInParent<GameObject>());
-            }
-        }    
+            door.GetComponent<Door>().enabled = false;
+
+            door.GetComponent<LineRenderer>().enabled = false;
+            doors.Remove(door);
+            Switch.AllDoors = doors;
+        }
     }
 }

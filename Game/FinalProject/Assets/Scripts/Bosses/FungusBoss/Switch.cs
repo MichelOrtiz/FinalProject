@@ -7,14 +7,14 @@ public class Switch : MonoBehaviour
     public bool activado;
     [SerializeField] private float radius;
     [SerializeField] private List<GameObject> doorsAttached;
-    private List<Door> allDoors;
+    public static List<Door> AllDoors { get; set; }
     private PlayerManager player;
     
     // Start is called before the first frame update
     void Start()
     {
         player = PlayerManager.instance;
-        allDoors = ScenesManagers.GetObjectsOfType<Door>();
+        AllDoors = ScenesManagers.GetObjectsOfType<Door>();
     }
 
     // Update is called once per frame
@@ -29,16 +29,17 @@ public class Switch : MonoBehaviour
                 GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
                 foreach (var door in doorsAttached)
                 {
-                    if (allDoors.Exists(d => d.name == door.name))
+                    if (door != null)
                     {
-                        allDoors.Find(d => d.name == door.name).Activate();
+                        if (AllDoors.Exists(d => d.gameObject.name.Equals(door.name)))
+                        {
+                            door.GetComponent<Door>().Activate();
+                        }
                     }
                 }
             }
         }
     }
-
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
