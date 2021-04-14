@@ -92,6 +92,7 @@ public class GhostBossEnemy : Entity, IProjectile
             
         }
 
+        
 
         base.Update();
     }
@@ -196,8 +197,8 @@ public class GhostBossEnemy : Entity, IProjectile
         projectile.Setup(from, player.transform, this);
     }
 
-    void OnMouseDown()
+    void OnDestroy()
     {
-        Divide();
+        
     }
 }
