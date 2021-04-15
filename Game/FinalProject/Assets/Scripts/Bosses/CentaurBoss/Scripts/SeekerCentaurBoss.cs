@@ -5,6 +5,9 @@ using Pathfinding;
 
 public class SeekerCentaurBoss : Entity, IProjectile
 {
+    [Header("Effect On Player")]
+    [SerializeField] private State effectOnPlayer;
+    
     [Header("Pathfinfing")]
     [SerializeField] private Transform target;
     [SerializeField] private float activateDistance;
@@ -79,13 +82,16 @@ public class SeekerCentaurBoss : Entity, IProjectile
         {
             if (direction.y > jumpNodeHeightRequirement)
             {
-                rigidbody2d.AddForce(Vector2.up * speed * jumpForce);
+                rigidbody2d.AddForce(Vector2.up * speed * jumpForce, ForceMode2D.Impulse);
             }
 
         }
 
+        if (!isGrounded) force.y = 0;
+        
+        rigidbody2d.AddForce(force, ForceMode2D.Impulse);
+
         // Movement
-        rigidbody2d.AddForce(force);
 
         // Next Waypoint
         float distance = Vector2.Distance(GetPosition(), path.vectorPath[currentWaypoint]);
