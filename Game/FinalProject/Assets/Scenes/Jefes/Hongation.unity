@@ -1269,6 +1269,8 @@ MonoBehaviour:
   stages:
   - {fileID: 11400000, guid: c12e6f604e8034e49ba38582ea14b324, type: 2}
   abilityObject: {fileID: 0}
+  currentStage: {fileID: 0}
+  isCleared: 0
 --- !u!4 &653973819
 Transform:
   m_ObjectHideFlags: 0
@@ -1472,11 +1474,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 114.92
+      value: 111.8
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 148.16
+      value: 150.7
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2910,7 +2912,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387b4d7f3ff88a3439d50e3cefa5fad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePosition: {x: 0, y: 0, z: 0}
 --- !u!81 &1276819462
 AudioListener:
   m_ObjectHideFlags: 0
