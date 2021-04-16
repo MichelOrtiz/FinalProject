@@ -853,7 +853,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196234395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -297.9, y: 14, z: 0}
+  m_LocalPosition: {x: -297.9, y: 15.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1060,7 +1060,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec33669121d3072419cc9d042eb1498e, type: 2}
   - {fileID: 11400000, guid: e958f1b2efe207647b6e9ff19a80703b, type: 2}
   - {fileID: 11400000, guid: 348f1e233987ccf4cbad317b8385c6e1, type: 2}
-  reward: {fileID: 0}
+  abilityObject: {fileID: 0}
+  currentStage: {fileID: 0}
+  isCleared: 0
 --- !u!224 &408987194 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5193769848945909687, guid: 7a0b76e1ae4c6a14f9144daf2644ab6d, type: 3}
@@ -3027,7 +3029,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387b4d7f3ff88a3439d50e3cefa5fad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePosition: {x: 0, y: 0, z: 0}
 --- !u!81 &823525688
 AudioListener:
   m_ObjectHideFlags: 0
@@ -80912,7 +80913,9 @@ MonoBehaviour:
   stages:
   - {fileID: 11400000, guid: 12d67a17d4b0f014980ed9d0a7999f6b, type: 2}
   - {fileID: 11400000, guid: 13617c33423ae4546b9a5b483e3de2bb, type: 2}
-  reward: {fileID: 1552632792}
+  abilityObject: {fileID: 0}
+  currentStage: {fileID: 0}
+  isCleared: 0
 --- !u!4 &1943245068
 Transform:
   m_ObjectHideFlags: 0
