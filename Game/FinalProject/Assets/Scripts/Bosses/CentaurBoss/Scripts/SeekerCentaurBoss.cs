@@ -6,8 +6,22 @@ using Pathfinding;
 public class SeekerCentaurBoss : Entity, IProjectile
 {
     [Header("Effect On Player")]
-    [SerializeField] private State effectOnPlayer;
-    
+    [SerializeField] private State enemyEffectOnPlayer;
+    [SerializeField] private State enemyEffectOnSelf;
+    [SerializeField] private State projectileEffectOnPlayer;
+    [SerializeField] private float damageAmount;
+
+
+    [Header("Projectile")]
+    [SerializeField] private GameObject projectilePrefab;
+    private Projectile projectile;
+    [SerializeField] private Transform shotPoint;
+    [SerializeField] private float minDistanceToShoot;
+    [SerializeField] private float timeBtwShot;
+    private float currentTimeBtwShot;
+
+
+    #region PathFinding variables
     [Header("Pathfinfing")]
     [SerializeField] private Transform target;
     [SerializeField] private float activateDistance;
@@ -22,7 +36,17 @@ public class SeekerCentaurBoss : Entity, IProjectile
     private Path path;
     private int currentWaypoint = 0;
     private Seeker seeker;
+    #endregion
+
+    [SerializeField] private Transform fovOrigin;
+    [SerializeField] private float baseCastDistance;
+    [SerializeField] private bool canMove = true;
+
+    [SerializeField] private float waitTime;
+    private float currentTime;
+
     private PlayerManager player;
+    private bool touchingPlayer;
 
 
     // Start is called before the first frame update
@@ -30,6 +54,7 @@ public class SeekerCentaurBoss : Entity, IProjectile
     {
         base.Start();
         seeker = GetComponent<Seeker>();
+        statesManager = GetComponent<StatesManager>();
         player = PlayerManager.instance;
         target = player.transform;
         speed = averageSpeed * speedMultiplier;
@@ -39,6 +64,24 @@ public class SeekerCentaurBoss : Entity, IProjectile
     // Update is called once per frame
     new void Update()
     {
+        float distanceFromPlayer = Vector2.Distance(GetPosition(), player.GetPosition());
+        if (distanceFromPlayer >= minDistanceToShoot)
+        {
+            if (currentTimeBtwShot > timeBtwShot)
+            {
+                ShotProjectile(shotPoint, player.GetPosition());
+                currentTimeBtwShot = 0;
+            }
+            else
+            {
+                currentTimeBtwShot += Time.deltaTime;
+            }
+        }
+        else
+        {
+            currentTimeBtwShot = 0;
+        }
+
         base.Update();
     }
 
@@ -47,7 +90,7 @@ public class SeekerCentaurBoss : Entity, IProjectile
     /// </summary>
     void FixedUpdate()
     {
-        if (TargetInDistance())
+        if (TargetInDistance() && canMove)
         {
             FollowPath();
         }
@@ -78,7 +121,7 @@ public class SeekerCentaurBoss : Entity, IProjectile
         Vector2 force = direction * speed * Time.deltaTime;
 
         // Jump
-        if (isGrounded)
+        if (isGrounded && canMove)
         {
             if (direction.y > jumpNodeHeightRequirement)
             {
@@ -86,8 +129,10 @@ public class SeekerCentaurBoss : Entity, IProjectile
             }
 
         }
-
-        if (!isGrounded) force.y = 0;
+        else
+        {
+            force.y = 0;
+        }
         
         rigidbody2d.AddForce(force, ForceMode2D.Impulse);
 
@@ -133,13 +178,43 @@ public class SeekerCentaurBoss : Entity, IProjectile
         }
     }
 
+
+    protected bool InFrontOfObstacle()
+    {
+
+        float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
+        Vector3 targetPos = fovOrigin.position + (facingDirection == LEFT? Vector3.left : Vector3.right) * castDistance;
+        return RayHitObstacle(fovOrigin.position, targetPos);
+    }
+
     public void ProjectileAttack()
     {
-        //throw new System.NotImplementedException();
+        player.statesManager.AddState(projectileEffectOnPlayer);
     }
 
     public void ShotProjectile(Transform from, Vector3 to)
     {
-        //throw new System.NotImplementedException();
+        projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<Projectile>();
+        projectile.Setup(from, to);
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            touchingPlayer = true;
+            player.TakeTirement(damageAmount);
+            player.statesManager.AddState(enemyEffectOnPlayer);
+            statesManager.AddState(enemyEffectOnSelf);
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+
+            touchingPlayer = false;
+        }        
     }
 }
