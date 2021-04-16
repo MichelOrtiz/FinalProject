@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PrecisionMedufJuego : MonoBehaviour
 {
-    int random;
+    int random, randomreloj;
     public float x, y;
     public float angle =0;
     public float speed=(2*Mathf.PI)/5; //2*PI in degress is 360, so you get 5 seconds to complete a circle
@@ -20,17 +20,30 @@ public class PrecisionMedufJuego : MonoBehaviour
     }
      void Update()
     {
+        
         Moverse();
     }
     void Moverse(){
         if (reloj)
         {
+            random=Random.Range(1,3);
             Body.rotation = x;
-            x++;
+            x+=random;
+            if (x>randomreloj)
+            {
+                randomreloj=Random.Range(-250,-750)/*(-350,-750)*/;
+                reloj = false;
+            }
         }else
         {
-            Body.rotation = y;
-            y--;
+            random=Random.Range(1,3);
+            Body.rotation = x;
+            x-=random;
+            if (x<-randomreloj)
+            {
+                randomreloj=Random.Range(250,750)/*(350,750)*/;
+                reloj = true;
+            }
         }
     }
 }
