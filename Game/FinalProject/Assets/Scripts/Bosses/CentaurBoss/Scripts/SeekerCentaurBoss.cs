@@ -38,6 +38,12 @@ public class SeekerCentaurBoss : Entity, IProjectile
     private Seeker seeker;
     #endregion
 
+    [Header("Speed Increase")]
+    [SerializeField] private float minDistanceFromPlayer;
+    [SerializeField] private float speedIcreaseMultiplier;
+    private  bool speedIncreased;
+
+    [Header("Misc")]
     [SerializeField] private Transform fovOrigin;
     [SerializeField] private float baseCastDistance;
     [SerializeField] private bool canMove = true;
@@ -82,6 +88,21 @@ public class SeekerCentaurBoss : Entity, IProjectile
             currentTimeBtwShot = 0;
         }
 
+        if (distanceFromPlayer <= minDistanceFromPlayer)
+        {
+            if (!speedIncreased)
+            {
+                speed *= speedIcreaseMultiplier;
+                speedIncreased = true;
+            }
+            
+        }
+        else if (speedIncreased)
+        {
+            speed /= speedIcreaseMultiplier;
+            speedIncreased = false;
+        }
+
         base.Update();
     }
 
@@ -121,7 +142,7 @@ public class SeekerCentaurBoss : Entity, IProjectile
         Vector2 force = direction * speed * Time.deltaTime;
 
         // Jump
-        if (isGrounded && canMove)
+        if (isGrounded)
         {
             if (direction.y > jumpNodeHeightRequirement)
             {
@@ -154,14 +175,19 @@ public class SeekerCentaurBoss : Entity, IProjectile
              rigidbody2d.velocity = new Vector2(speed*(-1), rigidbody2d.velocity.y);
          }*/
 
-         if (rigidbody2d.velocity.x > 0.05f && facingDirection == LEFT)
+        /* if (rigidbody2d.velocity.x > 0.05f && facingDirection == LEFT)
          {
             transform.eulerAngles = new Vector3(0, 0); 
          }
          else if (rigidbody2d.velocity.x < -0.05f && facingDirection == RIGHT)
          {
             transform.eulerAngles = new Vector3(0, 180); 
-         }
+         }*/
+         if (( facingDirection == RIGHT && player.GetPosition().x < GetPosition().x )
+                || ( facingDirection == LEFT && player.GetPosition().x > GetPosition().x ))
+            {
+                transform.eulerAngles = new Vector3(0, facingDirection == LEFT? 0:180); 
+            }
     }
 
     private bool TargetInDistance()
@@ -195,7 +221,7 @@ public class SeekerCentaurBoss : Entity, IProjectile
     public void ShotProjectile(Transform from, Vector3 to)
     {
         projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to);
+        projectile.Setup(from, to, this);
     }
 
     void OnCollisionEnter2D(Collision2D other)
