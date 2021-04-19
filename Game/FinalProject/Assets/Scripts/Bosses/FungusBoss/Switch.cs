@@ -31,7 +31,7 @@ public class Switch : MonoBehaviour
                 {
                     if (door != null)
                     {
-                        if (AllDoors.Exists(d => d.gameObject.name.Equals(door.name)))
+                        if (AllDoors.Exists(d => d.name.Equals(door.name)))
                         {
                             door.GetComponent<Door>().Activate();
                         }

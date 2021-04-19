@@ -19,26 +19,26 @@ public class GiroTimon : MonoBehaviour
     {
         if (girar == 1)
         {
-            Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            if (Input.GetMouseButtonDown(0))
+            {
+                PressPoint = Input.mousePosition;
+                StartRotation = transform.rotation;
+            }
+            /*Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
-            transform.rotation = rotation;
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            PressPoint = Input.mousePosition;
-            StartRotation = transform.rotation;
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            float CurrentDistanceBetweenMousePosition = (Input.mousePosition - PressPoint).y;
-            transform.rotation = StartRotation * Quaternion.Euler(Vector3.forward * (CurrentDistanceBetweenMousePosition/SceneHeight)*360);
+            transform.rotation = rotation;*/
+            else if (Input.GetMouseButton(0))
+            {
+                float CurrentDistanceBetweenMousePosition = (Input.mousePosition - PressPoint).y;
+                transform.rotation = StartRotation * Quaternion.Euler(Vector3.forward * (CurrentDistanceBetweenMousePosition/SceneHeight)*360);
+            }
         }
     }
-    void OnMouseDown(){
-        //girar = 1;
+    void OnMouseEnter(){
+        girar = 1;
     }
-    void OnMouseUp(){
+    void OnMouseExit(){
         girar = 0;
     }
 }
