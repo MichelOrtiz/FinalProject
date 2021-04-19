@@ -80,4 +80,25 @@ public class ScenesManagers : MonoBehaviour
         }
         return result;
     }
+
+    public static void SetListActive(List<GameObject> gameObjects, bool active)
+    {
+        foreach (var gameObject in gameObjects)
+        {
+            if (gameObject != null)
+            {
+                gameObject.SetActive(active);
+            }
+        }
+    }
+
+    public static bool IsFullListActive(List<GameObject> gameObjects)
+    {
+        return !gameObjects.Exists(g => !g.activeInHierarchy);
+    }
+
+    public static void InvertListActive(List<GameObject> gameObjects)
+    {
+        SetListActive(gameObjects, !IsFullListActive(gameObjects));
+    }
 }

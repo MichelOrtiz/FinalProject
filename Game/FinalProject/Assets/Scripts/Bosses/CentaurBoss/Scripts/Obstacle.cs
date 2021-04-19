@@ -1,6 +1,6 @@
 
 using UnityEngine;
-public class CBObstacle : MonoBehaviour
+public class Obstacle : MonoBehaviour
 {
     [SerializeField] private float damage;
     private PlayerManager player;
@@ -22,4 +22,12 @@ public class CBObstacle : MonoBehaviour
             player.TakeTirement(damage);
         }
     }
+
+/*void OnTriggerEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            player.TakeTirement(damage);
+        }
+    }*/
 }
