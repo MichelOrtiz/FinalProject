@@ -7,7 +7,7 @@ public class PrecisionMedufJuego : MonoBehaviour
     int random, randomreloj;
     public float x, y;
     public float angle =0;
-    public float speed=(2*Mathf.PI)/5; //2*PI in degress is 360, so you get 5 seconds to complete a circle
+    public float speed=(2*Mathf.PI)/5;
     float radius=5;
     [SerializeField] Rigidbody2D Body;
     public Vector2 position;
@@ -31,7 +31,7 @@ public class PrecisionMedufJuego : MonoBehaviour
             x+=random;
             if (x>randomreloj)
             {
-                randomreloj=Random.Range(-250,-750)/*(-350,-750)*/;
+                randomreloj=Random.Range(-1000,-1500);
                 reloj = false;
             }
         }else
@@ -41,7 +41,7 @@ public class PrecisionMedufJuego : MonoBehaviour
             x-=random;
             if (x<-randomreloj)
             {
-                randomreloj=Random.Range(250,750)/*(350,750)*/;
+                randomreloj=Random.Range(1000,1500);
                 reloj = true;
             }
         }

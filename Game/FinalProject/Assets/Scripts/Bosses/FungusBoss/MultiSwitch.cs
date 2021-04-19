@@ -6,7 +6,7 @@ public class MultiSwitch : MonoBehaviour
 {
     public int numberOfSwitch;
     public bool jugando;
-    [SerializeField] private List<int> Orden;
+    [SerializeField] private List<Switch> Orden;
     [SerializeField] private List<bool> OrdenJugador;
     
     public Door door;
@@ -36,7 +36,17 @@ public class MultiSwitch : MonoBehaviour
         {
             for (int i = 0; i < switches.Count; i++)
             {
-                if (!OrdenJugador[i] && switches[i].activado )
+                
+                if ((switches[i].activado && OrdenJugador[i] == Orden[i].activado))
+                {
+                    OrdenJugador[i] = true;//
+                    
+                }else if(OrdenJugador[i] != Orden[i])
+                {
+                    Default();
+                    break;
+                }
+                /*if (!OrdenJugador[i] && switches[i].activado )
                 {
                     OrdenJugador[i] = true;
                     if (i!=Orden[i])
@@ -44,7 +54,7 @@ public class MultiSwitch : MonoBehaviour
                         Default();
                     }
                     break;
-                }
+                }*/
             }            
         }
         if (Activados()&& !door.isOpen)
@@ -79,4 +89,3 @@ public class MultiSwitch : MonoBehaviour
         return true;
     }
 }
-
