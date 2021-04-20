@@ -42,7 +42,7 @@ public abstract class Enemy : Entity
     #endregion
 
     #region Status
-    [SerializeField] protected bool touchingPlayer;
+    public bool touchingPlayer;
     [SerializeField] protected bool justCapturedPlayer;
     #endregion
 
