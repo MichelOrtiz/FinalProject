@@ -7,6 +7,13 @@ public class Laser : MonoBehaviour
 
     [SerializeField] private float lifeTime;
 
+    [SerializeField] protected bool targetWarningAvailable;
+    [SerializeField] private GameObject warning;
+    private GameObject warningObject;
+    private LineRenderer warningLine;
+    [SerializeField] private float warningTime;
+    private float currentWarningTime;
+
 
     private float currentTime;
     private float speed;
@@ -40,6 +47,25 @@ public class Laser : MonoBehaviour
         this.speed = speed;
         this.summoner = summoner;
         direction = (endPos - startPos).normalized;
+
+
+        if (targetWarningAvailable)
+        {
+            /*try
+            {
+                warningLine = warning.GetComponent<LineRenderer>();
+                warningLine.SetPosition(0, startPos);
+                warningLine.SetPosition(1, endPos);
+
+                Debug.Log("Start:" + warningLine.GetPosition(0));
+                Debug.Log("End:" + warningLine.GetPosition(1));
+            }
+            catch (System.NullReferenceException ex)
+            {
+                Debug.Log("ERROR: No GameObject assigned to warning: " + ex.Message);
+            }*/
+            warningObject = Instantiate(warning, endPos, Quaternion.identity);
+        }
     }
 
 
@@ -50,30 +76,47 @@ public class Laser : MonoBehaviour
         ray.SetPosition(1, startPos);
 
         edge = GetComponent<EdgeCollider2D>();
+
+        
     }
     void Update()
     {
-        if (currentTime > lifeTime)
+        if (targetWarningAvailable)
         {
-            Destroy(gameObject);
+            if (currentWarningTime > warningTime)
+            {
+                Destroy(warning);
+                targetWarningAvailable = false;
+            }
+            else
+            {
+                currentWarningTime += Time.deltaTime;
+            }
         }
         else
         {
-            currentTime += Time.deltaTime;
-        }
+            if (currentTime > lifeTime)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                currentTime += Time.deltaTime;
+            }
 
 
-        ExtendRay();
-        
-        
-        edge.SetPoints(new List<Vector2>()
-            {transform.InverseTransformPoint(startPos) , transform.InverseTransformPoint(endPoint.position)}
-        );
+            ExtendRay();
+            
+            
+            edge.SetPoints(new List<Vector2>()
+                {transform.InverseTransformPoint(startPos) , transform.InverseTransformPoint(endPoint.position)}
+            );
 
-        if (touchingPlayer)
-        {
-            summoner.LaserAttack();
-            touchingPlayer = false;
+            if (touchingPlayer)
+            {
+                summoner.LaserAttack();
+                touchingPlayer = false;
+            }
         }
     }
  

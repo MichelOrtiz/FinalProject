@@ -27,7 +27,6 @@ public class Spore : MonoBehaviour
         //Debug.Log("Collision" + other.gameObject);
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Player hit by particles");
             player.TakeTirement(damageAmount);
             if (!player.statesManager.currentStates.Contains(effectOnPlayer))
             {
