@@ -85,7 +85,7 @@ public class Laser : MonoBehaviour
         {
             if (currentWarningTime > warningTime)
             {
-                Destroy(warning);
+                Destroy(warningObject);
                 targetWarningAvailable = false;
             }
             else
