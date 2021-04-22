@@ -31,7 +31,7 @@ public class PrecisionMedufJuego : MonoBehaviour
             x+=random;
             if (x>randomreloj)
             {
-                randomreloj=Random.Range(-1000,-1500);
+                randomreloj=Random.Range(-500,-750);
                 reloj = false;
             }
         }else
@@ -39,9 +39,9 @@ public class PrecisionMedufJuego : MonoBehaviour
             random=Random.Range(1,3);
             Body.rotation = x;
             x-=random;
-            if (x<-randomreloj)
+            if (x<randomreloj)
             {
-                randomreloj=Random.Range(1000,1500);
+                randomreloj=Random.Range(500,750);
                 reloj = true;
             }
         }
