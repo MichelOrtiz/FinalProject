@@ -9,6 +9,14 @@ public class Switch : MonoBehaviour
     [SerializeField] private List<GameObject> doorsAttached;
     public static List<Door> AllDoors { get; set; }
     private PlayerManager player;
+
+    // Events :O
+    public delegate void Activate();
+    public event Activate SwitchActivated;
+    protected virtual void OnSwitchActivated()
+    {
+        SwitchActivated?.Invoke();
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -37,6 +45,9 @@ public class Switch : MonoBehaviour
                         }
                     }
                 }
+
+                // Events :0
+                OnSwitchActivated();
             }
         }
     }
