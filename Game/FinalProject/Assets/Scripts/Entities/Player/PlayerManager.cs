@@ -112,7 +112,7 @@ public class PlayerManager : Entity
     #endregion
 
     #region Inputs
-    PlayerInputs inputs;
+    public PlayerInputs inputs;
     #endregion
     [SerializeField]private State inmunityState;
     public AbilityManager abilityManager;
