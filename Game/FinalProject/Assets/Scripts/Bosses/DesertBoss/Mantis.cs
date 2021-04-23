@@ -39,7 +39,7 @@ public class Mantis : Enemy
     new protected void FixedUpdate()
     {
         
-        if (CanSeePlayer())
+        //if (CanSeePlayer())
         {
             if (timeBeforeChase > baseTimeBeforeChase)
             {
@@ -48,6 +48,7 @@ public class Mantis : Enemy
             }
             else
             {
+
                 timeBeforeChase += Time.deltaTime;
             }
         }

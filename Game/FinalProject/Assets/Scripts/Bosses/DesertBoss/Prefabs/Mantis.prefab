@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3404244852224898396}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.93, y: -0.13, z: 1.5819737}
+  m_LocalPosition: {x: 1.273, y: -0.13, z: 1.5819737}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3404244852907316298}
@@ -250,9 +250,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  whatIsObstacle:
-  - serializedVersion: 2
-    m_Bits: 512
+  whatIsObstacle: []
   feetPos: {fileID: 3404244852800845082}
   checkFeetRadius: 0.3
   fovType: 1
@@ -262,9 +260,9 @@ MonoBehaviour:
   chaseSpeedMultiplier: 2.5
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
-  startWaitTime: 0
+  startWaitTime: 1
   normalSpeed: 0
-  chaseSpeed: 0
+  chaseSpeed: 2
   groundCheck: {fileID: 3404244853046143592}
   fovOrigin: {fileID: 3404244852224898399}
   baseCastDistance: 1.5

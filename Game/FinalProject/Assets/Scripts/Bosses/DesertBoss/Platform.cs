@@ -29,7 +29,7 @@ public class Platform : MonoBehaviour
     {
         if (isTarget && !onEffect)
         {
-            gameObject.layer = LayerMask.NameToLayer("Enemies");
+            gameObject.layer = LayerMask.NameToLayer("Obstacles");
             //gameObject.GetComponent<SpriteRenderer>().material = materialWhenTarget;
             gameObject.GetComponent<SpriteRenderer>().color = colorWhenTarget;
         }

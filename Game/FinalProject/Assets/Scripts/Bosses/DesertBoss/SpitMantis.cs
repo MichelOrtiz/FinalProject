@@ -110,7 +110,7 @@ public class SpitMantis : Mantis, IProjectile
 
     private GameObject GetProjectileTarget()
     {
-        int chosenPlatform = RandomGenerator.NewRandom(0, ScenesManagers.FindObjectOfType<MantisBoss>().allPlatforms.Count);
+        int chosenPlatform = RandomGenerator.NewRandom(0, ScenesManagers.FindObjectOfType<MantisBoss>().allPlatforms.Count -1);
         return ScenesManagers.FindObjectOfType<MantisBoss>().allPlatforms[chosenPlatform].gameObject;
     }
 
