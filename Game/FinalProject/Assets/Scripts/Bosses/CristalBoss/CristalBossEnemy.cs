@@ -78,10 +78,14 @@ public class CristalBossEnemy : NormalType, ILaser
         {
             Destroy(gameObject);
         }
-
         base.Update();
     }
 
+    new void FixedUpdate()
+    {
+        ChasePlayer();
+        base.FixedUpdate();
+    }
 
     public override void ConsumeItem(Item item)
     {

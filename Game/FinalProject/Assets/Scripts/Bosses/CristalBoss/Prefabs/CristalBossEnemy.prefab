@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6036926405131859372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.77, y: 1.19, z: 0}
+  m_LocalPosition: {x: 1.78, y: 1.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 6036926406539717104}
@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6036926406226358770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.78, y: 1.19, z: 0}
+  m_LocalPosition: {x: 1.71, y: 1.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 6036926406539717104}
@@ -311,9 +311,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  whatIsObstacle:
-  - serializedVersion: 2
-    m_Bits: 512
+  whatIsObstacle: []
   feetPos: {fileID: 6036926404911437818}
   checkFeetRadius: 0.35
   fovType: 1
@@ -331,7 +329,7 @@ MonoBehaviour:
   baseCastDistance: 0.5
   downDistanceGroundCheck: 0.5
   viewDistance: 40
-  fovAngle: 0
+  fovAngle: 360
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}
