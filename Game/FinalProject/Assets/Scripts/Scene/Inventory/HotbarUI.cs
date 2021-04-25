@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HotbarUI : MonoBehaviour
 {
+    [SerializeField] PlayerInputs inputs;
     public static HotbarUI instance;
     Inventory inventory;
     InventoryUI inventoryUI;
@@ -29,6 +30,7 @@ public class HotbarUI : MonoBehaviour
             slotsHotbar0[i].SetItem(null);
         }
         inventory.onItemChangedCallBack += UpdateHotbar0UI;
+        inputs = PlayerManager.instance.inputs;
     }
 
     // Update is called once per frame
@@ -37,7 +39,7 @@ public class HotbarUI : MonoBehaviour
         if(timeKeyPressed > 0.5){
             GunProjectile.instance.StartAiming();
         }
-        if(Input.GetButtonUp("HotbarObj0") && slotsHotbar0[0].GetItem()!=null){
+        if(inputs.ItemHotbarUp[0] && slotsHotbar0[0].GetItem()!=null){
             if(timeKeyPressed <= 0.5){
                 slotsHotbar0[0].UseItem();
             }
@@ -48,7 +50,7 @@ public class HotbarUI : MonoBehaviour
             } 
             timeKeyPressed = 0;
         }
-        if(Input.GetButtonUp("HotbarObj1") && slotsHotbar0[1].GetItem()!=null){
+        if(inputs.ItemHotbarUp[1] && slotsHotbar0[1].GetItem()!=null){
             if(timeKeyPressed <= 0.5){
                 slotsHotbar0[1].UseItem();
             }
@@ -59,7 +61,7 @@ public class HotbarUI : MonoBehaviour
             }
             timeKeyPressed = 0;
         }
-        if(Input.GetButtonUp("HotbarObj2") && slotsHotbar0[2].GetItem()!=null){
+        if(inputs.ItemHotbarUp[2] && slotsHotbar0[2].GetItem()!=null){
             if(timeKeyPressed <= 0.5){
                 slotsHotbar0[2].UseItem();
             }
@@ -70,7 +72,7 @@ public class HotbarUI : MonoBehaviour
             }
             timeKeyPressed = 0;
         }
-        if(Input.GetButtonUp("HotbarObj3") && slotsHotbar0[3].GetItem()!=null){
+        if(inputs.ItemHotbarUp[3] && slotsHotbar0[3].GetItem()!=null){
             if(timeKeyPressed <= 0.5){
                 slotsHotbar0[3].UseItem();
             }
@@ -81,7 +83,7 @@ public class HotbarUI : MonoBehaviour
             }
             timeKeyPressed = 0;
         }
-        if(Input.GetButtonUp("HotbarObj4") && slotsHotbar0[4].GetItem()!=null){
+        if(inputs.ItemHotbarUp[4] && slotsHotbar0[4].GetItem()!=null){
             if(timeKeyPressed <= 0.5){
                 slotsHotbar0[4].UseItem();
             }
@@ -94,23 +96,23 @@ public class HotbarUI : MonoBehaviour
         }
 
 
-        if(Input.GetButton("HotbarObj0") && slotsHotbar0[0].GetItem()!=null){
+        if(inputs.ItemHotbarDown[0] && slotsHotbar0[0].GetItem()!=null){
             //Debug.Log("timeKey1Pressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }
-        if(Input.GetButton("HotbarObj1") && slotsHotbar0[1].GetItem()!=null){
+        if(inputs.ItemHotbarDown[1] && slotsHotbar0[1].GetItem()!=null){
             //Debug.Log("timeKey2Pressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }
-        if(Input.GetButton("HotbarObj2") && slotsHotbar0[2].GetItem()!=null){
+        if(inputs.ItemHotbarDown[2] && slotsHotbar0[2].GetItem()!=null){
             //Debug.Log("timeKe3yPressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }
-        if(Input.GetButton("HotbarObj3") && slotsHotbar0[3].GetItem()!=null){
+        if(inputs.ItemHotbarDown[3] && slotsHotbar0[3].GetItem()!=null){
             //Debug.Log("timeKey4Pressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }
-        if(Input.GetButton("HotbarObj4") && slotsHotbar0[4].GetItem()!=null){
+        if(inputs.ItemHotbarDown[4] && slotsHotbar0[4].GetItem()!=null){
             //Debug.Log("timeKey5Pressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }

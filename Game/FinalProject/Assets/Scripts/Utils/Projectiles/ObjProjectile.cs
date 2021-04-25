@@ -15,7 +15,7 @@ public class ObjProjectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(!other.CompareTag("Player")){
             //Debug.Log(other.name);
-            if(!other.CompareTag("Enemy")){
+            if(other.CompareTag("Enemy")){
                 Enemy enemy = other.gameObject.GetComponent<Enemy>();
                 if(enemy!=null){
                     enemy.ConsumeItem(item);

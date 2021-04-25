@@ -49,7 +49,7 @@ public class InventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Inventory"))
+        if (PlayerManager.instance.inputs.OpenInventory)
         {
             invetoryUI.SetActive(!invetoryUI.activeSelf);
         }
