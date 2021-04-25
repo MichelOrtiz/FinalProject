@@ -53,6 +53,8 @@ public class Entity : MonoBehaviour
     [SerializeField] protected LayerMask[] whatIsObstacle;
     [SerializeField] public Transform feetPos;    
     [SerializeField] protected float checkFeetRadius;
+
+    [SerializeField] protected GroundChecker groundChecker;
     #endregion
 
     #region Unity stuff
@@ -69,7 +71,9 @@ public class Entity : MonoBehaviour
     protected void Update()
     {
         facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
+        //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
+        isGrounded = groundChecker.isGrounded;
+
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
         try
         {
