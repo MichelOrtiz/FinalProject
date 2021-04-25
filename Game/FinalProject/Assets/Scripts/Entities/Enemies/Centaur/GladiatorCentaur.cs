@@ -33,6 +33,11 @@ public class GladiatorCentaur : Centaur
                 waitTimeAfterPush = 0;
             }
         }
+
+        if (collisionHandler.touchingEnemy)
+        {
+            enemyTouched = collisionHandler.lastEnemyTouched;
+        }
         base.Update();
     }
 
@@ -77,7 +82,7 @@ public class GladiatorCentaur : Centaur
         //player.Push(pushForce, pushSpeed);
     }
 
-    protected override void OnCollisionEnter2D(Collision2D other)
+    /*protected override void OnCollisionEnter2D(Collision2D other)
     {
         base.OnCollisionEnter2D(other);
         if (other.gameObject.tag == "Enemy")
@@ -94,6 +99,6 @@ public class GladiatorCentaur : Centaur
         {
             touchingEnemy = false;
         }
-    }
+    }*/
 
 }

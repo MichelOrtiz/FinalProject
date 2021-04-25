@@ -91,7 +91,7 @@ public class Mantis : Enemy
     {
         //throw new System.NotImplementedException();
     }
-    protected override void OnCollisionEnter2D(Collision2D other)
+    /*protected override void OnCollisionEnter2D(Collision2D other)
     {
         //base.OnCollisionEnter2D(other);
         if (other.gameObject.tag == "Ground")
@@ -120,7 +120,7 @@ public class Mantis : Enemy
         {
             gameObject.layer = LayerMask.NameToLayer("Enemies");
         }
-    }
+    }*/
 
     /*private void TouchingGround()
     {

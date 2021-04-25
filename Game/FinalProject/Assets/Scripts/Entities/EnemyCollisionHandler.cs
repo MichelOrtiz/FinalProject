@@ -1,22 +1,18 @@
 using UnityEngine;
+using System.Collections.Generic;
 public class EnemyCollisionHandler : MonoBehaviour
 {
-    private Enemy enemy;
-
-    [SerializeField] private LayerMask whatIsGround;
-    //[SerializeField] private LayerMask whatIsObstacle;
-
-    [SerializeField] private BoxCollider2D groundCollider;
-    [SerializeField] private Collider2D triggerCollider;
-
-    [SerializeField] private Transform feetPos;
-    [SerializeField] private float checkFeetRadius;
-
-
-
-    public bool isGrounded;
-
+    //private Collider2D collider;
+    [SerializeField] private List<string> contacts;
+    public List<string> Contacts { get; private set; }
+    
     private PlayerManager player;
+    public bool touchingPlayer;
+    public bool touchingEnemy;
+    public Enemy lastEnemyTouched;
+
+    
+
     void Awake()
     {
         
@@ -24,19 +20,27 @@ public class EnemyCollisionHandler : MonoBehaviour
     void Start()
     {
         player = PlayerManager.instance;
-        enemy = GetComponent<Enemy>();
     }
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);;
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            enemy.touchingPlayer = true;
+            touchingPlayer = true;
+        }
+        else if (other.tag == "Enemy")
+        {
+            touchingEnemy = true;
+            lastEnemyTouched = other.GetComponent<Enemy>();
+        }
+        if (!contacts.Contains(other.tag))
+        {
+            contacts.Add(other.tag);
         }
     }
 
@@ -45,7 +49,15 @@ public class EnemyCollisionHandler : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            enemy.touchingPlayer = false;
+            touchingPlayer = false;
+        }
+        else if (other.tag == "Enemy")
+        {
+            touchingEnemy = false;
+        }
+        if (contacts.Contains(other.tag))
+        {
+            contacts.Remove(other.tag);
         }
     }
 }

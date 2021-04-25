@@ -39,6 +39,8 @@ public abstract class Enemy : Entity
 
     // Fov angle if needed
     [SerializeField] protected float fovAngle;
+
+    [SerializeField] protected EnemyCollisionHandler collisionHandler;
     #endregion
 
     #region Status
@@ -92,6 +94,7 @@ public abstract class Enemy : Entity
             {
                 ChangeFacingDirection();
             }*/
+        touchingPlayer = collisionHandler.touchingPlayer;
         UpdateState();
         base.Update();
     }
@@ -115,7 +118,7 @@ public abstract class Enemy : Entity
         }
     }
 
-    /// <summary>
+    /*/// <summary>
     /// OnCollisionStay is called once per frame for every collider/rigidbody
     /// that is touching rigidbody/collider.
     /// </summary>
@@ -144,7 +147,7 @@ public abstract class Enemy : Entity
         {
             touchingPlayer = false;
         }
-    }
+    }*/
     #endregion
 
     #region General behaviour methods

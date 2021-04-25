@@ -114,7 +114,7 @@ public class SpitMantis : Mantis, IProjectile
         return ScenesManagers.FindObjectOfType<MantisBoss>().allPlatforms[chosenPlatform].gameObject;
     }
 
-    protected override void OnCollisionEnter2D(Collision2D other)
+    /*protected override void OnCollisionEnter2D(Collision2D other)
     {
         base.OnCollisionEnter2D(other);
     }
@@ -122,5 +122,5 @@ public class SpitMantis : Mantis, IProjectile
     protected override void OnCollisionExit2D(Collision2D other)
     {
         base.OnCollisionExit2D(other);
-    }
+    }*/
 }

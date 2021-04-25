@@ -20,6 +20,7 @@ public class SwordGriffin : Griffin
 
     new void Update()
     {
+        touchingBreakableObject = collisionHandler.Contacts.Contains("Breakable");
         base.Update();
     }
 
@@ -74,7 +75,7 @@ public class SwordGriffin : Griffin
 
     
 
-    protected override void OnCollisionEnter2D(Collision2D other)
+    /*protected override void OnCollisionEnter2D(Collision2D other)
     {
         base.OnCollisionEnter2D(other);
         if (other.gameObject.tag == "Breakable")
@@ -91,7 +92,7 @@ public class SwordGriffin : Griffin
         {
             touchingBreakableObject = false;
         }
-    }
+    }*/
 
     private bool CanSeePlayerSecondFov()
     {
