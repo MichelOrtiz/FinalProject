@@ -122,7 +122,7 @@ public abstract class Enemy : Entity
         }
     }
 
-    void collisionHandler_Attack()
+    protected virtual void collisionHandler_Attack()
     {
         if (!player.isImmune)
         {

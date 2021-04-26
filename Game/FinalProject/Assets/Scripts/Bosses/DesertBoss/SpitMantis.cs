@@ -124,6 +124,5 @@ public class SpitMantis : Mantis, IProjectile
     new void collisionHandler_TouchingGround()
     {
         base.collisionHandler_TouchingGround();
-        Debug.Log("collisionHandler_TouchingGround called on" + gameObject);
     }
 }
