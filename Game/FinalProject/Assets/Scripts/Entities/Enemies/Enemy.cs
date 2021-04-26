@@ -327,8 +327,10 @@ public abstract class Enemy : Entity
             hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Default"));
             if (hit.collider == null)
             {
+                //Debug.Log("Collider null");
                 return false;
             }
+            
             return hit.collider.gameObject.CompareTag("Player");
         }
         return false;
