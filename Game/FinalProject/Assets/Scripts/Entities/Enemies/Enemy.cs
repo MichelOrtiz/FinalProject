@@ -81,6 +81,8 @@ public abstract class Enemy : Entity
         player = ScenesManagers.Instance.player;
         chaseSpeed = chaseSpeedMultiplier * averageSpeed;
         normalSpeed = normalSpeedMultiplier * averageSpeed;
+
+        collisionHandler.TouchingPlayer += collisionHandler_Attack;
     }
 
     new protected void Update()
@@ -95,6 +97,8 @@ public abstract class Enemy : Entity
                 ChangeFacingDirection();
             }*/
         touchingPlayer = collisionHandler.touchingPlayer;
+        
+
         UpdateState();
         base.Update();
     }
@@ -117,6 +121,14 @@ public abstract class Enemy : Entity
                 break;
         }
     }
+
+    void collisionHandler_Attack()
+    {
+        if (!player.isImmune)
+        {
+            Attack();
+        }
+    } 
 
     /*/// <summary>
     /// OnCollisionStay is called once per frame for every collider/rigidbody

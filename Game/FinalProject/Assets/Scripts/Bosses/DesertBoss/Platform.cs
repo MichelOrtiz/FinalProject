@@ -35,7 +35,7 @@ public class Platform : MonoBehaviour
         }
         else
         {
-            gameObject.layer = LayerMask.NameToLayer("Ground");
+            gameObject.layer = LayerMask.NameToLayer("Platforms");
         }
 
 

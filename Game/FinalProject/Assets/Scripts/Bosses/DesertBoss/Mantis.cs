@@ -2,21 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mantis : Enemy
+public class Mantis : Enemy//, IBattleBounds
 {
     [SerializeField] protected float baseTimeBeforeChase;
     [SerializeField] protected Item itemToGive;
     [SerializeField] protected float decreaseSpeedMultiplier;
     [SerializeField] protected float increaseDamage;
     [SerializeField] private int timesToGiveItem;
+    
+    [SerializeField] private GameObject battleBoundsPrefab;
+    private BattleBounds battleBounds;
 
     protected float timeBeforeChase;
     protected bool touchingGround;
+    protected bool justTouchedGround;
     public int timesItemGiven;
+
+
 
     new void Start()
     {
         timesItemGiven = 0;
+        //battleBounds = battleBoundsPrefab.GetComponent<BattleBounds>();
+        battleBounds = FindObjectOfType<BattleBounds>();
+
+        collisionHandler.JustTouchedPlayer += collisionHandler_StopAttack;
+        collisionHandler.TouchingGroundHandler += collisionHandler_TouchingGround;
+        //battleBounds_SetEventHandler();
+
         base.Start();
     }
 
@@ -28,11 +41,15 @@ public class Mantis : Enemy
             {
                 ChangeFacingDirection();
             }
-        if (touchingGround)
+
+        //touchingGround = collisionHandler.touchingGround;
+        
+        
+        /*if (touchingGround)
         {
             rigidbody2d.velocity = new Vector2();
             touchingGround = false;
-        }
+        }*/
         base.Update();
     }
 
@@ -52,6 +69,15 @@ public class Mantis : Enemy
                 timeBeforeChase += Time.deltaTime;
             }
         }
+    }
+
+    /// <summary>
+    /// LateUpdate is called every frame, if the Behaviour is enabled.
+    /// It is called after all Update functions have been called.
+    /// </summary>
+    void LateUpdate()
+    {
+        //justTouchedGround = touchingGround && !collisionHandler.Contacts.Contains("Ground");
     }
 
     public override void ConsumeItem(Item item)
@@ -75,6 +101,17 @@ public class Mantis : Enemy
     protected override void Attack()
     {
         PlayerManager.instance.TakeTirement(damageAmount);
+        ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Fake"));
+    }
+
+    protected virtual void collisionHandler_StopAttack()
+    {
+        ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Semi Ghost"));
+    }
+
+    protected virtual void collisionHandler_TouchingGround()
+    {
+        rigidbody2d.velocity = new Vector2();
     }
 
     protected override void ChasePlayer()
@@ -82,8 +119,13 @@ public class Mantis : Enemy
         Vector2 playerPosition = player.GetPosition();
         float angleToPlayer = MathUtils.GetAngleBetween(GetPosition(), player.GetPosition());
         Vector2 vectorToPlayer = MathUtils.GetVectorFromAngle(angleToPlayer);
+
+        //RaycastHit2D hit = Physics2D.Raycast(GetPosition(), vectorToPlayer, 100f, LayerMask.NameToLayer("Ground"));
+        //Debug.DrawLine(GetPosition(), hit.point);
         Debug.DrawLine(GetPosition(), vectorToPlayer * viewDistance, Color.blue);
-        rigidbody2d.AddForce(vectorToPlayer * 2500f * 1000f, ForceMode2D.Force);
+        
+       // rigidbody2d.position = Vector2.MoveTowards(GetPosition(), hit.point, chaseSpeed * Time.deltaTime);
+        rigidbody2d.AddForce(vectorToPlayer  * 2500f * 1000f, ForceMode2D.Force);
         //Push(vectorToPlayer.x + (xPushForce * -10000), vectorToPlayer.y + (yPushForce * 10000));
     }
 
@@ -91,39 +133,18 @@ public class Mantis : Enemy
     {
         //throw new System.NotImplementedException();
     }
-    /*protected override void OnCollisionEnter2D(Collision2D other)
+
+    
+
+    void ChangeParentAndChildrenLayer(LayerMask layerMask)
     {
-        //base.OnCollisionEnter2D(other);
-        if (other.gameObject.tag == "Ground")
+        gameObject.layer = layerMask;
+        foreach (Transform child in GetComponentsInChildren<Transform>(true))
         {
-            touchingGround = true;
-        }
-        if (other.gameObject.tag == "Player")
-        {
-            touchingPlayer = true;
-            if (!PlayerManager.instance.isImmune)
-            {
-                Attack();
-            }
-            gameObject.layer = LayerMask.NameToLayer("Fake");
+            child.gameObject.layer = layerMask;
         }
     }
 
-    protected override void OnCollisionExit2D(Collision2D other)
-    {
-        base.OnCollisionExit2D(other);
-        if (other.gameObject.tag == "Ground")
-        {
-            touchingGround = false;
-        }
-        if (other.gameObject.tag == "Player")
-        {
-            gameObject.layer = LayerMask.NameToLayer("Enemies");
-        }
-    }*/
+    
 
-    /*private void TouchingGround()
-    {
-        RaycastHit2D = 
-    }*/
 }

@@ -67,12 +67,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2335636184417845273}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fe9afc55af06f40a752dda680792d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 811e5f0796c9fe6468a696abe02c112e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 4864
   feetPos: {fileID: 3829738358953819176}
   checkFeetRadius: 0.27
   isGrounded: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
   rigidbody2d: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 4864
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 0
@@ -286,6 +286,7 @@ MonoBehaviour:
   dialogue: {fileID: 0}
   loosingStamina: 0
   loosingOxygen: 0
+  inputs: {fileID: 0}
   inmunityState: {fileID: 11400000, guid: 8c5ce0ce2397d3a4db178116f24195fc, type: 2}
   abilityManager: {fileID: 1180875131347066391}
 --- !u!95 &3829738358529845166
@@ -347,6 +348,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d5df941fae41a4e81b45dff8359c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemHotbarUp: 0000000000
+  ItemHotbarDown: 0000000000
+  EquipmentHotbar: 0000000000
 --- !u!1 &3829738358953819177
 GameObject:
   m_ObjectHideFlags: 0

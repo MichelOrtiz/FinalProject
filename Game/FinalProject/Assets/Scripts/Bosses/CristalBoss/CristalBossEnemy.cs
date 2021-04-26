@@ -38,6 +38,7 @@ public class CristalBossEnemy : NormalType, ILaser
 
     #endregion
 
+
     new void Start()
     {
         base.Start();
@@ -162,10 +163,6 @@ public class CristalBossEnemy : NormalType, ILaser
         }
     }
 
-    private bool OnPlatform()
-    {
-        return Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround).gameObject.CompareTag("Platform");
-    }
     
 
     private Transform FindNearestPlatform()
