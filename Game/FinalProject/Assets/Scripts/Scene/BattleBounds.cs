@@ -45,7 +45,6 @@ public class BattleBounds : MonoBehaviour
             Debug.Log(other.gameObject.name + " inside");
             other.gameObject.layer = LayerMask.NameToLayer("Ghost");
         }*/
-        Debug.Log(other.gameObject.GetComponent<Entity>());
 
         if (other.GetComponent<Entity>() &&
             other.GetComponent<Entity>() is IBattleBounds)

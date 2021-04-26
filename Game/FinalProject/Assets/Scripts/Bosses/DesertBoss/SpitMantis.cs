@@ -24,8 +24,9 @@ public class SpitMantis : Mantis, IProjectile
     new void Start()
     {
         base.Start();
-        chasesToDo = RandomGenerator.NewRandom(minChases, maxChases);
 
+        chasesToDo = RandomGenerator.NewRandom(minChases, maxChases);
+        
         /*foreach (var platform in targetPlatforms)
         {
             platform = ScenesManagers.GetObjectsOfType<Platform>().Find(p => p == platform);
@@ -47,11 +48,7 @@ public class SpitMantis : Mantis, IProjectile
                 timeAfterShot += Time.deltaTime;
             }
         }
-        if (touchingGround)
-        {
-            rigidbody2d.velocity = new Vector2();
-            touchingGround = false;
-        }
+
         base.Update();
         
     }
@@ -123,4 +120,10 @@ public class SpitMantis : Mantis, IProjectile
     {
         base.OnCollisionExit2D(other);
     }*/
+
+    new void collisionHandler_TouchingGround()
+    {
+        base.collisionHandler_TouchingGround();
+        Debug.Log("collisionHandler_TouchingGround called on" + gameObject);
+    }
 }

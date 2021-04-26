@@ -20,7 +20,7 @@ public class SwordGriffin : Griffin
 
     new void Update()
     {
-        touchingBreakableObject = collisionHandler.Contacts.Contains("Breakable");
+        touchingBreakableObject = collisionHandler.Contacts.Find(c => c.tag == "Breakable");
         base.Update();
     }
 

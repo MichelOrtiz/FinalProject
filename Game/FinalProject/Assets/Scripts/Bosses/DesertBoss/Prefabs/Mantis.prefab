@@ -61,7 +61,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.038518906, y: -0.41670176}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7892075548320804545}
   m_Layer: 13
   m_Name: CollisionHandler
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -140,6 +140,7 @@ MonoBehaviour:
   contacts: []
   touchingPlayer: 0
   touchingEnemy: 0
+  touchingGround: 0
   lastEnemyTouched: {fileID: 0}
 --- !u!1 &3404244852224898396
 GameObject:
@@ -399,7 +400,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1725110444965641589}
   fovType: 1
   enemyName: 0
-  damageAmount: 1
+  damageAmount: 5
   normalSpeedMultiplier: 0
   chaseSpeedMultiplier: 2.5
   atackEffect: {fileID: 0}

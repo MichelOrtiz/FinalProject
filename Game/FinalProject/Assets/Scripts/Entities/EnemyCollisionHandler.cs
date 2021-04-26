@@ -1,19 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-public class EnemyCollisionHandler : MonoBehaviour
+public class EnemyCollisionHandler : CollisionHandler
 {
-    //private Collider2D collider;
-    //[SerializeField] private List<string> contacts;
-    //public List<string> Contacts { get; private set; }
-
-    [SerializeField] private List<string> contacts;
-    public List<string> Contacts
-    {
-        get { return contacts; }
-        private set { contacts = value; }
-    }
-    
-    
     private PlayerManager player;
     public bool touchingPlayer;
     public bool touchingEnemy;
@@ -40,23 +28,19 @@ public class EnemyCollisionHandler : MonoBehaviour
         TouchingGroundHandler?.Invoke();
     }
     
-
-    void Awake()
-    {
-        Contacts = new List<string>();
-    }
     void Start()
     {
         player = PlayerManager.instance;
-        
     }
 
     void Update()
     {
+     
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    new void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = true;
@@ -72,15 +56,12 @@ public class EnemyCollisionHandler : MonoBehaviour
             touchingGround = true;
             OnTouchingGround();
         }
-        if (!contacts.Contains(other.gameObject.tag))
-        {
-            contacts.Add(other.gameObject.tag);
-        }
     }
 
     
-    void OnTriggerExit2D(Collider2D other)
+    new void OnTriggerExit2D(Collider2D other)
     {
+        base.OnTriggerExit2D(other);
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = false;
@@ -95,14 +76,11 @@ public class EnemyCollisionHandler : MonoBehaviour
             touchingGround = false;
 
         }
-        if (contacts.Contains(other.gameObject.tag))
-        {
-            contacts.Remove(other.gameObject.tag);
-        }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    new void OnCollisionEnter2D(Collision2D other)
     {
+        base.OnCollisionEnter2D(other);
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = true;
@@ -111,7 +89,7 @@ public class EnemyCollisionHandler : MonoBehaviour
         else if (other.gameObject.tag == "Enemy")
         {
             touchingEnemy = true;
-            lastEnemyTouched = other.gameObject.gameObject.GetComponent<Enemy>();
+            lastEnemyTouched = other.transform.parent.GetComponent<Enemy>();
         }
         else if (other.gameObject.tag == "Ground")
         {
@@ -119,14 +97,11 @@ public class EnemyCollisionHandler : MonoBehaviour
             OnTouchingGround();
 
         }
-        if (!contacts.Contains(other.gameObject.tag))
-        {
-            contacts.Add(other.gameObject.tag);
-        }
     }
 
-    void OnCollisionExit2D(Collision2D other)
+    new void OnCollisionExit2D(Collision2D other)
     {
+        base.OnCollisionExit2D(other);
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = false;
@@ -139,10 +114,6 @@ public class EnemyCollisionHandler : MonoBehaviour
         else if (other.gameObject.tag == "Ground")
         {
             touchingGround = false;
-        }
-        if (contacts.Contains(other.gameObject.tag))
-        {
-            contacts.Remove(other.gameObject.tag);
         }
     }
 }

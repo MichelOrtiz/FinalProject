@@ -20,8 +20,10 @@ public class Mantis : Enemy//, IBattleBounds
 
 
 
-    new void Start()
+    new protected void Start()
     {
+        base.Start();
+
         timesItemGiven = 0;
         //battleBounds = battleBoundsPrefab.GetComponent<BattleBounds>();
         battleBounds = FindObjectOfType<BattleBounds>();
@@ -29,12 +31,11 @@ public class Mantis : Enemy//, IBattleBounds
         collisionHandler.JustTouchedPlayer += collisionHandler_StopAttack;
         collisionHandler.TouchingGroundHandler += collisionHandler_TouchingGround;
         //battleBounds_SetEventHandler();
-
-        base.Start();
+        Debug.Log("Start called by" + gameObject);
     }
 
     // Update is called once per frame
-    new void Update()
+    new protected void Update()
     {
         if (InFrontOfObstacle() ||( (GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
             || GetPosition().x < player.GetPosition().x && facingDirection == LEFT) )
@@ -71,15 +72,6 @@ public class Mantis : Enemy//, IBattleBounds
         }
     }
 
-    /// <summary>
-    /// LateUpdate is called every frame, if the Behaviour is enabled.
-    /// It is called after all Update functions have been called.
-    /// </summary>
-    void LateUpdate()
-    {
-        //justTouchedGround = touchingGround && !collisionHandler.Contacts.Contains("Ground");
-    }
-
     public override void ConsumeItem(Item item)
     {
         if (item == itemToGive)
@@ -101,12 +93,12 @@ public class Mantis : Enemy//, IBattleBounds
     protected override void Attack()
     {
         PlayerManager.instance.TakeTirement(damageAmount);
-        ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Fake"));
+        //ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Fake"));
     }
 
     protected virtual void collisionHandler_StopAttack()
     {
-        ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Semi Ghost"));
+        //ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Semi Ghost"));
     }
 
     protected virtual void collisionHandler_TouchingGround()
