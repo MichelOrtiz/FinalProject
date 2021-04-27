@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Colo {blue, red, yellow, green};
+public enum Colo {blue, red, yellow, green, purple};
 public class PoweredWireStats : MonoBehaviour
 {
     public bool movable = false;
