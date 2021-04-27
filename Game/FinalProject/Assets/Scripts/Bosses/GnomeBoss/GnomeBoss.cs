@@ -32,7 +32,7 @@ public class GnomeBoss : MonoBehaviour
         }
     }
 
-    void stageSwitch_Activated()
+    void stageSwitch_Activated(Switch sender)
     {
         if (!switchEventCalled)
         {

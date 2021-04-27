@@ -81,6 +81,24 @@ public class ScenesManagers : MonoBehaviour
         return result;
     }
 
+
+    public static List<GameObject> FindMatchedObjects<T>(List<T> objects)
+    {
+        List<GameObject> result = new List<GameObject>();
+        List<GameObject> scriptObjects = GetGameObjectsOfScript<T>();
+        foreach (var sc in scriptObjects)
+        {
+            if (sc.TryGetComponent<T>(out T obj))
+            {
+                if (objects.Contains(obj))
+                {
+                    result.Add(sc);
+                }
+            }
+        }
+        return result;
+    }
+
     public static void SetListActive(List<GameObject> gameObjects, bool active)
     {
         foreach (var gameObject in gameObjects)
@@ -91,6 +109,14 @@ public class ScenesManagers : MonoBehaviour
             }
         }
     }
+
+   /* public static void SetScriptActive<MonoBehaviour>(GameObject gameObject)
+    {
+        if (gameObject.GetComponent<MonoBehaviour>() != null)
+        {
+            gameObject.GetComponent<MonoBehaviour>().enabled = false;
+        }
+    }*/
 
     public static bool IsFullListActive(List<GameObject> gameObjects)
     {

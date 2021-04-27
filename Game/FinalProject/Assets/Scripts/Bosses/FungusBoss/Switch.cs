@@ -11,11 +11,11 @@ public class Switch : MonoBehaviour
     private PlayerManager player;
 
     // Events :O
-    public delegate void Activate();
+    public delegate void Activate(Switch sender);
     public event Activate SwitchActivated;
-    protected virtual void OnSwitchActivated()
+    protected virtual void OnSwitchActivated(Switch sender)
     {
-        SwitchActivated?.Invoke();
+        SwitchActivated?.Invoke(sender);
     }
     
     // Start is called before the first frame update
@@ -47,10 +47,20 @@ public class Switch : MonoBehaviour
                 }
 
                 // Events :0
-                OnSwitchActivated();
+                OnSwitchActivated(this);
             }
         }
     }
+
+    public void DeActivate()
+    {
+        if (activado)
+        {
+            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+            activado = false;
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;

@@ -7,21 +7,30 @@ public class MultiSwitch : MonoBehaviour
     public int numberOfSwitch;
     public bool jugando;
     [SerializeField] private List<Switch> Orden;
-    [SerializeField] private List<bool> OrdenJugador;
+    //[SerializeField] private List<bool> OrdenJugador;
     
+    [SerializeField] private List<Switch> playerOrder;
     public Door door;
     private PlayerManager player;
     [SerializeField] private List<Switch> switches;
+    private int index;
 
     
     void Start()
     {
-        OrdenJugador = new List<bool>(Orden.Count);
+        /*OrdenJugador = new List<bool>(Orden.Count);
         for (int i = 0; i < Orden.Count; i++)
         {
             OrdenJugador.Add(false);
+        }*/
+
+        foreach (var sw in switches)
+        {
+            sw.SwitchActivated += switch_AnyActivated;
         }
+
         Default();
+
 
         /*allDoors = ScenesManagers.GetObjectsOfType<Door>();*/
     }
@@ -32,12 +41,14 @@ public class MultiSwitch : MonoBehaviour
         if (!jugando)
         {
             jugando = Jugando();
-        }else
+        }
+        else
         {
-            for (int i = 0; i < switches.Count; i++)
+            //if (Activados())
+            /*for (int i = 0; i < switches.Count; i++)
             {
                 
-                if ((switches[i].activado && OrdenJugador[i] == Orden[i].activado))
+                /*if ((switches[i].activado && OrdenJugador[i] == Orden[i].activado))
                 {
                     OrdenJugador[i] = true;//
                     
@@ -45,7 +56,7 @@ public class MultiSwitch : MonoBehaviour
                 {
                     Default();
                     break;
-                }
+                }*/
                 /*if (!OrdenJugador[i] && switches[i].activado )
                 {
                     OrdenJugador[i] = true;
@@ -54,12 +65,14 @@ public class MultiSwitch : MonoBehaviour
                         Default();
                     }
                     break;
-                }*/
-            }            
+                }
+            }*/
         }
         if (Activados()&& !door.isOpen)
         {
             door.Activate();
+            Default();
+           // ScenesManagers.SetListActive(ScenesManagers.FindMatchedObjects<Switch>(switches), false);
         }
         
     }
@@ -67,18 +80,23 @@ public class MultiSwitch : MonoBehaviour
     void Default(){
         foreach (var Switch in switches)
         {
-            Switch.activado = false;
+            Switch.DeActivate();
         }
-        for (int i = 0; i < OrdenJugador.Count; i++)
+        /*for (int i = 0; i < OrdenJugador.Count; i++)
         {
             OrdenJugador[i] = false;
-        }
+        }*/
+        playerOrder.Clear();
+        index = 0;
+
         jugando = false;
     }
-    bool Jugando(){
+    bool Jugando()
+    {
         return switches.Exists(s=>s.activado);
     }
-    bool Activados(){
+    bool Activados()
+    {
         foreach (var Switch in switches)
         {
             if (!Switch.activado)
@@ -87,5 +105,20 @@ public class MultiSwitch : MonoBehaviour
             }
         }
         return true;
+    }
+
+    
+
+    void switch_AnyActivated(Switch sender)
+    {
+        playerOrder.Add(sender);
+        if (playerOrder[index] != Orden[index])
+        {
+            Default();
+        }
+        else
+        {
+            index++;
+        }
     }
 }
