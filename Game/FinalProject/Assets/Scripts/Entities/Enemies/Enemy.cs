@@ -39,6 +39,8 @@ public abstract class Enemy : Entity
 
     // Fov angle if needed
     [SerializeField] protected float fovAngle;
+
+    new protected EnemyCollisionHandler collisionHandler;
     #endregion
 
     #region Status
@@ -79,6 +81,10 @@ public abstract class Enemy : Entity
         player = ScenesManagers.Instance.player;
         chaseSpeed = chaseSpeedMultiplier * averageSpeed;
         normalSpeed = normalSpeedMultiplier * averageSpeed;
+        
+        collisionHandler = (EnemyCollisionHandler)base.collisionHandler;
+        
+        collisionHandler.TouchingPlayer += collisionHandler_Attack;
     }
 
     new protected void Update()
@@ -92,6 +98,9 @@ public abstract class Enemy : Entity
             {
                 ChangeFacingDirection();
             }*/
+        touchingPlayer = collisionHandler.touchingPlayer;
+        
+
         UpdateState();
         base.Update();
     }
@@ -115,7 +124,15 @@ public abstract class Enemy : Entity
         }
     }
 
-    /// <summary>
+    protected virtual void collisionHandler_Attack()
+    {
+        if (!player.isImmune)
+        {
+            Attack();
+        }
+    } 
+
+    /*/// <summary>
     /// OnCollisionStay is called once per frame for every collider/rigidbody
     /// that is touching rigidbody/collider.
     /// </summary>
@@ -144,7 +161,7 @@ public abstract class Enemy : Entity
         {
             touchingPlayer = false;
         }
-    }
+    }*/
     #endregion
 
     #region General behaviour methods
@@ -312,8 +329,10 @@ public abstract class Enemy : Entity
             hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Default"));
             if (hit.collider == null)
             {
+                //Debug.Log("Collider null");
                 return false;
             }
+
             return hit.collider.gameObject.CompareTag("Player");
         }
         return false;

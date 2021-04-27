@@ -11,13 +11,14 @@ public class NormalType : Enemy
     #region Unity stuff
     protected new void Start()
     {
+        base.Start();
+
         startWaitTime = 2f;
         waitTime = startWaitTime;
         /*viewDistance = 3f;
         damageAmount = 20;
         waitTime = 2f;
         chaseSpeed = normalSpeed;*/
-        base.Start();
     }
 
     protected new void Update()
@@ -70,6 +71,7 @@ public class NormalType : Enemy
         if(atackEffect != null){
             player.statesManager.AddState(atackEffect,this);
         }
+        player.TakeTirement(damageAmount);
     }
 
     public override void ConsumeItem(Item item)
