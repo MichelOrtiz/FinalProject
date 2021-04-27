@@ -56,7 +56,13 @@ public class Entity : MonoBehaviour
 
     [SerializeField] protected float checkFeetRadius;
     [SerializeField] protected GroundChecker groundChecker;
+    [SerializeField] protected CollisionHandler collisionHandler;
     #endregion
+
+    protected virtual void collisionHandler_EnterContact(GameObject contact){}
+    protected virtual void collisionHandler_StayInContact(GameObject contact){}
+    protected virtual void collisionHandler_ExitContact(GameObject contact){}
+    
 
     #region Unity stuff
 
@@ -67,13 +73,24 @@ public class Entity : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         statesManager = gameObject.GetComponent<StatesManager>();
+
+        if (collisionHandler != null)
+        {
+            collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;
+            collisionHandler.StayTouchingContactHandler += collisionHandler_StayInContact;
+            collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
+        }
     }
 
     protected void Update()
     {
         facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
         //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
-        isGrounded = groundChecker.isGrounded;
+
+        if (groundChecker != null)
+        {
+            isGrounded = groundChecker.isGrounded;
+        }
 
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
         try

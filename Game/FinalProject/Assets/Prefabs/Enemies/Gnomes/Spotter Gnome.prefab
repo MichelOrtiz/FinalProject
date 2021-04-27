@@ -63,6 +63,7 @@ MonoBehaviour:
   contacts: []
   touchingPlayer: 0
   touchingEnemy: 0
+  touchingGround: 0
   lastEnemyTouched: {fileID: 0}
 --- !u!1 &7822691457044856446
 GameObject:
@@ -118,7 +119,7 @@ BoxCollider2D:
     adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
-  m_AutoTiling: 1
+  m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.39949036, y: 0.7359426}
   m_EdgeRadius: 0
@@ -165,7 +166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8647063262188154504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.657, y: 0.06, z: 0}
+  m_LocalPosition: {x: 0.667, y: 0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8647063263483198510}
@@ -432,6 +433,7 @@ MonoBehaviour:
   feetPos: {fileID: 8647063263394020807}
   checkFeetRadius: 0.4
   groundChecker: {fileID: 166204660747556882}
+  collisionHandler: {fileID: 849333991903978391}
   fovType: 0
   enemyName: 2
   damageAmount: 15
@@ -448,7 +450,6 @@ MonoBehaviour:
   downDistanceGroundCheck: 0
   viewDistance: 20
   fovAngle: 0
-  collisionHandler: {fileID: 849333991903978391}
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}

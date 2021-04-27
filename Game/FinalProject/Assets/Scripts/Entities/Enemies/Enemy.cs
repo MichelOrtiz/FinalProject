@@ -40,7 +40,7 @@ public abstract class Enemy : Entity
     // Fov angle if needed
     [SerializeField] protected float fovAngle;
 
-    [SerializeField] protected EnemyCollisionHandler collisionHandler;
+    new protected EnemyCollisionHandler collisionHandler;
     #endregion
 
     #region Status
@@ -81,7 +81,9 @@ public abstract class Enemy : Entity
         player = ScenesManagers.Instance.player;
         chaseSpeed = chaseSpeedMultiplier * averageSpeed;
         normalSpeed = normalSpeedMultiplier * averageSpeed;
-
+        
+        collisionHandler = (EnemyCollisionHandler)base.collisionHandler;
+        
         collisionHandler.TouchingPlayer += collisionHandler_Attack;
     }
 
@@ -330,7 +332,7 @@ public abstract class Enemy : Entity
                 //Debug.Log("Collider null");
                 return false;
             }
-            
+
             return hit.collider.gameObject.CompareTag("Player");
         }
         return false;
