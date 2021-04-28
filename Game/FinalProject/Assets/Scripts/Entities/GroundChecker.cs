@@ -11,6 +11,13 @@ public class GroundChecker : MonoBehaviour
     public bool isGrounded;
     public string lastGroundTag;
 
+    public delegate void ChangedGroundTag();
+    public event ChangedGroundTag ChangedGroundTagHandler;
+    protected virtual void OnChangedGroundTag()
+    {
+        ChangedGroundTagHandler?.Invoke();
+    }
+
     void Start()
     {
         //collider2D = GetComponent<BoxCollider2D>();
@@ -26,7 +33,11 @@ public class GroundChecker : MonoBehaviour
     {
         if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Platform")
         {
-            lastGroundTag = other.gameObject.tag;
+            if (other.gameObject.tag != lastGroundTag)
+            {
+                lastGroundTag = other.gameObject.tag;
+                OnChangedGroundTag();
+            }
         }
     }
 }

@@ -18,6 +18,8 @@ public class Hawk : Entity, ILaser
     [Header("Laser Beam")]
     [SerializeField] private Transform shotPos;
     public Transform ShotPos { get => shotPos; }
+    private Vector2 endPos;
+    public Vector2 EndPos { get => endPos; } 
     [SerializeField] private float intervalToShoot;
     private float timeToShoot;
 
@@ -100,7 +102,9 @@ public class Hawk : Entity, ILaser
             Vector2 newShotPosition =  new Vector2(player.GetPosition().x, shotPos.position.y);
             shotPos.position = newShotPosition;
             // SetPositionAndRotation(newShotPosition, Quaternion.identity);
-            ShootLaser(shotPos.position, player.GetPosition());
+
+            endPos = player.GetPosition();
+            ShootLaser(shotPos.position, EndPos);
 
             timeToShoot = 0;
         }

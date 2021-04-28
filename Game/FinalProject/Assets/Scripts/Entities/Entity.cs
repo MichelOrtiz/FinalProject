@@ -55,8 +55,8 @@ public class Entity : MonoBehaviour
 
 
     [SerializeField] protected float checkFeetRadius;
-    [SerializeField] protected GroundChecker groundChecker;
-    [SerializeField] protected CollisionHandler collisionHandler;
+    public GroundChecker groundChecker;
+    public CollisionHandler collisionHandler;
     #endregion
 
     protected virtual void collisionHandler_EnterContact(GameObject contact){}
