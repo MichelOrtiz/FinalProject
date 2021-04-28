@@ -14,16 +14,23 @@ public class UBAttackedBehaviour : Entity
     [SerializeField] private int minTears;
     [SerializeField] private int maxTears;
     
+    [SerializeField] private float rainTime;
+    private float currentRainTime;
+    [SerializeField] private float intervalBtwDrops;
+    private float currentTimeBtwDrops;
 
 
     private bool reachedDestination;
     private PlayerManager player;
+    private int index;
+    private int nTears;
 
     new void Start()
     {
         base.Start();
         speed = averageSpeed * speedMultiplier;
         player = PlayerManager.instance;
+        currentTimeBtwDrops = intervalBtwDrops;
     }
 
     // Update is called once per frame
@@ -35,18 +42,36 @@ public class UBAttackedBehaviour : Entity
             {
                 //OnReachedDestination();
                 reachedDestination = true;
-                int index = minTears;
-                int nTears = RandomGenerator.NewRandom(minTears, maxTears);
-                while (index <= nTears)
-                {
-                   FallingRocks.instance.GenerateRandomRock();
-                    index++;    
-                }
+                
             }
         }
-
-
+        else
+        {
+            if (currentRainTime < rainTime)
+            {
+                if (currentTimeBtwDrops > intervalBtwDrops)
+                {
+                    index = minTears;
+                    nTears = RandomGenerator.NewRandom(minTears, maxTears);
+                    while (index++ <= nTears)
+                    {
+                        DropTear();
+                    }
+                    currentTimeBtwDrops = 0;   
+                }
+                else
+                {
+                    currentTimeBtwDrops += Time.deltaTime;
+                }
+                currentRainTime += Time.deltaTime;
+            }
+        }
         base.Update();
+    }
+
+    private void DropTear()
+    {
+        FallingRocks.instance.GenerateRandomRock();
     }
 
     void FixedUpdate()
