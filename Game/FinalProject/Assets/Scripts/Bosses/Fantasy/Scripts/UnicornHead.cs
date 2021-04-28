@@ -23,6 +23,6 @@ public class UnicornHead : MonoBehaviour
 
     void playerGroundChecker_ChangedGroundTagHandler()
     {
-        Debug.Log("ChangedGroundChecker");
+//        Debug.Log("ChangedGroundChecker");
     }
 }
