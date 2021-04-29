@@ -293,6 +293,8 @@ GameObject:
   - component: {fileID: 235274177}
   - component: {fileID: 235274176}
   - component: {fileID: 235274178}
+  - component: {fileID: 235274180}
+  - component: {fileID: 235274179}
   m_Layer: 9
   m_Name: Barrier
   m_TagString: Untagged
@@ -346,6 +348,7 @@ PolygonCollider2D:
     - - {x: -4.3857145, y: 6.052522}
       - {x: -4.3857145, y: -6.052522}
       - {x: 4.3857145, y: -6.052522}
+      - {x: 4.3857145, y: -0.21768697}
       - {x: 4.3857145, y: 6.052522}
     - - {x: -1.2412399, y: -5.4791875}
       - {x: -1.2944359, y: -5.4437237}
@@ -507,6 +510,47 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!61 &235274179
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235274174}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.09683752, y: 0.0420413}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 8.771428, y: 12.105044}
+    newSize: {x: 8.771428, y: 12.105044}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 11.287658, y: 14.744443}
+  m_EdgeRadius: 0
+--- !u!114 &235274180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235274174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2177bbf3880dc944b6c4843b6d1a83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puckScript: {fileID: 1053711530}
+  airHockeyPlayerMovement: {fileID: 884989934}
+  aIScript: {fileID: 1649645735}
 --- !u!1 &376301167
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882559861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.18, y: -2.1, z: 0}
+  m_LocalPosition: {x: 4.18, y: -1.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907120231}
@@ -978,6 +1022,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9435c480dcb79e54a8cab557041cf91b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wasJustClicked: 0
+  canMove: 0
   BoundaryHolder: {fileID: 376301168}
 --- !u!212 &884989935
 SpriteRenderer:
@@ -1128,6 +1174,8 @@ GameObject:
   - component: {fileID: 1053711527}
   - component: {fileID: 1053711526}
   - component: {fileID: 1053711530}
+  - component: {fileID: 1053711531}
+  - component: {fileID: 1053711532}
   m_Layer: 9
   m_Name: Puck
   m_TagString: Untagged
@@ -1250,7 +1298,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreScriptInstance: {fileID: 1701990144}
-  MaxSpeed: 80
+  MaxSpeed: 60
+--- !u!58 &1053711531
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053711525}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 3e3869d6f57261947931cabecae40518, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.011274849, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.36300704
+--- !u!58 &1053711532
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053711525}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 3e3869d6f57261947931cabecae40518, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.005241667, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.40825552
 --- !u!1 &1184582031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1275,7 +1355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184582031}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.18, y: 2.1, z: 0}
+  m_LocalPosition: {x: 3.79, y: 1.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907120231}
@@ -1980,8 +2060,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649645730}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.13, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalPosition: {x: 17.26, y: -0.08, z: 0}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -2135,6 +2215,7 @@ MonoBehaviour:
   AiScoreText: {fileID: 1562513180}
   PlayerScoreText: {fileID: 1254328127}
   uIManager: {fileID: 1701990146}
+  airHockeyPlayer: {fileID: 0}
   MaxScore: 5
   aiScore: 0
   playerScore: 0
@@ -2473,7 +2554,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094475906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.19, y: 0, z: 0}
+  m_LocalPosition: {x: 3.96, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907120231}

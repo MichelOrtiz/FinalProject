@@ -14,7 +14,7 @@ public class AIScript : MonoBehaviour
     private Boundary puckBoundary;
     private Vector2 targetPosition;
     private bool isFirstHalfPass = true;
-    private float offsetYFromTarget, offset1, offset2;
+    private float offsetYFromTarget, offset1, offset2, returned;
     public ScoreScript scoreScript;
 
     private void Start(){
@@ -40,29 +40,34 @@ public class AIScript : MonoBehaviour
             switch (scoreScript.playerScore)
             {
                 case 0:
-                    MaxMovementSpeed = 10;
-                    offset1 = -5;
-                    offset2 = 5;
+                    MaxMovementSpeed = 20;
+                    offset1 = -8;
+                    offset2 = 8;
+                    returned = .3f;
                     break;
                 case 1:
-                    MaxMovementSpeed = 20;
-                    offset1 = -4;
-                    offset2 = 4;
+                    MaxMovementSpeed = 30;
+                    offset1 = -6f;
+                    offset2 = 6f;
+                    returned = .3f;
                     break;
                 case 2:
-                    MaxMovementSpeed = 30;
-                    offset1 = -3;
-                    offset2 = 3;
+                    MaxMovementSpeed = 50;
+                    offset1 = -4;
+                    offset2 = 4;
+                    returned = .5f;
                     break;
                 case 3:
-                    MaxMovementSpeed = 40;
-                    offset1 = -2;
-                    offset2 = 2;
+                    MaxMovementSpeed = 75;
+                    offset1 = -2f;
+                    offset2 = 2f;
+                    returned = .5f;
                     break;
                 case 4:
-                    MaxMovementSpeed = 50;
-                    offset1 = -1;
-                    offset2 = 1;
+                    MaxMovementSpeed = 90;
+                    offset1 = -1f;
+                    offset2 = 1f;
+                    returned = .7f;
                     break;
             }
             if (Puck.position.x < puckBoundary.Up)
@@ -72,12 +77,12 @@ public class AIScript : MonoBehaviour
                     isFirstHalfPass = false;
                     offsetYFromTarget = Random.Range(offset1, offset2);
                 }
-                movementSpeed = MaxMovementSpeed * Random.Range(0.1f, 0.3f);
+                movementSpeed = MaxMovementSpeed * returned;
                 targetPosition = new Vector2(startingPosition.x, Mathf.Clamp(Puck.position.y + offsetYFromTarget, playerBoundary.Down, playerBoundary.Up));
             }else
             {
                 isFirstHalfPass = true;
-                movementSpeed = Random.Range(MaxMovementSpeed * 0.4f, MaxMovementSpeed);
+                movementSpeed = Random.Range(MaxMovementSpeed * returned, MaxMovementSpeed);
                 targetPosition = new Vector2(Mathf.Clamp(Puck.position.x, playerBoundary.Left, playerBoundary.Right),
                                             Mathf.Clamp(Puck.position.y, playerBoundary.Down, playerBoundary.Up));
             }

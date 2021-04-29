@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AirHockeyPlayerMovement : MonoBehaviour
 {
-    bool wasJustClicked, canMove;
+    public bool wasJustClicked, canMove;
+    int i;
     Rigidbody2D rb;
     Vector2 centerPosition;
     public Transform BoundaryHolder;
@@ -43,6 +44,11 @@ public class AirHockeyPlayerMovement : MonoBehaviour
             }
             if (canMove)
             {
+                while (i<10000)
+                {
+                    i++;
+                }
+                i=0;
                 Vector2 clampedMousePos = new Vector2(Mathf.Clamp(mousePos.x, playerBoundary.Left, playerBoundary.Right),
                                                       Mathf.Clamp(mousePos.y, playerBoundary.Down, playerBoundary.Up));
                 rb.MovePosition(clampedMousePos);

@@ -11,6 +11,7 @@ public class ScoreScript : MonoBehaviour
     }
     public Text AiScoreText, PlayerScoreText;
     public UIManager uIManager;
+    public AirHockeyPlayerMovement airHockeyPlayer;
 
     #region Scores
         public int MaxScore, aiScore, playerScore;
@@ -46,7 +47,6 @@ public class ScoreScript : MonoBehaviour
             AiScoreText.text = (++AiScore).ToString();
         }else
         {
-            
             PlayerScoreText.text = (++PlayerScore).ToString();
         }
     }
