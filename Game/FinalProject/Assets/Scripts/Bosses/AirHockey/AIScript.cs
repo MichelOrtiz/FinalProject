@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIScript : MonoBehaviour
 {
-    private float MaxMovementSpeed;
+    public float MaxMovementSpeed;
     private Rigidbody2D rb;
     private Vector2 startingPosition;
     public Rigidbody2D Puck;

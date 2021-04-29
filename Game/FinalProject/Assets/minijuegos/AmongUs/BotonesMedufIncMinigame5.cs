@@ -16,15 +16,15 @@ public class BotonesMedufIncMinigame5 : MonoBehaviour
         yellow = false;
         purple = false;
         expBlues.gameObject.GetComponent<UnpoweredWireBehaviour>().enabled = false;
-            expGreens.gameObject.GetComponent<UnpoweredWireBehaviour>().enabled = false;
-            expYellows.gameObject.GetComponent<UnpoweredWireBehaviour>().enabled = false;
-            expReds.gameObject.GetComponent<UnpoweredWireBehaviour>().enabled = false;
-            expPurples.gameObject.GetComponent<UnpoweredWireBehaviour>().enabled = false;
-            expBlues.gameObject.GetComponent<UnpoweredWireStat>().enabled = false;
-            expGreens.gameObject.GetComponent<UnpoweredWireStat>().enabled = false;
-            expYellows.gameObject.GetComponent<UnpoweredWireStat>().enabled = false;
-            expReds.gameObject.GetComponent<UnpoweredWireStat>().enabled = false;
-            expPurples.gameObject.GetComponent<UnpoweredWireStat>().enabled = false;
+        expGreens.gameObject.GetComponent<UnpoweredWireBehaviour>().enabled = false;
+        expYellows.gameObject.GetComponent<UnpoweredWireBehaviour>().enabled = false;
+        expReds.gameObject.GetComponent<UnpoweredWireBehaviour>().enabled = false;
+        expPurples.gameObject.GetComponent<UnpoweredWireBehaviour>().enabled = false;
+        expBlues.gameObject.GetComponent<UnpoweredWireStat>().enabled = false;
+        expGreens.gameObject.GetComponent<UnpoweredWireStat>().enabled = false;
+        expYellows.gameObject.GetComponent<UnpoweredWireStat>().enabled = false;
+        expReds.gameObject.GetComponent<UnpoweredWireStat>().enabled = false;
+        expPurples.gameObject.GetComponent<UnpoweredWireStat>().enabled = false;
     }
 
     // Update is called once per frame
