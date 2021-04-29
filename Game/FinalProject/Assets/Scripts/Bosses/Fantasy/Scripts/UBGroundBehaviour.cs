@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class UBGroundBehaviour : UBBehaviour, ILaser
 {
-    [SerializeField] private float speedMultiplier;
-    private float speed;
-    
+    #region TargetPosition
+    [Header("Target Position")]
     [SerializeField] private Vector2 positionToGo;
     [SerializeField] private float destinationRadius;
-    
     private bool reachedDestination;
-    private PlayerManager player;
+    #endregion
 
     #region LaserBeam
     [Header("Laser Beam")]
@@ -36,13 +34,7 @@ public class UBGroundBehaviour : UBBehaviour, ILaser
     new void Start()
     {
         base.Start();
-        
-
-        
         SetDefaults();
-
-        
-
     }
 
     // Update is called once per frame
@@ -102,7 +94,6 @@ public class UBGroundBehaviour : UBBehaviour, ILaser
 
     protected override void SetDefaults()
     {
-        speed = averageSpeed * speedMultiplier;
-        player = PlayerManager.instance;
+        return;
     }
 }

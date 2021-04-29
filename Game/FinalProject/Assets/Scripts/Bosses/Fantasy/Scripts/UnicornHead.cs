@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UnicornHead : MonoBehaviour
 {
+    //[SerializeField] private BossFight bossFight;
     PlayerManager player;
     GroundChecker playerGroundChecker;  
     [SerializeField] private List<UBLamp> lamps;
@@ -18,7 +19,12 @@ public class UnicornHead : MonoBehaviour
     private float currentTimeBtwAttack;
     private bool changingAttack;
 
-    // Start is called before the first frame update
+    int lampsActivated;
+
+    void Awake()
+    {
+        lamps = ScenesManagers.GetObjectsOfType<UBLamp>();
+    }
     void Start()
     {
         player = PlayerManager.instance;
@@ -44,7 +50,11 @@ public class UnicornHead : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //UpdateChildrenPosition();
+        UpdateChildrenPosition();
+        if (AllLampsActivated())
+        {
+            FindObjectOfType<BossFight>().EndBattle();
+        }
         if (changingAttack)
         {
             if (currentTimeBtwAttack > timeBtwAttacks)
@@ -97,10 +107,16 @@ public class UnicornHead : MonoBehaviour
         {
             nextChild = RainAttack;
         }
+        lampsActivated++;
         /*if (!changingAttack)
         {
             ChangeChild(RainAttack);
         }*/
+    }
+
+    bool AllLampsActivated()
+    {
+        return lampsActivated == lamps.Count;  
     }
 
     void ChangeChild(GameObject gameObject)
@@ -112,7 +128,7 @@ public class UnicornHead : MonoBehaviour
         {
             child.GetComponent<UBBehaviour>().SetActive(false);
         }
-        
+
         child = gameObject;
         child.GetComponent<UBBehaviour>().SetActive(true);
 

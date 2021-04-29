@@ -4,33 +4,30 @@ using UnityEngine;
 
 public class UBAttackedBehaviour : UBBehaviour
 {
-    [SerializeField] private float speedMultiplier;
-    private float speed;
-    
+    #region TargetPosition
+    [Header("Target Position")]
     [SerializeField] private Vector2 positionToGo;
     [SerializeField] private float destinationRadius;
+    #endregion
+    
 
-
+    #region Tears
     [SerializeField] private int minTears;
     [SerializeField] private int maxTears;
-    
     [SerializeField] private float rainTime;
     private float currentRainTime;
     [SerializeField] private float intervalBtwDrops;
     private float currentTimeBtwDrops;
-
-
-    private bool reachedDestination;
-    private PlayerManager player;
-    private int index;
     private int nTears;
+    private int index;
+
+    #endregion
+
 
     new void Start()
     {
         base.Start();
-        speed = averageSpeed * speedMultiplier;
-        player = PlayerManager.instance;
-        currentTimeBtwDrops = intervalBtwDrops;
+        SetDefaults();
     }
 
     // Update is called once per frame
@@ -38,16 +35,7 @@ public class UBAttackedBehaviour : UBBehaviour
     {
         if (!finishedAttack)
         {
-            if (!reachedDestination)
-            {
-                if (Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius)
-                {
-                    //OnReachedDestination();
-                    reachedDestination = true;
-                    
-                }
-            }
-            else
+            if (ReachedDestination())
             {
                 if (currentRainTime < rainTime)
                 {
@@ -76,6 +64,11 @@ public class UBAttackedBehaviour : UBBehaviour
         base.Update();
     }
 
+    bool ReachedDestination()
+    {
+        return Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius;
+    }
+
     private void DropTear()
     {
         FallingRocks.instance.GenerateRandomRock();
@@ -83,7 +76,7 @@ public class UBAttackedBehaviour : UBBehaviour
 
     void FixedUpdate()
     {
-        if (!reachedDestination)
+        if (!ReachedDestination())
         {
             rigidbody2d.position = Vector2.MoveTowards(GetPosition(), positionToGo, speed * Time.deltaTime);
         }
@@ -92,5 +85,6 @@ public class UBAttackedBehaviour : UBBehaviour
     protected override void SetDefaults()
     {
         currentRainTime = 0;
+        currentTimeBtwDrops = intervalBtwDrops;
     }
 }

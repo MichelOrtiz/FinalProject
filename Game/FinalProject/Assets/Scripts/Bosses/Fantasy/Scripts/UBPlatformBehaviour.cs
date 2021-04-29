@@ -4,50 +4,40 @@ using UnityEngine;
 
 public class UBPlatformBehaviour : UBBehaviour
 {
+    #region Prepare
+    [Header("Prepare")]
     [SerializeField] private float startingTime;
     private float currentStartingTime;
     private bool preparing;
-
-    PlayerManager player;
-    [SerializeField] private float speedMultiplier;
-    private float chaseSpeed;
-
-    [SerializeField] private float pushForce;
-
-    private Vector2 direction;
-    private Vector2 push;
-
     [SerializeField] private float timeBeforePush;
     private float currentTimeBeforePush;
+    #endregion
+
+    #region Push
+    [Header("Push")]
+    [SerializeField] private float pushForce;
+    private Vector2 direction;
+    private Vector2 push;
     private bool inPush;
-    
-    [SerializeField] private float startDamageAmount;
+    #endregion
+
+    #region Params
+    [Header("Params")]
     [SerializeField] private float inPushDamageAmount;
-    
-    new private EnemyCollisionHandler collisionHandler;
+    #endregion
 
     private bool defaultsSet;
     
-    void Awake()
+    new void Awake()
     {
-        collisionHandler = (EnemyCollisionHandler) base.collisionHandler;
-
-        collisionHandler.TouchingGroundHandler += collisionHandler_TouchingGround;
-        collisionHandler.TouchingPlayer += collisionHandler_Attack;
-
-       inPush = true;
-       preparing = true;
+        base.Awake();
+        eCollisionHandler.TouchingGroundHandler += eCollisionHandler_TouchingGround;
     }
     
     new void Start()
     {
         base.Start();
-        
-        //SetDefaults();
         SetDefaults();
-
-        
-        
     }
 
     new void Update()
@@ -80,7 +70,7 @@ public class UBPlatformBehaviour : UBBehaviour
         }
     }
 
-    void collisionHandler_TouchingGround()
+    void eCollisionHandler_TouchingGround()
     {
         Debug.Log("preparing " + preparing);
         if (currentStartingTime > startingTime)
@@ -99,7 +89,7 @@ public class UBPlatformBehaviour : UBBehaviour
     }
 
 
-    void collisionHandler_Attack()
+    new void eCollisionHandler_Attack()
     {
         if (inPush)
         {
@@ -134,9 +124,6 @@ public class UBPlatformBehaviour : UBBehaviour
         player = PlayerManager.instance;
 
         direction = (player.GetPosition() - GetPosition()).normalized;
-        push = new Vector2(direction.x * pushForce * speedMultiplier, direction.y * speedMultiplier * pushForce);
-
-        
-        Debug.Log("Defaults Set");
+        push = new Vector2(direction.x * pushForce * speed, direction.y * speed * pushForce);
     }
 }

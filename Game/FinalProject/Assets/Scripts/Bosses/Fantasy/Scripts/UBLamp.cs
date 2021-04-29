@@ -4,31 +4,38 @@ using UnityEngine;
 
 public class UBLamp : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite spriteWhenEnabled;
+    [SerializeField] private Sprite spriteWhenDisabled;
+    
     [SerializeField] private float interactionRadius;
     //[SerializeField] private float effectRadius;
     [SerializeField] private CollisionHandler collisionHandler;
     [SerializeField] private string targetObjectTag;
     [SerializeField] private float waitTimeIfFailActivate;
     private float currentTime;
-
     private bool targetEnteredZone;
     private bool canActivate;
 
-
+    #region Events
     public delegate void Activated();
     public event Activated ActivatedHandler;
     protected virtual void OnActivated()
     {
         ActivatedHandler?.Invoke();
+        enabled = false;
     }
 
+    #endregion
     private PlayerManager player;
-   // float distanceFromTarget;
 
     void Awake()
     {
         collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterTouchingContact;
         collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitTouchingContact;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        ChangeSprite(spriteWhenEnabled);
     }
 
     void Start()
@@ -45,10 +52,12 @@ public class UBLamp : MonoBehaviour
         //Debug.Log(targetObject.position);
         if (canActivate)
         {
+            ChangeSprite(spriteWhenEnabled);
             if (distanceFromPlayer <= interactionRadius)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    ChangeSprite(spriteWhenDisabled);
                     if (targetEnteredZone)
                     {
                         OnActivated();
@@ -74,7 +83,14 @@ public class UBLamp : MonoBehaviour
         }
     }
 
-    
+    void ChangeSprite(Sprite sprite)
+    {
+        if (spriteRenderer.sprite != sprite)
+        {
+            spriteRenderer.sprite = sprite;
+        }
+    }
+
     void OnDrawGizmos()
     {
         //Gizmos.color = Color.red;
