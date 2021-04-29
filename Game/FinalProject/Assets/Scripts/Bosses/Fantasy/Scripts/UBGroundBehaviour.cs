@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UBGroundBehaviour : Entity, ILaser
+public class UBGroundBehaviour : UBBehaviour, ILaser
 {
     [SerializeField] private float speedMultiplier;
     private float speed;
@@ -21,6 +21,7 @@ public class UBGroundBehaviour : Entity, ILaser
     public Vector2 EndPos { get => endPos; }
     [SerializeField] private float intervalToShot;
     private float timeToShot;
+    private bool shotLaser;
 
     //[SerializeField] private LineRenderer laser;
     [SerializeField] private GameObject laserPrefab;
@@ -31,48 +32,55 @@ public class UBGroundBehaviour : Entity, ILaser
     #endregion
     
 
-    /*public delegate void ReachedDestination();
-    public event ReachedDestination ReachedDestinationHandler;
-    protected virtual void OnReachedDestination()
-    {
-        ReachedDestinationHandler?.Invoke();
-        reachedDestination = true;
-        ShootLaser(shotPos.position, player.GetPosition());
-    }*/
 
-    // Start is called before the first frame update
     new void Start()
     {
         base.Start();
-        speed = averageSpeed * speedMultiplier;
-        player = PlayerManager.instance;
+        
+
+        
+        SetDefaults();
+
+        
+
     }
 
     // Update is called once per frame
     new void Update()
     {
-        endPos = player.GetPosition();
-        if (!reachedDestination)
+        if (!finishedAttack)
         {
-            if (Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius)
+            endPos = player.GetPosition();
+            if (ReachedDestination())
             {
-                //OnReachedDestination();
-                reachedDestination = true;
-                endPos = player.GetPosition();
-                ShootLaser(shotPos.position, endPos);
+                if (!shotLaser)
+                {
+                    endPos = player.GetPosition();
+                    ShootLaser(shotPos.position, endPos);
+                    shotLaser = true;
+                }
+                else if (laser == null)
+                {
+                    OnFinishedAttack();
+                }
             }
         }
-
+        
 
         base.Update();
     }
 
     void FixedUpdate()
     {
-        if (!reachedDestination)
+        if (!ReachedDestination())
         {
             rigidbody2d.position = Vector2.MoveTowards(GetPosition(), positionToGo, speed * Time.deltaTime);
         }
+    }
+
+    bool ReachedDestination()
+    {
+        return Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius;
     }
 
     public void ShootLaser(Vector2 from, Vector2 to)
@@ -84,5 +92,17 @@ public class UBGroundBehaviour : Entity, ILaser
     public void LaserAttack()
     {
         player.TakeTirement(laserDamage);
+    }
+
+    new void OnFinishedAttack()
+    {
+        shotLaser = false;
+        base.OnFinishedAttack();
+    }
+
+    protected override void SetDefaults()
+    {
+        speed = averageSpeed * speedMultiplier;
+        player = PlayerManager.instance;
     }
 }

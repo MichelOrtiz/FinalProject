@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UBAttackedBehaviour : Entity
+public class UBAttackedBehaviour : UBBehaviour
 {
     [SerializeField] private float speedMultiplier;
     private float speed;
@@ -36,39 +36,43 @@ public class UBAttackedBehaviour : Entity
     // Update is called once per frame
     new void Update()
     {
-        if (!reachedDestination)
+        if (!finishedAttack)
         {
-            if (Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius)
+            if (!reachedDestination)
             {
-                //OnReachedDestination();
-                reachedDestination = true;
-                
-            }
-        }
-        else
-        {
-            if (currentRainTime < rainTime)
-            {
-                if (currentTimeBtwDrops > intervalBtwDrops)
+                if (Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius)
                 {
-                    index = minTears;
-                    nTears = RandomGenerator.NewRandom(minTears, maxTears);
-                    Debug.Log(nTears);
-                    while (index++ <= nTears)
+                    //OnReachedDestination();
+                    reachedDestination = true;
+                    
+                }
+            }
+            else
+            {
+                if (currentRainTime < rainTime)
+                {
+                    if (currentTimeBtwDrops > intervalBtwDrops)
                     {
-                        DropTear();
+                        index = minTears;
+                        nTears = RandomGenerator.NewRandom(minTears, maxTears);
+                        while (index++ <= nTears)
+                        {
+                            DropTear();
+                        }
+                        currentTimeBtwDrops = 0;
                     }
-                    currentTimeBtwDrops = 0;   
+                    else
+                    {
+                        currentTimeBtwDrops += Time.deltaTime;
+                    }
+                    currentRainTime += Time.deltaTime;
                 }
                 else
                 {
-                    currentTimeBtwDrops += Time.deltaTime;
+                    OnFinishedAttack();
                 }
-                currentRainTime += Time.deltaTime;
             }
         }
-
-
         base.Update();
     }
 
@@ -83,5 +87,10 @@ public class UBAttackedBehaviour : Entity
         {
             rigidbody2d.position = Vector2.MoveTowards(GetPosition(), positionToGo, speed * Time.deltaTime);
         }
+    }
+
+    protected override void SetDefaults()
+    {
+        currentRainTime = 0;
     }
 }

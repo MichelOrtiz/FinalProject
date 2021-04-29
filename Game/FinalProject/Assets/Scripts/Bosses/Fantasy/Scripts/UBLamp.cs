@@ -49,8 +49,6 @@ public class UBLamp : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Debug.Log("Key pressed");
-                    //Debug.Log(distanceFromTarget);
                     if (targetEnteredZone)
                     {
                         OnActivated();
