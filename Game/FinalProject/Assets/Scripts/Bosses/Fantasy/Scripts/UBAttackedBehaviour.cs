@@ -53,6 +53,7 @@ public class UBAttackedBehaviour : Entity
                 {
                     index = minTears;
                     nTears = RandomGenerator.NewRandom(minTears, maxTears);
+                    Debug.Log(nTears);
                     while (index++ <= nTears)
                     {
                         DropTear();
@@ -66,6 +67,8 @@ public class UBAttackedBehaviour : Entity
                 currentRainTime += Time.deltaTime;
             }
         }
+
+
         base.Update();
     }
 

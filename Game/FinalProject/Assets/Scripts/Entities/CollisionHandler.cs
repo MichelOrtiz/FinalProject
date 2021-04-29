@@ -13,25 +13,25 @@ public class CollisionHandler : MonoBehaviour
         protected set { contacts = value; }
     }
 
-    public delegate void EnterTouchingContact(GameObject contactTag);
+    public delegate void EnterTouchingContact(GameObject contact);
     public event EnterTouchingContact EnterTouchingContactHandler;
-    protected virtual void OnEnterTouchingContact(GameObject tag)
+    protected virtual void OnEnterTouchingContact(GameObject contact)
     {
-        EnterTouchingContactHandler?.Invoke(tag);
+        EnterTouchingContactHandler?.Invoke(contact);
     }
 
-    public delegate void StayTouchingContact(GameObject contactTag);
+    public delegate void StayTouchingContact(GameObject contact);
     public event StayTouchingContact StayTouchingContactHandler;
-    protected virtual void OnStayTouchingContact(GameObject tag)
+    protected virtual void OnStayTouchingContact(GameObject contact)
     {
-        StayTouchingContactHandler?.Invoke(tag);
+        StayTouchingContactHandler?.Invoke(contact);
     }
 
-    public delegate void ExitTouchingContact(GameObject contactTag);
+    public delegate void ExitTouchingContact(GameObject contact);
     public event ExitTouchingContact ExitTouchingContactHandler;
-    protected virtual void OnExitTouchingContact(GameObject tag)
+    protected virtual void OnExitTouchingContact(GameObject contact)
     {
-        ExitTouchingContactHandler?.Invoke(tag);
+        ExitTouchingContactHandler?.Invoke(contact);
     }
 
     void Awake()
