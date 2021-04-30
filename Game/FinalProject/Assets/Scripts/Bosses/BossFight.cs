@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class BossFight : MonoBehaviour
 {
+    public static BossFight instance;
+    private void Awake() {
+        if(instance!=null){
+            Debug.Log("this is bad : BossFight");
+            return;
+        }
+        instance = this;
+    }
     [SerializeField] protected List<Stage> stages;
     [SerializeField] protected GameObject abilityObject;
     public Stage currentStage;

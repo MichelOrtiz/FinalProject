@@ -112,7 +112,7 @@ public class PlayerManager : Entity
     #endregion
 
     #region Inputs
-    PlayerInputs inputs;
+    public PlayerInputs inputs;
     #endregion
     [SerializeField]private State inmunityState;
     public AbilityManager abilityManager;
@@ -156,7 +156,7 @@ public class PlayerManager : Entity
         animator.SetBool("Is Aiming", isAiming);
         isStruggling = false;
         isWalking = inputs.movementX!=0 && isGrounded;
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
+        //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < 0f;
         //UpdateAnimation();
 

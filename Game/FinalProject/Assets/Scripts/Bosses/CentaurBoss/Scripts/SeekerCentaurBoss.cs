@@ -224,7 +224,7 @@ public class SeekerCentaurBoss : Entity, IProjectile
         projectile.Setup(from, to, this);
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    /*void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -242,5 +242,24 @@ public class SeekerCentaurBoss : Entity, IProjectile
 
             touchingPlayer = false;
         }        
+    }*/
+
+    new void collisionHandler_EnterContact(GameObject contact)
+    {
+        if (contact.gameObject.tag == "Player")
+        {
+            touchingPlayer = true;
+            player.TakeTirement(damageAmount);
+            player.statesManager.AddState(enemyEffectOnPlayer);
+            statesManager.AddState(enemyEffectOnSelf);
+        }
+    }
+
+    new void collisionHandler_ExitContact(GameObject contact)
+    {
+        if (contact.gameObject.tag == "Player")
+        {
+            touchingPlayer = false;
+        }
     }
 }

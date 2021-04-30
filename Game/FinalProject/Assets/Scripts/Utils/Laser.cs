@@ -16,7 +16,9 @@ public class Laser : MonoBehaviour
 
 
     private float currentTime;
-    private float speed;
+    [SerializeField] private float speed;
+    [SerializeField] private bool chaseTargetPosition;
+    [SerializeField] private bool chaseOnReachedEndPos;
 
     private Vector2 startPos;
     private Vector2 endPos;
@@ -28,6 +30,10 @@ public class Laser : MonoBehaviour
 
 
     private EdgeCollider2D edge;
+
+
+    //public delegate void ReachedEndPos();
+    //public event ReachedEndPos ReachedDestinationHandler;
 
     public Laser(){}
 
@@ -68,6 +74,27 @@ public class Laser : MonoBehaviour
         }
     }
 
+    public void Setup(Vector2 startPos, Vector2 endPos, ILaser summoner)
+    {
+        this.startPos = startPos;
+        this.endPos = endPos;
+        this.summoner = summoner;
+        direction = (endPos - startPos).normalized;
+
+
+        if (targetWarningAvailable)
+        {
+            warningObject = Instantiate(warning, endPos, Quaternion.identity);
+        }
+    }
+
+    void Awake()
+    {
+        if (chaseTargetPosition && chaseOnReachedEndPos)
+        {
+              chaseTargetPosition = !chaseOnReachedEndPos;
+        }
+    }
 
     void Start()
     {
@@ -77,10 +104,18 @@ public class Laser : MonoBehaviour
 
         edge = GetComponent<EdgeCollider2D>();
 
+        //chaseOnReachedEndPos = chaseOnReachedEndPos && chaseTargetPosition;
+
         
     }
     void Update()
     {
+        /*if (chaseTargetPosition)
+        {
+            endPos = summoner.EndPos;
+            direction = (endPos- startPos).normalized;
+        }*/
+
         if (targetWarningAvailable)
         {
             if (currentWarningTime > warningTime)
@@ -106,7 +141,7 @@ public class Laser : MonoBehaviour
 
 
             ExtendRay();
-            
+
             
             edge.SetPoints(new List<Vector2>()
                 {transform.InverseTransformPoint(startPos) , transform.InverseTransformPoint(endPoint.position)}
@@ -126,11 +161,21 @@ public class Laser : MonoBehaviour
         ray.SetPosition(0, summoner.ShotPos.position);
         float distanceToEndPos = Vector2.Distance(endPos, startPos);
         float currentDistanceFromStart = Vector2.Distance(endPoint.position, startPos);
-        if (currentDistanceFromStart < distanceToEndPos)
+
+        if (chaseTargetPosition)
+        {
+            endPoint.transform.position = Vector2.MoveTowards(endPoint.transform.position, summoner.EndPos, speed * Time.deltaTime);
+        }
+        else if (currentDistanceFromStart < distanceToEndPos)
         {
             endPoint.transform.position += (Vector3) (direction * speed * Time.deltaTime);
-            ray.SetPosition(1, endPoint.position);
         }
+
+        if (currentDistanceFromStart >= distanceToEndPos)
+        {
+            OnReachedEndPos();
+        }
+        ray.SetPosition(1, endPoint.position);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -148,4 +193,13 @@ public class Laser : MonoBehaviour
             touchingPlayer = false;
         }
     }
+
+    public void OnReachedEndPos()
+    {
+        if (chaseOnReachedEndPos)
+        {
+            endPoint.transform.position = Vector2.MoveTowards(endPoint.transform.position, summoner.EndPos, speed * Time.deltaTime);
+        }
+    }
+        
 }

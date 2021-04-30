@@ -12,7 +12,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected GameObject? impactEffect;
 
     [SerializeField] protected bool targetWarningAvailable;
-    [SerializeField] protected bool collidesWithPlayer;
+    //[SerializeField] protected bool collidesWithPlayer;
+    [SerializeField] protected bool independentAttackEnabled;
     protected LayerMask defaultLayer;
     #endregion
 
@@ -127,7 +128,12 @@ public class Projectile : MonoBehaviour
         
         if (touchingObstacle)
         {
-            rigidbody2d.Sleep();
+            // maybe temporary
+            rigidbody2d.gravityScale = 0;
+            speedMultiplier = 0;
+            rigidbody2d.velocity = new Vector2();
+            // *
+
             if (waitTime <= 0)
             {
                 Destroy();
@@ -149,12 +155,16 @@ public class Projectile : MonoBehaviour
     {
         if (touchingPlayer)
         {
-                aboutToDestroy = true;
-                if (enemy != null)
-                {
-                    enemy.ProjectileAttack();
-                }
-                Destroy();
+            if (independentAttackEnabled)
+            {
+                PlayerManager.instance.TakeTirement(damage);
+            }
+            aboutToDestroy = true;
+            if (enemy != null)
+            {
+                enemy.ProjectileAttack();
+            }
+            Destroy();
             
         }
     }

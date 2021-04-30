@@ -1,0 +1,96 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AIScript : MonoBehaviour
+{
+    public float MaxMovementSpeed;
+    private Rigidbody2D rb;
+    private Vector2 startingPosition;
+    public Rigidbody2D Puck;
+    public Transform PlayerBoundaryHolder;
+    private Boundary playerBoundary;
+    public Transform PuckBoundaryHolder;
+    private Boundary puckBoundary;
+    private Vector2 targetPosition;
+    private bool isFirstHalfPass = true;
+    private float offsetYFromTarget, offset1, offset2, returned;
+    public ScoreScript scoreScript;
+
+    private void Start(){
+        rb = GetComponent<Rigidbody2D>();
+        startingPosition = rb.position;
+        playerBoundary = new Boundary(PlayerBoundaryHolder.GetChild(0).position.y,
+                                      PlayerBoundaryHolder.GetChild(1).position.y,
+                                      PlayerBoundaryHolder.GetChild(2).position.x,
+                                      PlayerBoundaryHolder.GetChild(3).position.x);
+        playerBoundary = new Boundary(PuckBoundaryHolder.GetChild(0).position.y,
+                                      PuckBoundaryHolder.GetChild(1).position.y,
+                                      PuckBoundaryHolder.GetChild(2).position.x,
+                                      PuckBoundaryHolder.GetChild(3).position.x);
+        MaxMovementSpeed = 10;
+        offset1 = -5;
+        offset2 = 5;
+    }
+
+    private void FixedUpdate(){
+        if (!PuckScript.WasGoal)
+        { 
+            float movementSpeed;
+            switch (scoreScript.playerScore)
+            {
+                case 0:
+                    MaxMovementSpeed = 20;
+                    offset1 = -8;
+                    offset2 = 8;
+                    returned = .3f;
+                    break;
+                case 1:
+                    MaxMovementSpeed = 30;
+                    offset1 = -6f;
+                    offset2 = 6f;
+                    returned = .3f;
+                    break;
+                case 2:
+                    MaxMovementSpeed = 50;
+                    offset1 = -4;
+                    offset2 = 4;
+                    returned = .5f;
+                    break;
+                case 3:
+                    MaxMovementSpeed = 75;
+                    offset1 = -2f;
+                    offset2 = 2f;
+                    returned = .5f;
+                    break;
+                case 4:
+                    MaxMovementSpeed = 90;
+                    offset1 = -1f;
+                    offset2 = 1f;
+                    returned = .7f;
+                    break;
+            }
+            if (Puck.position.x < puckBoundary.Up)
+            {
+                if (isFirstHalfPass)
+                {
+                    isFirstHalfPass = false;
+                    offsetYFromTarget = Random.Range(offset1, offset2);
+                }
+                movementSpeed = MaxMovementSpeed * returned;
+                targetPosition = new Vector2(startingPosition.x, Mathf.Clamp(Puck.position.y + offsetYFromTarget, playerBoundary.Down, playerBoundary.Up));
+            }else
+            {
+                isFirstHalfPass = true;
+                movementSpeed = Random.Range(MaxMovementSpeed * returned, MaxMovementSpeed);
+                targetPosition = new Vector2(Mathf.Clamp(Puck.position.x, playerBoundary.Left, playerBoundary.Right),
+                                            Mathf.Clamp(Puck.position.y, playerBoundary.Down, playerBoundary.Up));
+            }
+            rb.MovePosition(Vector2.MoveTowards(rb.position,targetPosition, movementSpeed * Time.fixedDeltaTime));
+        }
+    }
+    
+    public void  CenterPosition(){
+        rb.position = startingPosition;
+    }
+}

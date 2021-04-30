@@ -48,14 +48,12 @@ public class Fov3 : GnomeFov
          //if you want to switch direction, use -= instead of +=
         if (!justAttacked)
         {
-            Debug.Log("not attacked!!");
             Move();
         }
         else if (timeAfterAttack > baseTimeAfterAttack)
         {
 
             ChangeDirection();
-            Debug.Log("attacked!!");
             endPoint.x = Mathf.Cos(90)*radius+center.position.x;
             endPoint.y = Mathf.Sin(90)*radius+center.position.y;
         }

@@ -10,7 +10,7 @@ public class Stage : ScriptableObject
     
     [SerializeField] public List<GameObject> gameObjects;
     [SerializeField] public List<Vector2> positions;
-    private List<GameObject> currentObjects;
+    public List<GameObject> currentObjects { get; set; }
     public void Generate(){
         for (int i = 0; i < gameObjects.Count; i++)
         {

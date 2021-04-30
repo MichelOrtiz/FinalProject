@@ -48,7 +48,6 @@ public abstract class GnomeFov : MonoBehaviour
         {
             if (timeAfterAttack > baseTimeAfterAttack)
             {
-                Debug.Log("just attacked false");
                 timeAfterAttack = 0;
                 justAttacked = false;
                 mesh.GetComponent<MeshRenderer>().material = normalMaterial;

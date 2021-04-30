@@ -61,7 +61,7 @@ public class MantisBoss : MonoBehaviour
     }
     private void UpdateMantisList()
     {
-        mantises = ScenesManagers.GetObjectsOfType<Mantis>();
+        mantises =  ScenesManagers.GetObjectsOfType<Mantis>();
     }
 
     private void UpdatePlatformsList()

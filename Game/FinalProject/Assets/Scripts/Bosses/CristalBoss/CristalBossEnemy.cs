@@ -8,6 +8,8 @@ public class CristalBossEnemy : NormalType, ILaser
     [Header("Laser Beam")]
     [SerializeField] private Transform shotPos;
     public Transform ShotPos { get => shotPos; }
+    private Vector2 endPos;
+    public Vector2 EndPos { get => endPos; }
     [SerializeField] private float minDistanceToShotRay;
     [SerializeField] private float intervalToShot;
     private float timeToShot;
@@ -37,6 +39,7 @@ public class CristalBossEnemy : NormalType, ILaser
     private int interactions;
 
     #endregion
+
 
     new void Start()
     {
@@ -78,10 +81,14 @@ public class CristalBossEnemy : NormalType, ILaser
         {
             Destroy(gameObject);
         }
-
         base.Update();
     }
 
+    new void FixedUpdate()
+    {
+        ChasePlayer();
+        base.FixedUpdate();
+    }
 
     public override void ConsumeItem(Item item)
     {
@@ -101,7 +108,8 @@ public class CristalBossEnemy : NormalType, ILaser
             {
                 if (laser == null)
                 {
-                    ShootLaser(shotPos.position, player.GetPosition());
+                    endPos = player.GetPosition();
+                    ShootLaser(shotPos.position, EndPos);
                 }
                 timeToShot = 0;
             }
@@ -158,10 +166,6 @@ public class CristalBossEnemy : NormalType, ILaser
         }
     }
 
-    private bool OnPlatform()
-    {
-        return Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround).gameObject.CompareTag("Platform");
-    }
     
 
     private Transform FindNearestPlatform()

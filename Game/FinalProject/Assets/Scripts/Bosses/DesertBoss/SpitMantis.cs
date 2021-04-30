@@ -24,8 +24,9 @@ public class SpitMantis : Mantis, IProjectile
     new void Start()
     {
         base.Start();
-        chasesToDo = RandomGenerator.NewRandom(minChases, maxChases);
 
+        chasesToDo = RandomGenerator.NewRandom(minChases, maxChases);
+        
         /*foreach (var platform in targetPlatforms)
         {
             platform = ScenesManagers.GetObjectsOfType<Platform>().Find(p => p == platform);
@@ -47,11 +48,7 @@ public class SpitMantis : Mantis, IProjectile
                 timeAfterShot += Time.deltaTime;
             }
         }
-        if (touchingGround)
-        {
-            rigidbody2d.velocity = new Vector2();
-            touchingGround = false;
-        }
+
         base.Update();
         
     }
@@ -110,11 +107,11 @@ public class SpitMantis : Mantis, IProjectile
 
     private GameObject GetProjectileTarget()
     {
-        int chosenPlatform = RandomGenerator.NewRandom(0, ScenesManagers.FindObjectOfType<MantisBoss>().allPlatforms.Count);
+        int chosenPlatform = RandomGenerator.NewRandom(0, ScenesManagers.FindObjectOfType<MantisBoss>().allPlatforms.Count -1);
         return ScenesManagers.FindObjectOfType<MantisBoss>().allPlatforms[chosenPlatform].gameObject;
     }
 
-    protected override void OnCollisionEnter2D(Collision2D other)
+    /*protected override void OnCollisionEnter2D(Collision2D other)
     {
         base.OnCollisionEnter2D(other);
     }
@@ -122,5 +119,10 @@ public class SpitMantis : Mantis, IProjectile
     protected override void OnCollisionExit2D(Collision2D other)
     {
         base.OnCollisionExit2D(other);
+    }*/
+
+    new void collisionHandler_TouchingGround()
+    {
+        base.collisionHandler_TouchingGround();
     }
 }
