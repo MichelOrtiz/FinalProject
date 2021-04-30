@@ -165,13 +165,7 @@ public abstract class Enemy : Entity
     #endregion
 
     #region General behaviour methods
-    /// <summary>
-    /// Rotates the enemy Y axis
-    /// </summary>
-    protected void ChangeFacingDirection()
-    {
-        transform.eulerAngles = new Vector3(0, facingDirection == LEFT? 0:180);
-    }
+    
     protected bool InFrontOfObstacle()
     {
 
