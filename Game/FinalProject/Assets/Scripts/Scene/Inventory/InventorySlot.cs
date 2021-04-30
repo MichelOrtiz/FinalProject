@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class InventorySlot : Slot
+public class InventorySlot : ItemSlot
 {
     private InventoryUI inventoryUI;
     private void Start() {

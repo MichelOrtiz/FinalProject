@@ -36,7 +36,7 @@ public class Hawk : Entity, ILaser
     [SerializeField] private float damageAmount;
 
     /* change to enemy and inherit later*/
-    private EnemyCollisionHandler collisionHandler;
+    new private EnemyCollisionHandler collisionHandler;
     private bool touchingPlayer;
 
     private PlayerManager player;

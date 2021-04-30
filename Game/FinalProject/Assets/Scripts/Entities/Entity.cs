@@ -147,6 +147,14 @@ public class Entity : MonoBehaviour
         }
         return false;
     }
+
+    /// <summary>
+    /// Rotates the enity Y axis
+    /// </summary>
+    protected void ChangeFacingDirection()
+    {
+        transform.eulerAngles = new Vector3(0, facingDirection == LEFT? 0:180);
+    }
     
     #endregion
 }
