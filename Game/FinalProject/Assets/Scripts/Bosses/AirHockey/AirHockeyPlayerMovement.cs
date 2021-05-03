@@ -5,16 +5,16 @@ using UnityEngine;
 public class AirHockeyPlayerMovement : MonoBehaviour
 {
     public bool wasJustClicked, canMove;
-    int i;
+    public int playerSpeed = 50;
     Rigidbody2D rb;
     Vector2 centerPosition;
     public Transform BoundaryHolder;
     Boundary playerBoundary;
-    Collider2D playerCollider;
+    [SerializeField]Collider2D playerCollider;
+    public bool pegarle;
     void Start()
     {
-        playerCollider = GetComponent<Collider2D>();
-        wasJustClicked = true; 
+        pegarle = false;
         wasJustClicked = false; 
         rb = GetComponent<Rigidbody2D>();
         centerPosition = rb.position;
@@ -44,14 +44,16 @@ public class AirHockeyPlayerMovement : MonoBehaviour
             }
             if (canMove)
             {
-                while (i<10000)
-                {
-                    i++;
-                }
-                i=0;
                 Vector2 clampedMousePos = new Vector2(Mathf.Clamp(mousePos.x, playerBoundary.Left, playerBoundary.Right),
                                                       Mathf.Clamp(mousePos.y, playerBoundary.Down, playerBoundary.Up));
-                rb.MovePosition(clampedMousePos);
+                if (pegarle)
+                {
+                    rb.MovePosition(clampedMousePos);
+                }else
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, clampedMousePos, Time.deltaTime*playerSpeed);
+                }
+                //rb.velocity = Vector2.MoveTowards(transform.position, clampedMousePos, Time.deltaTime*50);
             }
         }
         else
@@ -61,5 +63,13 @@ public class AirHockeyPlayerMovement : MonoBehaviour
     }
     public void  CenterPosition(){
         rb.position = centerPosition;
+    }
+    void OnTriggerEnter2D(Collider2D other){
+        if (other.tag == "Spit"){   
+        pegarle = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D other){
+        pegarle = false;
     }
 }

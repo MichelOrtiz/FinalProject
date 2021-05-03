@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AIScript : MonoBehaviour
 {
+    public GameObject PuckGO;
     public float MaxMovementSpeed;
     private Rigidbody2D rb;
     private Vector2 startingPosition;
@@ -39,7 +40,7 @@ public class AIScript : MonoBehaviour
             float movementSpeed;
             switch (scoreScript.playerScore)
             {
-                case 0:
+                case 0:    
                     MaxMovementSpeed = 20;
                     offset1 = -8;
                     offset2 = 8;

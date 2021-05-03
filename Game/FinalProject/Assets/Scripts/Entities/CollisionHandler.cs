@@ -5,6 +5,7 @@ public class CollisionHandler : MonoBehaviour
     //private Collider2D collider;
     //[SerializeField] private List<string> contacts;
     //public List<string> Contacts { get; private set; }
+    public string lastColliderTag;
 
     [SerializeField] private List<GameObject> contacts;
     public List<GameObject> Contacts
@@ -33,6 +34,12 @@ public class CollisionHandler : MonoBehaviour
     {
         ExitTouchingContactHandler?.Invoke(contact);
     }
+    public delegate void ChangedColliderTag();
+    public event ChangedColliderTag ChangedColliderTagHandler;
+    protected virtual void OnChangedColliderTag()
+    {
+        ChangedColliderTagHandler?.Invoke();
+    }
 
     void Awake()
     {
@@ -55,6 +62,11 @@ public class CollisionHandler : MonoBehaviour
         {
             Contacts.Add(other.gameObject);
         }
+        if (other.gameObject.tag != "Untagged" && other.gameObject.tag != lastColliderTag)
+            {
+                lastColliderTag = other.gameObject.tag;
+                OnChangedColliderTag();
+            }
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -75,6 +87,11 @@ public class CollisionHandler : MonoBehaviour
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         OnEnterTouchingContact(other.gameObject);
+        if (other.gameObject.tag != "Untagged" && other.gameObject.tag != lastColliderTag)
+            {
+                lastColliderTag = other.gameObject.tag;
+                OnChangedColliderTag();
+            }
     }
     protected virtual void OnCollisionStay2D(Collision2D other)
     {
@@ -84,5 +101,6 @@ public class CollisionHandler : MonoBehaviour
     protected virtual void OnCollisionExit2D(Collision2D other)
     {
         OnExitTouchingContact(other.gameObject);
+        
     }
 }

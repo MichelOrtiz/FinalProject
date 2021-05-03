@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class PuckScript : MonoBehaviour
 {
+    [SerializeField] float AumentoVel;
+    public CollisionHandler collisionHandler;
+    public GameObject PuckGO;
     public ScoreScript ScoreScriptInstance;
-    
+    PowerUps powerUps;
+
     public float MaxSpeed;
     public static bool WasGoal{
         get; 
@@ -16,6 +20,7 @@ public class PuckScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         WasGoal = false;
+        collisionHandler.ChangedColliderTagHandler += collisionHandler_Changedtag;
     }
     private void OnTriggerEnter2D(Collider2D other){
         if (!WasGoal)
@@ -31,6 +36,7 @@ public class PuckScript : MonoBehaviour
                 WasGoal = true;
                 StartCoroutine(ResetPuck(true));
             }
+            
         }
     }
     private IEnumerator ResetPuck(bool AIScored){
@@ -42,8 +48,26 @@ public class PuckScript : MonoBehaviour
             rb.position = new Vector2(-2, 0);
         }else
         {
-            rb.position = new Vector2(2, 0);
+            rb.position = new Vector2(3, 0);
         }
+        switch (ScoreScriptInstance.playerScore)
+            {
+                case 0:    
+                    PuckGO.gameObject.GetComponent<PuckScript>().MaxSpeed += AumentoVel;
+                    break;
+                case 1:
+                    PuckGO.gameObject.GetComponent<PuckScript>().MaxSpeed += AumentoVel;
+                    break;
+                case 2:
+                    PuckGO.gameObject.GetComponent<PuckScript>().MaxSpeed += AumentoVel;
+                    break;
+                case 3:
+                    PuckGO.gameObject.GetComponent<PuckScript>().MaxSpeed += AumentoVel;
+                    break;
+                case 4:
+                    PuckGO.gameObject.GetComponent<PuckScript>().MaxSpeed += AumentoVel;
+                    break;
+            }
     }
 
     public void CenterPuck(){
@@ -51,5 +75,11 @@ public class PuckScript : MonoBehaviour
     }
     private void FixedUpdate(){
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, MaxSpeed);
+    }
+    
+    private void collisionHandler_Changedtag(){
+        Debug.Log(collisionHandler.lastColliderTag);
+
+        
     }
 }
