@@ -74,8 +74,8 @@ public class Inventory : MonoBehaviour
         }
     }
     public void SwapItems(int originIndex, int destinationIndex){
-        Item origin = items.ToArray()[originIndex];
-        Item destination = items.ToArray()[destinationIndex];
+        Item origin = items[originIndex];
+        Item destination = items[destinationIndex];
 
         items.Insert(destinationIndex,origin);
         items.RemoveAt(destinationIndex+1);
