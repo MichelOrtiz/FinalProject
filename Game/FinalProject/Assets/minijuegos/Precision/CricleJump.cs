@@ -8,7 +8,8 @@ public class CricleJump : MonoBehaviour
     public float x, y;
     public float angle =0;
     public float speed=(2*Mathf.PI)/5; //2*PI in degress is 360, so you get 5 seconds to complete a circle
-    float radius=5;
+    [SerializeField] float radius=300;
+    [SerializeField] Transform center;
     Rigidbody2D Body;
     public Vector2 position;
     bool reloj;
@@ -16,7 +17,7 @@ public class CricleJump : MonoBehaviour
     void Start()
     {
         Body = GetComponent<Rigidbody2D>();
-        Body.position = new Vector2(0,0);
+        Body.position = new Vector2(806, 226);
         reloj = true;
     }
      void Update()
@@ -42,8 +43,9 @@ public class CricleJump : MonoBehaviour
                 reloj=true;
             }
         }
-        x = Mathf.Cos(angle)*radius;
-        y = Mathf.Sin(angle)*radius;
+        x = Mathf.Cos(angle)*radius + center.position.x;
+        y = Mathf.Sin(angle)*radius + center.position.y;
+
         position = new Vector2(x,y);
         Body.position = position;
     }
