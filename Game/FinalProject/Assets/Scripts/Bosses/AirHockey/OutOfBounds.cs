@@ -9,9 +9,11 @@ public class OutOfBounds : MonoBehaviour
     public AirHockeyPlayerMovement airHockeyPlayerMovement;
     public AIScript aIScript;
     public void OnTriggerEnter2D(Collider2D other){
-        Debug.Log("Centracion");
-        puckScript.CenterPuck();
-        airHockeyPlayerMovement.CenterPosition();
-        aIScript.CenterPosition();
+        if (other.tag == "Spit"){
+            Debug.Log("Centracion");    
+            puckScript.CenterPuck();
+            airHockeyPlayerMovement.CenterPosition();
+            aIScript.CenterPosition();
+        }
     }
 }

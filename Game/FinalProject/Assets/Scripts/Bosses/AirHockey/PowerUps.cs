@@ -8,7 +8,7 @@ public class PowerUps : MonoBehaviour
     AirHockeyPlayerMovement airHockeyPlayerMovement;
     PuckScript puckScript;
     AIScript aIScript;
-    float aIMaxMovementSpeed, MaxPuckSpeed;
+    float PUMaxMovementSpeed, MaxPuckSpeed;
     int powerUpType;
     private void OnTriggerEnter2D(Collider2D othe){
         if (othe.tag == "Spit")
@@ -26,9 +26,9 @@ public class PowerUps : MonoBehaviour
                 break;
                 case 2:
                     Debug.Log(powerUpType);
-                    Player.gameObject.GetComponent<AirHockeyPlayerMovement>().playerSpeed = 1000;
-                    aIMaxMovementSpeed = AI.gameObject.GetComponent<AIScript>().MaxMovementSpeed;
-                    AI.gameObject.GetComponent<AIScript>().MaxMovementSpeed = aIMaxMovementSpeed * 1.5f;
+                    Player.gameObject.GetComponent<AirHockeyPlayerMovement>().playerSpeed = 10000000;
+                    PUMaxMovementSpeed = AI.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed;
+                    AI.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed = PUMaxMovementSpeed * 1.5f;
 
                     StartCoroutine(TimePowerUpActive(5));
                 break;
@@ -80,8 +80,8 @@ public class PowerUps : MonoBehaviour
                 StartCoroutine(Respawn());
             break;
             case 2:
-                Player.gameObject.GetComponent<AirHockeyPlayerMovement>().playerSpeed = 30;
-                AI.gameObject.GetComponent<AIScript>().MaxMovementSpeed = aIMaxMovementSpeed;
+                Player.gameObject.GetComponent<AirHockeyPlayerMovement>().playerSpeed = 50;
+                AI.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed = PUMaxMovementSpeed;
                 StartCoroutine(Respawn());
             break;
             case 3:

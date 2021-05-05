@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PuckScript : MonoBehaviour
 {
-    [SerializeField] float AumentoVel;
+    [SerializeField] float AumentoVel, AumentoAI;
     public CollisionHandler collisionHandler;
-    public GameObject PuckGO;
+    public GameObject PuckGO, Ai;
     public ScoreScript ScoreScriptInstance;
     PowerUps powerUps;
+    AIScript aIScript;
 
     public float MaxSpeed;
     public static bool WasGoal{
@@ -54,18 +55,23 @@ public class PuckScript : MonoBehaviour
             {
                 case 0:    
                     PuckGO.gameObject.GetComponent<PuckScript>().MaxSpeed += AumentoVel;
+                    Ai.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed += AumentoAI;
                     break;
                 case 1:
                     PuckGO.gameObject.GetComponent<PuckScript>().MaxSpeed += AumentoVel;
+                    Ai.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed += AumentoAI;
                     break;
                 case 2:
                     PuckGO.gameObject.GetComponent<PuckScript>().MaxSpeed += AumentoVel;
+                    Ai.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed += AumentoAI;
                     break;
                 case 3:
                     PuckGO.gameObject.GetComponent<PuckScript>().MaxSpeed += AumentoVel;
+                    Ai.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed += AumentoAI;
                     break;
                 case 4:
                     PuckGO.gameObject.GetComponent<PuckScript>().MaxSpeed += AumentoVel;
+                    Ai.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed += AumentoAI;
                     break;
             }
     }

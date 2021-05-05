@@ -16,6 +16,7 @@ public class AIScript : MonoBehaviour
     private Vector2 targetPosition;
     private bool isFirstHalfPass = true;
     private float offsetYFromTarget, offset1, offset2, returned;
+    public float aIMaxMovementSpeed;
     public ScoreScript scoreScript;
 
     private void Start(){
@@ -29,9 +30,10 @@ public class AIScript : MonoBehaviour
                                       PuckBoundaryHolder.GetChild(1).position.y,
                                       PuckBoundaryHolder.GetChild(2).position.x,
                                       PuckBoundaryHolder.GetChild(3).position.x);
-        MaxMovementSpeed = 10;
+        MaxMovementSpeed = 0;
         offset1 = -5;
         offset2 = 5;
+        aIMaxMovementSpeed = 30;
     }
 
     private void FixedUpdate(){
@@ -41,31 +43,31 @@ public class AIScript : MonoBehaviour
             switch (scoreScript.playerScore)
             {
                 case 0:    
-                    MaxMovementSpeed = 20;
+                    MaxMovementSpeed = aIMaxMovementSpeed;
                     offset1 = -8;
                     offset2 = 8;
                     returned = .3f;
                     break;
                 case 1:
-                    MaxMovementSpeed = 30;
+                    MaxMovementSpeed = aIMaxMovementSpeed;
                     offset1 = -6f;
                     offset2 = 6f;
                     returned = .3f;
                     break;
                 case 2:
-                    MaxMovementSpeed = 50;
+                    MaxMovementSpeed = aIMaxMovementSpeed;
                     offset1 = -4;
                     offset2 = 4;
                     returned = .5f;
                     break;
                 case 3:
-                    MaxMovementSpeed = 75;
+                    MaxMovementSpeed = aIMaxMovementSpeed;
                     offset1 = -2f;
                     offset2 = 2f;
                     returned = .5f;
                     break;
                 case 4:
-                    MaxMovementSpeed = 90;
+                    MaxMovementSpeed = aIMaxMovementSpeed;
                     offset1 = -1f;
                     offset2 = 1f;
                     returned = .7f;

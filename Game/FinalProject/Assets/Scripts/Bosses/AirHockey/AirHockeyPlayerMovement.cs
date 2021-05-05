@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class AirHockeyPlayerMovement : MonoBehaviour
 {
-    public bool wasJustClicked, canMove;
+    public bool wasJustClicked, canMove, pegarle, overPuck, agarrado, frozen;
     public int playerSpeed = 50;
     Rigidbody2D rb;
     Vector2 centerPosition;
     public Transform BoundaryHolder;
     Boundary playerBoundary;
     [SerializeField]Collider2D playerCollider;
-    public bool pegarle;
+    Vector2 mousePos;
+
     void Start()
     {
         pegarle = false;
@@ -22,20 +23,29 @@ public class AirHockeyPlayerMovement : MonoBehaviour
                                       BoundaryHolder.GetChild(1).position.y,
                                       BoundaryHolder.GetChild(2).position.x,
                                       BoundaryHolder.GetChild(3).position.x);
-
+        overPuck = false;
     }
 
     void Update()
     {
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (playerCollider.OverlapPoint(mousePos))
+        {
+            overPuck = true;
+        }
+        else
+        {
+            overPuck = false;
+        }
         if (Input.GetMouseButton(0))
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (wasJustClicked)
             {
                 wasJustClicked = false;
                 if (playerCollider.OverlapPoint(mousePos))
                 {
                     canMove = true;
+                    overPuck = true;
                 }
                 else
                 {
@@ -44,6 +54,16 @@ public class AirHockeyPlayerMovement : MonoBehaviour
             }
             if (canMove)
             {
+                if (playerCollider.OverlapPoint(mousePos))
+                {
+                    canMove = true;
+                    overPuck = true;
+                    agarrado = true;
+                }else
+                {
+                    canMove = false;
+                    agarrado = false;
+                }
                 Vector2 clampedMousePos = new Vector2(Mathf.Clamp(mousePos.x, playerBoundary.Left, playerBoundary.Right),
                                                       Mathf.Clamp(mousePos.y, playerBoundary.Down, playerBoundary.Up));
                 if (pegarle)
@@ -52,6 +72,10 @@ public class AirHockeyPlayerMovement : MonoBehaviour
                 }else
                 {
                     transform.position = Vector2.MoveTowards(transform.position, clampedMousePos, Time.deltaTime*playerSpeed);
+                }if (agarrado == true)
+                {
+                    StartCoroutine(Congelamiento());
+
                 }
                 //rb.velocity = Vector2.MoveTowards(transform.position, clampedMousePos, Time.deltaTime*50);
             }
@@ -71,5 +95,27 @@ public class AirHockeyPlayerMovement : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other){
         pegarle = false;
+    }
+    private IEnumerator Congelamiento(){
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (playerCollider.OverlapPoint(mousePos))
+        {
+            yield return new WaitForSecondsRealtime(.1f);
+            if (playerCollider.OverlapPoint(mousePos))
+            {
+                canMove = false;
+                agarrado = false;
+                frozen = true;
+                StartCoroutine(Congelado());
+            }
+        }
+        frozen = false;
+    }
+    private IEnumerator Congelado(){
+        
+        yield return new WaitForSecondsRealtime(2);
+        canMove = true;
+        agarrado = true;
+        frozen = false;
     }
 }

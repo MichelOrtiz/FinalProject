@@ -292,6 +292,7 @@ GameObject:
   - component: {fileID: 115819088}
   - component: {fileID: 115819090}
   - component: {fileID: 115819089}
+  - component: {fileID: 115819091}
   m_Layer: 9
   m_Name: OutOfBounds (3)
   m_TagString: Untagged
@@ -307,8 +308,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115819087}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.520001, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -114, y: 31, z: 0}
+  m_LocalScale: {x: 42.12, y: 42.12, z: 42.12}
   m_Children: []
   m_Father: {fileID: 462994861}
   m_RootOrder: 3
@@ -354,6 +355,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.570325, y: 40.459755}
   m_EdgeRadius: 0
+--- !u!50 &115819091
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115819087}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &119492190
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +748,7 @@ GameObject:
   - component: {fileID: 358423179}
   - component: {fileID: 358423181}
   - component: {fileID: 358423180}
+  - component: {fileID: 358423182}
   m_Layer: 9
   m_Name: OutOfBounds
   m_TagString: Untagged
@@ -741,8 +764,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358423178}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -167, y: 12, z: 0}
+  m_LocalScale: {x: 53.39501, y: 53.39501, z: 53.39501}
   m_Children: []
   m_Father: {fileID: 462994861}
   m_RootOrder: 0
@@ -788,6 +811,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.290639, y: 35.835426}
   m_EdgeRadius: 0
+--- !u!50 &358423182
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358423178}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &376301167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1433,7 @@ GameObject:
   - component: {fileID: 776434125}
   - component: {fileID: 776434127}
   - component: {fileID: 776434126}
+  - component: {fileID: 776434128}
   m_Layer: 9
   m_Name: OutOfBounds (2)
   m_TagString: Untagged
@@ -1404,8 +1449,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776434124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -724, z: 0}
+  m_LocalScale: {x: 1, y: 127.47, z: 1}
   m_Children: []
   m_Father: {fileID: 462994861}
   m_RootOrder: 2
@@ -1451,6 +1496,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.5702133, y: 9.831598}
   m_EdgeRadius: 0
+--- !u!50 &776434128
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776434124}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &855606188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,10 +1698,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wasJustClicked: 0
   canMove: 0
+  pegarle: 0
+  overPuck: 0
+  agarrado: 0
+  frozen: 0
   playerSpeed: 50
   BoundaryHolder: {fileID: 376301168}
   playerCollider: {fileID: 1970687165}
-  pegarle: 0
 --- !u!212 &884989935
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1911,8 +1980,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AumentoVel: 5
+  AumentoAI: 10
   collisionHandler: {fileID: 2114716450}
   PuckGO: {fileID: 1053711525}
+  Ai: {fileID: 1649645730}
   ScoreScriptInstance: {fileID: 1701990144}
   MaxSpeed: 30
 --- !u!58 &1053711531
@@ -2263,6 +2334,7 @@ GameObject:
   - component: {fileID: 1349140179}
   - component: {fileID: 1349140181}
   - component: {fileID: 1349140180}
+  - component: {fileID: 1349140182}
   m_Layer: 9
   m_Name: OutOfBounds (1)
   m_TagString: Untagged
@@ -2278,8 +2350,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349140178}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0, y: 533, z: 0}
+  m_LocalScale: {x: 1, y: 94.704, z: 1}
   m_Children: []
   m_Father: {fileID: 462994861}
   m_RootOrder: 1
@@ -2325,6 +2397,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.5702133, y: 11.294458}
   m_EdgeRadius: 0
+--- !u!50 &1349140182
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349140178}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1431918393
 GameObject:
   m_ObjectHideFlags: 0
@@ -2904,6 +2997,7 @@ MonoBehaviour:
   Puck: {fileID: 1053711526}
   PlayerBoundaryHolder: {fileID: 907120231}
   PuckBoundaryHolder: {fileID: 1451620279}
+  aIMaxMovementSpeed: 0
   scoreScript: {fileID: 1701990144}
 --- !u!1 &1672581500
 GameObject:
