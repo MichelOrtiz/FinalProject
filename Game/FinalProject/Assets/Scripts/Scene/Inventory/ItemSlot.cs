@@ -33,7 +33,6 @@ public abstract class ItemSlot : MonoBehaviour
         item = null;
         icon.sprite = null;
         icon.enabled = false;
-        background.color = Color.clear;
     }
     public virtual void UseItem(){
         item.Use();

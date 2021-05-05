@@ -78,6 +78,32 @@ public class Projectile : MonoBehaviour
         this.colliderTag = colliderTag;
     }
 
+    /*  - - - - - - - - --*/
+
+    public void Setup(Vector2 startPoint, Vector2 target)
+    {
+        this.startPoint = startPoint;
+        this.target = target;
+        shootDir = (target - startPoint).normalized;
+    }
+
+    public void Setup(Vector2 startPoint, Vector2 target, IProjectile enemy)
+    {
+        this.startPoint = startPoint;
+        this.target = target;
+        this.enemy = enemy;
+        shootDir = (target - startPoint).normalized;
+    }
+
+    public void Setup(Vector2 startPoint, Vector2 target, IProjectile enemy, string colliderTag)
+    {
+        this.startPoint = startPoint;
+        this.target = target;
+        this.enemy = enemy;
+        shootDir = (target - startPoint).normalized;
+        this.colliderTag = colliderTag;
+    }
+    /* - - - - - - - */
     void Start()
     {
         defaultLayer = gameObject.layer;
