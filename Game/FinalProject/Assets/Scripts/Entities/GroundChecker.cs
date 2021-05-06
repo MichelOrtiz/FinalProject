@@ -18,6 +18,21 @@ public class GroundChecker : MonoBehaviour
         ChangedGroundTagHandler?.Invoke();
     }
 
+    public delegate void Grounded(string groundTag);
+    public delegate void GroundedGameObject(GameObject ground);
+
+    public event Grounded GroundedHandler;
+    public event GroundedGameObject GroundedGameObjectHandler;
+
+    protected virtual void OnGrounded(string groundTag)
+    {
+        GroundedHandler?.Invoke(groundTag);
+    }
+    protected virtual void OnGroundedGameObject(GameObject ground)
+    {
+        GroundedGameObjectHandler?.Invoke(ground);
+    }
+
     void Start()
     {
         //collider2D = GetComponent<BoxCollider2D>();
@@ -33,6 +48,7 @@ public class GroundChecker : MonoBehaviour
     {
         if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Platform")
         {
+            OnGrounded(other.gameObject.tag);
             if (other.gameObject.tag != lastGroundTag)
             {
                 lastGroundTag = other.gameObject.tag;
@@ -40,4 +56,5 @@ public class GroundChecker : MonoBehaviour
             }
         }
     }
+
 }

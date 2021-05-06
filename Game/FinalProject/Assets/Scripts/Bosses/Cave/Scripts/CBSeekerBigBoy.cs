@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CBSeekerBigBoy : Entity
 {
+    private bool canStart;
+
     #region Physics
     [Header("Physic Params")]
     [SerializeField] private float speedMultiplier;
@@ -11,22 +13,45 @@ public class CBSeekerBigBoy : Entity
 
     [SerializeField] private float pushForce;
     private Vector2 push;
-    private bool inPush;
+    public bool inPush;
+    public RoomComponent currentPush;
     private bool stopped;
+
+    [SerializeField] private float timeBeforePush;
+    private float currentTimeBeforePush; 
+
+    private float defaultGravityScale;
     #endregion
 
     #region Collisions
     [Header("Collisions")]
     [SerializeField] private List<GameObject> walls;
+    [SerializeField] private string LeftWallName;
+    [SerializeField] private string RightWallName;
+    [SerializeField] private string FloorName;
+    [SerializeField] private string CeilingName;
+
+    [SerializeField] private List<GameObject> grounds;
     private bool hitWall;
     [SerializeField] private float waitTimeWhenCollide;
     private float currentWaitTime;
 
     [SerializeField] private float distanceFromPlayerToStop;
+
+    private bool inWall;
+    public bool inSameWallThanPlayer;
+    public bool inGroundWithPlayer;
+    //private bool touchingGround;
     #endregion
-    private bool chasingInGround;
+
+    #region ShockWave
+    [SerializeField] private GameObject shockWake;
+    #endregion
+
 
     private Vector2 lastPlayerPosition;
+    private Vector2 direction;
+
 
     
 
@@ -37,22 +62,45 @@ public class CBSeekerBigBoy : Entity
     void Awake()
     {
         eCollisionHandler = (EnemyCollisionHandler) collisionHandler;
-        eCollisionHandler.TouchingGroundHandler += eCollisionHandler_TouchingGround;
+        //eCollisionHandler.TouchingGroundHandler += eCollisionHandler_TouchingGround;
         eCollisionHandler.EnterTouchingContactHandler += eCollisionHandler_EnterCollision;
+        eCollisionHandler.ExitTouchingContactHandler += eCollisionHandler_ExitCollision;
+
+        eCollisionHandler.StayTouchingContactHandler += eCollisionHandler_StayInCollision;
+
+
+        groundChecker.GroundedHandler += groundChecker_Grounded;
+        //groundChecker.GroundedGameObjectHandler += groundChecker_GroundedGameObject;
+
 
         speed = averageSpeed * speedMultiplier;
     }
 
     new void Start()
     {
-        player = PlayerManager.instance;
         base.Start();
+        player = PlayerManager.instance;
+        defaultGravityScale = rigidbody2d.gravityScale;
+
+        inPush = true;
+    }
+
+    void HandlePreStart()
+    {
+        canStart = false;
+        while(currentTimeBeforePush <= timeBeforePush)
+        {
+            currentTimeBeforePush += Time.deltaTime;
+        }
+        currentTimeBeforePush = 0;
+        canStart = true;
     }
 
     // Update is called once per frame
     new void Update()
     {
-       
+        
+            
         if (hitWall)
         {
              
@@ -68,23 +116,33 @@ public class CBSeekerBigBoy : Entity
             }
         }
 
-        if (!isGrounded)
+        if (!inPush)
         {
-            inPush = false;
-        }
 
-        if (isGrounded && !inPush)
-        {
-            lastPlayerPosition = player.GetPosition();
-
-            if (player.isGrounded)
+            if (inGroundWithPlayer)
             {
-                Vector2 direction = ((Vector3)lastPlayerPosition - GetPosition()).normalized;
-                push = new Vector2(direction.x * pushForce * speed, 0);
-                inPush = true;
+                SetPushOn(RoomComponent.Ground);
             }
+            else if (inSameWallThanPlayer)
+            {
+                SetPushOn(RoomComponent.Wall);
+            }
+            else
+            {
+                SetPushOn(RoomComponent.Air);
+            }
+            inPush = true;
+
         }
+
         
+
+        
+        /*if (!player.collisionHandler.Contacts.Exists(c => c.tag == "Ground"))
+        {
+            inSameWallThanPlayer = false;
+        }*/
+
 
         base.Update();
     }
@@ -92,29 +150,13 @@ public class CBSeekerBigBoy : Entity
     
     void FixedUpdate()
     {
-        if (inPush)
+        if (canStart)
         {
-            rigidbody2d.AddForce(push * Time.deltaTime, ForceMode2D.Impulse);
-
-            Vector2 vel = transform.rotation * rigidbody2d.velocity;
-            if (vel.x > 0)
+            if (inPush)
             {
-                if (GetPosition().x > player.GetPosition().x && DistancedFromPlayer())
-                {
-                    StopMoving();
-                }
+                rigidbody2d.AddForce(push * Time.deltaTime, ForceMode2D.Impulse);
+                HandleStopPushing();
             }
-            else
-            {
-                if (GetPosition().x < player.GetPosition().x && DistancedFromPlayer())
-                {
-                    StopMoving();
-                }
-            }
-            // jump
-        }
-        else
-        {
         }
     }
 
@@ -130,25 +172,158 @@ public class CBSeekerBigBoy : Entity
         rigidbody2d.velocity = new Vector2();
     }
 
-    public void ProjectileAttack()
+    void SetPushOn(RoomComponent roomComponent)
     {
-        //throw new System.NotImplementedException();
+        currentPush = roomComponent;
+
+        lastPlayerPosition = player.GetPosition();
+        direction = ((Vector3)lastPlayerPosition - GetPosition()).normalized;
+
+        switch (roomComponent)
+        {
+            case RoomComponent.Ground:
+                push = new Vector2(direction.x * pushForce * speed, 0);
+                break;
+            case RoomComponent.Wall:
+                inWall = true;
+                push = new Vector2(0, direction.y * pushForce * speed);
+                break;
+            default:
+                push = new Vector2(direction.x * pushForce * speed, direction.y * jumpForce *(rigidbody2d.gravityScale > 0?  rigidbody2d.gravityScale : defaultGravityScale));
+                break;
+        }
     }
 
-
-    void eCollisionHandler_TouchingGround()
+    void HandleStopPushing()
     {
+        Vector2 vel = transform.rotation * rigidbody2d.velocity;
 
+        if (inPush)
+        {
+            switch (currentPush)
+            {
+                case RoomComponent.Ground:
+                    if (inGroundWithPlayer && inSameWallThanPlayer)
+                    {
+                        StopMoving();
+                    }
+                    if (vel.x > 0)
+                    {
+                        if (GetPosition().x > player.GetPosition().x && DistancedFromPlayer() )
+                        {
+                            StopMoving();
+                        }
+                    }
+                    else
+                    {
+                        if (GetPosition().x < player.GetPosition().x && DistancedFromPlayer())
+                        {
+                            StopMoving();
+                        }
+                    }
+                    break;
+                case RoomComponent.Wall:
+                    if (inGroundWithPlayer)
+                    {
+                        StopMoving();
+                    }
+                    if (vel.y > 0)
+                    {
+                        if (GetPosition().y > player.GetPosition().y && DistancedFromPlayer())
+                        {
+                            StopMoving();
+                        }
+                    }
+                    else
+                    {
+                        if (GetPosition().y < player.GetPosition().y && DistancedFromPlayer())
+                        {
+                            StopMoving();
+                        }
+                    }
+                    break;
+            }
+
+        }
+
+        if (currentPush == RoomComponent.Wall && inGroundWithPlayer)
+        {
+            inPush = false;
+        }
     }
+
 
     void eCollisionHandler_EnterCollision(GameObject contact)
     {
 
         // Stops the enemy if touches any of the walls
+        
         if (walls.Contains(contact))
         {
-            StopMoving();
+            if (inPush)
+            {
+                if (inSameWallThanPlayer || currentPush == RoomComponent.Air)
+                {
+                    StopMoving();
+
+                }
+            }
+            if (!grounds.Contains(contact))
+            {
+                rigidbody2d.gravityScale = 0;
+            }
+            
+        }
+
+    }
+
+    void eCollisionHandler_StayInCollision(GameObject contact)
+    {
+        if (walls.Contains(contact))
+        {
+            inSameWallThanPlayer = player.collisionHandler.Contacts.Contains(contact);
+        }
+        if (grounds.Contains(contact))
+        {
+            inGroundWithPlayer = isGrounded && player.collisionHandler.Contacts.Contains(contact);
+        }
+
+    }
+
+    void eCollisionHandler_ExitCollision(GameObject contact)
+    {
+
+        // Stops the enemy if touches any of the walls
+        
+        if (walls.Contains(contact))
+        {
+            rigidbody2d.gravityScale = defaultGravityScale;
+        }
+        inWall = false;
+        inGroundWithPlayer = false;
+
+        if (!isGrounded)
+        {
+            shockWake.SetActive(false);
         }
     }
+
+    void groundChecker_Grounded(string groundTag)
+    {
+        if (groundTag == "Ground")
+        {
+            StopMoving();
+            HandlePreStart();
+            shockWake.SetActive(true);
+        }
+    }
+
+    /*void groundChecker_GroundedGameObject(GameObject ground)
+    {
+        if (player.isGrounded && player.collisionHandler.Contacts.Contains(ground))
+        {
+            inGroundWithPlayer = true;
+        }
+    }*/
     
 }

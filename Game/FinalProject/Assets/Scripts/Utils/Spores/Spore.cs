@@ -6,9 +6,16 @@ public class Spore : MonoBehaviour
 {
     [SerializeField] private float damageAmount;
     [SerializeField] private State effectOnPlayer;
-    private PlayerManager player; 
+    [SerializeField] private bool stopEmittingWhenParticleCollide;
+    private PlayerManager player;
+    new private ParticleSystem particleSystem; 
     void Start()
     {
+        particleSystem = GetComponent<ParticleSystem>();
+        if (particleSystem.isStopped)
+        {
+            particleSystem.Play();
+        }
         player = PlayerManager.instance;
     }
 
@@ -24,7 +31,6 @@ public class Spore : MonoBehaviour
     /// <param name="other">The GameObject hit by the particle.</param>
     void OnParticleCollision(GameObject other)
     {
-        //Debug.Log("Collision" + other.gameObject);
         if (other.gameObject.tag == "Player")
         {
             player.TakeTirement(damageAmount);
@@ -33,7 +39,11 @@ public class Spore : MonoBehaviour
                 player.statesManager.AddState(effectOnPlayer);
             }
         }
-    }
 
+        if (stopEmittingWhenParticleCollide)
+        {
+            particleSystem.Stop();
+        }
+    }
     
 }
