@@ -4,48 +4,53 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public GameObject Player, AI;
+    public GameObject Puck, Player, AI;
+    AirHockeyPlayerMovement airHockeyPlayerMovement;
     PuckScript puckScript;
     AIScript aIScript;
-    float aIMaxMovementSpeed;
+    float PUMaxMovementSpeed, MaxPuckSpeed;
     int powerUpType;
-    private void OnTriggerEnter2D(Collider2D other){
-        if (other.tag == "Spit")
+    private void OnTriggerEnter2D(Collider2D othe){
+        if (othe.tag == "Spit")
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+            powerUpType = 2;
             switch (powerUpType)
             {
                 case 1:
                     Debug.Log(powerUpType);
-                    puckScript.MaxSpeed=80;
-                    TimePowerUpActive(5);
+                    MaxPuckSpeed = Puck.gameObject.GetComponent<PuckScript>().MaxSpeed;
+                    Puck.gameObject.GetComponent<PuckScript>().MaxSpeed=MaxPuckSpeed*2;
+                    StartCoroutine(TimePowerUpActive(5));
                 break;
                 case 2:
                     Debug.Log(powerUpType);
-                    aIMaxMovementSpeed = aIScript.MaxMovementSpeed;
-                    aIScript.MaxMovementSpeed = aIScript.MaxMovementSpeed * 1.5f;
-                    TimePowerUpActive(5);
+                    Player.gameObject.GetComponent<AirHockeyPlayerMovement>().playerSpeed = 10000000;
+                    PUMaxMovementSpeed = AI.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed;
+                    AI.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed = PUMaxMovementSpeed * 1.5f;
+
+                    StartCoroutine(TimePowerUpActive(5));
                 break;
                 case 3:
                     Debug.Log(powerUpType);
-                    TimePowerUpActive(2);
+                    StartCoroutine(TimePowerUpActive(2));
                 break;
                 case 4:
                     Debug.Log(powerUpType);
-                    if (other.tag == "Fruit")
+                    if (othe.tag == "Fruit")
                     {
                         Player.gameObject.GetComponent<AirHockeyPlayerMovement>().enabled = false;
-                    }else if(other.tag == "Bomb")
+                    }else if(othe.tag == "Bomb")
                     {
                         AI.gameObject.GetComponent<AIScript>().enabled = false;
                     }
-                    TimePowerUpActive(3);
+                    StartCoroutine(TimePowerUpActive(3));
                 break;
                 case 5:
                     Debug.Log(powerUpType);
                     
-                    TimePowerUpActive(5);
+                    StartCoroutine(TimePowerUpActive(5));
                 break;
             }
         }
@@ -54,13 +59,13 @@ public class PowerUps : MonoBehaviour
         yield return new WaitForSecondsRealtime(15);
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<PolygonCollider2D>().enabled = true;
-        powerUpType = Random.Range(1,5);
+        powerUpType = Random.Range(1,2);
     }
-    void Start()
+    public void Start()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<PolygonCollider2D>().enabled = true;
-        powerUpType = Random.Range(1,5);
+        powerUpType = Random.Range(1,2);
     }
     void Update()
     {
@@ -71,24 +76,25 @@ public class PowerUps : MonoBehaviour
         switch (powerUpType)
         {
             case 1:
-                puckScript.MaxSpeed=30;
-                Respawn();
+                Puck.gameObject.GetComponent<PuckScript>().MaxSpeed=MaxPuckSpeed;
+                StartCoroutine(Respawn());
             break;
             case 2:
-                aIScript.MaxMovementSpeed = aIMaxMovementSpeed;
-                Respawn();
+                Player.gameObject.GetComponent<AirHockeyPlayerMovement>().playerSpeed = 50;
+                AI.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed = PUMaxMovementSpeed;
+                StartCoroutine(Respawn());
             break;
             case 3:
-                Respawn(); 
+                StartCoroutine(Respawn());
             break;
             case 4:
                 AI.gameObject.GetComponent<AIScript>().enabled = true;
                 Player.gameObject.GetComponent<AirHockeyPlayerMovement>().enabled = true;
-                Respawn();
+                StartCoroutine(Respawn());
             break;
             case 5:
 
-                Respawn();
+                StartCoroutine(Respawn());
             break;
         }
     }
