@@ -15,7 +15,7 @@ public class PowerUps : MonoBehaviour
         {
             gameObject.GetComponent<PolygonCollider2D>().enabled = false;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            powerUpType = 3;
+            powerUpType = Random.Range(1, 4);
             switch (powerUpType)
             {
                 case 1:
