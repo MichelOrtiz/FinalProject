@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HotbarUI : MonoBehaviour
 {
-    [SerializeField] PlayerInputs inputs;
+    private PlayerInputs inputs;
     public static HotbarUI instance;
     Inventory inventory;
     InventoryUI inventoryUI;

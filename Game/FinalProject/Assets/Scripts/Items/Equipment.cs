@@ -12,10 +12,12 @@ public class Equipment : Item
     private float currentCooldown;
     public override void Use()
     {
-        base.Use();
-        
+        EquipmentManager.instance.Equip(this);
+    }
+    public virtual void rutine(){
         //Cosa que haga...
     }
+
 }
 
 public enum EquipmentSlot {Head, Chest, Legs, Hands, Feet}
