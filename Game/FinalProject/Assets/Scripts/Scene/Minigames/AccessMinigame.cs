@@ -5,7 +5,7 @@ using UnityEngine;
 public class AccessMinigame : MonoBehaviour
 {
     public float radius;
-    public GameObject minigame;
+    public Minigame minigame;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,7 @@ public class AccessMinigame : MonoBehaviour
         //Place where the oject is - place where Nico is
         float distance = Vector2.Distance(PlayerManager.instance.transform.position, transform.position);
         if(Input.GetKeyDown(KeyCode.E)&&distance<radius){
-            MinigameUI.instance.recieveMinigame(minigame);
+            minigame.StartMinigame();
         }
     }
 }
