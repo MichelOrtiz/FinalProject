@@ -6,7 +6,7 @@ public class GroundChecker : MonoBehaviour
 {
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform feetPos;
-    [SerializeField] private float checkFeetRadius;
+    [SerializeField] public float checkFeetRadius;
     //private BoxCollider2D collider2D;
     public bool isGrounded;
     public string lastGroundTag;

@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcb3f795e3cf1143b10f860f7ddfcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
 --- !u!50 &7225441922294991801
 Rigidbody2D:
@@ -582,6 +583,7 @@ GameObject:
   - component: {fileID: 1618878735}
   - component: {fileID: 1225996928}
   - component: {fileID: 1587736599}
+  - component: {fileID: 8891905290899016347}
   - component: {fileID: 1587736591}
   m_Layer: 0
   m_Name: AbilitySystem
@@ -747,6 +749,26 @@ MonoBehaviour:
   abilityName: 12
   isUnlocked: 1
   collider: {fileID: 1587736591}
+--- !u!114 &8891905290899016347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829738360394267735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454b5b4bf98f8c34e86930ed0d1a26c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 0.0625
+  hotkey: 256
+  staminaCost: 10
+  duration: 0
+  isInCooldown: 0
+  abilityName: 3
+  isUnlocked: 1
+  NicoFeet: {fileID: 2335636184417845273}
 --- !u!61 &1587736591
 BoxCollider2D:
   m_ObjectHideFlags: 0
