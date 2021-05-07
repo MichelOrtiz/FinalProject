@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AirHockeyPlayerMovement : MonoBehaviour
 {
-    public bool wasJustClicked, canMove, pegarle, overPuck, agarrado, frozen;
+    public bool wasJustClicked, canMove, pegarle, overPuck, agarrado, frozen, congelando;
     public int playerSpeed = 50;
     Rigidbody2D rb;
     Vector2 centerPosition;
@@ -12,6 +12,7 @@ public class AirHockeyPlayerMovement : MonoBehaviour
     Boundary playerBoundary;
     [SerializeField]Collider2D playerCollider;
     Vector2 mousePos;
+    public float offset;
 
     void Start()
     {
@@ -24,66 +25,72 @@ public class AirHockeyPlayerMovement : MonoBehaviour
                                       BoundaryHolder.GetChild(2).position.x,
                                       BoundaryHolder.GetChild(3).position.x);
         overPuck = false;
+        frozen = false;
     }
 
     void Update()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (playerCollider.OverlapPoint(mousePos))
+        if (!frozen)
         {
-            overPuck = true;
-        }
-        else
-        {
-            overPuck = false;
-        }
-        if (Input.GetMouseButton(0))
-        {
-            if (wasJustClicked)
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (playerCollider.OverlapPoint(mousePos))
             {
-                wasJustClicked = false;
-                if (playerCollider.OverlapPoint(mousePos))
+                overPuck = true;
+                if (Input.GetMouseButton(0))
                 {
-                    canMove = true;
-                    overPuck = true;
+                    if (wasJustClicked)
+                    {
+                        wasJustClicked = false;
+                        if (playerCollider.OverlapPoint(mousePos))
+                        {
+                            canMove = true;
+                            overPuck = true;
+                        }
+                        else
+                        {
+                            canMove = false;
+                        }
+                    }
+                    if (canMove)
+                    {
+                        if (playerCollider.OverlapPoint(mousePos))
+                        {
+                            canMove = true;
+                            overPuck = true;
+                            agarrado = true;
+                        }else
+                        {
+                            canMove = false;
+                            agarrado = false;
+                        }
+                            Vector2 clampedMousePos = new Vector2(Mathf.Clamp(mousePos.x + Random.Range(offset, -offset), playerBoundary.Left, playerBoundary.Right),
+                                                            Mathf.Clamp(mousePos.y + Random.Range(offset, -offset), playerBoundary.Down, playerBoundary.Up));
+                        if (pegarle)
+                        {
+                            rb.MovePosition(clampedMousePos);
+                        }else
+                        {
+                            transform.position = Vector2.MoveTowards(transform.position, clampedMousePos, Time.deltaTime*playerSpeed);
+                        }
+                        if (agarrado == true && !congelando)
+                        {
+                            StartCoroutine(Congelamiento());
+                        }
+                        //rb.velocity = Vector2.MoveTowards(transform.position, clampedMousePos, Time.deltaTime*50);
+                    }
                 }
                 else
                 {
-                    canMove = false;
+                    wasJustClicked = true;
                 }
             }
-            if (canMove)
+            else
             {
-                if (playerCollider.OverlapPoint(mousePos))
-                {
-                    canMove = true;
-                    overPuck = true;
-                    agarrado = true;
-                }else
-                {
-                    canMove = false;
-                    agarrado = false;
-                }
-                Vector2 clampedMousePos = new Vector2(Mathf.Clamp(mousePos.x, playerBoundary.Left, playerBoundary.Right),
-                                                      Mathf.Clamp(mousePos.y, playerBoundary.Down, playerBoundary.Up));
-                if (pegarle)
-                {
-                    rb.MovePosition(clampedMousePos);
-                }else
-                {
-                    transform.position = Vector2.MoveTowards(transform.position, clampedMousePos, Time.deltaTime*playerSpeed);
-                }if (agarrado == true)
-                {
-                    StartCoroutine(Congelamiento());
-
-                }
-                //rb.velocity = Vector2.MoveTowards(transform.position, clampedMousePos, Time.deltaTime*50);
+                overPuck = false;
             }
+            
         }
-        else
-        {
-            wasJustClicked = true;
-        }
+        
     }
     public void  CenterPosition(){
         rb.position = centerPosition;
@@ -100,7 +107,8 @@ public class AirHockeyPlayerMovement : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (playerCollider.OverlapPoint(mousePos))
         {
-            yield return new WaitForSecondsRealtime(.1f);
+            congelando = true;
+            yield return new WaitForSecondsRealtime(5);
             if (playerCollider.OverlapPoint(mousePos))
             {
                 canMove = false;
@@ -108,14 +116,20 @@ public class AirHockeyPlayerMovement : MonoBehaviour
                 frozen = true;
                 StartCoroutine(Congelado());
             }
+        }else
+        {
+            congelando = false;
         }
         frozen = false;
     }
     private IEnumerator Congelado(){
-        
+        canMove = false;
+        agarrado = false;
+        frozen = true;
         yield return new WaitForSecondsRealtime(2);
         canMove = true;
         agarrado = true;
         frozen = false;
+        congelando = false;
     }
 }

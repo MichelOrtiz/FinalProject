@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public GameObject Puck, Player, AI;
+    public GameObject Puck, Player, AI, NieblaJug, NieblaAI;
     AirHockeyPlayerMovement airHockeyPlayerMovement;
     PuckScript puckScript;
     AIScript aIScript;
@@ -13,9 +13,9 @@ public class PowerUps : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D othe){
         if (othe.tag == "Spit")
         {
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
             gameObject.GetComponent<PolygonCollider2D>().enabled = false;
-            powerUpType = 2;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            powerUpType = 3;
             switch (powerUpType)
             {
                 case 1:
@@ -26,31 +26,39 @@ public class PowerUps : MonoBehaviour
                 break;
                 case 2:
                     Debug.Log(powerUpType);
-                    Player.gameObject.GetComponent<AirHockeyPlayerMovement>().playerSpeed = 10000000;
-                    PUMaxMovementSpeed = AI.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed;
-                    AI.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed = PUMaxMovementSpeed * 1.5f;
-
+                    if (Puck.gameObject.GetComponent<PuckScript>().collisionHandler.lastColliderTag == "Player")
+                    {
+                        Player.gameObject.GetComponent<AirHockeyPlayerMovement>().playerSpeed = 10000000;
+                    }else if(Puck.gameObject.GetComponent<PuckScript>().collisionHandler.lastColliderTag == "Enemy")
+                    {
+                        PUMaxMovementSpeed = AI.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed;
+                        AI.gameObject.GetComponent<AIScript>().aIMaxMovementSpeed = PUMaxMovementSpeed * 1.5f;
+                    }
                     StartCoroutine(TimePowerUpActive(5));
                 break;
                 case 3:
                     Debug.Log(powerUpType);
-                    StartCoroutine(TimePowerUpActive(2));
+                    if (Puck.gameObject.GetComponent<PuckScript>().collisionHandler.lastColliderTag == "Player")
+                    {
+                        NieblaAI.gameObject.SetActive(true);
+                        AI.gameObject.GetComponent<AIScript>().PUoffset = 30;
+                    }else if(Puck.gameObject.GetComponent<PuckScript>().collisionHandler.lastColliderTag == "Enemy")
+                    {
+                        NieblaJug.gameObject.SetActive(true);
+                        Player.gameObject.GetComponent<AirHockeyPlayerMovement>().offset = 2f;
+                    }
+                    StartCoroutine(TimePowerUpActive(5));
                 break;
                 case 4:
                     Debug.Log(powerUpType);
-                    if (othe.tag == "Fruit")
-                    {
-                        Player.gameObject.GetComponent<AirHockeyPlayerMovement>().enabled = false;
-                    }else if(othe.tag == "Bomb")
+                    if (Puck.gameObject.GetComponent<PuckScript>().collisionHandler.lastColliderTag == "Player")
                     {
                         AI.gameObject.GetComponent<AIScript>().enabled = false;
+                    }else if(Puck.gameObject.GetComponent<PuckScript>().collisionHandler.lastColliderTag == "Enemy")
+                    {
+                        Player.gameObject.GetComponent<AirHockeyPlayerMovement>().enabled = false;
                     }
                     StartCoroutine(TimePowerUpActive(3));
-                break;
-                case 5:
-                    Debug.Log(powerUpType);
-                    
-                    StartCoroutine(TimePowerUpActive(5));
                 break;
             }
         }
@@ -85,15 +93,15 @@ public class PowerUps : MonoBehaviour
                 StartCoroutine(Respawn());
             break;
             case 3:
+                NieblaAI.gameObject.SetActive(false);
+                NieblaJug.gameObject.SetActive(false);
+                Player.gameObject.GetComponent<AirHockeyPlayerMovement>().offset = 0;
+                AI.gameObject.GetComponent<AIScript>().PUoffset = 0;
                 StartCoroutine(Respawn());
             break;
             case 4:
                 AI.gameObject.GetComponent<AIScript>().enabled = true;
                 Player.gameObject.GetComponent<AirHockeyPlayerMovement>().enabled = true;
-                StartCoroutine(Respawn());
-            break;
-            case 5:
-
                 StartCoroutine(Respawn());
             break;
         }

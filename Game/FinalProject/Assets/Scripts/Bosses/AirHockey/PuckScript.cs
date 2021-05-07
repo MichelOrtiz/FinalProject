@@ -85,7 +85,6 @@ public class PuckScript : MonoBehaviour
     
     private void collisionHandler_Changedtag(){
         Debug.Log(collisionHandler.lastColliderTag);
-
         
     }
 }
