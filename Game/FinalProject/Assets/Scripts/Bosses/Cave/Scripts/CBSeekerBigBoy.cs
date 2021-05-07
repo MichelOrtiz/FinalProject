@@ -6,6 +6,12 @@ public class CBSeekerBigBoy : Entity
 {
     private bool canStart;
 
+    #region OnPlayerEffects
+    [Header("Effects on Player")]
+    [SerializeField] private State effectOnPlayer;
+    [SerializeField] private float damageAmount;
+
+    #endregion
     #region Physics
     [Header("Physic Params")]
     [SerializeField] private float speedMultiplier;
@@ -25,13 +31,10 @@ public class CBSeekerBigBoy : Entity
 
     #region Collisions
     [Header("Collisions")]
-    [SerializeField] private List<GameObject> walls;
-    [SerializeField] private string LeftWallName;
-    [SerializeField] private string RightWallName;
-    [SerializeField] private string FloorName;
-    [SerializeField] private string CeilingName;
+    [SerializeField] private CBRoomManager roomManager;
+    private List<GameObject> walls;
+    private List<GameObject> grounds;
 
-    [SerializeField] private List<GameObject> grounds;
     private bool hitWall;
     [SerializeField] private float waitTimeWhenCollide;
     private float currentWaitTime;
@@ -68,12 +71,16 @@ public class CBSeekerBigBoy : Entity
 
         eCollisionHandler.StayTouchingContactHandler += eCollisionHandler_StayInCollision;
 
+        eCollisionHandler.TouchingPlayer += eCollisionHandler_Attack;
+
 
         groundChecker.GroundedHandler += groundChecker_Grounded;
         //groundChecker.GroundedGameObjectHandler += groundChecker_GroundedGameObject;
 
 
         speed = averageSpeed * speedMultiplier;
+
+       
     }
 
     new void Start()
@@ -81,6 +88,9 @@ public class CBSeekerBigBoy : Entity
         base.Start();
         player = PlayerManager.instance;
         defaultGravityScale = rigidbody2d.gravityScale;
+
+        walls = roomManager.walls;
+        grounds = roomManager.grounds;
 
         inPush = true;
     }
@@ -318,12 +328,9 @@ public class CBSeekerBigBoy : Entity
         }
     }
 
-    /*void groundChecker_GroundedGameObject(GameObject ground)
+    void eCollisionHandler_Attack()
     {
-        if (player.isGrounded && player.collisionHandler.Contacts.Contains(ground))
-        {
-            inGroundWithPlayer = true;
-        }
-    }*/
-    
+        player.TakeTirement(damageAmount);
+        //player.statesManager.AddState(effectOnPlayer);
+    }
 }
