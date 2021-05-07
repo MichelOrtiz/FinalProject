@@ -13,10 +13,11 @@ public class AIScript : MonoBehaviour
     private Boundary playerBoundary;
     public Transform PuckBoundaryHolder;
     private Boundary puckBoundary;
-    private Vector2 targetPosition;
+    [SerializeField] private Vector2 targetPosition;
     private bool isFirstHalfPass = true;
-    private float offsetYFromTarget, offset1, offset2, returned;
-    public float aIMaxMovementSpeed;
+    private float offset1, offset2, returned;
+    [SerializeField] float offsetYFromTarget;
+    public float aIMaxMovementSpeed, PUoffset;
     public ScoreScript scoreScript;
 
     private void Start(){
@@ -34,6 +35,7 @@ public class AIScript : MonoBehaviour
         offset1 = -5;
         offset2 = 5;
         aIMaxMovementSpeed = 30;
+        PUoffset = 0;
     }
 
     private void FixedUpdate(){
@@ -79,9 +81,10 @@ public class AIScript : MonoBehaviour
                 {
                     isFirstHalfPass = false;
                     offsetYFromTarget = Random.Range(offset1, offset2);
+                    PUoffset = Random.Range(PUoffset, -PUoffset);
                 }
                 movementSpeed = MaxMovementSpeed * returned;
-                targetPosition = new Vector2(startingPosition.x, Mathf.Clamp(Puck.position.y + offsetYFromTarget, playerBoundary.Down, playerBoundary.Up));
+                targetPosition = new Vector2(startingPosition.x, Mathf.Clamp(Puck.position.y + offsetYFromTarget + PUoffset, playerBoundary.Down, playerBoundary.Up));
             }else
             {
                 isFirstHalfPass = true;
