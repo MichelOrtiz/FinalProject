@@ -12,6 +12,7 @@ public class Equipment : Item
     private float currentCooldown;
     public override void Use()
     {
+        
         EquipmentManager.instance.Equip(this);
     }
     public virtual void rutine(){
