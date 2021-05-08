@@ -9,6 +9,6 @@ public class DialogueTrigger : MonoBehaviour
     {
             
             DialogueManager.instance.StartDialogue(dialog);
-
+            Debug.Log("Trigger " + dialog.name);
     }
 }

@@ -53,62 +53,40 @@ public class PlayerManager : Entity
     private bool tirementRunning = false;
     private bool tirementDrowning = false;
     #endregion
-
-    #region Dialogue Trigger
-    public DialogueTrigger dialogue;
-    private RaycastHit2D hit;
-
     [SerializeField]private bool loosingStamina;
     [SerializeField]private bool loosingOxygen;
     private float regenCooldown;
 
-    private void SearchInteraction()
+    #region Dialogues
+        private RaycastHit2D hit;
+        private void SearchInteraction()
         {
+
             Vector2 startPoint = transform.position;
             Vector2 interactPoint = transform.position;
 
             if(transform.rotation.y == 0)
             {
-                startPoint.x += 0.3f;
-                interactPoint.x += 5f;
+                startPoint.x += 0.6f;
+                interactPoint.x += 2f;
             }
             else
             {
-                startPoint.x -= 0.3f;
-                interactPoint.x -= 5f;
+                startPoint.x -= 0.6f;
+                interactPoint.x -= 2f;
             }
             
-            hit = Physics2D.Raycast(startPoint, interactPoint, Vector2.Distance(transform.position, interactPoint));
-            if (hit.collider != null && !hit.collider.gameObject.CompareTag("Player"))
+            hit = Physics2D.Raycast(startPoint, transform.forward, Vector2.Distance(startPoint,interactPoint));
+            if (hit.collider != null)
             {
-
-                Debug.DrawLine(startPoint, interactPoint, Color.blue, 5f);
-                DialogueTrigger chat = hit.collider.GetComponent<DialogueTrigger>();
-                
-                dialogue = chat;
-
-                if(chat != null)
-                {
-                    SetFocus(chat);
-                    return;
-                }
-                else
-                {
-                    RemoveFocus();
+                DialogueTrigger trigger = hit.collider.GetComponent<DialogueTrigger>();
+                if(trigger!=null){
+                    trigger.TriggerDialogue();
                 }
             }
 
 
         }
-    private void SetFocus(DialogueTrigger newFocus)
-        {
-            newFocus.TriggerDialogue();
-        }
-        private void RemoveFocus()
-        {
-            dialogue = null;
-        }
-
     #endregion
 
     #region Inputs
@@ -116,7 +94,7 @@ public class PlayerManager : Entity
     #endregion
     [SerializeField]private State inmunityState;
     public AbilityManager abilityManager;
-    public static PlayerManager instance = null;
+    public static PlayerManager instance;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -147,6 +125,7 @@ public class PlayerManager : Entity
         currentGravity = defaultGravity;
         currentMass = defaultMass;
         inputs = gameObject.GetComponent<PlayerInputs>();
+        
     }
 
     new void Update()
