@@ -4,7 +4,7 @@ public class Laser : MonoBehaviour
 {
     [SerializeField] private LineRenderer ray;
     [SerializeField] private Transform endPoint;
-
+    [SerializeField] private bool hasLifeTime;
     [SerializeField] private float lifeTime;
 
     [SerializeField] protected bool targetWarningAvailable;
@@ -130,7 +130,7 @@ public class Laser : MonoBehaviour
         }
         else
         {
-            if (currentTime > lifeTime)
+            if (hasLifeTime && currentTime > lifeTime)
             {
                 Destroy(gameObject);
             }
