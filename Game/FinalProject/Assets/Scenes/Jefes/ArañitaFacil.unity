@@ -17631,6 +17631,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &780084888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780084889}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &780084889
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780084888}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.88, y: 23.29, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1121960881}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &806249132
 GameObject:
   m_ObjectHideFlags: 0
@@ -18079,6 +18109,7 @@ MonoBehaviour:
   distanceFromPlayerToStop: 3
   inSameWallThanPlayer: 0
   inGroundWithPlayer: 0
+  maxProjectileHits: 2
   shockWake: {fileID: 1127698648}
 --- !u!95 &897050612
 Animator:
@@ -18883,7 +18914,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.36491394, y: -0.72558594, z: 185.00887}
   m_LocalScale: {x: 1, y: 1, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 780084889}
   m_Father: {fileID: 1454011864}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18899,7 +18931,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc6cfd3d18743c4d9abf807b08c75f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHits: 0
+  projectilePrefab: {fileID: 4690660590625237830, guid: 492695ceaaa815240afe9850a65825e7, type: 3}
+  shootPos: {fileID: 780084889}
+  collisionTags:
+  - Enemy
+  maxHits: 3
 --- !u!1 &1127698648
 GameObject:
   m_ObjectHideFlags: 0
@@ -24257,7 +24293,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 40.18492, y: -0.72558594, z: 185.00887}
   m_LocalScale: {x: 1, y: 1, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 1884985118}
   m_Father: {fileID: 1454011864}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24273,7 +24310,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc6cfd3d18743c4d9abf807b08c75f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHits: 0
+  projectilePrefab: {fileID: 4690660590625237830, guid: 492695ceaaa815240afe9850a65825e7, type: 3}
+  shootPos: {fileID: 1884985118}
+  collisionTags:
+  - Enemy
+  maxHits: 3
 --- !u!1 &1370777329
 GameObject:
   m_ObjectHideFlags: 0
@@ -29852,7 +29893,7 @@ GameObject:
   - component: {fileID: 1600331584}
   m_Layer: 13
   m_Name: CollisionHandler
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34670,6 +34711,36 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5193769848945909687, guid: 7a0b76e1ae4c6a14f9144daf2644ab6d, type: 3}
   m_PrefabInstance: {fileID: 1454957410}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1884985117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1884985118}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1884985118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884985117}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.17, y: 23.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1362720910}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1913197334
 GameObject:
   m_ObjectHideFlags: 0
@@ -34742,6 +34813,7 @@ MonoBehaviour:
   distanceFromPlayerToStop: 3
   inSameWallThanPlayer: 0
   inGroundWithPlayer: 0
+  maxProjectileHits: 0
   shockWake: {fileID: 439253172}
 --- !u!95 &1913197336
 Animator:
