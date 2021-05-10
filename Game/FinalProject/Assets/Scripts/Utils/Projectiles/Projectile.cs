@@ -225,8 +225,11 @@ public class Projectile : MonoBehaviour
     protected void OnTriggerEnter2D(Collider2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
-        touchingObstacle = other.gameObject.layer == whatIsObstacle;
+        //touchingObstacle = other.gameObject.layer == whatIsObstacle;
+        touchingObstacle = Physics2D.OverlapCircle(transform.position, transform.localScale.magnitude, whatIsObstacle);
+
     }
+
     
     protected void OnTriggerStay2D(Collider2D other)
     {
@@ -237,8 +240,9 @@ public class Projectile : MonoBehaviour
     protected void OnCollisionEnter2D(Collision2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
-        touchingObstacle = other.gameObject.layer == whatIsObstacle;
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
+        //touchingObstacle = other.gameObject.layer == whatIsObstacle;
+        touchingObstacle = Physics2D.OverlapCircle(transform.position, transform.localScale.magnitude, whatIsObstacle);
     }
     
     protected void OnCollisionStay2D(Collision2D other)
