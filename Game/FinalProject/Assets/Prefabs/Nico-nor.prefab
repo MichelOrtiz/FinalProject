@@ -531,6 +531,7 @@ GameObject:
   - component: {fileID: 1225996928}
   - component: {fileID: 1587736599}
   - component: {fileID: 8891905290899016347}
+  - component: {fileID: 4628444344613271231}
   - component: {fileID: 1587736591}
   m_Layer: 0
   m_Name: AbilitySystem
@@ -716,6 +717,27 @@ MonoBehaviour:
   abilityName: 3
   isUnlocked: 1
   NicoFeet: {fileID: 2335636184417845273}
+--- !u!114 &4628444344613271231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829738360394267735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4aeb0074b3062d4ca00707e280f9f96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 10
+  hotkey: 257
+  staminaCost: 15
+  duration: 5
+  isInCooldown: 0
+  abilityName: 0
+  isUnlocked: 1
+  Nico: {fileID: 3829738358529845160}
+  isInvisible: 0
 --- !u!61 &1587736591
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2020415388813460389
 Transform:
   m_ObjectHideFlags: 0
@@ -167,7 +167,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020415388813460399}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -228,6 +228,8 @@ MonoBehaviour:
     m_Bits: 512
   feetPos: {fileID: 2020415389121602270}
   checkFeetRadius: 0
+  groundChecker: {fileID: 0}
+  collisionHandler: {fileID: 0}
   fovType: 0
   enemyName: 0
   damageAmount: 80
@@ -249,10 +251,10 @@ MonoBehaviour:
   player: {fileID: 0}
   items:
   - {fileID: 11400000, guid: c9818b8b6e6f49d4e8041cc49e66a96c, type: 2}
-  - {fileID: 11400000, guid: 87cdb9e94580b56459a394e00f3b3487, type: 2}
-  - {fileID: 11400000, guid: d137fafc42811c546b667a1fe95b2c07, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   trash: {fileID: 11400000, guid: e4f2c8c4628fe1a4a92b69b77e01b654, type: 2}
-  snitch: {fileID: 11400000, guid: d583dfc230d1f6846b74df3f330dcb74, type: 2}
+  snitch: {fileID: 0}
 --- !u!114 &7622590005233136400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hostEntity: {fileID: 0}
   enemy: {fileID: 0}
+  currentStates: []
 --- !u!1 &2020415388974143899
 GameObject:
   m_ObjectHideFlags: 0

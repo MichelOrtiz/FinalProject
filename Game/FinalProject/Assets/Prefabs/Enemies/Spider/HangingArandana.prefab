@@ -240,7 +240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &884248132953188836
 Transform:
   m_ObjectHideFlags: 0
@@ -250,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 884248132953188834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.8, y: 35.8, z: -1.5819737}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 884248131135160087}
   - {fileID: 884248131156096981}
@@ -358,7 +358,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884248132953188834}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -419,6 +419,8 @@ MonoBehaviour:
     m_Bits: 512
   feetPos: {fileID: 884248131156096981}
   checkFeetRadius: 0.3
+  groundChecker: {fileID: 0}
+  collisionHandler: {fileID: 0}
   fovType: 3
   enemyName: 30
   damageAmount: 22
@@ -458,6 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hostEntity: {fileID: 0}
   enemy: {fileID: 0}
+  currentStates: []
 --- !u!1 &6625568307703599549
 GameObject:
   m_ObjectHideFlags: 0

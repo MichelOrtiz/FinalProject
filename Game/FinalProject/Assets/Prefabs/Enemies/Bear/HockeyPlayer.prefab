@@ -111,7 +111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &525320775802754293
 Transform:
   m_ObjectHideFlags: 0
@@ -228,7 +228,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525320775802754303}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -289,6 +289,8 @@ MonoBehaviour:
     m_Bits: 512
   feetPos: {fileID: 525320774841720435}
   checkFeetRadius: 0.3
+  groundChecker: {fileID: 0}
+  collisionHandler: {fileID: 0}
   fovType: 0
   enemyName: 0
   damageAmount: 0
@@ -330,6 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hostEntity: {fileID: 0}
   enemy: {fileID: 0}
+  currentStates: []
 --- !u!1 &525320776076346182
 GameObject:
   m_ObjectHideFlags: 0
