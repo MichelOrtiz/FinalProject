@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -927070410017260167}
   - component: {fileID: -5777436470037907633}
   m_Layer: 11
-  m_Name: CBProjectile
+  m_Name: CBProjectileStage3
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &-5777436470037907633
 MonoBehaviour:
@@ -142,9 +142,9 @@ MonoBehaviour:
   impactEffect: {fileID: 0}
   targetWarningAvailable: 0
   independentAttackEnabled: 0
-  speedMultiplier: 3
+  speedMultiplier: 5
   maxShotDistance: 30
-  damage: 5
+  damage: 15
   waitTime: 0.1
   impactEffectExitTime: 0
   touchingPlayer: 0

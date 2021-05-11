@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: -927070410017260167}
   - component: {fileID: -5777436470037907633}
   m_Layer: 11
-  m_Name: CBProjectile
-  m_TagString: Projectile
+  m_Name: CBCeilingRock
+  m_TagString: Ceiling
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +116,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -137,12 +137,12 @@ MonoBehaviour:
   rigidbody2d: {fileID: -927070410017260167}
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1024
   warning: {fileID: 0}
   impactEffect: {fileID: 0}
   targetWarningAvailable: 0
   independentAttackEnabled: 0
-  speedMultiplier: 3
+  speedMultiplier: 0
   maxShotDistance: 30
   damage: 5
   waitTime: 0.1

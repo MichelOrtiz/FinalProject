@@ -44,6 +44,10 @@ public class CBSeekerBigBoy : Entity
     private bool inWall;
     public bool inSameWallThanPlayer;
     public bool inGroundWithPlayer;
+
+    // To change stage
+    [SerializeField] private byte maxProjectileHits;
+    private byte projectileHits;
     //private bool touchingGround;
     #endregion
 
@@ -283,6 +287,19 @@ public class CBSeekerBigBoy : Entity
                 rigidbody2d.gravityScale = 0;
             }
             
+        }
+
+        if (contact.tag == "Ceiling")
+        {
+            if (projectileHits < maxProjectileHits-1)
+            {
+                projectileHits++;
+            }
+            else
+            {
+                // finish stage
+                Debug.Log("Finished Stage");
+            }
         }
 
     }
