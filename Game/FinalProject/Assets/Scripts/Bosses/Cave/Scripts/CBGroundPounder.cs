@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CBGroundPounder : Entity, ILaser
+public class CBGroundPounder : Entity, ILaser, IProjectile
 {
     #region TargetPosition
     [Header("Target Position")]
@@ -33,11 +33,14 @@ public class CBGroundPounder : Entity, ILaser
     [Header("Collisions")]
     [SerializeField] private CBRoomManager roomManager;
     private List<GameObject> grounds;
-
     private bool hitGround;
+    [SerializeField] private byte maxGroundHits;
+    private byte currentGroundHits;
+    //[SerializeField] private byte maxProjectileHits;
+    //private byte projectileHits;
     [SerializeField] private float waitTimeWhenCollide;
     private float currentWaitTime;
-
+    private bool touchingPlayer;
     //private bool touchingGround;
     #endregion
 
@@ -50,8 +53,21 @@ public class CBGroundPounder : Entity, ILaser
     public Transform ShotPos { get => shotPos; }
     [SerializeField] private Transform endPos;
     public Vector2 EndPos { get => endPos.position; }
+    #endregion
 
-
+    #region ProjectileStuff
+    [Header("Projectile Stuff")]
+    [SerializeField] private GameObject projectilePrefab;
+    private Projectile projectile;
+    [SerializeField] private Transform projectileShotPos;
+    private Vector2 shotPoint;
+    [SerializeField] private float timeBtwShot;
+    private float currentTimeBtwShot;
+    [SerializeField] private int minAnglePerShot;
+    [SerializeField] private int maxAnglePerShot;
+    [SerializeField] private int minAngleBtwProjectiles;
+    [SerializeField] private Transform center;
+    [SerializeField] private byte shotsPerBurst;
     #endregion
 
 
@@ -65,6 +81,9 @@ public class CBGroundPounder : Entity, ILaser
     {
         eCollisionHandler = (EnemyCollisionHandler) collisionHandler;
         //eCollisionHandler.TouchingGroundHandler += eCollisionHandler_TouchingGround;
+        eCollisionHandler.EnterTouchingContactHandler += eCollisionHandler_EnterCollision;
+        eCollisionHandler.ExitTouchingContactHandler += eCollisionHandler_ExitCollision;
+
 
         eCollisionHandler.TouchingPlayer += eCollisionHandler_Attack;
 
@@ -90,17 +109,30 @@ public class CBGroundPounder : Entity, ILaser
     // Update is called once per frame
     new void Update()
     {
+        if (!sawPlayer)
+        {
+            sawPlayer = reachedDestination && Mathf.Abs(GetPosition().x - player.GetPosition().x) <= xRangeToSeePlayer;
+        }
         // So it is true forever, but only once the enemy reached destination for the first time
         if (!reachedDestination)
         {
             reachedDestination = Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius
                                 && player.GetPosition().y < GetPosition().y;
         }
-
-        if (!sawPlayer)
+        else
         {
-            sawPlayer = Mathf.Abs(GetPosition().x - player.GetPosition().x) <= xRangeToSeePlayer;
+            if (currentTimeBtwShot > timeBtwShot)
+            {
+                ShootProjectiles();
+                currentTimeBtwShot = 0;
+            }
+            else
+            {
+                currentTimeBtwShot += Time.deltaTime;
+            }
         }
+
+        
             
         if (hitGround)
         {
@@ -113,7 +145,6 @@ public class CBGroundPounder : Entity, ILaser
             {
                 StopMoving();
                 currentWaitTime += Time.deltaTime;
-                return;
             }
         }
 
@@ -128,15 +159,28 @@ public class CBGroundPounder : Entity, ILaser
         {
             if (!reachedDestination)
             {
-                rigidbody2d.position = Vector2.MoveTowards(GetPosition(), positionToGo, speed * Time.deltaTime);
+                GoToDestination();
             }
             else if (sawPlayer)
             {
-                Push(0, -pushForce);
+                if (!touchingPlayer)
+                {
+                    Push(0, -pushForce);
+                }
+                else
+                {
+                    //StopMoving();
+                    reachedDestination = false;
+                    GoToDestination();
+                }
             }
         }
     }
 
+    void GoToDestination()
+    {
+        rigidbody2d.position = Vector2.MoveTowards(GetPosition(), positionToGo, speed * Time.deltaTime);
+    }
 
     void StopMoving()
     {
@@ -152,13 +196,43 @@ public class CBGroundPounder : Entity, ILaser
             hitGround = true;
             reachedDestination = false;
             sawPlayer = false;
+
+            if (currentGroundHits < maxGroundHits-1)
+            {
+                currentGroundHits++;
+            }
+            else
+            {
+                rigidbody2d.gravityScale = 1;
+                endPos.transform.GetComponent<Rigidbody2D>().gravityScale = 1;
+            }
         }
     }
 
     void eCollisionHandler_Attack()
     {
+        touchingPlayer = true;
         player.TakeTirement(damageAmount);
         //player.statesManager.AddState(effectOnPlayer);
+    }
+
+    void eCollisionHandler_EnterCollision(GameObject contact)
+    {
+        if (contact.tag == "Player")
+        {
+            StopMoving();
+        }
+        if (contact.tag == "Ceiling")
+        {
+            Debug.Log("Finished Stage");
+        }
+    }
+    void eCollisionHandler_ExitCollision(GameObject contact)
+    {
+        if (contact.tag == "Player")
+        {
+            touchingPlayer = false;
+        }
     }
 
     public void ShootLaser(Vector2 from, Vector2 to)
@@ -170,5 +244,39 @@ public class CBGroundPounder : Entity, ILaser
     public void LaserAttack()
     {
         return;
+    }
+
+    public void ProjectileAttack()
+    {
+        player.TakeTirement(projectile.damage);
+    }
+
+    public void ShootProjectiles()
+    {
+        int lastAngle = 0;
+        int angle = 0;
+        byte shotsDone = 0;
+        while (shotsDone < shotsPerBurst)
+        {
+            do
+            {
+                angle = Random.Range(minAnglePerShot, maxAnglePerShot);
+            }
+            while (Mathf.Abs(lastAngle - angle) < minAngleBtwProjectiles);
+            
+            shotPoint = center.position + MathUtils.GetVectorFromAngle(angle);
+
+            ShotProjectile(center.position, shotPoint );
+            shotsDone++;
+
+            lastAngle = angle;
+        }
+    }
+
+    public void ShotProjectile(Transform from, Vector3 to){}  
+    public void ShotProjectile(Vector2 from, Vector3 to)
+    {
+        projectile = Instantiate(projectilePrefab, from, Quaternion.identity).GetComponent<Projectile>();
+        projectile.Setup(from, to, this);
     }
 }

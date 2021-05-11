@@ -44,7 +44,7 @@ public class CBProjectileThrower : Entity, IProjectile
 
     public void ProjectileAttack()
     {
-        //throw new System.NotImplementedException();
+        
     }
 
     public void ShotProjectiles()
@@ -67,6 +67,6 @@ public class CBProjectileThrower : Entity, IProjectile
     public void ShotProjectile(Vector2 from, Vector3 to)
     {
         projectile = Instantiate(projectilePrefab, from, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to);
+        projectile.Setup(from, to, this);
     }
 }

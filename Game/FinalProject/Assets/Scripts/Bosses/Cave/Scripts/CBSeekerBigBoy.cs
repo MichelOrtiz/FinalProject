@@ -289,7 +289,7 @@ public class CBSeekerBigBoy : Entity
             
         }
 
-        if (contact.tag == "Projectile")
+        if (contact.tag == "Ceiling")
         {
             if (projectileHits < maxProjectileHits-1)
             {
