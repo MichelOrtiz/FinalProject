@@ -31,7 +31,8 @@ public class LootChest : ScriptableObject {
         Inventory.instance.AddMoney(money);
         for(int i=0;i<newItems.Length;i++){
             prefab.GetComponent<Inter>().SetItem(newItems[i]);
-            Instantiate(prefab,spawnPoint,Quaternion.identity);
+            GameObject x = Instantiate(prefab,spawnPoint,Quaternion.identity);
+            x.SetActive(true);
         }
     }
     public void SetSpawnPoint(Vector3 newPoint){

@@ -8,8 +8,8 @@ public class ItemStamina : Item
     public int staminaGain; 
     public override void Use()
     {
-        if(staminaGain<0){
-            PlayerManager.instance.TakeTirement(staminaGain);
+        if(staminaGain < 0){
+            PlayerManager.instance.TakeTirement(-staminaGain);
         }else{
             PlayerManager.instance.RegenStamina(staminaGain);
         }

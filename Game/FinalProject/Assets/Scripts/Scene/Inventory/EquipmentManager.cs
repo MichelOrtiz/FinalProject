@@ -27,7 +27,7 @@ public class EquipmentManager : MonoBehaviour
         int slotIndex = (int) newItem.equipmentSlot;
         Unequip(slotIndex);
         currentEquipment[slotIndex] = newItem;
-        Inventory.instance.Remove(newItem);
+        //Inventory.instance.Remove(newItem);
     }
 
     public void Unequip(int slotIndex){
