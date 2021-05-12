@@ -5,7 +5,17 @@ using UnityEngine.UI;
 
 public class StaminaBar : MonoBehaviour
 {
-    public Slider slider;
+    PlayerManager player = PlayerManager.instance;
+    private Slider slider;
+
+    private void Start() {
+        slider = gameObject.GetComponent<Slider>();
+        player = PlayerManager.instance;
+        SetMaxStamina(player.maxStamina);
+    }
+    private void Update() {
+        slider.value = player.currentStamina;
+    }
 
     public void SetMaxStamina(float stamina){
         slider.maxValue = stamina;

@@ -18,8 +18,8 @@ public class PlayerManager : Entity
     #endregion
 
     #region Constant change Parameters
-    public float currentStamina;
-    public float currentOxygen;
+    public float currentStamina {get;set;}
+    public float currentOxygen {get;set;}
     private float moveInput; 
     private float jumpTimeCounter;
     #endregion
@@ -39,16 +39,9 @@ public class PlayerManager : Entity
 
     #region Layers, rigids, etc
     public GameObject camara;
-    public StaminaBar staminaBar;
-    public OxygenBar oxygenBar;
     #endregion
 
     #region states params // might be in a different class
-    private float buttonCool = 0.8f;
-    private static int lButtonCount = 0;
-    private static int rButtonCount = 0;
-    
-    [SerializeField] private float coolDownAfterAttack;
 
     private bool tirementRunning = false;
     private bool tirementDrowning = false;
@@ -115,11 +108,8 @@ public class PlayerManager : Entity
     new void Start()
     {
         base.Start();
-        //walkingSpeed = AverageSpeed-3f;
         currentStamina = maxStamina;
-        staminaBar.SetMaxStamina(maxStamina);
         currentOxygen = maxOxygen;
-        oxygenBar.SetMaxOxygen(maxOxygen);
         FindStartPos();
         regenCooldown = 5;
         currentGravity = defaultGravity;
@@ -216,9 +206,7 @@ public class PlayerManager : Entity
             {
                 FindRespawnPos();
                 currentStamina = maxStamina;
-                staminaBar.SetMaxStamina(maxStamina);
                 currentOxygen = maxOxygen;
-                oxygenBar.SetMaxOxygen(maxOxygen);
             }
         }
         base.Update();
@@ -297,11 +285,10 @@ public class PlayerManager : Entity
             if (currentOxygen>0)
             {
             currentOxygen -= drown;
-            oxygenBar.SetOxygen(currentOxygen);
             }
             if (currentOxygen<0)
             {
-                oxygenBar.SetOxygen(0);
+                currentOxygen = 0;
             }
         }
         yield return new WaitForSeconds(timeDrowned);
@@ -347,14 +334,12 @@ public class PlayerManager : Entity
     {
         if (currentStamina>0)
         {
-            //statesManager.AddState(inmunityState);
             currentStamina -= damage;
             loosingStamina = true;
-            staminaBar.SetStamina(currentStamina);
         }
         if (currentStamina<0)
         {
-            staminaBar.SetStamina(0);
+            currentStamina = 0;
         }
         
     }
@@ -363,11 +348,10 @@ public class PlayerManager : Entity
         if (currentStamina<100)
         {
         currentStamina += regen;
-        staminaBar.SetStamina(currentStamina);
         }
         if (currentStamina>100)
         {
-            staminaBar.SetStamina(100);
+            currentStamina = 100;
         }
     }
     void RegenOxygen(float regen)
@@ -375,11 +359,10 @@ public class PlayerManager : Entity
         if (currentOxygen<100)
         {
         currentOxygen += regen;
-        oxygenBar.SetOxygen(currentOxygen);
         }
         if (currentOxygen>100)
         {
-            oxygenBar.SetOxygen(100);
+            currentOxygen = 100;
         }
     }
     #endregion

@@ -128,7 +128,7 @@ public class GhostBossEnemy : Entity, IProjectile
             {
                 projectileEffectOnPlayer.StopAffect();
                 //player.GetComponent<StatesManager>().RemoveState(projectileEffectOnPlayer);
-                player.currentStamina = 0;
+                player.currentStamina = 0; //insta kill??
             }
             else
             {
