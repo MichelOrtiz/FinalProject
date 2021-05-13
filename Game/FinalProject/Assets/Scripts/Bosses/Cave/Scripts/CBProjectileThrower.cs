@@ -20,6 +20,13 @@ public class CBProjectileThrower : Entity, IProjectile
 
     #endregion
 
+    #region 
+    [Header("Threads")]
+    [SerializeField] private List<LineRenderer> threads;
+    [SerializeField] private List<Vector2> startPositions;
+    [SerializeField] private List<Vector2> endPositions;
+    #endregion
+
     new void Start()
     {
         base.Start();
@@ -28,15 +35,20 @@ public class CBProjectileThrower : Entity, IProjectile
     // Update is called once per frame
     new void Update()
     {
-        if (currentTimeBtwShot > timeBtwShot)
-        {
-            ShotProjectiles();
-            currentTimeBtwShot = 0;
-        }
-        else
-        {
-            currentTimeBtwShot += Time.deltaTime;
-        }
+        UpdateThreadPositions();
+        //if (!finishedAttack)
+        //{
+            if (currentTimeBtwShot > timeBtwShot)
+            {
+                ShotProjectiles();
+                currentTimeBtwShot = 0;
+            }
+            else
+            {
+                currentTimeBtwShot += Time.deltaTime;
+            }
+        //}
+        
 
 
         base.Update();
@@ -64,9 +76,25 @@ public class CBProjectileThrower : Entity, IProjectile
         
     }
 
+    void UpdateThreadPositions()
+    {
+        byte index = 0;
+        foreach (var thread in threads)
+        {
+            thread.SetPosition(0, startPositions[index]);
+            thread.SetPosition(1, endPositions[index]);
+            index++;
+        }
+    }
+
     public void ShotProjectile(Vector2 from, Vector3 to)
     {
         projectile = Instantiate(projectilePrefab, from, Quaternion.identity).GetComponent<Projectile>();
         projectile.Setup(from, to, this);
     }
+
+    /*protected override void SetDefaults()
+    {
+        //throw new System.NotImplementedException();
+    }*/
 }

@@ -8,7 +8,7 @@ public class Stage : ScriptableObject
     //[SerializeField]private List<GameObject> stageObject;
     //[SerializeField] private SerializableDictionary<Vector3, GameObject> stageObjects;
     
-    [SerializeField] public List<GameObject> gameObjects;
+    [SerializeField] public List<GameObject> gameObjects = new List<GameObject>();
     [SerializeField] public List<Vector2> positions;
     public List<GameObject> currentObjects { get; set; }
     public void Generate(){
@@ -17,6 +17,14 @@ public class Stage : ScriptableObject
             currentObjects.Add(Instantiate(gameObjects[i], positions[i], gameObjects[i].transform.rotation));
         }
     }
+
+    public GameObject GenerateSingle(GameObject gameObject, Vector2 position)
+    {
+        GameObject obj = Instantiate(gameObject, position, gameObject.transform.rotation);
+        currentObjects.Add(obj);
+        return obj;
+    }
+
     public void Destroy(){
         foreach (GameObject obj in currentObjects)
         {

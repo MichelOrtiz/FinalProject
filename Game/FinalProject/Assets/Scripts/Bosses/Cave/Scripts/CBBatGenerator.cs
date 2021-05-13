@@ -77,7 +77,10 @@ public class CBBatGenerator : MonoBehaviour, IProjectile
     public void ProjectileAttack()
     {
         player.TakeTirement(projectile.damage);
-        player.statesManager.AddState(effectOnPlayer);
+        if (effectOnPlayer != null)
+        {
+            player.statesManager.AddState(effectOnPlayer);
+        }
     }
 
     public void ShotProjectile(Transform from, Vector3 to)

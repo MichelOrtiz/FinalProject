@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -927070410017260167}
   - component: {fileID: -5777436470037907633}
   m_Layer: 11
-  m_Name: CBCeilingRock
+  m_Name: CaveB-CeilingRock
   m_TagString: Ceiling
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,15 +137,15 @@ MonoBehaviour:
   rigidbody2d: {fileID: -927070410017260167}
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 8192
   warning: {fileID: 0}
   impactEffect: {fileID: 0}
   targetWarningAvailable: 0
   independentAttackEnabled: 0
-  speedMultiplier: 0
+  speedMultiplier: 1.5
   maxShotDistance: 30
   damage: 5
-  waitTime: 0.1
+  waitTime: 0
   impactEffectExitTime: 0
   touchingPlayer: 0
   touchingObstacle: 0

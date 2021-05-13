@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CBGroundPounder : Entity, ILaser, IProjectile
+public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
 {
     #region TargetPosition
     [Header("Target Position")]
@@ -31,8 +31,8 @@ public class CBGroundPounder : Entity, ILaser, IProjectile
 
     #region Collisions
     [Header("Collisions")]
-    [SerializeField] private CBRoomManager roomManager;
-    private List<GameObject> grounds;
+    //[SerializeField] private CBRoomManager roomManager;
+    //private List<GameObject> grounds;
     private bool hitGround;
     [SerializeField] private byte maxGroundHits;
     private byte currentGroundHits;
@@ -68,6 +68,8 @@ public class CBGroundPounder : Entity, ILaser, IProjectile
     [SerializeField] private int minAngleBtwProjectiles;
     [SerializeField] private Transform center;
     [SerializeField] private byte shotsPerBurst;
+
+    private bool hit;
     #endregion
 
 
@@ -101,7 +103,13 @@ public class CBGroundPounder : Entity, ILaser, IProjectile
     {
         base.Start();
         player = PlayerManager.instance;
-        grounds = roomManager.grounds;
+
+        /*if (roomManager == null)
+        {
+            roomManager = FindObjectOfType<CBRoomManager>();
+        }
+
+        grounds = roomManager.grounds;*/
 
         ShootLaser(shotPos.position, endPos.position);
     }
@@ -203,8 +211,10 @@ public class CBGroundPounder : Entity, ILaser, IProjectile
             }
             else
             {
+
                 rigidbody2d.gravityScale = 1;
-                endPos.transform.GetComponent<Rigidbody2D>().gravityScale = 1;
+                Destroy(FindObjectOfType<LineRenderer>());
+                Destroy(FindObjectOfType<Laser>());
             }
         }
     }
@@ -224,7 +234,13 @@ public class CBGroundPounder : Entity, ILaser, IProjectile
         }
         if (contact.tag == "Ceiling")
         {
-            Debug.Log("Finished Stage");
+            if (hit)
+            {
+                
+                
+               OnFinished(GetPosition());
+            }
+            hit = true;
         }
     }
     void eCollisionHandler_ExitCollision(GameObject contact)

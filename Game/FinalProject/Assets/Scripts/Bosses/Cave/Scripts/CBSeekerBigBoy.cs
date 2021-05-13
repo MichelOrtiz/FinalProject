@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CBSeekerBigBoy : Entity
+public class CBSeekerBigBoy : CaveBossBehaviour
 {
     private bool canStart;
 
@@ -47,7 +47,10 @@ public class CBSeekerBigBoy : Entity
 
     // To change stage
     [SerializeField] private byte maxProjectileHits;
-    private byte projectileHits;
+    [SerializeField]private byte projectileHits;
+
+
+
     //private bool touchingGround;
     #endregion
 
@@ -92,6 +95,11 @@ public class CBSeekerBigBoy : Entity
         base.Start();
         player = PlayerManager.instance;
         defaultGravityScale = rigidbody2d.gravityScale;
+
+        if (roomManager == null)
+        {
+            roomManager = ScenesManagers.FindObjectOfType<CBRoomManager>();
+        }
 
         walls = roomManager.walls;
         grounds = roomManager.grounds;
@@ -288,6 +296,7 @@ public class CBSeekerBigBoy : Entity
             }
             
         }
+        
 
         if (contact.tag == "Ceiling")
         {
@@ -297,8 +306,7 @@ public class CBSeekerBigBoy : Entity
             }
             else
             {
-                // finish stage
-                Debug.Log("Finished Stage");
+                OnFinished(GetPosition());
             }
         }
 
@@ -350,4 +358,5 @@ public class CBSeekerBigBoy : Entity
         player.TakeTirement(damageAmount);
         //player.statesManager.AddState(effectOnPlayer);
     }
+
 }

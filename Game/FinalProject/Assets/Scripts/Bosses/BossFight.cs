@@ -16,7 +16,7 @@ public class BossFight : MonoBehaviour
     [SerializeField] protected GameObject abilityObject;
     public Stage currentStage;
     public bool isCleared;
-    int indexStage;
+    protected int indexStage;
 
     protected void Start()
     {
