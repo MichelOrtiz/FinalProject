@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class ItemSlot : MonoBehaviour
+public abstract class Slot : MonoBehaviour
 {
     public Image icon;
     public Image background;

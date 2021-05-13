@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HotbarSlot : ItemSlot
+public class HotbarSlot : Slot
 {
     private HotbarUI hotbarUI;
     private InventoryUI inventoryUI;
