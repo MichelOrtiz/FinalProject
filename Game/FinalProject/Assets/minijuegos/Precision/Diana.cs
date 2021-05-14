@@ -7,6 +7,7 @@ public class Diana : MonoBehaviour
     public bool activado;
     void Start()
     {
+        ScoreController.score = 0;
         activado = false;        
     }
 

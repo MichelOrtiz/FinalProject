@@ -27,9 +27,11 @@ public class MinigameUI : MonoBehaviour
     }
 
     public void endMinigame(){
-        currentMinigame.SetActive(false);
-        background.SetActive(false);
-        Destroy(currentMinigame);
+        if(currentMinigame != null){
+            currentMinigame.SetActive(false);
+            background.SetActive(false);
+            Destroy(currentMinigame);
+        }
     }
 
 
