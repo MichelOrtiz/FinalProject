@@ -20,7 +20,6 @@ public class Minigame : MonoBehaviour{
             
         }else{
             SceneManager.LoadScene(sceneIndex);
-
         }
     }
 
@@ -33,6 +32,7 @@ public class Minigame : MonoBehaviour{
 
     void Update()
     {
+        Debug.Log(currentTime);
         if(hasTime){
             if(currentTime<=0){
                 currentTime = time;
@@ -50,5 +50,6 @@ public class Minigame : MonoBehaviour{
         }else{
             
         }
+        Destroy(gameObject);
     }
 }
