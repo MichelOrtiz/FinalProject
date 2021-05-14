@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 4516865211306719725}
   - component: {fileID: 4516865211306719724}
   - component: {fileID: 4516865211306719715}
+  - component: {fileID: 1335012717}
   m_Layer: 10
   m_Name: PatrolGriffin
   m_TagString: Enemy
@@ -357,6 +358,7 @@ MonoBehaviour:
   feetPos: {fileID: 4516865209761536009}
   checkFeetRadius: 0.3
   groundChecker: {fileID: 1272798475043057628}
+  collisionHandler: {fileID: 2603810840414330028}
   fovType: 2
   enemyName: 25
   damageAmount: 30
@@ -373,7 +375,6 @@ MonoBehaviour:
   downDistanceGroundCheck: 1
   viewDistance: 5
   fovAngle: 45
-  collisionHandler: {fileID: 2603810840414330028}
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}
@@ -381,6 +382,21 @@ MonoBehaviour:
   meshRenderDefault: {fileID: 2100000, guid: 45e21fa2e01323c42afb0d08cbc02655, type: 2}
   meshRenderSawPlayer: {fileID: 2100000, guid: 7bb5921486f704e42bb6aa75e2e738ad, type: 2}
   meshFov: {fileID: 0}
+--- !u!114 &1335012717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4516865211306719714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a10b0e024d509479a276cdedbec9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostEntity: {fileID: 0}
+  enemy: {fileID: 0}
+  currentStates: []
 --- !u!1 &6237832327814630853
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2237de5c9d3a2f47850568f79ea60f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
   touchingPlayer: 0
   touchingEnemy: 0
