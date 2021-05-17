@@ -289,6 +289,7 @@ MonoBehaviour:
   feetPos: {fileID: 5308470135382847625}
   checkFeetRadius: 0.3
   groundChecker: {fileID: 3965930891091105410}
+  collisionHandler: {fileID: 2325924012507113105}
   fovType: 1
   enemyName: 26
   damageAmount: 40
@@ -305,7 +306,6 @@ MonoBehaviour:
   downDistanceGroundCheck: 1
   viewDistance: 10
   fovAngle: 0
-  collisionHandler: {fileID: 2325924012507113105}
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}
@@ -466,6 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2237de5c9d3a2f47850568f79ea60f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
   touchingPlayer: 0
   touchingEnemy: 0

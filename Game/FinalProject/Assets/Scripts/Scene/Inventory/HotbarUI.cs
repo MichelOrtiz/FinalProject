@@ -36,6 +36,9 @@ public class HotbarUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(inputs == null){
+            inputs = PlayerManager.instance.inputs;
+        }
         if(timeKeyPressed > 0.5){
             GunProjectile.instance.StartAiming();
         }
