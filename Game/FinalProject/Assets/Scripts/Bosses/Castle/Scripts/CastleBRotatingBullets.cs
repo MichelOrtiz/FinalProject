@@ -104,15 +104,14 @@ public class CastleBRotatingBullets : MonoBehaviour, IProjectile
         {
             shotPoint = center.position + MathUtils.GetVectorFromAngle(angle + centerAngle);
 
-            ShotProjectile(center.position, shotPoint);
+            ShotProjectile(center, shotPoint);
             angle += angleBtwShots;
         }
     }
 
-    public void ShotProjectile(Transform from, Vector3 to){}
-    public void ShotProjectile(Vector2 from, Vector3 to)
+    public void ShotProjectile(Transform from, Vector3 to)
     {
-        projectile = Instantiate(projectilePrefab, from, Quaternion.identity).GetComponent<Projectile>();
+        projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<Projectile>();
         projectile.Setup(from, to, this);
     }
 }
