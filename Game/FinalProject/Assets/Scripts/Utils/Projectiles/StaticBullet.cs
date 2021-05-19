@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class StaticBullet : MonoBehaviour
 {
-    [SerializeField] private float damageAmount;
     [SerializeField] private State effectOnPlayer;
     
     [SerializeField] private bool activateOnPlayerOnRadius;
@@ -105,7 +104,6 @@ public class StaticBullet : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            player.TakeTirement(damageAmount);
             
             if (effectOnPlayer != null)
             {

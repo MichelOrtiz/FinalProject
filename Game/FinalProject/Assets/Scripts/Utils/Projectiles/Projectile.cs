@@ -178,23 +178,7 @@ public class Projectile : MonoBehaviour
         
     }
     
-    protected void FixedUpdate()
-    {
-        if (touchingPlayer)
-        {
-            if (independentAttackEnabled)
-            {
-                PlayerManager.instance.TakeTirement(damage);
-            }
-            aboutToDestroy = true;
-            if (enemy != null)
-            {
-                enemy.ProjectileAttack();
-            }
-            Destroy();
-            
-        }
-    }
+    protected void FixedUpdate(){}
 
     /*private void ChangeSizeByDistance()
     {
@@ -226,6 +210,20 @@ public class Projectile : MonoBehaviour
     protected void OnTriggerEnter2D(Collider2D other)
     {
         touchingPlayer = other.gameObject.tag == "Player";
+
+        if (touchingPlayer)
+        {
+             if (independentAttackEnabled)
+            {
+                PlayerManager.instance.TakeTirement(damage);
+            }
+            aboutToDestroy = true;
+            if (enemy != null)
+            {
+                enemy.ProjectileAttack();
+            }
+            Destroy();
+        }
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
 
         /*if (other.gameObject.layer == whatIsObstacle)

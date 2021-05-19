@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5777436470037907633}
   - component: {fileID: 1525843037130447263}
   m_Layer: 11
-  m_Name: CastleB-SeekerBall
+  m_Name: CastleB-SeekerBall-5
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,10 +142,10 @@ MonoBehaviour:
   warning: {fileID: 0}
   impactEffect: {fileID: 0}
   targetWarningAvailable: 0
-  independentAttackEnabled: 0
-  speedMultiplier: 1.8
-  maxShotDistance: 50
-  damage: 5
+  independentAttackEnabled: 1
+  speedMultiplier: 4
+  maxShotDistance: 75
+  damage: 20
   waitTime: 0.0001
   impactEffectExitTime: 0
   touchingPlayer: 0
@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c24711f4c9f864d9f833670f1be292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 15
   effectOnPlayer: {fileID: 0}
   activateOnPlayerOnRadius: 0
   radius: 5
