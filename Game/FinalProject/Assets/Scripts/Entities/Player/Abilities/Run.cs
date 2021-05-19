@@ -15,6 +15,18 @@ public class Run : Ability
             //Debug.Log("Usando en cooldown");
         }
         player.walkingSpeed = runningSpeed;
+        if (player.isInWater)
+        {
+            player.walkingSpeed = 7f;
+        }
+        if (player.isInIce)
+        {
+            player.walkingSpeed = 75f;
+        }
+        if (player.isInSnow && !player.isInIce)
+        {
+            player.walkingSpeed = 8.5f;
+        }
     }
 
     protected override void Start()
@@ -58,5 +70,20 @@ public class Run : Ability
             }
         }
         
+    }
+    private void OnTriggerEnter2D(Collider2D collision){
+        GameObject collisionGameObject = collision.gameObject;
+        if (collisionGameObject.tag == "Water")
+        {
+            runningSpeed = player.walkingSpeed * speedMultiplier;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision){
+        GameObject collisionGameObject = collision.gameObject;
+        if (collisionGameObject.tag == "Water")
+        {
+            player.walkingSpeed = player.defaultwalkingSpeed;
+            runningSpeed = player.walkingSpeed * speedMultiplier;
+        }
     }
 }

@@ -244,7 +244,13 @@ public class PlayerManager : Entity
     void Move()
     {
         if(!inputs.enabled)return;
-        rigidbody2d.velocity = new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y);
+        if (isInIce)
+        {
+            rigidbody2d.AddForce(new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y)); 
+        }else
+        {
+            rigidbody2d.velocity = new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y);    
+        }
     }
 
     void Flying()
