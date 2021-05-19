@@ -99,4 +99,12 @@ public static class RandomGenerator
 
         return matchedElement;
     }
+
+    public static Vector2 RandomPointInBounds(Bounds bounds)
+    {
+        float x = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
+        float y = UnityEngine.Random.Range(bounds.min.y, bounds.max.y);
+
+        return new Vector2(x, y);
+    }
 }
