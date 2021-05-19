@@ -11,7 +11,7 @@ public class ObjectSpawner : MonoBehaviour
     void Start()
     {
         box = GetComponent<BoxCollider2D>();
-        //SpawnObjects();
+        SpawnObjects();
     }
 
 
@@ -27,6 +27,7 @@ public class ObjectSpawner : MonoBehaviour
         {
             Vector2 position = RandomGenerator.RandomPointInBounds(box.bounds);
             Instantiate(objectToInstantiate, position, objectToInstantiate.transform.rotation);
+
         }
     }
 

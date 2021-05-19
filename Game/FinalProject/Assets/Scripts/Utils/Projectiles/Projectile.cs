@@ -160,6 +160,7 @@ public class Projectile : MonoBehaviour
             rigidbody2d.velocity = new Vector2();
             // *
 
+
             if (waitTime <= 0)
             {
                 Destroy();
@@ -226,7 +227,14 @@ public class Projectile : MonoBehaviour
     {
         touchingPlayer = other.gameObject.tag == "Player";
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
-        touchingObstacle = Physics2D.OverlapCircle(transform.position, transform.localScale.magnitude, whatIsObstacle);
+
+        /*if (other.gameObject.layer == whatIsObstacle)
+        {
+
+        }*/
+
+        touchingObstacle = Physics2D.OverlapCircle(transform.position, GetComponent<Collider2D>().bounds.extents.magnitude, whatIsObstacle);
+        //touchingObstacle = other.gameObject.layer == whatIsObstacle;
 
     }
 
@@ -242,7 +250,9 @@ public class Projectile : MonoBehaviour
         touchingPlayer = other.gameObject.tag == "Player";
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
-        touchingObstacle = Physics2D.OverlapCircle(transform.position, transform.localScale.magnitude, whatIsObstacle);
+        touchingObstacle = Physics2D.OverlapCircle(transform.position, GetComponent<Collider2D>().bounds.extents.magnitude, whatIsObstacle);
+        //touchingObstacle = other.gameObject.layer == whatIsObstacle;
+
     }
     
     protected void OnCollisionStay2D(Collision2D other)

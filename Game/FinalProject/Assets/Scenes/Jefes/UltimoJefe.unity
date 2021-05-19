@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 744179438}
   - component: {fileID: 744179437}
   - component: {fileID: 744179436}
+  - component: {fileID: 744179439}
   m_Layer: 0
   m_Name: BulletSpawner
   m_TagString: Untagged
@@ -747,7 +748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3414368ba32d96a4b8875064fdd7ff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToInstantiate: {fileID: 4331114214583877445, guid: 28ee1a86a4749904fabe138f7370ac91, type: 3}
+  objectToInstantiate: {fileID: 4690660590625237830, guid: 3dac7ee39a650114c8d215947abc8ba5, type: 3}
   numberOfSpawns: 25
 --- !u!61 &744179437
 BoxCollider2D:
@@ -789,6 +790,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &744179439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744179435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cfd08c70163cc24eac541374a55bbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateBasedOnTime: 1
+  timeBtwShot: 2
 --- !u!1 &812901684
 GameObject:
   m_ObjectHideFlags: 0
@@ -4354,6 +4369,8 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -5363,7 +5380,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1587736591, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1533819169538553012, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514794171441737889, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
