@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleBBulletBurst : MonoBehaviour, IProjectile
+public class CastleBBulletBurst : MonoBehaviour, IProjectile, IBossFinishedBehaviour
 {
+    #region TotalTime
+    [Header("Total Time")]
+    [SerializeField] private float totalTime;
+    private float currentTime;
+    #endregion
+
     #region ProjectileStuff
     [Header("Projectile Stuff")]
     [SerializeField] private GameObject projectilePrefab;
@@ -29,6 +35,13 @@ public class CastleBBulletBurst : MonoBehaviour, IProjectile
     private Vector2 lastPlayerPos;
 
 
+    public event IBossFinishedBehaviour.Finished FinishedHandler;
+    public void OnFinished(Vector2 lastPosition)
+    {
+        FinishedHandler?.Invoke(lastPosition);
+    }
+
+
     void Start()
     {
         player = PlayerManager.instance;
@@ -40,37 +53,47 @@ public class CastleBBulletBurst : MonoBehaviour, IProjectile
 
     void Update()
     {
-        if (curTimeBtwBurst > timeBtwBurst)
+        if (currentTime <= totalTime)
         {
-            if (curShots > shotsPerBurst-1)
+            if (curTimeBtwBurst > timeBtwBurst)
             {
+                if (curShots > shotsPerBurst-1)
+                {
 
-                curShots = 0;
-                curTimeBtwBurst = 0;
-            }
-            else
-            {
-                if (curShots == 0)
-                {
-                    // player position before start shooting
-                    shotTarget = (Vector2) player.GetPosition();
-                }
-                if (currentTimeBtwShot > timeBtwShot)
-                {
-                    ShotProjectile(shotPoint, shotTarget);
-                    curShots++;
-                    currentTimeBtwShot = 0;
+                    curShots = 0;
+                    curTimeBtwBurst = 0;
                 }
                 else
                 {
-                    currentTimeBtwShot += Time.deltaTime;
+                    if (curShots == 0)
+                    {
+                        // player position before start shooting
+                        shotTarget = (Vector2) player.GetPosition();
+                    }
+                    if (currentTimeBtwShot > timeBtwShot)
+                    {
+                        ShotProjectile(shotPoint, shotTarget);
+                        curShots++;
+                        currentTimeBtwShot = 0;
+                    }
+                    else
+                    {
+                        currentTimeBtwShot += Time.deltaTime;
+                    }
                 }
-            }
 
+            }
+            else
+            {
+                curTimeBtwBurst += Time.deltaTime;
+            }
+        
+            currentTime += Time.deltaTime;        
         }
         else
         {
-            curTimeBtwBurst += Time.deltaTime;
+            // Next Stage
+            OnFinished(transform.position);
         }
     }
 

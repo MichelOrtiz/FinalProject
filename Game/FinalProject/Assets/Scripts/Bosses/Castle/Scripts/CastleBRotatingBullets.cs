@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleBRotatingBullets : MonoBehaviour, IProjectile
+public class CastleBRotatingBullets : MonoBehaviour, IProjectile, IBossFinishedBehaviour
 {
+    #region TotalTime
+    [Header("Total Time")]
+    [SerializeField] private float totalTime;
+    private float currentTime;
+    #endregion
 
     #region ProjectileStuff
     [Header("Projectile Stuff")]
@@ -33,6 +38,14 @@ public class CastleBRotatingBullets : MonoBehaviour, IProjectile
 
     private PlayerManager player;
 
+
+    public event IBossFinishedBehaviour.Finished FinishedHandler;
+    public void OnFinished(Vector2 lastPosition)
+    {
+        FinishedHandler?.Invoke(lastPosition);
+    }
+
+
     void Start()
     {
        rotationSpeed = (2*Mathf.PI)/timeToCompleteCircle;
@@ -42,35 +55,45 @@ public class CastleBRotatingBullets : MonoBehaviour, IProjectile
     // Update is called once per frame
     void Update()
     {
-        RotateCenter();
-        if (curTimeBtwBurst > timeBtwBurst)
+        if (currentTime <= totalTime)
         {
-            if (curBurstTime > burstTime)
+            RotateCenter();
+            if (curTimeBtwBurst > timeBtwBurst)
             {
-                curBurstTime = 0;
-                curTimeBtwBurst = 0;
-
-                // Invert the direction
-                isClockwise = !isClockwise;
-            }
-            else
-            {
-                if (currentTimeBtwShot > timeBtwShot)
+                if (curBurstTime > burstTime)
                 {
-                    ShotProjectiles();
-                    currentTimeBtwShot = 0;
+                    curBurstTime = 0;
+                    curTimeBtwBurst = 0;
+
+                    // Invert the direction
+                    isClockwise = !isClockwise;
                 }
                 else
                 {
-                    currentTimeBtwShot += Time.deltaTime;
+                    if (currentTimeBtwShot > timeBtwShot)
+                    {
+                        ShotProjectiles();
+                        currentTimeBtwShot = 0;
+                    }
+                    else
+                    {
+                        currentTimeBtwShot += Time.deltaTime;
+                    }
+                    curBurstTime += Time.deltaTime;
                 }
-                curBurstTime += Time.deltaTime;
+
+            }
+            else
+            {
+                curTimeBtwBurst += Time.deltaTime;
             }
 
+            currentTime += Time.deltaTime;
         }
         else
         {
-            curTimeBtwBurst += Time.deltaTime;
+            // Next stage
+            OnFinished(transform.position);
         }
             
         //}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleBLaserBeamer : MonoBehaviour, ILaser
+public class CastleBLaserBeamer : MonoBehaviour, ILaser, IBossFinishedBehaviour
 {
     #region LaserStuff
     [Header("Laser Stuff")]
@@ -26,6 +26,12 @@ public class CastleBLaserBeamer : MonoBehaviour, ILaser
     [SerializeField] private int maxRayDistance;
 
     private PlayerManager player;
+
+    public event IBossFinishedBehaviour.Finished FinishedHandler;
+    public void OnFinished(Vector2 lastPosition)
+    {
+        FinishedHandler?.Invoke(lastPosition);
+    }
     
 
     // Start is called before the first frame update
@@ -41,7 +47,7 @@ public class CastleBLaserBeamer : MonoBehaviour, ILaser
         
         if (hit.collider == null)
         {
-            endPos = new Vector2(hit.normal.x, hit.normal.y) * maxRayDistance;
+            endPos = new Vector2(hit.point.x, hit.point.y) * maxRayDistance;
         }
         else 
         {
@@ -66,6 +72,10 @@ public class CastleBLaserBeamer : MonoBehaviour, ILaser
             {
                 currentTimeBtwShot += Time.deltaTime;
             }
+        }
+        else if (laser == null)
+        {
+            OnFinished(transform.position);
         }
     }
 

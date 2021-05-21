@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleBRangeBullets : MonoBehaviour, IProjectile
+public class CastleBRangeBullets : MonoBehaviour, IProjectile, IBossFinishedBehaviour
 {
+    #region TotalTime
+    [Header("Total Time")]
+    [SerializeField] private float totalTime;
+    private float currentTime;
+    #endregion
+
     #region ProjectileStuff
     [Header("Projectile Stuff")]
     [SerializeField] private GameObject projectilePrefab;
@@ -12,8 +18,15 @@ public class CastleBRangeBullets : MonoBehaviour, IProjectile
     [SerializeField] private Transform shotPoint;
     
     private Vector2 shotTarget;
+
     [SerializeField] private float timeBtwShot;
     private float currentTimeBtwShot;
+
+    /// <summary>
+    /// Shots to do per given time
+    /// </summary>
+    [SerializeField] private int shotsPerTime;
+
     #endregion
 
     #region TargetRangeStuff
@@ -26,6 +39,14 @@ public class CastleBRangeBullets : MonoBehaviour, IProjectile
 
     private PlayerManager player;
 
+    public event IBossFinishedBehaviour.Finished FinishedHandler;
+    public void OnFinished(Vector2 lastPosition)
+    {
+        FinishedHandler?.Invoke(lastPosition);
+    }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,15 +56,28 @@ public class CastleBRangeBullets : MonoBehaviour, IProjectile
     // Update is called once per frame
     void Update()
     {
-        if (currentTimeBtwShot > timeBtwShot)
+        if (currentTime <= totalTime)
         {
-            ShotProjectiles();
-            currentTimeBtwShot = 0;
+            if (currentTimeBtwShot > timeBtwShot)
+            {
+                for (int i = 0; i < shotsPerTime; i++)
+                {
+                    ShotProjectiles();
+                }
+                currentTimeBtwShot = 0;
+            }
+            else
+            {
+                currentTimeBtwShot += Time.deltaTime;
+            }
+            currentTime += Time.deltaTime;
         }
         else
         {
-            currentTimeBtwShot += Time.deltaTime;
+            // next stage
+            OnFinished(transform.position);
         }
+        
     }
 
     public void ShotProjectiles()

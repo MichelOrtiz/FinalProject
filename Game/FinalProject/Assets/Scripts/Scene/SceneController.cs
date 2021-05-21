@@ -23,12 +23,13 @@ public class SceneController : MonoBehaviour
         DontDestroyOnLoad(this);
     }
     private void Start() {
-        if(currentScene==-1)
+        if(currentScene==0)
         currentScene = SceneManager.GetActiveScene().buildIndex;
+        //Debug.Log("Start scenecontroller");
     }
     public void LoadScene(int scene){
-        prevScene = currentScene;
-        currentScene = scene;
+        prevScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene);
+        currentScene = scene;
     }
 }
