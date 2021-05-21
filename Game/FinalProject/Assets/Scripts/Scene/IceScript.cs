@@ -13,18 +13,6 @@ public class IceScript : MonoBehaviour
 
     }
 
-    void Update(Collider2D collision)
-    {
-        if (player.isInWater)
-        {
-            GameObject collisionGameObject = collision.gameObject;
-            if (collisionGameObject.tag == "Player")
-            {
-                player.isInIce = true;
-                player.walkingSpeed = 50f;
-            }
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;

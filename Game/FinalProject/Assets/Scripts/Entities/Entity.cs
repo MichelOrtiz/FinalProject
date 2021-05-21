@@ -22,6 +22,7 @@ public class Entity : MonoBehaviour
     public bool isInWater = false;
     public bool isInIce = false;
     public bool isInSnow = false;
+    public bool isInConvey = false;
     #endregion 
 
     #region Special States

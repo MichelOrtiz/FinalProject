@@ -13,22 +13,6 @@ public class SnowScript : MonoBehaviour
         
     }
 
-    void Update(Collider2D collision)
-    {
-        if (player.isInSnow)
-        {
-            GameObject collisionGameObject = collision.gameObject;
-            if (collisionGameObject.tag == "Player")
-            {
-                if (!player.isInIce)
-                {
-                    player.isInSnow = true;
-                    player.walkingSpeed = 4.25f;
-                }
-            }
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Player")
