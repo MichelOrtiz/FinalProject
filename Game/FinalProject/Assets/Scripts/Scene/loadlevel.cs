@@ -1,38 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class loadlevel : MonoBehaviour
 {
     public int iLevelToLoad;
+    [SerializeField]private GameObject startPosition;
+    [SerializeField]private Transform loadPosition;
     public static loadlevel instance = null;
-
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    /*void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
+    private void Start() {
+        if(SceneController.instance.prevScene == iLevelToLoad){
+            if(loadPosition!=null){
+                startPosition.transform.position = loadPosition.position;
+            }
         }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(this);
-    }*/
-    void Start()
-    {
-        
     }
-
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Player")
@@ -42,7 +25,7 @@ public class loadlevel : MonoBehaviour
     }
 
     void LoadScene(){
-        SceneManager.LoadScene(iLevelToLoad);
+        SceneController.instance.LoadScene(iLevelToLoad);
         //Camera.instance.gameObject.SetActive(true);
     }
 }

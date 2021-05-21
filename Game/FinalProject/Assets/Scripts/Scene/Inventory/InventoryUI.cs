@@ -27,7 +27,7 @@ public class InventoryUI : MonoBehaviour
     
     private void Awake() {
         if(instance!=null){
-            Debug.Log("HOW!!!");
+            Debug.Log("mmm esto podria ser malo?");
             return;
         }
         instance = this;

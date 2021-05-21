@@ -6,6 +6,7 @@ public class IceScript : MonoBehaviour
 {
     public Rigidbody2D body;
     PlayerManager player;
+    Collider2D collision;
 
     void Start()
     {
@@ -13,7 +14,7 @@ public class IceScript : MonoBehaviour
 
     }
 
-    void Update(Collider2D collision)
+    void Update()
     {
         if (player.isInWater)
         {
