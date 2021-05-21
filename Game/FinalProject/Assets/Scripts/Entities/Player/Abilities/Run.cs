@@ -27,6 +27,10 @@ public class Run : Ability
         {
             player.walkingSpeed = 8.5f;
         }
+        if (player.isInConvey)
+        {
+            player.walkingSpeed = 75f;
+        }
     }
 
     protected override void Start()

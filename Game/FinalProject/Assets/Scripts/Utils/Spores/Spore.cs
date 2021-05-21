@@ -7,6 +7,11 @@ public class Spore : MonoBehaviour
     [SerializeField] private float damageAmount;
     [SerializeField] private State effectOnPlayer;
     [SerializeField] private bool stopEmittingWhenParticleCollide;
+    public delegate void ParticleCollision(GameObject other);
+    public event ParticleCollision ParticleCollisionHandler;
+    protected virtual void InParticleCollsion(GameObject other){
+        ParticleCollisionHandler?.Invoke(other);
+    }
     private PlayerManager player;
     new private ParticleSystem particleSystem; 
     void Start()
@@ -44,6 +49,7 @@ public class Spore : MonoBehaviour
         {
             particleSystem.Stop();
         }
+        InParticleCollsion(other);
     }
     
 }

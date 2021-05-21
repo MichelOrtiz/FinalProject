@@ -5,7 +5,11 @@ using UnityEngine;
 public class Rafaga : Ability
 {
     public GameObject Rafagaobj;
+    public GameObject parti;
     public bool isActivated;
+    private Spore spore;
+    [SerializeField] private float empuje;
+    private List<Enemy> enemies;
 
     public override void UseAbility()
     {   
@@ -18,6 +22,8 @@ public class Rafaga : Ability
         base.Start();
         time = cooldownTime;
         isActivated=false;
+        spore = parti.GetComponent<Spore>();
+        spore.ParticleCollisionHandler += spore_ParticleCollision;
     }
     protected override void Update()
     {
@@ -39,11 +45,23 @@ public class Rafaga : Ability
         }
         if (isActivated)
         {
-            Rafagaobj.gameObject.GetComponent<CircleCollider2D>().enabled = true;
+            parti.SetActive(true);
+            //Rafagaobj.gameObject.GetComponent<BoxCollider2D>().enabled = true;
             //player.abilityManager.escudo.gameObject.GetComponent<CircleCollider2D>().enabled = true;
         }else
         {
-            Rafagaobj.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            parti.SetActive(false);
+            if (enemies != null)
+            {
+                foreach (var enemy in enemies)
+                {
+                    if (enemy != null)
+                    {
+                        enemy.GetComponent<Rigidbody2D>().velocity = new Vector2();
+                    }
+                }
+            }
+            //Rafagaobj.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             //player.abilityManager.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }
         if (Input.GetKeyDown(hotkey))
@@ -53,5 +71,17 @@ public class Rafaga : Ability
                 UseAbility();
             }
         }
+    }
+    void spore_ParticleCollision(GameObject other){
+        if(other.TryGetComponent<Enemy>(out Enemy enemy)){
+            enemies.Add(enemy);
+            if (player.facingDirection == "left")
+            {
+                enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.left * empuje);
+            }else if (player.facingDirection == "right")
+            {
+                enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.right * empuje);
+            }
+        }   
     }
 }

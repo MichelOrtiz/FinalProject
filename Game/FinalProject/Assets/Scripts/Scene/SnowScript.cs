@@ -6,6 +6,7 @@ public class SnowScript : MonoBehaviour
 {
     public Rigidbody2D body;
     PlayerManager player;
+    Collider2D collision;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +14,7 @@ public class SnowScript : MonoBehaviour
         
     }
 
-    void Update(Collider2D collision)
+    void Update()
     {
         if (player.isInSnow)
         {

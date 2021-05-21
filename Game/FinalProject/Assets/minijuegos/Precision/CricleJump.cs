@@ -10,6 +10,7 @@ public class CricleJump : MonoBehaviour
     public float speed=(2*Mathf.PI)/5; //2*PI in degress is 360, so you get 5 seconds to complete a circle
     [SerializeField] float radius=300;
     [SerializeField] Transform center;
+    [SerializeField] Transform diana;
     Rigidbody2D Body;
     public Vector2 position;
     bool reloj;
@@ -18,6 +19,7 @@ public class CricleJump : MonoBehaviour
     {
         Body = GetComponent<Rigidbody2D>();
         Body.position = new Vector2(806, 226);
+        radius = Vector2.Distance(diana.position,center.position);
         reloj = true;
     }
      void Update()

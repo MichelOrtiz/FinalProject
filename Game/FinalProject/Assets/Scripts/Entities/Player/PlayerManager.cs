@@ -49,6 +49,7 @@ public class PlayerManager : Entity
     [SerializeField]private bool loosingStamina;
     [SerializeField]private bool loosingOxygen;
     private float regenCooldown;
+    ConveyScript convey;
 
     #region Dialogues
         private RaycastHit2D hit;
@@ -247,7 +248,8 @@ public class PlayerManager : Entity
         if (isInIce)
         {
             rigidbody2d.AddForce(new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y)); 
-        }else
+        }
+        else
         {
             rigidbody2d.velocity = new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y);    
         }
