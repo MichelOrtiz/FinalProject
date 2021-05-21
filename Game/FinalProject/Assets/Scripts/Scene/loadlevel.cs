@@ -12,7 +12,7 @@ public class loadlevel : MonoBehaviour
     private void Start() {
         if(SceneController.instance.prevScene == iLevelToLoad){
             if(loadPosition!=null){
-                startPosition.transform.position = loadPosition.position;
+                PlayerManager.instance.gameObject.transform.position = loadPosition.position;
             }
         }
     }

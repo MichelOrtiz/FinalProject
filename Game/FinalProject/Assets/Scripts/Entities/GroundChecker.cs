@@ -5,7 +5,7 @@ using UnityEngine;
 public class GroundChecker : MonoBehaviour
 {
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private Transform feetPos;
+    private Transform feetPos;
     [SerializeField] public float checkFeetRadius;
     //private BoxCollider2D collider2D;
     public bool isGrounded;
@@ -35,6 +35,7 @@ public class GroundChecker : MonoBehaviour
 
     void Start()
     {
+        feetPos = PlayerManager.instance.feetPos;
         //collider2D = GetComponent<BoxCollider2D>();
     }
 
