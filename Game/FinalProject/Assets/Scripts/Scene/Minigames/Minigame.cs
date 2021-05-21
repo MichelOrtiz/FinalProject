@@ -11,7 +11,6 @@ public class Minigame : MonoBehaviour{
     [SerializeField] private float time;
     private TimerBar timerBar;
     private float currentTime;
-
     
 
     public virtual void StartMinigame(){
