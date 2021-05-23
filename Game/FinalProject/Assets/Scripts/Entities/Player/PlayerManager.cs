@@ -103,6 +103,7 @@ public class PlayerManager : Entity
         {
             Destroy(gameObject);
         }
+        
         DontDestroyOnLoad(this);
     }
 

@@ -9,6 +9,7 @@ public class MinigameUI : MonoBehaviour
     public GameObject canvas;
     private GameObject currentMinigame;
     public TimerBar timerBar;
+    public int rewardMoney;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -27,6 +28,7 @@ public class MinigameUI : MonoBehaviour
     }
 
     public void endMinigame(){
+        Inventory.instance.AddMoney(rewardMoney);
         if(currentMinigame != null){
             currentMinigame.SetActive(false);
             background.SetActive(false);
