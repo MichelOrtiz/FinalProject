@@ -13,6 +13,8 @@ public class CastleBMaster : BossFight
     //public Vector2 startBossPosition { get => startBossEntityPosition; set => startBossEntityPosition = value; }
     private Vector2 currentPos;
 
+    private CastleBStageFight stageFight;
+
     //private IBossFinishedBehaviour bossBehaviour;
 
     void Awake()
@@ -42,9 +44,9 @@ public class CastleBMaster : BossFight
     {
         if (currentStageBehaviour.GetComponent<CastleBStageFight>() != null)
         {
+            //currentPos = currentStageBehaviour.GetComponent<CastleBStageFight>().CurrentBoss.transform.position;
             currentPos = currentStageBehaviour.GetComponent<CastleBStageFight>().CurrentBoss.transform.position;
         }
-        Debug.Log($"Dummy king: {FindObjectOfType<DummyParalizedKing>() != null}");
 
         SetLampsEnabled( FindObjectOfType<DummyParalizedKing>() != null);
 
@@ -77,9 +79,14 @@ public class CastleBMaster : BossFight
     void UpdateCurrentStage()
     {
         currentStageBehaviour = currentStage.GenerateSingle(stageBehaviours[indexStage], currentPos);
+
+        stageFight = currentStageBehaviour.GetComponent<CastleBStageFight>();
+        stageFight.FinalStageFightEndedHandler += stageFight_FinalStageEnded;
+
         if (currentPos != new Vector2())
         {
-            currentStageBehaviour.GetComponent<CastleBStageFight>().startBossPosition = currentPos;
+            //currentStageBehaviour.GetComponent<CastleBStageFight>().startBossPosition = currentPos;
+            stageFight.startBossPosition = currentPos;
         }
 
         //Debug.Log(currentStage.currentObjects);
@@ -90,7 +97,8 @@ public class CastleBMaster : BossFight
 
     void DestroyStageObjects()
     {
-        currentStageBehaviour.GetComponent<CastleBStageFight>().DestroyCurrentStage();
+        //currentStageBehaviour.GetComponent<CastleBStageFight>().DestroyCurrentStage();
+        stageFight.DestroyCurrentStage();
         currentStage.Destroy();
         var bullets = ScenesManagers.GetGameObjectsOfScript<StaticBullet>(); 
 
@@ -116,5 +124,10 @@ public class CastleBMaster : BossFight
                 lamp.canActivate = value;
             }
         }
+    }
+
+    void stageFight_FinalStageEnded()
+    {
+        EndBattle();
     }
 }

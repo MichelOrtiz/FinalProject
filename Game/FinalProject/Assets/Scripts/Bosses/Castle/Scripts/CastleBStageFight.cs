@@ -11,7 +11,16 @@ public class CastleBStageFight : BossFight
     public Vector2 startBossPosition { get => startBossEntityPosition; set => startBossEntityPosition = value; }
     private Vector2 currentPos;
 
+    [SerializeField] private bool finalStageFight;
+
     private IBossFinishedBehaviour bossBehaviour;
+
+    public delegate void FinalStageFightEnded();
+    public event FinalStageFightEnded FinalStageFightEndedHandler;
+    protected virtual void OnFinalStageFightEnded()
+    {
+        FinalStageFightEndedHandler?.Invoke();
+    }
 
 
     new void Start()
@@ -39,9 +48,14 @@ public class CastleBStageFight : BossFight
         {
             indexStage++;
         }
-        else
+        else if (!finalStageFight)
         {
             indexStage = 0;
+        }
+        else
+        {
+            OnFinalStageFightEnded();
+            return;
         }
         currentStage.Destroy();
         currentStage=stages[indexStage];
