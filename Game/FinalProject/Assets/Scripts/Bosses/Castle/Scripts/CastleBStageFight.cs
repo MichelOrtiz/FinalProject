@@ -26,6 +26,10 @@ public class CastleBStageFight : BossFight
     
     new void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            NextStage();
+        }
         base.Update();
     }
 

@@ -18,7 +18,6 @@ public class CastleBLamp : MonoBehaviour
     {
         activated = true;
         canActivate = false;
-        ChangeSprite(spriteWhenDisabled);
         ActivatedHandler?.Invoke();        
     }
 
@@ -29,10 +28,6 @@ public class CastleBLamp : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         
-        if (canActivate)
-        {
-            ChangeSprite(spriteWhenEnabled);
-        }
 
         player = PlayerManager.instance;
     }
@@ -40,6 +35,7 @@ public class CastleBLamp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ChangeSprite(canActivate? spriteWhenEnabled : spriteWhenDisabled);
         if (canActivate)
         {
             if (Vector2.Distance(player.GetPosition(), transform.position) <= interactionRadius)

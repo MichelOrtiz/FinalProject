@@ -44,7 +44,9 @@ public class CastleBMaster : BossFight
         {
             currentPos = currentStageBehaviour.GetComponent<CastleBStageFight>().CurrentBoss.transform.position;
         }
-        Debug.Log("Dummy king: " +  currentStageBehaviour.GetComponent<CastleBStageFight>().CurrentBoss.GetComponentInChildren<DummyParalizedKing>() != null);
+        Debug.Log($"Dummy king: {FindObjectOfType<DummyParalizedKing>() != null}");
+
+        SetLampsEnabled( FindObjectOfType<DummyParalizedKing>() != null);
 
         base.Update();
     }
@@ -55,8 +57,8 @@ public class CastleBMaster : BossFight
         {
             indexStage++;
 
-            currentStageBehaviour.GetComponent<CastleBStageFight>().DestroyCurrentStage();
-            currentStage.Destroy();
+            DestroyStageObjects();
+
             currentStage=stages[indexStage];
             
             currentStage.Generate();
@@ -80,17 +82,26 @@ public class CastleBMaster : BossFight
             currentStageBehaviour.GetComponent<CastleBStageFight>().startBossPosition = currentPos;
         }
 
-        foreach (var obj in currentStage.currentObjects)
-        {
-            Debug.Log(obj);
-        }
         //Debug.Log(currentStage.currentObjects);
 
         // enables lamps if currrent stage is paralized kings
 
-        //SetLampsEnabled( currentStageBehaviour.GetComponent<CastleBStageFight>().CurrentBoss.GetComponentInChildren<DummyParalizedKing>() != null);
     }
 
+    void DestroyStageObjects()
+    {
+        currentStageBehaviour.GetComponent<CastleBStageFight>().DestroyCurrentStage();
+        currentStage.Destroy();
+        var bullets = ScenesManagers.GetGameObjectsOfScript<StaticBullet>(); 
+
+        if (bullets != null)
+        {
+            foreach (var bullet in bullets)
+            {
+                Destroy(bullet);
+            }
+        }
+    }
     void lamp_Activated()
     {
         NextStage();

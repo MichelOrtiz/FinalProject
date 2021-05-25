@@ -9,13 +9,33 @@ public class ObjectSpawner : MonoBehaviour
     private float currentTime;
     [SerializeField] private bool loop;
 
+    /// <summary>
+    /// Center position of the bounds:
+    /// <see langword="false"/> to use parent position, 
+    /// <see langword="true"/> to use world custom position
+    /// </summary>
+    [SerializeField] private bool useWorldPosition;
+
+    // Only if false in useParentPosition
+    [SerializeField] private Vector2 worldPosition;
 
     private BoxCollider2D box;
 
+    void Awake()
+    {
+        if (box == null)
+        {
+            box = GetComponent<BoxCollider2D>();
+        }
+
+        if (useWorldPosition)
+        {
+            box.transform.position = worldPosition;
+        }
+    }
 
     void Start()
     {
-        box = GetComponent<BoxCollider2D>();
         //SpawnObjects();
     }
 
@@ -25,7 +45,7 @@ public class ObjectSpawner : MonoBehaviour
         if (currentTime >= timeBeforeSpawn)
         {
             SpawnObjects();
-            currentTime = -1;
+            currentTime = -0.1f;
         }
         else if (loop)
         {
