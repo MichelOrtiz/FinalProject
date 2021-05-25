@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CastleBSeekerBulletHandler : MonoBehaviour
 {
+    
+
     [SerializeField] private bool activateBasedOnTime;
     [SerializeField] private float timeBtwShot;
     private float curTimeBtwShot;
@@ -11,6 +13,7 @@ public class CastleBSeekerBulletHandler : MonoBehaviour
     private List<StaticBullet> staticBullets;
     private PlayerManager player;
 
+    
 
     // Start is called before the first frame update
     void Start()
@@ -22,15 +25,12 @@ public class CastleBSeekerBulletHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
-            staticBullets = ScenesManagers.GetObjectsOfType<StaticBullet>();
-            Vector2 playerPosition = player.GetPosition();
-            foreach (var bullet in staticBullets)
-            {
-                bullet.ActivateBullet(playerPosition);
-            }
-        }
+            ActivateBullets();
+        }*/
+
+        
 
         if (activateBasedOnTime)
         {
@@ -52,4 +52,16 @@ public class CastleBSeekerBulletHandler : MonoBehaviour
             }
         }
     }
+
+    public void ActivateBullets()
+    {
+        staticBullets = ScenesManagers.GetObjectsOfType<StaticBullet>();
+        Vector2 playerPosition = player.GetPosition();
+        foreach (var bullet in staticBullets)
+        {
+            bullet.ActivateBullet(playerPosition);
+        }
+    }
+
+    
 }

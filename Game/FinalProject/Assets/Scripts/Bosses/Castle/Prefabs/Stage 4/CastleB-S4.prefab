@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1214589198487306269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1214589198487306259}
+  - component: {fileID: 1214589198487306258}
+  m_Layer: 0
+  m_Name: CastleB-S4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1214589198487306259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214589198487306269}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 139.62372, y: -108.24666, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1214589198487306258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214589198487306269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82955b69b50160c43aa4f0cdf6dd0b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stages:
+  - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
+  - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
+  - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
+  - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
+  - {fileID: 11400000, guid: b7ef90524fc3fed4ea01711cbc4977a9, type: 2}
+  - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
+  abilityObject: {fileID: 0}
+  currentStage: {fileID: 0}
+  isCleared: 0
+  behaviours:
+  - {fileID: 4433346320687199723, guid: 84acd23121bb30648aed84b29a3e2812, type: 3}
+  - {fileID: 6134830991788356167, guid: 0f692388cfff33b46a22ae855d43eec4, type: 3}
+  - {fileID: 3205889313457394505, guid: cdb6d657fc51d9a47a000eef4fd976a1, type: 3}
+  - {fileID: 8992072323137076789, guid: 529c371b162f1064091b2eaf595a5981, type: 3}
+  - {fileID: 728410515910533597, guid: 482b498e23f9c0740a2482d64c5da746, type: 3}
+  - {fileID: 7333412034781297246, guid: c376cb08d5452144d968d513020110b2, type: 3}
+  startBossEntityPosition: {x: 139, y: -90}

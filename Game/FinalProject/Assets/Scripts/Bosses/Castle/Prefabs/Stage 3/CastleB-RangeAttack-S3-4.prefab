@@ -91,8 +91,9 @@ GameObject:
   - component: {fileID: 5027818270718426575}
   - component: {fileID: 5846050050747571288}
   - component: {fileID: 6014179295465941520}
+  - component: {fileID: 7125132474741568753}
   m_Layer: 6
-  m_Name: CastleB-RangeAttack-S3-3
+  m_Name: CastleB-RangeAttack-S3-4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,3 +213,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3659668, y: 0.4916606}
   m_EdgeRadius: 0
+--- !u!114 &7125132474741568753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8992072323137076789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed79f3a17b3db484da3a747c5f79cc60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMultiplier: 0.6
+  followPlayer: 1
+  targetPosition: {x: 0, y: 0}

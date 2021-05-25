@@ -2,24 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleBSeeker : Entity
+public class CastleBSeeker : MonoBehaviour, IBossFinishedBehaviour
 {
+    private Rigidbody2D rigidbody2d;
     [SerializeField] private float speedMultiplier;
     private float speed;
-    PlayerManager player;
+    private PlayerManager player;
 
+    [SerializeField] private bool followPlayer;
+    public bool FollowsPlayer { get => followPlayer; }
 
-    // Start is called before the first frame update
-    new void Start()
+    [SerializeField] private Vector2 targetPosition;
+   //[SerializeField] private float targetRadius;
+
+    public event IBossFinishedBehaviour.Finished FinishedHandler;
+    public void OnFinished(Vector2 lastPosition)
     {
-        speed = averageSpeed * speedMultiplier;
-        player = PlayerManager.instance;
+        FinishedHandler?.Invoke(lastPosition);
     }
 
-    // Update is called once per frame
-    new void Update()
+
+
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
     {
-        //transform.position += transform.Translate(player.GetPosition() * speed * Time.deltaTime, Space.World);
+        
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rigidbody2d = GetComponent<Rigidbody2D>();
+        speed = Entity.averageSpeed * speedMultiplier;
+        player = PlayerManager.instance;
+    }
+        
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (followPlayer)
+        {
+            targetPosition = player.GetPosition();
+        }
+        else if (rigidbody2d.position == targetPosition)
+        {
+            OnFinished(transform.position);
+        }
     }
 
     /// <summary>
@@ -27,6 +59,8 @@ public class CastleBSeeker : Entity
     /// </summary>
     void FixedUpdate()
     {
-        rigidbody2d.position = Vector2.MoveTowards(GetPosition(), player.GetPosition(), speed * Time.deltaTime);
+        rigidbody2d.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }
+
+    
 }

@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &217597533622469375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 217597533622469373}
+  - component: {fileID: 217597533622469372}
+  - component: {fileID: 217597533622469371}
+  - component: {fileID: 217597533622469370}
+  - component: {fileID: 217597533622469368}
+  m_Layer: 0
+  m_Name: CastleB-S5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &217597533622469373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217597533622469375}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 139.1, y: -90.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &217597533622469372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217597533622469375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82955b69b50160c43aa4f0cdf6dd0b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stages:
+  - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
+  - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
+  - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
+  - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
+  - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
+  abilityObject: {fileID: 0}
+  currentStage: {fileID: 0}
+  isCleared: 0
+  behaviours:
+  - {fileID: 4433346320687199723, guid: 5a5e7a4e6691a6742b41771703224139, type: 3}
+  - {fileID: 6134830991788356167, guid: 2fe0a8afcd549e046beb19bfb7d2a36b, type: 3}
+  - {fileID: 3205889313457394505, guid: fd3a588dad9276f4abaab5fd44cad564, type: 3}
+  - {fileID: 8992072323137076789, guid: df5cdf9584c65cd49be12c16573b3c8b, type: 3}
+  - {fileID: 728410515910533597, guid: 482b498e23f9c0740a2482d64c5da746, type: 3}
+  startBossEntityPosition: {x: 139, y: -90}
+--- !u!114 &217597533622469371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217597533622469375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3414368ba32d96a4b8875064fdd7ff66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToInstantiate: {fileID: 4690660590625237830, guid: 7361ce8119c84ae47a6fbb09233523d8, type: 3}
+  numberOfSpawns: 5
+  timeBeforeSpawn: 4.5
+  loop: 1
+--- !u!114 &217597533622469370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217597533622469375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cfd08c70163cc24eac541374a55bbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateBasedOnTime: 1
+  timeBtwShot: 1.5
+--- !u!61 &217597533622469368
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217597533622469375}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50}
+  m_EdgeRadius: 0

@@ -31,9 +31,11 @@ public class UBLamp : MonoBehaviour
 
     void Awake()
     {
-        collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterTouchingContact;
-        collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitTouchingContact;
-
+        if (collisionHandler != null)
+        {
+            collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterTouchingContact;
+            collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitTouchingContact;
+        }
         spriteRenderer = GetComponent<SpriteRenderer>();
         ChangeSprite(spriteWhenEnabled);
     }

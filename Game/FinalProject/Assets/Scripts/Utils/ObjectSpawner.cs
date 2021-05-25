@@ -5,19 +5,32 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] private GameObject objectToInstantiate;
     [SerializeField] private int numberOfSpawns;
 
+    [SerializeField] private float timeBeforeSpawn;
+    private float currentTime;
+    [SerializeField] private bool loop;
+
+
     private BoxCollider2D box;
 
 
     void Start()
     {
         box = GetComponent<BoxCollider2D>();
-        SpawnObjects();
+        //SpawnObjects();
     }
 
 
     void Update()
     {
-        
+        if (currentTime >= timeBeforeSpawn)
+        {
+            SpawnObjects();
+            currentTime = -1;
+        }
+        else if (loop)
+        {
+            currentTime += Time.deltaTime;
+        }
     }
 
     public void SpawnObjects()

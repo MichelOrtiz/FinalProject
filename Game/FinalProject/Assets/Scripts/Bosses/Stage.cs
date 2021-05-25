@@ -25,11 +25,11 @@ public class Stage : ScriptableObject
         return obj;
     }
 
-    public void Destroy(){
+    public void Destroy()
+    {
         foreach (GameObject obj in currentObjects)
         {
-            if(obj!=null)
-            Destroy(obj);
+            if(obj!=null) Destroy(obj);
         }
     }
 }

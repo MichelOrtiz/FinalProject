@@ -71,7 +71,7 @@ public class CaveBoss : BossFight
 
         if (caveBossBehaviour != null)
         {
-            caveBossBehaviour.FinishedHandler += caveBoss_FinishedBehaviour;
+            //caveBossBehaviour.FinishedHandler += caveBoss_FinishedBehaviour;
         }
     }
 

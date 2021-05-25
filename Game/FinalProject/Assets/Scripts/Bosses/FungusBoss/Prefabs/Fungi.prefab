@@ -4829,6 +4829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 0
   effectOnPlayer: {fileID: 11400000, guid: 8666c37dbf9d12047882b98fe93e1059, type: 2}
+  stopEmittingWhenParticleCollide: 0
 --- !u!1 &1254405717892209806
 GameObject:
   m_ObjectHideFlags: 0
@@ -4902,7 +4903,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 768
-  feetPos: {fileID: 8777826608387957389}
   checkFeetRadius: 0.25
   isGrounded: 0
   lastGroundTag: 
@@ -4966,6 +4966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2237de5c9d3a2f47850568f79ea60f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
   touchingPlayer: 0
   touchingEnemy: 0
@@ -5239,6 +5240,9 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -5262,6 +5266,7 @@ MonoBehaviour:
   feetPos: {fileID: 8777826608387957389}
   checkFeetRadius: 0.25
   groundChecker: {fileID: 1393568496588355870}
+  collisionHandler: {fileID: 840220677433600684}
   fovType: 1
   enemyName: 12
   damageAmount: 0
@@ -5278,7 +5283,6 @@ MonoBehaviour:
   downDistanceGroundCheck: 0.5
   viewDistance: 13
   fovAngle: 0
-  collisionHandler: {fileID: 840220677433600684}
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}

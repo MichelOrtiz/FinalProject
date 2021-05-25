@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2983237974997249987}
   - component: {fileID: 8188000993571548298}
   - component: {fileID: 1090713854327332072}
+  - component: {fileID: 1362124601633514269}
   m_Layer: 6
   m_Name: CastleB-RotatingBulletsAttack-S1-2
   m_TagString: Untagged
@@ -133,6 +134,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3659668, y: 0.4916606}
   m_EdgeRadius: 0
+--- !u!114 &1362124601633514269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216105900170165474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed79f3a17b3db484da3a747c5f79cc60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMultiplier: 0.25
+  followPlayer: 1
+  targetPosition: {x: 0, y: 0}
 --- !u!1 &3893527164351458779
 GameObject:
   m_ObjectHideFlags: 0

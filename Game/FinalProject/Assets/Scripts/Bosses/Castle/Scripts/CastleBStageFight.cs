@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System.Linq;
 
 public class CastleBStageFight : BossFight
 {
-    [SerializeField] private List<GameObject> bossBehaviours;
-    private GameObject currentBoss;
+    [SerializeField] private List<GameObject> behaviours;
+    public GameObject CurrentBoss { get; set; }
     [SerializeField] private Vector2 startBossEntityPosition;
+    public Vector2 startBossPosition { get => startBossEntityPosition; set => startBossEntityPosition = value; }
     private Vector2 currentPos;
 
     private IBossFinishedBehaviour bossBehaviour;
@@ -24,37 +26,50 @@ public class CastleBStageFight : BossFight
     
     new void Update()
     {
-        
         base.Update();
-
     }
 
     public override void NextStage()
     {
         if(indexStage<stages.Count-1)
         {
-
             indexStage++;
-
-            currentStage.Destroy();
-            currentStage=stages[indexStage];
-            
-            currentStage.Generate();
-            UpdateCurrentBoss();
         }
-        else{
-            Debug.Log("Lo hiciste ganaste!!!1");
-            currentStage.Destroy();
-            isCleared=true;
-            //give ability
-            //AbilityManager.instance.AddAbility(reward);
+        else
+        {
+            indexStage = 0;
         }
+        currentStage.Destroy();
+        currentStage=stages[indexStage];
+        
+        currentStage.Generate();
+        UpdateCurrentBoss();
     }
 
     void UpdateCurrentBoss()
     {
-        currentBoss = currentStage.GenerateSingle(bossBehaviours[indexStage], currentPos);
-        bossBehaviour = currentBoss.GetComponentInChildren<IBossFinishedBehaviour>();
+        CurrentBoss = currentStage.GenerateSingle(behaviours[indexStage], currentPos);
+        var behaviour = CurrentBoss.GetComponentInChildren<IBossFinishedBehaviour>();
+
+        // Intended to NOT be aware of the event "Finished Attack" of Seeker, if the parent is Seeker and follows Player
+        if (behaviour is CastleBSeeker c)
+        {
+            if (c.FollowsPlayer)
+            {
+                var behaviours = CurrentBoss.GetComponentsInChildren<IBossFinishedBehaviour>();
+                
+                foreach (var b in behaviours)
+                {
+                    // search for children only
+                    if (!(b is CastleBSeeker))
+                    {
+                        behaviour = b;
+                    }
+                }
+            }
+        }
+
+        bossBehaviour = behaviour;
 
         if (bossBehaviour != null)
         {
@@ -66,5 +81,10 @@ public class CastleBStageFight : BossFight
     {
         currentPos = lastPos;
         NextStage();
+    }
+
+    public void DestroyCurrentStage()
+    {
+        currentStage.Destroy();
     }
 }

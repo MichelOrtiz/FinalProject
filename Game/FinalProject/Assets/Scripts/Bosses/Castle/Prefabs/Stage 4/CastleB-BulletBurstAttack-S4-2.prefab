@@ -220,39 +220,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6134830991788356167}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed79f3a17b3db484da3a747c5f79cc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  facingDirection: 
-  currentState: 0
-  isWalking: 0
-  isGrounded: 0
-  isJumping: 0
-  isFlying: 0
-  isFalling: 0
-  isInWater: 0
-  isInIce: 0
-  isInSnow: 0
-  isParalized: 0
-  isCaptured: 0
-  isInFear: 0
-  isDizzy: 0
-  isBrainFrozen: 0
-  isResting: 0
-  isChasing: 0
-  statesManager: {fileID: 0}
-  jumpForce: 0
-  jumpTime: 0
-  fallingCriteria: 0
-  rigidbody2d: {fileID: 9190234042285063831}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsObstacle: []
-  feetPos: {fileID: 0}
-  checkFeetRadius: 0
-  groundChecker: {fileID: 0}
-  collisionHandler: {fileID: 0}
-  speedMultiplier: 0.15
+  speedMultiplier: 0.7
+  followPlayer: 1
+  targetPosition: {x: 0, y: 0}
