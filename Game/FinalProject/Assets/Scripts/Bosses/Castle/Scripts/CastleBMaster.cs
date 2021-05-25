@@ -42,7 +42,7 @@ public class CastleBMaster : BossFight
     
     new void Update()
     {
-        if (currentStageBehaviour.GetComponent<CastleBStageFight>() != null)
+        if (currentStageBehaviour != null && currentStageBehaviour.GetComponent<CastleBStageFight>() != null)
         {
             //currentPos = currentStageBehaviour.GetComponent<CastleBStageFight>().CurrentBoss.transform.position;
             currentPos = currentStageBehaviour.GetComponent<CastleBStageFight>().CurrentBoss.transform.position;
@@ -128,6 +128,7 @@ public class CastleBMaster : BossFight
 
     void stageFight_FinalStageEnded()
     {
+        DestroyStageObjects();
         EndBattle();
     }
 }
