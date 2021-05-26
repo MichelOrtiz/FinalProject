@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Minigame : MonoBehaviour{
+    Overlord overlord;
     public string name;
     [SerializeField] private bool isUI;
     [SerializeField] private GameObject minigameObject;
@@ -25,7 +26,13 @@ public class Minigame : MonoBehaviour{
     void Start()
     {
         timerBar = MinigameUI.instance.timerBar;
-        timerBar.SetMaxTime(time);
+        if (overlord.IsOverlording)
+        {
+            timerBar.SetMaxTime(time + (time*.5f));
+        }else
+        {
+            timerBar.SetMaxTime(time);
+        }
         currentTime = time;
     }
 

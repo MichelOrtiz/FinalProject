@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.33333334}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,7 +97,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3525947920752425556
 Transform:
   m_ObjectHideFlags: 0
@@ -5091,7 +5091,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6745098}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.96862745}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5470,6 +5470,7 @@ MonoBehaviour:
   isInIce: 0
   isInSnow: 0
   isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -5677,6 +5678,8 @@ GameObject:
   - component: {fileID: 4628444344613271231}
   - component: {fileID: 1899013230873059424}
   - component: {fileID: 1533819169538553012}
+  - component: {fileID: 1814029372052625239}
+  - component: {fileID: 447332426354923146}
   - component: {fileID: 1587736591}
   m_Layer: 0
   m_Name: AbilitySystem
@@ -5732,7 +5735,7 @@ MonoBehaviour:
   duration: 0
   isInCooldown: 0
   abilityName: 1
-  isUnlocked: 1
+  isUnlocked: 0
   speedMultiplier: 2
   runningSpeed: 0
 --- !u!114 &8716125286967460233
@@ -5777,7 +5780,7 @@ MonoBehaviour:
   duration: 0.25
   isInCooldown: 0
   abilityName: 7
-  isUnlocked: 1
+  isUnlocked: 0
   body: {fileID: 3829738358529845164}
   altHotkey: 115
   doubleTimeTap: 0.5
@@ -5823,7 +5826,7 @@ MonoBehaviour:
   duration: 0
   isInCooldown: 0
   abilityName: 14
-  isUnlocked: 1
+  isUnlocked: 0
 --- !u!114 &1587736599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5842,7 +5845,7 @@ MonoBehaviour:
   duration: 0
   isInCooldown: 0
   abilityName: 12
-  isUnlocked: 1
+  isUnlocked: 0
   collider: {fileID: 1587736591}
 --- !u!114 &8891905290899016347
 MonoBehaviour:
@@ -5862,7 +5865,7 @@ MonoBehaviour:
   duration: 0
   isInCooldown: 0
   abilityName: 3
-  isUnlocked: 1
+  isUnlocked: 0
   NicoFeet: {fileID: 2335636184417845273}
 --- !u!114 &4628444344613271231
 MonoBehaviour:
@@ -5882,7 +5885,7 @@ MonoBehaviour:
   duration: 5
   isInCooldown: 0
   abilityName: 0
-  isUnlocked: 1
+  isUnlocked: 0
   Nico: {fileID: 3829738358529845160}
   isInvisible: 0
 --- !u!114 &1899013230873059424
@@ -5903,7 +5906,7 @@ MonoBehaviour:
   duration: 5
   isInCooldown: 0
   abilityName: 10
-  isUnlocked: 1
+  isUnlocked: 0
   Escudobj: {fileID: 2648981663275236285}
   isInShield: 0
 --- !u!114 &1533819169538553012
@@ -5913,7 +5916,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 689c0685a5e4a1948b6731c8fa99f958, type: 3}
   m_Name: 
@@ -5929,6 +5932,46 @@ MonoBehaviour:
   parti: {fileID: 960247108246901055}
   isActivated: 0
   empuje: 2000
+--- !u!114 &1814029372052625239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829738360394267735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e34188428bf6df498449dc08da1256f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 0
+  hotkey: 0
+  staminaCost: 0
+  duration: 0
+  isInCooldown: 0
+  abilityName: 0
+  isUnlocked: 0
+  SpriteMask: {fileID: 2436495351721809552}
+--- !u!114 &447332426354923146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829738360394267735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48ee65ddfe188241b2d35bc9f700b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 0
+  hotkey: 0
+  staminaCost: 0
+  duration: 0
+  isInCooldown: 0
+  abilityName: 5
+  isUnlocked: 0
+  IsOverlording: 0
 --- !u!61 &1587736591
 BoxCollider2D:
   m_ObjectHideFlags: 0
