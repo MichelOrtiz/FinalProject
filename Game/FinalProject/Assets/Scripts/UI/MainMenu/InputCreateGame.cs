@@ -7,7 +7,7 @@ public class InputCreateGame : MonoBehaviour
 {
     GameSlot gameSlot = null;
     #region UIelements
-    [SerializeField] private Text playerName;
+    [SerializeField] private InputField playerName;
     [SerializeField] private Button btnConfirm;
     [SerializeField] private Button btnReturn;
     #endregion
@@ -38,5 +38,8 @@ public class InputCreateGame : MonoBehaviour
     public void PressedReturnBtn(){
         playerName.text="";
         gameObject.SetActive(false);
+    }
+    private void OnDisable() {
+        playerName.text="";
     }
 }
