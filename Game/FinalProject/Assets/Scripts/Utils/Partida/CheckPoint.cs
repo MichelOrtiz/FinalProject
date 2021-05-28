@@ -25,6 +25,6 @@ public class CheckPoint : MonoBehaviour
         progress.prefab = null;
         progress.sceneToLoad = SceneController.instance.currentScene;
         progress.positionSpawn = transform.position;
-        SaveFilesManager.instance.WriteSaveFile(progress);
+        SaveFilesManager.instance.WriteSaveFile(progress,Application.dataPath + "/Partida" +forcedSlot);
     }
 }
