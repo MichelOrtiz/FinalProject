@@ -12,14 +12,8 @@ public class SceneController : MonoBehaviour
     public static SceneController instance;
 
     private void Awake() {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
+        if(instance == null) instance = this;
+        else if (instance != this) Destroy(this);
         DontDestroyOnLoad(this);
     }
     private void Start() {

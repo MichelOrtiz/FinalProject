@@ -95,15 +95,8 @@ public class PlayerManager : Entity
     /// </summary>
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-        
+        if(instance==null)instance=this;
+        else if(instance!=this)Destroy(gameObject);
         DontDestroyOnLoad(this);
     }
 
