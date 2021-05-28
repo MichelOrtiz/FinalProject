@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Minigame : MonoBehaviour{
     Overlord overlord;
-    public string name;
+    //public string name;
     [SerializeField] private bool isUI;
     [SerializeField] private GameObject minigameObject;
     [SerializeField] private int sceneIndex;
