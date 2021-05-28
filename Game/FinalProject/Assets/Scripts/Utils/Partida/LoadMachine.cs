@@ -20,7 +20,12 @@ public class LoadMachine : MonoBehaviour
     void Load(){
         SaveFile partida = SaveFilesManager.instance.LoadSaveFile(Application.dataPath + "/Partida" + forcedSlot);
         if(partida!=null){
-
+            Inventory.instance.items.Clear();
+            for(int i=0;i<partida.inventoy.Length;i++){
+                Inventory.instance.Add(partida.inventoy[i]);
+            }
+            Debug.Log("...cosas se cargaron");
+            Debug.Log("DELETE THIS");
         }else{
             Debug.Log("NADA ALMACENADO EN SLOT " + forcedSlot);
         }
