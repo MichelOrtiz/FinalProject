@@ -7,6 +7,7 @@ public class Minigame : MonoBehaviour{
     [SerializeField] private bool isUI;
     [SerializeField] private GameObject minigameObject;
     [SerializeField] private int sceneIndex;
+    public bool MinigameCompleted;
 
     [SerializeField] private bool hasTime;
     [SerializeField] private float time;
@@ -26,7 +27,7 @@ public class Minigame : MonoBehaviour{
     void Start()
     {
         timerBar = MinigameUI.instance.timerBar;
-        if (overlord.IsOverlording)
+        if (overlord.IsOverlording && overlord.isUnlocked)
         {
             timerBar.SetMaxTime(time + (time*.5f));
         }else
@@ -34,6 +35,7 @@ public class Minigame : MonoBehaviour{
             timerBar.SetMaxTime(time);
         }
         currentTime = time;
+        MinigameCompleted = false;
     }
 
     void Update()
