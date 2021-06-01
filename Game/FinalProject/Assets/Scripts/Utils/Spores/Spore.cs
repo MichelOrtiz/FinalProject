@@ -51,7 +51,7 @@ public class Spore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!particleSystem.isEmitting && !onEndedCalled)
+        if (particleSystem.isStopped && !onEndedCalled)
         {
             OnEmmissionEnded(this);
         }
