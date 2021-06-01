@@ -39,6 +39,24 @@ public class ScenesManagers : MonoBehaviour
         return objects;
     }
 
+    public static List<T> GetComponentsInChildrenList<T>(GameObject gameObject)
+    {
+        List<T> children = new List<T>();
+        Transform[] transforms = gameObject.GetComponentsInChildren<Transform>();
+
+        foreach (Transform child in transforms)
+        {
+            if (child != transforms[0])
+            {
+                if (child.TryGetComponent<T>(out T obj))
+                {
+                    children.Add(obj);
+                }
+            }
+        }
+        return children;
+    }
+
     public static List<GameObject> GetGameObjectsOfScript<T>()
     {
         List<T> objects = GetObjectsOfType<T>();

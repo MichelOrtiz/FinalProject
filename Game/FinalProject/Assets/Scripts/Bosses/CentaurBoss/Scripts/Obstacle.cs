@@ -23,11 +23,11 @@ public class Obstacle : MonoBehaviour
         }
     }
 
-/*void OnTriggerEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
             player.TakeTirement(damage);
         }
-    }*/
+    }
 }
