@@ -5574,6 +5574,7 @@ MonoBehaviour:
   isDoubleJumping: 0
   isDodging: 0
   DeathActive: 0
+  isInvisible: 0
   camara: {fileID: 0}
   loosingStamina: 0
   loosingOxygen: 0
@@ -5743,6 +5744,7 @@ GameObject:
   - component: {fileID: 1814029372052625239}
   - component: {fileID: 447332426354923146}
   - component: {fileID: 1031731497466114772}
+  - component: {fileID: 936999293969563206}
   - component: {fileID: 1587736591}
   m_Layer: 0
   m_Name: AbilitySystem
@@ -5951,7 +5953,6 @@ MonoBehaviour:
   abilityName: 0
   isUnlocked: 0
   Nico: {fileID: 3829738358529845160}
-  isInvisible: 0
 --- !u!114 &1899013230873059424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6057,8 +6058,28 @@ MonoBehaviour:
   isUnlocked: 1
   body: {fileID: 3829738358529845164}
   nico: {fileID: 3829738358529845160}
+  Atacado: {fileID: 603629796347817875}
   movimiento: 0.05
   speed: 100000
+--- !u!114 &936999293969563206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829738360394267735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cddd8bca96fad9439176b7fd527ceff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 0
+  hotkey: 0
+  staminaCost: 0
+  duration: 0
+  isInCooldown: 0
+  abilityName: 8
+  isUnlocked: 0
 --- !u!61 &1587736591
 BoxCollider2D:
   m_ObjectHideFlags: 0

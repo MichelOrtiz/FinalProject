@@ -93,10 +93,10 @@ public class CollisionHandler : MonoBehaviour
     {
         OnEnterTouchingContact(other.gameObject);
         if (other.gameObject.tag != "Untagged" && other.gameObject.tag != lastColliderTag)
-            {
-                lastColliderTag = other.gameObject.tag;
-                OnChangedColliderTag();
-            }
+        {
+            lastColliderTag = other.gameObject.tag;
+            OnChangedColliderTag();
+        }
     }
     protected virtual void OnCollisionStay2D(Collision2D other)
     {
