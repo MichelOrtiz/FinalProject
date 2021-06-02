@@ -12,7 +12,7 @@ public class Atacado : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.tag == "Enemy")
+        if (collisionGameObject.tag == "Enemy" || collisionGameObject.tag == "Projectile")
         {
             Dodgeable = true;
             //Debug.Log("DodgeEable");
@@ -21,7 +21,7 @@ public class Atacado : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.tag == "Enemy")
+        if (collisionGameObject.tag == "Enemy" || collisionGameObject.tag == "Projectile")
         {
             Dodgeable = false;
             //Debug.Log("No DodgeEable");

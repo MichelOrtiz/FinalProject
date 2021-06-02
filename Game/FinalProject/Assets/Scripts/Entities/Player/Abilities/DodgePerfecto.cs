@@ -5,14 +5,12 @@ using UnityEngine;
 public class DodgePerfecto : Ability
 {
     [SerializeField]private Rigidbody2D body;
-    [SerializeField]protected KeyCode altHotkey;
-    [SerializeField]private bool atacableee;
+    [SerializeField]private GameObject nico;
+    public GameObject Atacado;
     private float prevGravity;
     private float timeKeyPressed;
-    public float doubleTimeTap;
     public float movimiento;
     public float speed;
-    protected Atacado atacado;
     float currentDashTime;
     Vector2 target;
     int nKeyPressed;
@@ -31,6 +29,7 @@ public class DodgePerfecto : Ability
     {
         base.Start();
         body=player.gameObject.GetComponent<Rigidbody2D>();
+        currentDashTime = 0;
     }
     protected override void Update(){
         this.enabled = isUnlocked;
@@ -43,24 +42,57 @@ public class DodgePerfecto : Ability
                 time = 0;
             }
         }
-        atacableee = atacado.Dodgeable;
-        if(atacado.Dodgeable == true){
-            Debug.Log("DodgeEable");
+        if(player.isDodging){
+            if (nico.transform.localRotation.eulerAngles.y == 0)
+            {
+                target = new Vector2(movimiento, 0f);  
+                Debug.Log("der");
+            }else
+            {
+                target = new Vector2(-movimiento, 0f); 
+                Debug.Log("izq");
+            } 
+            currentDashTime += Time.deltaTime;
+            if(currentDashTime >= duration){
+                currentDashTime=0;
+                body.gravityScale = prevGravity;
+                player.isDodging = false;
+            }
+            player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("DodgePerfect");
+            player.groundChecker.gameObject.layer = LayerMask.NameToLayer("DodgePerfect");
+            player.collisionHandler.gameObject.tag = "Untagged";
+            player.groundChecker.gameObject.tag = "Untagged";
+        }else if(!player.isInvisible)
+        {
+            
+            player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Default");
+            player.groundChecker.gameObject.layer = LayerMask.NameToLayer("Default");
+            player.collisionHandler.gameObject.tag = "Player";
+            player.groundChecker.gameObject.tag = "Player";
+        }
+        if(Atacado.gameObject.GetComponent<Atacado>().Dodgeable == true){
             if(player.isDodging){
-                target = new Vector2(movimiento, 0f);
+                if (nico.transform.localRotation.eulerAngles.y == 0)
+                {
+                    target = new Vector2(movimiento, 0f);  
+                    Debug.Log("der");
+                }else
+                {
+                    target = new Vector2(-movimiento, 0f); 
+                    Debug.Log("izq");
+                } 
                 currentDashTime += Time.deltaTime;
                 if(currentDashTime >= duration){
                     currentDashTime=0;
                     body.gravityScale = prevGravity;
                     player.isDodging = false;
-                    Debug.Log("DodgeEnd");
                 }
             }
             else{
                 if(Input.GetKeyDown(hotkey)){
-                    UseAbility();
-                }
-                if(Input.GetKeyDown(altHotkey)){
+                    if(movimiento<0){
+                        movimiento*=-1;                     
+                    }
                     UseAbility();
                 }
             }
@@ -69,6 +101,7 @@ public class DodgePerfecto : Ability
     private void FixedUpdate() {
         if(player.isDodging){
             body.AddForce(target * speed);
+            
         }
     }
 }

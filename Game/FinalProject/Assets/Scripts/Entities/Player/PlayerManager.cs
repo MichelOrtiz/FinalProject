@@ -36,6 +36,7 @@ public class PlayerManager : Entity
     public bool isDodging;
     public bool DeathActive;
 
+    public bool isInvisible;
     #endregion
 
     #region Layers, rigids, etc

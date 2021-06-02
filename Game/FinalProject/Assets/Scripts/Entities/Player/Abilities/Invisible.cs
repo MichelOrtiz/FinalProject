@@ -5,19 +5,18 @@ using UnityEngine;
 public class Invisible : Ability
 {
     public GameObject Nico;
-    public bool isInvisible;
 
     public override void UseAbility()
     {   
         if(player.currentStamina < staminaCost)return;
-        isInvisible=true;
+        player.isInvisible=true;
         base.UseAbility();
     }
     protected override void Start()
     {
         base.Start();
         time = cooldownTime;
-        isInvisible=false;
+        player.isInvisible=false;
     }
     protected override void Update()
     {
@@ -35,9 +34,9 @@ public class Invisible : Ability
             }
         }else
         {
-            isInvisible = false;
+            player.isInvisible = false;
         }
-        if (isInvisible)
+        if (player.isInvisible)
         {
             player.gameObject.layer = LayerMask.NameToLayer("Invisible");
             player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Invisible");
