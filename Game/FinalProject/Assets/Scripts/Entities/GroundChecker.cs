@@ -5,7 +5,7 @@ using UnityEngine;
 public class GroundChecker : MonoBehaviour
 {
     [SerializeField] private LayerMask whatIsGround;
-    private Transform feetPos;
+    [SerializeField] private Transform feetPos;
     [SerializeField] public float checkFeetRadius;
     //private BoxCollider2D collider2D;
     public bool isGrounded;
@@ -23,7 +23,6 @@ public class GroundChecker : MonoBehaviour
 
     public event Grounded GroundedHandler;
     public event GroundedGameObject GroundedGameObjectHandler;
-
     protected virtual void OnGrounded(string groundTag)
     {
         GroundedHandler?.Invoke(groundTag);
@@ -33,9 +32,16 @@ public class GroundChecker : MonoBehaviour
         GroundedGameObjectHandler?.Invoke(ground);
     }
 
+    public delegate void ExitGround();
+    public event ExitGround ExitGroundHandlder;
+    protected virtual void OnExitGround()
+    {
+        ExitGroundHandlder?.Invoke();
+    }
+
     void Start()
     {
-        feetPos = PlayerManager.instance.feetPos;
+        //feetPos = PlayerManager.instance.feetPos;
         //collider2D = GetComponent<BoxCollider2D>();
     }
 
@@ -57,7 +63,12 @@ public class GroundChecker : MonoBehaviour
             }
         }
     }
-
-    
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (!isGrounded)
+        {
+            OnExitGround();
+        }
+    }
 
 }

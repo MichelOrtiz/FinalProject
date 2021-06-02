@@ -10,6 +10,7 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     [SerializeField] private List<GameObject> parts;
     private int totalParts;
     [SerializeReference] private List<GameObject> movedParts; 
+    //[SerializeReference] private List<GameObject> assembledParts;
     #endregion
 
     #region GameObject Position Reference
@@ -20,6 +21,8 @@ public class MBPartsHandler : MonoBehaviour, ILaser
 
     private Vector2 lastPartPosition;
     [SerializeField] private float yCheckRange;
+
+    public Vector2 Center { get; set; }
 
     #endregion
 
@@ -40,13 +43,30 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     #region LaserWarning
     [SerializeField] private GameObject laserPrefab;
     private Laser laser;
-
     public Transform ShotPos {get; set;}
-
     public Vector2 EndPos {get; set;}
-
-
     #endregion
+
+    #region Events
+    /*public delegate void HalfPartsReached(Vector2 center);
+    public event HalfPartsReached HalfPartsReachedHandler;
+    protected virtual void OnHalfPartsReached(Vector2 center)
+    {
+        Debug.Log(center);
+        assembledHalf = true;
+        HalfPartsReachedHandler?.Invoke(center);
+    }
+    private bool assembledHalf;*/
+
+    public delegate void ChangedReference(GameObject reference);
+    public event ChangedReference ChangedReferenceHandler;
+    protected virtual void OnChangedReference(GameObject reference)
+    {
+        ChangedReferenceHandler?.Invoke(reference);
+    }
+    #endregion
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,13 +75,17 @@ public class MBPartsHandler : MonoBehaviour, ILaser
 
         totalParts = parts.Count + movedParts.Count;
         currentPositionsReference = leftPositionReference;
+        OnChangedReference(currentPositionsReference);
+
+        Center = MathUtils.FindCenterOfTransforms(parts.GetRange(0, parts.Count));
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!Assembled())
+        //if (!Assembled(totalParts))
+        if (!Assembled(totalParts))
         {
             if (curTimeBtwMove > timeBtwMove)
             {
@@ -70,20 +94,37 @@ public class MBPartsHandler : MonoBehaviour, ILaser
             }
             else
             {
+                //UpdateAssembledParts();
                 curTimeBtwMove += Time.deltaTime;
             }
+
+            /*if (assembledParts.Count >= totalParts/2)
+            {
+                //if (!assembledHalf)
+                {
+                    Center = MathUtils.FindCenterOfTransforms(assembledParts.GetRange(0, assembledParts.Count));
+                    //OnHalfPartsReached(center);
+                }
+            }*/
+            /*else
+            {
+                assembledHalf = false;
+            }*/
         }
         else
         {
             if (parts.Count != movedParts.Count)
             {
                 parts.AddRange(movedParts);
+                //Center =  MathUtils.FindCenterOfTransforms(assembledParts.GetRange(0, parts.Count));
             }
             if (curAssembledTime > waitTimeWhenAssembled)
             {
                 //assembled = false;
+                //movedParts.Clear();
                 movedParts.Clear();
                 ChangePositionReference();
+                OnChangedReference(currentPositionsReference);
                 curAssembledTime = 0;
             }
             else
@@ -99,9 +140,6 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     {
         foreach (var part in movedParts)
         {
-            /*Transform objectReference = ScenesManagers
-                .GetComponentsInChildrenList<Transform>(GetTargetPositionReference())
-                .Find(g => g.gameObject.ToString() == part.gameObject.ToString());*/
 
             var positionReference = GetTargetPosition(part);
 
@@ -121,24 +159,6 @@ public class MBPartsHandler : MonoBehaviour, ILaser
             int randomPart = 0;
             randomPart = RandomGenerator.NewRandom(0, parts.Count-1);
 
-            /*do
-            {
-                Debug.Log("imindowhile");
-                randomPart = RandomGenerator.NewRandom(0, parts.Count-1);
-
-                if (movedParts.Count == 0)
-                {
-                    Debug.Log("should break loop");
-                    break;
-                }
-                else
-                {
-                    distance = Math.Abs( parts[randomPart].transform.position.y - lastPartPosition.y); 
-                }
-            }
-            while ( distance <= yCheckRange );
-            Debug.Log("imoutoftheloop");
-            lastPartPosition = movedParts[randomPart].transform.position;*/
             movedParts.Add(parts[randomPart]);
             ShotPos = parts[randomPart].transform;
                 EndPos = GetTargetPosition(parts[randomPart]);
@@ -150,7 +170,10 @@ public class MBPartsHandler : MonoBehaviour, ILaser
         {
             return;
         }
+
+        
     }
+
 
     private Vector2 GetTargetPosition(GameObject part)
     {
@@ -176,27 +199,18 @@ public class MBPartsHandler : MonoBehaviour, ILaser
                 rightPositionReference;
     }
 
-    /*private GameObject GetTargetPositionReference()
-    {
-        if (currentPositionsReference == rightPositionReference)
-        {
-            return leftPositionReference;
-        }
-        else
-        {
-            return rightPositionReference;
-        }
-    }*/
 
-
-    bool Assembled()
+    bool Assembled(int manyParts)
     {
-        if (movedParts.Count < totalParts)
+        if (movedParts.Count < manyParts)
         {
             return false;
         }
         
-        foreach (var part in movedParts)
+        /*List<GameObject> someParts = new List<GameObject>();
+        someParts.AddRange()*/
+
+        foreach (var part in movedParts.GetRange(0, manyParts))
         {
             if ((Vector2)part.transform.position != GetTargetPosition(part))
             {
@@ -205,6 +219,13 @@ public class MBPartsHandler : MonoBehaviour, ILaser
         }
         return true;
     }
+
+    /*void UpdateAssembledParts()
+    {
+        assembledParts.AddRange(movedParts.FindAll(p => (Vector2)p.transform.position == GetTargetPosition(p)));
+        //movedParts.RemoveAll(p => (Vector2)p.transform.position == GetTargetPosition(p));
+    }*/
+
 
     public void ShootLaser(Vector2 from, Vector2 to)
     {
