@@ -5,12 +5,14 @@ using UnityEngine;
 public class DodgePerfecto : Ability
 {
     [SerializeField]private Rigidbody2D body;
-    [SerializeField] protected KeyCode altHotkey;
+    [SerializeField]protected KeyCode altHotkey;
+    [SerializeField]private bool atacableee;
     private float prevGravity;
     private float timeKeyPressed;
     public float doubleTimeTap;
     public float movimiento;
     public float speed;
+    protected Atacado atacado;
     float currentDashTime;
     Vector2 target;
     int nKeyPressed;
@@ -18,7 +20,7 @@ public class DodgePerfecto : Ability
     {
         if(player.currentStamina < staminaCost)return;
         base.UseAbility();
-        player.isDashingH = true;
+        player.isDodging = true;
         prevGravity = body.gravityScale;
         body.gravityScale = 0;
         body.velocity = new Vector2(0f,0f);
@@ -29,7 +31,6 @@ public class DodgePerfecto : Ability
     {
         base.Start();
         body=player.gameObject.GetComponent<Rigidbody2D>();
-        currentDashTime = 0;
     }
     protected override void Update(){
         this.enabled = isUnlocked;
@@ -42,55 +43,31 @@ public class DodgePerfecto : Ability
                 time = 0;
             }
         }
-        if(player.isDashingH){
-            target = new Vector2(movimiento, 0f);
-            currentDashTime += Time.deltaTime;
-            if(currentDashTime >= duration){
-                currentDashTime=0;
-                body.gravityScale = prevGravity;
-                player.isDashingH = false;
-                Debug.Log("DashEnd");
-            }
-        }
-        else{
-            if(timeKeyPressed!=0){
-                timeKeyPressed += Time.deltaTime;
-                if(timeKeyPressed >= doubleTimeTap){
-                    timeKeyPressed=0;
-                    nKeyPressed=0;
+        atacableee = atacado.Dodgeable;
+        if(atacado.Dodgeable == true){
+            Debug.Log("DodgeEable");
+            if(player.isDodging){
+                target = new Vector2(movimiento, 0f);
+                currentDashTime += Time.deltaTime;
+                if(currentDashTime >= duration){
+                    currentDashTime=0;
+                    body.gravityScale = prevGravity;
+                    player.isDodging = false;
+                    Debug.Log("DodgeEnd");
                 }
             }
-            if(Input.GetKeyDown(hotkey)){
-                if(movimiento<0){
-                    movimiento*=-1;
-                    nKeyPressed=0;
+            else{
+                if(Input.GetKeyDown(hotkey)){
+                    UseAbility();
                 }
-                nKeyPressed++;
-                timeKeyPressed+=Time.deltaTime;
-                if(nKeyPressed>=2){
-                    nKeyPressed=0;
+                if(Input.GetKeyDown(altHotkey)){
                     UseAbility();
                 }
             }
-            if(Input.GetKeyDown(altHotkey)){
-                if(movimiento>0){
-                    movimiento*=-1;
-                    nKeyPressed=0;
-                }
-                nKeyPressed++;
-                timeKeyPressed+=Time.deltaTime;
-                if(nKeyPressed>=2){
-                    nKeyPressed=0;
-                    UseAbility();
-                }
-            }
-            
-            
         }
-        
     }
     private void FixedUpdate() {
-        if(player.isDashingH){
+        if(player.isDodging){
             body.AddForce(target * speed);
         }
     }

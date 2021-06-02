@@ -33,6 +33,7 @@ public class PlayerManager : Entity
     public bool isDashingH;
     public bool isDashingV;
     public bool isDoubleJumping;
+    public bool isDodging;
     public bool DeathActive;
 
     #endregion

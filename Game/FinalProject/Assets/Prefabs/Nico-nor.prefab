@@ -132,7 +132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2725911057359720447
 Transform:
   m_ObjectHideFlags: 0
@@ -157,7 +157,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdc7b52246974c4aa9de47a81a84670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dodgeable: 0
 --- !u!1 &960247108246901055
 GameObject:
   m_ObjectHideFlags: 0
@@ -5571,6 +5572,7 @@ MonoBehaviour:
   isDashingH: 0
   isDashingV: 0
   isDoubleJumping: 0
+  isDodging: 0
   DeathActive: 0
   camara: {fileID: 0}
   loosingStamina: 0
@@ -6047,17 +6049,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 3
-  hotkey: 261
-  staminaCost: -5
-  duration: 0
+  hotkey: 263
+  staminaCost: 5
+  duration: 0.25
   isInCooldown: 0
   abilityName: 11
   isUnlocked: 1
   body: {fileID: 3829738358529845164}
-  altHotkey: 0
+  altHotkey: 265
   doubleTimeTap: 0
-  movimiento: 0
-  speed: 0
+  movimiento: 15
+  speed: 100
 --- !u!61 &1587736591
 BoxCollider2D:
   m_ObjectHideFlags: 0
