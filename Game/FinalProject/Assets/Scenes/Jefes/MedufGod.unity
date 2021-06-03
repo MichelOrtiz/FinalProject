@@ -6916,7 +6916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &191252427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20146,7 +20146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9162cc6d3e48acd4fa6fa992386a6643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: {x: 2, y: 5}
+  jumpForce: {x: 2, y: 6}
+  timeBtwJump: 2
   collisionHandler: {fileID: 1692216742}
   groundChecker: {fileID: 792954810}
   partsHandler: {fileID: 1308799996}
@@ -33858,7 +33859,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9162cc6d3e48acd4fa6fa992386a6643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: {x: 2, y: 5}
+  jumpForce: {x: 2, y: 6}
+  timeBtwJump: 2
   collisionHandler: {fileID: 138694815}
   groundChecker: {fileID: 1089704553}
   partsHandler: {fileID: 1308799996}
@@ -43697,6 +43699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: {x: 1, y: 4}
+  timeBtwJump: 0
   collisionHandler: {fileID: 1712638962}
   groundChecker: {fileID: 0}
   partsHandler: {fileID: 0}

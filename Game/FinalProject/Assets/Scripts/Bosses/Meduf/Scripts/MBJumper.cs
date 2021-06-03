@@ -7,6 +7,8 @@ public class MBJumper : MonoBehaviour
     #region Physics
     [Header("Physics")]
     [SerializeField] private Vector2 jumpForce;
+    [SerializeField] private float timeBtwJump;
+    private float curTimeBtwJump;
     #endregion
 
     #region Rigid, Colliders
@@ -14,6 +16,7 @@ public class MBJumper : MonoBehaviour
     [SerializeField] private CollisionHandler collisionHandler;
     [SerializeField] private GroundChecker groundChecker;
     private Rigidbody2D rb;
+    private bool justGrounded;
     #endregion
 
     #region References
@@ -41,10 +44,29 @@ public class MBJumper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (!collisionHandler.touchingPlayer)
+        if (justGrounded)
         {
-            collisionHandler.transform.position = partsHandler.Center;
-        }*/
+            if (curTimeBtwJump > timeBtwJump)
+            {
+                justGrounded = false;
+                curTimeBtwJump = 0;
+            }
+            else
+            {
+                curTimeBtwJump += Time.deltaTime;
+            }
+        }
+        else if (groundChecker.isGrounded)
+        {
+            if ((player.GetPosition().x < transform.position.x && transform.rotation.y == 0)
+            ||  (player.GetPosition().x > transform.position.x && transform.rotation.y != 0))
+            {
+                Debug.Log("swaaaa");
+                transform.eulerAngles = new Vector3(0, transform.rotation.y == 0? 180:0);
+            }
+        }
+
+        
     }
 
     void collisionHandler_TouchingContact(GameObject contact)
@@ -52,7 +74,7 @@ public class MBJumper : MonoBehaviour
         //rb.centerOfMass = partsHandler.Center;
         if (contact.tag == "Player")
         {
-            if (isReference && groundChecker.isGrounded)
+            if (!justGrounded && isReference && groundChecker.isGrounded)
             {
                 Vector2 jumpDirection = new Vector2
                 (
@@ -68,6 +90,7 @@ public class MBJumper : MonoBehaviour
 
     void groundChecker_Grounded(string groundTag)
     {
+        justGrounded = true;
         rb.velocity = new Vector2();
     }
 

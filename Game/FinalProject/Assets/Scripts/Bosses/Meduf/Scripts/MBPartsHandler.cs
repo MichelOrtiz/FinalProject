@@ -113,7 +113,7 @@ public class MBPartsHandler : MonoBehaviour, ILaser
         }
         else
         {
-            if (parts.Count != movedParts.Count)
+            if (parts.Count == 0)
             {
                 parts.AddRange(movedParts);
                 //Center =  MathUtils.FindCenterOfTransforms(assembledParts.GetRange(0, parts.Count));
@@ -141,12 +141,12 @@ public class MBPartsHandler : MonoBehaviour, ILaser
         foreach (var part in movedParts)
         {
 
-            var positionReference = GetTargetPosition(part);
+            var reference = GetTargetReference(part);
 
-            if (positionReference != null)
+            if (reference != null)
             {
-                part.transform.position = Vector2.MoveTowards(part.transform.position, positionReference, speed * Time.deltaTime);
-                
+                part.transform.position = Vector2.MoveTowards(part.transform.position, reference.transform.position, speed * Time.deltaTime);
+                part.transform.rotation = reference.transform.rotation;
                 
             }
         }
@@ -158,13 +158,17 @@ public class MBPartsHandler : MonoBehaviour, ILaser
         {
             int randomPart = 0;
             randomPart = RandomGenerator.NewRandom(0, parts.Count-1);
-
-            movedParts.Add(parts[randomPart]);
             ShotPos = parts[randomPart].transform;
-                EndPos = GetTargetPosition(parts[randomPart]);
+            EndPos = GetTargetReference(parts[randomPart]).transform.position;
 
-                ShootLaser(ShotPos.position, EndPos);
-            parts.RemoveAt(randomPart);
+            ShootLaser(ShotPos.position, EndPos);
+
+            if (!movedParts.Contains(parts[randomPart]))
+            {
+                movedParts.Add(parts[randomPart]);
+                parts.RemoveAt(randomPart);
+            }
+            
         }
         catch (ArgumentOutOfRangeException)
         {
@@ -175,19 +179,23 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     }
 
 
-    private Vector2 GetTargetPosition(GameObject part)
+    private GameObject GetTargetReference(GameObject part)
     {
-        Vector2 position = ScenesManagers
+        /*Vector2 position = ScenesManagers
                 .GetComponentsInChildrenList<Transform>(currentPositionsReference)
-                .Find(g => g.gameObject.ToString() == part.gameObject.ToString()).position;
+                .Find(g => g.gameObject.ToString() == part.gameObject.ToString()).position;*/
 
-        if (position != null)
+        GameObject reference = ScenesManagers
+                .GetComponentsInChildrenList<Transform>(currentPositionsReference)
+                .Find(g => g.gameObject.ToString() == part.gameObject.ToString()).gameObject;
+
+        if (reference != null)
         {
-            return position;
+            return reference;
         }
         else
         {
-            return new Vector2();
+            return new GameObject();
         }
     }
 
@@ -212,7 +220,7 @@ public class MBPartsHandler : MonoBehaviour, ILaser
 
         foreach (var part in movedParts.GetRange(0, manyParts))
         {
-            if ((Vector2)part.transform.position != GetTargetPosition(part))
+            if (part.transform.position != GetTargetReference(part).transform.position)
             {
                 return false;
             }
