@@ -31,18 +31,16 @@ public class Minigame : MonoBehaviour{
         timerBar = MinigameUI.instance.timerBar;
         if (overlord.IsOverlording && overlord.isUnlocked)
         {
-            timerBar.SetMaxTime(time + (time*.5f));
-        }else
-        {
-            timerBar.SetMaxTime(time);
+            time += time * 0.5f;
         }
+        timerBar.SetMaxTime(time);
+
         currentTime = time;
         MinigameCompleted = false;
     }
 
     void Update()
     {
-        Debug.Log(currentTime);
         if(hasTime){
             if(currentTime<=0){
                 currentTime = time;
