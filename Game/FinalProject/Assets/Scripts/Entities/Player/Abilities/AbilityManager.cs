@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
-    List<Ability> abilities = new List<Ability>();
+    public List<Ability> abilities = new List<Ability>();
     public static AbilityManager instance;
     public GameObject abiltySystem;
     private void Awake() {

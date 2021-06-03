@@ -61,7 +61,6 @@ public class MBJumper : MonoBehaviour
             if ((player.GetPosition().x < transform.position.x && transform.rotation.y == 0)
             ||  (player.GetPosition().x > transform.position.x && transform.rotation.y != 0))
             {
-                Debug.Log("swaaaa");
                 transform.eulerAngles = new Vector3(0, transform.rotation.y == 0? 180:0);
             }
         }

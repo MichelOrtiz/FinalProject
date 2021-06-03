@@ -26,6 +26,8 @@ public class Minigame : MonoBehaviour{
 
     void Start()
     {
+        overlord = (Overlord)PlayerManager.instance.abilityManager.abilities.Find(a => a.abilityName == Ability.Abilities.Overlord);
+
         timerBar = MinigameUI.instance.timerBar;
         if (overlord.IsOverlording && overlord.isUnlocked)
         {
