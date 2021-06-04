@@ -5,7 +5,7 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     PlayerManager player;
-    public int forcedSlot;//DELETE THIS
+    //public int forcedSlot;//DELETE THIS
     public float radius = 1f;
     private void Start() {
         player = PlayerManager.instance;
@@ -14,17 +14,17 @@ public class CheckPoint : MonoBehaviour
     {
         float distance = Vector2.Distance(player.GetPosition(),transform.position);
         if(Input.GetKeyDown(KeyCode.E) && distance<=radius){
-            SaveProgres();
+            Save();
         }
     }
-    void SaveProgres(){
-        SaveFile progress = new SaveFile();
-        progress.slotFile = forcedSlot;
+    void Save(){
+        SaveFile progress = SaveFilesManager.instance.currentSaveSlot;
         progress.chestItems = null;
         progress.inventoy = Inventory.instance.items.ToArray();
         progress.prefab = null;
         progress.sceneToLoad = SceneController.instance.currentScene;
         progress.positionSpawn = transform.position;
-        SaveFilesManager.instance.WriteSaveFile(progress,Application.dataPath + "/Partida" +forcedSlot);
+        SaveFilesManager.instance.SaveProgress();
+        Debug.Log("Guardando partida");
     }
 }

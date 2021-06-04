@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using System.IO;
 using UnityEngine.Serialization;
@@ -8,7 +7,8 @@ public class SaveFilesManager : MonoBehaviour
 {
     //string filePath;
     //string jsonString;
-    public SaveFile currentSaveSlot;
+    public SaveFile currentSaveSlot {get;set;}
+    private DateTime startSession;
     public static SaveFilesManager instance;
     private void Awake() {
         if(instance == null) instance = this;
@@ -52,5 +52,21 @@ public class SaveFilesManager : MonoBehaviour
             File.Delete(path);
         }
         File.Create(path);
+    }
+    public void SaveProgress(){
+        if(currentSaveSlot==null)return;
+        TimeSpan timePlayed = DateTime.Now - startSession;
+        Debug.Log(DateTime.Now.ToString() + " - " + startSession.ToString());
+        currentSaveSlot.timeDaysPlayed += timePlayed.Days;
+        currentSaveSlot.timeHoursPlayed += timePlayed.Hours;
+        currentSaveSlot.timeMinutesPlayed += timePlayed.Minutes;
+        string jsonString = JsonUtility.ToJson(currentSaveSlot);
+        string filePath = Application.dataPath + "/Partida" + currentSaveSlot.slotFile;
+        using(StreamWriter writer = new StreamWriter(filePath,false)){
+            writer.Write(jsonString);
+        }
+    }
+    public void SetStartSession(DateTime dateStart){
+        startSession = dateStart;
     }
 }

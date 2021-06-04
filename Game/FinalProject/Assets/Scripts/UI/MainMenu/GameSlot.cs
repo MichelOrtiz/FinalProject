@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +33,7 @@ public class GameSlot : MonoBehaviour
             lblName.text = "Nombre: ";
             lblName.text += partida.namePlayer;
             lblTime.text = "Tiempo: ";
-            lblTime.text += partida.timePlayed;
+            lblTime.text += partida.timeDaysPlayed + ":" + partida.timeHoursPlayed + ":" + partida.timeMinutesPlayed;
             lblZone.text = "Zona: ";
             lblZone.text += partida.sceneToLoad;
         }else{
@@ -58,6 +57,9 @@ public class GameSlot : MonoBehaviour
     }
     public void CargarPartida(){
         //Boy ... cargar cosas
+        SaveFilesManager.instance.currentSaveSlot = partida;
+        SaveFilesManager.instance.SetStartSession(DateTime.Now);
+        SceneController.instance.Load(SaveFilesManager.instance.currentSaveSlot);
     }
     public void BorrarPartida(){
         partida = null;
