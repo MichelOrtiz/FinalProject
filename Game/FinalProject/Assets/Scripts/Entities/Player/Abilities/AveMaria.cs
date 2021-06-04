@@ -6,11 +6,13 @@ public class AveMaria : Ability
 {
     private int AvesMarias;
     void collisionHandler_EnterContact(GameObject contact){
-        if (contact.gameObject.tag != "Projectiles")
+
+        if (contact.gameObject.tag == "Projectile")
         {
             AvesMarias++;
             if (AvesMarias == 4)
             {
+                Debug.Log("Stamina increased by 10");
                 player.currentStamina += 10;
                 AvesMarias = 0;
             }

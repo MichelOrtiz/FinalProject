@@ -37,13 +37,10 @@ public class GiroTimon : MasterMinigame
                 float CurrentDistanceBetweenMousePosition = (Input.mousePosition - PressPoint).y;
                 transform.rotation = StartRotation * Quaternion.Euler(Vector3.forward * (CurrentDistanceBetweenMousePosition/SceneHeight)*360);
             }
-
-            
         }
 
         if (transform.localEulerAngles.z > 0 && transform.localEulerAngles.z <= rotationAngleToWin)
         {
-            Debug.Log("should end");
             OnWinMinigame();
         }
         

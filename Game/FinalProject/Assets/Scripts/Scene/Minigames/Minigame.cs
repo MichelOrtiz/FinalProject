@@ -9,6 +9,8 @@ public class Minigame : MonoBehaviour{
     [SerializeField] private GameObject minigameObject;
     [SerializeField] private int sceneIndex;
     public bool MinigameCompleted;
+    [SerializeField] private int rewardMoney;
+
 
     [SerializeField] private bool hasTime;
     [SerializeField] private float time;
@@ -36,9 +38,6 @@ public class Minigame : MonoBehaviour{
 
     void Start()
     {
-        
-
-
         overlord = (Overlord)PlayerManager.instance.abilityManager.abilities.Find(a => a.abilityName == Ability.Abilities.Overlord);
 
         timerBar = MinigameUI.instance.timerBar;
@@ -78,6 +77,7 @@ public class Minigame : MonoBehaviour{
     {
         Debug.Log("MinigameCompleted");
         MinigameCompleted = true;
+        Inventory.instance.AddMoney(rewardMoney);
         EndMinigame();
     }
 }
