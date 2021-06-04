@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,19 +14,31 @@ public class Minigame : MonoBehaviour{
     [SerializeField] private float time;
     private TimerBar timerBar;
     private float currentTime;
-    
+
+    private MasterMinigame minigame;
+
 
     public virtual void StartMinigame(){
+        
         if(isUI){
             MinigameUI.instance.recieveMinigame(minigameObject);
             
         }else{
             SceneManager.LoadScene(sceneIndex);
         }
+
+        minigame = ScenesManagers.FindObjectOfType<MasterMinigame>();
+        if (minigame != null)
+        {
+            minigame.WinMinigameHandler += minigame_WinMinigame;
+        }
     }
 
     void Start()
     {
+        
+
+
         overlord = (Overlord)PlayerManager.instance.abilityManager.abilities.Find(a => a.abilityName == Ability.Abilities.Overlord);
 
         timerBar = MinigameUI.instance.timerBar;
@@ -59,5 +72,12 @@ public class Minigame : MonoBehaviour{
             
         }
         Destroy(gameObject);
+    }
+
+    protected virtual void minigame_WinMinigame()
+    {
+        Debug.Log("MinigameCompleted");
+        MinigameCompleted = true;
+        EndMinigame();
     }
 }
