@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +5,7 @@ public class SceneController : MonoBehaviour
 {
     public int prevScene { get; set; }
     public int currentScene { get; set; }
+    [SerializeField]private GameObject playerPrefab;
     SceneManager manager;
 
     public static SceneController instance;
@@ -25,5 +24,8 @@ public class SceneController : MonoBehaviour
         prevScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene);
         currentScene = scene;
+    }
+    public void Load(SaveFile partida){
+        LoadScene(partida.sceneToLoad);
     }
 }
