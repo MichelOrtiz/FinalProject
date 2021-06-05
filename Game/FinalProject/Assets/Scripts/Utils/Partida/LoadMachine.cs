@@ -5,7 +5,6 @@ using UnityEngine;
 public class LoadMachine : MonoBehaviour
 {
     PlayerManager player;
-    public int forcedSlot;//DELETE THIS
     public float radius = 1f;
     private void Start() {
         player = PlayerManager.instance;
@@ -18,7 +17,7 @@ public class LoadMachine : MonoBehaviour
         }
     }
     void Load(){
-        SaveFile partida = SaveFilesManager.instance.LoadSaveFile(Application.dataPath + "/Partida" + forcedSlot);
+        SaveFile partida = SaveFilesManager.instance.LoadSaveFile(Application.dataPath + "/Partida" + SaveFilesManager.instance.currentSaveSlot.slotFile);
         if(partida!=null){
             Inventory.instance.items.Clear();
             for(int i=0;i<partida.inventoy.Length;i++){
@@ -26,8 +25,6 @@ public class LoadMachine : MonoBehaviour
             }
             Debug.Log("...cosas se cargaron");
             Debug.Log("DELETE THIS");
-        }else{
-            Debug.Log("NADA ALMACENADO EN SLOT " + forcedSlot);
         }
     }
 }

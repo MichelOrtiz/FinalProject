@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,19 +9,30 @@ public class Minigame : MonoBehaviour{
     [SerializeField] private GameObject minigameObject;
     [SerializeField] private int sceneIndex;
     public bool MinigameCompleted;
+    [SerializeField] private int rewardMoney;
+
 
     [SerializeField] private bool hasTime;
     [SerializeField] private float time;
     private TimerBar timerBar;
     private float currentTime;
-    
+
+    private MasterMinigame minigame;
+
 
     public virtual void StartMinigame(){
+        
         if(isUI){
             MinigameUI.instance.recieveMinigame(minigameObject);
             
         }else{
             SceneManager.LoadScene(sceneIndex);
+        }
+
+        minigame = ScenesManagers.FindObjectOfType<MasterMinigame>();
+        if (minigame != null)
+        {
+            minigame.WinMinigameHandler += minigame_WinMinigame;
         }
     }
 
@@ -59,5 +71,13 @@ public class Minigame : MonoBehaviour{
             
         }
         Destroy(gameObject);
+    }
+
+    protected virtual void minigame_WinMinigame()
+    {
+        Debug.Log("MinigameCompleted");
+        MinigameCompleted = true;
+        Inventory.instance.AddMoney(rewardMoney);
+        EndMinigame();
     }
 }

@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiroTimon : MonoBehaviour
+public class GiroTimon : MasterMinigame
 {
     public int girar = 0;
     private float SceneHeight;
     private Vector3 PressPoint;
     private Quaternion StartRotation;
+    
+    [SerializeField] private float rotationAngleToWin;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +38,12 @@ public class GiroTimon : MonoBehaviour
                 transform.rotation = StartRotation * Quaternion.Euler(Vector3.forward * (CurrentDistanceBetweenMousePosition/SceneHeight)*360);
             }
         }
+
+        if (transform.localEulerAngles.z > 0 && transform.localEulerAngles.z <= rotationAngleToWin)
+        {
+            OnWinMinigame();
+        }
+        
     }
     void OnMouseEnter(){
         girar = 1;

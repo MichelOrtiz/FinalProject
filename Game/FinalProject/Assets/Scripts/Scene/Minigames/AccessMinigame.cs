@@ -7,6 +7,8 @@ public class AccessMinigame : MonoBehaviour
     public float radius;
     public GameObject minigameObject;
     private Minigame minigame;
+
+    
     // Start is called before the first frame update
     void Start()
     {

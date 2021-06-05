@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ScoreController : MonoBehaviour
+public class ScoreController : MasterMinigame
 {
     public Text scoreText;
 
