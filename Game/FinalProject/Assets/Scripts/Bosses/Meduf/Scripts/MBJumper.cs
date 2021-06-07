@@ -16,11 +16,12 @@ public class MBJumper : MonoBehaviour
     [SerializeField] private CollisionHandler collisionHandler;
     [SerializeField] private GroundChecker groundChecker;
     private Rigidbody2D rb;
-    private bool justGrounded;
+    [SerializeReference]private bool justGrounded;
     #endregion
 
     #region References
     [Header("References")]
+    [SerializeField] private Vector2 initialPosition;
     [SerializeField] private MBPartsHandler partsHandler;
     [SerializeField] private GameObject positionReference;
     private PlayerManager player;
@@ -55,6 +56,7 @@ public class MBJumper : MonoBehaviour
             {
                 curTimeBtwJump += Time.deltaTime;
             }
+            
         }
         else if (groundChecker.isGrounded)
         {
@@ -99,6 +101,7 @@ public class MBJumper : MonoBehaviour
         {
             isReference = true;
             GetComponent<SpriteRenderer>().enabled = true;
+            transform.position = initialPosition;
         }
         else
         {

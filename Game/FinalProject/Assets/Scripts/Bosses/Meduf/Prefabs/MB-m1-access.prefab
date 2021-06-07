@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &735489612146258554
+--- !u!1 &2016833079206979088
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7971148352548893928}
-  - component: {fileID: 4061066537321750380}
+  - component: {fileID: 586880995361138405}
+  - component: {fileID: 1708362229331670437}
   m_Layer: 0
   m_Name: MB-m1-access
   m_TagString: Untagged
@@ -17,35 +17,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7971148352548893928
+--- !u!4 &586880995361138405
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735489612146258554}
+  m_GameObject: {fileID: 2016833079206979088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 111.19528, y: 54.957005, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4061066537321750380
+--- !u!114 &1708362229331670437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735489612146258554}
+  m_GameObject: {fileID: 2016833079206979088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e5c9e3dede9954f8702cf277a3953a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ac70b1382bf150488747c8e7837e2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUI: 1
-  minigameObject: {fileID: 4280962574725656920, guid: 577c6fc3bbb4cf346ac4217a14a0e918, type: 3}
-  sceneIndex: 0
-  MinigameCompleted: 0
-  hasTime: 1
-  time: 5
+  radius: 5
+  minigameObject: {fileID: 735489612146258554, guid: c196c8cd67985bc46b9d288cd44b0413, type: 3}
+  minigame: {fileID: 0}
+  available: 0
+  cooldownTime: 0

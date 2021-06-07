@@ -7,6 +7,7 @@ public class Minigame : MonoBehaviour{
     //public string name;
     [SerializeField] private bool isUI;
     [SerializeField] private GameObject minigameObject;
+    //public GameObject MinigameObject { get => minigameObject; }
     [SerializeField] private int sceneIndex;
     public bool MinigameCompleted;
     [SerializeField] private int rewardMoney;
@@ -17,7 +18,14 @@ public class Minigame : MonoBehaviour{
     private TimerBar timerBar;
     private float currentTime;
 
-    private MasterMinigame minigame;
+    public MasterMinigame MasterMinigame { get; set; }
+
+    public delegate void MinigameEnded();
+    public event MinigameEnded MinigameEndedHandler;
+    protected virtual void OnMinigameEnded()
+    {
+        MinigameEndedHandler?.Invoke();
+    }
 
 
     public virtual void StartMinigame(){
@@ -29,11 +37,11 @@ public class Minigame : MonoBehaviour{
             SceneManager.LoadScene(sceneIndex);
         }
 
-        minigame = ScenesManagers.FindObjectOfType<MasterMinigame>();
-        if (minigame != null)
+        MasterMinigame = ScenesManagers.FindObjectOfType<MasterMinigame>();
+        /*if (minigame != null)
         {
-            minigame.WinMinigameHandler += minigame_WinMinigame;
-        }
+            //minigame.WinMinigameHandler += minigame_WinMinigame;
+        }*/
     }
 
     void Start()
@@ -56,7 +64,7 @@ public class Minigame : MonoBehaviour{
         if(hasTime){
             if(currentTime<=0){
                 currentTime = time;
-                EndMinigame();
+                EndMinigame(false);
             }else{
                 currentTime -= Time.deltaTime;
                 timerBar.SetTime(currentTime);
@@ -64,20 +72,26 @@ public class Minigame : MonoBehaviour{
         } 
     }
 
-    public virtual void EndMinigame(){
+    public virtual void EndMinigame(bool isCompleted)
+    {
         if(isUI){
             MinigameUI.instance.endMinigame();
         }else{
             
         }
+        if (isCompleted)
+        {
+            Debug.Log("MinigameCompleted");
+            Inventory.instance.AddMoney(rewardMoney);
+        }
+        OnMinigameEnded();
         Destroy(gameObject);
     }
 
-    protected virtual void minigame_WinMinigame()
+    /*public void WinMinigame()
     {
-        Debug.Log("MinigameCompleted");
         MinigameCompleted = true;
         Inventory.instance.AddMoney(rewardMoney);
         EndMinigame();
-    }
+    }*/
 }

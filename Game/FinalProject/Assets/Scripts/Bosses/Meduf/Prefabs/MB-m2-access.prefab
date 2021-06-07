@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4704700980958240212
+--- !u!1 &2210813177949553734
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3267230678414419941}
-  - component: {fileID: 8754195318977822732}
+  - component: {fileID: 970065055009834163}
+  - component: {fileID: 1361787231782442995}
   m_Layer: 0
   m_Name: MB-m2-access
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3267230678414419941
+--- !u!4 &970065055009834163
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4704700980958240212}
+  m_GameObject: {fileID: 2210813177949553734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
@@ -31,21 +31,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8754195318977822732
+--- !u!114 &1361787231782442995
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4704700980958240212}
+  m_GameObject: {fileID: 2210813177949553734}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e5c9e3dede9954f8702cf277a3953a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ac70b1382bf150488747c8e7837e2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUI: 1
-  minigameObject: {fileID: 7461996884066457521, guid: f886740b0dbedf34e899f5dcbf60f672, type: 3}
-  sceneIndex: 0
-  MinigameCompleted: 0
-  hasTime: 1
-  time: 15
+  radius: 5
+  minigameObject: {fileID: 4704700980958240212, guid: e5045835a76f7a84496c9a43486331b8, type: 3}
+  minigame: {fileID: 0}
+  available: 0
+  cooldownTime: 0

@@ -30,6 +30,7 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     [Header("Speed and Time")]
     [SerializeField] private float speedMultiplier;
     private float speed;
+    [SerializeField] private float distanceSpeedRatio;
     [SerializeField] private float timeBtwMove;
     private float curTimeBtwMove;
 
@@ -145,6 +146,7 @@ public class MBPartsHandler : MonoBehaviour, ILaser
 
             if (reference != null)
             {
+                //float speedRatio =  Vector2.Distance(part.transform.position, reference.transform.position) / distanceSpeedRatio ;
                 part.transform.position = Vector2.MoveTowards(part.transform.position, reference.transform.position, speed * Time.deltaTime);
                 part.transform.rotation = reference.transform.rotation;
                 
