@@ -13,25 +13,24 @@ public class SquareMinijuego : MasterMinigame
     int speed;
     Rigidbody2D Body;
     private int score;
-    private int dif;
+    public int dif;
 
     void Start()
     {
         Body = GetComponent<Rigidbody2D>();
         dif = 0;
-        speed = Random.Range(10,15);
+        speed = Random.Range(100,150);
+        StartCoroutine(Destruccion());
     }
     void Update()
     {
         transform.position += (Vector3)rotation * speed * Time.deltaTime;
     }
-    void OnTriggerEnter2D(Collider2D target){
-        if (target.tag == "Ground")
-        {
-            Destroy(gameObject);
-        }
+    IEnumerator Destruccion(){
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
     }
-    void OnMouseDown(){
+    public void Pres(){
         dif++;
         if (dif == 2)
         {
