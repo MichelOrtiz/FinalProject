@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SquareMinijuego : MonoBehaviour
+public class SquareMinijuego : MasterMinigame
 {
     private enum Tipo{Cuadrado}
     [SerializeField] Tipo tipo;
@@ -37,6 +37,10 @@ public class SquareMinijuego : MonoBehaviour
         {
             Destroy(gameObject);
             ScoreController.score++;
+            if (ScoreController.score == 5)
+            {
+                OnWinMinigame();
+            }
         }else
         {
             speed = speed/2;
