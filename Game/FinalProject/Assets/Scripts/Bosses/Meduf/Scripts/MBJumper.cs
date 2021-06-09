@@ -9,6 +9,7 @@ public class MBJumper : MonoBehaviour
     [SerializeField] private Vector2 jumpForce;
     [SerializeField] private float timeBtwJump;
     private float curTimeBtwJump;
+    [SerializeField] private float translationSpeed;
     #endregion
 
     #region Rigid, Colliders
@@ -49,14 +50,22 @@ public class MBJumper : MonoBehaviour
         {
             if (curTimeBtwJump > timeBtwJump)
             {
-                justGrounded = false;
-                curTimeBtwJump = 0;
+                if ((Vector2)transform.position != initialPosition)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, initialPosition, translationSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    justGrounded = false;
+                    curTimeBtwJump = 0;
+                    transform.position = initialPosition;  
+                }
+                
             }
             else
             {
                 curTimeBtwJump += Time.deltaTime;
             }
-            
         }
         else if (groundChecker.isGrounded)
         {

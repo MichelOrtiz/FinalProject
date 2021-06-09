@@ -19,7 +19,7 @@ public class ObjectSpawner : MonoBehaviour
     // Only if false in useParentPosition
     [SerializeField] private Vector2 worldPosition;
 
-    private BoxCollider2D box;
+    [SerializeField] private BoxCollider2D box;
 
     void Awake()
     {

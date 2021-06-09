@@ -16,6 +16,11 @@ public class BotonMiniJuegoMeduf : MonoBehaviour
     {
         
     }
+    public void ClickButton()
+    {
+        password.GetComponent<password>().AddPressedCheck(Direccion);
+    }
+    
     void OnMouseDown(){
         password.GetComponent<password>().AddPressedCheck(Direccion);
     }
