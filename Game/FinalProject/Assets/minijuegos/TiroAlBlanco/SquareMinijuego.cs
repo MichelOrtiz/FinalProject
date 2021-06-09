@@ -19,18 +19,18 @@ public class SquareMinijuego : MasterMinigame
     {
         Body = GetComponent<Rigidbody2D>();
         dif = 0;
-        speed = Random.Range(100,150);
-        StartCoroutine(Destruccion());
+        speed = Random.Range(100,250);
     }
     void Update()
     {
         transform.position += (Vector3)rotation * speed * Time.deltaTime;
-    }
-    IEnumerator Destruccion(){
-        yield return new WaitForSeconds(5);
-        Destroy(gameObject);
+        if (transform.position.x<99 || transform.position.x>651 || transform.position.y<49 || transform.position.y>401)
+        {
+            Destroy(gameObject);
+        }
     }
     public void Pres(){
+        Debug.Log("SePudo");
         dif++;
         if (dif == 2)
         {
