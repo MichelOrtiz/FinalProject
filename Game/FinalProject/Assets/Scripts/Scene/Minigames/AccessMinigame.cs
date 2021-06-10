@@ -6,7 +6,7 @@ public class AccessMinigame : MonoBehaviour
 {
     public float radius;
     public GameObject minigameObject;
-    public Minigame minigame;
+    private Minigame minigame;
 
     public MasterMinigame MasterMinigame { get; set; }
     //[SerializeReference] private bool isCompleted;

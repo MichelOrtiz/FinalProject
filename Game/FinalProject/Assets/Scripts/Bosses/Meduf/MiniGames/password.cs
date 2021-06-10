@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class password : MonoBehaviour
+public class password : MasterMinigame
 {
     public int direccion, cant, index;
     public string x;
@@ -11,6 +11,10 @@ public class password : MonoBehaviour
     public List<DireccionMiniJuegoMeduf> ContraCorrect;
     public List<DireccionMiniJuegoMeduf> ContraUser;
     [SerializeField] ArrayList contraseña;
+
+    public delegate void PasswordSet();
+    public event PasswordSet PasswordSetHandler;
+    [SerializeField] private MBPasswordView passwordView;
     void Start()
     {
         cant = RandomGenerator.NewRandom(5,10);
@@ -18,6 +22,7 @@ public class password : MonoBehaviour
         {
             ContraCorrect.Add((DireccionMiniJuegoMeduf)(int)UnityEngine.Random.Range(0,Enum.GetValues(typeof(DireccionMiniJuegoMeduf)).Length));
         }
+        passwordView.SetImages(ContraCorrect);
     }
 
     // Update is called once per frame
@@ -27,6 +32,7 @@ public class password : MonoBehaviour
         {
             Debug.Log("Ganaste :3");
             index = 0;
+            OnWinMinigame();
         }
     }
     void OnMouseDown(){

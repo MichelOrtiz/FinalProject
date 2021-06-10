@@ -22,6 +22,10 @@ public class Minigame : MonoBehaviour{
 
     public delegate void MinigameEnded();
     public event MinigameEnded MinigameEndedHandler;
+
+    /// <summary>
+    /// Called when the minigame ends, either won or not
+    /// </summary>
     protected virtual void OnMinigameEnded()
     {
         MinigameEndedHandler?.Invoke();
@@ -38,10 +42,6 @@ public class Minigame : MonoBehaviour{
         }
 
         MasterMinigame = ScenesManagers.FindObjectOfType<MasterMinigame>();
-        /*if (minigame != null)
-        {
-            //minigame.WinMinigameHandler += minigame_WinMinigame;
-        }*/
     }
 
     void Start()
