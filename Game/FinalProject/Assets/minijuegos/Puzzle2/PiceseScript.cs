@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class PiceseScript : MonoBehaviour
+public class PiceseScript : MasterMinigame
 {
-    private Vector3 RightPosition;
+    [SerializeField] private Vector2 RightPosition;
     public bool InRightPosition = false;
     public bool Selected;
     int lado = 0;
-        void Start()
+    public bool correcta = false;
+    [SerializeField] float rango;
+
+    void Start()
     {
         RightPosition = transform.position;
+        lado = Random.Range(0,2);
         if (lado == 0)
         {
-            transform.position = new Vector3(Random.Range(220,180),Random.Range(310,120));
-            lado++;
+            transform.position = new Vector2(Random.Range(220,180),Random.Range(310,120));
         }else{
-            transform.position = new Vector3(Random.Range(590,550),Random.Range(310,120));
-            lado--;
+            transform.position = new Vector2(Random.Range(590,550),Random.Range(310,120));
         }
-            
     }
 
-    // Update is called once per frame
     void Update()
-    {
-        if (Vector3.Distance(transform.position,RightPosition) < .5f)
+    {        
+
+        if (Vector2.Distance(transform.position,RightPosition) < rango)
         {
             if (!Selected)
             {
@@ -34,9 +35,9 @@ public class PiceseScript : MonoBehaviour
                     transform.position=RightPosition;
                     InRightPosition = true;
                     GetComponent<SortingGroup>().sortingOrder = 0;
+                    correcta = true;
                 }
             }
-            
         }
     }
 }

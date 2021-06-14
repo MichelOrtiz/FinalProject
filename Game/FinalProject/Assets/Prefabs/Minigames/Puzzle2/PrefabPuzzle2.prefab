@@ -8,7 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6843163346110610457}
+  - component: {fileID: 6959308083536212964}
+  - component: {fileID: 7961269493329717330}
   m_Layer: 0
   m_Name: PrefabPuzzle2
   m_TagString: Untagged
@@ -16,15 +17,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6843163346110610457
-Transform:
+--- !u!224 &6959308083536212964
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3280198353829778267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -90.74038}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2627772095298502127}
@@ -33,6 +34,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7961269493329717330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3280198353829778267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae2914712871f547a48149ee889149f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedPiece: {fileID: 0}
 --- !u!1 &3998546299117969962
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +368,7 @@ GameObject:
   - component: {fileID: 3998546299222944880}
   - component: {fileID: 5223180777092000288}
   - component: {fileID: 8564202178573903304}
+  - component: {fileID: 8090302928837186539}
   m_Layer: 0
   m_Name: Piece (25)
   m_TagString: Puzzle
@@ -373,7 +393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.02002, y: -2.04}
+  m_AnchoredPosition: {x: 141.3, y: -89.6}
   m_SizeDelta: {x: 2.23, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3932358879429632924
@@ -505,8 +525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &5223180777092000288
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -528,6 +550,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &8090302928837186539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546299222944886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546299222944886}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546299294019421
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +595,7 @@ GameObject:
   - component: {fileID: 3998546299294019415}
   - component: {fileID: 7315447777184513703}
   - component: {fileID: 8653579986956814580}
+  - component: {fileID: 1417426234264361250}
   m_Layer: 0
   m_Name: Piece (35)
   m_TagString: Puzzle
@@ -568,7 +620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -18.976013, y: -3.7299995}
+  m_AnchoredPosition: {x: -140.3, y: -149}
   m_SizeDelta: {x: 1.69, y: 2.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &369082059606366905
@@ -700,8 +752,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &7315447777184513703
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -723,6 +777,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &1417426234264361250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546299294019421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546299294019421}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546299324141596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1122,7 @@ GameObject:
   - component: {fileID: 3998546299557187104}
   - component: {fileID: 6254818274570474954}
   - component: {fileID: 5831332624278014770}
+  - component: {fileID: 7177458641667758389}
   m_Layer: 0
   m_Name: Piece (19)
   m_TagString: Puzzle
@@ -1063,7 +1147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.526031, y: -2.0389996}
+  m_AnchoredPosition: {x: -89.1, y: -88.6}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7274218261069847173
@@ -1195,8 +1279,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &6254818274570474954
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1218,6 +1304,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &7177458641667758389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546299557187110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546299557187110}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546299634716222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,6 +1349,7 @@ GameObject:
   - component: {fileID: 3998546299634716216}
   - component: {fileID: 3033055523242238060}
   - component: {fileID: 4064813973848175625}
+  - component: {fileID: 3176287577963777424}
   m_Layer: 0
   m_Name: Piece (18)
   m_TagString: Puzzle
@@ -1258,7 +1374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.536041, y: -0.34999943}
+  m_AnchoredPosition: {x: -88.4, y: -30}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1139579566861871574
@@ -1390,8 +1506,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &3033055523242238060
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1413,6 +1531,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &3176287577963777424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546299634716222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546299634716222}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546299638074642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,7 +1623,7 @@ RectTransform:
   - {fileID: 8484862055431037429}
   - {fileID: 3382025416601784808}
   - {fileID: 572982216532352591}
-  m_Father: {fileID: 6843163346110610457}
+  m_Father: {fileID: 6959308083536212964}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1575,6 +1722,7 @@ GameObject:
   - component: {fileID: 3998546299658510142}
   - component: {fileID: 8678596082769173241}
   - component: {fileID: 7891993441918035770}
+  - component: {fileID: 5084386254889934542}
   m_Layer: 0
   m_Name: Piece (10)
   m_TagString: Puzzle
@@ -1599,7 +1747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.536041, y: 3.04}
+  m_AnchoredPosition: {x: -88.4, y: 91.4}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2847897180112356654
@@ -1731,8 +1879,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &8678596082769173241
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1754,6 +1904,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &5084386254889934542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546299658510116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546299658510116}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546299695447399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,6 +2099,7 @@ GameObject:
   - component: {fileID: 3998546299724995101}
   - component: {fileID: 2733055286106769735}
   - component: {fileID: 3842531895366673209}
+  - component: {fileID: 6427827307520169114}
   m_Layer: 0
   m_Name: Piece (20)
   m_TagString: Puzzle
@@ -1944,7 +2124,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.836029, y: -2.0489998}
+  m_AnchoredPosition: {x: -31.8, y: -88.9}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1655776855188769814
@@ -2076,8 +2256,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &2733055286106769735
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2099,6 +2281,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &6427827307520169114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546299724995075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546299724995075}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546299728130642
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,6 +2476,7 @@ GameObject:
   - component: {fileID: 3998546299753495097}
   - component: {fileID: 5573491543804664229}
   - component: {fileID: 3151543727248064648}
+  - component: {fileID: 7963969640984238529}
   m_Layer: 0
   m_Name: Piece (27)
   m_TagString: Puzzle
@@ -2289,7 +2501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -18.976013, y: -0.34000015}
+  m_AnchoredPosition: {x: -140.1, y: -28.5}
   m_SizeDelta: {x: 2.23, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7421002357919628624
@@ -2421,8 +2633,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &5573491543804664229
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2444,6 +2658,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &7963969640984238529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546299753495103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546299753495103}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546299775194995
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,6 +2778,7 @@ GameObject:
   - component: {fileID: 3998546299787981327}
   - component: {fileID: 7109745803144143260}
   - component: {fileID: 2792291226665736391}
+  - component: {fileID: 2194350383488777898}
   m_Layer: 0
   m_Name: Piece (5)
   m_TagString: Puzzle
@@ -2559,7 +2803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.006012, y: 4.75}
+  m_AnchoredPosition: {x: 141.8, y: 148}
   m_SizeDelta: {x: 1.69, y: 2.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5141967749901715203
@@ -2691,8 +2935,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &7109745803144143260
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2714,6 +2960,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &2194350383488777898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546299787981557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546299787981557}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546299909794324
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,6 +3080,7 @@ GameObject:
   - component: {fileID: 3998546299921435099}
   - component: {fileID: 5005736084427027126}
   - component: {fileID: 4664761182922687761}
+  - component: {fileID: 626578687467169591}
   m_Layer: 0
   m_Name: Piece (22)
   m_TagString: Puzzle
@@ -2829,7 +3105,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.4470215, y: -2.04}
+  m_AnchoredPosition: {x: 89.6, y: -89.6}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2608950082964817667
@@ -2961,8 +3237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &5005736084427027126
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2984,6 +3262,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &626578687467169591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546299921435073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546299921435073}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546299924114883
 GameObject:
   m_ObjectHideFlags: 0
@@ -3075,6 +3382,7 @@ GameObject:
   - component: {fileID: 3998546299932655062}
   - component: {fileID: 1649736449585632800}
   - component: {fileID: 4052573920658463245}
+  - component: {fileID: 8274909506654846864}
   m_Layer: 0
   m_Name: Piece (29)
   m_TagString: Puzzle
@@ -3099,7 +3407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -18.976013, y: 3.04}
+  m_AnchoredPosition: {x: -140, y: 89.3}
   m_SizeDelta: {x: 2.23, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6352032757823317303
@@ -3231,8 +3539,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &1649736449585632800
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3254,6 +3564,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &8274909506654846864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546299932655068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546299932655068}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546299946540163
 GameObject:
   m_ObjectHideFlags: 0
@@ -3420,6 +3759,7 @@ GameObject:
   - component: {fileID: 3998546300063585447}
   - component: {fileID: 3004547587848578838}
   - component: {fileID: 352457041389709617}
+  - component: {fileID: 3329175668584150966}
   m_Layer: 0
   m_Name: Piece (33)
   m_TagString: Puzzle
@@ -3444,7 +3784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.827026, y: -3.751}
+  m_AnchoredPosition: {x: -32.3, y: -148.9}
   m_SizeDelta: {x: 2.74, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3447686622220201505
@@ -3576,8 +3916,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &3004547587848578838
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3599,6 +3941,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &3329175668584150966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300063585453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300063585453}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300128963521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3615,6 +3986,7 @@ GameObject:
   - component: {fileID: 3998546300128963547}
   - component: {fileID: 6881880839851947025}
   - component: {fileID: 8837879948025742470}
+  - component: {fileID: 6114054573608822572}
   m_Layer: 0
   m_Name: Piece (14)
   m_TagString: Puzzle
@@ -3639,7 +4011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.4470215, y: 1.349}
+  m_AnchoredPosition: {x: 89.6, y: 30.3}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4098484159748169584
@@ -3771,8 +4143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &6881880839851947025
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3794,6 +4168,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &6114054573608822572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300128963521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300128963521}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300167089830
 GameObject:
   m_ObjectHideFlags: 0
@@ -3885,6 +4288,7 @@ GameObject:
   - component: {fileID: 3998546300216648380}
   - component: {fileID: 6066775938100446606}
   - component: {fileID: 5277480839093627071}
+  - component: {fileID: 877750440953653093}
   m_Layer: 0
   m_Name: Piece (0)
   m_TagString: Puzzle
@@ -3909,7 +4313,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19.23703, y: 4.5040007}
+  m_AnchoredPosition: {x: -149, y: 142.2}
   m_SizeDelta: {x: 1.69, y: 2.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1364785801454131765
@@ -4041,8 +4445,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &6066775938100446606
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4064,6 +4470,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &877750440953653093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300216648381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300216648381}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300223739399
 GameObject:
   m_ObjectHideFlags: 0
@@ -4080,6 +4515,7 @@ GameObject:
   - component: {fileID: 3998546300223739393}
   - component: {fileID: 1912680352993759852}
   - component: {fileID: 12776905682629214}
+  - component: {fileID: 3037036717781861537}
   m_Layer: 0
   m_Name: Piece (24)
   m_TagString: Puzzle
@@ -4104,7 +4540,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.7760315, y: -0.32899952}
+  m_AnchoredPosition: {x: 150.7, y: -29.3}
   m_SizeDelta: {x: 2.74, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4328446545639341217
@@ -4236,8 +4672,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &1912680352993759852
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4259,6 +4697,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &3037036717781861537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300223739399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300223739399}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300226267854
 GameObject:
   m_ObjectHideFlags: 0
@@ -4350,6 +4817,7 @@ GameObject:
   - component: {fileID: 3998546300301708301}
   - component: {fileID: 4227710423041780354}
   - component: {fileID: 3852577157601049492}
+  - component: {fileID: 1025446726953706936}
   m_Layer: 0
   m_Name: Piece (17)
   m_TagString: Puzzle
@@ -4374,7 +4842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.846039, y: -0.3399992}
+  m_AnchoredPosition: {x: -30.3, y: -30}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5203929854407487463
@@ -4506,8 +4974,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &4227710423041780354
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4529,6 +4999,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &1025446726953706936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300301708531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300301708531}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300338196434
 GameObject:
   m_ObjectHideFlags: 0
@@ -4545,6 +5044,7 @@ GameObject:
   - component: {fileID: 3998546300338196460}
   - component: {fileID: 1513850114650401008}
   - component: {fileID: 6138944419213775239}
+  - component: {fileID: 8691330515083272061}
   m_Layer: 0
   m_Name: Piece (12)
   m_TagString: Puzzle
@@ -4569,7 +5069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.836029, y: 1.3400002}
+  m_AnchoredPosition: {x: -30.4, y: 30.4}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5202819639552254450
@@ -4701,8 +5201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &1513850114650401008
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4724,6 +5226,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &8691330515083272061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300338196434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300338196434}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300374613636
 GameObject:
   m_ObjectHideFlags: 0
@@ -4740,6 +5271,7 @@ GameObject:
   - component: {fileID: 3998546300374613662}
   - component: {fileID: 8576748910546444200}
   - component: {fileID: 2336884893351965979}
+  - component: {fileID: 8597106938837716154}
   m_Layer: 0
   m_Name: Piece (34)
   m_TagString: Puzzle
@@ -4764,7 +5296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.53302, y: -3.487}
+  m_AnchoredPosition: {x: -89.2, y: -140.6}
   m_SizeDelta: {x: 2.23, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2489712569800748852
@@ -4896,8 +5428,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &8576748910546444200
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4919,6 +5453,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &8597106938837716154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300374613636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300374613636}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300392110364
 GameObject:
   m_ObjectHideFlags: 0
@@ -4935,6 +5498,7 @@ GameObject:
   - component: {fileID: 3998546300392110358}
   - component: {fileID: 3834876894522645592}
   - component: {fileID: 1057894118847851510}
+  - component: {fileID: 2251319003460300758}
   m_Layer: 0
   m_Name: Piece (30)
   m_TagString: Puzzle
@@ -4959,7 +5523,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.756012, y: -3.4799995}
+  m_AnchoredPosition: {x: 149.1, y: -141}
   m_SizeDelta: {x: 1.69, y: 2.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1857866501886153586
@@ -5091,8 +5655,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &3834876894522645592
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5114,6 +5680,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &2251319003460300758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300392110364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300392110364}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300458932348
 GameObject:
   m_ObjectHideFlags: 0
@@ -5355,6 +5950,7 @@ GameObject:
   - component: {fileID: 3998546300638409621}
   - component: {fileID: 508219356400081449}
   - component: {fileID: 5019612952538416121}
+  - component: {fileID: 3830912503410280922}
   m_Layer: 0
   m_Name: Piece (8)
   m_TagString: Puzzle
@@ -5379,7 +5975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.156036, y: 3.04}
+  m_AnchoredPosition: {x: 31.2, y: 90.6}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3591292961653236896
@@ -5511,8 +6107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &508219356400081449
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5534,6 +6132,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &3830912503410280922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300638409627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300638409627}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300642755296
 GameObject:
   m_ObjectHideFlags: 0
@@ -5550,6 +6177,7 @@ GameObject:
   - component: {fileID: 3998546300642755322}
   - component: {fileID: 4371027218312137920}
   - component: {fileID: 731685571759870745}
+  - component: {fileID: 7381947194689601225}
   m_Layer: 0
   m_Name: Piece (13)
   m_TagString: Puzzle
@@ -5574,7 +6202,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.146027, y: 1.3500004}
+  m_AnchoredPosition: {x: 28.9, y: 29.4}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &288971091805173173
@@ -5706,8 +6334,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &4371027218312137920
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5729,6 +6359,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &7381947194689601225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300642755296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300642755296}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300645037295
 GameObject:
   m_ObjectHideFlags: 0
@@ -5745,6 +6404,7 @@ GameObject:
   - component: {fileID: 3998546300645037289}
   - component: {fileID: 5250986954249120120}
   - component: {fileID: 3070165116034457994}
+  - component: {fileID: 5437143259591480439}
   m_Layer: 0
   m_Name: Piece (11)
   m_TagString: Puzzle
@@ -5769,7 +6429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.526031, y: 1.3500004}
+  m_AnchoredPosition: {x: -88.7, y: 30.5}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8836217793715149499
@@ -5901,8 +6561,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &5250986954249120120
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5924,6 +6586,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &5437143259591480439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300645037295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300645037295}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300654105406
 GameObject:
   m_ObjectHideFlags: 0
@@ -6179,7 +6870,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 35, y: 35, z: 1}
   m_Children: []
-  m_Father: {fileID: 6843163346110610457}
+  m_Father: {fileID: 6959308083536212964}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6329,6 +7020,7 @@ GameObject:
   - component: {fileID: 3998546300712891821}
   - component: {fileID: 6002725487039344852}
   - component: {fileID: 8092957138501028892}
+  - component: {fileID: 3434894075075890436}
   m_Layer: 0
   m_Name: Piece (4)
   m_TagString: Puzzle
@@ -6353,7 +7045,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.456024, y: 4.51}
+  m_AnchoredPosition: {x: 91, y: 139.8}
   m_SizeDelta: {x: 2.23, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3661119663093935739
@@ -6485,8 +7177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &6002725487039344852
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6508,6 +7202,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &3434894075075890436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300712891795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300712891795}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300733193093
 GameObject:
   m_ObjectHideFlags: 0
@@ -6599,6 +7322,7 @@ GameObject:
   - component: {fileID: 3998546300752875425}
   - component: {fileID: 7024508924312701846}
   - component: {fileID: 3849291979107916521}
+  - component: {fileID: 4958036952129508294}
   m_Layer: 0
   m_Name: Piece (32)
   m_TagString: Puzzle
@@ -6623,7 +7347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.146027, y: -3.5}
+  m_AnchoredPosition: {x: 28.1, y: -140.7}
   m_SizeDelta: {x: 2.23, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2660583247739190605
@@ -6755,8 +7479,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &7024508924312701846
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6778,6 +7504,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &4958036952129508294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300752875431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300752875431}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300760388995
 GameObject:
   m_ObjectHideFlags: 0
@@ -6794,6 +7549,7 @@ GameObject:
   - component: {fileID: 3998546300760389021}
   - component: {fileID: 1165663216681529936}
   - component: {fileID: 7262318676806875520}
+  - component: {fileID: 6690272379380641388}
   m_Layer: 0
   m_Name: Piece (15)
   m_TagString: Puzzle
@@ -6818,7 +7574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.436035, y: -0.3399992}
+  m_AnchoredPosition: {x: 89.6, y: -29.3}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2907126429927725235
@@ -6950,8 +7706,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &1165663216681529936
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6973,6 +7731,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &6690272379380641388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300760388995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300760388995}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300769476490
 GameObject:
   m_ObjectHideFlags: 0
@@ -7077,7 +7864,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 35, y: 35, z: 1}
   m_Children: []
-  m_Father: {fileID: 6843163346110610457}
+  m_Father: {fileID: 6959308083536212964}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7139,6 +7926,7 @@ GameObject:
   - component: {fileID: 3998546300848975082}
   - component: {fileID: 1439337043559713792}
   - component: {fileID: 2547885022929929968}
+  - component: {fileID: 6759439004334688805}
   m_Layer: 0
   m_Name: Piece (2)
   m_TagString: Puzzle
@@ -7163,7 +7951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.846039, y: 4.51}
+  m_AnchoredPosition: {x: -31, y: 138.2}
   m_SizeDelta: {x: 2.23, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5808244908696696006
@@ -7295,8 +8083,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &1439337043559713792
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7318,6 +8108,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &6759439004334688805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300848975056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300848975056}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300860546506
 GameObject:
   m_ObjectHideFlags: 0
@@ -7409,6 +8228,7 @@ GameObject:
   - component: {fileID: 3998546300879925978}
   - component: {fileID: 8041677143002874718}
   - component: {fileID: 1597143950463712678}
+  - component: {fileID: 7759373172628274613}
   m_Layer: 0
   m_Name: Piece (1)
   m_TagString: Puzzle
@@ -7433,7 +8253,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.55603, y: 4.76}
+  m_AnchoredPosition: {x: -90.8, y: 148}
   m_SizeDelta: {x: 2.74, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1963829911785941813
@@ -7565,8 +8385,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &8041677143002874718
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7588,6 +8410,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &7759373172628274613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300879925952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300879925952}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300894504705
 GameObject:
   m_ObjectHideFlags: 0
@@ -7604,6 +8455,7 @@ GameObject:
   - component: {fileID: 3998546300894504731}
   - component: {fileID: 8535843116255288026}
   - component: {fileID: 6692574837607075765}
+  - component: {fileID: 893460074379384459}
   m_Layer: 0
   m_Name: Piece (23)
   m_TagString: Puzzle
@@ -7628,7 +8480,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.016022, y: 1.3400002}
+  m_AnchoredPosition: {x: 141.3, y: 30.3}
   m_SizeDelta: {x: 2.23, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6118661870814951332
@@ -7760,8 +8612,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &8535843116255288026
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7783,6 +8637,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &893460074379384459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300894504705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300894504705}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546300993928252
 GameObject:
   m_ObjectHideFlags: 0
@@ -7799,6 +8682,7 @@ GameObject:
   - component: {fileID: 3998546300993928246}
   - component: {fileID: 2079319051087053981}
   - component: {fileID: 2507243075194613556}
+  - component: {fileID: 6233247194601482072}
   m_Layer: 0
   m_Name: Piece (7)
   m_TagString: Puzzle
@@ -7823,7 +8707,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.466034, y: 3.0500002}
+  m_AnchoredPosition: {x: 91, y: 90.6}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3919035456364374220
@@ -7955,8 +8839,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &2079319051087053981
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7978,6 +8864,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &6233247194601482072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546300993928252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546300993928252}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546301007409317
 GameObject:
   m_ObjectHideFlags: 0
@@ -7994,6 +8909,7 @@ GameObject:
   - component: {fileID: 3998546301007409343}
   - component: {fileID: 9039225608555778748}
   - component: {fileID: 5627849969488647174}
+  - component: {fileID: 7265165553877710881}
   m_Layer: 0
   m_Name: Piece (31)
   m_TagString: Puzzle
@@ -8018,7 +8934,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.446014, y: -3.7399998}
+  m_AnchoredPosition: {x: 88.8, y: -150}
   m_SizeDelta: {x: 2.74, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6378518092211313148
@@ -8150,8 +9066,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &9039225608555778748
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8173,6 +9091,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &7265165553877710881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546301007409317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546301007409317}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546301018198971
 GameObject:
   m_ObjectHideFlags: 0
@@ -8264,6 +9211,7 @@ GameObject:
   - component: {fileID: 3998546301021824058}
   - component: {fileID: 8779942665140725482}
   - component: {fileID: 8458995689480075123}
+  - component: {fileID: 4737971674840460663}
   m_Layer: 0
   m_Name: Piece (26)
   m_TagString: Puzzle
@@ -8288,7 +9236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19.226013, y: -2.04}
+  m_AnchoredPosition: {x: -149.5, y: -87.3}
   m_SizeDelta: {x: 2.74, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4403576359889632887
@@ -8420,8 +9368,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &8779942665140725482
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8443,6 +9393,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &4737971674840460663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546301021824032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546301021824032}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546301083459085
 GameObject:
   m_ObjectHideFlags: 0
@@ -8459,6 +9438,7 @@ GameObject:
   - component: {fileID: 3998546301083459079}
   - component: {fileID: 3933564680325104320}
   - component: {fileID: 5572359810853296250}
+  - component: {fileID: 8560232818421645881}
   m_Layer: 0
   m_Name: Piece (21)
   m_TagString: Puzzle
@@ -8483,7 +9463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.146027, y: -2.0389996}
+  m_AnchoredPosition: {x: 28.7, y: -88.7}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2782330799628392827
@@ -8615,8 +9595,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &3933564680325104320
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8638,6 +9620,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &8560232818421645881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546301083459085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546301083459085}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546301089837572
 GameObject:
   m_ObjectHideFlags: 0
@@ -8879,6 +9890,7 @@ GameObject:
   - component: {fileID: 3998546301102353893}
   - component: {fileID: 4941275976514053663}
   - component: {fileID: 4146323153328433715}
+  - component: {fileID: 5814300189791482122}
   m_Layer: 0
   m_Name: Piece (16)
   m_TagString: Puzzle
@@ -8903,7 +9915,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.156036, y: -0.34999943}
+  m_AnchoredPosition: {x: 29.3, y: -28.5}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2865108806059771869
@@ -9035,8 +10047,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &4941275976514053663
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9058,6 +10072,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &5814300189791482122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546301102353899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546301102353899}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546301107772395
 GameObject:
   m_ObjectHideFlags: 0
@@ -9149,6 +10192,7 @@ GameObject:
   - component: {fileID: 3998546301159039505}
   - component: {fileID: 2566155664922172009}
   - component: {fileID: 2104524433864280644}
+  - component: {fileID: 5099655669070573118}
   m_Layer: 0
   m_Name: Piece (6)
   m_TagString: Puzzle
@@ -9173,7 +10217,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.7760315, y: 3.0510006}
+  m_AnchoredPosition: {x: 150.8, y: 91.4}
   m_SizeDelta: {x: 2.74, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4147343763610481217
@@ -9305,8 +10349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &2566155664922172009
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9328,6 +10374,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &5099655669070573118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546301159039511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546301159039511}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546301173501672
 GameObject:
   m_ObjectHideFlags: 0
@@ -9344,6 +10419,7 @@ GameObject:
   - component: {fileID: 3998546301173501666}
   - component: {fileID: 1183711338895586981}
   - component: {fileID: 6635959664215039838}
+  - component: {fileID: 2487337659028323907}
   m_Layer: 0
   m_Name: Piece (9)
   m_TagString: Puzzle
@@ -9368,7 +10444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.846039, y: 3.0500002}
+  m_AnchoredPosition: {x: -29.4, y: 89.8}
   m_SizeDelta: {x: 1.72, y: 2.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6962003090191412164
@@ -9500,8 +10576,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &1183711338895586981
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9523,6 +10601,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &2487337659028323907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546301173501672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546301173501672}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546301196313131
 GameObject:
   m_ObjectHideFlags: 0
@@ -9539,6 +10646,7 @@ GameObject:
   - component: {fileID: 3998546301196313125}
   - component: {fileID: 5895808358407783422}
   - component: {fileID: 2280195337334759243}
+  - component: {fileID: 243059837880355305}
   m_Layer: 0
   m_Name: Piece (3)
   m_TagString: Puzzle
@@ -9563,7 +10671,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.146027, y: 4.76}
+  m_AnchoredPosition: {x: 28.8, y: 148.8}
   m_SizeDelta: {x: 2.74, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4198931270855332602
@@ -9695,8 +10803,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &5895808358407783422
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9718,6 +10828,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &243059837880355305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546301196313131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546301196313131}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546301224504545
 GameObject:
   m_ObjectHideFlags: 0
@@ -9734,6 +10873,7 @@ GameObject:
   - component: {fileID: 3998546301224504571}
   - component: {fileID: 9006048927058070403}
   - component: {fileID: 5951315214439569961}
+  - component: {fileID: 5231337512440527985}
   m_Layer: 0
   m_Name: Piece (28)
   m_TagString: Puzzle
@@ -9758,7 +10898,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19.236023, y: 1.3600006}
+  m_AnchoredPosition: {x: -148, y: 31.1}
   m_SizeDelta: {x: 2.74, y: 1.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1537740551635928604
@@ -9890,8 +11030,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d9100b424604daa5f9aa114d0245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RightPosition: {x: 0, y: 0}
   InRightPosition: 0
   Selected: 0
+  rango: 17.5
 --- !u!222 &9006048927058070403
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9913,6 +11055,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &5231337512440527985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998546301224504545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7961269493329717330}
+          m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
+          m_MethodName: presionado
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3998546301224504545}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3998546301242742003
 GameObject:
   m_ObjectHideFlags: 0
