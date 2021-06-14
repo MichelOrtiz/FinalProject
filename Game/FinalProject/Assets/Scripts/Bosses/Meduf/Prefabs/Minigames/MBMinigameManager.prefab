@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2016833079206979088
+--- !u!1 &6199962170960842233
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 586880995361138405}
-  - component: {fileID: 1708362229331670437}
+  - component: {fileID: 2674683094783143551}
+  - component: {fileID: 308058316967125212}
   m_Layer: 0
-  m_Name: MB-m1-access
+  m_Name: MBMinigameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &586880995361138405
+--- !u!4 &2674683094783143551
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016833079206979088}
+  m_GameObject: {fileID: 6199962170960842233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 132.51749, y: 47.87352, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1708362229331670437
+--- !u!114 &308058316967125212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016833079206979088}
+  m_GameObject: {fileID: 6199962170960842233}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ac70b1382bf150488747c8e7837e2cf, type: 3}
+  m_Script: {fileID: 11500000, guid: d1e63273d12597642a08922317cd76b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
-  minigameObject: {fileID: 735489612146258554, guid: c196c8cd67985bc46b9d288cd44b0413, type: 3}
-  minigame: {fileID: 0}
-  available: 0
-  cooldownTime: 0
+  currentHost: {fileID: 0}
+  minigameAccess:
+  - {fileID: 1708362229331670437, guid: 0138b498d6597b047b997d34d32181d9, type: 3}
+  - {fileID: 1361787231782442995, guid: dbe3d03ba384d4f49972d5da11b5eb4a, type: 3}
+  - {fileID: 7250095390988747224, guid: 2db2604a6432a0348bb5bd9103c5ef5a, type: 3}
+  currentMinigameAccess: {fileID: 0}
+  index: 0

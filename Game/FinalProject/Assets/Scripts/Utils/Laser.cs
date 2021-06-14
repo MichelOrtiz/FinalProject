@@ -139,9 +139,10 @@ public class Laser : MonoBehaviour
                 currentTime += Time.deltaTime;
             }
 
-
-            ExtendRay();
-
+            if (summoner?.ShotPos != null)
+            {
+                ExtendRay();
+            }
             
             edge.SetPoints(new List<Vector2>()
                 {transform.InverseTransformPoint(startPos) , transform.InverseTransformPoint(endPoint.position)}

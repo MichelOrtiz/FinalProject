@@ -40,6 +40,7 @@ public class AccessMinigame : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.E)&&distance<radius)
         {
+            Debug.Log("should access minigame from " + minigameObject);
             //spawns the minigame as a Unity object so that it recognizes its methods, then runs its code.
             minigame = Instantiate(minigameObject).GetComponent<Minigame>();  
             minigame.StartMinigame();

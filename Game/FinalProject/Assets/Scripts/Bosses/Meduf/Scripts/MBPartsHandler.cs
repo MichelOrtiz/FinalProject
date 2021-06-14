@@ -10,6 +10,8 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     [SerializeField] private List<GameObject> parts;
     private int totalParts;
     [SerializeReference] private List<GameObject> movedParts; 
+
+    public bool IsAssembled { get => Assembled(totalParts); }
     //[SerializeReference] private List<GameObject> assembledParts;
     #endregion
 
@@ -18,6 +20,7 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     [SerializeField] private GameObject rightPositionReference;
     [SerializeField] private GameObject leftPositionReference;
     [SerializeReference] private GameObject currentPositionsReference;
+    public GameObject CurrentReference { get => currentPositionsReference; }
 
     private Vector2 lastPartPosition;
     [SerializeField] private float yCheckRange;
@@ -36,9 +39,7 @@ public class MBPartsHandler : MonoBehaviour, ILaser
 
     [SerializeField] private float waitTimeWhenAssembled;
     private float curAssembledTime;
-    private bool assembled;
 
-    
     #endregion
 
     #region LaserWarning
@@ -65,6 +66,14 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     {
         ChangedReferenceHandler?.Invoke(reference);
     }
+
+
+    public delegate void AllAssembled();
+    public event AllAssembled AllAssemledHandler;
+    protected virtual void OnAllAssembled()
+    {
+        AllAssemledHandler?.Invoke();
+    }
     #endregion
 
 
@@ -75,7 +84,10 @@ public class MBPartsHandler : MonoBehaviour, ILaser
         speed = Entity.averageSpeed * speedMultiplier;
 
         totalParts = parts.Count + movedParts.Count;
-        currentPositionsReference = leftPositionReference;
+        if (currentPositionsReference == null)
+        {
+            currentPositionsReference = leftPositionReference;
+        }
         OnChangedReference(currentPositionsReference);
 
         Center = MathUtils.FindCenterOfTransforms(parts.GetRange(0, parts.Count));
@@ -114,6 +126,7 @@ public class MBPartsHandler : MonoBehaviour, ILaser
         }
         else
         {
+            OnAllAssembled();
             if (parts.Count == 0)
             {
                 parts.AddRange(movedParts);

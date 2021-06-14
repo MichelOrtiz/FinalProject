@@ -34,9 +34,10 @@ public class Minigame : MonoBehaviour{
 
     public virtual void StartMinigame(){
         
-        if(isUI){
+        if(isUI)
+        {
             MinigameUI.instance.recieveMinigame(minigameObject);
-            
+            Pause.PauseGame();
         }else{
             SceneManager.LoadScene(sceneIndex);
         }
@@ -66,7 +67,7 @@ public class Minigame : MonoBehaviour{
                 currentTime = time;
                 EndMinigame(false);
             }else{
-                currentTime -= Time.deltaTime;
+                currentTime -= Time.unscaledDeltaTime;
                 timerBar.SetTime(currentTime);
             }
         } 
@@ -74,14 +75,16 @@ public class Minigame : MonoBehaviour{
 
     public virtual void EndMinigame(bool isCompleted)
     {
-        if(isUI){
+        if(isUI)
+        {
             MinigameUI.instance.endMinigame();
+            Pause.ResumeGame();
         }else{
             
         }
         if (isCompleted)
         {
-            Debug.Log("MinigameCompleted");
+            Debug.Log("Minigame <<" + minigameObject + ">> completed!");
             Inventory.instance.AddMoney(rewardMoney);
         }
         OnMinigameEnded();

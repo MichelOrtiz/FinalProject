@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
-    bool active;
+    static bool active;
     public GameObject panel;
-    PlayerInputs inputs;
+    static PlayerInputs inputs;
     void Start()
     {
        inputs = PlayerManager.instance.gameObject.GetComponent<PlayerInputs>();
@@ -19,10 +19,28 @@ public class Pause : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape)){
-            active = !active;
+            //active = !active;
+            HandleActive(!active);
             panel.SetActive(active);
-            Time.timeScale = (active) ? 0 : 1f;
-            inputs.enabled = !active;
+            //Time.timeScale = (active) ? 0 : 1f;
+            //inputs.enabled = !active;
         }
+    }
+    
+    public static void PauseGame()
+    {
+        HandleActive(true);
+    }
+
+    public static void ResumeGame()
+    {
+        HandleActive(false);
+    }
+
+    static void HandleActive(bool value)
+    {
+        active = value;
+        Time.timeScale = (active) ? 0 : 1f;
+        inputs.enabled = !active;
     }
 }

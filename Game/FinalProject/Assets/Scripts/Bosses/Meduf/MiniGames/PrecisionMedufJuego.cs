@@ -13,6 +13,11 @@ public class PrecisionMedufJuego : MonoBehaviour
     public Vector2 position;
     bool reloj;
     public bool moviendose;
+
+    [Header("Score Range")]
+    [SerializeField] private float minAngle;
+    [SerializeField] private float maxAngle;
+
     void Start()
     {
         Body = GetComponent<Rigidbody2D>();
@@ -27,7 +32,7 @@ public class PrecisionMedufJuego : MonoBehaviour
         if (reloj)
         {
             random=Random.Range(1,3);
-            Body.rotation = x;
+            transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, x);
             x+=random;
             if (x>randomreloj)
             {
@@ -37,7 +42,7 @@ public class PrecisionMedufJuego : MonoBehaviour
         }else
         {
             random=Random.Range(1,3);
-            Body.rotation = x;
+            transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, x);
             x-=random;
             if (x<randomreloj)
             {
@@ -46,5 +51,14 @@ public class PrecisionMedufJuego : MonoBehaviour
             }
         }
     }
-}
+    
+    public void OnClickButton()
+    {
+        if (transform.localEulerAngles.z <= minAngle || transform.localEulerAngles.z >= maxAngle )
+        {
+            ScoreController.score++;
+        }
+        enabled = false;
+    }   
 
+}
