@@ -87,16 +87,18 @@ public class UnicornHead : MonoBehaviour
         {
             if (child != GroundAttack)
             {
+                Debug.Log("Changed atatck to ground");
                 nextChild = GroundAttack;
-                // ChangeChild(GroundAttack);
+                //ChangeChild(GroundAttack);
             }
         }
         else if (playerGroundChecker.lastGroundTag == "Platform")
         {
             if (child != PlatformAttack)
             {
+                Debug.Log("Changed attack to platform");
                 nextChild = PlatformAttack;
-                // ChangeChild(PlatformAttack);
+                //ChangeChild(PlatformAttack);
             }
         }
     }
@@ -127,7 +129,14 @@ public class UnicornHead : MonoBehaviour
         if (child != null)
         {
             child.GetComponent<UBBehaviour>().SetActive(false);
+        
         }
+        
+        /*if (gameObject != GroundAttack)
+        {
+            Destroy(FindObjectOfType<Laser>()?.gameObject);
+        }*/
+
 
         child = gameObject;
         child.GetComponent<UBBehaviour>().SetActive(true);

@@ -40,12 +40,14 @@ public class BossFight : MonoBehaviour
             currentStage=stages[indexStage];
             currentStage.Generate();
         }
-        else{
-            Debug.Log("Lo hiciste ganaste!!!1");
+        else
+        {
+            /*Debug.Log("Lo hiciste ganaste!!!1");
             currentStage.Destroy();
-            isCleared=true;
+            isCleared=true;*/
             //give ability
             //AbilityManager.instance.AddAbility(reward);
+            EndBattle();
         }
     }
 
@@ -53,6 +55,11 @@ public class BossFight : MonoBehaviour
     {
         currentStage.Destroy();
         isCleared=true;
+
+        Vector2 abilitySpawnPos = new Vector2(PlayerManager.instance.GetPosition().x, PlayerManager.instance.GetPosition().y + 5f);
+
+        Instantiate(abilityObject, abilitySpawnPos, abilityObject.transform.rotation);
+
         Debug.Log("Lo hiciste ganaste!!!1");
     }
 }

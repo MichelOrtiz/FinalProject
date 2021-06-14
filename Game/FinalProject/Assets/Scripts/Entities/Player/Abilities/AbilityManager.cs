@@ -20,10 +20,34 @@ public class AbilityManager : MonoBehaviour
             abilities.Add(abs[i]);
         }
     }
+
+    /// <summary>
+    /// Sets active (<see langword="true"/> or <see langword="false"/>) on all abilities
+    /// </summary>
+    /// <param name="active"></param>
     public void SetActive(bool active){
         foreach(Ability a in abilities){
             a.isUnlocked=active;
             a.enabled=active;
         }
+    }
+
+    public void SetActiveSingle(Ability ability, bool active)
+    {
+        try
+        {
+            FindAbility(ability.abilityName).isUnlocked = active;
+            FindAbility(ability.abilityName).enabled = active;
+        }
+        catch (System.NullReferenceException)
+        {
+            Debug.Log("ERROR: Can't set active: ability not found in manager list");
+            return;
+        }
+    }
+
+    public Ability FindAbility(Ability.Abilities name)
+    {
+        return abilities.Find(a => a.abilityName == name);
     }
 }

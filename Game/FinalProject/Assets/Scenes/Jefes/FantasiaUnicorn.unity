@@ -403,7 +403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9566c5aae163cd14d972aac317724961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 65040897}
 --- !u!114 &65040897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,7 +580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e5d5604cd93bd4e83c5a3ac17922b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 148514038}
 --- !u!114 &148514038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcb3f795e3cf1143b10f860f7ddfcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
 --- !u!58 &199248765
 CircleCollider2D:
@@ -1204,7 +1203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stages:
   - {fileID: 11400000, guid: fc70580ab3d850243bb7f8ea4cd10dc6, type: 2}
-  abilityObject: {fileID: 0}
+  abilityObject: {fileID: 610940962886055774, guid: 804597eaf0c39b6469c0f1ef6336d9a7, type: 3}
   currentStage: {fileID: 0}
   isCleared: 0
 --- !u!4 &308103145
@@ -1668,6 +1667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcb3f795e3cf1143b10f860f7ddfcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
 --- !u!58 &503463049
 CircleCollider2D:
@@ -2267,11 +2267,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.73
+      value: 9.3
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.45
+      value: 3.7
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13638,6 +13638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcb3f795e3cf1143b10f860f7ddfcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
 --- !u!58 &1042695315
 CircleCollider2D:
@@ -17602,7 +17603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc842e7354865304a9bfa633bbd6c620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputs: {fileID: 0}
   itemsParentHotbar0: {fileID: 1691597617}
 --- !u!114 &1806600492
 MonoBehaviour:
@@ -17638,7 +17638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyText: {fileID: 201421831}
   items:
-  - {fileID: 11400000, guid: d137fafc42811c546b667a1fe95b2c07, type: 2}
+  - {fileID: 0}
   capacidad: 20
 --- !u!114 &1806600494
 MonoBehaviour:
@@ -17938,6 +17938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fcb3f795e3cf1143b10f860f7ddfcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
 --- !u!58 &1921592611
 CircleCollider2D:
