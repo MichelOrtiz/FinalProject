@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Invisible : Ability
 {
-    public GameObject Nico;
+    public GameObject Atacado;
 
     public override void UseAbility()
     {   
@@ -40,12 +40,16 @@ public class Invisible : Ability
         {
             player.gameObject.layer = LayerMask.NameToLayer("Invisible");
             player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Invisible");
+            player.groundChecker.gameObject.layer = LayerMask.NameToLayer("Invisible");
             player.abilityManager.gameObject.layer = LayerMask.NameToLayer("Invisible");
-        }else
+            Atacado.gameObject.layer = LayerMask.NameToLayer("Invisible");
+        }else if(!player.isDodging)
         {
             player.gameObject.layer = LayerMask.NameToLayer("Default");
             player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Default");
+            player.groundChecker.gameObject.layer = LayerMask.NameToLayer("Default");
             player.abilityManager.gameObject.layer = LayerMask.NameToLayer("Default");
+            Atacado.gameObject.layer = LayerMask.NameToLayer("Default");
         }
         if (Input.GetKeyDown(hotkey))
         {

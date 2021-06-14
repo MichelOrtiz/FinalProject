@@ -25,7 +25,7 @@ public class FrutaMiniJuego : MonoBehaviour
             Tiempoact = 0;
         }else
         {
-            Tiempoact += Time.deltaTime;
+            Tiempoact += Time.unscaledDeltaTime;
         }
 
     }

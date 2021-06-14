@@ -23,7 +23,7 @@ public class SquareMinijuego : MonoBehaviour
     }
     void Update()
     {
-        transform.position += (Vector3)rotation * speed * Time.deltaTime;
+        transform.position += (Vector3)rotation * speed * Time.unscaledDeltaTime;
         if (transform.position.x<99 || transform.position.x>651 || transform.position.y<49 || transform.position.y>401)
         {
             Destroy(gameObject);
@@ -39,7 +39,7 @@ public class SquareMinijuego : MonoBehaviour
         }else
         {
             speed = speed/2;
-            transform.position += (Vector3)rotation * speed * Time.deltaTime;
+            transform.position += (Vector3)rotation * speed * Time.unscaledDeltaTime;
         }
     }
 }

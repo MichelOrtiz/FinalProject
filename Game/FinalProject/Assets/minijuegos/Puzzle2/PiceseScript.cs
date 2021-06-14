@@ -20,7 +20,7 @@ public class PiceseScript : MasterMinigame
         {
             transform.position = new Vector2(Random.Range(220,180),Random.Range(310,120));
         }else{
-            transform.position = new Vector2(Random.Range(590,550),Random.Range(310,120));
+            transform.position = new Vector2(Random.Range(590,550),Random.Range(215,120));
         }
     }
 
