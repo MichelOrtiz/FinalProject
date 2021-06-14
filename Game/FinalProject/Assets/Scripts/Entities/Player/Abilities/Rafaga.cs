@@ -46,8 +46,6 @@ public class Rafaga : Ability
         if (isActivated)
         {
             parti.SetActive(true);
-            //Rafagaobj.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-            //player.abilityManager.escudo.gameObject.GetComponent<CircleCollider2D>().enabled = true;
         }else
         {
             parti.SetActive(false);
@@ -61,8 +59,6 @@ public class Rafaga : Ability
                     }
                 }
             }
-            //Rafagaobj.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            //player.abilityManager.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }
         if (Input.GetKeyDown(hotkey))
         {

@@ -6,12 +6,14 @@ public class Escudo : Ability
 {
     public GameObject Escudobj;
     public bool isInShield;
+    public float staminaActual;
 
     public override void UseAbility()
     {   
         if(player.currentStamina < staminaCost)return;
         isInShield=true;
         base.UseAbility();
+        staminaActual = player.currentStamina;
     }
     protected override void Start()
     {
@@ -40,6 +42,7 @@ public class Escudo : Ability
         if (isInShield)
         {
             Escudobj.gameObject.GetComponent<CircleCollider2D>().enabled = true;
+            player.currentStamina = staminaActual;
             //player.abilityManager.escudo.gameObject.GetComponent<CircleCollider2D>().enabled = true;
         }else
         {

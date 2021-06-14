@@ -1253,7 +1253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245988048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.3, y: 22.1, z: 0}
+  m_LocalPosition: {x: -138.1, y: -20.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -121856,7 +121856,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 603629796347817875, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_Layer
-      value: 16
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 603629796347817875, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 838884290077030954, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_Color.a
@@ -121870,6 +121874,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 960247108246901055, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031731497466114772, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: movimiento
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1327495402985332090, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_Color.a
       value: 0.90588236
@@ -121881,6 +121893,10 @@ PrefabInstance:
     - target: {fileID: 1522910831385704399, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: checkFeetRadius
       value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1533819169538553012, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: empuje
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 1533819169538553012, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: duration
@@ -121928,7 +121944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2648981663275236285, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2852917842079464605, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_Color.a
@@ -122333,10 +122349,6 @@ PrefabInstance:
     - target: {fileID: 8716125286967460233, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: isUnlocked
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8891905290899016347, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-      propertyPath: staminaCost
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9109771510052706400, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: lengthInSec
