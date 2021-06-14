@@ -11,44 +11,48 @@ public class GiroTimon : MasterMinigame
     private Quaternion StartRotation;
     
     [SerializeField] private float rotationAngleToWin;
+    
+    private CircleCollider2D circleCollider;
 
     // Start is called before the first frame update
     void Start()
     {
         SceneHeight = Screen.height;
+        circleCollider = GetComponent<CircleCollider2D>();
+    
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (girar == 1)
+        Vector2 cursorPos =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0) && Vector2.Distance(cursorPos, circleCollider.bounds.center) <= circleCollider.radius)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                PressPoint = Input.mousePosition;
-                StartRotation = transform.rotation;
-            }
-            /*Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
-            transform.rotation = rotation;*/
-            else if (Input.GetMouseButton(0))
-            {
-                float CurrentDistanceBetweenMousePosition = (Input.mousePosition - PressPoint).y;
-                transform.rotation = StartRotation * Quaternion.Euler(Vector3.forward * (CurrentDistanceBetweenMousePosition/SceneHeight)*360);
-            }
+            PressPoint = Input.mousePosition;
+            StartRotation = transform.rotation;
         }
 
-        if (transform.localEulerAngles.z > 0 && transform.localEulerAngles.z <= rotationAngleToWin)
+
+        /*Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
+        transform.rotation = rotation;*/
+        else if (Input.GetMouseButton(0))
         {
-            OnWinMinigame();
+            float CurrentDistanceBetweenMousePosition = (Input.mousePosition - PressPoint).y;
+            if (CurrentDistanceBetweenMousePosition < 0)
+            {
+                transform.rotation = StartRotation * Quaternion.Euler(Vector3.forward * (CurrentDistanceBetweenMousePosition/SceneHeight)*360);
+            }
+
+
         }
         
-    }
-    void OnMouseEnter(){
-        girar = 1;
-    }
-    void OnMouseExit(){
-        girar = 0;
+
+        if (transform.localEulerAngles .z> 0 && transform.localEulerAngles.z <= rotationAngleToWin)
+        {
+            //Debug.Log("minigame won!");
+            OnWinMinigame();
+        }
     }
 }

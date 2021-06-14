@@ -25,6 +25,7 @@ public class MBJumper : MonoBehaviour
     [SerializeField] private Vector2 initialPosition;
     [SerializeField] private MBPartsHandler partsHandler;
     [SerializeField] private GameObject positionReference;
+    [SerializeField] private GameObject machineFx;
     private PlayerManager player;
     private bool isReference;
     #endregion    
@@ -110,12 +111,14 @@ public class MBJumper : MonoBehaviour
         {
             isReference = true;
             GetComponent<SpriteRenderer>().enabled = true;
+            machineFx.SetActive(true);
             transform.position = initialPosition;
         }
         else
         {
             isReference = false;
             GetComponent<SpriteRenderer>().enabled = false;
+            machineFx.SetActive(false);
         }
     }
 

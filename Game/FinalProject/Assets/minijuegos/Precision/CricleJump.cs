@@ -29,7 +29,7 @@ public class CricleJump : MonoBehaviour
     void Moverse(){
         if (reloj)
         {
-            angle += speed*Time.deltaTime;
+            angle += speed*Time.unscaledDeltaTime;
             if (angle>=3)
             {
                 reloj=false;
@@ -38,7 +38,7 @@ public class CricleJump : MonoBehaviour
             }
         }else
         {
-            angle -= speed*Time.deltaTime;
+            angle -= speed*Time.unscaledDeltaTime;
             if (angle<=0)
             {
                 speed=(2*Mathf.PI)/Random.Range(1,5);
@@ -47,8 +47,9 @@ public class CricleJump : MonoBehaviour
         }
         x = Mathf.Cos(angle)*radius + center.position.x;
         y = Mathf.Sin(angle)*radius + center.position.y;
-
+        Debug.Log("x: " + x);
+        Debug.Log("y: " + y);
         position = new Vector2(x,y);
-        Body.position = position;
+        transform.position = position;
     }
 }
