@@ -13,7 +13,7 @@ public class AveMaria : Ability
             if (AvesMarias == 4)
             {
                 Debug.Log("Stamina increased by 10");
-                player.currentStamina += 10;
+                player.currentStamina += 30;
                 AvesMarias = 0;
             }
         }

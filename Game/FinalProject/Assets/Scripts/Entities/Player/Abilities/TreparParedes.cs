@@ -10,7 +10,7 @@ public class TreparParedes : Ability
     {   
         
         if(player.currentStamina < staminaCost)return;
-        NicoFeet.gameObject.GetComponent<GroundChecker>().checkFeetRadius=.387f;
+        NicoFeet.gameObject.GetComponent<GroundChecker>().checkFeetRadius=.13f;
         if (isInCooldown)
         {
             player.TakeTirement(staminaCost);
@@ -33,7 +33,7 @@ public class TreparParedes : Ability
         }
         if (Input.GetKeyUp(hotkey))
         {
-            NicoFeet.gameObject.GetComponent<GroundChecker>().checkFeetRadius=.27f;
+            NicoFeet.gameObject.GetComponent<GroundChecker>().checkFeetRadius=.12f;
         }
         if (Input.GetKey(hotkey))
         {

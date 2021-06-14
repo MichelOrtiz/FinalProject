@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 7879049552581725013}
   m_Layer: 0
   m_Name: Atacado
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5207,7 +5207,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.33708334, y: -0.17048526}
+  m_Offset: {x: 0.31679344, y: 0.6892307}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5218,7 +5218,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32583332, y: 0.21063948}
+  m_Size: {x: 0.36641312, y: 1.9300714}
   m_EdgeRadius: 0
 --- !u!114 &1522910831385704399
 MonoBehaviour:
@@ -5236,7 +5236,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4864
   feetPos: {fileID: 3829738358953819176}
-  checkFeetRadius: 0.27
+  checkFeetRadius: 0.25
   isGrounded: 0
   lastGroundTag: 
 --- !u!1 &2436495351721809552
@@ -5953,8 +5953,8 @@ MonoBehaviour:
   duration: 5
   isInCooldown: 0
   abilityName: 0
-  isUnlocked: 0
-  Nico: {fileID: 3829738358529845160}
+  isUnlocked: 1
+  Atacado: {fileID: 603629796347817875}
 --- !u!114 &1899013230873059424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5973,7 +5973,7 @@ MonoBehaviour:
   duration: 5
   isInCooldown: 0
   abilityName: 10
-  isUnlocked: 0
+  isUnlocked: 1
   Escudobj: {fileID: 2648981663275236285}
   isInShield: 0
 --- !u!114 &1533819169538553012
@@ -6061,7 +6061,7 @@ MonoBehaviour:
   body: {fileID: 3829738358529845164}
   nico: {fileID: 3829738358529845160}
   Atacado: {fileID: 603629796347817875}
-  movimiento: 0.05
+  movimiento: 0.1
   speed: 100000
 --- !u!114 &936999293969563206
 MonoBehaviour:
