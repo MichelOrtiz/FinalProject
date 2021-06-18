@@ -27,17 +27,16 @@ public class CofreUI : MonoBehaviour
     public GameObject slotsCofUI;
     public GameObject slotsInvUI;
     CofreSlot[] slotsCof;
-    InventorySlot[] slotsInv;
+    CofreSlot[] slotsInv;
 
-    public int moveItemIndex;
+    public Slot moveItemSlot;
     private int pageCof;
     private int pageInv;
-    private Item moveItem;
 
     void Start()
     {
         focusedSlot=null;
-        moveItem = null;
+        moveItemSlot = null;
         //moveItemIndex=0;
         inventory = Inventory.instance;
         cofre = Cofre.instance;
@@ -45,7 +44,7 @@ public class CofreUI : MonoBehaviour
         cofre.onItemChangedCallBack += UpdateUI;
         menuDesplegable.SetActive(false);
         slotsCof = slotsInvUI.GetComponentsInChildren<CofreSlot>();
-        slotsInv = slotsInvUI.GetComponentsInChildren<InventorySlot>();
+        slotsInv = slotsInvUI.GetComponentsInChildren<CofreSlot>();
         
         pageCof = 0;
         pageInv = 0;
@@ -101,14 +100,14 @@ public class CofreUI : MonoBehaviour
         //Cofre
         for(int i=0; i<slotsCof.Length;i++){
             slotsCof[i].SetIndex(i+pageCof);
-            if(i+pageCof < inventory.items.Count){
+            if(i+pageCof < cofre.savedItems.Count){
                 slotsCof[i].SetItem(cofre.savedItems[i+pageCof]);
             }else{
                 slotsCof[i].ClearSlot();
             }
             
         }
-        if(pageCof+10 < cofre.savedItems.Count){
+        if(pageCof+20 < cofre.savedItems.Count){
             nextButtonCof.gameObject.SetActive(true);
         }
         else{
@@ -124,8 +123,10 @@ public class CofreUI : MonoBehaviour
         if(focusedSlot!=null){
             focusedSlot.icon.color = Color.yellow;
             focusedSlot.background.color = Color.red;
-            description.text = focusedSlot.GetItem().descripcion;
-            nametxt.text = focusedSlot.GetItem().name;
+            if(focusedSlot.GetItem()!=null){
+                description.text = focusedSlot.GetItem().descripcion;
+                nametxt.text = focusedSlot.GetItem().name;
+            }
         }else{
             nametxt.text = "";
             description.text = "Selecciona un objeto";
@@ -177,7 +178,7 @@ public class CofreUI : MonoBehaviour
     public void MoveButton(){
         HideMenuDesp();
         if(focusedSlot!=null){
-            SetMoveItem(focusedSlot.GetItem(),focusedSlot.GetIndex());
+            SetMoveSlot(focusedSlot);
             RemoveFocusSlot();
         }
     }
@@ -187,23 +188,20 @@ public class CofreUI : MonoBehaviour
         item.RemoveFromInventory();
         HideMenuDesp();
     }
-    public void SetMoveItem(Item item, int index){
-        moveItem = item;
-        moveItemIndex = index;
+    public void SetMoveSlot(Slot slot){
+        moveItemSlot = slot;
     }
     public void RemoveMoveItem(){
-        moveItem = null;
-        moveItemIndex = 0;
+        moveItemSlot = null;
     }
-    public void MoveItems(int destination){
-        inventory.SwapItems(moveItemIndex,destination);
+    public void MoveItems(Slot destination){
+        Item aux = destination.GetItem();
+        destination.SetItem(moveItemSlot.GetItem());
+        moveItemSlot.SetItem(aux);
         RemoveMoveItem();
     }
-    public void SetMoveItem(Item i){
-        moveItem = i;
-        return;
-    }
-    public Item GetMoveItem(){
-        return moveItem;
+   
+    public Slot GetMoveItem(){
+        return moveItemSlot;
     }
 }
