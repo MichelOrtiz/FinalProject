@@ -5,7 +5,7 @@ public class InventoryUI : MonoBehaviour
 {
     #region Objects
         public static InventoryUI instance;
-         public Text nametxt;
+        public Text nametxt;
         public Text description;
         private Item moveItem;
         public GameObject menuDesplegable;
