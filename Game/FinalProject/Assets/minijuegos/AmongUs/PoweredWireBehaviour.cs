@@ -7,6 +7,7 @@ public class PoweredWireBehaviour : MonoBehaviour
     bool mouseDown = false;
     public PoweredWireStats powerWireS;
     LineRenderer line;
+
     void Start()
     {
         powerWireS = gameObject.GetComponent<PoweredWireStats>();
@@ -25,35 +26,36 @@ public class PoweredWireBehaviour : MonoBehaviour
             );
     }
 
-    void OnMouseDown(){
+    public void OnMouseDown(){
         mouseDown=true;
     }
-    void OnMouseOver(){
+    public void OnMouseOver(){
         powerWireS.movable=true;
     }
-    void OnMouseExit(){
+    public void OnMouseExit(){
         if(!powerWireS.moving){
             powerWireS.movable = false;
         }
     }
-    void OnMouseUp(){
+    public void OnMouseUp(){
         mouseDown = false;
         if (!powerWireS.connected)
         {
-            gameObject.transform.position = powerWireS.startPosition;
+            gameObject.transform.localPosition = powerWireS.startPosition;
         }
         if (powerWireS.connected)
         {
             gameObject.transform.position = powerWireS.connectedPosition;            
         }
     }
+
     void MoveWire(){
-        if (mouseDown && powerWireS.movable)
+        if (mouseDown)// && powerWireS.movable)
         {
         powerWireS.moving = true;
         float mouseX = Input.mousePosition.x;
         float mouseY = Input.mousePosition.y;
-        gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mouseX, mouseY,9));   
+        gameObject.transform.position = Input.mousePosition;//Camera.main.ScreenToWorldPoint(new Vector3(mouseX, mouseY,9));   
         gameObject.transform.position = new Vector3(    
             gameObject.transform.position.x, gameObject.transform.position.y, transform.parent.transform.position.z
             );

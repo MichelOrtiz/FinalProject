@@ -6,17 +6,33 @@ public class UnpoweredWireBehaviour : MonoBehaviour
 {
     public bool prueba = false;
     public UnpoweredWireStat unpoweredWireS;
+    [SerializeField] private PoweredWireBehaviour poweredWireAttached;
+    [SerializeField] private float checkRadius;
+    private PoweredWireStats poweredWireS;
     void Start()
     {
         unpoweredWireS = gameObject.GetComponent<UnpoweredWireStat>();
+
+        poweredWireS = poweredWireAttached.GetComponent<PoweredWireStats>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        float distance = Vector2.Distance(transform.position, poweredWireAttached.transform.position);
+        if (distance <= checkRadius)
+        {
+            //if (poweredWireS.objectColor == unpoweredWireS.objectColor)
+            {
+                poweredWireS.connected = true;
+                unpoweredWireS.connected = true;
+                poweredWireS.connectedPosition = gameObject.transform.position;
+            }
+        }
         ManageLight();
     }
     void OnTriggerEnter2D(Collider2D collision){
+        Debug.Log(gameObject + " Collision: " + collision);
         if (collision.GetComponent<PoweredWireStats>())
         {
             prueba = true;

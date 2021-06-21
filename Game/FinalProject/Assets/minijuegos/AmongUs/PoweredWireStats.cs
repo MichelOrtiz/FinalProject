@@ -13,7 +13,7 @@ public class PoweredWireStats : MonoBehaviour
     public Colo objectColor;
     void Start()
     {
-        startPosition = transform.position;
+        startPosition = transform.localPosition;
     }
 
     // Update is called once per frame
