@@ -9,6 +9,8 @@ public class GiroTimon : MasterMinigame
     private float SceneHeight;
     private Vector3 PressPoint;
     private Quaternion StartRotation;
+
+    [SerializeField] private float radius;
     
     [SerializeField] private float rotationAngleToWin;
     
@@ -26,7 +28,7 @@ public class GiroTimon : MasterMinigame
     void Update()
     {
         Vector2 cursorPos =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && Vector2.Distance(cursorPos, circleCollider.bounds.center) <= circleCollider.radius)
+        if (Input.GetMouseButtonDown(0) && Vector2.Distance(cursorPos, transform.localPosition) <= radius)
         {
             PressPoint = Input.mousePosition;
             StartRotation = transform.rotation;
