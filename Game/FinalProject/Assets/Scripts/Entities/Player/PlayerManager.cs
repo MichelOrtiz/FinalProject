@@ -13,6 +13,7 @@ public class PlayerManager : Entity
     public float currentGravity;
     public float defaultMass = 10;
     public float currentMass;
+    public GameObject dodgePerectCollider;
 
     private GameObject[] players;
     #endregion
@@ -112,7 +113,6 @@ public class PlayerManager : Entity
         currentGravity = defaultGravity;
         currentMass = defaultMass;
         inputs = gameObject.GetComponent<PlayerInputs>();
-        
     }
 
     new void Update()

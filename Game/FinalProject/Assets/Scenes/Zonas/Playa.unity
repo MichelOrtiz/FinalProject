@@ -189,6 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 374522192}
+  - component: {fileID: 74254053}
   m_Layer: 0
   m_Name: StartPosition
   m_TagString: StartPos
@@ -196,6 +197,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &74254053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74254052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a28c76ed9ad044db36c87a37e1c363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentScene: 
 --- !u!1 &197572357
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74254052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -324.9, y: 1, z: 0}
+  m_LocalPosition: {x: -324.03, y: 0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43222,6 +43236,7 @@ MonoBehaviour:
   iLevelToLoad: 2
   startPosition: {fileID: 74254052}
   loadPosition: {fileID: 197572358}
+  coords: {x: -3, y: 2}
 --- !u!61 &1459501031
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -43307,7 +43322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459501029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -246.33002, y: 13.4, z: 0}
+  m_LocalPosition: {x: -246.33002, y: 5.97, z: 0}
   m_LocalScale: {x: 2.635, y: 2.5786, z: 1}
   m_Children:
   - {fileID: 197572358}
