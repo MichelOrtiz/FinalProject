@@ -21,7 +21,7 @@ public abstract class GnomeFov : MonoBehaviour
     protected float timeBeforeAttack;
     protected float timeAfterAttack;
     protected bool touchingPlayer;
-    protected bool justAttacked;
+    public bool justAttacked;
     protected MeshCollision meshCollision;
     protected Vector2 lastPosition;
     //protected float speed;
