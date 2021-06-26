@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 204460334}
   - component: {fileID: 204460333}
   - component: {fileID: 204460332}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: levelLoader (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -939,6 +939,7 @@ MonoBehaviour:
   iLevelToLoad: 0
   startPosition: {fileID: 0}
   loadPosition: {fileID: 0}
+  coords: {x: 0, y: 0}
 --- !u!61 &204460333
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12647,7 +12648,7 @@ GameObject:
   - component: {fileID: 850712005}
   - component: {fileID: 850712004}
   - component: {fileID: 850712003}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: levelLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12669,6 +12670,7 @@ MonoBehaviour:
   iLevelToLoad: 0
   startPosition: {fileID: 0}
   loadPosition: {fileID: 0}
+  coords: {x: 0, y: 0}
 --- !u!61 &850712004
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -114820,6 +114822,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5737836, y: 2.373783}
   m_EdgeRadius: 0
+--- !u!1 &980048544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 603629796347817875, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+  m_PrefabInstance: {fileID: 1859436196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1005138143 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5897520343088184235, guid: 08a4d2bdb3194b14ba9bbd62e1acf752, type: 3}
@@ -122034,6 +122041,10 @@ PrefabInstance:
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 211230034}
+    - target: {fileID: 3829738358529845165, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: dodgePerectCollider
+      value: 
+      objectReference: {fileID: 980048544}
     - target: {fileID: 3829738358953819177, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_Layer
       value: 0

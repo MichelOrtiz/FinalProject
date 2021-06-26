@@ -9,15 +9,25 @@ public class loadlevel : MonoBehaviour
     [SerializeField]private GameObject startPosition;
     [SerializeField]private Transform loadPosition;
     public static loadlevel instance = null;
+    public Vector2 coords;
+    protected PlayerManager player;
+
     private void Start() {
         if(SceneController.instance.prevScene == iLevelToLoad){
             if(loadPosition!=null){
                 PlayerManager.instance.gameObject.transform.position = loadPosition.position;
             }
         }
+        startPosition.gameObject.transform.position = coords;
     }
     private void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
+        if (collisionGameObject.tag == "Untagged")
+        {
+            PlayerManager.instance.dodgePerectCollider.gameObject.layer = LayerMask.NameToLayer("Player");
+        }else{
+            PlayerManager.instance.dodgePerectCollider.gameObject.layer = LayerMask.NameToLayer("Untagged");
+        }
         if (collisionGameObject.tag == "Player")
         {
             LoadScene();
