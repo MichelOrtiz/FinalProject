@@ -10,6 +10,13 @@ public class Switch : MonoBehaviour
     public static List<Door> AllDoors { get; set; }
     private PlayerManager player;
 
+    #region Time
+    [Header("Time")]
+    [SerializeField] private bool hasTime;
+    [SerializeField] private float timeActivated;
+    private float curTimeActivated;
+    #endregion
+
     // Events :O
     public delegate void Activate(Switch sender);
     public event Activate SwitchActivated;
@@ -50,6 +57,18 @@ public class Switch : MonoBehaviour
                 OnSwitchActivated(this);
             }
         }
+        if (activado)
+        {
+            if (curTimeActivated > timeActivated)
+            {
+                DeActivate();
+                curTimeActivated = 0;
+            }
+            else
+            {
+                curTimeActivated += Time.deltaTime;
+            }
+        }
     }
 
     public void DeActivate()
@@ -58,6 +77,19 @@ public class Switch : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
             activado = false;
+            foreach (var door in doorsAttached)
+            {
+                if (door != null)
+                {
+                    if (AllDoors.Exists(d => d.name.Equals(door.name)))
+                    {
+                        if(door.GetComponent<Door>().isOpen)
+                        {
+                            door.GetComponent<Door>().Activate();
+                        }
+                    }
+                }
+            }
         }
     }
 

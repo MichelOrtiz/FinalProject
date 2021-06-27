@@ -7,6 +7,8 @@ public class LightZone : MonoBehaviour
     [SerializeField] private GameObject lightZone;
     private BoxCollider2D lightCollider;
     private Door door;
+    private GhostBossEnemy ghost;
+
     void Start()
     {
         lightCollider = lightZone.GetComponent<BoxCollider2D>();
@@ -30,5 +32,12 @@ public class LightZone : MonoBehaviour
                 lightCollider.enabled = false;
             }
         }
+    }
+
+    public void UnableDoor()
+    {
+        door.enabled = false;
+        lightCollider.enabled = false;
+        gameObject.SetActive(false);
     }
 }

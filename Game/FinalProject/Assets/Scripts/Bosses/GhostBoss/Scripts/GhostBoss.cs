@@ -17,14 +17,14 @@ public class GhostBoss : MonoBehaviour
     void Update()
     {
         Door door = doors.Find(d => d.isOpen);
-        if (door != null)
+        /*if (door != null)
         {
             door.GetComponent<Door>().enabled = false;
 
             door.GetComponent<LineRenderer>().enabled = false;
             doors.Remove(door);
             Switch.AllDoors = doors;
-        }
+        }*/
 
         if (!bossFight.isCleared)
         {

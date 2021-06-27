@@ -16,6 +16,9 @@ public class Door : MonoBehaviour
     [SerializeField] public bool isOpen;
     [SerializeField] private float pushForce;
     [SerializeField] private float radius;
+
+    
+
     PlayerManager player;
     Enemy enemy;
     

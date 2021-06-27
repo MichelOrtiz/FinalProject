@@ -44,6 +44,10 @@ public class GhostBossEnemy : Entity, IProjectile
     private float curTimeBtwShot;
     #endregion
     
+    #region References
+    [SerializeReference] private LightZone currentLZ;
+
+    #endregion
     
     new void Start()
     {
@@ -83,6 +87,8 @@ public class GhostBossEnemy : Entity, IProjectile
                     Divide();
                     InLight = false;
                     timeInLight = 0;
+
+                    currentLZ?.UnableDoor();
                 }
                 else
                 {
@@ -139,6 +145,7 @@ public class GhostBossEnemy : Entity, IProjectile
         if (other.tag == "Light")
         {
             InLight = true;
+            currentLZ = other.transform.parent.GetComponentInChildren<LightZone>();
         }
     }
 
