@@ -16,7 +16,7 @@ public class ObjProjectile : MonoBehaviour
         if(!other.CompareTag("Player")){
             //Debug.Log(other.name);
             if(other.CompareTag("Enemy")){
-                Enemy enemy = other.gameObject.GetComponent<Enemy>();
+                Enemy enemy = other.transform.parent.GetComponentInChildren<Enemy>();
                 if(enemy!=null){
                     enemy.ConsumeItem(item);
                     Destroy(gameObject);

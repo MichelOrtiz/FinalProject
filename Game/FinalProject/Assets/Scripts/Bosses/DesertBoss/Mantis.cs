@@ -31,7 +31,6 @@ public class Mantis : Enemy//, IBattleBounds
         collisionHandler.JustTouchedPlayer += collisionHandler_StopAttack;
         collisionHandler.TouchingGroundHandler += collisionHandler_TouchingGround;
         //battleBounds_SetEventHandler();
-        Debug.Log("Start called by" + gameObject);
     }
 
     // Update is called once per frame

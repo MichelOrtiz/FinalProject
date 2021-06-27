@@ -30,7 +30,8 @@ public class FungusBoss : MonoBehaviour
         
         if (defeatedFungus == numberOfFungus)
         {
-            GetComponent<BossFight>().NextStage();
+            GetComponent<BossFight>().EndBattle();
+            defeatedFungus = 0;
         }
     }
 }

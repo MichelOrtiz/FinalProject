@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2596976214950181961}
   m_Layer: 13
   m_Name: GroundChecker
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2237de5c9d3a2f47850568f79ea60f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
   touchingPlayer: 0
   touchingEnemy: 0
@@ -379,6 +380,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -398,11 +403,12 @@ MonoBehaviour:
   feetPos: {fileID: 3404244852800845082}
   checkFeetRadius: 0.3
   groundChecker: {fileID: 1725110444965641589}
+  collisionHandler: {fileID: 7892075548320804545}
   fovType: 1
   enemyName: 0
   damageAmount: 5
   normalSpeedMultiplier: 0
-  chaseSpeedMultiplier: 2.5
+  chaseSpeedMultiplier: 1.7
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 1
@@ -414,7 +420,6 @@ MonoBehaviour:
   downDistanceGroundCheck: 0.5
   viewDistance: 40
   fovAngle: 0
-  collisionHandler: {fileID: 7892075548320804545}
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}

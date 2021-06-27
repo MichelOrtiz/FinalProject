@@ -41,6 +41,7 @@ public class MantisBoss : MonoBehaviour
         {
             if (currentTime > timeToRespawnItem)
             {
+                Debug.Log("spawned item");
                 spawnedItem = Instantiate(itemToSpawn, spawnPos.position, Quaternion.identity);
                 currentTime = 0;
             }
