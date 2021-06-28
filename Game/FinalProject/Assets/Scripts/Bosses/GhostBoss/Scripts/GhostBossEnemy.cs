@@ -88,7 +88,7 @@ public class GhostBossEnemy : Entity, IProjectile
                     InLight = false;
                     timeInLight = 0;
 
-                    currentLZ?.UnableDoor();
+                    //currentLZ?.UnableDoor();
                 }
                 else
                 {

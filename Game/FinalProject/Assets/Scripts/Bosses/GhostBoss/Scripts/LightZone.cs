@@ -20,16 +20,24 @@ public class LightZone : MonoBehaviour
     {
         if (door.isOpen)
         {
-            if (!lightCollider.enabled)
+            /*if (!lightCollider.enabled)
             {
                 lightCollider.enabled = true;
+            }*/
+            if (!lightZone.activeSelf)
+            {
+                lightZone.SetActive(true);
             }
         }
         else
         {
-            if (lightCollider.enabled)
+            /*if (lightCollider.enabled)
             {
                 lightCollider.enabled = false;
+            }*/
+            if (lightZone.activeSelf)
+            {
+                lightZone.SetActive(false);
             }
         }
     }

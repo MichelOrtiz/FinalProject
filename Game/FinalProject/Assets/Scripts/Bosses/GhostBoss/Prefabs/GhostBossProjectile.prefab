@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6314688034159828953}
   m_Layer: 7
   m_Name: GhostBossProjectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   warning: {fileID: 0}
   impactEffect: {fileID: 0}
   targetWarningAvailable: 0
-  collidesWithPlayer: 0
+  independentAttackEnabled: 0
   speedMultiplier: 0.6
   maxShotDistance: 50
   damage: 1
@@ -165,4 +165,4 @@ MonoBehaviour:
   changeSizeByTime: 0
   timeToIncrease: 0
   sizeByTimeMultiplier: 0
-  lifeTime: 15
+  lifeTime: 10
