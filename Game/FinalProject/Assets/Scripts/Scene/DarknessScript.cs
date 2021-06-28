@@ -11,6 +11,9 @@ public class DarknessScript : MonoBehaviour
     void Start()
     {
         player = PlayerManager.instance;
+
+        Oscuridad = player.Darkness;
+
         player.isInDark = false;
         Oscuridad.SetActive(false);
         

@@ -42,6 +42,7 @@ public class PlayerManager : Entity
 
     #region Layers, rigids, etc
     public GameObject camara;
+    public GameObject Darkness;
     #endregion
 
     #region states params // might be in a different class
