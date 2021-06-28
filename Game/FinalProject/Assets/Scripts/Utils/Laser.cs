@@ -17,8 +17,10 @@ public class Laser : MonoBehaviour
 
     private float currentTime;
     [SerializeField] private float speed;
+    [SerializeField] private float secondSpeed;
     [SerializeField] private bool chaseTargetPosition;
     [SerializeField] private bool chaseOnReachedEndPos;
+    private bool reachedEndPos;
 
     private Vector2 startPos;
     private Vector2 endPos;
@@ -139,10 +141,7 @@ public class Laser : MonoBehaviour
                 currentTime += Time.deltaTime;
             }
 
-            if (summoner?.ShotPos != null)
-            {
-                ExtendRay();
-            }
+            
             
             edge.SetPoints(new List<Vector2>()
                 {transform.InverseTransformPoint(startPos) , transform.InverseTransformPoint(endPoint.position)}
@@ -155,6 +154,14 @@ public class Laser : MonoBehaviour
             }
         }
     }
+
+    void FixedUpdate()
+    {
+        if (summoner?.ShotPos != null)
+        {
+            ExtendRay();
+        }
+    }
  
     void ExtendRay()
     {
@@ -163,9 +170,9 @@ public class Laser : MonoBehaviour
         float distanceToEndPos = Vector2.Distance(endPos, startPos);
         float currentDistanceFromStart = Vector2.Distance(endPoint.position, startPos);
 
-        if (chaseTargetPosition)
+        if (chaseTargetPosition || reachedEndPos)
         {
-            endPoint.transform.position = Vector2.MoveTowards(endPoint.transform.position, summoner.EndPos, speed * Time.deltaTime);
+            endPoint.transform.position = Vector2.MoveTowards(endPoint.transform.position, summoner.EndPos, secondSpeed * Time.deltaTime);
         }
         else if (currentDistanceFromStart < distanceToEndPos)
         {
@@ -176,6 +183,7 @@ public class Laser : MonoBehaviour
         {
             OnReachedEndPos();
         }
+
         ray.SetPosition(1, endPoint.position);
     }
 
@@ -197,10 +205,11 @@ public class Laser : MonoBehaviour
 
     public void OnReachedEndPos()
     {
-        if (chaseOnReachedEndPos)
+        reachedEndPos = true;
+        /*if (chaseOnReachedEndPos)
         {
             endPoint.transform.position = Vector2.MoveTowards(endPoint.transform.position, summoner.EndPos, speed * Time.deltaTime);
-        }
+        }*/
     }
         
 }

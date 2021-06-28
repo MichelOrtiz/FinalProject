@@ -42,7 +42,7 @@ public class CristalBoss : MonoBehaviour
         }
         if (FindObjectOfType<CristalBossEnemy>() == null)
         {
-            GetComponent<BossFight>().NextStage();
+            GetComponent<BossFight>().EndBattle();
             return;
         }
 

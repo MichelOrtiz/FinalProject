@@ -78,10 +78,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ray: {fileID: 930200630163608275}
   endPoint: {fileID: 930200629135861536}
-  lifeTime: 0.5
+  hasLifeTime: 1
+  lifeTime: 3
   targetWarningAvailable: 1
   warning: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
   warningTime: 0.5
+  speed: 15
+  secondSpeed: 8
+  chaseTargetPosition: 0
+  chaseOnReachedEndPos: 1
 --- !u!68 &5896100059345284874
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -129,7 +134,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930200630163608276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.599425, y: 42.589725, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 930200629637541265}
@@ -180,7 +185,7 @@ LineRenderer:
   - {x: 0, y: 1, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.2465464
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -198,8 +203,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9056604, g: 0.14397678, b: 0, a: 1}
-      key1: {r: 0.9056604, g: 0.14397678, b: 0, a: 1}
+      key0: {r: 0.9056604, g: 0.22247174, b: 0.09825563, a: 1}
+      key1: {r: 0.6267382, g: 0.48273405, b: 0.9056604, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 1}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -222,7 +227,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
+      m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

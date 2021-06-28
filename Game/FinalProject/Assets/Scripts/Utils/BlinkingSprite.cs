@@ -34,4 +34,12 @@ public class BlinkingSprite : MonoBehaviour
             curTimeBtwBlink += Time.deltaTime;
         }
     }
+
+    /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    void OnDisable()
+    {
+        SpriteRenderer.enabled = true;
+    }
 }

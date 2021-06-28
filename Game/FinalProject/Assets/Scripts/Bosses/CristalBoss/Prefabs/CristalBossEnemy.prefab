@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 6036926406539717117}
   - component: {fileID: 6036926406539717116}
   - component: {fileID: 6036926406539717115}
+  - component: {fileID: 1604804072694938832}
   m_Layer: 7
   m_Name: CristalBossEnemy
   m_TagString: Enemy
@@ -298,6 +299,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -317,6 +322,7 @@ MonoBehaviour:
   feetPos: {fileID: 6036926404911437818}
   checkFeetRadius: 0.35
   groundChecker: {fileID: 361713493203797688}
+  collisionHandler: {fileID: 8236969429505831903}
   fovType: 1
   enemyName: 0
   damageAmount: 0
@@ -333,7 +339,6 @@ MonoBehaviour:
   downDistanceGroundCheck: 0.5
   viewDistance: 40
   fovAngle: 360
-  collisionHandler: {fileID: 8236969429505831903}
   touchingPlayer: 0
   justCapturedPlayer: 0
   player: {fileID: 0}
@@ -352,8 +357,27 @@ MonoBehaviour:
   - {fileID: 8359048598104174101, guid: 6b3cc41380860df47bc5d52c03e477f1, type: 3}
   - {fileID: 4569511343039786640, guid: f3b3b72cbbd42f34b9e1695358ca4c70, type: 3}
   - {fileID: 4332277929904699720, guid: 3cb037f34b029ec4990ddf72d7859c7b, type: 3}
-  interactionRadius: 2
+  interactionRadius: 3
+  colorWhenInteractuable: {r: 0.37753648, g: 0.60645586, b: 0.7924528, a: 1}
+  colorWhenInteraction: {r: 0.7921569, g: 0.19452132, b: 0.054901946, a: 1}
+  spriteRenderer: {fileID: 0}
   interactionsToDestroy: 3
+  cooldownAfterInteraction: 2
+--- !u!114 &1604804072694938832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6036926406539717114}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08980ac8a7ee22a4b8c810505081961e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 6036926406539717119}
+  timeHidden: 0.2
+  timeBtwBlink: 0.2
 --- !u!1 &6544222785477402148
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,9 +422,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2237de5c9d3a2f47850568f79ea60f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
   touchingPlayer: 0
   touchingEnemy: 0
+  touchingGround: 0
   lastEnemyTouched: {fileID: 0}
 --- !u!58 &686752541353553929
 CircleCollider2D:

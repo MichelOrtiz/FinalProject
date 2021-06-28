@@ -53,13 +53,16 @@ public class BossFight : MonoBehaviour
 
     public virtual void EndBattle()
     {
-        currentStage.Destroy();
-        isCleared=true;
+        if (!isCleared)
+        {
+            currentStage.Destroy();
+            isCleared=true;
 
-        Vector2 abilitySpawnPos = new Vector2(PlayerManager.instance.GetPosition().x, PlayerManager.instance.GetPosition().y + 5f);
+            Vector2 abilitySpawnPos = new Vector2(PlayerManager.instance.GetPosition().x, PlayerManager.instance.GetPosition().y + 5f);
 
-        Instantiate(abilityObject, abilitySpawnPos, abilityObject.transform.rotation);
+            Instantiate(abilityObject, abilitySpawnPos, abilityObject.transform.rotation);
 
-        Debug.Log("Lo hiciste ganaste!!!1");
+            Debug.Log("Lo hiciste ganaste!!!1");
+        }
     }
 }

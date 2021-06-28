@@ -35,10 +35,32 @@ public class CristalBossEnemy : NormalType, ILaser
     #region Player Interaction
     [Header("Player Interaction")]
     [SerializeField] private float interactionRadius;
+
+    [SerializeField] private Color colorWhenInteractuable;
+    [SerializeField] private Color colorWhenInteraction;
+    private Color defaultColor;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    
+    private BlinkingSprite blinkingSprite;
+    
     [SerializeField] private int interactionsToDestroy;
     private int interactions;
 
+    private bool justInteracted;
+
+    [SerializeField] private float cooldownAfterInteraction;
+    private float curCooldown;
+
     #endregion
+
+    void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        blinkingSprite = GetComponent<BlinkingSprite>();
+        blinkingSprite.enabled = false;
+
+        defaultColor = spriteRenderer.color;
+    }
 
 
     new void Start()
@@ -49,6 +71,8 @@ public class CristalBossEnemy : NormalType, ILaser
 
     new void Update()
     {
+        endPos = player.GetPosition();
+
         if (!runningFromPlayer)
         {
             if (InFrontOfObstacle() ||( (GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
@@ -68,25 +92,45 @@ public class CristalBossEnemy : NormalType, ILaser
         
         distanceToPlayer = Vector2.Distance(GetPosition(), player.GetPosition());
 
-        if (distanceToPlayer <= interactionRadius)
+        if (!justInteracted)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (distanceToPlayer <= interactionRadius)
             {
-                interactions++;
+                spriteRenderer.color = colorWhenInteractuable;
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    OnInteraction();
+                }
+            }
+            else
+            {
+                spriteRenderer.color = defaultColor;
             }
         }
-        
-
-        if (interactions == interactionsToDestroy)
+        else
         {
-            Destroy(gameObject);
+            if (curCooldown > cooldownAfterInteraction)
+            {
+                blinkingSprite.enabled = false;
+                justInteracted = false;
+                curCooldown = 0;
+
+                if (interactions == interactionsToDestroy)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                curCooldown += Time.deltaTime;
+            }
         }
         base.Update();
     }
 
     new void FixedUpdate()
     {
-        ChasePlayer();
+        //ChasePlayer();
         base.FixedUpdate();
     }
 
@@ -102,13 +146,13 @@ public class CristalBossEnemy : NormalType, ILaser
 
     protected override void ChasePlayer()
     {
+
         if (distanceToPlayer >= minDistanceToShotRay)
         {
             if (timeToShot > intervalToShot)
             {
                 if (laser == null)
                 {
-                    endPos = player.GetPosition();
                     ShootLaser(shotPos.position, EndPos);
                 }
                 timeToShot = 0;
@@ -151,7 +195,7 @@ public class CristalBossEnemy : NormalType, ILaser
     public void ShootLaser(Vector2 from, Vector2 to)
     {
         laser = Instantiate(laserPrefab, from, Quaternion.identity).GetComponent<Laser>();
-        laser.Setup(from, to, laserSpeed, this);
+        laser.Setup(from, to, this);
     }
     public void LaserAttack()
     {
@@ -165,8 +209,6 @@ public class CristalBossEnemy : NormalType, ILaser
             rigidbody2d.AddForce(new Vector2((facingDirection == RIGHT? 5000f : -5000f), jumpForce * 450), ForceMode2D.Impulse);
         }
     }
-
-    
 
     private Transform FindNearestPlatform()
     {
@@ -205,5 +247,13 @@ public class CristalBossEnemy : NormalType, ILaser
             }
         }
         return pos;
+    }
+
+    private void OnInteraction()
+    {
+        blinkingSprite.enabled = true;
+        spriteRenderer.color = colorWhenInteraction;
+        interactions++;
+        justInteracted = true;
     }
 }
