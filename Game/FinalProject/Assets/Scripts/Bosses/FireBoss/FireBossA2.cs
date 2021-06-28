@@ -18,9 +18,10 @@ public class FireBossA2 : FireBossEnemy
             if (timeBtwShot > baseTimeBtwShot)
             {
                 base.ShotProjectile(shotPoint, shotPoint.position + facingDirection == LEFT? Vector2.left : Vector2.right);
+                projectilesShot = true;
                 timeBtwShot = 0;
             }
-            else
+            else if(!projectilesShot)
             {
                 timeBtwShot += Time.deltaTime;
             }

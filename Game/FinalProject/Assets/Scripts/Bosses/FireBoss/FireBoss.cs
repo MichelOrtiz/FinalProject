@@ -5,11 +5,15 @@ using UnityEngine;
 public class FireBoss : BossFight
 {
     [SerializeField] private float intervalBwtStages;
+    private float curTimeBtwStages;
+
+    [SerializeField] private float transitionTime;
+    private float curTransitionTime;
     
     // Hits until the boss gets beaten
     public int maxHits;
     private int currentHits;
-    private float timeBtwStages;
+    private int currentStageIndex;
     private enum Zone
     {
         First,
@@ -21,6 +25,7 @@ public class FireBoss : BossFight
     // Start is called before the first frame update
     new void Start()
     {
+        currentStageIndex = 0;
         base.Start();
     }
 
@@ -29,16 +34,33 @@ public class FireBoss : BossFight
     {
         if (!isCleared)
         {
-            if (timeBtwStages >= intervalBwtStages)
+            if (curTimeBtwStages >= intervalBwtStages)
             {
-                int randomStage = RandomGenerator.NewRandom(0, stages.Count-1);
-                ChangeToStage(stages[randomStage]);
+                // Change attack
+                if (curTransitionTime > transitionTime)
+                {
+                    int lastIndex = currentStageIndex;
+                    do
+                    {
+                        currentStageIndex = RandomGenerator.NewRandom(0, stages.Count-1);
+                    }
+                    while (currentStageIndex == lastIndex);
+                    
+                    ChangeToStage(stages[currentStageIndex]);
+                    
+                    curTimeBtwStages = 0;
+                    curTransitionTime = 0;
+                }
+                else
+                {
+                    curTransitionTime += Time.deltaTime;
+                }
                 
-                timeBtwStages = 0;
             }
             else
             {
-                timeBtwStages += Time.deltaTime;
+                
+                curTimeBtwStages += Time.deltaTime;
             }
         }
         

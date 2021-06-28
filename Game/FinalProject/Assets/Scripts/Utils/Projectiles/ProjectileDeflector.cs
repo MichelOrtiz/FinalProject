@@ -3,6 +3,7 @@ using System;
 public class ProjectileDeflector : MonoBehaviour
 {
     [SerializeField] private float interactionRadius;
+    [SerializeField] private float speedMultiplier;
     private Rigidbody2D rb;
     private Vector2 currentVelocity;
     private Projectile projectile;
@@ -12,6 +13,7 @@ public class ProjectileDeflector : MonoBehaviour
     {
         //projectile = GetComponent<Projectile>().gameObject;
         player = PlayerManager.instance;
+        projectile = GetComponent<Projectile>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -32,11 +34,12 @@ public class ProjectileDeflector : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 float speed = currentVelocity.magnitude;
-                var direction = GameCamera.instance.GetMousePosition();
+                //var direction = GameCamera.instance.GetMousePosition();
 
                  //Vector2.Reflect(currentVelocity.normalized, transform.position.normalized); 
-                GetComponent<Projectile>().Setup(player.transform,  direction);
-                rb.velocity = direction.normalized * GetComponent<Projectile>().speedMultiplier * 1.5f;
+                projectile.Setup(player.transform,  player.GetComponentInChildren<MouseDirPointer>().PointerDir );
+                projectile.speedMultiplier *= speedMultiplier;
+                    //rb.velocity = transform.InverseTransformVector(direction.normalized) * GetComponent<Projectile>().speedMultiplier * speedMultiplier;
 
             }
         }

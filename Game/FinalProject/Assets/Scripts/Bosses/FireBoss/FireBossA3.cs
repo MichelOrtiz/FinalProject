@@ -24,9 +24,10 @@ public class FireBossA3 : FireBossEnemy
             if (timeBtwShot > baseTimeBtwShot)
             {
                 base.ShotProjectile(shotPoint, shotPoint.position + Vector3.down);
+                projectilesShot = true;
                 timeBtwShot = 0;
             }
-            else
+            else// if(!projectilesShot)
             {
                 timeBtwShot += Time.deltaTime;
             }

@@ -174,7 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e5d5604cd93bd4e83c5a3ac17922b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 19631164}
 --- !u!114 &19631164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24602,7 +24601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9566c5aae163cd14d972aac317724961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 621856856}
 --- !u!114 &621856856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27432,7 +27430,7 @@ GameObject:
   - component: {fileID: 1749096962}
   - component: {fileID: 1749096961}
   - component: {fileID: 1749096960}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Platforms
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -30478,10 +30476,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8480421980d191048bc34850b7d7d262, type: 2}
   - {fileID: 11400000, guid: 6fd46416c5dd5334986808beb77261ae, type: 2}
   - {fileID: 11400000, guid: aaf284647d93a6145ae6adeaac94a11b, type: 2}
-  abilityObject: {fileID: 0}
+  abilityObject: {fileID: 3425089447169414433, guid: 2058aade59f50b74097e17c8bc775732, type: 3}
   currentStage: {fileID: 0}
   isCleared: 0
   intervalBwtStages: 5
+  transitionTime: 1.5
   maxHits: 3
 --- !u!50 &1874818936
 Rigidbody2D:
@@ -30916,6 +30915,22 @@ PrefabInstance:
       objectReference: {fileID: 621856855}
     - target: {fileID: 3829738358529845165, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: DeathActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535541480564359810, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631721155459251015, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: radius
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631721155459251015, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: maxRadius
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8631721155459251015, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: minRadius
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

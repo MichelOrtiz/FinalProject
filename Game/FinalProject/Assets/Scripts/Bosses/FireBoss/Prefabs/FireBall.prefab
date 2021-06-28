@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: -6107770864380526211}
   - component: {fileID: 53733825894341834}
   - component: {fileID: 8231594080307718534}
-  m_Layer: 7
+  - component: {fileID: 4883299064450097870}
+  m_Layer: 11
   m_Name: FireBall
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -152,11 +153,11 @@ MonoBehaviour:
   warning: {fileID: 0}
   impactEffect: {fileID: 0}
   targetWarningAvailable: 0
-  collidesWithPlayer: 0
+  independentAttackEnabled: 0
   speedMultiplier: 2
   maxShotDistance: 40
   damage: 15
-  waitTime: 0.5
+  waitTime: 0.001
   impactEffectExitTime: 0.5
   touchingPlayer: 0
   touchingObstacle: 0
@@ -179,3 +180,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionRadius: 2.5
+  speedMultiplier: 3.5
+--- !u!114 &4883299064450097870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805213487483752607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08980ac8a7ee22a4b8c810505081961e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 6524594571814338891}
+  timeHidden: 0.1
+  timeBtwBlink: 0.3

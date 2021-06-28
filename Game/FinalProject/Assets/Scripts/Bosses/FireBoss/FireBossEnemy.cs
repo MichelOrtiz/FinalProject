@@ -18,6 +18,8 @@ public abstract class FireBossEnemy : Entity, IProjectile
     protected float timeBtwShot;
     [SerializeField] protected GameObject projectilePrefab;
     protected Projectile projectile;
+    protected bool projectilesShot;
+
     #endregion
 
     #region Hit Handler
