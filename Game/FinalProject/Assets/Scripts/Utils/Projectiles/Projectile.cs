@@ -130,27 +130,7 @@ public class Projectile : MonoBehaviour
         {
             Destroy();
         }
-        if (!touchingPlayer)
-        {
-            if (colliderTag == null)
-            {
-                if (!touchingObstacle)
-                {
-                    transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
-                }
-            }
-            else
-            {
-                if (isOnCollider)
-                {
-                    transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
-                }
-            }
-        }
-        else
-        {
-            FixedUpdate();
-        }
+        
         
         if (touchingObstacle)
         {
@@ -178,7 +158,26 @@ public class Projectile : MonoBehaviour
         
     }
     
-    protected void FixedUpdate(){}
+    protected void FixedUpdate()
+    {
+        if (!touchingPlayer)
+        {
+            if (colliderTag == null)
+            {
+                if (!touchingObstacle)
+                {
+                    transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
+                }
+            }
+            else
+            {
+                if (isOnCollider)
+                {
+                    transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
+                }
+            }
+        }
+    }
 
     /*private void ChangeSizeByDistance()
     {
