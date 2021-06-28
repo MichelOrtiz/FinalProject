@@ -26,7 +26,7 @@ public class TreparParedes : Ability
     {
         //Entonces, para este, por el momento hay un bug el cual le permite a nico saltar en las paredes, lo cual seria como si tuviera la
         //habilidad de trepar, segun yo, ya lo elimine, reduciendo su feetpos, entonces para hacerlo, simplemente deberiamos de aumentarla
-        //nuevamente, cambiarle de .27 a .273
+        //nuevamente, cambiarle de .12 a .13 en el ground checker
         if (!isUnlocked)
         {
             this.enabled = false;
