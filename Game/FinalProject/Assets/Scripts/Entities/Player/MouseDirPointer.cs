@@ -9,11 +9,11 @@ public class MouseDirPointer : MonoBehaviour
     [SerializeField] private float minRadius;
     [SerializeField] private float maxRadius;
 
+    private Vector2 mousePosition; 
     private Vector2 mouseDirection;
     private Vector2 pointerPos;
-
     public Vector2 PointerDir { get => pointerPos; }
-
+    private float angle;
 
     //private Vector2 mouseDirection;
     void Start()
@@ -24,7 +24,11 @@ public class MouseDirPointer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 mousePosition = GameCamera.instance.GetMousePosition();
+        if (GameCamera.instance.HasMouseMoved())
+        {
+            mousePosition = GameCamera.instance.GetMousePosition();
+            angle = MathUtils.GetAngleBetween(transform.position, mousePosition);
+        }
         /*float distance = Vector2.Distance(transform.position, mousePosition);
         if (distance < maxRadius && distance > minRadius)
         {
@@ -32,7 +36,6 @@ public class MouseDirPointer : MonoBehaviour
         }
         else*/
         {
-            float angle = MathUtils.GetAngleBetween(transform.position, mousePosition);
             mouseDirection = MathUtils.GetVectorFromAngle(angle);
             
             //if (distance < maxRadius)

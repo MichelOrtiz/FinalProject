@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2237de5c9d3a2f47850568f79ea60f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
   contacts: []
   touchingPlayer: 0
   touchingEnemy: 0
@@ -76,7 +77,7 @@ GameObject:
   - component: {fileID: 1155376887995941798}
   - component: {fileID: 7329158353842209263}
   - component: {fileID: 4854041401405510612}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +92,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2614618620355412414}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.023, y: -0.39, z: 0}
+  m_LocalPosition: {x: -0.023, y: -0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 5831323529502717667}
@@ -113,7 +114,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4864
   feetPos: {fileID: 5831323528585537926}
-  checkFeetRadius: 0.15
+  checkFeetRadius: 0.4
   isGrounded: 0
   lastGroundTag: 
 --- !u!58 &4854041401405510612
@@ -156,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5831323528585537921}
   m_LocalRotation: {x: -0, y: 0.9998819, z: 0.015367009, w: 0}
-  m_LocalPosition: {x: -0.027, y: -1.29, z: 0}
+  m_LocalPosition: {x: 0.12, y: -1.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 5831323529502717667}
@@ -388,6 +389,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -412,7 +417,7 @@ MonoBehaviour:
   checkFeetRadius: 0.15
   groundChecker: {fileID: 7329158353842209263}
   collisionHandler: {fileID: 149231213980759810}
-  enemyEffectOnPlayer: {fileID: 11400000, guid: 8fb47409506f3844e84cd6922ba55500, type: 2}
+  enemyEffectOnPlayer: {fileID: 11400000, guid: 8de5e72f6bf5ff44fa630dfab5f2bbcf, type: 2}
   enemyEffectOnSelf: {fileID: 11400000, guid: 4d0b64dedb6294445a543b048c02b1a0, type: 2}
   projectileEffectOnPlayer: {fileID: 11400000, guid: 90c69d5edae60f3408126cff60c25dd9, type: 2}
   damageAmount: 5
@@ -425,7 +430,7 @@ MonoBehaviour:
   pathUpdateSeconds: 0.5
   speedMultiplier: 4000
   nextWaypointDistance: 3
-  jumpNodeHeightRequirement: 0.5
+  jumpNodeHeightRequirement: 0.2
   minDistanceFromPlayer: 5
   speedIcreaseMultiplier: 2
   fovOrigin: {fileID: 5831323528851422959}

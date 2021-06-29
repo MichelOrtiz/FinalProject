@@ -54,6 +54,12 @@ public class SeekerCentaurBoss : Entity, IProjectile
     private PlayerManager player;
     private bool touchingPlayer;
 
+    void Awake()
+    {
+        collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;
+        collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
+
+    }
 
     // Start is called before the first frame update
     new void Start()
@@ -248,6 +254,7 @@ public class SeekerCentaurBoss : Entity, IProjectile
     {
         if (contact.gameObject.tag == "Player")
         {
+            Debug.Log("touching player");
             touchingPlayer = true;
             player.TakeTirement(damageAmount);
             player.statesManager.AddState(enemyEffectOnPlayer);

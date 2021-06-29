@@ -33,4 +33,9 @@ public class GameCamera : MonoBehaviour
     public Vector3 GetMousePosition(){
         return mousePosition;
     }
+    public bool HasMouseMoved()
+    {
+        //I feel dirty even doing this 
+        return (Input.GetAxis("Mouse X") != 0) || (Input.GetAxis("Mouse Y") != 0);
+    }
 }
