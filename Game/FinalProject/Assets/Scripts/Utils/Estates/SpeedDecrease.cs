@@ -15,7 +15,7 @@ public class SpeedDecrease : State
         if(isPlayer)
         {
             player = manager.hostEntity.GetComponent<PlayerManager>();
-            defaultWalkingSpeed = player.walkingSpeed;
+            defaultWalkingSpeed = player.defaultwalkingSpeed;
 
             player.walkingSpeed *= decreaseMultiplier;
         }
