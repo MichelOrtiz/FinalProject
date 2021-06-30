@@ -21,8 +21,6 @@ public class GameCamera : MonoBehaviour
             }
             DontDestroyOnLoad(this);
         }
-        
-        transform.position = new Vector3(PlayerManager.instance.transform.position.x,PlayerManager.instance.transform.position.y,-10f);
     }
     // Start is called before the first frame update
     void Start()
@@ -32,9 +30,9 @@ public class GameCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        transform.position = new Vector3(PlayerManager.instance.transform.position.x,PlayerManager.instance.transform.position.y,-10f);
         if (camera1)
         {
+            transform.position = new Vector3(PlayerManager.instance.transform.position.x,PlayerManager.instance.transform.position.y,-10f);
             mousePosition = gameObject.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
         }
     }
