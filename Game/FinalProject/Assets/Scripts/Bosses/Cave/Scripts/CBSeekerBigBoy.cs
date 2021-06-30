@@ -156,10 +156,6 @@ public class CBSeekerBigBoy : CaveBossBehaviour
             inPush = true;
 
         }
-
-        
-
-        
         /*if (!player.collisionHandler.Contacts.Exists(c => c.tag == "Ground"))
         {
             inSameWallThanPlayer = false;
@@ -300,6 +296,8 @@ public class CBSeekerBigBoy : CaveBossBehaviour
 
         if (contact.tag == "Ceiling")
         {
+            inColor = true;
+            spriteRenderer.color = colorWhenHit;
             if (projectileHits < maxProjectileHits-1)
             {
                 projectileHits++;

@@ -155,8 +155,6 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
                 currentWaitTime += Time.deltaTime;
             }
         }
-
-        
         base.Update();
     }
 
@@ -200,6 +198,7 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
     {
         if (groundTag == "Ground")
         {
+            inColor = true;
             StopMoving();
             hitGround = true;
             reachedDestination = false;
@@ -230,6 +229,7 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
         }
         if (contact.tag == "Ceiling")
         {
+            //inColor = true;
             if (currentGroundHits >= maxGroundHits)
             {
                OnFinished(GetPosition());

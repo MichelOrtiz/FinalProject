@@ -109,17 +109,21 @@ public class Entity : MonoBehaviour
 
     public void UpdateAnimation()
     {
-        animator.SetBool("Is Grounded", isGrounded);
-        animator.SetBool("Is Walking", isWalking);
-        animator.SetBool("Is Falling", isFalling);
-        animator.SetBool("Is Jumping", isJumping);
-        animator.SetBool("Is Flying", isFlying);
-        animator.SetBool("Is Paralized", isParalized);
-        animator.SetBool("Is Captured", isCaptured);
-        animator.SetBool("Is In Fear", isInFear);
-        animator.SetBool("Is Brain Frozen", isBrainFrozen);
-        animator.SetBool("Is Resting", isResting);
-        animator.SetBool("Is Chasing", isChasing);
+        if (animator != null && animator.runtimeAnimatorController)
+        {
+            animator.SetBool("Is Grounded", isGrounded);
+            animator.SetBool("Is Walking", isWalking);
+            animator.SetBool("Is Falling", isFalling);
+            animator.SetBool("Is Jumping", isJumping);
+            animator.SetBool("Is Flying", isFlying);
+            animator.SetBool("Is Paralized", isParalized);
+            animator.SetBool("Is Captured", isCaptured);
+            animator.SetBool("Is In Fear", isInFear);
+            animator.SetBool("Is Brain Frozen", isBrainFrozen);
+            animator.SetBool("Is Resting", isResting);
+            animator.SetBool("Is Chasing", isChasing);
+            
+        }
     }
 
     public Vector3 GetPosition()

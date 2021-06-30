@@ -14,6 +14,8 @@ public class CBBatGenerator : MonoBehaviour, IProjectile
     [SerializeField] private int batPerShot;
     private int batsShot;
     private bool shooting;
+    private bool keepShooting;
+
     #endregion
 
     #region PlayerEtc
@@ -29,9 +31,16 @@ public class CBBatGenerator : MonoBehaviour, IProjectile
     private float distanceFromY;
     private float distanceFromX;
 
-    private bool keepShooting;
 
     #endregion
+
+    #region TimeStuff
+    [Header("Time")]
+    [SerializeField] private float cooldown;
+    private float curCooldown;
+    #endregion
+
+
 
     void Start()
     {
@@ -44,13 +53,22 @@ public class CBBatGenerator : MonoBehaviour, IProjectile
         {
             direction = transform.TransformDirection(direction);
         }
+        curCooldown = cooldown;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (curCooldown > 0)
+        {
+            curCooldown -= Time.deltaTime;
+            return;
+        }
+
         distanceFromY = Mathf.Abs(player.GetPosition().y - transform.position.y);
         distanceFromX = Mathf.Abs(player.GetPosition().x - transform.position.x);
+
+
         if ( (distanceFromY <= yOffsetCheck && distanceFromX >= minXDistanceCheck) || keepShooting)
         {
             if (batsShot < batPerShot)
@@ -71,6 +89,7 @@ public class CBBatGenerator : MonoBehaviour, IProjectile
             }
             else
             {
+                curCooldown = cooldown;
                 keepShooting = false;
             }
         }
