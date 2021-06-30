@@ -14,11 +14,11 @@ namespace Minimap{
         // Update is called once per frame
         public static void Show()
         {
-            instance.gameObject.SetActive(true);
+            instance?.gameObject.SetActive(true);
         }
         public static void Hide()
         {            
-            instance.gameObject.SetActive(false);
+            instance?.gameObject.SetActive(false);
         }
     }
 }
