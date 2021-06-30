@@ -35,7 +35,7 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
     //private List<GameObject> grounds;
     private bool hitGround;
     [SerializeField] private byte maxGroundHits;
-    private byte currentGroundHits;
+    [SerializeReference]private byte currentGroundHits;
     //[SerializeField] private byte maxProjectileHits;
     //private byte projectileHits;
     [SerializeField] private float waitTimeWhenCollide;
@@ -51,8 +51,9 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
 
     [SerializeField] private Transform shotPos;
     public Transform ShotPos { get => shotPos; }
-    [SerializeField] private Transform endPos;
-    public Vector2 EndPos { get => endPos.position; }
+    [SerializeField] private Vector2 endPos;
+   // private Transform endPosClone;
+    public Vector2 EndPos { get => endPos; }
     #endregion
 
     #region ProjectileStuff
@@ -110,8 +111,7 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
         }
 
         grounds = roomManager.grounds;*/
-
-        ShootLaser(shotPos.position, endPos.position);
+        ShootLaser(shotPos.position, endPos);
     }
 
     // Update is called once per frame
@@ -171,16 +171,16 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
             }
             else if (sawPlayer)
             {
-                if (!touchingPlayer)
+                //if (!touchingPlayer)
                 {
                     Push(0, -pushForce);
                 }
-                else
+                /*else
                 {
                     //StopMoving();
                     reachedDestination = false;
                     GoToDestination();
-                }
+                }*/
             }
         }
     }
@@ -205,13 +205,9 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
             reachedDestination = false;
             sawPlayer = false;
 
-            if (currentGroundHits < maxGroundHits-1)
+            currentGroundHits++;
+            if (currentGroundHits >= maxGroundHits)
             {
-                currentGroundHits++;
-            }
-            else
-            {
-
                 rigidbody2d.gravityScale = 1;
                 Destroy(FindObjectOfType<LineRenderer>());
                 Destroy(FindObjectOfType<Laser>());
@@ -234,10 +230,8 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
         }
         if (contact.tag == "Ceiling")
         {
-            if (hit)
+            if (currentGroundHits >= maxGroundHits)
             {
-                
-                
                OnFinished(GetPosition());
             }
             hit = true;

@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: fdacc0f56ac823d4fa63eaaaed129156, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -149,6 +149,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -182,6 +186,7 @@ MonoBehaviour:
   inSameWallThanPlayer: 0
   inGroundWithPlayer: 0
   maxProjectileHits: 2
+  projectileHits: 0
   shockWake: {fileID: 6682537399405604149}
 --- !u!1 &6682537397815908608
 GameObject:
@@ -5053,7 +5058,7 @@ GameObject:
   - component: {fileID: 6682537399287111957}
   - component: {fileID: 6682537399287111962}
   - component: {fileID: 6682537399287111963}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9959,7 +9964,7 @@ GameObject:
   - component: {fileID: 6682537399332971183}
   - component: {fileID: 6682537399332971180}
   - component: {fileID: 6682537399332971181}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CollisionHandler
   m_TagString: Enemy
   m_Icon: {fileID: 0}

@@ -30,6 +30,11 @@ public class CBProjectileThrower : Entity, IProjectile
     new void Start()
     {
         base.Start();
+        /*byte index = 0;
+        foreach (var thread in threads)
+        {
+            Instantiate(thread, startPositions[index], thread.transform.rotation);
+        }*/
     }
 
     // Update is called once per frame

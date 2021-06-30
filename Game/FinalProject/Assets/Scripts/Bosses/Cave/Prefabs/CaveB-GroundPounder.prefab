@@ -152,6 +152,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -162,7 +166,7 @@ MonoBehaviour:
   statesManager: {fileID: 0}
   jumpForce: 0
   jumpTime: 0
-  fallingCriteria: 0
+  fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
@@ -175,15 +179,16 @@ MonoBehaviour:
   positionToGo: {x: 79.9, y: 113.8}
   destinationRadius: 0.5
   xRangeToSeePlayer: 1
-  effectOnPlayer: {fileID: 0}
-  damageAmount: 0
+  effectOnPlayer: {fileID: 11400000, guid: 4c22bfd67c6572543a94cf2731a50266, type: 2}
+  damageAmount: 35
   speedMultiplier: 2
   pushForce: 100
-  maxGroundHits: 3
+  maxGroundHits: 5
+  currentGroundHits: 0
   waitTimeWhenCollide: 1.5
   laserPrefab: {fileID: 930200629637541267, guid: 1ed0458b4e4cc0141b1b8ff35b83448f, type: 3}
   shotPos: {fileID: 4912847327396497695}
-  endPos: {fileID: 6109003575160564890, guid: f3fbf4b22bcfcff43951ee17d030f52f, type: 3}
+  endPos: {x: 80.05, y: 132.9}
   projectilePrefab: {fileID: 4690660590625237830, guid: 9fe37f48a9f628f47807f58a3072858e, type: 3}
   projectileShotPos: {fileID: 4912847327136516643}
   timeBtwShot: 1
@@ -10047,7 +10052,7 @@ GameObject:
   - component: {fileID: 4912847327590852771}
   - component: {fileID: 4912847327590852770}
   - component: {fileID: 4912847327590852781}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GroundChecker
   m_TagString: Fake
   m_Icon: {fileID: 0}
@@ -10081,7 +10086,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.015422283}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -10092,7 +10097,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.36082458, y: 0.053838134}
+  m_Size: {x: 0.36082458, y: 0.0846827}
   m_EdgeRadius: 0
 --- !u!114 &4912847327590852781
 MonoBehaviour:

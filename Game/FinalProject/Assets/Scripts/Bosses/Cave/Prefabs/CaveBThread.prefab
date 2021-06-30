@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 930200629637541266}
   - component: {fileID: 5896100059345284874}
   m_Layer: 7
-  m_Name: CBThread
+  m_Name: CaveBThread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,8 @@ MonoBehaviour:
   warning: {fileID: 0}
   warningTime: 0
   speed: 50
-  chaseTargetPosition: 1
+  secondSpeed: 0
+  chaseTargetPosition: 0
   chaseOnReachedEndPos: 0
 --- !u!68 &5896100059345284874
 EdgeCollider2D:
@@ -184,7 +185,7 @@ LineRenderer:
   - {x: 0, y: 1, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.25356054
     widthCurve:
       serializedVersion: 2
       m_Curve:

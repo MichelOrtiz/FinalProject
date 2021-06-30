@@ -13,7 +13,6 @@ public class CaveBoss : BossFight
 
     private CaveBossBehaviour caveBossBehaviour;
 
-    private byte timesNextStageCalled;
 
     void Awake()
     {
@@ -31,13 +30,14 @@ public class CaveBoss : BossFight
         currentStage.Generate();
         currentPos = startBossEntityPosition;
         
+        
+        
         UpdateCurrentBoss();
     }
 
     
     new void Update()
     {
-        
         base.Update();
 
     }
@@ -46,21 +46,18 @@ public class CaveBoss : BossFight
     {
         if(indexStage<stages.Count-1)
         {
-
             indexStage++;
-
+            
             currentStage.Destroy();
+
             currentStage=stages[indexStage];
             
             currentStage.Generate();
             UpdateCurrentBoss();
         }
-        else{
-            Debug.Log("Lo hiciste ganaste!!!1");
-            currentStage.Destroy();
-            isCleared=true;
-            //give ability
-            //AbilityManager.instance.AddAbility(reward);
+        else
+        {
+            EndBattle();
         }
     }
 
@@ -71,7 +68,7 @@ public class CaveBoss : BossFight
 
         if (caveBossBehaviour != null)
         {
-            //caveBossBehaviour.FinishedHandler += caveBoss_FinishedBehaviour;
+            caveBossBehaviour.FinishedHandler += caveBoss_FinishedBehaviour;
         }
     }
 
@@ -93,8 +90,6 @@ public class CaveBoss : BossFight
 
     void caveBoss_FinishedBehaviour(Vector2 lastPos)
     {
-        Debug.Log("current pos = " + lastPos);
-
         currentPos = lastPos;
         NextStage();
     }

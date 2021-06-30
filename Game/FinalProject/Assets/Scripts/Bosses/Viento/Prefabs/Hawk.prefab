@@ -5071,6 +5071,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -5089,7 +5093,9 @@ MonoBehaviour:
   whatIsObstacle: []
   feetPos: {fileID: 7581885320599023022}
   checkFeetRadius: 0
-  baseSpeedMultiplier: 0.5
+  groundChecker: {fileID: 0}
+  collisionHandler: {fileID: 0}
+  baseSpeedMultiplier: 0.75
   speedChangeMultiplier: 1.25
   intervalToChangeSpeed: 5
   changeSpeedTimeAcive: 1

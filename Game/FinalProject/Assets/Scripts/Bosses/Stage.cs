@@ -32,4 +32,12 @@ public class Stage : ScriptableObject
             if(obj!=null) Destroy(obj);
         }
     }
+
+    public void DestroyAllBut(List<GameObject> gameObjects)
+    {
+        foreach (GameObject obj in currentObjects)
+        {
+            if(obj!=null && !gameObjects.Contains(obj)) Destroy(obj);
+        }
+    }
 }

@@ -29,7 +29,8 @@ public class CBBatGenerator : MonoBehaviour, IProjectile
     private float distanceFromY;
     private float distanceFromX;
 
-    private RaycastHit2D raycast;
+    private bool keepShooting;
+
     #endregion
 
     void Start()
@@ -50,10 +51,12 @@ public class CBBatGenerator : MonoBehaviour, IProjectile
     {
         distanceFromY = Mathf.Abs(player.GetPosition().y - transform.position.y);
         distanceFromX = Mathf.Abs(player.GetPosition().x - transform.position.x);
-        if (distanceFromY <= yOffsetCheck && distanceFromX >= minXDistanceCheck || batsShot > 0)
+        if ( (distanceFromY <= yOffsetCheck && distanceFromX >= minXDistanceCheck) || keepShooting)
         {
             if (batsShot < batPerShot)
             {
+                 keepShooting = true;
+
                 if (curTimeBtwBat > timeBtwBat)
                 {
                     
@@ -65,6 +68,10 @@ public class CBBatGenerator : MonoBehaviour, IProjectile
                 {
                     curTimeBtwBat += Time.deltaTime;
                 }
+            }
+            else
+            {
+                keepShooting = false;
             }
         }
         else
