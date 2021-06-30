@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Minimap;
 
 public class PlayerManager : Entity
 {
@@ -53,6 +54,7 @@ public class PlayerManager : Entity
     [SerializeField]private bool loosingStamina;
     [SerializeField]private bool loosingOxygen;
     private float regenCooldown;
+    private bool MinimapaActivada;
     ConveyScript convey;
 
     #region Dialogues
@@ -114,6 +116,7 @@ public class PlayerManager : Entity
         currentGravity = defaultGravity;
         currentMass = defaultMass;
         inputs = gameObject.GetComponent<PlayerInputs>();
+        MinimapaActivada = true;
     }
 
     new void Update()
@@ -206,6 +209,16 @@ public class PlayerManager : Entity
                 currentStamina = maxStamina;
                 currentOxygen = maxOxygen;
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            MinimapaActivada = !MinimapaActivada;
+        }
+        if (MinimapaActivada)
+        {
+            MinimapWindow.Show();
+        }else{
+            MinimapWindow.Hide();
         }
         base.Update();
     } 

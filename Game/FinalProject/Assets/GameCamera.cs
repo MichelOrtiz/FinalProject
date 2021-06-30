@@ -6,29 +6,35 @@ public class GameCamera : MonoBehaviour
 {
     public static GameCamera instance = null;
     private Vector3 mousePosition;
+    public bool camera1;
     void Awake()
     {
-        if (instance == null)
+        if (camera1)
         {
-            instance = this;
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+            DontDestroyOnLoad(this);
         }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(this);
     }
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(PlayerManager.instance.transform.position.x,PlayerManager.instance.transform.position.y,-10f);
     }
 
     // Update is called once per frame
     void Update()
     { 
-        transform.position = new Vector3(PlayerManager.instance.transform.position.x,PlayerManager.instance.transform.position.y,-10f);
-        mousePosition = gameObject.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
+        if (camera1)
+        {
+            transform.position = new Vector3(PlayerManager.instance.transform.position.x,PlayerManager.instance.transform.position.y,-10f);
+            mousePosition = gameObject.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
+        }
     }
     public Vector3 GetMousePosition(){
         return mousePosition;
