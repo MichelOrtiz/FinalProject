@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DragonBoss : MonoBehaviour,IProjectile
 {
+    [SerializeField] private Transform shotPos;
     [SerializeField]private Transform head;
     [SerializeField]private Transform tail;
     [SerializeField]private GameObject projectilePrefab;
@@ -42,7 +43,7 @@ public class DragonBoss : MonoBehaviour,IProjectile
         rockTime += Time.deltaTime;
         if(currentTime>=shootInterval && currentProjectiles<nProjectiles){
             currentTime=0;
-            ShotProjectile(head,player.transform.position);
+            ShotProjectile(shotPos,player.transform.position);
             currentProjectiles++;
         }
         if(currentTime>=roarInterval){

@@ -9,6 +9,10 @@ public class Smoke : MonoBehaviour
     [SerializeField]private float speedMultiplier;
     [SerializeField]private Rigidbody2D rigidbody2d;
     [SerializeField]private Vector3 target;
+
+    [SerializeField] private float lifeTime;
+    private float curLifeTime;
+
     private Vector3 shootDir;
     private Vector3 startPosition;
     private float currentTime;
@@ -28,6 +32,15 @@ public class Smoke : MonoBehaviour
         }
         else{
             currentTime=0;
+        }
+
+        if (curLifeTime > lifeTime)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            curLifeTime += Time.deltaTime;
         }
     }
     void Movement(){

@@ -117,6 +117,29 @@ public class ScenesManagers : MonoBehaviour
         return result;
     }
 
+    public static GameObject FindGameObject(Predicate<GameObject> predicate)
+    {
+        GameObject gameObject;
+        List<GameObject> gameObjectsInScene = GetGameObjectsOfScript<Transform>();
+        
+        gameObject = gameObjectsInScene.Find(predicate);
+        return gameObject;
+    }
+
+    public static bool ExistsGameObject(GameObject gameObject)
+    {
+        List<GameObject> gameObjectsInScene = GetGameObjectsOfScript<Transform>();
+        
+        foreach (var gameObjectInScene in gameObjectsInScene)
+        {
+            if (gameObjectInScene == gameObject)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void SetListActive(List<GameObject> gameObjects, bool active)
     {
         foreach (var gameObject in gameObjects)

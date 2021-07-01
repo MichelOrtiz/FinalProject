@@ -131,18 +131,24 @@ MonoBehaviour:
   rigidbody2d: {fileID: 8379419199720394816}
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4352
   warning: {fileID: 0}
   impactEffect: {fileID: 0}
   targetWarningAvailable: 0
-  collidesWithPlayer: 1
+  independentAttackEnabled: 0
   speedMultiplier: 1.25
   maxShotDistance: 80
   damage: 10
-  waitTime: 0
+  waitTime: 0.01
   impactEffectExitTime: 0
   touchingPlayer: 0
   touchingObstacle: 0
+  changeSizeByDistance: 0
+  distanceToIncrease: 0
+  sizeByDistanceMultiplier: 0
+  changeSizeByTime: 0
+  timeToIncrease: 0
+  sizeByTimeMultiplier: 0
 --- !u!50 &8379419199720394816
 Rigidbody2D:
   serializedVersion: 4
