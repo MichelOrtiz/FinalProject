@@ -37,7 +37,7 @@ public class GnomeBoss : MonoBehaviour
         if (!switchEventCalled)
         {
             bossFight.NextStage();
-            stageSwitch = new Switch();
+            //stageSwitch = new Switch();
             switchEventCalled = true;
         }
     }

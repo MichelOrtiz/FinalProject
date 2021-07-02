@@ -131,4 +131,15 @@ public class CastleBMaster : BossFight
         DestroyStageObjects();
         EndBattle();
     }
+
+    public override void EndBattle()
+    {
+        if (!isCleared)
+        {
+            currentStage?.Destroy();
+            isCleared=true;
+            Debug.Log("Lo hiciste ganaste!!!1");
+        }
+
+    }
 }

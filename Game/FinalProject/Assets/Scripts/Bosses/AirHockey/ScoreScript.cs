@@ -23,7 +23,7 @@ public class ScoreScript : MonoBehaviour
                 aiScore = value;    
                 if (value == MaxScore)
                 {
-                    uIManager.ShowRestartCanvas(true);
+                    //uIManager.ShowRestartCanvas(true);
                 }
             }
         }
@@ -35,11 +35,13 @@ public class ScoreScript : MonoBehaviour
                 playerScore = value;    
                 if (value == MaxScore)
                 {
-                    uIManager.ShowRestartCanvas(false);
+                    GetComponent<BossFight>().EndBattle();
+                    //uIManager.ShowRestartCanvas(false);
                 }
             }
         }
     #endregion
+
 
     public void Increment(Score whichScore){
         if (whichScore == Score.AiScore)

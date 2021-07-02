@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UBLamp : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite spriteWhenEnabled;
     [SerializeField] private Sprite spriteWhenDisabled;
     
@@ -36,7 +36,7 @@ public class UBLamp : MonoBehaviour
             collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterTouchingContact;
             collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitTouchingContact;
         }
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
         ChangeSprite(spriteWhenEnabled);
     }
 

@@ -57,7 +57,7 @@ public class Switch : MonoBehaviour
                 OnSwitchActivated(this);
             }
         }
-        if (activado)
+        if (activado && hasTime)
         {
             if (curTimeActivated > timeActivated)
             {

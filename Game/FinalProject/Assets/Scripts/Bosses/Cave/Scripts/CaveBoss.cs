@@ -14,8 +14,9 @@ public class CaveBoss : BossFight
     private CaveBossBehaviour caveBossBehaviour;
 
 
-    void Awake()
+    new void Awake()
     {
+        base.Awake();
         foreach (var scissor in threadBreakers)
         {
             scissor.ActivatedHandler += threadBreaker_Activated;

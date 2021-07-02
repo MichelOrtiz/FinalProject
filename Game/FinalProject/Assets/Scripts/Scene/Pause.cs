@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
-    static bool active;
+    public static bool active;
     public GameObject panel;
     static PlayerInputs inputs;
     void Start()
@@ -18,7 +18,8 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
             //active = !active;
             HandleActive(!active);
             panel.SetActive(active);
@@ -41,6 +42,10 @@ public class Pause : MonoBehaviour
     {
         active = value;
         Time.timeScale = (active) ? 0 : 1f;
-        inputs.enabled = !active;
+        
+        if (inputs != null)
+        {
+            inputs.enabled = !active;
+        }
     }
 }

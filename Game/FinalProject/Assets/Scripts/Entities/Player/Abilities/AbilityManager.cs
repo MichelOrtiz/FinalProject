@@ -46,6 +46,20 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
+    public void SetActiveSingle(Ability.Abilities ability, bool active)
+    {
+        try
+        {
+            FindAbility(ability).isUnlocked = active;
+            FindAbility(ability).enabled = active;
+        }
+        catch (System.NullReferenceException)
+        {
+            Debug.Log("ERROR: Can't set active: ability not found in manager list");
+            return;
+        }
+    }
+
     public Ability FindAbility(Ability.Abilities name)
     {
         return abilities.Find(a => a.abilityName == name);

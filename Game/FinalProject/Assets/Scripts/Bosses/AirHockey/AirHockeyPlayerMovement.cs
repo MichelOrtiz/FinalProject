@@ -11,6 +11,7 @@ public class AirHockeyPlayerMovement : MonoBehaviour
     public Transform BoundaryHolder;
     Boundary playerBoundary;
     [SerializeField]Collider2D playerCollider;
+    [SerializeField] private Collider2D mouseCollider;
     Vector2 mousePos;
     public float offset;
 
@@ -33,7 +34,7 @@ public class AirHockeyPlayerMovement : MonoBehaviour
         if (!frozen)
         {
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (playerCollider.OverlapPoint(mousePos))
+            if (mouseCollider.OverlapPoint(mousePos))
             {
                 overPuck = true;
                 if (Input.GetMouseButton(0))
@@ -41,7 +42,7 @@ public class AirHockeyPlayerMovement : MonoBehaviour
                     if (wasJustClicked)
                     {
                         wasJustClicked = false;
-                        if (playerCollider.OverlapPoint(mousePos))
+                        if (mouseCollider.OverlapPoint(mousePos))
                         {
                             canMove = true;
                             overPuck = true;
@@ -53,7 +54,7 @@ public class AirHockeyPlayerMovement : MonoBehaviour
                     }
                     if (canMove)
                     {
-                        if (playerCollider.OverlapPoint(mousePos))
+                        if (mouseCollider.OverlapPoint(mousePos))
                         {
                             canMove = true;
                             overPuck = true;
