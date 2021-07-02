@@ -111,7 +111,7 @@ public class PlayerManager : Entity
         base.Start();
         currentStamina = maxStamina;
         currentOxygen = maxOxygen;
-        FindStartPos();
+        //FindStartPos();
         regenCooldown = 5;
         currentGravity = defaultGravity;
         currentMass = defaultMass;
@@ -216,9 +216,9 @@ public class PlayerManager : Entity
         }
         if (MinimapaActivada)
         {
-            MinimapWindow.Show();
+            MinimapWindow.instance?.Show();
         }else{
-            MinimapWindow.Hide();
+            MinimapWindow.instance?.Hide();
         }
         base.Update();
     } 
@@ -385,8 +385,7 @@ public class PlayerManager : Entity
     }
     #endregion
 
-
-
+/*
     private void OnLevelWasLoaded(int level){
         base.Start();
         FindStartPos();
@@ -399,7 +398,8 @@ public class PlayerManager : Entity
 
     void FindStartPos(){
         transform.position = GameObject.FindWithTag("StartPos").transform.position;
-    }
+        //transform.position = loadlevel.instance.startPosition.transform.position;
+    }*/
     void FindRespawnPos(){
         transform.position = GameObject.FindWithTag("RespawnPos").transform.position;
     }
