@@ -5,20 +5,25 @@ using UnityEngine;
 namespace Minimap{
     public class MinimapWindow : MonoBehaviour
     {
-        private static MinimapWindow instance;
+        public static MinimapWindow instance;
         private void Awake()
         {
             instance = this;
         }
-
-        // Update is called once per frame
-        public static void Show()
+        private void Update()
         {
-            instance?.gameObject.SetActive(true);
+            if (instance==null)
+            {
+                instance = this;
+            }
         }
-        public static void Hide()
+        public void Show()
+        {
+            instance?.gameObject?.SetActive(true);
+        }
+        public void Hide()
         {            
-            instance?.gameObject.SetActive(false);
+            instance?.gameObject?.SetActive(false);
         }
     }
 }
