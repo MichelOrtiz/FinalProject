@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class GroundChecker : MonoBehaviour
 {
+    #region Ground And Edge Variables
+    [Header("Ground")]
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform feetPos;
     [SerializeField] public float checkFeetRadius;
-    //private BoxCollider2D collider2D;
     public bool isGrounded;
     public string lastGroundTag;
 
+    [Header("Edge")]
+    [SerializeField] private Transform edgeCheck;
+    [SerializeField] private float downCheckDistance;
+    public bool isNearEdge;
+    #endregion
+
+    #region Events
     public delegate void ChangedGroundTag();
     public event ChangedGroundTag ChangedGroundTagHandler;
     protected virtual void OnChangedGroundTag()
     {
         ChangedGroundTagHandler?.Invoke();
     }
-
     public delegate void Grounded(string groundTag);
     public delegate void GroundedGameObject(GameObject ground);
 
@@ -31,13 +38,13 @@ public class GroundChecker : MonoBehaviour
     {
         GroundedGameObjectHandler?.Invoke(ground);
     }
-
     public delegate void ExitGround();
     public event ExitGround ExitGroundHandlder;
     protected virtual void OnExitGround()
     {
         ExitGroundHandlder?.Invoke();
     }
+    #endregion
 
     void Start()
     {
@@ -49,6 +56,20 @@ public class GroundChecker : MonoBehaviour
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
+        isNearEdge = IsNearEdge();
+    }
+
+    public bool IsNearEdge()
+    {
+        //bool nearEdge;
+        try
+        {
+            return !(Physics2D.Raycast(edgeCheck.position, Vector3.down, downCheckDistance)).collider.IsTouchingLayers(whatIsGround);
+        }
+        catch (System.NullReferenceException)
+        {
+            return true;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)

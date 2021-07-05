@@ -8,18 +8,18 @@ public class EnemyCollisionHandler : CollisionHandler
     public bool touchingGround;
     public Enemy lastEnemyTouched;
 
-    public delegate void AttackPlayer();
-    public event AttackPlayer TouchingPlayer;
+    public delegate void TouchingPlayer();
+    public event TouchingPlayer TouchingPlayerHandler;
     protected virtual void OnTouchingPlayer()
     {
-        TouchingPlayer?.Invoke();
+        TouchingPlayerHandler?.Invoke();
     }
 
-    public delegate void StopAttack(); 
-    public event StopAttack JustTouchedPlayer;
-    protected virtual void OnJustTouchedPlayer()
+    public delegate void StoppedTouchingPlayer(); 
+    public event StoppedTouchingPlayer StoppedTouchingHandler;
+    protected virtual void OnStoppedTouchingPlayer()
     {
-        JustTouchedPlayer?.Invoke();
+        StoppedTouchingHandler?.Invoke();
     }
 
     public delegate void TouchingGround();
@@ -65,7 +65,7 @@ public class EnemyCollisionHandler : CollisionHandler
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = false;
-            OnJustTouchedPlayer();
+            OnStoppedTouchingPlayer();
         }
         else if (other.gameObject.tag == "Enemy")
         {
@@ -105,7 +105,7 @@ public class EnemyCollisionHandler : CollisionHandler
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = false;
-            OnJustTouchedPlayer();
+            OnStoppedTouchingPlayer();
         }
         else if (other.gameObject.tag == "Enemy")
         {

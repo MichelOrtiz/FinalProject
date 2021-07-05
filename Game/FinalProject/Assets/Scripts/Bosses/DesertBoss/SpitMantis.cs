@@ -121,8 +121,8 @@ public class SpitMantis : Mantis, IProjectile
         base.OnCollisionExit2D(other);
     }*/
 
-    new void collisionHandler_TouchingGround()
+    new void eCollisionHandler_TouchingGround()
     {
-        base.collisionHandler_TouchingGround();
+        base.eCollisionHandler_TouchingGround();
     }
 }

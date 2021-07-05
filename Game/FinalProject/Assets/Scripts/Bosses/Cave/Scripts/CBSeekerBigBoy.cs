@@ -78,7 +78,7 @@ public class CBSeekerBigBoy : CaveBossBehaviour
 
         eCollisionHandler.StayTouchingContactHandler += eCollisionHandler_StayInCollision;
 
-        eCollisionHandler.TouchingPlayer += eCollisionHandler_Attack;
+        eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
 
 
         groundChecker.GroundedHandler += groundChecker_Grounded;
@@ -351,7 +351,7 @@ public class CBSeekerBigBoy : CaveBossBehaviour
         }
     }
 
-    void eCollisionHandler_Attack()
+    void eCollisionHandler_TouchingPlayer()
     {
         player.TakeTirement(damageAmount);
         //player.statesManager.AddState(effectOnPlayer);

@@ -34,9 +34,9 @@ public class GladiatorCentaur : Centaur
             }
         }
 
-        if (collisionHandler.touchingEnemy)
+        if (eCollisionHandler.touchingEnemy)
         {
-            enemyTouched = collisionHandler.lastEnemyTouched;
+            enemyTouched = eCollisionHandler.lastEnemyTouched;
         }
         base.Update();
     }

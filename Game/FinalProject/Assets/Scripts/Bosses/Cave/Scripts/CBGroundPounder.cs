@@ -88,7 +88,7 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
         eCollisionHandler.ExitTouchingContactHandler += eCollisionHandler_ExitCollision;
 
 
-        eCollisionHandler.TouchingPlayer += eCollisionHandler_Attack;
+        eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
 
 
         groundChecker.GroundedHandler += groundChecker_Grounded;
@@ -214,7 +214,7 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
         }
     }
 
-    void eCollisionHandler_Attack()
+    void eCollisionHandler_TouchingPlayer()
     {
         touchingPlayer = true;
         player.TakeTirement(damageAmount);

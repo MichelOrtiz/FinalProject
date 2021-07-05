@@ -39,13 +39,13 @@ public abstract class Enemy : Entity
 
     // Fov angle if needed
     [SerializeField] protected float fovAngle;
+    protected FieldOfView fieldOfView;
 
-    new protected EnemyCollisionHandler collisionHandler;
+    protected EnemyCollisionHandler eCollisionHandler;
     #endregion
 
     #region Status
     public bool touchingPlayer;
-    [SerializeField] protected bool justCapturedPlayer;
     #endregion
 
     #region Abstract methods
@@ -82,9 +82,10 @@ public abstract class Enemy : Entity
         chaseSpeed = chaseSpeedMultiplier * averageSpeed;
         normalSpeed = normalSpeedMultiplier * averageSpeed;
         
-        collisionHandler = (EnemyCollisionHandler)base.collisionHandler;
+        eCollisionHandler = (EnemyCollisionHandler)base.collisionHandler;
         
-        collisionHandler.TouchingPlayer += collisionHandler_Attack;
+        eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
+        fieldOfView = GetComponent<FieldOfView>();
     }
 
     new protected void Update()
@@ -98,7 +99,7 @@ public abstract class Enemy : Entity
             {
                 ChangeFacingDirection();
             }*/
-        touchingPlayer = collisionHandler.touchingPlayer;
+        touchingPlayer = eCollisionHandler.touchingPlayer;
         
 
         UpdateState();
@@ -124,54 +125,23 @@ public abstract class Enemy : Entity
         }
     }
 
-    protected virtual void collisionHandler_Attack()
+    protected virtual void eCollisionHandler_TouchingPlayer()
     {
         if (!player.isImmune)
         {
             Attack();
         }
     } 
-
-    /*/// <summary>
-    /// OnCollisionStay is called once per frame for every collider/rigidbody
-    /// that is touching rigidbody/collider.
-    /// </summary>
-    /// <param name="other">The Collision data associated with this collision.</param>
-    protected virtual void OnCollisionEnter2D(Collision2D other)
-    {
-        // if the enemy is touching the player
-        if (other.gameObject.tag == "Player")
-        {
-            touchingPlayer = true;
-            if (!player.isImmune)
-            {
-                Attack();
-            }
-        }
-    }
-    
-    /// <summary>
-    /// Sent when a collider on another object stops touching this
-    /// object's collider (2D physics only).
-    /// </summary>
-    /// <param name="other">The Collision2D data associated with this collision.</param>
-    protected virtual void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            touchingPlayer = false;
-        }
-    }*/
     #endregion
 
     #region General behaviour methods
     
     protected bool InFrontOfObstacle()
     {
-
-        float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
+        return fieldOfView.inFrontOfObstacle;
+        /*float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
         Vector3 targetPos = fovOrigin.position + (facingDirection == LEFT? Vector3.left : Vector3.right) * castDistance;
-        return RayHitObstacle(fovOrigin.position, targetPos);
+        return RayHitObstacle(fovOrigin.position, targetPos);*/
         //targetPos.x += castDistance;
 
         /*foreach (var obstacle in whatIsObstacle)
@@ -189,18 +159,10 @@ public abstract class Enemy : Entity
     protected bool IsNearEdge()
     {
         // the raycast draws a 0.2f line down and checks if there's something 
-        return !(Physics2D.Raycast(groundCheck.position, Vector3.down, 0.3f)).collider;
+        //return !(Physics2D.Raycast(groundCheck.position, Vector3.down, 0.3f)).collider;
+        return groundChecker.isNearEdge;
     }
 
-    // not tested
-    public IEnumerator AfterPlayerReleasedFromCapture()
-    {
-        isParalized = true;
-        rigidbody2d.Sleep();
-        yield return new WaitForSeconds(2);
-        rigidbody2d.WakeUp();
-        isParalized = false;
-    }
 
     protected void MoveTowardsPlayerInGround(float speed)
     {
@@ -230,27 +192,6 @@ public abstract class Enemy : Entity
             isFalling? StateNames.Falling :
             StateNames.Patrolling;
     }
-    // To call IEnumerators use StartCoroutine() pls
-    public IEnumerator Paralized(float time)
-    {
-        isParalized = true;
-        rigidbody2d.Sleep();
-        Debug.Log("Paralized");
-        yield return new WaitForSeconds(time);
-        rigidbody2d.WakeUp();
-        isParalized = false;
-        Debug.Log("Not paralized");
-    }
-    
-    // not tested yet
-    public IEnumerator Rest()
-    {
-        isResting = true;
-        rigidbody2d.Sleep();
-        yield return new WaitUntil(()=>CanSeePlayer());
-        rigidbody2d.WakeUp();
-        isResting = false;
-    }
     #endregion
 
     
@@ -262,7 +203,8 @@ public abstract class Enemy : Entity
     /// <returns></returns>
     protected bool CanSeePlayer()
     {
-        Vector3 endPos = fovOrigin.position;
+        return fieldOfView.canSeePlayer;
+        /*Vector3 endPos = fovOrigin.position;
         
         Vector3 dir = player.GetPosition() - fovOrigin.position;
  
@@ -329,7 +271,7 @@ public abstract class Enemy : Entity
 
             return hit.collider.gameObject.CompareTag("Player");
         }
-        return false;
+        return false;*/
         
     }
 

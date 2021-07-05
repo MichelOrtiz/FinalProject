@@ -28,8 +28,8 @@ public class Mantis : Enemy//, IBattleBounds
         //battleBounds = battleBoundsPrefab.GetComponent<BattleBounds>();
         battleBounds = FindObjectOfType<BattleBounds>();
 
-        collisionHandler.JustTouchedPlayer += collisionHandler_StopAttack;
-        collisionHandler.TouchingGroundHandler += collisionHandler_TouchingGround;
+        eCollisionHandler.StoppedTouchingHandler += eCollisionHandler_StoppedTouchingPlayer;
+        eCollisionHandler.TouchingGroundHandler += eCollisionHandler_TouchingGround;
         //battleBounds_SetEventHandler();
     }
 
@@ -95,12 +95,12 @@ public class Mantis : Enemy//, IBattleBounds
         //ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Fake"));
     }
 
-    protected virtual void collisionHandler_StopAttack()
+    protected virtual void eCollisionHandler_StoppedTouchingPlayer()
     {
         //ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Semi Ghost"));
     }
 
-    protected virtual void collisionHandler_TouchingGround()
+    protected virtual void eCollisionHandler_TouchingGround()
     {
         rigidbody2d.velocity = new Vector2();
     }

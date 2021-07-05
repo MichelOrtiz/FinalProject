@@ -42,7 +42,7 @@ public abstract class UBBehaviour : Entity
     protected virtual void Awake()
     {
         eCollisionHandler = (EnemyCollisionHandler) base.collisionHandler;
-        eCollisionHandler.TouchingPlayer += eCollisionHandler_Attack;
+        eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
         
         speed = averageSpeed * speedMultiplier;
     }
@@ -65,7 +65,7 @@ public abstract class UBBehaviour : Entity
         base.Update();
     }
 
-    protected virtual void eCollisionHandler_Attack()
+    protected virtual void eCollisionHandler_TouchingPlayer()
     {
         player.TakeTirement(startDamageAmount);
     }

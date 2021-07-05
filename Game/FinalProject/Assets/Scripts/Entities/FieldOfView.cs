@@ -1,33 +1,52 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 public class FieldOfView : MonoBehaviour
 {
-    [SerializeField] Transform fovOrigin;
+    #region FieldOfView
+    [Header("Field Of View")]
+    [SerializeField] private Transform fovOrigin;
     [SerializeField] private FovType fovType;
+    [SerializeField] private float fovAngle;
     [SerializeField] private float viewDistance;
-    
-    private string facingDirection;
+    public bool canSeePlayer;
+    public bool inFrontOfObstacle;
+    private RaycastHit2D hit;
+    #endregion
+
+    #region ObstacleChecking
+    [Header("Obstacle Checking")]
+    [SerializeField] private List<LayerMask> whatIsObstacle;
+    [SerializeField] private Transform obstacleCheckOrigin;
+    [SerializeField] private float obstacleViewDistance;
+    [SerializeField] private Transform edgeCheckOrigin;
+    #endregion
+
+    #region Direction
+    [Header("Direction")]
+    [SerializeReference] private string facingDirection;
     private const string RIGHT = "right";
     private const string LEFT = "left";
+    #endregion
 
+    #region References
     private PlayerManager player;
-    private bool canSeePlayer;
-    private float whatIsObstacle;
+    private Entity entity;
+    #endregion
 
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
     void Start()
     {
         player = PlayerManager.instance;
+        entity = GetComponent<Entity>();
     }
 
     void Update()
     {
-       // canSeePlayer = 
+        facingDirection = entity.facingDirection;
+        canSeePlayer = CanSeePlayer();
+        inFrontOfObstacle = InFrontOfObstacle();
     }
-/*
+
     public bool CanSeePlayer()
     {
         Vector3 endPos = fovOrigin.position;
@@ -108,7 +127,25 @@ public class FieldOfView : MonoBehaviour
     public float GetAngleFromPlayer()
     {
         return MathUtils.GetAngleBetween(fovOrigin.position, player.GetPosition());
-    }*/
+    }
 
-    
+    protected bool InFrontOfObstacle()
+    {
+        float castDistance = facingDirection == LEFT ? -obstacleViewDistance : obstacleViewDistance;
+        Vector3 targetPos = fovOrigin.position + (facingDirection == LEFT? Vector3.left : Vector3.right) * castDistance;
+        return RayHitObstacle(fovOrigin.position, targetPos);
+    }
+
+
+    protected bool RayHitObstacle(Vector2 start, Vector2 end)
+    {
+        foreach (var obstacle in whatIsObstacle)
+        {
+            if (Physics2D.Linecast(start, end, obstacle))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

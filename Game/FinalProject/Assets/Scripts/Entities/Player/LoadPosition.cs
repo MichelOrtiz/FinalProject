@@ -16,13 +16,13 @@ public class LoadPosition : MonoBehaviour
         
     }
     private void OnLevelWasLoaded(int level){
-        base.Start();
+        //base.Start();
         FindStartPos();
-        players = GameObject.FindGameObjectsWithTag("Player");
+        /*players = GameObject.FindGameObjectsWithTag("Player");
         if (players.Length >1)
         {
             Destroy(players[1]);
-        }
+        }*/
     }
 
     void FindStartPos(){
