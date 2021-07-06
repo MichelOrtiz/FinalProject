@@ -20,7 +20,8 @@ public class BattleshipManager : MonoBehaviour
     void Start()
     {
         shipScript = ships[shipIndex].GetComponent<ShipScript>();
-        nextButton.onClick.AddListener(() => NextShipClicked());
+        //nextButton.onClick.AddListener(() => NextShipClicked());
+        ////if (Input.GetMouseButtonUp(0)) {
     }
 
     private void NextShipClicked(){
@@ -38,21 +39,17 @@ public class BattleshipManager : MonoBehaviour
     }
 
     public void TileClicked(GameObject tile){
-        Debug.Log("Si se le da click al tile");
         if(setupComplete && playerTurn){
             //Drop missile - BOOM
         } else if(!setupComplete){
-            Debug.Log("Si manda a llamar a Placeship");
             PlaceShip(tile);
         }
     } 
 
     private void PlaceShip(GameObject tile){
-        Debug.Log("Entra a placeship");
         shipScript = ships[shipIndex].GetComponent<ShipScript>();
         shipScript.ClearTileList();
-        Vector3 newVec = shipScript.GetOffsetVec(tile.transform.position);
-        ships[shipIndex].transform.localPosition = newVec;
-        Debug.Log("Cambia de posicion");
+        Vector2 newVec = shipScript.GetOffsetVec(tile.transform.position);
+        ships[shipIndex].transform.position = newVec;
     }
 }

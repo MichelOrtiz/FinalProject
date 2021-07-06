@@ -19,17 +19,13 @@ public class TilesScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("0");
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit)){
-            Debug.Log("1");
-            if(Input.GetMouseButtonDown(0) && hit.collider.gameObject.name == gameObject.name){
-                Debug.Log("2");
-                if(missileHit == false){
-                    Debug.Log("3");
-                    battleshipManager.TileClicked(hit.collider.gameObject);
-                }
-            }
-        }
     }
+
+    public void onClickTile(){
+        if(missileHit == false){
+            battleshipManager.TileClicked(gameObject);
+        }
+        
+    }
+    
 }
