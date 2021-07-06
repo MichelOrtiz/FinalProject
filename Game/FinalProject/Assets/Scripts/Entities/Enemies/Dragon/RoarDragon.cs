@@ -3,6 +3,7 @@ using System.Collections.Generic;
 public class RoarDragon : Dragon
 {
     //[SerializeField] private float roarAffectDistance;
+    [SerializeField] private float fallToSurfaceCriteria;
     [SerializeField] private float enhanceMultiplier;
     [SerializeField] private float baseEnhancementTime;
     private float enhancementTime;
@@ -41,7 +42,7 @@ public class RoarDragon : Dragon
     {
         if (!roared)
         {
-            if (InFrontOfObstacle() || (IsNearEdge() && !CanFallToSurface()))
+            if (InFrontOfObstacle() || (IsNearEdge()) )//&& !CanFallToSurface()))
             {
                 if (waitTime > 0)
                 {
@@ -81,6 +82,6 @@ public class RoarDragon : Dragon
 
     private bool CanFallToSurface()
     {
-        return (Physics2D.Raycast(groundCheck.position, Vector3.down, -downDistanceGroundCheck)).collider;
+        return groundChecker.isNearEdge;//(Physics2D.Raycast(groundCheck.position, Vector3.down, -downDistanceGroundCheck)).collider;
     }
 }

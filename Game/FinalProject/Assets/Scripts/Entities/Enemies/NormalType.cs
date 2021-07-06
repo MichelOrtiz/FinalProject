@@ -31,7 +31,8 @@ public class NormalType : Enemy
     {
         if ( (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge) && !isFalling)
         {
-            rigidbody2d.velocity = new Vector2();
+            //rigidbody2d.velocity = new Vector2();
+            enemyMovement.StopMovement();
         }
         base.FixedUpdate();
     }
@@ -40,7 +41,8 @@ public class NormalType : Enemy
     #region Behaviour methods
     protected override void MainRoutine()
     {
-        if (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge)
+        enemyMovement.DefaultPatrol();
+        /*if (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge)
         {
             rigidbody2d.velocity = new Vector2();
             if (waitTime > 0)
@@ -56,13 +58,14 @@ public class NormalType : Enemy
         {
             transform.Translate(Vector3.right * Time.deltaTime * normalSpeed);
             isWalking = true;
-        }
+        }*/
     }
 
 
     protected override void ChasePlayer()
     {
-        Vector2 direction = (Vector2) transform.position + (player.GetPosition().x > transform.position.x ? Vector2.right : Vector2.left);
+        enemyMovement.FollowPlayerInGround();
+        /*Vector2 direction = (Vector2) transform.position + (player.GetPosition().x > transform.position.x ? Vector2.right : Vector2.left);
         if (!IsNearEdge() && !touchingPlayer && isGrounded)
         {
             //rigidbody2d.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
@@ -71,7 +74,7 @@ public class NormalType : Enemy
         else
         {
             isWalking = false;
-        }
+        }*/
     }
 
     protected override void Attack()

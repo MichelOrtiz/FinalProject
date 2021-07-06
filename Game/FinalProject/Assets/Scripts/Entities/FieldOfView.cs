@@ -6,9 +6,17 @@ public class FieldOfView : MonoBehaviour
     #region FieldOfView
     [Header("Field Of View")]
     [SerializeField] private Transform fovOrigin;
+    public Transform FovOrigin { get => fovOrigin; }
+
     [SerializeField] private FovType fovType;
+    public FovType FovType { get => fovType; }
+
     [SerializeField] private float fovAngle;
+    public float FovAngle { get => fovAngle; }
+
     [SerializeField] private float viewDistance;
+    public float ViewDistance { get => viewDistance; }
+    
     public bool canSeePlayer;
     public bool inFrontOfObstacle;
     private RaycastHit2D hit;
@@ -19,7 +27,6 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private List<LayerMask> whatIsObstacle;
     [SerializeField] private Transform obstacleCheckOrigin;
     [SerializeField] private float obstacleViewDistance;
-    [SerializeField] private Transform edgeCheckOrigin;
     #endregion
 
     #region Direction
@@ -31,13 +38,18 @@ public class FieldOfView : MonoBehaviour
 
     #region References
     private PlayerManager player;
-    private Entity entity;
+    [SerializeField] private Entity entity;
     #endregion
 
     void Start()
     {
         player = PlayerManager.instance;
         entity = GetComponent<Entity>();
+
+        if (entity == null)
+        {
+            entity = transform.parent.GetComponentInChildren<Entity>();
+        }
     }
 
     void Update()
@@ -45,6 +57,32 @@ public class FieldOfView : MonoBehaviour
         facingDirection = entity.facingDirection;
         canSeePlayer = CanSeePlayer();
         inFrontOfObstacle = InFrontOfObstacle();
+    }
+
+    public void SetViewDistanceOnRayHitObstacle(Vector2 direction, float maxViewDistance)
+    {
+        viewDistance = maxViewDistance;
+        float distance = 0;
+        RaycastHit2D rayHit;
+        foreach (var obstacle in whatIsObstacle)
+        {
+            rayHit = Physics2D.Raycast(fovOrigin.position, direction, maxViewDistance, obstacle);
+            if (rayHit)
+            {
+                if (distance == 0 || rayHit.distance < distance)
+                {
+                    distance = rayHit.distance;
+                }
+            }
+        }
+        if (distance > 0)
+        {
+            viewDistance = distance;
+        }
+        else
+        {
+            viewDistance = maxViewDistance;
+        }
     }
 
     public bool CanSeePlayer()

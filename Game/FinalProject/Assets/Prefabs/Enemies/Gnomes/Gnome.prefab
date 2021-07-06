@@ -77,6 +77,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 4289093295417900742}
+  downCheckDistance: 0.3
+  isNearEdge: 0
 --- !u!1 &4289093295417900743
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,10 +182,9 @@ GameObject:
   - component: {fileID: 4289093296609766914}
   - component: {fileID: 4289093296609766915}
   - component: {fileID: 4289093296609766924}
-  - component: {fileID: 4289093296609766925}
-  - component: {fileID: 4289093296609766927}
   - component: {fileID: 4289093296609766926}
   - component: {fileID: -8804368764696952957}
+  - component: {fileID: 3058508899216969951}
   m_Layer: 10
   m_Name: Gnome
   m_TagString: Enemy
@@ -300,77 +302,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!60 &4289093296609766925
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289093296609766920}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2.56, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.5, y: -0.578125}
-      - {x: 0.578125, y: -0.5234375}
-      - {x: 0.640625, y: -0.4609375}
-      - {x: 0.640625, y: -0.1015625}
-      - {x: 0.59375, y: -0.046875}
-      - {x: 0.515625, y: 0.015625}
-      - {x: 0.25, y: 0.015625}
-      - {x: 0.171875, y: -0.0390625}
-      - {x: 0.109375, y: -0.1015625}
-      - {x: 0.1015625, y: -0.234375}
-      - {x: -0.1015625, y: -0.109375}
-      - {x: -0.1796875, y: -0.0390625}
-      - {x: -0.390625, y: -0.0234375}
-      - {x: -0.453125, y: -0.125}
-      - {x: -0.453125, y: -0.4375}
-      - {x: -0.40625, y: -0.515625}
-      - {x: -0.28125, y: -0.640625}
-      - {x: 0.1484375, y: -0.640625}
-      - {x: 0.2265625, y: -0.5234375}
-      - {x: 0.3046875, y: -0.5859375}
---- !u!61 &4289093296609766927
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289093296609766920}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.006682396, y: -0.15691972}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2.56, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6447544, y: 1.4160757}
-  m_EdgeRadius: 0
 --- !u!114 &4289093296609766926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,6 +322,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -403,9 +338,6 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -415,24 +347,16 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   groundChecker: {fileID: 3092719037491369519}
   collisionHandler: {fileID: 3289317340817417742}
-  fovType: 0
   enemyName: 0
-  damageAmount: 15
   normalSpeedMultiplier: 0.5
+  normalSpeed: 0
   chaseSpeedMultiplier: 0.5
+  chaseSpeed: 0
+  damageAmount: 15
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 0
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 4289093295417900742}
-  fovOrigin: {fileID: 4289093295526452860}
-  baseCastDistance: 0.5
-  downDistanceGroundCheck: 0
-  viewDistance: 20
-  fovAngle: 0
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
 --- !u!114 &-8804368764696952957
 MonoBehaviour:
@@ -449,6 +373,33 @@ MonoBehaviour:
   hostEntity: {fileID: 0}
   enemy: {fileID: 0}
   currentStates: []
+--- !u!114 &3058508899216969951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4289093296609766920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c05e27967b6b72459f91df781de4694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fovOrigin: {fileID: 4289093295526452860}
+  fovType: 0
+  fovAngle: 0
+  viewDistance: 3
+  canSeePlayer: 0
+  inFrontOfObstacle: 0
+  whatIsObstacle:
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 512
+  obstacleCheckOrigin: {fileID: 4289093295526452860}
+  obstacleViewDistance: 0.5
+  edgeCheckOrigin: {fileID: 95529337669060766}
+  facingDirection: 
 --- !u!1 &7308598288018407365
 GameObject:
   m_ObjectHideFlags: 0

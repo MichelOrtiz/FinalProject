@@ -53,7 +53,6 @@ public class Entity : MonoBehaviour
     [Header ("General additions")]
     public Rigidbody2D rigidbody2d;
     protected Animator animator;
-    [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] protected LayerMask[] whatIsObstacle;
     [SerializeField] public Transform feetPos;
 
@@ -75,7 +74,10 @@ public class Entity : MonoBehaviour
         facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
 
         animator = GetComponent<Animator>();
-        rigidbody2d = GetComponent<Rigidbody2D>();
+        if (rigidbody2d == null)
+        {
+            rigidbody2d = GetComponent<Rigidbody2D>();
+        }
         statesManager = gameObject.GetComponent<StatesManager>();
 
         if (collisionHandler != null)

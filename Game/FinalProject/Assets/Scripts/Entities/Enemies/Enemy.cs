@@ -9,39 +9,39 @@ public abstract class Enemy : Entity
 
     #region Main Parameters
     [Header("Main parameters")]
-    [SerializeField] protected FovType fovType;
     [SerializeField] public EnemyName enemyName;
-    [SerializeField] protected float damageAmount;
     [SerializeField] protected float normalSpeedMultiplier;
+    [SerializeReference] public float normalSpeed;
     [SerializeField] protected float chaseSpeedMultiplier;
-    [SerializeField]protected State atackEffect;
-    [SerializeField]protected State projectileEffect;
-
-    [SerializeField] protected float startWaitTime;
-    protected float waitTime;
-    public float normalSpeed;
-    public float chaseSpeed;
-
+    [SerializeReference] public float chaseSpeed;
+    [SerializeField] protected float damageAmount;
+    [SerializeField] protected State atackEffect;
+    [SerializeField] protected State projectileEffect;
     #endregion
 
+    #region Time
+    [Header("Time")]
+    [SerializeField] protected float startWaitTime;
+    protected float waitTime;
+    #endregion
+
+
     #region Layers, rigids, etc
-    [Header("Layers, rigids, etc")]
+    [Header("References")]
+    [SerializeField] protected FieldOfView fieldOfView;
+    [SerializeField] protected EnemyMovement enemyMovement;
     private RaycastHit2D hit;
-    [SerializeField] protected Transform? groundCheck;
-    [SerializeField] protected Transform? fovOrigin;
+    //[SerializeField] protected Transform fovOrigin;
     
     // Distance from fovOrigin to check if in front of obstacle
-    [SerializeField] protected float baseCastDistance;
-    [SerializeField] protected float downDistanceGroundCheck;
     
     // Fov distance
-    [SerializeField] protected float viewDistance;
+    //[SerializeField] protected float viewDistance;
 
     // Fov angle if needed
-    [SerializeField] protected float fovAngle;
-    protected FieldOfView fieldOfView;
-
-    protected EnemyCollisionHandler eCollisionHandler;
+    //[SerializeField] protected float fovAngle;
+    public FieldOfView FieldOfView { get => fieldOfView; }
+    [HideInInspector] public EnemyCollisionHandler eCollisionHandler;
     #endregion
 
     #region Status
@@ -63,18 +63,23 @@ public abstract class Enemy : Entity
     [SerializeField] protected PlayerManager player;
     #endregion
 
-    #region Unity stuff
-    /*void Awake()
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
     {
-        if (instance == null)
+        if (enemyMovement == null)
         {
-            instance = this;
+            enemyMovement = GetComponent<EnemyMovement>();
         }
-        else if (instance != this)
+        if (fieldOfView == null)
         {
-            Destroy(gameObject);
+            fieldOfView = GetComponent<FieldOfView>();
         }
-    }*/
+    }
+
+
+    #region Unity stuff
     new protected void Start()
     {
         base.Start();
@@ -85,7 +90,7 @@ public abstract class Enemy : Entity
         eCollisionHandler = (EnemyCollisionHandler)base.collisionHandler;
         
         eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
-        fieldOfView = GetComponent<FieldOfView>();
+        
     }
 
     new protected void Update()
@@ -129,6 +134,9 @@ public abstract class Enemy : Entity
     {
         if (!player.isImmune)
         {
+            Vector2 direction = player.GetPosition() - GetPosition();
+            player.rigidbody2d.velocity = new Vector2();
+            player.Push(-direction.x *50, -direction.y * 50);
             Attack();
         }
     } 
@@ -139,27 +147,10 @@ public abstract class Enemy : Entity
     protected bool InFrontOfObstacle()
     {
         return fieldOfView.inFrontOfObstacle;
-        /*float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
-        Vector3 targetPos = fovOrigin.position + (facingDirection == LEFT? Vector3.left : Vector3.right) * castDistance;
-        return RayHitObstacle(fovOrigin.position, targetPos);*/
-        //targetPos.x += castDistance;
-
-        /*foreach (var obstacle in whatIsObstacle)
-        {
-            if (Physics2D.Linecast(fovOrigin.position, targetPos, obstacle))
-            {
-                return true;
-            }
-        }
-        return false;
-        /*return //Physics2D.Linecast(fovOrigin.position, targetPos, 1 << LayerMask.NameToLayer("Obstacles")) || 
-                Physics2D.Linecast(fovOrigin.position, targetPos, 1 << LayerMask.NameToLayer("Ground"));*/
     }
 
     protected bool IsNearEdge()
     {
-        // the raycast draws a 0.2f line down and checks if there's something 
-        //return !(Physics2D.Raycast(groundCheck.position, Vector3.down, 0.3f)).collider;
         return groundChecker.isNearEdge;
     }
 
@@ -171,7 +162,6 @@ public abstract class Enemy : Entity
         {
             rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, speed * Time.deltaTime);
         }
-        //rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), speed * Time.deltaTime);
     }
 
     public void Jump(float xForce)
@@ -204,75 +194,6 @@ public abstract class Enemy : Entity
     protected bool CanSeePlayer()
     {
         return fieldOfView.canSeePlayer;
-        /*Vector3 endPos = fovOrigin.position;
-        
-        Vector3 dir = player.GetPosition() - fovOrigin.position;
- 
-        //      90
-        //  180     0 or 360
-        //      270       
-        float angle = GetAngleFromPlayer();
-
-        switch (fovType)
-        {
-            case FovType.Linear:
-                if (facingDirection == LEFT)
-                {
-                    endPos = fovOrigin.position + Vector3.left * viewDistance;
-                }
-                else
-                {
-                    endPos = fovOrigin.position + Vector3.right * viewDistance;
-                }
-                break;
-            case FovType.CircularFront:
-                if (facingDirection == RIGHT)
-                {
-                    if ( (angle > 0 && angle < 90 && angle < 0 + fovAngle/2) ||
-                        (angle > 270 && angle < 360 && angle > 360 - fovAngle/2) )
-                    {
-                        endPos = Vector3.MoveTowards(fovOrigin.position, player.GetPosition(), viewDistance);
-                    }
-                }
-                else
-                {
-                    if (angle > (180 - fovAngle/2) && angle < 270 && angle < 180 + fovAngle/2 && angle < 180 + fovAngle/2) 
-                    {
-                        endPos = Vector3.MoveTowards(fovOrigin.position, player.GetPosition(), viewDistance);
-                    }
-                }
-                break;
-            case FovType.CircularDown:
-                if (angle > 180 && angle < 360 && angle > 270 - fovAngle/2 && angle < 270 + fovAngle/2)
-                {
-                    endPos = Vector3.MoveTowards(fovOrigin.position, player.GetPosition(), viewDistance);
-                }
-                break;
-            case FovType.CircularUp:
-                if (angle < 180 && angle > 0 && angle > 90 - fovAngle/2 && angle < 90 + fovAngle/2)
-                {
-                    endPos = Vector3.MoveTowards(fovOrigin.position, player.GetPosition(), viewDistance);
-                }
-                break;
-            case FovType.CompleteCircle:
-                endPos = Vector3.MoveTowards(fovOrigin.position, player.GetPosition(), viewDistance);
-                break;
-        }
-        Debug.DrawLine(fovOrigin.position, endPos, Color.red);
-
-        if (!RayHitObstacle(fovOrigin.position, endPos))
-        {
-            hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Default"));
-            if (hit.collider == null)
-            {
-                //Debug.Log("Collider null");
-                return false;
-            }
-
-            return hit.collider.gameObject.CompareTag("Player");
-        }
-        return false;*/
-        
     }
 
     public float GetDistanceFromPlayerFov()
@@ -280,14 +201,5 @@ public abstract class Enemy : Entity
         return Math.Abs(hit.distance);
     }
 
-    public float GetAngleFromPlayer()
-    {
-        return MathUtils.GetAngleBetween(fovOrigin.position, player.GetPosition());
-    }
-
-    
-
     #endregion
-
-    //public void push
 }

@@ -11,7 +11,9 @@ public class PatrollGriffin : Griffin
     new void Start()
     {
         base.Start();
-        fovOrigin.GetComponent<MeshFov>().Setup(fovAngle, viewDistance, meshRenderDefault, fovType);
+        //fovOrigin.GetComponent<MeshFov>().Setup(fovAngle, viewDistance, meshRenderDefault, fieldOfView.FovType);
+        fieldOfView.FovOrigin.GetComponent<MeshFov>().Setup(fieldOfView.FovAngle, fieldOfView.ViewDistance, meshRenderDefault, fieldOfView.FovType);
+
         currentMeshMaterial = meshRenderDefault;
     }
 
@@ -19,12 +21,14 @@ public class PatrollGriffin : Griffin
     {
         if (CanSeePlayer() && currentMeshMaterial != meshRenderSawPlayer)
         {
-            fovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderSawPlayer;
+            //fovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderSawPlayer;
+            fieldOfView.FovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderSawPlayer;
             currentMeshMaterial = meshRenderSawPlayer;
         }
         else if(!CanSeePlayer() && currentMeshMaterial != meshRenderDefault)
         {
-            fovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderDefault;
+            //fovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderDefault;
+            fieldOfView.FovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderDefault;
             currentMeshMaterial= meshRenderDefault;
         }
         base.Update();

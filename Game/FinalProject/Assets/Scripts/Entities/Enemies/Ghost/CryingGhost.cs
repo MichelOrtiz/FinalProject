@@ -27,7 +27,7 @@ public class CryingGhost : Ghost, IProjectile
     protected override void ChasePlayer()
     {
         rigidbody2d.position = Vector3.MoveTowards(GetPosition(), new Vector2(player.GetPosition().x, GetPosition().y), chaseSpeed * Time.deltaTime);
-        RaycastHit2D hit = Physics2D.Linecast(shotPos.position, shotPos.position + Vector3.down * viewDistance, 1 << LayerMask.NameToLayer("Ground"));
+        RaycastHit2D hit = Physics2D.Linecast(shotPos.position, shotPos.position + Vector3.down * fieldOfView.FovAngle, 1 << LayerMask.NameToLayer("Ground"));
         if (timeBtwShot <= 0)
         {
             ShotProjectile(shotPos, hit.point);

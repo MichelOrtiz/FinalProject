@@ -113,7 +113,7 @@ public class Mantis : Enemy//, IBattleBounds
 
         //RaycastHit2D hit = Physics2D.Raycast(GetPosition(), vectorToPlayer, 100f, LayerMask.NameToLayer("Ground"));
         //Debug.DrawLine(GetPosition(), hit.point);
-        Debug.DrawLine(GetPosition(), vectorToPlayer * viewDistance, Color.blue);
+        Debug.DrawLine(GetPosition(), vectorToPlayer * fieldOfView.ViewDistance, Color.blue);
         
        // rigidbody2d.position = Vector2.MoveTowards(GetPosition(), hit.point, chaseSpeed * Time.deltaTime);
         rigidbody2d.AddForce(vectorToPlayer  * 2500f * 1000f, ForceMode2D.Force);

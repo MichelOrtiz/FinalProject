@@ -20,7 +20,7 @@ public class HockeyPlayer : Bear, IProjectile
         //isOnIce = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsIce);
         
         // change "Ground" to "Obtacles" maybe
-        RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, fovOrigin.position + (facingDirection == RIGHT? Vector3.right : Vector3.left) * maxViewDistance, 1 << LayerMask.NameToLayer("Ground"));
+        /*RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, fovOrigin.position + (facingDirection == RIGHT? Vector3.right : Vector3.left) * maxViewDistance, 1 << LayerMask.NameToLayer("Ground"));
         if (hit.collider == null)
         {
             viewDistance = maxViewDistance;
@@ -28,7 +28,8 @@ public class HockeyPlayer : Bear, IProjectile
         else 
         {
             viewDistance = hit.distance;
-        }
+        }*/
+        fieldOfView.SetViewDistanceOnRayHitObstacle(facingDirection == RIGHT? Vector3.right : Vector3.left, maxViewDistance);
         base.Update();
     }
 
@@ -95,12 +96,12 @@ public class HockeyPlayer : Bear, IProjectile
     public void ShotProjectile(Transform from, Vector3 to)
     {
         projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to, this, "Ground"); // change to "Ice" when exists
+        projectile.Setup(from, to, this, "Ice"); // change to "Ice" when exists
     }
 
     void OnCollisionStay2D(Collision2D other)
     {
-        isOnIce = other.collider.tag == "Ground";// change to "Ice" when exists
+        isOnIce = other.collider.tag == "Ice";// change to "Ice" when exists
     }
 
 }

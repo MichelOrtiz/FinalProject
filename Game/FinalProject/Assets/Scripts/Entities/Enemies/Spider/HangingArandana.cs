@@ -21,7 +21,7 @@ public class HangingArandana : Arandaña
         waitTime = startWaitTime;
         startPosition = this.GetPosition();
 
-        RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, fovOrigin.position + Vector3.down * maxViewDistance, 1 << LayerMask.NameToLayer("Ground"));
+        /*RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, fovOrigin.position + Vector3.down * maxViewDistance, 1 << LayerMask.NameToLayer("Ground"));
         if (hit.collider == null)
         {
             viewDistance = maxViewDistance;
@@ -29,7 +29,9 @@ public class HangingArandana : Arandaña
         else 
         {
             viewDistance = hit.distance;
-        }
+        }*/
+
+        fieldOfView.SetViewDistanceOnRayHitObstacle(Vector2.down, maxViewDistance);
         //viewDistance = 
     }
 

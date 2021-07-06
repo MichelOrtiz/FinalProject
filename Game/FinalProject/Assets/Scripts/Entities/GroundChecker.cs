@@ -44,6 +44,13 @@ public class GroundChecker : MonoBehaviour
     {
         ExitGroundHandlder?.Invoke();
     }
+
+    public delegate void NearEdge();
+    public event NearEdge NearEdgeHandler;
+    protected virtual void OnNearEdge()
+    {
+        NearEdgeHandler?.Invoke();
+    }
     #endregion
 
     void Start()
@@ -57,6 +64,10 @@ public class GroundChecker : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isNearEdge = IsNearEdge();
+        if (isNearEdge)
+        {
+            OnNearEdge();
+        }
     }
 
     public bool IsNearEdge()
@@ -71,6 +82,7 @@ public class GroundChecker : MonoBehaviour
             return true;
         }
     }
+
 
     void OnCollisionEnter2D(Collision2D other)
     {
