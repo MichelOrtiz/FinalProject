@@ -24,7 +24,9 @@ public class ShipScript : MonoBehaviour
         touchTiles.Clear();
     }
 
-    public Vector3 GetOffsetVec(Vector3 tilePos){
-        return new Vector3(tilePos.x + xOffset, tilePos.y + yOffset, 0);
+    public Vector2 GetOffsetVec(Vector2 tilePos){
+        return new Vector2(tilePos.x + xOffset, tilePos.y + yOffset);
     }
+
+    
 }
