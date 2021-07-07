@@ -86,14 +86,13 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void GoTo(Vector2 target, bool chasing)
+    public void GoTo(Vector2 target, bool chasing, bool gravity)
     {
-        rigidbody2d.position = Vector2.MoveTowards(transform.position, target, chasing? chaseSpeed : defaultSpeed);        
+        rigidbody2d.position = Vector3.MoveTowards(entity.GetPosition(), target, Time.deltaTime * (chasing? chaseSpeed : defaultSpeed) * (gravity ? rigidbody2d.gravityScale : 1) );   
     }
 
     public void DefaultPatrol()
     {
-        Debug.Log("default patrol");
         if (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge)
         {
             rigidbody2d.velocity = new Vector2();
@@ -108,7 +107,6 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("default patrol moving");
 
             rigidbody2d.transform.Translate(Vector3.right * Time.deltaTime * defaultSpeed);
             //isWalking = true;

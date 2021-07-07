@@ -10,6 +10,7 @@ public abstract class Enemy : Entity
     #region Main Parameters
     [Header("Main parameters")]
     [SerializeField] public EnemyName enemyName;
+    [SerializeField] protected bool flipToPlayerIfSpotted;
     [SerializeField] protected float normalSpeedMultiplier;
     [SerializeReference] public float normalSpeed;
     [SerializeField] protected float chaseSpeedMultiplier;
@@ -55,8 +56,20 @@ public abstract class Enemy : Entity
     /// What happens when the enemy sees the player
     /// </summary>
     protected abstract void ChasePlayer();
-    protected abstract void Attack();
-    public abstract void ConsumeItem(Item item);
+    //protected abstract void Attack();
+
+    protected virtual void Attack()
+    {
+        if(atackEffect != null)
+        {
+            player.statesManager.AddState(atackEffect,this);
+        }
+        player.TakeTirement(damageAmount);
+    }
+    public virtual void ConsumeItem(Item item)
+    {
+        Debug.Log("Consumiendo "+ item.nombre);
+    }
     #endregion
 
     #region Utils
@@ -99,11 +112,15 @@ public abstract class Enemy : Entity
         {
             ChangeFacingDirection();
         }*/
-        /*if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
-            || GetPosition().x < player.GetPosition().x && facingDirection == LEFT)
-            {
-                ChangeFacingDirection();
-            }*/
+        if (isChasing && flipToPlayerIfSpotted)
+        {
+            if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
+                || GetPosition().x < player.GetPosition().x && facingDirection == LEFT)
+                {
+                    ChangeFacingDirection();
+                }
+        }
+        isChasing = CanSeePlayer();
         touchingPlayer = eCollisionHandler.touchingPlayer;
         
 
@@ -134,9 +151,9 @@ public abstract class Enemy : Entity
     {
         if (!player.isImmune)
         {
-            Vector2 direction = player.GetPosition() - GetPosition();
-            player.rigidbody2d.velocity = new Vector2();
-            player.Push(-direction.x *50, -direction.y * 50);
+            //Vector2 direction = player.GetPosition() - GetPosition();
+            //player.rigidbody2d.velocity = new Vector2();
+            //player.Push(-direction.x *50, -direction.y * 50);
             Attack();
         }
     } 

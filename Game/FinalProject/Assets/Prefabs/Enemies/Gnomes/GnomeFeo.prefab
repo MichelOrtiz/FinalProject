@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: -8804368764696952957}
   - component: {fileID: 3058508899216969951}
   m_Layer: 10
-  m_Name: Gnome
+  m_Name: GnomeFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,6 +356,9 @@ MonoBehaviour:
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   player: {fileID: 0}
 --- !u!114 &-8804368764696952957
@@ -398,8 +401,8 @@ MonoBehaviour:
     m_Bits: 512
   obstacleCheckOrigin: {fileID: 4289093295526452860}
   obstacleViewDistance: 0.5
-  edgeCheckOrigin: {fileID: 95529337669060766}
   facingDirection: 
+  entity: {fileID: 0}
 --- !u!1 &7308598288018407365
 GameObject:
   m_ObjectHideFlags: 0

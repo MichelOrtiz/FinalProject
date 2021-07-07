@@ -183,6 +183,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!1 &9212552982142821850
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +202,7 @@ GameObject:
   - component: {fileID: 9212552982142821851}
   - component: {fileID: -1435539802248830432}
   m_Layer: 10
-  m_Name: WeaverArandana
+  m_Name: WeaverArandanaFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,6 +365,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -374,9 +381,7 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -386,24 +391,20 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   groundChecker: {fileID: 2962951393729128964}
   collisionHandler: {fileID: 8685429638990430109}
-  fovType: 0
   enemyName: 0
-  damageAmount: 0
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 0
+  normalSpeed: 0
   chaseSpeedMultiplier: 0
+  chaseSpeed: 0
+  damageAmount: 0
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 0
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 9212552984118318103}
-  fovOrigin: {fileID: 9212552983053266247}
-  baseCastDistance: 0.5
-  downDistanceGroundCheck: 0
-  viewDistance: 12
-  fovAngle: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
   relativeGravity: 0
   verticalDirection: 

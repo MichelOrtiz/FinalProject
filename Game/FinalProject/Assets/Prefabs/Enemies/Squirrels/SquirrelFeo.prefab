@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7994357988099515991}
   - component: {fileID: 2029390242}
   m_Layer: 10
-  m_Name: Squirrel
+  m_Name: SquirrelFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,6 +323,9 @@ MonoBehaviour:
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   player: {fileID: 0}
 --- !u!61 &3995145655655088904
@@ -391,8 +394,8 @@ MonoBehaviour:
     m_Bits: 512
   obstacleCheckOrigin: {fileID: 3995145655363388561}
   obstacleViewDistance: 0.5
-  edgeCheckOrigin: {fileID: 0}
   facingDirection: 
+  entity: {fileID: 0}
 --- !u!1 &5366705193655825278
 GameObject:
   m_ObjectHideFlags: 0

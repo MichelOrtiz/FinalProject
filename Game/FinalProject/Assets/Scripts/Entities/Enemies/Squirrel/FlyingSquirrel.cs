@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingSquirrel : Squirrel
+public class FlyingSquirrel : Enemy
 {
-    float playerY; // when player sighted
-    float initialY;
 
     #region Unity stuff
     new void Start()
@@ -16,41 +14,12 @@ public class FlyingSquirrel : Squirrel
     new void Update()
     {
         isJumping = !isFalling && !isGrounded;
-        isChasing = CanSeePlayer();
-        if (!isGrounded)
-        {
-            if ((player.GetPosition().x < this.GetPosition().x && facingDirection == RIGHT) // player is left to the enemy
-            || (player.GetPosition().x > this.GetPosition().x && facingDirection == LEFT)) // player is right
-            {
-                ChangeFacingDirection();
-            }
-        }
         base.Update();
     }
 
     new void FixedUpdate()
     {
-        switch (currentState)
-        {
-            case StateNames.Chasing:
-                ChasePlayer();
-                break;
-            case StateNames.Falling:
-                //ChasePlayer();
-                break;
-            case StateNames.Paralized:
-                //Paralized();
-                break;
-            case StateNames.Fear:
-                //Fear();
-                break;
-            case StateNames.Patrolling:
-                MainRoutine();
-                break;
-            default:
-                MainRoutine();
-                break;
-        } 
+        base.FixedUpdate();
     }
     #endregion
 
@@ -61,11 +30,12 @@ public class FlyingSquirrel : Squirrel
         if (isGrounded)
         {
             // Jumps
-            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce * rigidbody2d.gravityScale);
+            //rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce * rigidbody2d.gravityScale);
+            enemyMovement.Jump();
         }
         if (isFalling)
         {
-            playerY = player.GetPosition().y;
+            float playerY = player.GetPosition().y;
             
             // player is below
             if (playerY < GetPosition().y)
@@ -79,7 +49,8 @@ public class FlyingSquirrel : Squirrel
 
             if (!touchingPlayer)
             {
-                rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, chaseSpeed * Time.deltaTime * rigidbody2d.gravityScale);
+                //rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, chaseSpeed * Time.deltaTime * rigidbody2d.gravityScale);
+                enemyMovement.GoTo(playerPosition, chasing: true, gravity: true);
             }
         }
     }

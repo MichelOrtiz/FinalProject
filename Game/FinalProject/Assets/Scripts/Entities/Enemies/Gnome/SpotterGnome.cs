@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpotterGnome : Gnome
+public class SpotterGnome : Enemy
 {
     // To check if the player was being chased
     private bool justChasedPlayer;
@@ -75,5 +75,10 @@ public class SpotterGnome : Gnome
     protected override void Attack()
     {
         player.TakeTirement(damageAmount);
+    }
+
+    protected override void MainRoutine()
+    {
+        return;
     }
 }

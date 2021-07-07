@@ -21,6 +21,12 @@ public class Projectile : MonoBehaviour
     [Header("MainParams")]
     [SerializeField] public float speedMultiplier;
     [SerializeField] protected float maxShotDistance;
+    public float MaxShotDistance
+    {
+        get { return maxShotDistance; }
+        set { maxShotDistance = value; }
+    }
+    
     public float damage;
     // Time until destroyed
     [SerializeField] protected float waitTime;

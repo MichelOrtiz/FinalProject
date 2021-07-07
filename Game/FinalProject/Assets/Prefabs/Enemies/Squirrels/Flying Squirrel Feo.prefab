@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2197297656629908558}
   - component: {fileID: -5551594536046993603}
   m_Layer: 10
-  m_Name: Flying Squirrel
+  m_Name: Flying Squirrel Feo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,6 +299,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -311,9 +315,7 @@ MonoBehaviour:
   jumpTime: 0.2
   fallingCriteria: 0.001
   rigidbody2d: {fileID: 2197297656629908553}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -323,24 +325,20 @@ MonoBehaviour:
   checkFeetRadius: 0.25
   groundChecker: {fileID: 304603837975575677}
   collisionHandler: {fileID: 1818681446794616100}
-  fovType: 2
   enemyName: 45
-  damageAmount: 10
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 0
+  normalSpeed: 0
   chaseSpeedMultiplier: 2
+  chaseSpeed: 0
+  damageAmount: 10
   atackEffect: {fileID: 11400000, guid: 17f9a26db363b894c9545675e4ed23ca, type: 2}
   projectileEffect: {fileID: 0}
   startWaitTime: 0
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 0}
-  fovOrigin: {fileID: 2197297656837396883}
-  baseCastDistance: 1
-  downDistanceGroundCheck: 0
-  viewDistance: 8
-  fovAngle: 180
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
 --- !u!114 &-5551594536046993603
 MonoBehaviour:
@@ -494,3 +492,6 @@ MonoBehaviour:
   checkFeetRadius: 0.25
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0

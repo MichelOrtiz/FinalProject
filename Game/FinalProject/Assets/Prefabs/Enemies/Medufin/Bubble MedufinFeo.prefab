@@ -153,6 +153,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!1 &6363311131820688005
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +262,7 @@ GameObject:
   - component: {fileID: 6363311133194938775}
   - component: {fileID: -3608849001850943604}
   m_Layer: 10
-  m_Name: Bubble Medufin
+  m_Name: Bubble MedufinFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,6 +425,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -434,9 +441,7 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -446,24 +451,19 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   groundChecker: {fileID: 8450967459176187131}
   collisionHandler: {fileID: 5498816012063141095}
-  fovType: 1
   enemyName: 54
-  damageAmount: 30
   normalSpeedMultiplier: 0
+  normalSpeed: 0
   chaseSpeedMultiplier: 0
+  chaseSpeed: 0
+  damageAmount: 30
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 0
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 6363311132473047341}
-  fovOrigin: {fileID: 6363311131820688002}
-  baseCastDistance: 0.5
-  downDistanceGroundCheck: 0
-  viewDistance: 10
-  fovAngle: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
   shotProjectilePos: {fileID: 6363311133538750734}
   projectilePrefab: {fileID: 8805213487483752607, guid: 3a91bcf0652041f42853efc62592d9f3, type: 3}

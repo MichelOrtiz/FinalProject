@@ -143,6 +143,9 @@ MonoBehaviour:
   checkFeetRadius: 0.4
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!1 &8647063262188154504
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +252,7 @@ GameObject:
   - component: {fileID: 8647063263483198497}
   - component: {fileID: 6875942488527130172}
   m_Layer: 10
-  m_Name: Spotter Gnome
+  m_Name: Spotter Gnome Feo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -411,6 +414,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -423,9 +430,7 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -435,24 +440,20 @@ MonoBehaviour:
   checkFeetRadius: 0.4
   groundChecker: {fileID: 166204660747556882}
   collisionHandler: {fileID: 849333991903978391}
-  fovType: 0
   enemyName: 2
-  damageAmount: 15
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 0.25
+  normalSpeed: 0
   chaseSpeedMultiplier: 2
+  chaseSpeed: 0
+  damageAmount: 15
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 0
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 8647063262858222130}
-  fovOrigin: {fileID: 8647063262188154505}
-  baseCastDistance: 0.5
-  downDistanceGroundCheck: 0
-  viewDistance: 20
-  fovAngle: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
 --- !u!114 &6875942488527130172
 MonoBehaviour:

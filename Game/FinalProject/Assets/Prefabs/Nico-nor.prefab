@@ -5287,6 +5287,7 @@ MonoBehaviour:
   isGrounded: 0
   lastGroundTag: 
   edgeCheck: {fileID: 3829738358953819176}
+  downCheckDistance: 0
   isNearEdge: 0
 --- !u!1 &2436495351721809552
 GameObject:
@@ -5596,9 +5597,7 @@ MonoBehaviour:
   jumpTime: 0.35
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 4864
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 0
@@ -5739,7 +5738,7 @@ GameObject:
   - component: {fileID: 3829738359434066860}
   m_Layer: 0
   m_Name: MaybeGun
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5802,7 +5801,7 @@ GameObject:
   - component: {fileID: 1587736591}
   m_Layer: 0
   m_Name: AbilitySystem
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

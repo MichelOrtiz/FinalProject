@@ -52,7 +52,7 @@ public class Entity : MonoBehaviour
     #region Layers, rigids, etc...
     [Header ("General additions")]
     public Rigidbody2D rigidbody2d;
-    protected Animator animator;
+    [SerializeField] protected Animator animator;
     [SerializeField] protected LayerMask[] whatIsObstacle;
     [SerializeField] public Transform feetPos;
 
@@ -73,7 +73,10 @@ public class Entity : MonoBehaviour
     {
         facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
 
-        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
         if (rigidbody2d == null)
         {
             rigidbody2d = GetComponent<Rigidbody2D>();

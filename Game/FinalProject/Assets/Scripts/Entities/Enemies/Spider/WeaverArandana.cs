@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class WeaverArandana : Arandaña, IProjectile
+public class WeaverArandana : Enemy, IProjectile
 {
     [SerializeField] private Transform shotProjectilePos;
     [SerializeField] private GameObject projectilePrefab;
@@ -39,15 +39,12 @@ public class WeaverArandana : Arandaña, IProjectile
         return;
     }
 
-    protected override void Attack()
-    {
-        return;
-    }
 
 
     public void ProjectileAttack()
     {
         player.TakeTirement(projectile.damage);
+        player.statesManager.AddState(projectileEffect);
         // player decrease speed to 0.6 for 2 seconds
     }
 
@@ -56,6 +53,7 @@ public class WeaverArandana : Arandaña, IProjectile
     {
         projectile = Instantiate(projectilePrefab, from.transform.position, Quaternion.identity).GetComponent<Projectile>();
         projectile.Setup(from, to, this);
+        projectile.MaxShotDistance = Vector2.Distance(from.position, to);
     }
 
 }

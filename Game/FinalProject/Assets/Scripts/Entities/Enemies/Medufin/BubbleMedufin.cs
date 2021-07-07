@@ -2,19 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BubbleMedufin : Medufin, IProjectile
+public class BubbleMedufin : Enemy, IProjectile
 {
-    [SerializeField] private Transform shotProjectilePos;
+    #region ProjectileStuff
+    [Header("Projectile Stuff")]
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float shotsPerBurst;
-    [SerializeField] private float startTimeBtwShot;
-    [SerializeField] private float startTimeBtwShots;
     private Projectile projectile;
-    public float shotsFired;
-    public bool projectileTouchingPlayer;
-    private float timeBtwShot;
-    private Vector3 lastSeenPlayerPos;
-    private float timeBtwShots;
+
+    [SerializeField] private Transform shotPoint;
+    private Vector2 shotTarget;
+    
+    [SerializeField] private float timeBtwShot;
+    private float currentTimeBtwShot;
+
+    /*[SerializeField] private float burstTime;
+    private float curBurstTime;*/
+
+    [SerializeField] private byte shotsPerBurst;
+    private byte curShots;
+
+    [SerializeField] private float timeBtwBurst;
+    private float curTimeBtwBurst;
+
+    #endregion
     
     new void Start()
     {
@@ -26,11 +36,21 @@ public class BubbleMedufin : Medufin, IProjectile
     {
         if (!CanSeePlayer())
         {
-            lastSeenPlayerPos = this.GetPosition();
-            shotsFired = 0;
-            timeBtwShots = 0;
+            //lastSeenPlayerPos = this.GetPosition();
+            //shotsFired = 0;
+           // timeBtwShots = 0;
+        }
+        if (curShots > 0 && curShots < shotsPerBurst)
+        {
+            ChasePlayer();
         }
         base.Update();
+    }
+
+    new protected void FixedUpdate()
+    {
+        Debug.Log("waaa");
+        base.FixedUpdate();
     }
 
     protected override void MainRoutine()
@@ -40,35 +60,39 @@ public class BubbleMedufin : Medufin, IProjectile
 
     protected override void ChasePlayer()
     {
-        if (lastSeenPlayerPos == this.GetPosition())
-        {
-            lastSeenPlayerPos = player.GetPosition();
-        }
-        if (shotsFired < shotsPerBurst)
-        {
-            if (timeBtwShot <= 0)
+        if (curTimeBtwBurst > timeBtwBurst)
             {
-                ShotProjectile(shotProjectilePos, lastSeenPlayerPos);
-                timeBtwShot = startTimeBtwShot;
+                if (curShots > shotsPerBurst-1)
+                {
+                    flipToPlayerIfSpotted = true;
+                    curShots = 0;
+                    curTimeBtwBurst = 0;
+                }
+                else
+                {
+                    flipToPlayerIfSpotted = false;
+                    if (curShots == 0)
+                    {
+                        // player position before start shooting
+                        shotTarget = (Vector2) player.GetPosition();
+                    }
+                    if (currentTimeBtwShot > timeBtwShot)
+                    {
+                        ShotProjectile(shotPoint, shotTarget);
+                        curShots++;
+                        currentTimeBtwShot = 0;
+                    }
+                    else
+                    {
+                        currentTimeBtwShot += Time.deltaTime;
+                    }
+                }
+
             }
             else
             {
-                timeBtwShot -= Time.deltaTime;
+                curTimeBtwBurst += Time.deltaTime;
             }
-            timeBtwShots = 0;
-        }
-        else
-        {
-            if (timeBtwShots < startTimeBtwShots)
-            {
-                timeBtwShots += Time.deltaTime;
-            }
-            else
-            {
-                lastSeenPlayerPos = player.GetPosition();
-                shotsFired = 0;
-            }
-        }
     }
 
     protected override void Attack()
@@ -87,6 +111,6 @@ public class BubbleMedufin : Medufin, IProjectile
     {
         projectile = Instantiate(projectilePrefab, from.transform.position, Quaternion.identity).GetComponent<Projectile>();
         projectile.Setup(from, to, this);
-        shotsFired++;
+        //shotsFired++;
     }
 }

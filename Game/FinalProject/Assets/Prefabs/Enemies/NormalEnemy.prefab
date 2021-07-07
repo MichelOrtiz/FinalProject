@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 4864
   feetPos: {fileID: 6764451623956706185}
   checkFeetRadius: 0.35
   isGrounded: 0
@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 3603454702956225647}
   - component: {fileID: 1389705818850609487}
   - component: {fileID: 8100586535715584549}
+  - component: {fileID: 3305565271800109548}
   m_Layer: 10
   m_Name: NormalEnemy
   m_TagString: Untagged
@@ -463,12 +464,14 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
+  animator: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 6764451623956706185}
   checkFeetRadius: 0
   groundChecker: {fileID: 2266702640024506647}
   collisionHandler: {fileID: 5900927418365973340}
   enemyName: 0
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 0
   normalSpeed: 0
   chaseSpeedMultiplier: 0
@@ -503,6 +506,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &3305565271800109548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8100586535715584550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a10b0e024d509479a276cdedbec9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostEntity: {fileID: 0}
+  enemy: {fileID: 0}
+  currentStates: []
 --- !u!1 &8196388788595638358
 GameObject:
   m_ObjectHideFlags: 0

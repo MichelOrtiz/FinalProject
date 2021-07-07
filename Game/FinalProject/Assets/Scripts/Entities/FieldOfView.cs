@@ -16,7 +16,9 @@ public class FieldOfView : MonoBehaviour
 
     [SerializeField] private float viewDistance;
     public float ViewDistance { get => viewDistance; }
-    
+
+    [SerializeField] private LayerMask layerMask;
+
     public bool canSeePlayer;
     public bool inFrontOfObstacle;
     private RaycastHit2D hit;
@@ -145,10 +147,10 @@ public class FieldOfView : MonoBehaviour
 
         if (!RayHitObstacle(fovOrigin.position, endPos))
         {
-            hit = Physics2D.Linecast(fovOrigin.position, endPos, 1 << LayerMask.NameToLayer("Default"));
+            hit = Physics2D.Linecast(fovOrigin.position, endPos, layerMask);//, 1 << LayerMask.NameToLayer("Default"));
             if (hit.collider == null)
             {
-                //Debug.Log("Collider null");
+                Debug.Log("Collider null on " + entity);
                 return false;
             }
             
@@ -179,7 +181,8 @@ public class FieldOfView : MonoBehaviour
     {
         foreach (var obstacle in whatIsObstacle)
         {
-            if (Physics2D.Linecast(start, end, obstacle))
+            RaycastHit2D linecast = Physics2D.Linecast(start, end, layerMask);
+            if (linecast.collider != null && linecast.collider.gameObject.layer == obstacle)
             {
                 return true;
             }
