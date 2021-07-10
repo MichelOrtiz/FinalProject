@@ -31,6 +31,7 @@ public abstract class Enemy : Entity
     [Header("References")]
     [SerializeField] protected FieldOfView fieldOfView;
     [SerializeField] protected EnemyMovement enemyMovement;
+    [SerializeField] protected ProjectileShooter projectileShooter;
     private RaycastHit2D hit;
     //[SerializeField] protected Transform fovOrigin;
     
@@ -70,6 +71,11 @@ public abstract class Enemy : Entity
     {
         Debug.Log("Consumiendo "+ item.nombre);
     }
+
+    protected virtual void fieldOfView_InFrontOfObstacle()
+    {
+        return;
+    }
     #endregion
 
     #region Utils
@@ -103,7 +109,7 @@ public abstract class Enemy : Entity
         eCollisionHandler = (EnemyCollisionHandler)base.collisionHandler;
         
         eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
-        
+        fieldOfView.FrontOfObstacleHandler += fieldOfView_InFrontOfObstacle;
     }
 
     new protected void Update()
@@ -120,10 +126,9 @@ public abstract class Enemy : Entity
                     ChangeFacingDirection();
                 }
         }
-        isChasing = CanSeePlayer();
         touchingPlayer = eCollisionHandler.touchingPlayer;
         
-
+        SetStates();
         UpdateState();
         base.Update();
     }
@@ -149,17 +154,23 @@ public abstract class Enemy : Entity
 
     protected virtual void eCollisionHandler_TouchingPlayer()
     {
-        if (!player.isImmune)
+        /*if (!player.isImmune)
         {
             //Vector2 direction = player.GetPosition() - GetPosition();
             //player.rigidbody2d.velocity = new Vector2();
             //player.Push(-direction.x *50, -direction.y * 50);
             Attack();
-        }
+        }*/
+        Attack();
     } 
     #endregion
 
     #region General behaviour methods
+
+    protected virtual void SetStates()
+    {
+        isChasing = CanSeePlayer();
+    }
     
     protected bool InFrontOfObstacle()
     {

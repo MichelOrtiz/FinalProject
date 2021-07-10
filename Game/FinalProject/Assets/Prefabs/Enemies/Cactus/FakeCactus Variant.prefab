@@ -153,6 +153,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!1001 &3131549396150038052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -206,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3060900543918826378, guid: ca1e113bcc5dfbf4c9650fd01e2bc66b, type: 3}
       propertyPath: m_Name
-      value: FakeCactus
+      value: FakeCactus Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3060900543918826378, guid: ca1e113bcc5dfbf4c9650fd01e2bc66b, type: 3}
       propertyPath: m_Layer
@@ -214,7 +217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3060900543918826378, guid: ca1e113bcc5dfbf4c9650fd01e2bc66b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3079129482674021788, guid: ca1e113bcc5dfbf4c9650fd01e2bc66b, type: 3}
       propertyPath: m_Enabled

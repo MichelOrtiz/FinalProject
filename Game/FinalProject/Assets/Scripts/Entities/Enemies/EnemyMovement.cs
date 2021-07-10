@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private Vector2 jumpForce;
-    [SerializeField] private Vector2 forceMultiplier;
+    [SerializeField] private Vector2 jumpForceMultiplier;
     [SerializeField] private ForceMode2D forceMode;
 
 
@@ -41,7 +41,11 @@ public class EnemyMovement : MonoBehaviour
     {
         chaseSpeed = chaseSpeedMultiplier * Entity.averageSpeed;
         defaultSpeed = defaultSpeedMultiplier * Entity.averageSpeed;
-        //curWaitTime = waitTime;
+        if (jumpForceMultiplier.magnitude > 0)
+        {
+            jumpForce *= jumpForceMultiplier;
+        }
+        curWaitTime = waitTime;
     }
 
     void Start()
@@ -52,9 +56,6 @@ public class EnemyMovement : MonoBehaviour
         {
             entity = transform.parent.GetComponentInChildren<Entity>();
         }
-        /*groundChecker = enemy.groundChecker;
-        collisionHandler = enemy.eCollisionHandler;
-        fieldOfView = enemy.FieldOfView;*/
     }
 
     // Update is called once per frame
@@ -73,29 +74,52 @@ public class EnemyMovement : MonoBehaviour
     {
         if (groundChecker.isGrounded)
         {
-            rigidbody2d.AddForce(jumpForce, forceMode);
+            Vector2 jumpDirection = new Vector2(facingDirection == "right"? jumpForce.x : - jumpForce.x, jumpForce.y) * rigidbody2d.gravityScale;
+            rigidbody2d.AddForce(jumpDirection, forceMode);
         }
     }
 
-    public void FollowPlayerInGround()
+    public void GoToInGround(Vector2 target, bool chasing, bool checkNearEdge)
     {
-        Vector2 direction = (Vector2) transform.position + (player.GetPosition().x > transform.position.x ? Vector2.right : Vector2.left);
-        if (!groundChecker.isNearEdge && !collisionHandler.touchingPlayer && groundChecker.isGrounded)
+        Vector2 direction = (Vector2) transform.position + (target.x > rigidbody2d.transform.position.x ? Vector2.right : Vector2.left);
+        float speed = chasing? chaseSpeed : defaultSpeed;
+        if (checkNearEdge)
         {
-            rigidbody2d.position = Vector2.MoveTowards(transform.position, direction, chaseSpeed * Time.deltaTime);
+            if (!groundChecker.isNearEdge && groundChecker.isGrounded)
+            {
+                rigidbody2d.position = Vector2.MoveTowards(transform.position, direction, speed * Time.deltaTime);
+            }
+        }
+        else
+        {
+            if ( groundChecker.isGrounded || groundChecker.isNearEdge)
+            {
+                rigidbody2d.position = Vector2.MoveTowards(transform.position, direction, speed * Time.deltaTime);
+            }
         }
     }
 
     public void GoTo(Vector2 target, bool chasing, bool gravity)
     {
-        rigidbody2d.position = Vector3.MoveTowards(entity.GetPosition(), target, Time.deltaTime * (chasing? chaseSpeed : defaultSpeed) * (gravity ? rigidbody2d.gravityScale : 1) );   
+        rigidbody2d.position = Vector2.MoveTowards(entity.GetPosition(), target, Time.deltaTime * (chasing? chaseSpeed : defaultSpeed) * (gravity ? rigidbody2d.gravityScale : 1) );   
+        //rigidbody2d.transform.position += (Vector3)target * Time.deltaTime * defaultSpeed;
+    }
+
+    public void Translate(Vector2 target, bool chasing)
+    {
+        rigidbody2d.transform.position += (Vector3)target * (chasing ? chaseSpeed : defaultSpeed) * Time.deltaTime; 
+    }
+
+    public void Translate(Vector2 target, float speed)
+    {
+        rigidbody2d.transform.position += (Vector3)target * speed * Time.deltaTime; 
     }
 
     public void DefaultPatrol()
     {
-        if (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge)
+        if (groundChecker.isNearEdge || fieldOfView.inFrontOfObstacle)
         {
-            rigidbody2d.velocity = new Vector2();
+            StopMovement();
             if (curWaitTime > 0)
             {
                 //isWalking = false;
@@ -107,11 +131,35 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-
-            rigidbody2d.transform.Translate(Vector3.right * Time.deltaTime * defaultSpeed);
+            //GoToInGround(Vector2.right, chasing: false, checkNearEdge: true);
+            //rigidbody2d.transform.Translate(Vector2.right * Time.deltaTime * defaultSpeed);
+            rigidbody2d.transform.position += rigidbody2d.transform.right * Time.deltaTime * defaultSpeed;
             //isWalking = true;
         }
     }
+
+    public void DefaultPatrolInAir()
+    {
+        if (fieldOfView.inFrontOfObstacle)
+        {
+            StopMovement();
+            if (curWaitTime > 0)
+            {
+                //isWalking = false;
+                curWaitTime -= Time.deltaTime;
+                return;
+            }
+            ChangeFacingDirection();
+            curWaitTime = waitTime;
+        }
+        else
+        {
+            //rigidbody2d.transform.position += rigidbody2d.transform.forward * Time.deltaTime * defaultSpeed;
+            rigidbody2d.transform.Translate(Vector2.right * Time.deltaTime * defaultSpeed);
+            //isWalking = true;
+        }
+    }
+
 
     /// <summary>
     /// Rotates the enity Y axis
@@ -123,6 +171,9 @@ public class EnemyMovement : MonoBehaviour
 
     public void StopMovement()
     {
-        rigidbody2d.velocity = new Vector2();
+        if (!entity.isFalling)
+        {
+            rigidbody2d.velocity = new Vector2();
+        }
     }
 }

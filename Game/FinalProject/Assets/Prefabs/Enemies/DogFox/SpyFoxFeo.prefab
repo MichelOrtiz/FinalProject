@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 5327901373906169796}
   - component: {fileID: 2941790186830891307}
   m_Layer: 10
-  m_Name: SpyFox
+  m_Name: SpyFoxFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,6 +314,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -326,9 +330,7 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -338,24 +340,20 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   groundChecker: {fileID: 5374928664593244836}
   collisionHandler: {fileID: 8912319622377817992}
-  fovType: 0
   enemyName: 59
-  damageAmount: 50
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 1.25
+  normalSpeed: 0
   chaseSpeedMultiplier: 4
+  chaseSpeed: 0
+  damageAmount: 50
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 0
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 5327901373678350523}
-  fovOrigin: {fileID: 5327901373667214874}
-  baseCastDistance: 0.5
-  downDistanceGroundCheck: 0
-  viewDistance: 15
-  fovAngle: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
 --- !u!114 &2941790186830891307
 MonoBehaviour:
@@ -479,3 +477,6 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0

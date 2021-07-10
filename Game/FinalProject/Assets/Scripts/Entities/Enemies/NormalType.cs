@@ -41,7 +41,10 @@ public class NormalType : Enemy
     #region Behaviour methods
     protected override void MainRoutine()
     {
-        enemyMovement.DefaultPatrol();
+        if (!touchingPlayer)
+        {
+            enemyMovement.DefaultPatrol();
+        }
         /*if (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge)
         {
             rigidbody2d.velocity = new Vector2();
@@ -64,7 +67,10 @@ public class NormalType : Enemy
 
     protected override void ChasePlayer()
     {
-        enemyMovement.FollowPlayerInGround();
+        if (!touchingPlayer)
+        {
+            enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: true);
+        }
         /*Vector2 direction = (Vector2) transform.position + (player.GetPosition().x > transform.position.x ? Vector2.right : Vector2.left);
         if (!IsNearEdge() && !touchingPlayer && isGrounded)
         {

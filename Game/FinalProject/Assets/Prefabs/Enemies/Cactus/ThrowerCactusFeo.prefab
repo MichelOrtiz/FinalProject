@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4107570009045574975}
   - component: {fileID: -5017029985014228119}
   m_Layer: 10
-  m_Name: ThrowerCactus
+  m_Name: ThrowerCactusFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,6 +187,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -199,9 +203,7 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -211,27 +213,22 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   groundChecker: {fileID: 9033179803082893933}
   collisionHandler: {fileID: 27994906344909677}
-  fovType: 0
   enemyName: 20
-  damageAmount: 20
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 0
+  normalSpeed: 0
   chaseSpeedMultiplier: 0
+  chaseSpeed: 0
+  damageAmount: 20
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 0
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 2660371250124541041}
-  fovOrigin: {fileID: 5743414310258349275}
-  baseCastDistance: 0.5
-  downDistanceGroundCheck: 0
-  viewDistance: 20
-  fovAngle: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  projectileShooter: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
-  shotPos: {fileID: 579719614172573948}
-  projectilePrefab: {fileID: 8805213487483752607, guid: 95e877f4a543c9549b32611e4590fe70, type: 3}
   startTimeBtwShot: 2
   allucination: {fileID: 0}
   allucinationsPos:
@@ -243,6 +240,8 @@ MonoBehaviour:
   - {fileID: 4028909590145583046}
   - {fileID: 6446218667952671142}
   - {fileID: 3393519497124055804}
+  minAllucinations: 0
+  maxAllucinations: 0
 --- !u!114 &-5017029985014228119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,6 +544,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!1 &5595018864519479498
 GameObject:
   m_ObjectHideFlags: 0

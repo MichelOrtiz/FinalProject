@@ -75,7 +75,7 @@ public class GroundChecker : MonoBehaviour
         //bool nearEdge;
         try
         {
-            return !(Physics2D.Raycast(edgeCheck.position, Vector3.down, downCheckDistance)).collider.IsTouchingLayers(whatIsGround);
+            return !Physics2D.OverlapArea(edgeCheck.position, ((Vector2)edgeCheck.position + Vector2.down * downCheckDistance), whatIsGround); //(Physics2D.Raycast(edgeCheck.position, Vector3.down, downCheckDistance)).collider.IsTouchingLayers(whatIsGround);
         }
         catch (System.NullReferenceException)
         {

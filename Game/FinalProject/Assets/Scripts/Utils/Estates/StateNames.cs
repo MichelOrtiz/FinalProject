@@ -16,5 +16,6 @@ public enum StateNames
     Falling,
     Invulnerable, 
     Slow, 
-    StaminaReduced
+    StaminaReduced, 
+    Other
 }

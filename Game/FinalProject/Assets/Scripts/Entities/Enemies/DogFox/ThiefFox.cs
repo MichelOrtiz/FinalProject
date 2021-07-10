@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThiefFox : DogFox
+public class ThiefFox : Enemy
 {
-
     private Inventory inventory;
     private Item stolenItem;
     private bool hasItem;
@@ -19,6 +18,7 @@ public class ThiefFox : DogFox
     new void Start()
     {
         inventory = Inventory.instance;
+        afterStealSpeed *= averageSpeed;
         base.Start();
     }
 
@@ -26,26 +26,30 @@ public class ThiefFox : DogFox
     new void Update()
     {
         hasItem = stolenItem != null;
-        if (touchingPlayer)
-        {
-            ChangeFacingDirection();
-        }
-        if (InFrontOfObstacle())
-        {
-            //rigidbody2d.position = Vector3.MoveTowards(GetPosition(), new Vector3(GetPosition().x, jumpForce), chaseSpeed * Time.deltaTime * rigidbody2d.gravityScale);
-            //rigidbody2d.AddForce(Vector3.up * jumpForce * Time.deltaTime * rigidbody2d.gravityScale, ForceMode2D.Force);
-            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x * afterStealSpeed * Time.deltaTime, jumpForce * rigidbody2d.gravityScale);
-
-        }
+        base.Update();
+    }
+    
+    
+    new void FixedUpdate()
+    {
         if (hasItem)
         {
-            if (CanSeePlayer())
+            if (fieldOfView.canSeePlayer)
             {
+                enemyMovement.StopMovement();
                 ChangeFacingDirection();
             }
+            
             if (escapeTime < startEscapeTime)
             {
-                transform.Translate(Vector3.right * Time.deltaTime * afterStealSpeed);
+                if (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge)
+                {
+                    enemyMovement.Jump();
+                }
+                else
+                {
+                    enemyMovement.Translate(facingDirection == RIGHT? Vector2.right : Vector2.left, afterStealSpeed);
+                }
                 escapeTime += Time.deltaTime;
             }
             else
@@ -53,56 +57,39 @@ public class ThiefFox : DogFox
                 Destroy(gameObject);
             }
             stolenItemIcon.GetComponent<SpriteRenderer>().sprite = stolenItem.icon;
-            // Move the opposite direction of the player
         }
-        base.Update();
-    }
-    
-    
-    new void FixedUpdate()
-    {
-        
         base.FixedUpdate();
     }
 
     protected override void MainRoutine()
     {
-        base.MainRoutine();
+        if (!hasItem)
+        {
+            enemyMovement.DefaultPatrol();
+        }
     }
 
     protected override void ChasePlayer()
     {
         if (!hasItem)
         {
-            if (!touchingPlayer)
-            {
-                rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime);
-            }
+            enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: false);
         }
-        /*else
-        {
-            rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), afterStealVelocity * Time.deltaTime);
-            ChangeFacingDirection();
-        }*/
     }
 
     protected override void Attack()
     {
-        player.TakeTirement(damageAmount);
-        Item item = inventory.GetRandomEdibleItem();
-        
-        if (hasItem)
+        base.Attack();
+        if (!hasItem)
         {
-            ConsumeItem(item);
+            Item item = inventory.GetRandomEdibleItem();
+            if (item != null)
+            {
+                stolenItem = item;
+                escapeTime = 0;
+                inventory.Remove(stolenItem);
+            }
         }
-        else
-        {
-            stolenItem = item;
-            escapeTime = 0;
-        }
-        //stolenItem.RemoveFromInventory();
-        inventory.Remove(stolenItem);
-        
     }
 
     public override void ConsumeItem(Item item)

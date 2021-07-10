@@ -26,7 +26,7 @@ public class FieldOfView : MonoBehaviour
 
     #region ObstacleChecking
     [Header("Obstacle Checking")]
-    [SerializeField] private List<LayerMask> whatIsObstacle;
+    [SerializeField] private LayerMask whatIsObstacle;
     [SerializeField] private Transform obstacleCheckOrigin;
     [SerializeField] private float obstacleViewDistance;
     #endregion
@@ -41,6 +41,15 @@ public class FieldOfView : MonoBehaviour
     #region References
     private PlayerManager player;
     [SerializeField] private Entity entity;
+    #endregion
+
+    #region Events
+    public delegate void FrontOfObstacle();
+    public event FrontOfObstacle FrontOfObstacleHandler;
+    protected virtual void OnInFrontOfObstacle()
+    {
+        FrontOfObstacleHandler?.Invoke();
+    }
     #endregion
 
     void Start()
@@ -59,14 +68,28 @@ public class FieldOfView : MonoBehaviour
         facingDirection = entity.facingDirection;
         canSeePlayer = CanSeePlayer();
         inFrontOfObstacle = InFrontOfObstacle();
+       
+        if(inFrontOfObstacle)
+        {
+            OnInFrontOfObstacle();
+        }
+    }
+
+    void FixedUpdate()
+    {
     }
 
     public void SetViewDistanceOnRayHitObstacle(Vector2 direction, float maxViewDistance)
     {
         viewDistance = maxViewDistance;
         float distance = 0;
-        RaycastHit2D rayHit;
-        foreach (var obstacle in whatIsObstacle)
+        //RaycastHit2D rayHit;
+        Collider2D collider = Physics2D.OverlapArea(fovOrigin.position,(Vector2) fovOrigin.position + direction * maxViewDistance, whatIsObstacle);
+        if (collider != null)
+        {
+            distance = Vector2.Distance(fovOrigin.position, collider.ClosestPoint(fovOrigin.position));
+        }
+        /*foreach (var obstacle in whatIsObstacle)
         {
             rayHit = Physics2D.Raycast(fovOrigin.position, direction, maxViewDistance, obstacle);
             if (rayHit)
@@ -76,7 +99,7 @@ public class FieldOfView : MonoBehaviour
                     distance = rayHit.distance;
                 }
             }
-        }
+        }*/
         if (distance > 0)
         {
             viewDistance = distance;
@@ -150,12 +173,11 @@ public class FieldOfView : MonoBehaviour
             hit = Physics2D.Linecast(fovOrigin.position, endPos, layerMask);//, 1 << LayerMask.NameToLayer("Default"));
             if (hit.collider == null)
             {
-                Debug.Log("Collider null on " + entity);
                 return false;
             }
-            
             return hit.collider.gameObject.CompareTag("Player");
         }
+        //Debug.Log("hit collider of " + entity.gameObject + " false");
         return false;
     }
 
@@ -171,22 +193,34 @@ public class FieldOfView : MonoBehaviour
 
     protected bool InFrontOfObstacle()
     {
-        float castDistance = facingDirection == LEFT ? -obstacleViewDistance : obstacleViewDistance;
-        Vector3 targetPos = fovOrigin.position + (facingDirection == LEFT? Vector3.left : Vector3.right) * castDistance;
+        //float castDistance = facingDirection == LEFT ? -obstacleViewDistance : obstacleViewDistance;
+        Vector2 targetPos = (Vector2)fovOrigin.position + (facingDirection == LEFT? Vector2.left : Vector2.right) * obstacleViewDistance;
+        Debug.DrawLine(fovOrigin.position, targetPos, Color.blue);
         return RayHitObstacle(fovOrigin.position, targetPos);
     }
 
 
     protected bool RayHitObstacle(Vector2 start, Vector2 end)
     {
-        foreach (var obstacle in whatIsObstacle)
+        RaycastHit2D linecast = Physics2D.Linecast(start, end, whatIsObstacle);
+        //Debug.Log(entity.gameObject + " Raycast hit " + Physics2D.GetRayIntersection(new Ray(start, end), Vector2.Distance(start, end), whatIsObstacle));// .OverlapArea(start, end, whatIsObstacle)?.gameObject);
+        //return Physics2D.OverlapArea(start, end, whatIsObstacle);
+        //return Physics2D.GetRayIntersection(new Ray(start, end), Vector2.Distance(start, end), whatIsObstacle).collider;
+        return linecast.collider;
+        //if (linecast.collider != null) Debug.Log(linecast.collider.gameObject.layer + " obstacle value: " + obstacle);
+        /*if (linecast.collider != null && linecast.collider.IsTouchingLayers(whatIsObstacle))// gameObject. layer == whatIsObstacle)
+        {
+            return true;
+        }*/
+        /*foreach (var obstacle in whatIsObstacle)
         {
             RaycastHit2D linecast = Physics2D.Linecast(start, end, layerMask);
-            if (linecast.collider != null && linecast.collider.gameObject.layer == obstacle)
+            if (linecast.collider != null) Debug.Log(linecast.collider.gameObject.layer + " obstacle value: " + obstacle);
+            if (linecast.collider != null && linecast.collider.gameObject.layer == obstacle.value)
             {
                 return true;
             }
-        }
-        return false;
+        }*/
+        //return false;
     }
 }

@@ -31,7 +31,7 @@ public class HangingArandana : Arandaña
             viewDistance = hit.distance;
         }*/
 
-        fieldOfView.SetViewDistanceOnRayHitObstacle(Vector2.down, maxViewDistance);
+        //fieldOfView.SetViewDistanceOnRayHitObstacle(Vector2.down, maxViewDistance);
         //viewDistance = 
     }
 

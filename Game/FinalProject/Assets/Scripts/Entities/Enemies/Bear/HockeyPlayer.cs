@@ -29,7 +29,7 @@ public class HockeyPlayer : Bear, IProjectile
         {
             viewDistance = hit.distance;
         }*/
-        fieldOfView.SetViewDistanceOnRayHitObstacle(facingDirection == RIGHT? Vector3.right : Vector3.left, maxViewDistance);
+        //fieldOfView.SetViewDistanceOnRayHitObstacle(facingDirection == RIGHT? Vector3.right : Vector3.left, maxViewDistance);
         base.Update();
     }
 

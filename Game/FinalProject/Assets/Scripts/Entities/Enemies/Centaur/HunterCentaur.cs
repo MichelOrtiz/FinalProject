@@ -1,66 +1,48 @@
 using UnityEngine;
 
-public class HunterCentaur : Centaur, IProjectile
+public class HunterCentaur : Enemy
 {
-    [SerializeField] private Transform shotProjectilePos;
-    [SerializeField] private GameObject projectilePrefab;
-    private Projectile projectile;
+    [SerializeField] private float timeBtwFlip;
+    private float curTimeBtwFlip;
     [SerializeField] private float startTimeBtwShot;
     private float timeBtwShot;
 
-    new void Start()
-    {
-        base.Start();
-    }
-
-    new void Update()
-    {
-        base.Update();
-    }
-
     protected override void MainRoutine()
     {
-        if (waitTime <= 0)
+        if (rigidbody2d.velocity.magnitude != 0 && !fieldOfView.inFrontOfObstacle)
+        {
+            enemyMovement.StopMovement();
+        }
+        if (curTimeBtwFlip > timeBtwFlip || groundChecker.isNearEdge)
         {
             ChangeFacingDirection();
-            waitTime = startWaitTime;
+            curTimeBtwFlip = 0;
         }
         else
         {
-            waitTime -= Time.deltaTime;
+            curTimeBtwFlip += Time.deltaTime;
         }
     }
 
     protected override void ChasePlayer()
     {
+        enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: false);
+
         if (timeBtwShot <= 0)
         {
-            ShotProjectile(shotProjectilePos, player.GetPosition());
+            projectileShooter.ShootProjectile(player.GetPosition());
             timeBtwShot = startTimeBtwShot;
         }
         else
         {
             timeBtwShot -= Time.deltaTime;
         }
+
+        if (fieldOfView.inFrontOfObstacle)
+        {
+            enemyMovement.Jump();
+        }
         
-        rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime);
-    }
-
-    protected override void Attack()
-    {
-        Debug.Log("CENTAURO ATACANDO");
-        player.statesManager.AddState(atackEffect);
-    }
-
-    public void ProjectileAttack()
-    {
-        player.statesManager.AddState(projectileEffect);
-        player.TakeTirement(projectile.damage);
-    }
-
-    public void ShotProjectile(Transform from, Vector3 to)
-    {
-        projectile = Instantiate(projectilePrefab, from.transform.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to, this);
+        //rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime);
     }
 }

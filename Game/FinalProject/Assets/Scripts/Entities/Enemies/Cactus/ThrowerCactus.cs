@@ -1,37 +1,27 @@
 using UnityEngine;
 using System.Collections.Generic;
-public class ThrowerCactus : Cactus, IProjectile
+public class ThrowerCactus : Enemy
 {
-    [SerializeField] private Transform shotPos;
-    [SerializeField] private GameObject projectilePrefab;
+    [Header("Self Additions")]
     [SerializeField] private float startTimeBtwShot;
-    [SerializeField] private GameObject allucination;
-    //[SerializeField] private float numberOfAllucinations;
-    [SerializeField] private List<Transform> allucinationsPos;
-    private int numberOfAllucinations;
-    private bool allucinationsInstantiated;
-    private Projectile projectile;
     private float timeBtwShot;
+    [SerializeField] private GameObject allucination;
+    [SerializeField] private List<Transform> allucinationsPos;
+    [SerializeField] private byte minAllucinations;
+    [SerializeField] private byte maxAllucinations;
+    private bool allucinationsInstantiated;
+
     new void Start()
     {
         base.Start();
-
+        projectileShooter.ProjectileTouchedPlayerHandler += projectileShooter_ProjectileTouchedPlayer;
     }
-    new void Update()
-    {
-        base.Update();
-    }
-
-    /*protected override void MainRoutine()
-    {
-        return;
-    }*/
 
     protected override void ChasePlayer()
     {
         if (timeBtwShot <= 0)
         {
-            ShotProjectile(shotPos, player.GetPosition());
+            projectileShooter.ShootProjectile(player.GetPosition());
             timeBtwShot = startTimeBtwShot;
         }
         else
@@ -40,18 +30,13 @@ public class ThrowerCactus : Cactus, IProjectile
         }
     }
 
-    protected override void Attack()
-    {
-        player.TakeTirement(damageAmount);
-    } 
-
-    public void ProjectileAttack()
+    public void projectileShooter_ProjectileTouchedPlayer()
     {
         //player.TakeTirement(projectile.damage);
         // make screen dark for 0.5s
         if (!allucinationsInstantiated)
         {
-            numberOfAllucinations = RandomGenerator.NewRandom(3, 8);
+            int numberOfAllucinations = RandomGenerator.NewRandom(minAllucinations, maxAllucinations);
             for (int i = 0; i < numberOfAllucinations; i++)
             {
                 Instantiate(allucination, allucinationsPos[i].position, Quaternion.identity);
@@ -60,10 +45,8 @@ public class ThrowerCactus : Cactus, IProjectile
         }
     }
 
-    public void ShotProjectile(Transform from, Vector3 to)
+    protected override void MainRoutine()
     {
-        projectile = Instantiate(projectilePrefab, from.transform.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to, this);
+        return;
     }
-
 }

@@ -1,30 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
-public class WeaverArandana : Enemy, IProjectile
+public class WeaverArandana : Enemy
 {
-    [SerializeField] private Transform shotProjectilePos;
-    [SerializeField] private GameObject projectilePrefab;
     private Projectile projectile;
     [SerializeField] private float startTimeBtwShot;
     private float timeBtwShot;
-
-    new void Start()
-    {
-        base.Start();
-    }
-
-    new void Update()
-    {
-        base.Update();
-    }
 
     protected override void ChasePlayer()
     {
         if (timeBtwShot <= 0)
         {
             animator.SetBool("Is Shooting", true);
-            ShotProjectile(shotProjectilePos, player.GetPosition());
+            projectileShooter.ShootProjectileAndSetDistance(player.GetPosition());
             timeBtwShot = startTimeBtwShot;
         }
         else
@@ -40,20 +28,11 @@ public class WeaverArandana : Enemy, IProjectile
     }
 
 
-
-    public void ProjectileAttack()
-    {
-        player.TakeTirement(projectile.damage);
-        player.statesManager.AddState(projectileEffect);
-        // player decrease speed to 0.6 for 2 seconds
-    }
-
-
-    public void ShotProjectile(Transform from, Vector3 to)
+    /*public void ShotProjectile(Transform from, Vector3 to)
     {
         projectile = Instantiate(projectilePrefab, from.transform.position, Quaternion.identity).GetComponent<Projectile>();
         projectile.Setup(from, to, this);
         projectile.MaxShotDistance = Vector2.Distance(from.position, to);
-    }
+    }*/
 
 }

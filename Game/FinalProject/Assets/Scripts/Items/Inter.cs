@@ -10,7 +10,10 @@ public class Inter : MonoBehaviour
     private PlayerManager player;
     private void Start() {
         player = PlayerManager.instance;
-        imagen.sprite = item.icon;
+        if (item != null)
+        {
+            imagen.sprite = item.icon;
+        }
     }
     private void Update() {
         float distance = Vector2.Distance(player.transform.position, transform.position);
@@ -30,7 +33,7 @@ public class Inter : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        Enemy enemigo = other.GetComponent<Enemy>();
+        Enemy enemigo = other.transform.parent.GetComponentInChildren<Enemy>();
         if(enemigo!=null)
         {
             enemigo.ConsumeItem(item);

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1091648305553625287}
   - component: {fileID: 53733825894341834}
   - component: {fileID: 2347107957581602761}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FlyingDragonProjectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,13 +130,20 @@ MonoBehaviour:
   warning: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
   impactEffect: {fileID: 0}
   targetWarningAvailable: 1
-  speedMultiplier: 0.75
+  independentAttackEnabled: 0
+  speedMultiplier: 2.5
   maxShotDistance: 20
-  damage: 10
+  damage: 15
   waitTime: 0.01
   impactEffectExitTime: 0
   touchingPlayer: 0
   touchingObstacle: 0
+  changeSizeByDistance: 0
+  distanceToIncrease: 0
+  sizeByDistanceMultiplier: 0
+  changeSizeByTime: 0
+  timeToIncrease: 0
+  sizeByTimeMultiplier: 0
 --- !u!50 &2347107957581602761
 Rigidbody2D:
   serializedVersion: 4

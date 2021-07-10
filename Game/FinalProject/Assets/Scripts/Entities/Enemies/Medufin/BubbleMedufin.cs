@@ -2,35 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BubbleMedufin : Enemy, IProjectile
+public class BubbleMedufin : Enemy
 {
     #region ProjectileStuff
     [Header("Projectile Stuff")]
-    [SerializeField] private GameObject projectilePrefab;
-    private Projectile projectile;
-
-    [SerializeField] private Transform shotPoint;
     private Vector2 shotTarget;
-    
     [SerializeField] private float timeBtwShot;
     private float currentTimeBtwShot;
-
-    /*[SerializeField] private float burstTime;
-    private float curBurstTime;*/
-
     [SerializeField] private byte shotsPerBurst;
     private byte curShots;
-
     [SerializeField] private float timeBtwBurst;
     private float curTimeBtwBurst;
 
     #endregion
-    
-    new void Start()
-    {
-        base.Start();
-    }
-
     
     new void Update()
     {
@@ -45,12 +29,6 @@ public class BubbleMedufin : Enemy, IProjectile
             ChasePlayer();
         }
         base.Update();
-    }
-
-    new protected void FixedUpdate()
-    {
-        Debug.Log("waaa");
-        base.FixedUpdate();
     }
 
     protected override void MainRoutine()
@@ -78,7 +56,7 @@ public class BubbleMedufin : Enemy, IProjectile
                     }
                     if (currentTimeBtwShot > timeBtwShot)
                     {
-                        ShotProjectile(shotPoint, shotTarget);
+                        projectileShooter.ShootProjectile(shotTarget);
                         curShots++;
                         currentTimeBtwShot = 0;
                     }
@@ -98,19 +76,5 @@ public class BubbleMedufin : Enemy, IProjectile
     protected override void Attack()
     {
         player.TakeTirement(damageAmount);
-    }
-
-    public void ProjectileAttack()
-    {
-        //projectile.Destroy();
-        player.TakeTirement(projectile.damage);
-        //player.Captured(5, 5, this);
-    }
-
-    public void ShotProjectile(Transform from, Vector3 to)
-    {
-        projectile = Instantiate(projectilePrefab, from.transform.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to, this);
-        //shotsFired++;
     }
 }

@@ -5,20 +5,22 @@ using UnityEngine;
 public class SpotterGnome : Enemy
 {
     // To check if the player was being chased
-    private bool justChasedPlayer;
+    [SerializeField] private float targetOffset;
+    [SerializeField] private float waitTimeAfterReachedTarget;
+    private float curWaitTime;
+    [SerializeField] private float intervalBtwFlipInTarget;
+    private float curInterval;
+    [SerializeReference]private bool justChasedPlayer;
     private Vector3 lastSeenPlayerPosition;
-    float timer = 3;
 
     protected new void Start()
     {
         base.Start();
-        waitTime = 2; // to wait 2 seconds before changing facing direction
-        
+        curWaitTime = waitTimeAfterReachedTarget;
     }
 
     protected new void Update()
     {
-        isChasing = CanSeePlayer() || justChasedPlayer;
         base.Update();
     }
 
@@ -26,11 +28,14 @@ public class SpotterGnome : Enemy
     {
         if (justChasedPlayer)
         {
-            if (this.GetPosition().x != lastSeenPlayerPosition.x)
+            currentState = StateNames.Other;
+            if (Mathf.Abs(this.GetPosition().x - lastSeenPlayerPosition.x) > targetOffset)
             {
-                if (!InFrontOfObstacle() && isGrounded)
+                if (!InFrontOfObstacle())
                 {
-                    rigidbody2d.position = Vector3.MoveTowards(this.GetPosition(), new Vector3(lastSeenPlayerPosition.x, 0), chaseSpeed * rigidbody2d.gravityScale * Time.deltaTime);
+                    //rigidbody2d.position = Vector3.MoveTowards(this.GetPosition(), new Vector3(lastSeenPlayerPosition.x, 0), chaseSpeed * rigidbody2d.gravityScale * Time.deltaTime);
+                    Debug.Log("chasing target direction");
+                    enemyMovement.GoToInGround(lastSeenPlayerPosition, chasing: true, checkNearEdge: false);
                 }
                 else
                 {
@@ -39,23 +44,37 @@ public class SpotterGnome : Enemy
             }
             else
             {
-                isWalking = false;
-                if (timer > 0)
+                enemyMovement.StopMovement();
+
+                if (curWaitTime > 0)
                 {
-                    timer -= Time.deltaTime;
+                    if (curInterval > intervalBtwFlipInTarget)
+                    {
+                        enemyMovement.ChangeFacingDirection();
+                        curInterval = 0;
+                    }
+                    else
+                    {
+                        curInterval += Time.deltaTime;
+                    }
+                    curWaitTime -= Time.deltaTime;
                     return;
                 }
+
+                enemyMovement.ChangeFacingDirection();
                 justChasedPlayer = false;
-                timer = 2f;
+                curWaitTime = waitTimeAfterReachedTarget;
             }
         }
         base.FixedUpdate();
     }
 
-    /// <summary>
-    /// LateUpdate is called every frame, if the Behaviour is enabled.
-    /// It is called after all Update functions have been called.
-    /// </summary>
+    protected override void SetStates()
+    {
+        isChasing = CanSeePlayer() || touchingPlayer;// || justChasedPlayer;
+    }
+
+
     void LateUpdate()
     {
         // if ChasePlayer() was just called in update, checks if can not longer see player to update the boolean
@@ -63,13 +82,20 @@ public class SpotterGnome : Enemy
     }
     protected override void ChasePlayer()
     {
-        if (!touchingPlayer)
+        //if (!touchingPlayer)
         {
-            rigidbody2d.position = Vector3.MoveTowards(this.GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime * rigidbody2d.gravityScale);
+            //rigidbody2d.position = Vector3.MoveTowards(this.GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime * rigidbody2d.gravityScale);
+            enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: false);
         }
-        lastSeenPlayerPosition = player.GetPosition();
+
+        if (!justChasedPlayer)
+        {
+            lastSeenPlayerPosition = player.GetPosition();
+        }
 
         justChasedPlayer = true;
+        curWaitTime = waitTimeAfterReachedTarget;
+        curInterval = 0;
     }
 
     protected override void Attack()
@@ -79,6 +105,6 @@ public class SpotterGnome : Enemy
 
     protected override void MainRoutine()
     {
-        return;
+        enemyMovement.DefaultPatrol();
     }
 }
