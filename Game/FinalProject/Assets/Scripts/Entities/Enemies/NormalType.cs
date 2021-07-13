@@ -12,13 +12,6 @@ public class NormalType : Enemy
     protected new void Start()
     {
         base.Start();
-
-        startWaitTime = 2f;
-        waitTime = startWaitTime;
-        /*viewDistance = 3f;
-        damageAmount = 20;
-        waitTime = 2f;
-        chaseSpeed = normalSpeed;*/
     }
 
     protected new void Update()
@@ -31,7 +24,6 @@ public class NormalType : Enemy
     {
         if ( (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge) && !isFalling)
         {
-            //rigidbody2d.velocity = new Vector2();
             enemyMovement.StopMovement();
         }
         base.FixedUpdate();
@@ -45,25 +37,7 @@ public class NormalType : Enemy
         {
             enemyMovement.DefaultPatrol();
         }
-        /*if (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge)
-        {
-            rigidbody2d.velocity = new Vector2();
-            if (waitTime > 0)
-            {
-                isWalking = false;
-                waitTime -= Time.deltaTime;
-                return;
-            }
-            ChangeFacingDirection();
-            waitTime = startWaitTime;
-        }
-        else
-        {
-            transform.Translate(Vector3.right * Time.deltaTime * normalSpeed);
-            isWalking = true;
-        }*/
     }
-
 
     protected override void ChasePlayer()
     {
@@ -71,16 +45,6 @@ public class NormalType : Enemy
         {
             enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: true);
         }
-        /*Vector2 direction = (Vector2) transform.position + (player.GetPosition().x > transform.position.x ? Vector2.right : Vector2.left);
-        if (!IsNearEdge() && !touchingPlayer && isGrounded)
-        {
-            //rigidbody2d.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
-            rigidbody2d.position = Vector2.MoveTowards(transform.position, direction, chaseSpeed * Time.deltaTime);
-        }
-        else
-        {
-            isWalking = false;
-        }*/
     }
 
     protected override void Attack()

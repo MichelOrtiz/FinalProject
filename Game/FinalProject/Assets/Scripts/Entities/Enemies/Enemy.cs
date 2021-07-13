@@ -118,7 +118,7 @@ public abstract class Enemy : Entity
         {
             ChangeFacingDirection();
         }*/
-        if (isChasing && flipToPlayerIfSpotted)
+        if (isChasing && flipToPlayerIfSpotted && MathUtils.GetAbsXDistance(GetPosition(), player.GetPosition()) > 1f)
         {
             if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
                 || GetPosition().x < player.GetPosition().x && facingDirection == LEFT)
@@ -215,6 +215,17 @@ public abstract class Enemy : Entity
     
 
     #region Fov stuff
+    public float GetDistanceFromPlayer()
+    {
+        if (player != null)
+        {
+            return Vector2.Distance(GetPosition(), player.GetPosition());
+        }
+        return 0f;
+    }
+
+
+
     /// <summary>
     /// Checks if the enemy is able to see the player based on its field of view
     /// </summary>

@@ -19,6 +19,7 @@ public class Paralized : State
         Rigidbody2D rb = manager.hostEntity.GetComponent<Rigidbody2D>(); 
         rb.velocity = new Vector2(0f,-rb.gravityScale);
         currentTime += Time.deltaTime;
+        //Debug.Log(manager.gameObject + ": " + currentTime);
         if(currentTime >= duration){
             StopAffect();
         }

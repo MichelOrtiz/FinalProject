@@ -1,20 +1,12 @@
 using UnityEngine;
-public class ElectricMedufin : Medufin
+public class ElectricMedufin : NormalType
 {
-    new void Start()
-    {
-        base.Start();
-    }
-
-    // Update is called once per frame
-    new void Update()
-    {
-        base.Update();
-    }
-
+    [Header("Self Additions")]
+    [SerializeField] private State selfStateWhenAttack;
     protected override void Attack()
     {
-        player.TakeTirement(damageAmount);
-        // player and self paralize for 1s
+        statesManager.AddState(selfStateWhenAttack);
+        
+        base.Attack();
     }
 }

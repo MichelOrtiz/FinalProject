@@ -1,54 +1,44 @@
 using UnityEngine;
-public class GoalKeeperBear : Bear
+public class GoalKeeperBear : Enemy
 {
-    private float initialChaseSpeed;
+    [Header("Self Additions")]
+    [SerializeField] private float speedMultiplier;
+    [SerializeField] private float speedLimit;
+    [SerializeReference] private float speed;
     new void Start()
     {
+        speedLimit *= averageSpeed;
         base.Start();
-        initialChaseSpeed = chaseSpeed;
-    }
-    new void Update()
-    {
-        if (InFrontOfObstacle())
-        {
-            //rigidbody2d.position = Vector3.MoveTowards(GetPosition(), new Vector3(GetPosition().x, jumpForce), chaseSpeed * Time.deltaTime * rigidbody2d.gravityScale);
-            //rigidbody2d.AddForce(Vector3.up * jumpForce * Time.deltaTime * rigidbody2d.gravityScale, ForceMode2D.Force);
-            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x * normalSpeed * Time.deltaTime, jumpForce * rigidbody2d.gravityScale);
-
-        }
-        base.Update();
     }
 
     protected override void MainRoutine()
     {
-        chaseSpeed = initialChaseSpeed;
-        base.MainRoutine();
+        enemyMovement.DefaultPatrol();
     }
 
+    new void FixedUpdate()
+    {
+        if (groundChecker.lastGroundTag == "Platform")
+        {
+            if ( (!fieldOfView.canSeePlayer && (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge))
+                || (fieldOfView.canSeePlayer && player.GetPosition().y > GetPosition().y) )
+            {
+                enemyMovement.Jump();
+            }
+        }
+        base.FixedUpdate();
+    }
     protected override void ChasePlayer()
     {
-        if (facingDirection == LEFT && player.GetPosition().x > this.GetPosition().x || facingDirection == RIGHT && player.GetPosition().x < this.GetPosition().x)
+        float newSpeed = 1 / (MathUtils.GetAbsXDistance(player.GetPosition(), GetPosition())) * speedMultiplier * averageSpeed;
+        if (newSpeed <= speedLimit)
         {
-            ChangeFacingDirection();
+            speed = newSpeed;
+            enemyMovement.SetChaseSpeed(speed);
         }
-        chaseSpeed += 1/Mathf.Abs(player.GetPosition().x - this.GetPosition().x);
-        if (!touchingPlayer && isGrounded)
+        if (MathUtils.GetAbsXDistance(player.GetPosition(), GetPosition()) > 1f)
         {
-            rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime);
-
-            /*if (InFrontOfObstacle())
-            {
-                rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x * chaseSpeed * Time.deltaTime, jumpForce * rigidbody2d.gravityScale);
-            }*/
+            enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: true);
         }
-        else
-        {
-            chaseSpeed = initialChaseSpeed;
-        }
-    }
-
-    protected override void Attack()
-    {
-        player.TakeTirement(damageAmount);
     }
 }

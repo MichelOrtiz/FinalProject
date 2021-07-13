@@ -9,7 +9,7 @@ public class Fov3 : GnomeFov
 
     private Vector2 endPoint;
     private float angle =0;
-    private float speed=(2*Mathf.PI)/4 ;//2*PI in degress is 360, so you get 5 seconds to complete a circle
+    private float speed=(2*Mathf.PI)/4 ; //2*PI in degress is 360, so you get 4 seconds to complete a circle
 
 
     private enum Direction

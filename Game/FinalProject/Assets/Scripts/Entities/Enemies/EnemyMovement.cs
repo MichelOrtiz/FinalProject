@@ -17,6 +17,12 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float defaultSpeedMultiplier;
     [SerializeReference] private float defaultSpeed;
     [SerializeField] private float chaseSpeedMultiplier;
+    public float ChaseSpeedMultiplier 
+    { 
+        get { return chaseSpeedMultiplier; }
+        set { chaseSpeedMultiplier = value; }
+    }
+    
     [SerializeField] private float chaseSpeed;
     [SerializeField] private float currentSpeed;
 
@@ -37,6 +43,12 @@ public class EnemyMovement : MonoBehaviour
     private PlayerManager player;
     private Entity entity;
 
+    public void SetChaseSpeed(float speed)
+    {
+        chaseSpeedMultiplier = speed;
+        chaseSpeed = chaseSpeedMultiplier * Entity.averageSpeed;
+    }
+
     void Awake()
     {
         chaseSpeed = chaseSpeedMultiplier * Entity.averageSpeed;
@@ -46,6 +58,8 @@ public class EnemyMovement : MonoBehaviour
             jumpForce *= jumpForceMultiplier;
         }
         curWaitTime = waitTime;
+
+        groundChecker.GroundedHandler += groundChecker_Grounded;
     }
 
     void Start()
@@ -81,7 +95,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void GoToInGround(Vector2 target, bool chasing, bool checkNearEdge)
     {
-        Vector2 direction = (Vector2) transform.position + (target.x > rigidbody2d.transform.position.x ? Vector2.right : Vector2.left);
+        Vector2 direction = (Vector2) rigidbody2d.position + (target.x > rigidbody2d.transform.position.x ? Vector2.right : Vector2.left);
         float speed = chasing? chaseSpeed : defaultSpeed;
         if (checkNearEdge)
         {
@@ -117,9 +131,10 @@ public class EnemyMovement : MonoBehaviour
 
     public void DefaultPatrol()
     {
-        if (groundChecker.isNearEdge || fieldOfView.inFrontOfObstacle)
+        if (groundChecker.isGrounded && (groundChecker.isNearEdge || fieldOfView.inFrontOfObstacle))
         {
-            StopMovement();
+            
+            //StopMovement();
             if (curWaitTime > 0)
             {
                 //isWalking = false;
@@ -137,6 +152,7 @@ public class EnemyMovement : MonoBehaviour
             //isWalking = true;
         }
     }
+
 
     public void DefaultPatrolInAir()
     {
@@ -160,7 +176,6 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// Rotates the enity Y axis
     /// </summary>
@@ -175,5 +190,10 @@ public class EnemyMovement : MonoBehaviour
         {
             rigidbody2d.velocity = new Vector2();
         }
+    }
+    
+    void groundChecker_Grounded(string groundTag)
+    {
+        rigidbody2d.velocity = new Vector2();
     }
 }

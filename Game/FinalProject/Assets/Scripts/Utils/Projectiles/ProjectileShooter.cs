@@ -5,6 +5,7 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
     [SerializeField] private GameObject projectilePrefab;
     private Projectile projectile;
     [SerializeField] private Transform shotPos;
+    public Transform ShotPos { get => shotPos; }
     [SerializeField] private State effectOnPlayer;
 
     #region Events

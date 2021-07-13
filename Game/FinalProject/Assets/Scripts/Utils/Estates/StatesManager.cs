@@ -30,9 +30,12 @@ public class StatesManager : MonoBehaviour
     }
     public void AddState(State newState, Entity newEnemy){
         if(newState != null){
-            enemy=newEnemy;
-            newState.StartAffect(this);
-            currentStates.Add(newState);
+            if (!currentStates.Contains(newState))
+            {
+                enemy=newEnemy;
+                newState.StartAffect(this);
+                currentStates.Add(newState);
+            }
         }
     }
     public void RemoveState(State state){

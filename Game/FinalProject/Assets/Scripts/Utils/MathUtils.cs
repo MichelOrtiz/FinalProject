@@ -2,6 +2,39 @@ using System.Collections.Generic;
 using UnityEngine;
 public static class MathUtils
 {
+    public static float GetAbsXDistance(Vector3 from, Vector3 to)
+    {
+        return Mathf.Abs(from.x - to.x);
+    }
+
+    public static float GetyAbsYDistance(Vector3 from, Vector3 to)
+    {
+        return Mathf.Abs(from.y - to.y);
+    }
+    
+    
+    /// <summary>
+    /// Gets the horizantal vector between two vectors. The direction starts from starting with a <paramref name="from"/> origin vector
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <returns><paramref name="from"/> + <see langword="Vector3.right"/> or <see langword="Vector3.left"/></returns>
+    public static Vector3 GetXDirection(Vector3 from, Vector3 to)
+    {
+        return from + (to.x > from.x ? Vector3.right : Vector3.left);
+    }
+
+    /// <summary>
+    /// Gets the vertical vector between two vectors. The direction starts from starting with a <paramref name="from"/> origin vector
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <returns><paramref name="from"/> + <see langword="Vector3.up"/> or <see langword="Vector3.down"/></returns>
+    public static Vector3 GetYDirection(Vector3 from, Vector3 to)
+    {
+        return from + (to.y > from.y ? Vector3.up : Vector3.down);
+    }
+
     public static Vector3 GetVectorFromAngle(float angle)
     {
         float angleRad = angle * (Mathf.PI/180f);
