@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 884248132953188835}
   - component: {fileID: -734228048671128966}
   m_Layer: 10
-  m_Name: HangingArandana
+  m_Name: HangingArandanaFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,6 +399,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -411,9 +415,7 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -423,24 +425,21 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   groundChecker: {fileID: 1682323857262040583}
   collisionHandler: {fileID: 5994476894729563098}
-  fovType: 3
   enemyName: 30
-  damageAmount: 22
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 3
+  normalSpeed: 0
   chaseSpeedMultiplier: 2.5
+  chaseSpeed: 0
+  damageAmount: 22
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 0
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 884248131135160087}
-  fovOrigin: {fileID: 884248131141105296}
-  baseCastDistance: 1
-  downDistanceGroundCheck: 0
-  viewDistance: 0
-  fovAngle: 7
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  projectileShooter: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
   relativeGravity: 0
   verticalDirection: 
@@ -540,6 +539,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!1 &6625568307703599549
 GameObject:
   m_ObjectHideFlags: 0

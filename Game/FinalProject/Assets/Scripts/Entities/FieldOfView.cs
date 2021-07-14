@@ -27,6 +27,7 @@ public class FieldOfView : MonoBehaviour
     #region ObstacleChecking
     [Header("Obstacle Checking")]
     [SerializeField] private LayerMask whatIsObstacle;
+    public LayerMask WhatIsObstacle { get => whatIsObstacle; }
     [SerializeField] private Transform obstacleCheckOrigin;
     [SerializeField] private float obstacleViewDistance;
     #endregion
@@ -184,9 +185,9 @@ public class FieldOfView : MonoBehaviour
     protected bool InFrontOfObstacle()
     {
         //float castDistance = facingDirection == LEFT ? -obstacleViewDistance : obstacleViewDistance;
-        Vector2 targetPos = (Vector2)fovOrigin.position + (facingDirection == LEFT? Vector2.left : Vector2.right) * obstacleViewDistance;
-        Debug.DrawLine(fovOrigin.position, targetPos, Color.blue);
-        return RayHitObstacle(fovOrigin.position, targetPos);
+        Vector2 targetPos = (Vector2)obstacleCheckOrigin.position + (facingDirection == LEFT? Vector2.left : Vector2.right) * obstacleViewDistance;
+        Debug.DrawLine(obstacleCheckOrigin.position, targetPos, Color.blue);
+        return RayHitObstacle(obstacleCheckOrigin.position, targetPos);
     }
 
 
@@ -212,5 +213,10 @@ public class FieldOfView : MonoBehaviour
             }
         }*/
         //return false;
+    }
+
+    public static RaycastHit2D GetRaycastOnColliderHit(Vector2 start, Vector2 direction, float maxDistance, LayerMask whatIsObstacle)
+    {
+        return Physics2D.Raycast(start,  direction,  maxDistance, whatIsObstacle);
     }
 }

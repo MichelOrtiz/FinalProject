@@ -153,6 +153,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!1 &3441190772633519337
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +262,7 @@ GameObject:
   - component: {fileID: 3441190773335274245}
   - component: {fileID: -2901240179451968318}
   m_Layer: 7
-  m_Name: SeekerGhost
+  m_Name: SeekerGhostFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,6 +425,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -434,9 +441,7 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 512
@@ -444,24 +449,21 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   groundChecker: {fileID: 9122689629575634138}
   collisionHandler: {fileID: 5777285715588505723}
-  fovType: 1
   enemyName: 48
-  damageAmount: 25
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 0
+  normalSpeed: 0
   chaseSpeedMultiplier: 0.9
+  chaseSpeed: 0
+  damageAmount: 25
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 0.5
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 3441190772633519342}
-  fovOrigin: {fileID: 3441190773300546306}
-  baseCastDistance: 1
-  downDistanceGroundCheck: 0
-  viewDistance: 7
-  fovAngle: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  projectileShooter: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
   dividePos: {fileID: 3441190773498171932}
   baseStartTimeUntilDivide: 30

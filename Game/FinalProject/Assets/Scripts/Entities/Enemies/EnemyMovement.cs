@@ -58,8 +58,10 @@ public class EnemyMovement : MonoBehaviour
             jumpForce *= jumpForceMultiplier;
         }
         curWaitTime = waitTime;
-
-        groundChecker.GroundedHandler += groundChecker_Grounded;
+        if (groundChecker != null)
+        {
+            groundChecker.GroundedHandler += groundChecker_Grounded;
+        }
     }
 
     void Start()
@@ -208,6 +210,10 @@ public class EnemyMovement : MonoBehaviour
         {
             rigidbody2d.velocity = new Vector2();
         }
+    }
+    public void StopAllMovement()
+    {
+        rigidbody2d.velocity = new Vector2();
     }
     
     void groundChecker_Grounded(string groundTag)

@@ -1,54 +1,48 @@
 using UnityEngine;
 using System.Collections.Generic;
-public class GiantCactus : Cactus
+using System;
+public class GiantCactus : Enemy
 {
-    [Header("Objetos")]
-    [SerializeField]
-    private Item[] items;
-    [SerializeField]
-    private Item trash;
-    [SerializeField]
-    private Item snitch;
-    [SerializeField]
-    private Dictionary<Item, float> objectProbability;
+    [Header("Self Additions")]
+    [Header("Items")]
+    [SerializeField] private List<Item> commonItems;
+    [SerializeField] private Item trash;
+    [SerializeField] private Item snitch;
 
 
+    [Header("Probability")]
+    [SerializeField] private float randomItemProbability;
+    [SerializeField] private float trashProbability;
+    [SerializeField] private float snitchProbability;
     
-    new void Start()
+    public Item RandomItem()
     {
-        base.Start();
-        objectProbability = new Dictionary<Item, float>
-        {
-            {trash, 90.5f},
-            {RandomItem(), 9.5f}, 
-            {snitch, 0.5f}
-        };
-    }
-    public Item RandomItem(){
-        int random = RandomGenerator.NewRandom(0,items.Length-1);
-        return items[random];
-    }
-
-    new void Update()
-    {
-        base.Update();
+        int random = RandomGenerator.NewRandom(0,commonItems.Count-1);
+        return commonItems[random];
     }
 
     protected override void Attack()
     {
-        player.TakeTirement(damageAmount);
-        //Item item = new Item();
-        List<float> probabilities = new List<float>(objectProbability.Values);
-        int objectChosen = RandomGenerator.MatchedElement(probabilities);
-        //Debug.Log(objectChosen);
-        Item item = new List<Item>(objectProbability.Keys)[objectChosen];
-        //Debug.Log(item.name);
-        Inventory.instance.Add(item);
-        
+        List<ObjectProbability<Item>> itemProbabilities = new List<ObjectProbability<Item>>
+        {
+            new ObjectProbability<Item>(trash, trashProbability),
+            new ObjectProbability<Item>(snitch, snitchProbability),
+            new ObjectProbability<Item>(RandomItem(), randomItemProbability)
+        };
+
+        Item itemChosen = RandomGenerator.MatchedElement<Item>(itemProbabilities);
+
+        Inventory.instance.Add(itemChosen);
+        base.Attack();
     }
 
     protected override void MainRoutine()
     {
-        base.MainRoutine();
+        enemyMovement.DefaultPatrol();
+    }
+
+    protected override void ChasePlayer()
+    {
+        enemyMovement.DefaultPatrol();
     }
 }

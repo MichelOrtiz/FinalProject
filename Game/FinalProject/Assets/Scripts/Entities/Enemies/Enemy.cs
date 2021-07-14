@@ -51,7 +51,7 @@ public abstract class Enemy : Entity
     #endregion
 
     #region Abstract methods
-    protected abstract void MainRoutine();
+    protected virtual void MainRoutine() { }
     
     /// <summary>
     /// What happens when the enemy sees the player

@@ -1,66 +1,61 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HangingArandana : Arandaña
+public class HangingArandana : Enemy
 {
-    private bool justChasedPlayer;
-    private bool goingBack;
-    [SerializeField] private bool waiting;
-    private Vector3 startPosition;
-    private Vector3 lastSeenPlayerPosition;
-
+    
+    [Header("Self Additions")]
+    [SerializeField] float waitTimeWhenReach;
+    private float curWaitTime;
     [SerializeField] float maxViewDistance;
+    [SerializeField] float maxThreadDistance;
     [SerializeField] LineRenderer thread;
     [SerializeField] Transform threadPosition;
+    private bool justChasedPlayer;
+    private bool goingBack;
+    private bool waiting;
+    private Vector3 startPosition;
+    private Vector3 lastSeenPlayerPosition;
 
     #region Unity stuff
     new void Start()
     {
         base.Start();
-        waitTime = startWaitTime;
+        curWaitTime = waitTimeWhenReach;
         startPosition = this.GetPosition();
-
-        /*RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, fovOrigin.position + Vector3.down * maxViewDistance, 1 << LayerMask.NameToLayer("Ground"));
-        if (hit.collider == null)
-        {
-            viewDistance = maxViewDistance;
-        }
-        else 
-        {
-            viewDistance = hit.distance;
-        }*/
-
-        //fieldOfView.SetViewDistanceOnRayHitObstacle(Vector2.down, maxViewDistance);
-        //viewDistance = 
     }
 
     new void Update()
     {
-        isChasing = CanSeePlayer() || justChasedPlayer;
+        isChasing = fieldOfView.canSeePlayer || justChasedPlayer;
         thread.SetPosition(0, threadPosition.position);
-        RaycastHit2D hit = Physics2D.Linecast(threadPosition.position, threadPosition.position + Vector3.up * maxViewDistance, 1 << LayerMask.NameToLayer("Ground"));
+        RaycastHit2D hit = FieldOfView.GetRaycastOnColliderHit(threadPosition.position, Vector2.up, maxThreadDistance, fieldOfView.WhatIsObstacle);
         thread.SetPosition(1, hit.point);
+
+        fieldOfView.SetViewDistanceOnRayHitObstacle(Vector2.down, maxViewDistance);
+
+        if (touchingPlayer)
+        {
+            lastSeenPlayerPosition = GetPosition();
+        }
         base.Update();
     }
 
     new void FixedUpdate()
     {
-        base.FixedUpdate();
         if (justChasedPlayer)
         {
-            if (!touchingPlayer && this.GetPosition() != lastSeenPlayerPosition)
+            if (this.GetPosition() != lastSeenPlayerPosition)
             {
-                rigidbody2d.position = Vector3.MoveTowards(GetPosition(), lastSeenPlayerPosition, chaseSpeed * Time.deltaTime);
+                GoToPlayer();
             }
 
-            if (waitTime > 0)
+            if (curWaitTime > 0)
             {
                 waiting = true;
-                waitTime -= Time.deltaTime;
+                curWaitTime -= Time.deltaTime;
                 return;
             }
-            waitTime = startWaitTime;
+            curWaitTime = waitTimeWhenReach;
             waiting = false;
             goingBack = true;
             justChasedPlayer = false;
@@ -69,17 +64,17 @@ public class HangingArandana : Arandaña
         {
             if (this.GetPosition() != startPosition)
             {
-                rigidbody2d.position = Vector3.MoveTowards(GetPosition(), startPosition, normalSpeed * Time.deltaTime);
+                enemyMovement.GoTo(startPosition, chasing: false, gravity: false);
                 return;
             }
             goingBack = false;
         }
-        
+        base.FixedUpdate();
     }
 
     void LateUpdate()
     {
-        justChasedPlayer = justChasedPlayer && !CanSeePlayer();
+        justChasedPlayer = justChasedPlayer && !fieldOfView.canSeePlayer;
     }
     #endregion
 
@@ -88,14 +83,9 @@ public class HangingArandana : Arandaña
     {
         if (!waiting)
         {
-            lastSeenPlayerPosition = new Vector3(this.GetPosition().x, player.GetPosition().y);//new Vector3(, player.GetPosition().y);
+            lastSeenPlayerPosition = new Vector2(this.GetPosition().x, player.GetPosition().y);
         }
-        if (!touchingPlayer)
-        {
-            
-            rigidbody2d.position = Vector3.MoveTowards(GetPosition(), lastSeenPlayerPosition, chaseSpeed * Time.deltaTime);
-            
-        }
+        GoToPlayer();
         justChasedPlayer = true;  
     }
 
@@ -104,9 +94,12 @@ public class HangingArandana : Arandaña
         return;
     }
 
-    protected override void Attack()
+    void GoToPlayer()
     {
-        player.TakeTirement(damageAmount);
+        if (Vector2.Distance(GetPosition(), startPosition) < maxThreadDistance -1f && !touchingPlayer)
+        {
+            enemyMovement.GoTo(lastSeenPlayerPosition, chasing: true, gravity: false);
+        }
     }
     #endregion
 }

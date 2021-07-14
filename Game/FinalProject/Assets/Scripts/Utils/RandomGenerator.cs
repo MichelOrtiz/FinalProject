@@ -20,7 +20,7 @@ public static class RandomGenerator
         ushort num;
         System.Random random = new System.Random();
         
-        num = (ushort) random.Next(min, max);
+        num = (ushort) random.Next(min, max+1);
 
         return num; 
     }
@@ -42,7 +42,7 @@ public static class RandomGenerator
         
         do
         {
-            num = (ushort) random.Next(min, max);
+            num = (ushort) random.Next(min, max+1);
         }
         while (list.Contains(num));
 
@@ -78,16 +78,19 @@ public static class RandomGenerator
         int matchedElement = 0;
 
         double number = NewRandomDouble();
+        float probabilitySum = 0;
 
         for (int i = 0; i < percentages.Capacity; i++)
         {
+            probabilitySum += percentages[i];
+
             if (i == 0)
             {
                 elementMatched = number <= percentages[i];
             }
             else
             {
-                elementMatched = number > percentages[i-1] && number <= percentages[i-1] + percentages[i];
+                elementMatched = number > percentages[i-1] && number <= probabilitySum;
             }
 
             if (elementMatched)
@@ -98,6 +101,17 @@ public static class RandomGenerator
         }
 
         return matchedElement;
+    }
+
+    public static T MatchedElement<T>(List<ObjectProbability<T>> elements)
+    {
+        System.Random random = new System.Random();
+        double number = NewRandomDouble();
+
+        List<float> probabilities = new List<float>();
+        elements.ForEach(e => probabilities.Add(e.Probability));
+
+        return elements[MatchedElement(probabilities)].TObject;
     }
 
     public static Vector2 RandomPointInBounds(Bounds bounds)
