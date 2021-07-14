@@ -81,25 +81,15 @@ public class FieldOfView : MonoBehaviour
 
     public void SetViewDistanceOnRayHitObstacle(Vector2 direction, float maxViewDistance)
     {
-        viewDistance = maxViewDistance;
         float distance = 0;
-        //RaycastHit2D rayHit;
-        Collider2D collider = Physics2D.OverlapArea(fovOrigin.position,(Vector2) fovOrigin.position + direction * maxViewDistance, whatIsObstacle);
-        if (collider != null)
+        RaycastHit2D raycast = Physics2D.Linecast(fovOrigin.position,(Vector2)fovOrigin.position + direction * maxViewDistance, whatIsObstacle);
+        if (raycast)
         {
-            distance = Vector2.Distance(fovOrigin.position, collider.ClosestPoint(fovOrigin.position));
-        }
-        /*foreach (var obstacle in whatIsObstacle)
-        {
-            rayHit = Physics2D.Raycast(fovOrigin.position, direction, maxViewDistance, obstacle);
-            if (rayHit)
+            if (raycast.collider != null)
             {
-                if (distance == 0 || rayHit.distance < distance)
-                {
-                    distance = rayHit.distance;
-                }
+                distance = raycast.distance;
             }
-        }*/
+        }
         if (distance > 0)
         {
             viewDistance = distance;

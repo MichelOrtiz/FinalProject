@@ -60,6 +60,7 @@ public class CollisionHandler : MonoBehaviour
         return Contacts.Contains(contact);
     }
 
+
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         OnEnterTouchingContact(other.gameObject);

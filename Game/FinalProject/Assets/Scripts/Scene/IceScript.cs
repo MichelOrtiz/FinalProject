@@ -4,51 +4,57 @@ using UnityEngine;
 
 public class IceScript : MonoBehaviour
 {
-    public Rigidbody2D body;
+    [SerializeField] private CollisionHandler collisionHandler;
     PlayerManager player;
     Collider2D collision;
 
     void Start()
     {
+        if (collisionHandler == null)
+        {
+            collisionHandler = GetComponent<CollisionHandler>();
+        }
         player = PlayerManager.instance;
 
+        collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;
+        //collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
+        collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
     }
 
     void Update()
     {
-        if (player.isInWater)
+    }
+
+    void SetEffects(GameObject contact)
+    {
+        if (contact.tag == "Player")
         {
-            GameObject collisionGameObject = collision.gameObject;
-            if (collisionGameObject.tag == "Player")
-            {
-                player.isInIce = true;
-                player.walkingSpeed = 50f;
-            }
+            //player.rigidbody2d.AddForce(new Vector2( 300f * player.rigidbody2d.velocity.x, player.rigidbody2d.velocity.y));
+            player.isInIce = true;
+            player.walkingSpeed = 150f;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision){
-        GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.tag == "Player")
-        {
-            player.isInIce = true;
-            player.walkingSpeed = 50f;
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision){
-        GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.tag == "Player")
-        {
-            player.isInIce = true;
-            player.walkingSpeed = 50f;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision){
-            GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.tag == "Player")
+    void RemoveEffects(GameObject contact)
+    {
+        if (contact.tag == "Player")
         {
             player.isInIce = false;
             player.walkingSpeed = player.defaultwalkingSpeed;
         }
+    }
+
+    void collisionHandler_EnterContact(GameObject contact)
+    {
+        SetEffects(contact);
+    }
+   /* void collisionHandler_StayContact(GameObject contact)
+    {
+        SetEffects(contact);
+    }*/
+
+    void collisionHandler_ExitContact(GameObject contact)
+    {
+        RemoveEffects(contact);
     }
 }

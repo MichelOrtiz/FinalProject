@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour
     //[SerializeField] protected bool collidesWithPlayer;
     [SerializeField] protected bool independentAttackEnabled;
     protected LayerMask defaultLayer;
+    [SerializeField] private CollisionHandler collisionHandler;
     #endregion
 
     #region Main Params
@@ -53,7 +54,7 @@ public class Projectile : MonoBehaviour
     public Vector3 shootDir { get; set; }
     private Vector3 target;
     protected string colliderTag;
-    protected bool isOnCollider;
+    [SerializeReference]protected bool isOnCollider;
 
     protected bool aboutToDestroy;
 
@@ -126,6 +127,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+        isOnCollider = colliderTag != null && !collisionHandler.Contacts.Exists( c=> c.tag != colliderTag) && collisionHandler.Contacts.Exists( c=> c.tag == colliderTag);
         //rigidbody2d.position = Vector3.MoveTowards(transform.position, shootDir, speedMultiplier * Time.deltaTime); 
         //animator.SetBool("Is Destroying", aboutToDestroy);
         Vector2 distance = startPoint - transform.position;
@@ -137,8 +139,7 @@ public class Projectile : MonoBehaviour
             Destroy();
         }
         
-        
-        if (touchingObstacle)
+        if (touchingObstacle || (colliderTag != null && !isOnCollider))
         {
             // maybe temporary
             rigidbody2d.gravityScale = 0;
@@ -238,13 +239,12 @@ public class Projectile : MonoBehaviour
 
         touchingObstacle = Physics2D.OverlapCircle(transform.position, GetComponent<Collider2D>().bounds.extents.magnitude, whatIsObstacle);
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
-
     }
 
     
     protected void OnTriggerStay2D(Collider2D other)
     {
-        isOnCollider = other.gameObject.tag == colliderTag;
+        //isOnCollider = other.gameObject.tag == colliderTag;
     }
     
 
@@ -260,7 +260,7 @@ public class Projectile : MonoBehaviour
     
     protected void OnCollisionStay2D(Collision2D other)
     {
-        isOnCollider = other.gameObject.tag == colliderTag;
+       // isOnCollider = other.gameObject.tag == colliderTag;
     }
 
     protected void OnTriggerExit2D(Collider2D other)

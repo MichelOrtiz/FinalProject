@@ -1,35 +1,28 @@
 using UnityEngine;
-public class HockeyPlayer : Bear, IProjectile
+public class HockeyPlayer : Enemy
 {
-    [SerializeField] private Transform shotPos;
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float startTimeBtwShot;
-    [SerializeField] private LayerMask whatIsIce;
-    [SerializeField] private float pushForce;
+    [Header("Self Additions")]
     [SerializeField] private float maxViewDistance;
-    private Projectile projectile;
-    private float timeBtwShot;
+    [SerializeField] private float timeBtwShot;
+    private float curTimeBtwShot;
+    [SerializeField] private Vector2 pushForce;
+    [SerializeField] private Vector2 pushForceMultiplier;
     private bool isOnIce;
-    
+
     new void Start()
     {
         base.Start();
+        if (pushForceMultiplier.magnitude > 0f)
+        {
+            pushForce *= pushForceMultiplier;
+        }
+        projectileShooter.ProjectileTouchedPlayerHandler += projectileShooter_ProjectileTouchedPlayer;
     }
+    
     new void Update()
     {
-        //isOnIce = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsIce);
-        
-        // change "Ground" to "Obtacles" maybe
-        /*RaycastHit2D hit = Physics2D.Linecast(fovOrigin.position, fovOrigin.position + (facingDirection == RIGHT? Vector3.right : Vector3.left) * maxViewDistance, 1 << LayerMask.NameToLayer("Ground"));
-        if (hit.collider == null)
-        {
-            viewDistance = maxViewDistance;
-        }
-        else 
-        {
-            viewDistance = hit.distance;
-        }*/
-        //fieldOfView.SetViewDistanceOnRayHitObstacle(facingDirection == RIGHT? Vector3.right : Vector3.left, maxViewDistance);
+        fieldOfView.SetViewDistanceOnRayHitObstacle(facingDirection == RIGHT ? Vector2.right : Vector2.left, maxViewDistance);
+        isOnIce = groundChecker.lastGroundTag == "Ice";
         base.Update();
     }
 
@@ -37,47 +30,29 @@ public class HockeyPlayer : Bear, IProjectile
     {
         if (isOnIce)
         {
-            if (InFrontOfObstacle() || IsNearEdge())
-            {
-                if (waitTime > 0)
-                {
-                    isWalking = false;
-                    waitTime -= Time.deltaTime;
-                    return;
-                }
-                ChangeFacingDirection();
-                waitTime = startWaitTime;
-            }
-            else
-            {
-                transform.Translate(Vector3.right * Time.deltaTime * normalSpeed);
-                isWalking = true;
-            }
+            enemyMovement.DefaultPatrol("Ice");
         }
-        else
+        /*else
         {
-            if (waitTime > 0)
-            {
-                isWalking = false;
-                waitTime -= Time.deltaTime;
-                return;
-            }
             ChangeFacingDirection();
-            waitTime = startWaitTime;
-        }
+        }*/
         
     }
 
     protected override void ChasePlayer()
     {
-        if (timeBtwShot <= 0)
+        if (curTimeBtwShot > timeBtwShot)
         {
-            ShotProjectile(shotPos, new Vector3(player.feetPos.position.x, shotPos.transform.position.y));
-            timeBtwShot = startTimeBtwShot;
+            Vector2 shotPos = projectileShooter.ShotPos.position;
+            Vector2 direction = MathUtils.GetXDirection(shotPos, player.GetPosition());
+            float distance = MathUtils.GetAbsXDistance(shotPos, player.GetPosition());
+            direction.x = shotPos.x + (facingDirection == RIGHT? distance : -distance);// new Vector2(shotPos.x * (shotPos.x - player.GetPosition().x), 0f);
+            projectileShooter.ShootProjectileAndSetDistance(direction , "Ice");
+            curTimeBtwShot = 0;
         }
         else
         {
-            timeBtwShot -= Time.deltaTime;
+            curTimeBtwShot += Time.deltaTime;
         }
     }
 
@@ -86,22 +61,15 @@ public class HockeyPlayer : Bear, IProjectile
         return;
     }
 
-    public void ProjectileAttack()
+    public void projectileShooter_ProjectileTouchedPlayer()
+    {
+        player.Push((facingDirection == RIGHT? pushForce.x : -pushForce.x), pushForce.y);
+    }
+    /*public void ProjectileAttack()
     {
         player.TakeTirement(projectile.damage);
         player.Push((facingDirection == RIGHT? -pushForce : pushForce), 0f);
         
-    }
-
-    public void ShotProjectile(Transform from, Vector3 to)
-    {
-        projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to, this, "Ice"); // change to "Ice" when exists
-    }
-
-    void OnCollisionStay2D(Collision2D other)
-    {
-        isOnIce = other.collider.tag == "Ice";// change to "Ice" when exists
-    }
+    }*/
 
 }

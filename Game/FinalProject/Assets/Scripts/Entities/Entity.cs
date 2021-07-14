@@ -65,6 +65,8 @@ public class Entity : MonoBehaviour
     protected virtual void collisionHandler_EnterContact(GameObject contact){}
     protected virtual void collisionHandler_StayInContact(GameObject contact){}
     protected virtual void collisionHandler_ExitContact(GameObject contact){}
+
+    //protected virtual void groundChecker_Grounded(string groundTag){}
     
 
     #region Unity stuff
@@ -89,6 +91,7 @@ public class Entity : MonoBehaviour
             collisionHandler.StayTouchingContactHandler += collisionHandler_StayInContact;
             collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
         }
+
     }
 
     protected void Update()
@@ -99,6 +102,7 @@ public class Entity : MonoBehaviour
         if (groundChecker != null)
         {
             isGrounded = groundChecker.isGrounded;
+            //isInIce = groundChecker.lastGroundTag == "Ice";
         }
 
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;

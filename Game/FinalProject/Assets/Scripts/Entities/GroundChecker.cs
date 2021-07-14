@@ -18,6 +18,10 @@ public class GroundChecker : MonoBehaviour
     public bool isNearEdge;
     #endregion
 
+    #region Tags
+    public static List<string> GroundTags = new List<string>{ "Ground", "Platform",  "Ice"};
+    #endregion
+
     #region Events
     public delegate void ChangedGroundTag();
     public event ChangedGroundTag ChangedGroundTagHandler;
@@ -82,16 +86,29 @@ public class GroundChecker : MonoBehaviour
             return true;
         }
     }
+    public bool IsNearEdge(string groundTag)
+    {
+        //bool nearEdge;
+        try
+        {
+            return Physics2D.OverlapArea(edgeCheck.position, ((Vector2)edgeCheck.position + Vector2.down * downCheckDistance), whatIsGround).gameObject.tag != groundTag; //(Physics2D.Raycast(edgeCheck.position, Vector3.down, downCheckDistance)).collider.IsTouchingLayers(whatIsGround);
+        }
+        catch (System.NullReferenceException)
+        {
+            return true;
+        }
+    }
 
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Platform")
+        string tag = other.gameObject.tag;
+        if (GroundTags.Contains(tag))
         {
-            OnGrounded(other.gameObject.tag);
-            if (other.gameObject.tag != lastGroundTag)
+            OnGrounded(tag);
+            if (tag != lastGroundTag)
             {
-                lastGroundTag = other.gameObject.tag;
+                lastGroundTag = tag;
                 OnChangedGroundTag();
             }
         }

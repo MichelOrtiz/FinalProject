@@ -49,6 +49,18 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
         projectile.Setup(from, to, this);
     }
 
+    public void ShootProjectile(Vector2 to, string colliderTag)
+    {
+        projectile = Instantiate(projectilePrefab, shotPos.position, projectilePrefab.transform.rotation).GetComponent<Projectile>();
+        projectile.Setup(shotPos, to, this, colliderTag);
+    }
+
+    public void ShootProjectile(Vector2 from, Vector2 to, string colliderTag)
+    {
+        projectile = Instantiate(projectilePrefab, from, projectilePrefab.transform.rotation).GetComponent<Projectile>();
+        projectile.Setup(from, to, this, colliderTag);
+    }
+
     public void ShootProjectileAndSetDistance(Vector2 to)
     {
         ShootProjectile(to);
@@ -57,6 +69,17 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
     public void ShootProjectileAndSetDistance(Vector2 from, Vector2 to)
     {
         ShootProjectile(from, to);
+        projectile.MaxShotDistance = Vector2.Distance(from, to);
+    }
+
+    public void ShootProjectileAndSetDistance(Vector2 to, string colliderTag)
+    {
+        ShootProjectile(to, colliderTag);
+        projectile.MaxShotDistance = Vector2.Distance(shotPos.position, to);
+    }
+    public void ShootProjectileAndSetDistance(Vector2 from, Vector2 to, string colliderTag)
+    {
+        ShootProjectile(from, to, colliderTag);
         projectile.MaxShotDistance = Vector2.Distance(from, to);
     }
 

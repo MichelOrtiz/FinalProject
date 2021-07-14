@@ -153,6 +153,24 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    public void DefaultPatrol(string groundTag)
+    {
+        if (groundChecker.isGrounded && (groundChecker.IsNearEdge(groundTag) || fieldOfView.inFrontOfObstacle))
+        {
+            if (curWaitTime > 0)
+            {
+                curWaitTime -= Time.deltaTime;
+                return;
+            }
+            ChangeFacingDirection();
+            curWaitTime = waitTime;
+        }
+        else
+        {
+            rigidbody2d.transform.position += rigidbody2d.transform.right * Time.deltaTime * defaultSpeed;
+        }
+    }
+
 
     public void DefaultPatrolInAir()
     {
