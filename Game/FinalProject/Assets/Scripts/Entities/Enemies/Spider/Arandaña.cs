@@ -78,7 +78,7 @@ public class Arandaña : NormalType
        
         //transform.Translate(facingDirection == RIGHT? Vector3.right : Vector3.left * Time.deltaTime * normalSpeed);
 
-        if (InFrontOfObstacle())
+        if (fieldOfView.inFrontOfObstacle)
         {
             ChangeFacingDirection();
         }

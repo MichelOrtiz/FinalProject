@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpotterGnome : Enemy
 {
     // To check if the player was being chased
+    [Header("Self Additions")]
     [SerializeField] private float targetOffset;
     [SerializeField] private float waitTimeAfterReachedTarget;
     private float curWaitTime;
@@ -31,7 +32,7 @@ public class SpotterGnome : Enemy
             currentState = StateNames.Other;
             if (Mathf.Abs(this.GetPosition().x - lastSeenPlayerPosition.x) > targetOffset)
             {
-                if (!InFrontOfObstacle())
+                if (!fieldOfView.inFrontOfObstacle)
                 {
                     //rigidbody2d.position = Vector3.MoveTowards(this.GetPosition(), new Vector3(lastSeenPlayerPosition.x, 0), chaseSpeed * rigidbody2d.gravityScale * Time.deltaTime);
                     Debug.Log("chasing target direction");
@@ -71,14 +72,14 @@ public class SpotterGnome : Enemy
 
     protected override void SetStates()
     {
-        isChasing = CanSeePlayer() || touchingPlayer;// || justChasedPlayer;
+        isChasing = fieldOfView.canSeePlayer || touchingPlayer;// || justChasedPlayer;
     }
 
 
     void LateUpdate()
     {
         // if ChasePlayer() was just called in update, checks if can not longer see player to update the boolean
-        justChasedPlayer = justChasedPlayer && !CanSeePlayer();
+        justChasedPlayer = justChasedPlayer && !fieldOfView.canSeePlayer;
     }
     protected override void ChasePlayer()
     {

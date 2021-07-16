@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Enemy : Entity
@@ -9,6 +7,7 @@ public abstract class Enemy : Entity
 
     #region Main Parameters
     [Header("Main parameters")]
+    [SerializeField] public EnemyType enemyType;
     [SerializeField] public EnemyName enemyName;
     [SerializeField] protected bool flipToPlayerIfSpotted;
     [SerializeField] protected float normalSpeedMultiplier;
@@ -19,19 +18,11 @@ public abstract class Enemy : Entity
     [Header("Effect on Player")]
     [SerializeField] protected float damageAmount;
     [SerializeField] protected State atackEffect;
-    [SerializeField] protected State projectileEffect;
     [SerializeField] protected bool canKnockbackPlayer;
     [SerializeField] private float knockbackAngle;
     [SerializeField] private float knockbackDuration;
     [SerializeField] private float knockBackForce;
     #endregion
-
-    #region Time
-    [Header("Time")]
-    [SerializeField] protected float startWaitTime;
-    protected float waitTime;
-    #endregion
-
 
     #region Layers, rigids, etc
     [Header("References")]
@@ -39,66 +30,23 @@ public abstract class Enemy : Entity
     [SerializeField] protected EnemyMovement enemyMovement;
     [SerializeField] protected ProjectileShooter projectileShooter;
     private RaycastHit2D hit;
-    //[SerializeField] protected Transform fovOrigin;
-    
-    // Distance from fovOrigin to check if in front of obstacle
-    
-    // Fov distance
-    //[SerializeField] protected float viewDistance;
-
-    // Fov angle if needed
-    //[SerializeField] protected float fovAngle;
     public FieldOfView FieldOfView { get => fieldOfView; }
     [HideInInspector] public EnemyCollisionHandler eCollisionHandler;
-    #endregion
-
-    #region Status
+    protected PlayerManager player;
     public bool touchingPlayer;
     #endregion
 
-    #region Abstract methods
-    protected virtual void MainRoutine() { }
-    
-    /// <summary>
-    /// What happens when the enemy sees the player
-    /// </summary>
-    protected abstract void ChasePlayer();
-    //protected abstract void Attack();
-
-    protected virtual void Attack()
+    #region eCollisionHanlder && FieldOfView Event Subs
+    protected virtual void fieldOfView_InFrontOfObstacle(){}
+    protected virtual void eCollisionHandler_TouchingPlayer(){}
+    protected virtual void eCollisionHandler_TouchedPlayer()
     {
-        if(atackEffect != null)
-        {
-            player.statesManager.AddState(atackEffect,this);
-        }
-        player.TakeTirement(damageAmount);
-
-        if (canKnockbackPlayer)
-        {
-            KnockbackEntity(player);
-        }
-
-        enemyMovement?.StopMovement();
-    }
-    public virtual void ConsumeItem(Item item)
-    {
-        Debug.Log("Consumiendo "+ item.nombre);
-    }
-
-    protected virtual void fieldOfView_InFrontOfObstacle()
-    {
-        return;
+        Attack();
     }
     #endregion
 
-    #region Utils
-    [SerializeField] protected PlayerManager player;
-    #endregion
-
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    void Awake()
+    #region Unity stuff
+    protected void Awake()
     {
         if (enemyMovement == null)
         {
@@ -111,7 +59,6 @@ public abstract class Enemy : Entity
     }
 
 
-    #region Unity stuff
     new protected void Start()
     {
         base.Start();
@@ -137,7 +84,7 @@ public abstract class Enemy : Entity
             if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
                 || GetPosition().x < player.GetPosition().x && facingDirection == LEFT)
                 {
-                    ChangeFacingDirection();
+                    if (rigidbody2d.gravityScale == 0 ||  groundChecker.isGrounded) ChangeFacingDirection();
                 }
         }
         touchingPlayer = eCollisionHandler.touchingPlayer;
@@ -165,57 +112,40 @@ public abstract class Enemy : Entity
                 break;
         }
     }
+    #endregion
 
-    protected virtual void eCollisionHandler_TouchedPlayer()
-    {
-        Attack();
-    }
+    
+    
+    #region Behaviour (mainly called by current state)
+    protected virtual void MainRoutine() {}
+    
+    /// <summary>
+    /// What happens when the enemy sees the player
+    /// </summary>
+    protected virtual void ChasePlayer() {}
 
-    protected virtual void eCollisionHandler_TouchingPlayer()
+    protected virtual void Attack()
     {
-        /*if (!player.isImmune)
+        if(atackEffect != null)
         {
-            //Vector2 direction = player.GetPosition() - GetPosition();
-            //player.rigidbody2d.velocity = new Vector2();
-            //player.Push(-direction.x *50, -direction.y * 50);
-            Attack();
-        }*/
-        //Attack();
+            player.statesManager.AddState(atackEffect,this);
+        }
+        player.TakeTirement(damageAmount);
+
+        if (canKnockbackPlayer)
+        {
+            KnockbackEntity(player);
+        }
+
+        enemyMovement?.StopMovement();
+    }
+    public virtual void ConsumeItem(Item item)
+    {
+        Debug.Log("Consumiendo "+ item.nombre);
     }
     #endregion
 
-    #region General behaviour methods
-
-    protected virtual void SetStates()
-    {
-        isChasing = CanSeePlayer();
-    }
-    
-    protected bool InFrontOfObstacle()
-    {
-        return fieldOfView.inFrontOfObstacle;
-    }
-
-    protected bool IsNearEdge()
-    {
-        return groundChecker.isNearEdge;
-    }
-
-
-    protected void MoveTowardsPlayerInGround(float speed)
-    {
-        Vector3 playerPosition = (player.isGrounded? player.GetPosition(): new Vector3(player.GetPosition().x, GetPosition().y));
-        if (!InFrontOfObstacle() && isGrounded && !touchingPlayer)
-        {
-            rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, speed * Time.deltaTime);
-        }
-    }
-
-    public void Jump(float xForce)
-    {
-        rigidbody2d.AddForce(new Vector2(xForce,jumpForce),ForceMode2D.Impulse);
-    }
-
+    #region Effects on self or other
     protected virtual void KnockbackEntity(Entity entity)
     {
         entity.Knockback
@@ -237,6 +167,22 @@ public abstract class Enemy : Entity
                     ))
             );
     }
+
+    public void EnhanceValues(float multiplier)
+    {
+        enemyMovement.DefaultSpeed *= multiplier;
+        enemyMovement.ChaseSpeed *= multiplier;
+        enemyMovement.JumpForce *= multiplier;
+        damageAmount *= multiplier;
+    }
+
+    public void NerfValues(float divider)
+    {
+        enemyMovement.DefaultSpeed /= divider;
+        enemyMovement.ChaseSpeed /= divider;
+        enemyMovement.JumpForce /= divider;
+        damageAmount /= divider;
+    }
     #endregion
 
     #region Self state methods
@@ -251,21 +197,24 @@ public abstract class Enemy : Entity
             isFalling? StateNames.Falling :
             StateNames.Patrolling;
     }
-    #endregion
 
-    
-
-    #region Fov stuff
-    public float GetDistanceFromPlayer()
+    protected virtual void SetStates()
     {
-        if (player != null)
-        {
-            return Vector2.Distance(GetPosition(), player.GetPosition());
-        }
-        return 0f;
+        isChasing = fieldOfView.canSeePlayer;
+    }
+    
+    protected bool InFrontOfObstacle()
+    {
+        return fieldOfView.inFrontOfObstacle;
     }
 
+    protected bool IsNearEdge()
+    {
+        return groundChecker.isNearEdge;
+    }
+    #endregion
 
+    #region Delete Later
 
     /// <summary>
     /// Checks if the enemy is able to see the player based on its field of view

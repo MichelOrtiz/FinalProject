@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static RandomGenerator;
 public class Entity : MonoBehaviour
 {
     protected const string LEFT = "left";
@@ -57,7 +54,6 @@ public class Entity : MonoBehaviour
     [SerializeField] public Transform feetPos;
 
 
-    [SerializeField] protected float checkFeetRadius;
     public GroundChecker groundChecker;
     public CollisionHandler collisionHandler;
     public SomePhysics physics;
@@ -66,14 +62,10 @@ public class Entity : MonoBehaviour
     protected virtual void collisionHandler_EnterContact(GameObject contact){}
     protected virtual void collisionHandler_StayInContact(GameObject contact){}
     protected virtual void collisionHandler_ExitContact(GameObject contact){}
-
     protected virtual void groundChecker_Grounded(string groundTag){}
 
-    //protected virtual void groundChecker_Grounded(string groundTag){}
-    
 
     #region Unity stuff
-
     protected void Start()
     {
         facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
@@ -152,15 +144,6 @@ public class Entity : MonoBehaviour
     #endregion
 
     #region Self state methods
-
-    public void Push(float xForce, float yForce)
-    {
-        //rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, 0f);
-        Vector2 force = GetPosition() * new Vector2(xForce, yForce);
-        rigidbody2d.AddForce(force, ForceMode2D.Force);
-    }
-
-
     protected bool RayHitObstacle(Vector2 start, Vector2 end)
     {
         foreach (var obstacle in whatIsObstacle)
@@ -185,10 +168,17 @@ public class Entity : MonoBehaviour
 
 
     #region Physics related
+    public void Push(float xForce, float yForce)
+    {
+        //rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, 0f);
+        Vector2 force = GetPosition() * new Vector2(xForce, yForce);
+        rigidbody2d.AddForce(force, ForceMode2D.Force);
+    }
 
     public void Knockback(float knockbackDuration, float knockbackForce, Vector2 knockbackDir)
     {
         physics.StartKnockback(knockbackDuration, knockbackForce, knockbackDir);
     }
+
     #endregion
 }

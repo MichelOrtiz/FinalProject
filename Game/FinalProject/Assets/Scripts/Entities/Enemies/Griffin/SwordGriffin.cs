@@ -35,7 +35,6 @@ public class SwordGriffin : Enemy
 
     protected override void collisionHandler_EnterContact(GameObject contact)
     {
-        Debug.Log("enter contact " + contact);
         if (contact.tag == "Breakable")
         {
             //breakableObject = contact;

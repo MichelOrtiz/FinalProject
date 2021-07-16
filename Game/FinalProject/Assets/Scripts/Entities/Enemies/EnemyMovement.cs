@@ -6,6 +6,8 @@ public class EnemyMovement : MonoBehaviour
 {
     [Header("Main")]
     [SerializeReference] private string facingDirection;
+    [SerializeReference] private bool movingHorizontal;
+    [SerializeReference] private bool movingVertical;
 
 
     [Header("Time")]
@@ -17,19 +19,29 @@ public class EnemyMovement : MonoBehaviour
     [Header("Speed")]
     [SerializeField] private float defaultSpeedMultiplier;
     [SerializeReference] private float defaultSpeed;
-    [SerializeField] private float chaseSpeedMultiplier;
-    public float ChaseSpeedMultiplier 
-    { 
-        get { return chaseSpeedMultiplier; }
-        set { chaseSpeedMultiplier = value; }
+    public float DefaultSpeed
+    {
+        get { return defaultSpeed; }
+        set { defaultSpeed = value; }
     }
-    
+    [SerializeField] private float chaseSpeedMultiplier;
     [SerializeField] private float chaseSpeed;
+    public float ChaseSpeed
+    {
+        get { return chaseSpeed; }
+        set { chaseSpeed = value; }
+    }
     [SerializeField] private float currentSpeed;
 
 
     [Header("Jump")]
     [SerializeField] private Vector2 jumpForce;
+    public Vector2 JumpForce
+    {
+        get { return jumpForce; }
+        set { jumpForce = value; }
+    }
+    
     [SerializeField] private Vector2 jumpForceMultiplier;
     [SerializeField] private ForceMode2D forceMode;
 
@@ -39,6 +51,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private EnemyCollisionHandler collisionHandler;
     [SerializeField] private FieldOfView fieldOfView;
     [SerializeField] private Rigidbody2D rigidbody2d;
+    private Rigidbody2D tempRigidbody;
     private Vector2 patrolDestination;
     private Vector2 startPosition;
     
@@ -77,7 +90,6 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         facingDirection = entity.facingDirection;
@@ -85,7 +97,9 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+        Vector3 vel = transform.rotation * rigidbody2d.velocity;
+        movingHorizontal = vel.x != 0;
+        movingVertical = vel.y != 0;
     }
 
 
@@ -98,25 +112,11 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+
     public void GoToInGround(Vector2 target, bool chasing, bool checkNearEdge)
     {
-        //Vector2 direction = (Vector2) rigidbody2d.position + (target.x > rigidbody2d.transform.position.x ? Vector2.right : Vector2.left);
         float speed = chasing? chaseSpeed : defaultSpeed;
         GoToInGround(target, speed, checkNearEdge);
-        /*if (checkNearEdge)
-        {
-            if (!groundChecker.isNearEdge && groundChecker.isGrounded)
-            {
-                rigidbody2d.position = Vector2.MoveTowards(transform.position, direction, speed * Time.deltaTime);
-            }
-        }
-        else
-        {
-            if ( groundChecker.isGrounded || groundChecker.isNearEdge)
-            {
-                rigidbody2d.position = Vector2.MoveTowards(transform.position, direction, speed * Time.deltaTime);
-            }
-        }*/
     }
 
     public void GoToInGround(Vector2 target, float speed, bool checkNearEdge)
@@ -176,13 +176,30 @@ public class EnemyMovement : MonoBehaviour
             //GoToInGround(Vector2.right, chasing: false, checkNearEdge: true);
             //rigidbody2d.transform.Translate(Vector2.right * Time.deltaTime * defaultSpeed);
             rigidbody2d.transform.position += rigidbody2d.transform.right * Time.deltaTime * defaultSpeed;
-            //isWalking = true;
         }
     }
 
     public void DefaultPatrol(string groundTag)
     {
         if (groundChecker.isGrounded && (groundChecker.IsNearEdge(groundTag) || fieldOfView.inFrontOfObstacle))
+        {
+            if (curWaitTime > 0)
+            {
+                curWaitTime -= Time.deltaTime;
+                return;
+            }
+            ChangeFacingDirection();
+            curWaitTime = waitTime;
+        }
+        else
+        {
+            rigidbody2d.transform.position += rigidbody2d.transform.right * Time.deltaTime * defaultSpeed;
+        }
+    }
+
+    public void DefaultPatrol(bool checkNearEdge, bool checkInFrontOfObstacle)
+    {
+        if (groundChecker.isGrounded && (checkNearEdge? groundChecker.isNearEdge : false || checkInFrontOfObstacle? fieldOfView.inFrontOfObstacle : false))
         {
             if (curWaitTime > 0)
             {
@@ -233,17 +250,47 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!entity.isFalling)
         {
-            rigidbody2d.velocity = new Vector2();
+            StopAllMovement();
         }
     }
     public void StopAllMovement()
     {
-        rigidbody2d.velocity = new Vector2();
+        rigidbody2d.velocity = Vector3.zero;
+        rigidbody2d.angularVelocity = 0;
+        /*if (movingHorizontal || movingVertical)
+        {
+            StartCoroutine(ChangeToKinematicRigidbody(0.2f));
+        }*/
+    }
+
+    /*private IEnumerator ChangeToKinematicRigidbody(float seconds)
+    {
+        var oldDrag = rigidbody2d.
+        rigidbody2d.constraints = RigidbodyConstraints2D.FreezeAll;
+        yield return new WaitForSeconds(seconds);
+        rigidbody2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }*/
+    private IEnumerator ChangeToKinematicRigidbody(float seconds)
+    {
+        var oldDrag = rigidbody2d.drag;
+        var oldMass = rigidbody2d.mass;
+        var oldSpeed = rigidbody2d.velocity;
+        var oldRot = rigidbody2d.angularVelocity;
+        
+        rigidbody2d.isKinematic = true;  
+        
+        yield return new WaitForSeconds(seconds);
+
+        rigidbody2d.isKinematic = false;
+        rigidbody2d.drag = oldDrag;
+        rigidbody2d.mass = oldMass;
+        rigidbody2d.velocity = oldSpeed;
+        rigidbody2d.angularVelocity = oldRot;
     }
     
     void groundChecker_Grounded(string groundTag)
     {
-        rigidbody2d.velocity = new Vector2();
+        StopAllMovement();
         startPosition = entity.GetPosition();
     }
 }

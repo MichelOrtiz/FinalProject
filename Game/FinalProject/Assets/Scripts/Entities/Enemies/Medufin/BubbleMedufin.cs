@@ -18,7 +18,7 @@ public class BubbleMedufin : Enemy
     
     new void Update()
     {
-        if (!CanSeePlayer())
+        if (!fieldOfView.canSeePlayer)
         {
             //lastSeenPlayerPos = this.GetPosition();
             //shotsFired = 0;

@@ -16,18 +16,4 @@ public class Dragon : NormalType
     {
         base.FixedUpdate();
     }
-
-    public void EnhanceValues(float multiplier)
-    {
-        normalSpeed *= multiplier;
-        chaseSpeed *= multiplier;
-        damageAmount *= multiplier;
-    }
-
-    public void NerfValues(float divider)
-    {
-        normalSpeed /= divider;
-        chaseSpeed /= divider;
-        damageAmount /= divider;
-    }
 }

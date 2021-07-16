@@ -1,12 +1,15 @@
 using UnityEngine;
-public class ThiefDragon : Dragon
+public class ThiefDragon : Enemy
 {
-    [SerializeField] private float jumpForceX;
-    [SerializeField] private float startTimeBtwJump;
+    [Header("Self Additions")]
+    [SerializeField] private float timeBtwJump;
+    private float curTimeBtwJump;
     [SerializeField] private float percentageMoneySteal;
     [SerializeField] private int minMoneyToSteal;
     [SerializeField] private Transform stolenItemIcon;
-    private float timeBtwFloat;
+
+
+
     //private Inventory inventory;
     new void Start()
     {
@@ -14,30 +17,48 @@ public class ThiefDragon : Dragon
         percentageMoneySteal /= 100;
     }
 
-    new void Update()
-    {
-        base.Update();
-    }
-
     new void FixedUpdate()
     {
-        if (timeBtwFloat <= 0)
+        /*if (curTimeBtwJump > timeBtwJump)
         {
-            Jump(facingDirection == RIGHT? jumpForceX : -jumpForceX);
-            timeBtwFloat = startTimeBtwJump;
-            ChangeFacingDirection();
+            enemyMovement.Jump();
+            //ChangeFacingDirection();
             stolenItemIcon.GetComponent<SpriteRenderer>().sprite = null;
-
+            curTimeBtwJump = 0;
         }
         else
         {
-            timeBtwFloat -= Time.deltaTime;
-        }
+            curTimeBtwJump += Time.deltaTime;
+        }*/
         base.FixedUpdate();
+    }
+
+    protected override void MainRoutine()
+    {
+        if (curTimeBtwJump > timeBtwJump)
+        {
+            stolenItemIcon.GetComponent<SpriteRenderer>().sprite = null;
+            if (groundChecker.isNearEdge || fieldOfView.inFrontOfObstacle)
+            {
+                ChangeFacingDirection();
+                curTimeBtwJump = 0;
+            }
+            else
+            {
+                enemyMovement.Jump();
+                ChangeFacingDirection();
+                curTimeBtwJump = 0;
+            }
+        }
+        else
+        {
+            curTimeBtwJump += Time.deltaTime;
+        }
     }
 
     protected override void Attack()
     {
+        base.Attack();
         Inventory inventory = Inventory.instance;
         int money = Inventory.money;
         if (money >= minMoneyToSteal)
@@ -55,8 +76,16 @@ public class ThiefDragon : Dragon
         }
         else
         {
+            // player paralized
             player.statesManager.AddState(atackEffect);
-            // player paralized 0.5s
+        }
+    }
+
+    protected override void groundChecker_Grounded(string groundTag)
+    {
+        if (!groundChecker.isNearEdge)
+        {
+            ChangeFacingDirection();
         }
     }
 }

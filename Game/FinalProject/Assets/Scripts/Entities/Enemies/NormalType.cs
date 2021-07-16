@@ -9,14 +9,10 @@ public class NormalType : Enemy
     
 
     #region Unity stuff
-    protected new void Start()
-    {
-        base.Start();
-    }
 
     protected new void Update()
     {
-        isChasing = CanSeePlayer();
+        isChasing = fieldOfView.canSeePlayer;
         base.Update();
     }
 
@@ -47,13 +43,13 @@ public class NormalType : Enemy
         }
     }
 
-    protected override void Attack()
+    /*protected override void Attack()
     {
         if(atackEffect != null){
             player.statesManager.AddState(atackEffect,this);
         }
         player.TakeTirement(damageAmount);
-    }
+    }*/
 
     public override void ConsumeItem(Item item)
     {

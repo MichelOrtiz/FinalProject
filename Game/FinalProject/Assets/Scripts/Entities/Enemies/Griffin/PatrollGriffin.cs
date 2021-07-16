@@ -86,6 +86,5 @@ public class PatrollGriffin : Enemy
     void UpdatePatrolDestination()
     {
         patrolDestination = new Vector2(startPosition.x + (goingRight ? patrolDistance : -patrolDistance), startPosition.y);
-        Debug.Log(patrolDestination);
     }
 }
