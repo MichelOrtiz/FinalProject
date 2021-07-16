@@ -5,17 +5,19 @@ public class HockeyPlayer : Enemy
     [SerializeField] private float maxViewDistance;
     [SerializeField] private float timeBtwShot;
     private float curTimeBtwShot;
-    [SerializeField] private Vector2 pushForce;
-    [SerializeField] private Vector2 pushForceMultiplier;
+
+    [SerializeField] private float pushTime;
+    [SerializeField] private Vector2 pushVector;
+    [SerializeField] private float pushForce;
     private bool isOnIce;
 
     new void Start()
     {
         base.Start();
-        if (pushForceMultiplier.magnitude > 0f)
+        /*if (pushForceMultiplier.magnitude > 0f)
         {
             pushForce *= pushForceMultiplier;
-        }
+        }*/
         projectileShooter.ProjectileTouchedPlayerHandler += projectileShooter_ProjectileTouchedPlayer;
     }
     
@@ -63,7 +65,9 @@ public class HockeyPlayer : Enemy
 
     public void projectileShooter_ProjectileTouchedPlayer()
     {
-        player.Push((facingDirection == RIGHT? pushForce.x : -pushForce.x), pushForce.y);
+        //player.Push((facingDirection == RIGHT? pushForce.x : -pushForce.x), pushForce.y);
+        Vector2 direction = new Vector2(facingDirection == RIGHT? pushVector.x : -pushVector.x, pushVector.y);
+        player.Knockback(pushTime, pushForce, direction);
     }
     /*public void ProjectileAttack()
     {

@@ -10,6 +10,7 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Time")]
     [SerializeField] private float waitTime;
+    public float WaitTime { get => waitTime;  }
     private float curWaitTime;
 
 
@@ -38,6 +39,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private EnemyCollisionHandler collisionHandler;
     [SerializeField] private FieldOfView fieldOfView;
     [SerializeField] private Rigidbody2D rigidbody2d;
+    private Vector2 patrolDestination;
+    private Vector2 startPosition;
     
 
     private PlayerManager player;
@@ -97,8 +100,28 @@ public class EnemyMovement : MonoBehaviour
 
     public void GoToInGround(Vector2 target, bool chasing, bool checkNearEdge)
     {
-        Vector2 direction = (Vector2) rigidbody2d.position + (target.x > rigidbody2d.transform.position.x ? Vector2.right : Vector2.left);
+        //Vector2 direction = (Vector2) rigidbody2d.position + (target.x > rigidbody2d.transform.position.x ? Vector2.right : Vector2.left);
         float speed = chasing? chaseSpeed : defaultSpeed;
+        GoToInGround(target, speed, checkNearEdge);
+        /*if (checkNearEdge)
+        {
+            if (!groundChecker.isNearEdge && groundChecker.isGrounded)
+            {
+                rigidbody2d.position = Vector2.MoveTowards(transform.position, direction, speed * Time.deltaTime);
+            }
+        }
+        else
+        {
+            if ( groundChecker.isGrounded || groundChecker.isNearEdge)
+            {
+                rigidbody2d.position = Vector2.MoveTowards(transform.position, direction, speed * Time.deltaTime);
+            }
+        }*/
+    }
+
+    public void GoToInGround(Vector2 target, float speed, bool checkNearEdge)
+    {
+        Vector2 direction = (Vector2) rigidbody2d.position + (target.x > rigidbody2d.transform.position.x ? Vector2.right : Vector2.left);
         if (checkNearEdge)
         {
             if (!groundChecker.isNearEdge && groundChecker.isGrounded)
@@ -114,6 +137,8 @@ public class EnemyMovement : MonoBehaviour
             }
         }
     }
+    
+
 
     public void GoTo(Vector2 target, bool chasing, bool gravity)
     {
@@ -219,5 +244,6 @@ public class EnemyMovement : MonoBehaviour
     void groundChecker_Grounded(string groundTag)
     {
         rigidbody2d.velocity = new Vector2();
+        startPosition = entity.GetPosition();
     }
 }

@@ -346,6 +346,10 @@ public class PlayerManager : Entity
     }
     #endregion
 
+
+
+
+
     // Call these methods to increase or decrease stamina directly
     #region Direct stamina changes
     public void TakeTirement(float damage)
@@ -400,7 +404,10 @@ public class PlayerManager : Entity
         transform.position = GameObject.FindWithTag("StartPos").transform.position;
         //transform.position = loadlevel.instance.startPosition.transform.position;
     }*/
-    void FindRespawnPos(){
+    void FindRespawnPos()
+    {
         transform.position = GameObject.FindWithTag("RespawnPos").transform.position;
     }
+
+
 }

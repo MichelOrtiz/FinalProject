@@ -8,6 +8,13 @@ public class EnemyCollisionHandler : CollisionHandler
     public bool touchingGround;
     public Enemy lastEnemyTouched;
 
+    public delegate void TouchedPlayer();
+    public event TouchedPlayer TouchedPlayerHandler;
+    protected virtual void OnTouchedPlayer()
+    {
+        TouchedPlayerHandler?.Invoke();
+    }
+
     public delegate void TouchingPlayer();
     public event TouchingPlayer TouchingPlayerHandler;
     protected virtual void OnTouchingPlayer()
@@ -28,6 +35,13 @@ public class EnemyCollisionHandler : CollisionHandler
         TouchingGroundHandler?.Invoke();
     }
     
+    public delegate void TouchedEnemy(Enemy enemy);
+    public event TouchedEnemy TouchedEnemyHandler;
+    protected virtual void OnTouchedEnemy(Enemy enemy)
+    {
+        TouchedEnemyHandler?.Invoke(enemy);
+    }
+
     void Start()
     {
         player = PlayerManager.instance;
@@ -44,12 +58,13 @@ public class EnemyCollisionHandler : CollisionHandler
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = true;
-            OnTouchingPlayer();
+            OnTouchedPlayer();
         }
         else if (other.gameObject.tag == "Enemy")
         {
             touchingEnemy = true;
-            lastEnemyTouched = other.gameObject.GetComponent<Enemy>();
+            lastEnemyTouched = other.transform.parent.GetComponent<Enemy>();
+            OnTouchedEnemy(lastEnemyTouched);
         }
         else if (other.gameObject.tag == "Ground")
         {
@@ -58,6 +73,23 @@ public class EnemyCollisionHandler : CollisionHandler
         }
     }
 
+    new void OnTriggerStay2D(Collider2D other)
+    {
+        base.OnTriggerStay2D(other);
+        if (other.gameObject.tag == "Player")
+        {
+            touchingPlayer = false;
+            OnTouchingPlayer();
+        }
+        else if (other.gameObject.tag == "Enemy")
+        {
+            
+        }
+        else if (other.gameObject.tag == "Ground")
+        {
+            
+        }
+    }
     
     new void OnTriggerExit2D(Collider2D other)
     {
@@ -84,18 +116,38 @@ public class EnemyCollisionHandler : CollisionHandler
         if (other.gameObject.tag == "Player")
         {
             touchingPlayer = true;
-            OnTouchingPlayer();
+            OnTouchedPlayer();
         }
         else if (other.gameObject.tag == "Enemy")
         {
             touchingEnemy = true;
             lastEnemyTouched = other.transform.parent.GetComponent<Enemy>();
+            OnTouchedEnemy(lastEnemyTouched);
         }
         else if (other.gameObject.tag == "Ground")
         {
             touchingGround = true;
             OnTouchingGround();
 
+        }
+    }
+
+ 
+    new void OnCollisionStay2D(Collision2D other)
+    {
+        base.OnCollisionStay2D(other);
+        if (other.gameObject.tag == "Player")
+        {
+            touchingPlayer = false;
+            OnTouchingPlayer();
+        }
+        else if (other.gameObject.tag == "Enemy")
+        {
+            
+        }
+        else if (other.gameObject.tag == "Ground")
+        {
+            
         }
     }
 

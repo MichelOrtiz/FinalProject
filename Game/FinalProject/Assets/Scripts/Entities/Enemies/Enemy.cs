@@ -15,9 +15,15 @@ public abstract class Enemy : Entity
     [SerializeReference] public float normalSpeed;
     [SerializeField] protected float chaseSpeedMultiplier;
     [SerializeReference] public float chaseSpeed;
+
+    [Header("Effect on Player")]
     [SerializeField] protected float damageAmount;
     [SerializeField] protected State atackEffect;
     [SerializeField] protected State projectileEffect;
+    [SerializeField] protected bool canKnockbackPlayer;
+    [SerializeField] private float knockbackAngle;
+    [SerializeField] private float knockbackDuration;
+    [SerializeField] private float knockBackForce;
     #endregion
 
     #region Time
@@ -66,6 +72,13 @@ public abstract class Enemy : Entity
             player.statesManager.AddState(atackEffect,this);
         }
         player.TakeTirement(damageAmount);
+
+        if (canKnockbackPlayer)
+        {
+            KnockbackEntity(player);
+        }
+
+        enemyMovement?.StopMovement();
     }
     public virtual void ConsumeItem(Item item)
     {
@@ -108,16 +121,17 @@ public abstract class Enemy : Entity
         
         eCollisionHandler = (EnemyCollisionHandler)base.collisionHandler;
         
-        eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
-        fieldOfView.FrontOfObstacleHandler += fieldOfView_InFrontOfObstacle;
+        //eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
+        if (eCollisionHandler != null)
+        {
+            eCollisionHandler.TouchedPlayerHandler += eCollisionHandler_TouchedPlayer;
+            fieldOfView.FrontOfObstacleHandler += fieldOfView_InFrontOfObstacle;
+        }
     }
 
     new protected void Update()
     {
-        /*if (InFrontOfObstacle())
-        {
-            ChangeFacingDirection();
-        }*/
+        //Debug.DrawLine(GetPosition(), transform.TransformPoint((MathUtils.GetVectorFromAngle(knockbackAngle)).normalized));
         if (isChasing && flipToPlayerIfSpotted && MathUtils.GetAbsXDistance(GetPosition(), player.GetPosition()) > 1f)
         {
             if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
@@ -152,6 +166,11 @@ public abstract class Enemy : Entity
         }
     }
 
+    protected virtual void eCollisionHandler_TouchedPlayer()
+    {
+        Attack();
+    }
+
     protected virtual void eCollisionHandler_TouchingPlayer()
     {
         /*if (!player.isImmune)
@@ -161,8 +180,8 @@ public abstract class Enemy : Entity
             //player.Push(-direction.x *50, -direction.y * 50);
             Attack();
         }*/
-        Attack();
-    } 
+        //Attack();
+    }
     #endregion
 
     #region General behaviour methods
@@ -195,6 +214,28 @@ public abstract class Enemy : Entity
     public void Jump(float xForce)
     {
         rigidbody2d.AddForce(new Vector2(xForce,jumpForce),ForceMode2D.Impulse);
+    }
+
+    protected virtual void KnockbackEntity(Entity entity)
+    {
+        entity.Knockback
+            (
+                knockbackDuration, 
+                knockBackForce,
+                
+                facingDirection == entity.facingDirection ?
+                entity.transform.InverseTransformPoint
+                (
+                    entity.GetPosition() + 
+                    (MathUtils.GetVectorFromAngle(knockbackAngle)
+                    ))
+                    :
+                -entity.transform.InverseTransformPoint
+                (
+                    entity.GetPosition() + 
+                    (MathUtils.GetVectorFromAngle(-knockbackAngle)
+                    ))
+            );
     }
     #endregion
 

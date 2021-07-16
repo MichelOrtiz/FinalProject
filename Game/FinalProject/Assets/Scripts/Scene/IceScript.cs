@@ -31,7 +31,7 @@ public class IceScript : MonoBehaviour
         {
             //player.rigidbody2d.AddForce(new Vector2( 300f * player.rigidbody2d.velocity.x, player.rigidbody2d.velocity.y));
             player.isInIce = true;
-            player.walkingSpeed = 150f;
+            player.walkingSpeed = 100f;
         }
     }
 

@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 5308470135481348717}
   - component: {fileID: 9019260400319245964}
   m_Layer: 10
-  m_Name: SwordGriffin
+  m_Name: SwordGriffinFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,6 +268,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -280,9 +284,7 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -290,24 +292,26 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   groundChecker: {fileID: 3965930891091105410}
   collisionHandler: {fileID: 2325924012507113105}
-  fovType: 1
+  physics: {fileID: 0}
   enemyName: 26
-  damageAmount: 40
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 1
+  normalSpeed: 0
   chaseSpeedMultiplier: 3
+  chaseSpeed: 0
+  damageAmount: 40
   atackEffect: {fileID: 11400000, guid: 9838fbacd00254c4a86ac51bc0d6d23f, type: 2}
   projectileEffect: {fileID: 0}
+  canKnockbackPlayer: 0
+  knockbackAngle: 0
+  knockbackDuration: 0
+  knockBackForce: 0
   startWaitTime: 0
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 5308470134650636259}
-  fovOrigin: {fileID: 5308470134437372953}
-  baseCastDistance: 1
-  downDistanceGroundCheck: 1
-  viewDistance: 10
-  fovAngle: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  projectileShooter: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
   secondFovDistance: 4
   firstFovSpeedMultiplier: 0.5
@@ -406,6 +410,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!1 &8362324228898193638
 GameObject:
   m_ObjectHideFlags: 0

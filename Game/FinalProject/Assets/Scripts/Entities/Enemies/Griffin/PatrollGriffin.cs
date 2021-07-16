@@ -1,31 +1,39 @@
 using UnityEngine;
-public class PatrollGriffin : Griffin
+public class PatrollGriffin : Enemy
 {
+    [Header("Self Additions")]
     [SerializeField] private float patrolDistance;
     [SerializeField] private Material meshRenderDefault;
     [SerializeField] private Material meshRenderSawPlayer;
     [SerializeField] private MeshFov meshFov;
+    [SerializeField] private State meshEffectOnPlayer; 
     private Material currentMeshMaterial;
-    private bool reachedDestinationPatrol;
-    private Vector2 destinationPatrol;
+    [SerializeField]private bool reachedDestination;
+    private bool canContinue;
+    private Vector2 startPosition;
+    private Vector2 patrolDestination;
+    private float curWaitTime;
+    private bool goingRight;
+
     new void Start()
     {
         base.Start();
         //fovOrigin.GetComponent<MeshFov>().Setup(fovAngle, viewDistance, meshRenderDefault, fieldOfView.FovType);
         fieldOfView.FovOrigin.GetComponent<MeshFov>().Setup(fieldOfView.FovAngle, fieldOfView.ViewDistance, meshRenderDefault, fieldOfView.FovType);
-
         currentMeshMaterial = meshRenderDefault;
+
+        goingRight = facingDirection == RIGHT;
     }
 
     new void Update()
     {
-        if (CanSeePlayer() && currentMeshMaterial != meshRenderSawPlayer)
+        if (fieldOfView.canSeePlayer && currentMeshMaterial != meshRenderSawPlayer)
         {
             //fovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderSawPlayer;
             fieldOfView.FovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderSawPlayer;
             currentMeshMaterial = meshRenderSawPlayer;
         }
-        else if(!CanSeePlayer() && currentMeshMaterial != meshRenderDefault)
+        else if(!fieldOfView.canSeePlayer && currentMeshMaterial != meshRenderDefault)
         {
             //fovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderDefault;
             fieldOfView.FovOrigin.GetComponent<MeshFov>().MeshMaterial = meshRenderDefault;
@@ -37,31 +45,47 @@ public class PatrollGriffin : Griffin
     protected override void MainRoutine()
     {
         //base.MainRoutine();
-        if (isGrounded && !InFrontOfObstacle() && !IsNearEdge())
+        
+        if ( (!reachedDestination ) && groundChecker.isGrounded  )
         {
-            if (waitTime > startWaitTime)
+            enemyMovement.GoToInGround(patrolDestination, chasing: false, checkNearEdge: false);
+            reachedDestination = MathUtils.GetAbsXDistance(GetPosition(), patrolDestination) < 0.5f;
+        }
+        else
+        {
+            enemyMovement.StopMovement();
+            reachedDestination = true;
+            if (curWaitTime > enemyMovement.WaitTime)
             {
-                ChangeFacingDirection();
-                reachedDestinationPatrol = true;
-                destinationPatrol = new Vector2(GetPosition().x +(facingDirection == RIGHT?  -patrolDistance : +patrolDistance), GetPosition().y);
-                waitTime = 0;
+                startPosition = GetPosition();
+                goingRight = !goingRight;
+
+                UpdatePatrolDestination();
+
+                reachedDestination = false;
+                curWaitTime = 0;
             }
             else
             {
-                reachedDestinationPatrol = false;
-                rigidbody2d.position = Vector3.MoveTowards(GetPosition(), destinationPatrol, normalSpeed * Time.deltaTime);
-                waitTime += Time.deltaTime;
+                curWaitTime += Time.deltaTime;
             }
         }
-        
     }
 
     protected override void ChasePlayer()
     {
-        player.statesManager.AddState(atackEffect);
+        player.statesManager.AddState(meshEffectOnPlayer);
     }
-    protected override void Attack()
+
+    protected override void groundChecker_Grounded(string groundTag)
     {
-        player.TakeTirement(damageAmount);
+        startPosition = GetPosition();
+        UpdatePatrolDestination();
+    }
+
+    void UpdatePatrolDestination()
+    {
+        patrolDestination = new Vector2(startPosition.x + (goingRight ? patrolDistance : -patrolDistance), startPosition.y);
+        Debug.Log(patrolDestination);
     }
 }

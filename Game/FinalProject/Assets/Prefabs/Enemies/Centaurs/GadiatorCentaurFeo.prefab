@@ -77,6 +77,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!1 &3816554537490354573
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +126,7 @@ GameObject:
   - component: {fileID: 3816554537578472886}
   - component: {fileID: 46304989862776909}
   m_Layer: 10
-  m_Name: GadiatorCentaur
+  m_Name: GadiatorCentaurFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,6 +288,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -297,9 +304,7 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -309,24 +314,21 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   groundChecker: {fileID: 7684308300045301712}
   collisionHandler: {fileID: 1928221831720328603}
-  fovType: 0
   enemyName: 17
-  damageAmount: 30
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 1.5
+  normalSpeed: 0
   chaseSpeedMultiplier: 3.5
+  chaseSpeed: 0
+  damageAmount: 30
   atackEffect: {fileID: 0}
   projectileEffect: {fileID: 0}
   startWaitTime: 1
-  normalSpeed: 0
-  chaseSpeed: 0
-  groundCheck: {fileID: 3816554538021284285}
-  fovOrigin: {fileID: 3816554537490354562}
-  baseCastDistance: 1
-  downDistanceGroundCheck: 1
-  viewDistance: 10
-  fovAngle: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  projectileShooter: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
   player: {fileID: 0}
   touchingEnemy: 0
   baseWaitTimeAfterPush: 2

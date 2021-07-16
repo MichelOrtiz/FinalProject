@@ -60,11 +60,14 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float checkFeetRadius;
     public GroundChecker groundChecker;
     public CollisionHandler collisionHandler;
+    public SomePhysics physics;
     #endregion
 
     protected virtual void collisionHandler_EnterContact(GameObject contact){}
     protected virtual void collisionHandler_StayInContact(GameObject contact){}
     protected virtual void collisionHandler_ExitContact(GameObject contact){}
+
+    protected virtual void groundChecker_Grounded(string groundTag){}
 
     //protected virtual void groundChecker_Grounded(string groundTag){}
     
@@ -90,6 +93,11 @@ public class Entity : MonoBehaviour
             collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;
             collisionHandler.StayTouchingContactHandler += collisionHandler_StayInContact;
             collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
+        }
+
+        if (groundChecker != null)
+        {
+            groundChecker.GroundedHandler += groundChecker_Grounded;
         }
 
     }
@@ -173,5 +181,14 @@ public class Entity : MonoBehaviour
         transform.eulerAngles = new Vector3(0, facingDirection == LEFT? 0:180);
     }
     
+    #endregion
+
+
+    #region Physics related
+
+    public void Knockback(float knockbackDuration, float knockbackForce, Vector2 knockbackDir)
+    {
+        physics.StartKnockback(knockbackDuration, knockbackForce, knockbackDir);
+    }
     #endregion
 }

@@ -1,104 +1,120 @@
 using UnityEngine;
-public class GladiatorCentaur : Centaur
+public class GladiatorCentaur : Enemy
 {
-    [SerializeField] protected bool touchingEnemy;
-    [SerializeField] private float baseWaitTimeAfterPush;
-    [SerializeField] private float pushEnemyForceX;
-    [SerializeField] private float pushEnemySpeedX;
-    [SerializeField] private float pushEnemyForceY;
-    [SerializeField] private float pushEnemySpeedY;
-    [SerializeField] private float pushPlayerForceX;
-    [SerializeField] private float pushPlayerSpeedX;
-    [SerializeField] private float pushPlayerForceY;
-    [SerializeField] private float pushPlayerSpeedY;
-    private float waitTimeAfterPush;
+    [Header("Self Additions")]
+    [SerializeField] private float waitTimeAfterPush;
+    private float curTimeAfterPush;
+    
+
+    [SerializeField] private float enemyPushAngle;
+    [SerializeField] private float enemyPushForce;
+    [SerializeField] private float enemyPushTime;
+
+    
     private bool pushedPlayer;
     private Enemy enemyTouched;
+
     new void Start()
     {
         base.Start();
+        eCollisionHandler.TouchedEnemyHandler += eCollisionHandler_TouchedEnemy;
     }
     
     new void Update()
     {
         if (pushedPlayer)
         {
-            if (waitTimeAfterPush < baseWaitTimeAfterPush)
+            if (curTimeAfterPush > waitTimeAfterPush)
             {
-                waitTimeAfterPush += Time.deltaTime;
+                pushedPlayer = false;
+                curTimeAfterPush = 0;
             }
             else
             {
-                pushedPlayer = false;
-                waitTimeAfterPush = 0;
+                curTimeAfterPush += Time.deltaTime;
             }
-        }
-
-        if (eCollisionHandler.touchingEnemy)
-        {
-            enemyTouched = eCollisionHandler.lastEnemyTouched;
         }
         base.Update();
     }
 
     protected override void ChasePlayer()
     {
-        gameObject.layer = LayerMask.NameToLayer("Default");
-        Vector3 playerPosition = (player.isGrounded? player.GetPosition(): new Vector3(player.GetPosition().x, GetPosition().y));
-        if (!pushedPlayer && isGrounded && !touchingPlayer)
+        if (!pushedPlayer)
         {
-            rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, chaseSpeed * Time.deltaTime);
+            enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: true);
         }
     }
 
     protected override void MainRoutine()
     {
-        if (!pushedPlayer)
+        if (!touchingPlayer && !pushedPlayer)
         {
-            gameObject.layer = LayerMask.NameToLayer("Enemies");
-            base.MainRoutine();
+            enemyMovement.DefaultPatrol();
         }
     }
 
     new void FixedUpdate()
     {
-        if (touchingPlayer && !pushedPlayer)
+        //if (touchingPlayer && !pushedPlayer)
         {
             // has to be called here instead of Attack() since is physics related
             //player.Push((facingDirection == RIGHT? pushForceX : -pushForceX) * pushSpeedX, 0f);
-            player.Push((facingDirection == RIGHT? pushPlayerForceX : -pushPlayerForceX) * pushPlayerSpeedX, pushPlayerForceY * pushPlayerSpeedY);
-            pushedPlayer = true;
+            //player.Push(facingDirection == RIGHT? playerPushForce.x : -playerPushForce.x, playerPushForce.y);
+           // player.rigidbody2d.AddForce(new Vector2(facingDirection == RIGHT? playerPushForce.x : -playerPushForce.x, playerPushForce.y));
+            //pushedPlayer = true;
         }
-        if (touchingEnemy)
+        /*if (eCollisionHandler.touchingEnemy)
         {
-            enemyTouched.Push((facingDirection == RIGHT? pushEnemyForceX : -pushEnemyForceX) * pushEnemySpeedX, pushEnemyForceY * pushEnemySpeedY);
-        }
+            enemyTouched = eCollisionHandler.lastEnemyTouched;
+            enemyTouched.Push(facingDirection == RIGHT? enemyPushForce.x : -enemyPushForce.x, enemyPushForce.y);
+        }*/
         base.FixedUpdate();
     }
 
     protected override void Attack()
     {
-        player.TakeTirement(damageAmount);
-        //player.Push(pushForce, pushSpeed);
+        base.Attack();
+        enemyMovement.StopMovement();
     }
-
-    /*protected override void OnCollisionEnter2D(Collision2D other)
+    
+    protected override void KnockbackEntity(Entity entity)
     {
-        base.OnCollisionEnter2D(other);
-        if (other.gameObject.tag == "Enemy")
+        if (rigidbody2d.velocity.magnitude == 0) return;
+
+        if (entity == player)
         {
-            touchingEnemy = true;
-            enemyTouched = other.gameObject.GetComponent<Enemy>();
+            base.KnockbackEntity(player);
+            pushedPlayer = true;
+        }
+        else
+        {
+            entity.Knockback
+            (
+                enemyPushTime, 
+                enemyPushForce,
+                
+                facingDirection == entity.facingDirection ?
+                entity.transform.InverseTransformPoint
+                (
+                    entity.GetPosition() + 
+                    (MathUtils.GetVectorFromAngle(enemyPushAngle)
+                    ))
+                    :
+                -entity.transform.InverseTransformPoint
+                (
+                    entity.GetPosition() + 
+                    (MathUtils.GetVectorFromAngle(-enemyPushAngle)
+                    ))
+            );
         }
     }
 
-    protected override void OnCollisionExit2D(Collision2D other)
+    void eCollisionHandler_TouchedEnemy(Enemy enemy)
     {
-        base.OnCollisionExit2D(other);
-        if (other.gameObject.tag == "Enemy")
+        if (isChasing)
         {
-            touchingEnemy = false;
+            KnockbackEntity(enemy);
         }
-    }*/
+    }
 
 }

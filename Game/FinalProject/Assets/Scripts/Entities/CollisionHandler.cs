@@ -75,7 +75,7 @@ public class CollisionHandler : MonoBehaviour
             }
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    protected virtual void OnTriggerStay2D(Collider2D other)
     {
         OnStayTouchingContact(other.gameObject);
     }
@@ -93,6 +93,10 @@ public class CollisionHandler : MonoBehaviour
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         OnEnterTouchingContact(other.gameObject);
+        if (!Contacts.Contains(other.gameObject))
+        {
+            Contacts.Add(other.gameObject);
+        }
         if (other.gameObject.tag != "Untagged" && other.gameObject.tag != lastColliderTag)
         {
             lastColliderTag = other.gameObject.tag;
@@ -107,6 +111,9 @@ public class CollisionHandler : MonoBehaviour
     protected virtual void OnCollisionExit2D(Collision2D other)
     {
         OnExitTouchingContact(other.gameObject);
-        
+        if (Contacts.Contains(other.gameObject))
+        {
+            Contacts.Remove(other.gameObject);
+        }
     }
 }
