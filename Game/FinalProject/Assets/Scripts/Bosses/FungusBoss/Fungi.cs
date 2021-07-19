@@ -2,40 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fungi : NormalType
+public class Fungi : Enemy
 {
+    [Header("Self Additions")]
+    [SerializeField] private float selfKnockBackDuration;
+    [SerializeField] private float selfKnockBackForce;
+    [SerializeField] private Vector2 selfKnockBackDir;
+    private bool inKnockback;
     [SerializeField] private float baseTimeUntilDestroyed;
     [SerializeField] private float baseTimeUntilReset;
     private float timeUntilDestroyed;
     private float timeUntilReset;
     private bool facingRight;
-    // Start is called before the first frame update
-    new void Start()
-    {
-        base.Start();
-    }
 
-    // Update is called once per frame
     new void Update()
     {
         isJumping = isGrounded || !isFalling;
-        /*if (OnEdge())
-        {
-            if (timeUntilJump > baseTimeUntilJump)
-            {
-                canJump = true;
-                timeUntilJump = 0;
-            }
-            else
-            {
-                canJump = false;
-                timeUntilJump += Time.deltaTime;
-            }
-        }*/
-        if (CanSeePlayer() && !touchingPlayer)
-        {
-            facingRight = facingDirection == RIGHT;
+        facingRight = facingDirection == RIGHT;
+        base.Update();
+    }
 
+    new void FixedUpdate()
+    {
+        if (isChasing && !touchingPlayer)
+        {
+            ChasePlayer();
             if ( (facingRight && GetPosition().x < player.GetPosition().x) || (!facingRight && GetPosition().x > player.GetPosition().x))
             {
                 ChangeFacingDirection();
@@ -47,6 +38,7 @@ public class Fungi : NormalType
         }
         else
         {
+            
             if (timeUntilReset > baseTimeUntilReset)
             {
                 timeUntilDestroyed = 0;
@@ -57,63 +49,37 @@ public class Fungi : NormalType
                 timeUntilReset += Time.deltaTime;
             }
         }
-        base.Update();
-    }
-
-    new void FixedUpdate()
-    {
-        if (CanSeePlayer() && !touchingPlayer)
-        {
-            ChasePlayer();
-        }
-        if ((IsNearEdge() || InFrontOfObstacle()) && isGrounded)
-        {
-            Jump();
-        }
-        
-    }
-    protected override void MainRoutine()
-    {
-        return;
-        /*if (!OnEdge())
-        {
-            base.MainRoutine();
-        }*/
-        //base.MainRoutine();
     }
 
     protected override void ChasePlayer()
     {
-        
-        float  distanceFromPlayer = GetDistanceFromPlayerFov();
-        //Vector3 moveDirection = new Vector2(GetPosition().x - player.GetPosition().x, 0f);
-        Vector2 moveDirection = GetPosition() - player.GetPosition();
-        //rigidbody2d.position = Vector2.MoveTowards(GetPosition(), moveDirection.normalized * viewDistance, chaseSpeed * Time.deltaTime);
-
-        if (facingRight)
+        if (!fieldOfView.inFrontOfObstacle)
         {
-            rigidbody2d.position = Vector2.MoveTowards(GetPosition(), moveDirection.normalized, -chaseSpeed * Time.deltaTime);
+            enemyMovement.Translate(rigidbody2d.transform.right, chasing: true);
         }
-        else
+        if (groundChecker.isNearEdge || fieldOfView.inFrontOfObstacle)
         {
-            rigidbody2d.position = Vector2.MoveTowards(GetPosition(), moveDirection.normalized, chaseSpeed * Time.deltaTime);
+            enemyMovement.Jump();
         }
     }
 
     protected override void Attack()
     {
-        if (player.facingDirection == RIGHT)
+        if (eCollisionHandler.touchingGround)
         {
-            rigidbody2d.position = new Vector2 (player.GetPosition().x + 1f, player.GetPosition().y);
+            transform.position = player.GetPosition();
         }
         else
         {
-            rigidbody2d.position = new Vector2 (player.GetPosition().x - 1f, player.GetPosition().y);
+            transform.position = new Vector2 ( player.GetPosition().x + (player.facingDirection == RIGHT ? 0.5f : - 0.5f) , player.GetPosition().y );
+            Knockback(selfKnockBackDuration, selfKnockBackForce, selfKnockBackDir);
         }
+    }
 
+    protected override void eCollisionHandler_TouchingPlayer()
+    {
         if (timeUntilDestroyed > baseTimeUntilDestroyed)
         {
-            FungusBoss.defeatedFungus ++;
             Destroy(gameObject);
         }
         else
@@ -123,8 +89,23 @@ public class Fungi : NormalType
         }
     }
 
-    private void Jump()
+    protected override void eCollisionHandler_StoppedTouchingPlayer()
     {
-        rigidbody2d.AddForce(new Vector2((facingDirection == RIGHT? 1250f : -1250f), jumpForce * 300), ForceMode2D.Impulse);
+        if (eCollisionHandler.touchingGround)
+        {
+            transform.position = player.GetPosition();
+        }
+    }
+
+    void OnDestroy()
+    {
+        try
+        {
+            FindObjectOfType<FungusBoss>().defeatedFungus++;
+        }
+        catch (System.NullReferenceException)
+        {
+            Debug.Log("FungusBoss null");
+        }
     }
 }

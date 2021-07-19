@@ -43,6 +43,7 @@ public abstract class Enemy : Entity
     {
         Attack();
     }
+    protected virtual void eCollisionHandler_StoppedTouchingPlayer(){}
     #endregion
 
     #region Unity stuff
@@ -72,6 +73,11 @@ public abstract class Enemy : Entity
         if (eCollisionHandler != null)
         {
             eCollisionHandler.TouchedPlayerHandler += eCollisionHandler_TouchedPlayer;
+            eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
+            eCollisionHandler.StoppedTouchingHandler += eCollisionHandler_StoppedTouchingPlayer;
+        }
+        if (fieldOfView != null)
+        {
             fieldOfView.FrontOfObstacleHandler += fieldOfView_InFrontOfObstacle;
         }
     }

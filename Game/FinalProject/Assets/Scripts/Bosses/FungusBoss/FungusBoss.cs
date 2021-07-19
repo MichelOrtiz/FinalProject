@@ -9,10 +9,11 @@ public class FungusBoss : MonoBehaviour
     [SerializeField] private float numberOfFungus;
     private float timeUntilLoss;
     PlayerManager player;
-    public static float defeatedFungus;
+    public float defeatedFungus;
     void Start()
     {
         player = PlayerManager.instance;
+        //numberOfFungus = ScenesManagers.GetObjectsOfType<Fungi>().Count;
     }
 
     // Update is called once per frame

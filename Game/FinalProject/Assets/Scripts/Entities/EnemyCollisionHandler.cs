@@ -66,7 +66,7 @@ public class EnemyCollisionHandler : CollisionHandler
             lastEnemyTouched = other.transform.parent.GetComponent<Enemy>();
             OnTouchedEnemy(lastEnemyTouched);
         }
-        else if (other.gameObject.tag == "Ground")
+        else if (other.gameObject.tag == "Ground"|| other.gameObject.tag == "Platform")
         {
             touchingGround = true;
             OnTouchingGround();
@@ -78,14 +78,14 @@ public class EnemyCollisionHandler : CollisionHandler
         base.OnTriggerStay2D(other);
         if (other.gameObject.tag == "Player")
         {
-            touchingPlayer = false;
+            //touchingPlayer = true;
             OnTouchingPlayer();
         }
         else if (other.gameObject.tag == "Enemy")
         {
             
         }
-        else if (other.gameObject.tag == "Ground")
+        else if (other.gameObject.tag == "Ground"|| other.gameObject.tag == "Platform")
         {
             
         }
@@ -103,7 +103,7 @@ public class EnemyCollisionHandler : CollisionHandler
         {
             touchingEnemy = false;
         }
-        else if (other.gameObject.tag == "Ground")
+        else if (other.gameObject.tag == "Ground"|| other.gameObject.tag == "Platform")
         {
             touchingGround = false;
 
@@ -124,7 +124,7 @@ public class EnemyCollisionHandler : CollisionHandler
             lastEnemyTouched = other.transform.parent.GetComponent<Enemy>();
             OnTouchedEnemy(lastEnemyTouched);
         }
-        else if (other.gameObject.tag == "Ground")
+        else if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Platform")
         {
             touchingGround = true;
             OnTouchingGround();
@@ -138,14 +138,14 @@ public class EnemyCollisionHandler : CollisionHandler
         base.OnCollisionStay2D(other);
         if (other.gameObject.tag == "Player")
         {
-            touchingPlayer = false;
+            //touchingPlayer = true;
             OnTouchingPlayer();
         }
         else if (other.gameObject.tag == "Enemy")
         {
             
         }
-        else if (other.gameObject.tag == "Ground")
+        else if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Platform")
         {
             
         }
@@ -163,7 +163,7 @@ public class EnemyCollisionHandler : CollisionHandler
         {
             touchingEnemy = false;
         }
-        else if (other.gameObject.tag == "Ground")
+        else if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Platform")
         {
             touchingGround = false;
         }
