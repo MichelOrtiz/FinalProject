@@ -43,10 +43,10 @@ public class GroundChecker : MonoBehaviour
         GroundedGameObjectHandler?.Invoke(ground);
     }
     public delegate void ExitGround();
-    public event ExitGround ExitGroundHandlder;
+    public event ExitGround ExitGroundHandler;
     protected virtual void OnExitGround()
     {
-        ExitGroundHandlder?.Invoke();
+        ExitGroundHandler?.Invoke();
     }
 
     public delegate void NearEdge();
@@ -115,7 +115,9 @@ public class GroundChecker : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D other)
     {
-        if (!isGrounded)
+        //if (!isGrounded)
+        string tag = other.gameObject.tag;
+        if (GroundTags.Contains(tag))
         {
             OnExitGround();
         }

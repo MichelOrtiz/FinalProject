@@ -84,4 +84,16 @@ public static class MathUtils
         }
         return bound.center;
     }
+
+    public static int EditBitInBitmask(int bitmask, int pos, bool value)
+    {
+        if (value)
+        {
+            return bitmask |= (1 << pos);
+        }
+        else
+        {
+            return bitmask & ~(1 << pos);
+        }
+    }
 }
