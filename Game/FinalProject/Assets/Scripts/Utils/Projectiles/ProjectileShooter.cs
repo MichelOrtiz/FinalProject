@@ -7,7 +7,11 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
     [SerializeField] private Transform shotPos;
     public Transform ShotPos { get => shotPos; }
     [SerializeField] private State effectOnPlayer;
-
+    /*
+    [SerializeField] private bool canKnockbackPlayer;
+    [SerializeField] private float knockbackDuration;
+    [SerializeField] private float knockBackForce;
+    */
     #region Events
     public delegate void ProjectileTouchedPlayer();
     public event ProjectileTouchedPlayer ProjectileTouchedPlayerHandler;
