@@ -19,6 +19,11 @@ public class DarknessScript : MonoBehaviour
         
     }
 
+    public void SetActiveDarkness(bool value)
+    {
+        Oscuridad.SetActive(value);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Player")
