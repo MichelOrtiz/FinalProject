@@ -71,6 +71,11 @@ public static class RandomGenerator
         return random.NextDouble() * 100;
     }
 
+    public static T RandomElement<T>(List<T> list)
+    {
+        return list[NewRandom(0, list.Count-1)];
+    }
+
     public static int MatchedElement(List<float> percentages)
     {
         System.Random random = new System.Random();
