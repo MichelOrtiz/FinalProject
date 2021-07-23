@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class ProbabilitySpawner : MonoBehaviour
 {
     [SerializeField] private List<ProbabilitySpawn> probabilitySpawns;
+    public List<ProbabilitySpawn> ProbabilitySpawns { get => probabilitySpawns; }
 
     void Start()
     {
@@ -32,8 +33,9 @@ public class ProbabilitySpawner : MonoBehaviour
                         break;
                     }
                     Transform spawnPos = RandomGenerator.RandomElement<Transform>(positions);
-                    positions.Remove(spawnPos);
+                    spawn.SpawnedPos = spawnPos;
                     Instantiate(spawn.gameObject, spawnPos.position, spawn.gameObject.transform.rotation);
+                    positions.Remove(spawnPos);
                 }
             }
         }

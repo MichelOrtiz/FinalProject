@@ -10,6 +10,8 @@ public class ProbabilitySpawn
     public float probability;
     public byte minQuantity;
     public byte maxQuantity;
+    
+    public Transform SpawnedPos { get; set; }
 
     public ProbabilitySpawn(GameObject gameObject, List<Transform> positions, float probability, byte minQuantity, byte maxQuantity)
     {
