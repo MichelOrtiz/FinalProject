@@ -15,6 +15,7 @@ public class WallCristal : Enemy
     [Header("Projectile")]
     [SerializeField] private float timeBtwShot;
     private float curTimeBtwShot;
+    private bool projectileShot;
 
     [Header("Sprite Change")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -43,6 +44,7 @@ public class WallCristal : Enemy
         {
             positions = spawn.positions;
             spawnedPos = spawn.SpawnedPos;
+            Debug.Log(spawnedPos.position);
         }
 
     }
@@ -56,10 +58,15 @@ public class WallCristal : Enemy
     protected override void ChasePlayer()
     {
         ChangeSprite(spriteWhenChase);
+        
         if (curTimeBtwShot > timeBtwShot)
         {
-            projectileShooter.ShootProjectile(player.GetPosition());
-            curTimeBtwShot = 0;
+            if (!projectileShot)
+            {
+                projectileShooter.ShootProjectile(player.GetPosition());
+                curTimeBtwShot = 0;
+                projectileShot = true;
+            }
         }
         else
         {
@@ -81,6 +88,7 @@ public class WallCristal : Enemy
     }
     void flashImage_OnFlashInComplete()
     {
+        if (!projectileShot) return;
         if (positions.Count > 1)
         {
             Vector3 newPosition;
@@ -88,17 +96,21 @@ public class WallCristal : Enemy
             {
                 newPosition = RandomGenerator.RandomElement<Transform>(positions).position;
             }
-            while(newPosition == transform.position);
+            while(newPosition == spawnedPos.position);
+            spawnedPos.position = newPosition;
 
-            /*Vector3 playerNewPos;
+            
+            Vector3 playerNewPos;
             do
             {
                 playerNewPos = RandomGenerator.RandomElement<Transform>(positions).position;
             }
-            while(playerNewPos == newPosition);*/
+            while(playerNewPos == newPosition);
 
             transform.position = newPosition;
-            //player.transform.position = playerNewPos;
+            player.transform.position = playerNewPos;
+            curTimeBtwShot = 0;
+            projectileShot = false;
         }
     }
 
