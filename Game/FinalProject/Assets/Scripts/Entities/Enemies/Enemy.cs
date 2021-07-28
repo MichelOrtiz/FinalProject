@@ -29,6 +29,7 @@ public abstract class Enemy : Entity
     [SerializeField] protected FieldOfView fieldOfView;
     [SerializeField] protected EnemyMovement enemyMovement;
     [SerializeField] protected ProjectileShooter projectileShooter;
+    [SerializeField] protected LaserShooter laserShooter;
     private RaycastHit2D hit;
     public FieldOfView FieldOfView { get => fieldOfView; }
     [HideInInspector] public EnemyCollisionHandler eCollisionHandler;

@@ -5,6 +5,13 @@ public class ProbabilitySpawner : MonoBehaviour
 {
     [SerializeField] private List<ProbabilitySpawn> probabilitySpawns;
     public List<ProbabilitySpawn> ProbabilitySpawns { get => probabilitySpawns; }
+    [SerializeField] private List<SpawnedObject> spawnedObjects;
+    public List<SpawnedObject> SpawnedObjects {get => spawnedObjects; }
+
+    void Awake()
+    {
+        spawnedObjects = new List<SpawnedObject>();
+    }
 
     void Start()
     {
@@ -33,8 +40,12 @@ public class ProbabilitySpawner : MonoBehaviour
                         break;
                     }
                     Transform spawnPos = RandomGenerator.RandomElement<Transform>(positions);
-                    spawn.SpawnedPos = spawnPos;
-                    Instantiate(spawn.gameObject, spawnPos.position, spawn.gameObject.transform.rotation);
+                    //spawn.SpawnedPos = spawnPos;
+
+                    GameObject instantiated = Instantiate(spawn.gameObject, spawnPos.position, spawn.gameObject.transform.rotation);
+                    
+                    spawnedObjects.Add(new SpawnedObject(instantiated, spawnPos.position));
+
                     positions.Remove(spawnPos);
                 }
             }

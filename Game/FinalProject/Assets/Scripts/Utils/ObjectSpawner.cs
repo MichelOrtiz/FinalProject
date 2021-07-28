@@ -8,7 +8,6 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] private float timeBeforeSpawn;
     private float currentTime;
     [SerializeField] private bool loop;
-
     /// <summary>
     /// Center position of the bounds:
     /// <see langword="false"/> to use parent position, 

@@ -15,7 +15,13 @@ public class FieldOfView : MonoBehaviour
     public float FovAngle { get => fovAngle; }
 
     [SerializeField] private float viewDistance;
-    public float ViewDistance { get => viewDistance; }
+    public float ViewDistance
+    {
+        get { return viewDistance; }
+        set { viewDistance = value; }
+    }
+    
+
 
     [SerializeField] private LayerMask layerMask;
 
@@ -225,6 +231,13 @@ public class FieldOfView : MonoBehaviour
     public static RaycastHit2D GetRaycastOnColliderHit(Vector2 start, Vector2 direction, float maxDistance, LayerMask whatIsObstacle)
     {
         return Physics2D.Raycast(start,  direction,  maxDistance, whatIsObstacle);
+    }
+
+    public static bool RayHitObstacle(Vector2 start, Vector2 end, LayerMask whatIsObstacle)
+    {
+        RaycastHit2D linecast = Physics2D.Linecast(start, end, whatIsObstacle);
+    
+        return linecast.collider;
     }
 
 }

@@ -2,10 +2,12 @@ using UnityEngine;
 using System.Collections.Generic;
 public class Laser : MonoBehaviour
 {
+
     [SerializeField] private LineRenderer ray;
     [SerializeField] private Transform endPoint;
     [SerializeField] private bool hasLifeTime;
     [SerializeField] private float lifeTime;
+    private float currentTime;
 
     [SerializeField] protected bool targetWarningAvailable;
     [SerializeField] private GameObject warning;
@@ -15,23 +17,26 @@ public class Laser : MonoBehaviour
     private float currentWarningTime;
 
 
-    private float currentTime;
     [SerializeField] private float speed;
     [SerializeField] private float secondSpeed;
-    [SerializeField] private bool chaseTargetPosition;
-    [SerializeField] private bool chaseOnReachedEndPos;
+
+    public bool chaseTargetPosition;
+    public bool chaseOnReachedEndPos;
     private bool reachedEndPos;
 
     private Vector2 startPos;
     private Vector2 endPos;
     private Vector2 direction;
+
+    public bool collidesWithObstacles;
+    [SerializeField] private LayerMask whatIsObstacle;
+    [SerializeField] private CollisionHandler collisionHandler;
+    [SerializeField] private EdgeCollider2D edge;
     
     private bool touchingPlayer;
+    private bool rayHitObstacle;
     private ILaser summoner;
     private PlayerManager player;
-
-
-    private EdgeCollider2D edge;
 
 
     //public delegate void ReachedEndPos();
@@ -96,6 +101,11 @@ public class Laser : MonoBehaviour
         {
               chaseTargetPosition = !chaseOnReachedEndPos;
         }
+        if (collisionHandler != null)
+        {
+            collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterTouchingContactHandler;
+            collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitTouchingContactHandler;
+        }
     }
 
     void Start()
@@ -104,8 +114,12 @@ public class Laser : MonoBehaviour
         ray.SetPosition(0, startPos);
         ray.SetPosition(1, startPos);
 
-        edge = GetComponent<EdgeCollider2D>();
+        
 
+        if (edge == null)
+        {
+            edge = GetComponent<EdgeCollider2D>();
+        }
         //chaseOnReachedEndPos = chaseOnReachedEndPos && chaseTargetPosition;
 
         
@@ -153,6 +167,8 @@ public class Laser : MonoBehaviour
                 touchingPlayer = false;
             }
         }
+
+        rayHitObstacle = FieldOfView.RayHitObstacle(summoner.ShotPos.position, endPoint.position, whatIsObstacle) && collidesWithObstacles;
     }
 
     void FixedUpdate()
@@ -166,25 +182,48 @@ public class Laser : MonoBehaviour
     void ExtendRay()
     {
         //endPoint.transform.position = Vector2.MoveTowards(startPos, endPos, speed * Time.deltaTime);
-        ray.SetPosition(0, summoner.ShotPos.position);
+        startPos = summoner.ShotPos.position;
+        ray.SetPosition(0, startPos);
+        
+        //ray.SetPosition(0, summoner.ShotPos.position);
         float distanceToEndPos = Vector2.Distance(endPos, startPos);
         float currentDistanceFromStart = Vector2.Distance(endPoint.position, startPos);
 
-        if (chaseTargetPosition || reachedEndPos)
+        if (!rayHitObstacle)
         {
-            endPoint.transform.position = Vector2.MoveTowards(endPoint.transform.position, summoner.EndPos, secondSpeed * Time.deltaTime);
-        }
-        else if (currentDistanceFromStart < distanceToEndPos)
-        {
-            endPoint.transform.position += (Vector3) (direction * speed * Time.deltaTime);
+            if (chaseTargetPosition || reachedEndPos)
+            {
+                endPoint.transform.position = Vector2.MoveTowards(endPoint.transform.position, summoner.EndPos, secondSpeed * Time.deltaTime);
+            }
+            else if (currentDistanceFromStart < distanceToEndPos)
+            {
+                endPoint.transform.position += (Vector3) (direction * speed * Time.deltaTime);
+            }
         }
 
-        if (currentDistanceFromStart >= distanceToEndPos)
+
+        if (currentDistanceFromStart >= distanceToEndPos || rayHitObstacle)
         {
             OnReachedEndPos();
         }
 
         ray.SetPosition(1, endPoint.position);
+    }
+
+    void collisionHandler_EnterTouchingContactHandler(GameObject contact)
+    {
+        if (contact.tag == "Player")
+        {
+            touchingPlayer = true;
+        }
+    }
+
+    void collisionHandler_ExitTouchingContactHandler(GameObject contact)
+    {
+        if (contact.tag == "Player")
+        {
+            touchingPlayer = false;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -193,9 +232,26 @@ public class Laser : MonoBehaviour
         {
             touchingPlayer = true;
         }
+        Debug.Log(other.gameObject.layer);
     }
 
     void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            touchingPlayer = false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            touchingPlayer = true;
+        }
+        Debug.Log(other.gameObject.layer);
+    }
+    void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
         {

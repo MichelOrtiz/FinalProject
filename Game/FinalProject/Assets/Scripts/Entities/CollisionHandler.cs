@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+
+[RequireComponent(typeof(Collider2D))]
 public class CollisionHandler : MonoBehaviour
 {
     //private Collider2D collider;

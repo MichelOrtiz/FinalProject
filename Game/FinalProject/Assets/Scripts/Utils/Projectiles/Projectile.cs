@@ -304,6 +304,7 @@ public class Projectile : MonoBehaviour
             impactEffect.SetActive(true);
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         }
+
         Destroy(gameObject);
     }
 }

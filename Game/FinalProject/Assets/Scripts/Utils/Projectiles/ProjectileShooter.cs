@@ -4,6 +4,7 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
 {
     [SerializeField] private GameObject projectilePrefab;
     private Projectile projectile;
+    public Projectile Projectile { get => projectile; }
     [SerializeField] private Transform shotPos;
     public Transform ShotPos { get => shotPos; }
     [SerializeField] private State effectOnPlayer;
@@ -19,6 +20,8 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
     {
         ProjectileTouchedPlayerHandler?.Invoke();
     }
+
+    //public event Action OnProjectileDestroyed = delegate { };
     #endregion
 
     private PlayerManager player;
@@ -36,7 +39,7 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
     public void ProjectileAttack()
     {
         player.TakeTirement(projectile.damage);
-        player.statesManager.AddState(effectOnPlayer);
+        player.statesManager.AddState(effectOnPlayer, entity);
         OnProjectileTouchedPlayer();
     }
 
