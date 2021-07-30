@@ -14,6 +14,7 @@ public class GroundChecker : MonoBehaviour
 
     [Header("Edge")]
     [SerializeField] private Transform edgeCheck;
+    public Transform EdgeCheck { get => edgeCheck; set => edgeCheck = value; }
     [SerializeField] private float downCheckDistance;
     public bool isNearEdge;
     #endregion
@@ -77,9 +78,13 @@ public class GroundChecker : MonoBehaviour
     public bool IsNearEdge()
     {
         //bool nearEdge;
+        Debug.DrawLine(edgeCheck.position, edgeCheck.position - edgeCheck.up * downCheckDistance, Color.green);
+
         try
         {
-            return !Physics2D.OverlapArea(edgeCheck.position, ((Vector2)edgeCheck.position + Vector2.down * downCheckDistance), whatIsGround); //(Physics2D.Raycast(edgeCheck.position, Vector3.down, downCheckDistance)).collider.IsTouchingLayers(whatIsGround);
+            //return !Physics2D.OverlapArea(edgeCheck.position, ((Vector2)edgeCheck.position + Vector2.down * downCheckDistance), whatIsGround);
+            //return !FieldOfView.RayHitObstacle(edgeCheck.position, ((Vector2)edgeCheck.position + Vector2.down * downCheckDistance), whatIsGround);
+            return !FieldOfView.RayHitObstacle(edgeCheck.position, edgeCheck.position - edgeCheck.up * downCheckDistance, whatIsGround);
         }
         catch (System.NullReferenceException)
         {
@@ -91,7 +96,8 @@ public class GroundChecker : MonoBehaviour
         //bool nearEdge;
         try
         {
-            return Physics2D.OverlapArea(edgeCheck.position, ((Vector2)edgeCheck.position + Vector2.down * downCheckDistance), whatIsGround).gameObject.tag != groundTag; //(Physics2D.Raycast(edgeCheck.position, Vector3.down, downCheckDistance)).collider.IsTouchingLayers(whatIsGround);
+            //return Physics2D.OverlapArea(edgeCheck.position, ((Vector2)edgeCheck.position + Vector2.down * downCheckDistance), whatIsGround).gameObject.tag != groundTag; //(Physics2D.Raycast(edgeCheck.position, Vector3.down, downCheckDistance)).collider.IsTouchingLayers(whatIsGround);
+            return !FieldOfView.RayHitObstacle(edgeCheck.position, ((Vector2)edgeCheck.position + Vector2.down * downCheckDistance), whatIsGround);
         }
         catch (System.NullReferenceException)
         {
@@ -99,6 +105,28 @@ public class GroundChecker : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        string tag = other.gameObject.tag;
+        if (GroundTags.Contains(tag))
+        {
+            OnGrounded(tag);
+            if (tag != lastGroundTag)
+            {
+                lastGroundTag = tag;
+                OnChangedGroundTag();
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        string tag = other.gameObject.tag;
+        if (GroundTags.Contains(tag))
+        {
+            OnExitGround();
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D other)
     {

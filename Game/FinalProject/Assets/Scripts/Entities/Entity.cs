@@ -68,12 +68,21 @@ public class Entity : MonoBehaviour
     #region Unity stuff
     protected void Start()
     {
-        facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
+        //facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
+        if (transform.eulerAngles.z != 0)
+        {
+            facingDirection = transform.rotation.x == 0? RIGHT:LEFT;
+        }
+        else
+        {
+            facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
+        }
 
         if (animator == null)
         {
             animator = GetComponent<Animator>();
         }
+
         if (rigidbody2d == null)
         {
             rigidbody2d = GetComponent<Rigidbody2D>();
@@ -161,7 +170,15 @@ public class Entity : MonoBehaviour
     /// </summary>
     protected void ChangeFacingDirection()
     {
-        transform.eulerAngles = new Vector3(0, facingDirection == LEFT? 0:180);
+        if (transform.eulerAngles.z != 0)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x + 180, transform.eulerAngles.y, transform.eulerAngles.z);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(transform.rotation.x , transform.eulerAngles.y, transform.rotation.z);
+        }
+
     }
     
     #endregion

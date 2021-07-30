@@ -243,7 +243,14 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     public void ChangeFacingDirection()
     {
-        entity.transform.eulerAngles = new Vector3(0, facingDirection == "left"? 0:180);
+        if (entity.transform.eulerAngles.z != 0)
+        {
+            entity.transform.eulerAngles = new Vector3(entity.transform.eulerAngles.x + 180, entity.transform.eulerAngles.y, entity.transform.eulerAngles.z);
+        }
+        else
+        {
+            entity.transform.eulerAngles = new Vector3(entity.transform.eulerAngles.x , entity.transform.eulerAngles.y + 180, entity.transform.eulerAngles.z);
+        }
     }
 
     public void StopMovement()

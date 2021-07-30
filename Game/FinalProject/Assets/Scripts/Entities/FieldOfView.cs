@@ -121,14 +121,15 @@ public class FieldOfView : MonoBehaviour
         switch (fovType)
         {
             case FovType.Linear:
-                if (facingDirection == LEFT)
+                endPos = fovOrigin.position + fovOrigin.right * viewDistance;
+                /*if (facingDirection == LEFT)
                 {
-                    endPos = fovOrigin.position + Vector3.left * viewDistance;
+                    endPos = fovOrigin.position - fovOrigin.right * viewDistance;
                 }
                 else
                 {
-                    endPos = fovOrigin.position + Vector3.right * viewDistance;
-                }
+                    endPos = fovOrigin.position + fovOrigin.right * viewDistance;
+                }*/
                 break;
             case FovType.CircularFront:
                 if (facingDirection == RIGHT)
@@ -191,7 +192,8 @@ public class FieldOfView : MonoBehaviour
     protected bool InFrontOfObstacle()
     {
         //float castDistance = facingDirection == LEFT ? -obstacleViewDistance : obstacleViewDistance;
-        Vector2 targetPos = (Vector2)obstacleCheckOrigin.position + (facingDirection == LEFT? Vector2.left : Vector2.right) * obstacleViewDistance;
+        //Vector2 targetPos = (Vector2)obstacleCheckOrigin.position + (facingDirection == LEFT? Vector2.left : Vector2.right) * obstacleViewDistance;
+        Vector2 targetPos = obstacleCheckOrigin.position + obstacleCheckOrigin.right * obstacleViewDistance;
         Debug.DrawLine(obstacleCheckOrigin.position, targetPos, Color.blue);
         return RayHitObstacle(obstacleCheckOrigin.position, targetPos);
     }
