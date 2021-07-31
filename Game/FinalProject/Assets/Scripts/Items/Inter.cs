@@ -6,8 +6,15 @@ public class Inter : MonoBehaviour
 {
     public SpriteRenderer imagen;
     public float radius = 3f;
+    public string selfTag = "Berry";
     public Item item;
     private PlayerManager player;
+   
+    void Awake()
+    {
+        tag = selfTag;
+    }
+
     private void Start() {
         player = PlayerManager.instance;
         if (item != null)

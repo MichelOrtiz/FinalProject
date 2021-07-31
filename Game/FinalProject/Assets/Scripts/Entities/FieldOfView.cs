@@ -179,6 +179,7 @@ public class FieldOfView : MonoBehaviour
         return false;
     }
 
+
     public float GetDistanceFromPlayerFov()
     {
         return Math.Abs(hit.distance);
@@ -230,6 +231,7 @@ public class FieldOfView : MonoBehaviour
             player.GetPosition().x < entity.GetPosition().x) && (player.facingDirection == facingDirection) 
     }
 */
+
     public static RaycastHit2D GetRaycastOnColliderHit(Vector2 start, Vector2 direction, float maxDistance, LayerMask whatIsObstacle)
     {
         return Physics2D.Raycast(start,  direction,  maxDistance, whatIsObstacle);

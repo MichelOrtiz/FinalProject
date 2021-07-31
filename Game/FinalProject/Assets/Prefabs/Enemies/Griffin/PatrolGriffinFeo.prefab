@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 4516865211306719715}
   - component: {fileID: 1335012717}
   m_Layer: 10
-  m_Name: PatrolGriffin
+  m_Name: PatrolGriffinFeo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,6 +335,10 @@ MonoBehaviour:
   isFlying: 0
   isFalling: 0
   isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
   isParalized: 0
   isCaptured: 0
   isInFear: 0
@@ -347,41 +351,41 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
   - serializedVersion: 2
     m_Bits: 512
   feetPos: {fileID: 4516865209761536009}
-  checkFeetRadius: 0.3
   groundChecker: {fileID: 1272798475043057628}
   collisionHandler: {fileID: 2603810840414330028}
-  fovType: 2
+  physics: {fileID: 0}
+  enemyType: 0
   enemyName: 25
-  damageAmount: 30
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 0.75
-  chaseSpeedMultiplier: 0.75
-  atackEffect: {fileID: 11400000, guid: f19fc9c9f3344e24b81129828ef04c6a, type: 2}
-  projectileEffect: {fileID: 0}
-  startWaitTime: 1
   normalSpeed: 0
+  chaseSpeedMultiplier: 0.75
   chaseSpeed: 0
-  groundCheck: {fileID: 4516865209643494739}
-  fovOrigin: {fileID: 4516865209583809197}
-  baseCastDistance: 1
-  downDistanceGroundCheck: 1
-  viewDistance: 5
-  fovAngle: 45
+  damageAmount: 30
+  atackEffect: {fileID: 11400000, guid: f19fc9c9f3344e24b81129828ef04c6a, type: 2}
+  canKnockbackPlayer: 0
+  knockbackAngle: 0
+  knockbackDuration: 0
+  knockBackForce: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  projectileShooter: {fileID: 0}
+  laserShooter: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
-  player: {fileID: 0}
   patrolDistance: 4
   meshRenderDefault: {fileID: 2100000, guid: 45e21fa2e01323c42afb0d08cbc02655, type: 2}
   meshRenderSawPlayer: {fileID: 2100000, guid: 7bb5921486f704e42bb6aa75e2e738ad, type: 2}
   meshFov: {fileID: 0}
+  meshEffectOnPlayer: {fileID: 0}
+  reachedDestination: 0
 --- !u!114 &1335012717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +478,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!1 &7024042331360040010
 GameObject:
   m_ObjectHideFlags: 0
