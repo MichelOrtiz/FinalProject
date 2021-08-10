@@ -87,19 +87,23 @@ public abstract class Enemy : Entity
     new protected void Update()
     {
         //Debug.DrawLine(GetPosition(), transform.TransformPoint((MathUtils.GetVectorFromAngle(knockbackAngle)).normalized));
+        base.Update();
         if (isChasing && flipToPlayerIfSpotted && MathUtils.GetAbsXDistance(GetPosition(), player.GetPosition()) > 1f)
         {
             if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
-                || GetPosition().x < player.GetPosition().x && facingDirection == LEFT)
+                || (GetPosition().x < player.GetPosition().x && facingDirection == LEFT))
                 {
-                    if (rigidbody2d.gravityScale == 0 ||  groundChecker.isGrounded) ChangeFacingDirection();
+                    if (rigidbody2d.gravityScale == 0 ||  groundChecker.isGrounded)
+                    {
+                        ChangeFacingDirection();
+                    }
                 }
         }
         touchingPlayer = eCollisionHandler.touchingPlayer;
         
         SetStates();
         UpdateState();
-        base.Update();
+        
     }
 
     protected void FixedUpdate()

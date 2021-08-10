@@ -4,28 +4,13 @@ public class FollowerObjectManager : MonoBehaviour
 {
     [SerializeField] private GameObject target;
     [SerializeField] private int maxFollowers;
-    class FollowerAngle
-    {
-        public GameObject follower;
-        public float angle;
-        public float distance;
-
-        /*public FollowerAngle(GameObject follower, float angle, float distance)
-        {
-            this.follower = follower;
-            this.angle = angle;
-            this.distance = distance;
-        }*/
-    }
     private List<float> angles;
     private List<FollowerObject> followers;
-
 
     void Awake()
     {
         angles = new List<float>();
         followers = new List<FollowerObject>();
-        //followerGameObjects = new List<GameObject>();
         
         float angleBtw = 360 / maxFollowers;
         float prevAngle = 0;
@@ -36,15 +21,6 @@ public class FollowerObjectManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
     void Update()
     {
         if (followers != null)
@@ -52,10 +28,16 @@ public class FollowerObjectManager : MonoBehaviour
             int index = 0;
             foreach (var follower in followers)
             {
-                //FollowerAngle followerAngle = followers[index];
-                follower.transform.position = target.transform.position + MathUtils.GetVectorFromAngle(follower.angle) * follower.distance;
-                Debug.Log(follower + "distance " + follower.distance);
-                index++;
+                if (follower != null)
+                {
+                    follower.transform.position = target.transform.position + MathUtils.GetVectorFromAngle(follower.angle) * follower.distance;
+                    index++;
+                }
+                else
+                {
+                    followers.Remove(follower);
+                    break;
+                }
             }
         }
     }

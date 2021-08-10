@@ -168,15 +168,16 @@ public class Entity : MonoBehaviour
     /// <summary>
     /// Rotates the enity Y axis
     /// </summary>
-    protected void ChangeFacingDirection()
+    protected void  ChangeFacingDirection()
     {
-        if (transform.eulerAngles.z != 0)
+        
+        if (transform.localEulerAngles.z != 0)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x + 180, transform.eulerAngles.y, transform.eulerAngles.z);
         }
         else
         {
-            transform.eulerAngles = new Vector3(transform.rotation.x , transform.eulerAngles.y, transform.rotation.z);
+            transform.eulerAngles = new Vector3(transform.rotation.x , transform.eulerAngles.y + 180, transform.rotation.z);
         }
 
     }

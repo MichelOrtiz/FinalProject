@@ -2,25 +2,31 @@ using UnityEngine;
 using System.Collections.Generic;
 public class FatFungus : FatType
 {
-    [SerializeField] private byte sporesForState;
+    [Header("Self Additions")]
+    [SerializeField] private byte maxSpores;
     private byte currentSpores;
     [SerializeField] private List<State> states;
+    [SerializeField] private FollowerObject followerObject;
 
     protected override void Attack()
     {
         base.Attack();
-        currentSpores++;
+        var manager = player.GetComponentInChildren<FollowerObjectManager>();
+        manager.AddFollower(followerObject);
 
-        if (currentSpores >= sporesForState)
+        currentSpores = (byte)ScenesManagers.GetObjectsOfType<FollowerObject>()?.FindAll(f => f.type == FollowerObject.FollowerType.Spore && f.target == player.gameObject)?.Count;
+
+        if (currentSpores >= maxSpores)
         {
             try
             {
                 player.statesManager.AddState( RandomGenerator.RandomElement<State>(states) );
             }
-            catch (System.NullReferenceException)
+            catch (System.Exception)
             {
-                    Debug.LogError("No states to add from " + gameObject);
+                Debug.Log("No states to add from " + gameObject);
             }
+            manager.DestroyAllFollowers();
             currentSpores = 0;
         }
     }
