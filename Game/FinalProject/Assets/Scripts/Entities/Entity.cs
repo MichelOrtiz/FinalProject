@@ -12,6 +12,7 @@ public class Entity : MonoBehaviour
     [Header("Normal states")]
     public StateNames currentState;
     public bool isWalking = false;
+    public bool isRunning = false;
     public bool isGrounded = false;
     public bool isJumping = false;
     public bool isFlying = false;

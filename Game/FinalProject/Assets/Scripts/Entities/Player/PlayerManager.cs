@@ -27,7 +27,7 @@ public class PlayerManager : Entity
     #endregion
 
     #region States
-    public bool isRunning;
+    //public bool isRunning;
     public bool isSwiming;
     public bool isStruggling;
     public bool isImmune;
