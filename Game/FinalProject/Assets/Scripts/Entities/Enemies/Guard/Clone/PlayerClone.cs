@@ -1,21 +1,21 @@
 using UnityEngine;
 using System.Collections;
-public class Reflex : Enemy
+public abstract class PlayerClone : Enemy
 {
     [Header("Self Additions")]
-    [SerializeField] private float delay;
+    [SerializeField] protected float delay;
     private float curTime;
 
     #region CloningStuff
-    private Queue cloners;
-    private Cloner currentCloner;
-    class Cloner
+    protected Queue cloners;
+    protected Cloner currentCloner;
+    protected class Cloner
     {
         public Vector3 position;
         public Quaternion rotation;
         public AnimationState animation;
     }
-    enum AnimationState
+    protected enum AnimationState
     {
         Idle, 
         Walk, 
@@ -26,6 +26,8 @@ public class Reflex : Enemy
     }
     #endregion
 
+    protected abstract void CloneMovement();
+
     new void Awake()
     {
         base.Awake();
@@ -34,14 +36,13 @@ public class Reflex : Enemy
     
     new void FixedUpdate()
     {
-        // Each frame, a Cloner is added to the Queue, storing position, rotation and animation state from player current state
+        // Every frame, a Cloner is added to the Queue, storing position, rotation and animation state from player current state
         cloners.Enqueue( new Cloner { position = player.GetPosition(), rotation = player.transform.rotation, animation = GetAnimationState() }  );
         if (curTime > delay)
         {
-            // Takes a Cloner aut of the Queue, and assigns the info to the self variables
+            // Takes a Cloner aut of the Queue, updating the currentCloner
             currentCloner = (Cloner)cloners.Dequeue();
-            transform.position = currentCloner.position;
-            transform.rotation = currentCloner.rotation;
+            CloneMovement();
             SetAnimation(currentCloner.animation);
         }
         else
@@ -55,7 +56,7 @@ public class Reflex : Enemy
     /// Gets the player current animation state
     /// </summary>
     /// <returns></returns>
-    AnimationState GetAnimationState()
+    protected AnimationState GetAnimationState()
     {
         if (player.isWalking)
         {
@@ -87,7 +88,7 @@ public class Reflex : Enemy
     /// Updates current state so the upper (Entity) class does the animations
     /// </summary>
     /// <param name="animationState"></param>
-    void SetAnimation(AnimationState animationState)
+    protected void SetAnimation(AnimationState animationState)
     {
         switch (animationState)
         {
@@ -134,4 +135,5 @@ public class Reflex : Enemy
                 break;
         }
     }
+    
 }

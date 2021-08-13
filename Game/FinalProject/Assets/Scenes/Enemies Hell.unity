@@ -16618,6 +16618,7 @@ MonoBehaviour:
   laserShooter: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
+  touchedPlayerEffect: {fileID: 11400000, guid: 2cf0854124cfdf2479b31bd8997f4f79, type: 2}
   speedMultiplier: 1.3
   speedLimit: 2
   speed: 0
@@ -121967,6 +121968,37 @@ MonoBehaviour:
   laserShooter: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
+--- !u!1 &1503750786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1503750787}
+  m_Layer: 0
+  m_Name: ReflexGuard
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1503750787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503750786}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 200.68, y: 11.085, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1923045830}
+  m_Father: {fileID: 0}
+  m_RootOrder: 84
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1510494596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5156191329009537653, guid: 39e8c30868a841346bae03b334d5a5a3, type: 3}
@@ -131393,11 +131425,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 200.29
+      value: 193.45
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.6
+      value: 11.38
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -132131,6 +132163,7 @@ GameObject:
   - component: {fileID: 1923045830}
   - component: {fileID: 1923045829}
   - component: {fileID: 1923045828}
+  - component: {fileID: 1923045831}
   - component: {fileID: 1923045827}
   - component: {fileID: 1923045826}
   m_Layer: 10
@@ -132149,12 +132182,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1923045825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1d5df941fae41a4e81b45dff8359c8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0314b72a7a079134cbe5015edcc3ca8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemHotbarUp: 0000000000
-  ItemHotbarDown: 0000000000
-  EquipmentHotbar: 0000000000
+  mirror: {fileID: 1503750787}
+  distanceToActivate: 1
+  warningSign: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
 --- !u!114 &1923045827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132164,7 +132197,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1923045825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77e6b09aac427fa419cd228f69cf490d, type: 3}
+  m_Script: {fileID: 11500000, guid: d2bf835fd3e8edd41bb0ab1b62ad13b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   facingDirection: 
@@ -132188,9 +132221,9 @@ MonoBehaviour:
   isResting: 0
   isChasing: 0
   statesManager: {fileID: 0}
-  jumpForce: 6
-  jumpTime: 0.35
-  fallingCriteria: 1
+  jumpForce: 0
+  jumpTime: 0
+  fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 2032645879}
   whatIsObstacle: []
@@ -132205,19 +132238,20 @@ MonoBehaviour:
   normalSpeed: 0
   chaseSpeedMultiplier: 0
   chaseSpeed: 0
-  damageAmount: 20
+  damageAmount: 0
   atackEffect: {fileID: 0}
   canKnockbackPlayer: 0
-  knockbackAngle: 15
-  knockbackDuration: 0.2
-  knockBackForce: 15
+  knockbackAngle: 0
+  knockbackDuration: 0
+  knockBackForce: 0
   fieldOfView: {fileID: 748345291}
   enemyMovement: {fileID: 1205165371}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  delay: 1
+  delay: 0
+  mirrorOrigin: {fileID: 1503750787}
 --- !u!114 &1923045828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132261,9 +132295,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923045825}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 194.8, y: 11.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.25, y: 0.47000027, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 2032645881}
   - {fileID: 148131045}
@@ -132271,9 +132305,72 @@ Transform:
   - {fileID: 748345292}
   - {fileID: 1205165372}
   - {fileID: 1286013862}
-  m_Father: {fileID: 0}
-  m_RootOrder: 84
+  m_Father: {fileID: 1503750787}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1923045831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923045825}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446ad04aac479284192e010a89a87d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facingDirection: 
+  currentState: 0
+  isWalking: 0
+  isRunning: 0
+  isGrounded: 0
+  isJumping: 0
+  isFlying: 0
+  isFalling: 0
+  isInWater: 0
+  isInIce: 0
+  isInSnow: 0
+  isInConvey: 0
+  isInDark: 0
+  isParalized: 0
+  isCaptured: 0
+  isInFear: 0
+  isDizzy: 0
+  isBrainFrozen: 0
+  isResting: 0
+  isChasing: 0
+  statesManager: {fileID: 0}
+  jumpForce: 0
+  jumpTime: 0
+  fallingCriteria: 0
+  rigidbody2d: {fileID: 0}
+  animator: {fileID: 2032645879}
+  whatIsObstacle: []
+  feetPos: {fileID: 0}
+  groundChecker: {fileID: 470818692}
+  collisionHandler: {fileID: 148131043}
+  physics: {fileID: 1286013861}
+  enemyType: 12
+  enemyName: 49
+  flipToPlayerIfSpotted: 0
+  normalSpeedMultiplier: 0
+  normalSpeed: 0
+  chaseSpeedMultiplier: 0
+  chaseSpeed: 0
+  damageAmount: 20
+  atackEffect: {fileID: 0}
+  canKnockbackPlayer: 0
+  knockbackAngle: 0
+  knockbackDuration: 0
+  knockBackForce: 0
+  fieldOfView: {fileID: 748345291}
+  enemyMovement: {fileID: 1205165371}
+  projectileShooter: {fileID: 0}
+  laserShooter: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
+  touchingPlayer: 0
+  delay: 1
 --- !u!1 &1924796985
 GameObject:
   m_ObjectHideFlags: 0
