@@ -50,7 +50,7 @@ public class Entity : MonoBehaviour
     #region Layers, rigids, etc...
     [Header ("General additions")]
     public Rigidbody2D rigidbody2d;
-    [SerializeField] protected Animator animator;
+    public Animator animator;
     [SerializeField] protected LayerMask[] whatIsObstacle;
     [SerializeField] public Transform feetPos;
 
@@ -200,4 +200,10 @@ public class Entity : MonoBehaviour
     }
 
     #endregion
+
+    public void DestroyEntity()
+    {
+        EntityDestroyFx.Instance.StartDestroyFx(this);
+        Destroy(gameObject);
+    }
 }

@@ -31,6 +31,7 @@ public abstract class Enemy : Entity
     public EnemyMovement EnemyMovement { get => enemyMovement; }
     [SerializeField] protected ProjectileShooter projectileShooter;
     [SerializeField] protected LaserShooter laserShooter;
+    [SerializeField] protected ItemInteractionManager itemInteractionManager;
     private RaycastHit2D hit;
     public FieldOfView FieldOfView { get => fieldOfView; }
     [HideInInspector] public EnemyCollisionHandler eCollisionHandler;
@@ -154,6 +155,7 @@ public abstract class Enemy : Entity
     public virtual void ConsumeItem(Item item)
     {
         Debug.Log("Consumiendo "+ item.nombre);
+        itemInteractionManager.Interact(item);
     }
     #endregion
 
@@ -228,6 +230,9 @@ public abstract class Enemy : Entity
 
     #region Delete Later
 
+
+
+
     /// <summary>
     /// Checks if the enemy is able to see the player based on its field of view
     /// </summary>
@@ -243,4 +248,5 @@ public abstract class Enemy : Entity
     }
 
     #endregion
+
 }

@@ -900,6 +900,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 929930730}
   projectileShooter: {fileID: 906266426}
   laserShooter: {fileID: 1209782917}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   wishedItem: {fileID: 11400000, guid: 641cb724f3339ff488333eff0a622e36, type: 2}
@@ -2443,6 +2444,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &219761981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 219761983}
+  - component: {fileID: 219761982}
+  m_Layer: 0
+  m_Name: EntityDeestroyedFx
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &219761982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219761981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5131311db37dbb41a06d7579a6d7a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityDestroyed: {fileID: 8467522905295301367, guid: 355f7de7916343b409e740374562da72, type: 3}
+--- !u!4 &219761983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219761981}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 86
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &228553151
 GameObject:
   m_ObjectHideFlags: 0
@@ -3617,6 +3662,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1380032399}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
 --- !u!114 &333909762
@@ -9008,6 +9054,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 0}
   projectileShooter: {fileID: 353614586}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   startTimeBtwShot: 2
@@ -16389,6 +16436,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 793538276}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   wishedItem: {fileID: 11400000, guid: 1795efc6f4c679f47b4d6d0626c25f7b, type: 2}
@@ -16616,6 +16664,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1979538280}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   touchedPlayerEffect: {fileID: 11400000, guid: 2cf0854124cfdf2479b31bd8997f4f79, type: 2}
@@ -17625,6 +17674,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 524846952}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   wishedItem: {fileID: 11400000, guid: 7cb96a285f4cd0241879c3c01a9c5681, type: 2}
@@ -19207,6 +19257,7 @@ Transform:
   - {fileID: 980331449}
   - {fileID: 926518630}
   - {fileID: 1961395694}
+  - {fileID: 1365137061}
   m_Father: {fileID: 0}
   m_RootOrder: 79
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19444,6 +19495,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 908504718}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   leaveItem: {fileID: 169735827528490331, guid: 6221fa8b9d620da43b70df133a128fa4, type: 3}
@@ -19588,6 +19640,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 401072773}
   projectileShooter: {fileID: 2058426766}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   startTimeBtwShot: 0.5
@@ -45360,6 +45413,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 0}
   projectileShooter: {fileID: 407602683}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   timeBtwShot: 0.5
@@ -111863,6 +111917,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 0}
   projectileShooter: {fileID: 1390036196}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   startTimeBtwShot: 3
@@ -113008,7 +113063,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974802591}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -113081,6 +113136,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 482293013}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 1268970906}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
 --- !u!4 &974802595
@@ -113100,6 +113156,7 @@ Transform:
   - {fileID: 261159913}
   - {fileID: 482293014}
   - {fileID: 819193945}
+  - {fileID: 1268970907}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113500,6 +113557,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 333816054}
   projectileShooter: {fileID: 415652852}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   timeBtwFlip: 5
@@ -114154,6 +114212,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 508364081}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 301949459}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   walkingTime: 1.5
@@ -114368,6 +114427,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1366872521}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   waitTimeWhenReach: 5
@@ -115141,6 +115201,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 333636300}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   waitTimeAfterPush: 3
@@ -116224,6 +116285,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1023689543}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
 --- !u!114 &1190441058
@@ -117446,6 +117508,51 @@ Transform:
   m_Father: {fileID: 1713134921}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1268970905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1268970907}
+  - component: {fileID: 1268970906}
+  m_Layer: 10
+  m_Name: ItemInteraction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1268970906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268970905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48aa6f546a7185d46b48bf25516b637c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 974802594}
+  itemInteraction: {fileID: 11400000, guid: 6e87954ce5ff3d34780c6070e0090108, type: 2}
+--- !u!4 &1268970907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268970905}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 974802595}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1272598181
 GameObject:
   m_ObjectHideFlags: 0
@@ -117555,6 +117662,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 2143134584}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   enhanceMultiplier: 1.5
@@ -117969,6 +118077,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 2086812075}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   dividePos: {fileID: 1204913690}
@@ -118453,6 +118562,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1791700394}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
 --- !u!114 &1315580002
@@ -118590,6 +118700,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 2132951246}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   timeAfterChase: 2
@@ -118935,6 +119046,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 471269090}
   projectileShooter: {fileID: 1439455946}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   startTimeBtwShot: 2
@@ -119475,6 +119587,132 @@ Transform:
   m_Father: {fileID: 1842538535}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1365137060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1365137061}
+  - component: {fileID: 1365137064}
+  - component: {fileID: 1365137063}
+  - component: {fileID: 1365137062}
+  m_Layer: 0
+  m_Name: MonedaChoco (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1365137061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365137060}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -29.64, y: -23.95, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 739394528}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1365137062
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365137060}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!212 &1365137063
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365137060}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -857322767054708395, guid: 89f02c9dfcbdaa84db7fb6ec0dfccb02, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &1365137064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365137060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6b84c70fa2e6549b82c1617817cdb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imagen: {fileID: 1365137063}
+  radius: 3
+  selfTag: Berry
+  item: {fileID: 11400000, guid: 2a27c55b7fa682a4da73032f4f452688, type: 2}
 --- !u!1 &1366872519
 GameObject:
   m_ObjectHideFlags: 0
@@ -120050,6 +120288,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1335882389}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   commonItems:
@@ -120207,6 +120446,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1545367794}
   projectileShooter: {fileID: 1689469219}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   flashColor: {r: 0.8323185, g: 0.7821734, b: 0.8773585, a: 1}
@@ -120432,6 +120672,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 847739510}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 1892789091}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   timeBtwShot: 3
@@ -120882,6 +121123,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 2078024744}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   selfStateWhenAttack: {fileID: 11400000, guid: cc18857f15e70484f91a14ec14def462, type: 2}
@@ -121966,6 +122208,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 119457653}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
 --- !u!1 &1503750786
@@ -122480,6 +122723,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 569282848}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   patrolDistance: 4
@@ -122816,7 +123060,7 @@ GameObject:
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1579716481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128107,6 +128351,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1960525112}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   timeBtwJump: 1.5
@@ -128488,6 +128733,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1767301390}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   secondFovDistance: 7.5
@@ -128865,6 +129111,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 611815978}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   maxSpores: 4
@@ -131264,6 +131511,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1363372942}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   secondFovDistance: 7
@@ -131425,11 +131673,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 193.45
+      value: -66.8
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.38
+      value: -16.1
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -132086,6 +132334,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1443397275}
   projectileShooter: {fileID: 1837773502}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   secondFovDistance: 18
@@ -132248,6 +132497,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1205165371}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   delay: 0
@@ -132368,6 +132618,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1205165371}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   delay: 1
@@ -133714,6 +133965,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 7153517}
   projectileShooter: {fileID: 1314198393}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   maxViewDistance: 35
@@ -134119,6 +134371,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 547372951}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
 --- !u!1 &2046984900
@@ -135742,6 +135995,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 2104799255}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   targetOffset: 0.5
@@ -136333,6 +136587,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 8125774025826577434}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
 --- !u!1001 &2020415387497829597
@@ -136577,6 +136832,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c7735d786f89584ea9699f987aea1b1, type: 3}
+--- !u!1001 &3461356177997508995
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1247094851860631685, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_Name
+      value: EntityDestroyed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1247094851860631685, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355609885703797950, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 45e21fa2e01323c42afb0d08cbc02655, type: 2}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_RootOrder
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -113.68895
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -15.549161
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -471.30237
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 355f7de7916343b409e740374562da72, type: 3}
 --- !u!61 &3587551701205369626
 BoxCollider2D:
   m_ObjectHideFlags: 0

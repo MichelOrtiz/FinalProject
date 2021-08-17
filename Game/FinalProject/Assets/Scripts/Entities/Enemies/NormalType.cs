@@ -32,6 +32,7 @@ public class NormalType : Enemy
         if (!touchingPlayer)
         {
             enemyMovement.DefaultPatrol();
+            //enemyMovement.GoTo(GetPosition() + Vector3.up, chasing: false, gravity: false);
         }
     }
 
@@ -50,10 +51,5 @@ public class NormalType : Enemy
         }
         player.TakeTirement(damageAmount);
     }*/
-
-    public override void ConsumeItem(Item item)
-    {
-        Debug.Log("Consumiendo "+ item.nombre);
-    }
     #endregion
 }
