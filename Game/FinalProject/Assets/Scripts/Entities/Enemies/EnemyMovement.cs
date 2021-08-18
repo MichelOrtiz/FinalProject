@@ -146,6 +146,12 @@ public class EnemyMovement : MonoBehaviour
         //rigidbody2d.transform.position += (Vector3)target * Time.deltaTime * defaultSpeed;
     }
 
+    public void GoTo(Vector2 target, float speed, bool gravity)
+    {
+        rigidbody2d.position = Vector2.MoveTowards(entity.GetPosition(), target, Time.deltaTime * speed );   
+        //rigidbody2d.transform.position += (Vector3)target * Time.deltaTime * defaultSpeed;
+    }
+
     public void Translate(Vector2 target, bool chasing)
     {
         rigidbody2d.transform.position += (Vector3)target * (chasing ? chaseSpeed : defaultSpeed) * Time.deltaTime; 

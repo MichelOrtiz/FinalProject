@@ -2,10 +2,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName="New LevitateComically", menuName = "States/new LevitateComically")]
 public class LevitateComically : State
 {
-    [SerializeField] private Paralized paralized;
     [SerializeField] private float speed;
-
     private EnemyMovement enemyMovement;
+
     public override void StartAffect(StatesManager newManager)
     {
         //base.StartAffect(newManager);
@@ -13,7 +12,6 @@ public class LevitateComically : State
         
         manager.hostEntity.rigidbody2d.gravityScale = 0;
         manager.hostEntity.rigidbody2d.isKinematic = true;
-        manager.hostEntity.statesManager.AddState(paralized);
 
         manager.hostEntity.enabled = false;
         enemyMovement = manager.hostEntity.GetComponentInChildren<EnemyMovement>();
@@ -23,22 +21,22 @@ public class LevitateComically : State
 
     public override void Affect()
     {
-        if (!manager.currentStates.Contains(paralized))
+        if (currentTime >= duration)
         {
-            if (currentTime >= duration)
-            {
-                StopAffect();
-            }
-            else
-            {
-                manager.hostEntity.animator.SetBool("Is Walking", true);
-                manager.hostEntity.enabled = false;
+            StopAffect();
+        }
+        else
+        {
+            // Animation
+            manager.hostEntity.animator.SetBool("Is Walking", true);
+            manager.hostEntity.enabled = false;
 
-                manager.hostEntity.rigidbody2d.position = 
-                    Vector2.MoveTowards(manager.hostEntity.GetPosition(), manager.hostEntity.GetPosition() + Vector3.up , Time.deltaTime);
-                
-                currentTime += Time.deltaTime;
-            }
+            /*manager.hostEntity.rigidbody2d.position = 
+                Vector2.MoveTowards(manager.hostEntity.GetPosition(), manager.hostEntity.GetPosition() + Vector3.up , Time.deltaTime);*/
+
+            enemyMovement.GoTo(manager.hostEntity.GetPosition() + Vector3.up, speed, gravity: false);
+            
+            currentTime += Time.deltaTime;
         }
     }
 

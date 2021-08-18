@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public abstract class State : ScriptableObject
 {
     [SerializeField] protected StateNames name;
@@ -7,6 +7,9 @@ public abstract class State : ScriptableObject
     protected StatesManager manager;
     public bool onEffect;
     protected float currentTime;
+
+    public Action StoppedAffect;
+
     public abstract void Affect();
     public virtual void StartAffect(StatesManager newManager){
         manager=newManager;
@@ -21,6 +24,8 @@ public abstract class State : ScriptableObject
         onEffect=false;
         manager.statusCheck-=Affect;
         manager.RemoveState(this);
+
+        StoppedAffect?.Invoke();
     }
     
 }
