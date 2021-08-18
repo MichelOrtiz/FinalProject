@@ -20,11 +20,13 @@ public class BattleshipManager : MonoBehaviour
     void Start()
     {
         shipScript = ships[shipIndex].GetComponent<ShipScript>();
-        //nextButton.onClick.AddListener(() => NextShipClicked());
+        nextButton.onClick.AddListener(() => NextShipClicked());
+        rotateButton.onClick.AddListener(() => RotateClicked());
         ////if (Input.GetMouseButtonUp(0)) {
     }
 
     private void NextShipClicked(){
+        //Condition to only do this if there are still ships
         if(shipIndex <= ships.Length - 2){
             shipIndex++;
             shipScript = ships[shipIndex].GetComponent<ShipScript>();
@@ -43,6 +45,7 @@ public class BattleshipManager : MonoBehaviour
             //Drop missile - BOOM
         } else if(!setupComplete){
             PlaceShip(tile);
+            shipScript.SetClickedTile(tile);
         }
     } 
 
@@ -51,5 +54,13 @@ public class BattleshipManager : MonoBehaviour
         shipScript.ClearTileList();
         Vector2 newVec = shipScript.GetOffsetVec(tile.transform.position);
         ships[shipIndex].transform.position = newVec;
+    }
+
+    private void RotateClicked(){
+        shipScript.RotateShip();
+    }
+
+    void SetShipClickedTile(GameObject tile){
+        shipScript.SetClickedTile(tile);
     }
 }
