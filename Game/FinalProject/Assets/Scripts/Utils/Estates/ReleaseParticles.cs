@@ -1,7 +1,6 @@
 using UnityEngine;
-[CreateAssetMenu(fileName="New SpitFire", menuName = "States/new SpitFire")]
-
-public class SpitFire : State
+[CreateAssetMenu(fileName="New ReleaseParticles", menuName = "States/new ReleaseParticles")]
+public class ReleaseParticles : State
 {
     [SerializeField] private GameObject particles;
     [SerializeField] private bool stopMovement;
@@ -11,9 +10,17 @@ public class SpitFire : State
     public override void StartAffect(StatesManager newManager)
     {
         base.StartAffect(newManager);
-        // Requires the entity to have a projectile shooter
-        Vector2 shotPos = manager.hostEntity.GetComponentInChildren<ProjectileShooter>().ShotPos.position;
-        Instantiate(particles, shotPos, manager.hostEntity.transform.rotation);
+        
+        try
+        {
+            // Requires the entity to have a projectile shooter
+            Vector2 shotPos = manager.hostEntity.GetComponentInChildren<ProjectileShooter>().ShotPos.position;
+            Instantiate(particles, shotPos, manager.hostEntity.transform.rotation);
+        }
+        catch (System.NullReferenceException)
+        {
+            Instantiate(particles, manager.hostEntity.transform.position, manager.hostEntity.transform.rotation);
+        }
 
         if (stopMovement)
         {
@@ -23,11 +30,19 @@ public class SpitFire : State
             prevGravity = manager.hostEntity.rigidbody2d.gravityScale;
             manager.hostEntity.rigidbody2d.gravityScale = 0;
         }
+        
     }
 
     public override void Affect()
     {
-        // Animation?
+       if (currentTime > duration)
+       {
+           StopAffect();
+       }
+       else
+       {
+           currentTime += Time.deltaTime;
+       }
     }
 
     public override void StopAffect()

@@ -17,6 +17,7 @@ public abstract class Enemy : Entity
 
     [Header("Effect on Player")]
     [SerializeField] protected float damageAmount;
+    public float Damage { get => damageAmount; set => damageAmount = value; }
     [SerializeField] protected State atackEffect;
     [SerializeField] protected bool canKnockbackPlayer;
     [SerializeField] private float knockbackAngle;

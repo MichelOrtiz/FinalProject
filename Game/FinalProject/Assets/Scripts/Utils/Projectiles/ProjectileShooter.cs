@@ -4,7 +4,7 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
 {
     [SerializeField] private GameObject projectilePrefab;
     private Projectile projectile;
-    public Projectile Projectile { get => projectile; }
+    public Projectile Projectile { get => projectile; set => projectile = value; }
     [SerializeField] private Transform shotPos;
     public Transform ShotPos { get => shotPos; }
     [SerializeField] private State effectOnPlayer;

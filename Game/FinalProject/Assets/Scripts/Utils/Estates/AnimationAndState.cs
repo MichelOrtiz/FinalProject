@@ -11,7 +11,14 @@ public class AnimationAndState : State
     }
     public override void Affect()
     {
-        //throw new System.NotImplementedException();
+        if (currentTime > duration)
+        {
+            StopAffect();
+        }
+        else
+        {
+            currentTime += Time.deltaTime;
+        }
     }
     public override void StopAffect()
     {
