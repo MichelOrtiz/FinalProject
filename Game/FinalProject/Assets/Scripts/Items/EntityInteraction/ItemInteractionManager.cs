@@ -14,6 +14,7 @@ public class ItemInteractionManager : MonoBehaviour
 
     void Start()
     {
+        index = 0;
         if (entity == null)
         {
             entity = transform.parent.GetComponentInChildren<Entity>();
@@ -26,6 +27,7 @@ public class ItemInteractionManager : MonoBehaviour
         {
             if (!entity.statesManager.currentStates.Contains(currentState))
             {
+                
                 entity.statesManager.AddState(currentState);
             }
         }
@@ -40,9 +42,9 @@ public class ItemInteractionManager : MonoBehaviour
             if (itemState.states != null)
             {
 
-                //entity.statesManager.AddState(itemState.state);
                 states = itemState.states;
                 interacting = true;
+
                 UpdateCurrentState();
             }
             else
@@ -56,14 +58,14 @@ public class ItemInteractionManager : MonoBehaviour
 
     void UpdateCurrentState()
     {
-        if (states != null && states.Count != 0)
+        if (states != null && states.Count > 0)
         {
-            if (index < states.Count-1)
+            if (currentState != null)
             {
-                if (currentState != null)
-                {
-                    index++;
-                }
+                index++;
+            }
+            if (index <= states.Count - 1 || (index == 0 ))
+            {
                 currentState = states[index];
                 currentState.StoppedAffect += currentState_StoppedAffect;
             }

@@ -25,10 +25,10 @@ public class ReleaseParticles : State
         if (stopMovement)
         {
             manager.hostEntity.enabled = false;
-            manager.hostEntity.rigidbody2d.isKinematic = true;
+            //manager.hostEntity.rigidbody2d.isKinematic = true;
 
-            prevGravity = manager.hostEntity.rigidbody2d.gravityScale;
-            manager.hostEntity.rigidbody2d.gravityScale = 0;
+           // prevGravity = manager.hostEntity.rigidbody2d.gravityScale;
+            //manager.hostEntity.rigidbody2d.gravityScale = 0;
         }
         
     }
@@ -54,7 +54,7 @@ public class ReleaseParticles : State
         {
             manager.hostEntity.enabled = true;
             manager.hostEntity.rigidbody2d.isKinematic = false;
-            manager.hostEntity.rigidbody2d.gravityScale = prevGravity;
+            //manager.hostEntity.rigidbody2d.gravityScale = prevGravity;
         }
         base.StopAffect();
     }

@@ -20,6 +20,7 @@ public abstract class Enemy : Entity
     public float Damage { get => damageAmount; set => damageAmount = value; }
     [SerializeField] protected State atackEffect;
     [SerializeField] protected bool canKnockbackPlayer;
+    [Range(0, 360)]
     [SerializeField] private float knockbackAngle;
     [SerializeField] private float knockbackDuration;
     [SerializeField] private float knockBackForce;
@@ -178,7 +179,8 @@ public abstract class Enemy : Entity
                 -entity.transform.InverseTransformPoint
                 (
                     entity.GetPosition() + 
-                    (MathUtils.GetVectorFromAngle(-knockbackAngle)
+                    //(MathUtils.GetVectorFromAngle(-knockbackAngle)
+                    (MathUtils.GetVectorFromAngle(knockbackAngle + 180)
                     ))
             );
     }

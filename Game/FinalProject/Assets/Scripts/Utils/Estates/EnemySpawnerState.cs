@@ -16,18 +16,11 @@ public class EnemySpawnerState : State
         {
             hostEnemy = (Enemy) manager.hostEntity;
             var probabilitySpawner = ScenesManagers.FindObjectOfType<ProbabilitySpawner>();
-            var probabilitySpawns = probabilitySpawner.ProbabilitySpawns;
-            var spawns = probabilitySpawns.FindAll(p => p.gameObject.GetComponent<Enemy>());
-            
-            List<Enemy> enemies = new List<Enemy>();
-            spawns.ForEach(s => enemies.Add(s.gameObject.GetComponent<Enemy>()));
-            enemy = enemies.Find(e => e.enemyName == hostEnemy.enemyName);
-
-            positions = spawns.Find(s => s.gameObject == enemy.gameObject).positions;
-
-            var newSpawns = new ProbabilitySpawn(enemy.gameObject, positions, 100, minQuantity, maxQuantity);
-
-            probabilitySpawner.Spawn(newSpawns);
+            var probabilitySpawn = probabilitySpawner.GetProbabilitySpawnFrom(hostEnemy.gameObject);
+            //var spawn = probabilitySpawner.ProbabilitySpawns.Find(p => p == probabilitySpawn);
+            var newSpawn = new ProbabilitySpawn(hostEnemy.gameObject, probabilitySpawn.positions, 100, minQuantity, maxQuantity);
+            //Debug.Log(nwSpwns.gameObject);
+            probabilitySpawner.Spawn(newSpawn);
         }
         catch (System.Exception e)
         {

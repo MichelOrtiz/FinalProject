@@ -89,7 +89,7 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
         ShootProjectile(from, to, colliderTag);
         projectile.MaxShotDistance = Vector2.Distance(from, to);
     }
-
+    
     [Obsolete("maybe delete later idk")]
     public void ShotProjectile(Transform from, Vector3 to)
     {
