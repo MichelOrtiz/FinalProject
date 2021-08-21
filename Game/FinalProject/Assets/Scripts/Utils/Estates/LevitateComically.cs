@@ -23,6 +23,7 @@ public class LevitateComically : State
     {
         if (currentTime >= duration)
         {
+            currentTime = 0;
             StopAffect();
         }
         else
