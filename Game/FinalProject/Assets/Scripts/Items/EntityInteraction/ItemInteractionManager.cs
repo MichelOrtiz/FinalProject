@@ -57,8 +57,17 @@ public class ItemInteractionManager : MonoBehaviour
             if (index <= states.Count - 1 || (index == 0 ))
             {
                 currentState = states[index];
-                currentState = entity.statesManager.AddState(currentState);
-                currentState.StoppedAffect += UpdateCurrentState;
+
+                if (currentState == null)
+                {
+                    entity.DestroyEntity();
+                }
+                else
+                {
+                    currentState = entity.statesManager.AddState(currentState);
+                    currentState.StoppedAffect += UpdateCurrentState;
+                }
+
             }
             else
             {

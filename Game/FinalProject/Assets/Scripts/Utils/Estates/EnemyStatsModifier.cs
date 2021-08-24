@@ -4,6 +4,8 @@ using System;
 [CreateAssetMenu(fileName="New EnemyStatsModifier", menuName = "States/new EnemyStatsModifier")]
 public class EnemyStatsModifier : State
 {
+    [SerializeField] private bool hasTime;
+
     [Header("Speed")]
     [SerializeField] private float defaultSpeedMultiplier; 
     private float defaultSpeed;
@@ -24,6 +26,8 @@ public class EnemyStatsModifier : State
     [Header("Damage")]
     [SerializeField] private float damageMultiplier;
     private float defaultDamage;
+
+
 
 
     private Enemy enemy;
@@ -52,13 +56,16 @@ public class EnemyStatsModifier : State
 
     public override void Affect()
     {
-        if (currentTime > duration)
+        if (hasTime)
         {
-            StopAffect();
-        }
-        else
-        {
-            currentTime += Time.deltaTime;
+            if (currentTime > duration)
+            {
+                StopAffect();
+            }
+            else
+            {
+                currentTime += Time.deltaTime;
+            }
         }
     }
 

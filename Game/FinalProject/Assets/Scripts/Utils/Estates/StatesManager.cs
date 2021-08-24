@@ -32,6 +32,7 @@ public class StatesManager : MonoBehaviour
                 {
                     Debug.Log(gameObject + " manager cloned " + newState);
                     newState = Instantiate(newState);
+                    newState.onEffect = false;
                 }
 
 
@@ -52,6 +53,7 @@ public class StatesManager : MonoBehaviour
                 {
                     Debug.Log(gameObject + " manager cloned " + newState);
                     newState = Instantiate(newState);
+                    newState.onEffect = false;
                 }
 
                 enemy=newEnemy;
