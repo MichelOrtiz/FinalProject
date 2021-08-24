@@ -6,6 +6,8 @@ public class ItemInteractionManager : MonoBehaviour
     [SerializeField] private Entity entity;
     [SerializeField] private ItemInteraction itemInteraction;
 
+    [SerializeField] private List<ItemState> itemStates;
+
     private State currentState;
     private byte index;
     private List<State> states;
@@ -21,29 +23,16 @@ public class ItemInteractionManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (interacting)
-        {
-            if (!entity.statesManager.currentStates.Contains(currentState))
-            {
-                
-                entity.statesManager.AddState(currentState);
-            }
-        }
-    }
-
-
     public void Interact(Item item)
     {
         var itemState = itemInteraction.itemStates.Find(i => i.item == item);
         if (itemState != null)
         {
-            if (itemState.states != null)
+            if (itemState.states != null && itemState.states[0] != null)
             {
 
                 states = itemState.states;
-                interacting = true;
+                //interacting = true;
 
                 UpdateCurrentState();
             }
@@ -58,6 +47,7 @@ public class ItemInteractionManager : MonoBehaviour
 
     void UpdateCurrentState()
     {
+        Debug.Log("Update called: " + transform.parent.gameObject);
         if (states != null && states.Count > 0)
         {
             if (currentState != null)
@@ -67,17 +57,18 @@ public class ItemInteractionManager : MonoBehaviour
             if (index <= states.Count - 1 || (index == 0 ))
             {
                 currentState = states[index];
-                currentState.StoppedAffect += currentState_StoppedAffect;
+                currentState = entity.statesManager.AddState(currentState);
+                currentState.StoppedAffect += UpdateCurrentState;
             }
             else
             {
-                interacting = false;
+                //interacting = false;
             }
         }
     }
     
-    void currentState_StoppedAffect()
+    /*void currentState_StoppedAffect()
     {
         UpdateCurrentState();
-    }
+    }*/
 }

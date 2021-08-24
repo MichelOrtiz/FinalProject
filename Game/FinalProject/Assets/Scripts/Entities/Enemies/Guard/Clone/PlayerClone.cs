@@ -40,7 +40,7 @@ public abstract class PlayerClone : Enemy
         cloners.Enqueue( new Cloner { position = player.GetPosition(), rotation = player.transform.rotation, animation = GetAnimationState() }  );
         if (curTime > delay)
         {
-            // Takes a Cloner aut of the Queue, updating the currentCloner
+            // Takes a Cloner out of the Queue, updating the currentCloner
             currentCloner = (Cloner)cloners.Dequeue();
             CloneMovement();
             SetAnimation(currentCloner.animation);

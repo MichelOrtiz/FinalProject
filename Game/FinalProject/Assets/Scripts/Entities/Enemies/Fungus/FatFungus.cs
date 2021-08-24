@@ -3,8 +3,8 @@ using System.Collections.Generic;
 public class FatFungus : FatType
 {
     [Header("Self Additions")]
-    [SerializeField] private byte maxSpores;
-    private byte currentSpores;
+    public byte maxSpores;
+    public byte currentSpores;
     [SerializeField] private List<State> states;
     [SerializeField] private FollowerObject followerObject;
 

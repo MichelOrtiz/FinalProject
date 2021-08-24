@@ -58,6 +58,8 @@ public class Entity : MonoBehaviour
     public GroundChecker groundChecker;
     public CollisionHandler collisionHandler;
     public SomePhysics physics;
+
+    public Transform emotePos;
     #endregion
 
     protected virtual void collisionHandler_EnterContact(GameObject contact){}

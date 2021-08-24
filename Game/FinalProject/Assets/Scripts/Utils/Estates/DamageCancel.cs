@@ -54,7 +54,7 @@ public class DamageCancel : State
         {
             projectile = projectileShooter.Projectile;
             //projectileShooter.ProjectileTouchedPlayerHandler += StopAffect;
-
+            
             if (projectile.damage == projectile.StartDamage)
             {
                 projectileShooter.Projectile.damage = 0;

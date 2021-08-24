@@ -884,6 +884,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1713134920}
   collisionHandler: {fileID: 490977268}
   physics: {fileID: 1798551242}
+  emotePos: {fileID: 0}
   enemyType: 10
   enemyName: 17
   flipToPlayerIfSpotted: 1
@@ -967,7 +968,7 @@ Transform:
   - {fileID: 906266427}
   - {fileID: 1209782918}
   m_Father: {fileID: 0}
-  m_RootOrder: 83
+  m_RootOrder: 84
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &59616056
 GameObject:
@@ -1272,7 +1273,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 169735827528490330, guid: 6221fa8b9d620da43b70df133a128fa4, type: 3}
       propertyPath: m_RootOrder
-      value: 69
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 169735827528490330, guid: 6221fa8b9d620da43b70df133a128fa4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1831,8 +1832,9 @@ Transform:
   - {fileID: 875785702}
   - {fileID: 2046984901}
   - {fileID: 1098472414}
+  - {fileID: 311901390}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &123669087
 GameObject:
@@ -1916,6 +1918,55 @@ Transform:
   m_Father: {fileID: 2136063982}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &126958796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 126958797}
+  - component: {fileID: 126958798}
+  m_Layer: 10
+  m_Name: ItemInteraction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &126958797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126958796}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -15.729988, y: 0.1800003, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1190441060}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &126958798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126958796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48aa6f546a7185d46b48bf25516b637c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 1190441057}
+  itemInteraction: {fileID: 11400000, guid: 6c117513e7fb06844a58eb7e9f8ed9e8, type: 2}
+  itemStates:
+  - item: {fileID: 0}
+    states: []
+  interacting: 0
 --- !u!1 &127299107
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,7 +2289,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6363311133194938768, guid: 233a1e3f12e3fc54c925263a1c8d3999, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6363311133194938768, guid: 233a1e3f12e3fc54c925263a1c8d3999, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2290,6 +2341,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 233a1e3f12e3fc54c925263a1c8d3999, type: 3}
+--- !u!1 &195170195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195170196}
+  - component: {fileID: 195170197}
+  m_Layer: 10
+  m_Name: ItemInteraction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &195170196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195170195}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -223.319, y: -6.3389997, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1695399330}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &195170197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195170195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48aa6f546a7185d46b48bf25516b637c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 1695399327}
+  itemInteraction: {fileID: 11400000, guid: 8b4e52be4105a7e43babab801a3b8b88, type: 2}
+  itemStates: []
+  interacting: 0
 --- !u!1 &195747528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2444,7 +2542,7 @@ Transform:
   m_LocalScale: {x: 3.319046, y: 4.532921, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &219761981
 GameObject:
@@ -2488,7 +2586,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 86
+  m_RootOrder: 87
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &228553151
 GameObject:
@@ -2768,7 +2866,37 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &248827571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 248827572}
+  m_Layer: 9
+  m_Name: emotePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &248827572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248827571}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.014, y: 1.272, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 974802595}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &254048018
 GameObject:
@@ -3276,6 +3404,36 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.8, y: 2.8}
   m_Direction: 0
+--- !u!1 &311901389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 311901390}
+  m_Layer: 9
+  m_Name: emotePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &311901390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311901389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 121000441}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &314780984
 GameObject:
   m_ObjectHideFlags: 0
@@ -3420,7 +3578,7 @@ Transform:
   m_Children:
   - {fileID: 1669892911}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &321359101
 GameObject:
@@ -3776,6 +3934,7 @@ MonoBehaviour:
   groundChecker: {fileID: 2078304933}
   collisionHandler: {fileID: 688377881}
   physics: {fileID: 1988169740}
+  emotePos: {fileID: 0}
   enemyType: 5
   enemyName: 53
   flipToPlayerIfSpotted: 1
@@ -3850,7 +4009,7 @@ Transform:
   - {fileID: 1380032400}
   - {fileID: 1988169739}
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &340894935
 GameObject:
@@ -9169,6 +9328,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1590910894}
   collisionHandler: {fileID: 1309221161}
   physics: {fileID: 453501686}
+  emotePos: {fileID: 0}
   enemyType: 2
   enemyName: 57
   flipToPlayerIfSpotted: 1
@@ -9257,7 +9417,7 @@ Transform:
   - {fileID: 1373696067}
   - {fileID: 453501685}
   m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &368773682
 GameObject:
@@ -11553,7 +11713,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510934240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.04, y: -18.46, z: 0}
+  m_LocalPosition: {x: 202.11, y: -16.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 739394528}
@@ -16712,6 +16872,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1116014047}
   collisionHandler: {fileID: 364579923}
   physics: {fileID: 795664615}
+  emotePos: {fileID: 0}
   enemyType: 5
   enemyName: 12
   flipToPlayerIfSpotted: 0
@@ -16794,7 +16955,7 @@ Transform:
   - {fileID: 1065151248}
   - {fileID: 1954894107}
   m_Father: {fileID: 0}
-  m_RootOrder: 82
+  m_RootOrder: 83
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &551021961
 GameObject:
@@ -16940,6 +17101,7 @@ MonoBehaviour:
   groundChecker: {fileID: 650256278}
   collisionHandler: {fileID: 1858855629}
   physics: {fileID: 792567774}
+  emotePos: {fileID: 0}
   enemyType: 1
   enemyName: 26
   flipToPlayerIfSpotted: 1
@@ -17018,7 +17180,7 @@ Transform:
   - {fileID: 1979538279}
   - {fileID: 792567773}
   m_Father: {fileID: 0}
-  m_RootOrder: 39
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &552383569
 GameObject:
@@ -17452,7 +17614,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5753084710183935061, guid: c096e9991e263e64591c2121ac67063b, type: 3}
       propertyPath: m_RootOrder
-      value: 33
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 5753084710183935061, guid: c096e9991e263e64591c2121ac67063b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17950,6 +18112,7 @@ MonoBehaviour:
   groundChecker: {fileID: 774120027}
   collisionHandler: {fileID: 2085057517}
   physics: {fileID: 478375080}
+  emotePos: {fileID: 0}
   enemyType: 7
   enemyName: 14
   flipToPlayerIfSpotted: 0
@@ -17973,6 +18136,7 @@ MonoBehaviour:
   wishedItem: {fileID: 11400000, guid: 7cb96a285f4cd0241879c3c01a9c5681, type: 2}
   wishedItemIcon: {fileID: 907229603}
   maxSpores: 4
+  currentSpores: 0
   states:
   - {fileID: 11400000, guid: 7b8068372cac5b84fb38ac12e1dc36ce, type: 2}
   - {fileID: 11400000, guid: 2cf0854124cfdf2479b31bd8997f4f79, type: 2}
@@ -18033,7 +18197,7 @@ Transform:
   - {fileID: 478375081}
   - {fileID: 907229605}
   m_Father: {fileID: 0}
-  m_RootOrder: 81
+  m_RootOrder: 82
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &611815977
 GameObject:
@@ -18205,7 +18369,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 66
+  m_RootOrder: 67
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &617107093
 MonoBehaviour:
@@ -18269,7 +18433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 884248132953188836, guid: c8227177e6ab4c64ab7ea1680c911fdf, type: 3}
       propertyPath: m_RootOrder
-      value: 46
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 884248132953188836, guid: c8227177e6ab4c64ab7ea1680c911fdf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18831,7 +18995,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2197297656629908548, guid: e54317c708310064d810bad0dc266d25, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2197297656629908548, guid: e54317c708310064d810bad0dc266d25, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18899,7 +19063,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 672203435031506040, guid: f5c8ea2754b4f174a929d5bb9faf3086, type: 3}
       propertyPath: m_RootOrder
-      value: 63
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 672203435031506040, guid: f5c8ea2754b4f174a929d5bb9faf3086, type: 3}
       propertyPath: m_LocalScale.z
@@ -19556,7 +19720,7 @@ Transform:
   - {fileID: 257084521}
   - {fileID: 510934241}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &745532844
 GameObject:
@@ -19650,7 +19814,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &748345290
 GameObject:
@@ -19776,6 +19940,7 @@ MonoBehaviour:
   groundChecker: {fileID: 398246918}
   collisionHandler: {fileID: 2053916378}
   physics: {fileID: 2023785683}
+  emotePos: {fileID: 0}
   enemyType: 5
   enemyName: 56
   flipToPlayerIfSpotted: 0
@@ -19857,7 +20022,7 @@ Transform:
   - {fileID: 1035577710}
   - {fileID: 2023785682}
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &762997278
 GameObject:
@@ -19921,6 +20086,7 @@ MonoBehaviour:
   groundChecker: {fileID: 599500495}
   collisionHandler: {fileID: 1251747779}
   physics: {fileID: 2133195329}
+  emotePos: {fileID: 0}
   enemyType: 6
   enemyName: 22
   flipToPlayerIfSpotted: 1
@@ -19997,7 +20163,7 @@ Transform:
   - {fileID: 2058426767}
   - {fileID: 2133195328}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &763189243
 GameObject:
@@ -45582,7 +45748,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4289093296609766913, guid: c76882f1d3d324f4eb1200ee9383f16a, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4289093296609766913, guid: c76882f1d3d324f4eb1200ee9383f16a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -45696,6 +45862,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1793001925}
   collisionHandler: {fileID: 825201807}
   physics: {fileID: 273693854}
+  emotePos: {fileID: 0}
   enemyType: 13
   enemyName: 3
   flipToPlayerIfSpotted: 1
@@ -45774,7 +45941,7 @@ Transform:
   - {fileID: 273693853}
   - {fileID: 1830321107}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &847739509
 GameObject:
@@ -46019,7 +46186,7 @@ Transform:
   m_LocalScale: {x: 3.319046, y: 4.532921, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &862761094
 GameObject:
@@ -112201,6 +112368,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1895146358}
   collisionHandler: {fileID: 1343679553}
   physics: {fileID: 1731319097}
+  emotePos: {fileID: 0}
   enemyType: 0
   enemyName: 59
   flipToPlayerIfSpotted: 1
@@ -112276,7 +112444,7 @@ Transform:
   - {fileID: 1390036197}
   - {fileID: 1731319096}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &873546536
 GameObject:
@@ -112392,7 +112560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3339866858326962276, guid: 3d5f2d893cf2a89449da9ec45261f180, type: 3}
       propertyPath: m_RootOrder
-      value: 27
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 3339866858326962276, guid: 3d5f2d893cf2a89449da9ec45261f180, type: 3}
       propertyPath: m_LocalPosition.x
@@ -112547,7 +112715,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &907229603
 GameObject:
@@ -112759,7 +112927,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4420632871708670657, guid: 61239186c021cdc4390927055d0358d8, type: 3}
       propertyPath: m_RootOrder
-      value: 64
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 4420632871708670657, guid: 61239186c021cdc4390927055d0358d8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -113421,6 +113589,7 @@ MonoBehaviour:
   groundChecker: {fileID: 732317803}
   collisionHandler: {fileID: 1360121933}
   physics: {fileID: 819193946}
+  emotePos: {fileID: 248827572}
   enemyType: 9
   enemyName: 41
   flipToPlayerIfSpotted: 0
@@ -113449,7 +113618,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974802591}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -108.91, y: -17.389807, z: 0}
+  m_LocalPosition: {x: -110.4, y: -17.389807, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 553996231}
@@ -113459,8 +113628,9 @@ Transform:
   - {fileID: 482293014}
   - {fileID: 819193945}
   - {fileID: 1268970907}
+  - {fileID: 248827572}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &979921861
 GameObject:
@@ -113537,6 +113707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: 1496937096}
   itemInteraction: {fileID: 11400000, guid: 5df912812aa80234093f2b3f0a93281a, type: 2}
+  itemStates: []
   interacting: 0
 --- !u!1 &980331448
 GameObject:
@@ -113888,6 +114059,7 @@ MonoBehaviour:
   groundChecker: {fileID: 649322053}
   collisionHandler: {fileID: 1162235971}
   physics: {fileID: 1054579334}
+  emotePos: {fileID: 0}
   enemyType: 3
   enemyName: 29
   flipToPlayerIfSpotted: 0
@@ -113965,7 +114137,7 @@ Transform:
   - {fileID: 415652853}
   - {fileID: 1054579333}
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &998217632
 GameObject:
@@ -114543,6 +114715,7 @@ MonoBehaviour:
   groundChecker: {fileID: 388655527}
   collisionHandler: {fileID: 595592508}
   physics: {fileID: 1729143938}
+  emotePos: {fileID: 0}
   enemyType: 15
   enemyName: 2
   flipToPlayerIfSpotted: 0
@@ -114622,7 +114795,7 @@ Transform:
   - {fileID: 1729143937}
   - {fileID: 301949460}
   m_Father: {fileID: 0}
-  m_RootOrder: 76
+  m_RootOrder: 77
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1048793960
 GameObject:
@@ -114692,7 +114865,7 @@ Transform:
   - {fileID: 667654078195729326}
   - {fileID: 1811570534}
   m_Father: {fileID: 0}
-  m_RootOrder: 45
+  m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1049194329
 Rigidbody2D:
@@ -114758,6 +114931,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1745587107}
   collisionHandler: {fileID: 692870577}
   physics: {fileID: 1811570535}
+  emotePos: {fileID: 0}
   enemyType: 0
   enemyName: 27
   flipToPlayerIfSpotted: 0
@@ -115016,7 +115190,7 @@ Transform:
   - {fileID: 1972969530}
   - {fileID: 39496497}
   m_Father: {fileID: 0}
-  m_RootOrder: 72
+  m_RootOrder: 73
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1065151246
 GameObject:
@@ -115532,6 +115706,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1251993974}
   collisionHandler: {fileID: 1383672475}
   physics: {fileID: 1307545789}
+  emotePos: {fileID: 0}
   enemyType: 3
   enemyName: 25
   flipToPlayerIfSpotted: 0
@@ -115610,7 +115785,7 @@ Transform:
   - {fileID: 333636301}
   - {fileID: 1307545788}
   m_Father: {fileID: 0}
-  m_RootOrder: 55
+  m_RootOrder: 56
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1121140002
 GameObject:
@@ -116618,6 +116793,7 @@ MonoBehaviour:
   groundChecker: {fileID: 575190474}
   collisionHandler: {fileID: 1189964352}
   physics: {fileID: 1398644532}
+  emotePos: {fileID: 0}
   enemyType: 14
   enemyName: 23
   flipToPlayerIfSpotted: 1
@@ -116635,7 +116811,7 @@ MonoBehaviour:
   enemyMovement: {fileID: 1023689543}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
-  itemInteractionManager: {fileID: 0}
+  itemInteractionManager: {fileID: 126958798}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
 --- !u!114 &1190441058
@@ -116691,8 +116867,9 @@ Transform:
   - {fileID: 1814553858}
   - {fileID: 1023689542}
   - {fileID: 1398644531}
+  - {fileID: 126958797}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1190576498
 GameObject:
@@ -117276,7 +117453,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5830214563889771408, guid: a65e48a5d7601f246a68fcc1397c02f6, type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 5830214563889771408, guid: a65e48a5d7601f246a68fcc1397c02f6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -117890,6 +118067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: 974802594}
   itemInteraction: {fileID: 11400000, guid: 6e87954ce5ff3d34780c6070e0090108, type: 2}
+  itemStates: []
   interacting: 0
 --- !u!4 &1268970907
 Transform:
@@ -117997,6 +118175,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1315423385}
   collisionHandler: {fileID: 279920191}
   physics: {fileID: 1136743373}
+  emotePos: {fileID: 0}
   enemyType: 6
   enemyName: 50
   flipToPlayerIfSpotted: 1
@@ -118073,7 +118252,7 @@ Transform:
   - {fileID: 2143134585}
   - {fileID: 1136743374}
   m_Father: {fileID: 0}
-  m_RootOrder: 49
+  m_RootOrder: 50
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1274758470
 GameObject:
@@ -118303,7 +118482,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2419702810618214027, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2419702810618214027, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -118413,6 +118592,7 @@ MonoBehaviour:
   groundChecker: {fileID: 0}
   collisionHandler: {fileID: 1946162823}
   physics: {fileID: 0}
+  emotePos: {fileID: 0}
   enemyType: 0
   enemyName: 0
   flipToPlayerIfSpotted: 1
@@ -118492,7 +118672,7 @@ Transform:
   - {fileID: 2086812076}
   - {fileID: 1204913690}
   m_Father: {fileID: 0}
-  m_RootOrder: 53
+  m_RootOrder: 54
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1304836023
 GameObject:
@@ -118945,6 +119125,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1329736773}
   collisionHandler: {fileID: 2121983814}
   physics: {fileID: 1895467913}
+  emotePos: {fileID: 0}
   enemyType: 9
   enemyName: 6
   flipToPlayerIfSpotted: 0
@@ -119019,7 +119200,7 @@ Transform:
   - {fileID: 1791700395}
   - {fileID: 1895467912}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1322922686
 GameObject:
@@ -119083,6 +119264,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1511382474}
   collisionHandler: {fileID: 1000370165}
   physics: {fileID: 921953388}
+  emotePos: {fileID: 0}
   enemyType: 0
   enemyName: 0
   flipToPlayerIfSpotted: 0
@@ -119163,7 +119345,7 @@ Transform:
   - {fileID: 2132951247}
   - {fileID: 921953389}
   m_Father: {fileID: 0}
-  m_RootOrder: 74
+  m_RootOrder: 75
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1324498890
 PrefabInstance:
@@ -119174,7 +119356,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9212552982142821840, guid: a63fac9550125274eb7121f7fa09c6c8, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9212552982142821840, guid: a63fac9550125274eb7121f7fa09c6c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -119429,6 +119611,7 @@ MonoBehaviour:
   groundChecker: {fileID: 0}
   collisionHandler: {fileID: 1985520698}
   physics: {fileID: 1969694411}
+  emotePos: {fileID: 0}
   enemyType: 8
   enemyName: 4
   flipToPlayerIfSpotted: 0
@@ -119505,7 +119688,7 @@ Transform:
   - {fileID: 1439455947}
   - {fileID: 1969694410}
   m_Father: {fileID: 0}
-  m_RootOrder: 41
+  m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1343439246
 GameObject:
@@ -120015,7 +120198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365137060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.64, y: -23.95, z: 0}
+  m_LocalPosition: {x: -26.36, y: -23.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 739394528}
@@ -120532,6 +120715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: 1632673638}
   itemInteraction: {fileID: 11400000, guid: cbebe0ee074a9de438b64e05d190b2ff, type: 2}
+  itemStates: []
   interacting: 0
 --- !u!1 &1383672474
 GameObject:
@@ -120718,6 +120902,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1018663882}
   collisionHandler: {fileID: 1369639055}
   physics: {fileID: 1767205519}
+  emotePos: {fileID: 0}
   enemyType: 2
   enemyName: 24
   flipToPlayerIfSpotted: 0
@@ -120812,7 +120997,7 @@ Transform:
   - {fileID: 1335882390}
   - {fileID: 1767205518}
   m_Father: {fileID: 0}
-  m_RootOrder: 47
+  m_RootOrder: 48
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1394591056
 GameObject:
@@ -120876,6 +121061,7 @@ MonoBehaviour:
   groundChecker: {fileID: 551021962}
   collisionHandler: {fileID: 1367913811}
   physics: {fileID: 766594117}
+  emotePos: {fileID: 0}
   enemyType: 4
   enemyName: 58
   flipToPlayerIfSpotted: 0
@@ -120958,7 +121144,7 @@ Transform:
   - {fileID: 1689469220}
   - {fileID: 766594118}
   m_Father: {fileID: 0}
-  m_RootOrder: 75
+  m_RootOrder: 76
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1398644530
 GameObject:
@@ -121102,6 +121288,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1592012545}
   collisionHandler: {fileID: 1412155626}
   physics: {fileID: 1676173075}
+  emotePos: {fileID: 0}
   enemyType: 15
   enemyName: 1
   flipToPlayerIfSpotted: 0
@@ -121178,7 +121365,7 @@ Transform:
   - {fileID: 1676173074}
   - {fileID: 1892789092}
   m_Father: {fileID: 0}
-  m_RootOrder: 77
+  m_RootOrder: 78
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1412155625
 GameObject:
@@ -121441,7 +121628,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3995145655655088905, guid: 5bee8de31f401bc4e802ff5391818d67, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3995145655655088905, guid: 5bee8de31f401bc4e802ff5391818d67, type: 3}
       propertyPath: m_LocalPosition.x
@@ -121555,6 +121742,7 @@ MonoBehaviour:
   groundChecker: {fileID: 645619522}
   collisionHandler: {fileID: 1207569706}
   physics: {fileID: 1426324024}
+  emotePos: {fileID: 0}
   enemyType: 13
   enemyName: 5
   flipToPlayerIfSpotted: 0
@@ -121630,7 +121818,7 @@ Transform:
   - {fileID: 2078024745}
   - {fileID: 1426324023}
   m_Father: {fileID: 0}
-  m_RootOrder: 37
+  m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1439455945
 GameObject:
@@ -121851,7 +122039,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5569523307059912474, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
       propertyPath: m_RootOrder
-      value: 31
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 5569523307059912474, guid: 04a4ad884390f9447a0ae8f153d2385e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -121980,7 +122168,7 @@ Transform:
   - {fileID: 364737276}
   - {fileID: 1244440495}
   m_Father: {fileID: 0}
-  m_RootOrder: 68
+  m_RootOrder: 69
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1472481332
 PrefabInstance:
@@ -122023,7 +122211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3277886409155722088, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3277886409155722088, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -122602,7 +122790,7 @@ Transform:
   - {fileID: 980119763}
   - {fileID: 1315416062}
   m_Father: {fileID: 0}
-  m_RootOrder: 51
+  m_RootOrder: 52
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1496937096
 MonoBehaviour:
@@ -122647,6 +122835,7 @@ MonoBehaviour:
   groundChecker: {fileID: 230571631}
   collisionHandler: {fileID: 1155240594}
   physics: {fileID: 1041089056}
+  emotePos: {fileID: 0}
   enemyType: 6
   enemyName: 38
   flipToPlayerIfSpotted: 0
@@ -122696,7 +122885,7 @@ Transform:
   m_Children:
   - {fileID: 1923045830}
   m_Father: {fileID: 0}
-  m_RootOrder: 84
+  m_RootOrder: 85
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1510494596 stripped
 Transform:
@@ -122900,7 +123089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5327901373906169802, guid: 22101839261de0f4fa41d280f084985d, type: 3}
       propertyPath: m_RootOrder
-      value: 29
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5327901373906169802, guid: 22101839261de0f4fa41d280f084985d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -123162,6 +123351,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1174354653}
   collisionHandler: {fileID: 1149500055}
   physics: {fileID: 821658980}
+  emotePos: {fileID: 0}
   enemyType: 11
   enemyName: 48
   flipToPlayerIfSpotted: 0
@@ -123242,7 +123432,7 @@ Transform:
   - {fileID: 569282849}
   - {fileID: 821658981}
   m_Father: {fileID: 0}
-  m_RootOrder: 61
+  m_RootOrder: 62
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1552466623
 GameObject:
@@ -123566,7 +123756,7 @@ Transform:
   - {fileID: 13535636}
   - {fileID: 195747529}
   m_Father: {fileID: 0}
-  m_RootOrder: 79
+  m_RootOrder: 80
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1581989612
 GameObject:
@@ -128790,6 +128980,7 @@ MonoBehaviour:
   groundChecker: {fileID: 2092883369}
   collisionHandler: {fileID: 353676297}
   physics: {fileID: 829920456}
+  emotePos: {fileID: 0}
   enemyType: 6
   enemyName: 55
   flipToPlayerIfSpotted: 0
@@ -128870,7 +129061,7 @@ Transform:
   - {fileID: 365703589}
   - {fileID: 1382299745}
   m_Father: {fileID: 0}
-  m_RootOrder: 59
+  m_RootOrder: 60
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1639945930
 GameObject:
@@ -129173,6 +129364,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1056737020}
   collisionHandler: {fileID: 245621072}
   physics: {fileID: 1135235671}
+  emotePos: {fileID: 0}
   enemyType: 11
   enemyName: 54
   flipToPlayerIfSpotted: 1
@@ -129252,7 +129444,7 @@ Transform:
   - {fileID: 1767301391}
   - {fileID: 1135235672}
   m_Father: {fileID: 0}
-  m_RootOrder: 57
+  m_RootOrder: 58
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1689469218
 GameObject:
@@ -129552,6 +129744,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1442327385}
   collisionHandler: {fileID: 127299108}
   physics: {fileID: 2084229998}
+  emotePos: {fileID: 0}
   enemyType: 7
   enemyName: 39
   flipToPlayerIfSpotted: 0
@@ -129569,10 +129762,11 @@ MonoBehaviour:
   enemyMovement: {fileID: 611815978}
   projectileShooter: {fileID: 0}
   laserShooter: {fileID: 0}
-  itemInteractionManager: {fileID: 0}
+  itemInteractionManager: {fileID: 195170197}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   maxSpores: 4
+  currentSpores: 0
   states:
   - {fileID: 11400000, guid: 7b8068372cac5b84fb38ac12e1dc36ce, type: 2}
   - {fileID: 11400000, guid: 2cf0854124cfdf2479b31bd8997f4f79, type: 2}
@@ -129631,8 +129825,9 @@ Transform:
   - {fileID: 352469949}
   - {fileID: 611815979}
   - {fileID: 2084229999}
+  - {fileID: 195170196}
   m_Father: {fileID: 0}
-  m_RootOrder: 80
+  m_RootOrder: 81
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1696396841
 GameObject:
@@ -129899,6 +130094,63 @@ MonoBehaviour:
   obstacleViewDistance: 2
   facingDirection: 
   entity: {fileID: 0}
+--- !u!1001 &1716084366
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8346952390132706657, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_Name
+      value: TestEmote
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -86.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -27.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874798386483413412, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e9b0dfe6c1351954cbd398d593caa548, type: 3}
 --- !u!1 &1718513373
 GameObject:
   m_ObjectHideFlags: 0
@@ -131821,6 +132073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: 842914811}
   itemInteraction: {fileID: 11400000, guid: 6a4fb7fe9fde3a44db43d50726c60627, type: 2}
+  itemStates: []
   interacting: 0
 --- !u!4 &1830321107
 Transform:
@@ -132004,6 +132257,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1283517911}
   collisionHandler: {fileID: 839183443}
   physics: {fileID: 795621698}
+  emotePos: {fileID: 0}
   enemyType: 2
   enemyName: 31
   flipToPlayerIfSpotted: 1
@@ -132086,7 +132340,7 @@ Transform:
   - {fileID: 1363372943}
   - {fileID: 795621699}
   m_Father: {fileID: 0}
-  m_RootOrder: 71
+  m_RootOrder: 72
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1858855628
 GameObject:
@@ -132179,15 +132433,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_RootOrder
-      value: 67
+      value: 68
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -93.7
+      value: 118.8
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -17.03
+      value: -9.6
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -132354,7 +132608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8647063263483198510, guid: fd6e9c17393599d438c0c1e0f8c07cbc, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 8647063263483198510, guid: fd6e9c17393599d438c0c1e0f8c07cbc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -132827,6 +133081,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1552466624}
   collisionHandler: {fileID: 495276905}
   physics: {fileID: 918774443}
+  emotePos: {fileID: 0}
   enemyType: 0
   enemyName: 0
   flipToPlayerIfSpotted: 1
@@ -132909,7 +133164,7 @@ Transform:
   - {fileID: 1837773503}
   - {fileID: 918774444}
   m_Father: {fileID: 0}
-  m_RootOrder: 73
+  m_RootOrder: 74
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1917535839
 GameObject:
@@ -133116,6 +133371,7 @@ MonoBehaviour:
   groundChecker: {fileID: 470818692}
   collisionHandler: {fileID: 148131043}
   physics: {fileID: 1286013861}
+  emotePos: {fileID: 0}
   enemyType: 12
   enemyName: 49
   flipToPlayerIfSpotted: 0
@@ -133237,6 +133493,7 @@ MonoBehaviour:
   groundChecker: {fileID: 470818692}
   collisionHandler: {fileID: 148131043}
   physics: {fileID: 1286013861}
+  emotePos: {fileID: 0}
   enemyType: 12
   enemyName: 49
   flipToPlayerIfSpotted: 0
@@ -134587,6 +134844,7 @@ MonoBehaviour:
   groundChecker: {fileID: 643145347}
   collisionHandler: {fileID: 1091434638}
   physics: {fileID: 496577497}
+  emotePos: {fileID: 0}
   enemyType: 1
   enemyName: 28
   flipToPlayerIfSpotted: 0
@@ -134667,7 +134925,7 @@ Transform:
   - {fileID: 1314198394}
   - {fileID: 496577496}
   m_Father: {fileID: 0}
-  m_RootOrder: 43
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2029390241 stripped
 GameObject:
@@ -134948,7 +135206,7 @@ Transform:
   - {fileID: 547372950}
   - {fileID: 81120198}
   m_Father: {fileID: 0}
-  m_RootOrder: 78
+  m_RootOrder: 79
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2045357029
 MonoBehaviour:
@@ -134993,6 +135251,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1940509651}
   collisionHandler: {fileID: 834372324}
   physics: {fileID: 81120199}
+  emotePos: {fileID: 0}
   enemyType: 0
   enemyName: 32
   flipToPlayerIfSpotted: 0
@@ -135480,7 +135739,7 @@ Transform:
   m_Children:
   - {fileID: 30689682}
   m_Father: {fileID: 0}
-  m_RootOrder: 70
+  m_RootOrder: 71
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2065620053
 GameObject:
@@ -136619,6 +136878,7 @@ MonoBehaviour:
   groundChecker: {fileID: 123669088}
   collisionHandler: {fileID: 679701426}
   physics: {fileID: 1462581250}
+  emotePos: {fileID: 0}
   enemyType: 9
   enemyName: 52
   flipToPlayerIfSpotted: 0
@@ -136697,7 +136957,7 @@ Transform:
   - {fileID: 2104799254}
   - {fileID: 1462581249}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2138704591
 PrefabInstance:
@@ -136708,7 +136968,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8820404769766784067, guid: 1a512fc1d9023bc46b5be4a240e6e8fa, type: 3}
       propertyPath: m_RootOrder
-      value: 52
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 8820404769766784067, guid: 1a512fc1d9023bc46b5be4a240e6e8fa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -136901,7 +137161,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 525320775802754293, guid: 61b3986ac857b8444bd5d4851c05dd90, type: 3}
       propertyPath: m_RootOrder
-      value: 44
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 525320775802754293, guid: 61b3986ac857b8444bd5d4851c05dd90, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137013,7 +137273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8134830070469397129, guid: 39e8c30868a841346bae03b334d5a5a3, type: 3}
       propertyPath: m_RootOrder
-      value: 35
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 8134830070469397129, guid: 39e8c30868a841346bae03b334d5a5a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137095,7 +137355,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1246913696416090793, guid: eca15ddc27986e04ab593eb6807a877a, type: 3}
       propertyPath: m_RootOrder
-      value: 50
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 1246913696416090793, guid: eca15ddc27986e04ab593eb6807a877a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137212,6 +137472,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1472805631517898187}
   collisionHandler: {fileID: 6548454694524123008}
   physics: {fileID: 1381762537}
+  emotePos: {fileID: 0}
   enemyType: 14
   enemyName: 46
   flipToPlayerIfSpotted: 0
@@ -137241,7 +137502,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2020415388813460389, guid: e15255c4ec403f94f89bbcf28e003157, type: 3}
       propertyPath: m_RootOrder
-      value: 48
+      value: 49
       objectReference: {fileID: 0}
     - target: {fileID: 2020415388813460389, guid: e15255c4ec403f94f89bbcf28e003157, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137298,7 +137559,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3603454702956225647, guid: d97de8f0db4e11d4bb7d666ec4a84827, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3603454702956225647, guid: d97de8f0db4e11d4bb7d666ec4a84827, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137430,7 +137691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3441190773335274254, guid: 4c7735d786f89584ea9699f987aea1b1, type: 3}
       propertyPath: m_RootOrder
-      value: 54
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 3441190773335274254, guid: 4c7735d786f89584ea9699f987aea1b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137495,7 +137756,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 45e21fa2e01323c42afb0d08cbc02655, type: 2}
     - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
       propertyPath: m_RootOrder
-      value: 85
+      value: 86
       objectReference: {fileID: 0}
     - target: {fileID: 4835473484863440722, guid: 355f7de7916343b409e740374562da72, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137605,7 +137866,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3816554537578472875, guid: a1f45c0aeec556643a350302436e3293, type: 3}
       propertyPath: m_RootOrder
-      value: 56
+      value: 57
       objectReference: {fileID: 0}
     - target: {fileID: 3816554537578472875, guid: a1f45c0aeec556643a350302436e3293, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137671,7 +137932,7 @@ Transform:
   - {fileID: 4597984615443496728}
   - {fileID: 1381762536}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4112814276981106364
 Animator:
@@ -137709,7 +137970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4516865211306719720, guid: 1b111d88a4fbcfc44b844be2088c5829, type: 3}
       propertyPath: m_RootOrder
-      value: 62
+      value: 63
       objectReference: {fileID: 0}
     - target: {fileID: 4516865211306719720, guid: 1b111d88a4fbcfc44b844be2088c5829, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137916,7 +138177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5032802619721702371, guid: 2486618d62b2ac64ba4a20b2d7db0b6d, type: 3}
       propertyPath: m_RootOrder
-      value: 60
+      value: 61
       objectReference: {fileID: 0}
     - target: {fileID: 5032802619721702371, guid: 2486618d62b2ac64ba4a20b2d7db0b6d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -137977,7 +138238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5308470135481348726, guid: f3b4946fb4ec48942962c6de9b09cbfe, type: 3}
       propertyPath: m_RootOrder
-      value: 58
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 5308470135481348726, guid: f3b4946fb4ec48942962c6de9b09cbfe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -138030,7 +138291,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5689324310269302981, guid: d9e8753a9b9a7c14b86744fabdb6f608, type: 3}
       propertyPath: m_RootOrder
-      value: 42
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: 5689324310269302981, guid: d9e8753a9b9a7c14b86744fabdb6f608, type: 3}
       propertyPath: m_LocalPosition.x
@@ -138265,7 +138526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7371075741021416791, guid: 24fc3000d99806a45b10141c2e43b3b7, type: 3}
       propertyPath: m_RootOrder
-      value: 36
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 7371075741021416791, guid: 24fc3000d99806a45b10141c2e43b3b7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -138362,7 +138623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8777826609967360629, guid: ed5e5e5d902c89141aac6caec4834ccd, type: 3}
       propertyPath: m_RootOrder
-      value: 65
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 8777826609967360629, guid: ed5e5e5d902c89141aac6caec4834ccd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -138492,7 +138753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9004599920161459144, guid: 1e11da130e9b6b34a8a32b5fdad037b2, type: 3}
       propertyPath: m_RootOrder
-      value: 38
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 9004599920161459144, guid: 1e11da130e9b6b34a8a32b5fdad037b2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -138545,7 +138806,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9202972323174842262, guid: 9692ca850eb6cc347be57c77c8b51d69, type: 3}
       propertyPath: m_RootOrder
-      value: 40
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 9202972323174842262, guid: 9692ca850eb6cc347be57c77c8b51d69, type: 3}
       propertyPath: m_LocalPosition.x
