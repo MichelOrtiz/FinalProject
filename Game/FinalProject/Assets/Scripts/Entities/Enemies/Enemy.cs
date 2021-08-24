@@ -49,6 +49,7 @@ public abstract class Enemy : Entity
         Attack();
     }
     protected virtual void eCollisionHandler_StoppedTouchingPlayer(){}
+    public void ForceAttack() { Attack(); }
     #endregion
 
     #region Unity stuff
