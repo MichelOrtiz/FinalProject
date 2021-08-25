@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5072332843819862247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3427463062028271457}
+  - component: {fileID: 5555853579886415482}
+  m_Layer: 0
+  m_Name: DragonInteraction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3427463062028271457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5072332843819862247}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5555853579886415482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5072332843819862247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48aa6f546a7185d46b48bf25516b637c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  itemInteraction: {fileID: 0}
+  itemStates:
+  - item: {fileID: 11400000, guid: 2a27c55b7fa682a4da73032f4f452688, type: 2}
+    states:
+    - {fileID: 0}
+  - item: {fileID: 11400000, guid: 18792b94fb519064fb3973c52345ae5a, type: 2}
+    states:
+    - {fileID: 11400000, guid: 3631de27b76f56249bc0b09c3d13897b, type: 2}
+  - item: {fileID: 11400000, guid: 0333a5251ddbfdd4db5e20c10aa12593, type: 2}
+    states:
+    - {fileID: 11400000, guid: a6069412891e9274c997a9d667e42b3f, type: 2}
+  - item: {fileID: 11400000, guid: e57ca6afc035e7344b6ca88766abb04e, type: 2}
+    states:
+    - {fileID: 11400000, guid: bf6172abc431e2740b395a635185dd84, type: 2}
+  - item: {fileID: 11400000, guid: 1795efc6f4c679f47b4d6d0626c25f7b, type: 2}
+    states:
+    - {fileID: 0}
+  - item: {fileID: 11400000, guid: 641cb724f3339ff488333eff0a622e36, type: 2}
+    states:
+    - {fileID: 11400000, guid: 477394ec5b2d48042a692474c1fa11b8, type: 2}
+  - item: {fileID: 11400000, guid: 548a2dcf393afce4395b59c7566bd430, type: 2}
+    states:
+    - {fileID: 0}
+  interacting: 0

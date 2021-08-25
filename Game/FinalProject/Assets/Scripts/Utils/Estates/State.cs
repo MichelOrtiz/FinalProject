@@ -5,7 +5,7 @@ public abstract class State : ScriptableObject
     [SerializeField] protected StateNames name;
     [SerializeField] protected float duration;
     protected StatesManager manager;
-    public bool onEffect;
+    public bool onEffect = false;
     protected float currentTime;
 
     public Action StoppedAffect;
@@ -28,4 +28,9 @@ public abstract class State : ScriptableObject
         StoppedAffect?.Invoke();
     }
     
+  
+    void OnDestroy()
+    {
+        onEffect = false;
+    }
 }

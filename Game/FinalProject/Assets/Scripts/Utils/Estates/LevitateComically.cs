@@ -43,7 +43,10 @@ public class LevitateComically : State
 
     public override void StopAffect()
     {
-        //base.StopAffect();
-        manager.hostEntity.DestroyEntity();
+
+        manager.hostEntity.rigidbody2d.isKinematic = false;
+        manager.hostEntity.rigidbody2d.gravityScale = 1;
+        base.StopAffect();
+        //manager.hostEntity.DestroyEntity();
     }
 }

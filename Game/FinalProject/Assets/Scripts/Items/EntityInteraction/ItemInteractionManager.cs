@@ -25,7 +25,8 @@ public class ItemInteractionManager : MonoBehaviour
 
     public void Interact(Item item)
     {
-        var itemState = itemInteraction.itemStates.Find(i => i.item == item);
+        //var itemState = itemInteraction.itemStates.Find(i => i.item == item);
+        var itemState = itemStates.Find(i => i.item == item);
         if (itemState != null)
         {
             if (itemState.states != null && itemState.states[0] != null)
@@ -47,7 +48,6 @@ public class ItemInteractionManager : MonoBehaviour
 
     void UpdateCurrentState()
     {
-        Debug.Log("Update called: " + transform.parent.gameObject);
         if (states != null && states.Count > 0)
         {
             if (currentState != null)

@@ -13,6 +13,10 @@ public class EntityDestroyFx : MonoBehaviour
     public void StartDestroyFx(Entity entity)
     {
         var newEntity = entity;
+        /*if (newEntity == null)
+        {
+            newEntity = Instantiate(entity, )
+        }*/
         entityDestroyed.Setup(newEntity.transform.position, newEntity.transform.rotation, newEntity.transform.localScale, newEntity.GetComponentInChildren<SpriteRenderer>().sprite);
         Instantiate(entityDestroyed, newEntity.GetPosition(), newEntity.transform.rotation);
     }

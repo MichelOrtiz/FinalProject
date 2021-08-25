@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class MultipleStates : State
 {
     [SerializeField] private List<State> states;
+    private byte index;
     public override void StartAffect(StatesManager newManager)
     {
         base.StartAffect(newManager);
@@ -12,26 +13,36 @@ public class MultipleStates : State
         {
             foreach (var state in states)
             {
-                manager.hostEntity.statesManager.AddState(state);
+                var st = manager.hostEntity.statesManager.AddState(state);
+                st.StoppedAffect += state_StoppedAffect;
             }
         }
     }
 
     public override void Affect()
     {
-        if (currentTime > duration)
+        /*if (currentTime > duration)
         {
-            StopAffect();
+            //StopAffect();
         }
         else
         {
-            currentTime += Time.deltaTime;
-        }
+            //currentTime += Time.deltaTime;
+        }*/
     }
 
     public override void StopAffect()
     {
-
+//
         base.StopAffect();
+    }
+
+    void state_StoppedAffect()
+    {
+        // Stops this (multipleState) running after all its states have ended
+        if (++index >= states.Count)
+        {
+            StopAffect();
+        }
     }
 }

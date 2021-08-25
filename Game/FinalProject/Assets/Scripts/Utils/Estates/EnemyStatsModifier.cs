@@ -19,7 +19,14 @@ public class EnemyStatsModifier : State
 
     
     [Header("Field Of View")]
-    [SerializeField] private float newFovDistance;
+    [SerializeField] private float fovDistanceIncrease;
+    
+    enum FovIncrease
+    {
+        Add, Multiply
+    }
+    [SerializeField] private FovIncrease fovIncrease;
+
     private float defFovDistance;
 
     
@@ -48,7 +55,18 @@ public class EnemyStatsModifier : State
             enemy.EnemyMovement.DefaultSpeed *= defaultSpeedMultiplier;
             enemy.EnemyMovement.JumpForce *= jumpForceMultiplier;
             enemy.EnemyMovement.ChaseSpeed *= chaseSpeedMultiplier;
-            enemy.FieldOfView.ViewDistance = newFovDistance;
+
+            if (fovIncrease == FovIncrease.Add)
+            {
+                enemy.FieldOfView.ViewDistance += fovDistanceIncrease;
+            }
+            else
+            {
+                // might cause trouble 7_7
+                enemy.FieldOfView.ViewDistance *= fovDistanceIncrease;
+            }
+            
+            
             enemy.Damage *= damageMultiplier;
 
         }    
