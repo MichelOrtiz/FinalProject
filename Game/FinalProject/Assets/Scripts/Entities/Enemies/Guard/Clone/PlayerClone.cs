@@ -32,6 +32,12 @@ public abstract class PlayerClone : Enemy
     {
         base.Awake();
         cloners = new Queue();
+        itemInteractionManager.entity = this;
+    }
+
+    new void Start()
+    {
+        base.Start();
     }
     
     new void FixedUpdate()

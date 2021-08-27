@@ -72,7 +72,7 @@ public class Entity : MonoBehaviour
     protected void Start()
     {
         //facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
-        if (transform.eulerAngles.z != 0)
+        if (transform.rotation.z != 0)
         {
             facingDirection = transform.rotation.x == 0? RIGHT:LEFT;
         }
@@ -108,8 +108,18 @@ public class Entity : MonoBehaviour
 
     protected void Update()
     {
-        facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
+        //facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
         //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
+
+
+        if (transform.rotation.z != 0)
+        {
+            facingDirection = transform.rotation.x == -1? LEFT:RIGHT;
+        }
+        else
+        {
+            facingDirection = transform.rotation.y == -1? LEFT:RIGHT;
+        }
 
         if (groundChecker != null)
         {

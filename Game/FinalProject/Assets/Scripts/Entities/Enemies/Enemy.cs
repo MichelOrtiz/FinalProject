@@ -92,6 +92,8 @@ public abstract class Enemy : Entity
     {
         //Debug.DrawLine(GetPosition(), transform.TransformPoint((MathUtils.GetVectorFromAngle(knockbackAngle)).normalized));
         base.Update();
+
+
         if (isChasing && flipToPlayerIfSpotted && MathUtils.GetAbsXDistance(GetPosition(), player.GetPosition()) > 1f)
         {
             if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
@@ -165,25 +167,14 @@ public abstract class Enemy : Entity
     #region Effects on self or other
     protected virtual void KnockbackEntity(Entity entity)
     {
-        entity.Knockback
-            (
-                knockbackDuration, 
-                knockBackForce,
-                
-                facingDirection == entity.facingDirection ?
-                entity.transform.InverseTransformPoint
-                (
-                    entity.GetPosition() + 
-                    (MathUtils.GetVectorFromAngle(knockbackAngle)
-                    ))
-                    :
-                -entity.transform.InverseTransformPoint
-                (
-                    entity.GetPosition() + 
-                    //(MathUtils.GetVectorFromAngle(-knockbackAngle)
-                    (MathUtils.GetVectorFromAngle(knockbackAngle + 180)
-                    ))
-            );
+        Debug.Log(gameObject + " knock " + entity);
+        var entityPos = new Vector3(entity.GetPosition().x, entity.GetPosition().y);
+        var facingRight = entity.facingDirection == RIGHT;
+        var fixedDir = entity.GetPosition().x >= GetPosition().x ?
+                        (MathUtils.GetVectorFromAngle(facingRight? knockbackAngle : 180 - knockbackAngle)) :
+                        (MathUtils.GetVectorFromAngle(facingRight? 180 - knockbackAngle : knockbackAngle));
+        var direction =  entity.transform.InverseTransformPoint(entityPos + fixedDir);
+        entity.Knockback(knockbackDuration, knockBackForce, direction);
     }
 
     public void EnhanceValues(float multiplier)

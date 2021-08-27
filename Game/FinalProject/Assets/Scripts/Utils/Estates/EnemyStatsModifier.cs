@@ -21,20 +21,21 @@ public class EnemyStatsModifier : State
     [Header("Field Of View")]
     [SerializeField] private float fovDistanceIncrease;
     
-    enum FovIncrease
-    {
-        Add, Multiply
-    }
-    [SerializeField] private FovIncrease fovIncrease;
+    [SerializeField] private IncreaseType fovIncrease;
 
     private float defFovDistance;
 
     
     [Header("Damage")]
-    [SerializeField] private float damageMultiplier;
+    [SerializeField] private float damageValue;
     private float defaultDamage;
+    [SerializeField] private IncreaseType damageIncrease;
 
 
+    enum IncreaseType
+    {
+        Add, Multiply
+    }
 
 
     private Enemy enemy;
@@ -56,7 +57,7 @@ public class EnemyStatsModifier : State
             enemy.EnemyMovement.JumpForce *= jumpForceMultiplier;
             enemy.EnemyMovement.ChaseSpeed *= chaseSpeedMultiplier;
 
-            if (fovIncrease == FovIncrease.Add)
+            if (fovIncrease == IncreaseType.Add)
             {
                 enemy.FieldOfView.ViewDistance += fovDistanceIncrease;
             }
@@ -66,8 +67,14 @@ public class EnemyStatsModifier : State
                 enemy.FieldOfView.ViewDistance *= fovDistanceIncrease;
             }
             
-            
-            enemy.Damage *= damageMultiplier;
+            if (damageIncrease == IncreaseType.Add)
+            {
+                enemy.Damage += damageValue;
+            }
+            else
+            {
+                enemy.Damage *= damageValue; 
+            }
 
         }    
     }

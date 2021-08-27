@@ -16,7 +16,7 @@ public class EnemySpawnerState : State
         {
             hostEnemy = (Enemy) manager.hostEntity;
             var probabilitySpawner = ScenesManagers.FindObjectOfType<ProbabilitySpawner>();
-            var probabilitySpawn = probabilitySpawner.GetProbabilitySpawnFrom(hostEnemy.gameObject);
+            var probabilitySpawn = probabilitySpawner.GetProbabilitySpawnFrom(hostEnemy);
             //var spawn = probabilitySpawner.ProbabilitySpawns.Find(p => p == probabilitySpawn);
             var newSpawn = new ProbabilitySpawn(hostEnemy.gameObject, probabilitySpawn.positions, 100, minQuantity, maxQuantity);
             //Debug.Log(nwSpwns.gameObject);

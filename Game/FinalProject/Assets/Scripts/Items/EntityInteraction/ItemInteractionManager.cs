@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class ItemInteractionManager : MonoBehaviour
 {
-    [SerializeField] private Entity entity;
+    public Entity entity;
     [SerializeField] private ItemInteraction itemInteraction;
 
     [SerializeField] private List<ItemState> itemStates;

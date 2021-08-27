@@ -65,4 +65,37 @@ public class ProbabilitySpawner : MonoBehaviour
         return spawn;
     }
 
+    public ProbabilitySpawn GetProbabilitySpawnFrom(Enemy enemy)
+    {
+        var enemies = GetEnemiesPs();
+        foreach (var e in enemies)
+        {
+            if (e.gameObject.TryGetComponent<Enemy>(out var enmy))
+            {
+                if (enmy.enemyName == enemy.enemyName)
+                {
+                    return e;
+                }
+            }
+        }
+        return null;
+    }
+
+    public List<ProbabilitySpawn> GetEnemiesPs()
+    {
+        var enemies = new List<ProbabilitySpawn>();
+        var pspwns = new List<ProbabilitySpawn>(probabilitySpawns);
+        pspwns.RemoveAll(ps => ps.gameObject == null);
+        foreach (var ps in pspwns)
+        {
+            if (ps.gameObject.TryGetComponent<Enemy>(out var enmy))
+            {
+                enemies.Add(ps);
+            }
+        }
+        return enemies;
+    }
+
+    
+
 }

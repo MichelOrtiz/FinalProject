@@ -2,10 +2,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName="New ProjectileStatsModifier", menuName = "States/new ProjectileStatsModifier")]
 public class ProjectileStatsModifier : State
 {
+    [SerializeField] private bool hasTime;
+    [Header("Speed")]
     [SerializeField] private float speedMultiplier;
     private float defSpeed;
-    [SerializeField] private float damageMultiplier;
-    private float defDamage;
+
+
+    [Header("Damage")]
+    [SerializeField] private float damageValue;
+    [SerializeField] private DamageIncrease damageIncrease;
+    private float defaultDamage;
+    enum DamageIncrease
+    {
+        Add, Multiply
+    }
+
+
 
     private ProjectileShooter projectileShooter;
 
@@ -22,23 +34,37 @@ public class ProjectileStatsModifier : State
 
     public override void Affect()
     {
-        if (currentTime > duration)
+        if (hasTime)
+        {
+             if (currentTime > duration)
+            {
+                StopAffect();
+            }
+            else
+            {
+                currentTime += Time.deltaTime;
+            }
+        }
+        /*if (currentTime > duration)
         {
             StopAffect();
         }
         else
-        {
+        {*/
             if (projectileShooter != null && projectileShooter.Projectile != null)
             {
                 projectile = projectileShooter.Projectile;
                 if (projectile.damage == projectile.StartDamage || projectile.speedMultiplier == projectile.StartSpeed)
                 {
-                    projectileShooter.Projectile.SetNewValues(projectile.speedMultiplier * speedMultiplier, projectile.damage * damageMultiplier);
+                    projectileShooter.Projectile.SetNewValues
+                        (projectile.speedMultiplier * speedMultiplier,
+                        damageIncrease == DamageIncrease.Add?
+                            projectile.damage + damageValue : projectile.damage * damageValue);
                 }
             }
             //projectile = null;
-            currentTime += Time.deltaTime;
-        }
+            /*currentTime += Time.deltaTime;
+        }*/
     }
 
     public override void StopAffect()
