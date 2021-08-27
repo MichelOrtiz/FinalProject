@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new FungusSporeBlocker", menuName = "States/new FungusSporeBlocker")]
 public class FungusSporeBlocker : State
 {
+    [SerializeField] private bool hasTime;
     private Fungus fungus;
     private FatFungus fatFungus;
 
@@ -31,14 +32,17 @@ public class FungusSporeBlocker : State
     
     public override void Affect()
     {
-        if (currentTime > duration)
+        if (hasTime)
         {
-            currentTime = 0;
-            StopAffect();
-        }
-        else
-        {
-            currentTime += Time.deltaTime;
+            if (currentTime > duration)
+            {
+                currentTime = 0;
+                StopAffect();
+            }
+            else
+            {
+                currentTime += Time.deltaTime;
+            }
         }
     }
 

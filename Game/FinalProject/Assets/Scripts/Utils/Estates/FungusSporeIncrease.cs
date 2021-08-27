@@ -2,6 +2,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new FungusSporeIncrease", menuName = "States/new FungusSporeIncrease")]
 public class FungusSporeIncrease : State
 {
+    [SerializeField] private bool hasTime;
     [SerializeField] private byte extraSpores;
     private Fungus fungus;
     private FatFungus fatFungus;
@@ -24,21 +25,24 @@ public class FungusSporeIncrease : State
         {
             fatFungus = manager.hostEntity as FatFungus;
 
-            fungus.eCollisionHandler.TouchedPlayerHandler += eCollisionHandler_TouchedPlayer;
+            fatFungus.eCollisionHandler.TouchedPlayerHandler += eCollisionHandler_TouchedPlayer;
         }
 
 
     }
     public override void Affect()
     {
-        if (currentTime > duration)
+        if (hasTime)
         {
-            currentTime = 0;
-            StopAffect();
-        }
-        else
-        {
-            currentTime += Time.deltaTime;
+            if (currentTime > duration)
+            {
+                currentTime = 0;
+                StopAffect();
+            }
+            else
+            {
+                currentTime += Time.deltaTime;
+            }
         }
     }
 

@@ -17,11 +17,11 @@ public class FatType : Enemy
 
     public override void ConsumeItem(Item item)
     {
-
+        base.ConsumeItem(item);
         if (item == wishedItem)
         {
             Debug.Log("he liked that");
-            Destroy(gameObject);
+            DestroyEntity();
         }
         else
         {
