@@ -46,7 +46,7 @@ public class SpotterGnome : Enemy
             {
                 enemyMovement.StopMovement();
 
-                if (curWaitTime > 0)
+                if (curWaitTime > 0 && !fieldOfView.canSeePlayer)
                 {
                     if (curInterval > intervalBtwFlipInTarget)
                     {
@@ -96,6 +96,8 @@ public class SpotterGnome : Enemy
         justChasedPlayer = true;
         curWaitTime = waitTimeAfterReachedTarget;
         curInterval = 0;
+
+        animationManager.ChangeAnimation("walk", enemyMovement.ChaseSpeed * 1 / enemyMovement.DefaultSpeed);
     }
 
     protected override void Attack()

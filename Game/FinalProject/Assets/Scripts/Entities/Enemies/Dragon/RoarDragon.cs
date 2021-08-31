@@ -7,6 +7,8 @@ public class RoarDragon : Enemy
     [SerializeField] private float enhanceMultiplier;
     [SerializeField] private float baseEnhancementTime;
     private float enhancementTime;
+
+    [SerializeField] private EnemyStatsModifier statsModifier;
     private bool roared;
     private bool isRoaring;
     private bool canFallToSurface;
@@ -21,7 +23,8 @@ public class RoarDragon : Enemy
     {
         if (roared)
         {
-            if (enhancementTime > baseEnhancementTime)
+            
+            /*if (enhancementTime > baseEnhancementTime)
             {
                 foreach (var dragon in dragons)
                 {
@@ -34,7 +37,7 @@ public class RoarDragon : Enemy
             else
             {
                 enhancementTime += Time.deltaTime;
-            }
+            }*/
         }
         base.Update();
     }
@@ -43,7 +46,8 @@ public class RoarDragon : Enemy
     {
         if (roared)
         {
-            enemyMovement.StopMovement();
+            //enemyMovement.StopMovement();
+            return;
         }
         base.FixedUpdate();
     }
@@ -57,16 +61,31 @@ public class RoarDragon : Enemy
 
     protected override void ChasePlayer()
     {
-        enemyMovement.StopMovement();
+        //enemyMovement.StopMovement();
         if (!roared)
         {
             //animator.SetBool("Is Roaring", true);
-            animator.SetTrigger("Roar");
+            //animator.SetTrigger("Roar");
+            animationManager.ChangeAnimation("roar");
             roared = true;
+            EnemyStatsModifier refState = null;
             foreach (var dragon in dragons)
             {
-                dragon.EnhanceValues(enhanceMultiplier);
+                //dragon.EnhanceValues(enhanceMultiplier);
+                var state = dragon.statesManager.AddState(statsModifier);
+                if (refState == null)
+                {
+                    refState = (EnemyStatsModifier) state;
+                    refState.StoppedAffect += statsModifier_StoppedAffect;
+                }
+
             }
+
         }
+    }
+
+    void statsModifier_StoppedAffect()
+    {
+        roared = false;
     }
 }

@@ -171,6 +171,8 @@ public class EnemyMovement : MonoBehaviour
             if (curWaitTime > 0)
             {
                 //isWalking = false;
+                StopMovement();
+
                 curWaitTime -= Time.deltaTime;
                 return;
             }
@@ -181,6 +183,8 @@ public class EnemyMovement : MonoBehaviour
         {
             //GoToInGround(Vector2.right, chasing: false, checkNearEdge: true);
             //rigidbody2d.transform.Translate(Vector2.right * Time.deltaTime * defaultSpeed);
+            entity.animationManager?.ChangeAnimation("walk");
+
             rigidbody2d.transform.position += rigidbody2d.transform.right * Time.deltaTime * defaultSpeed;
         }
     }
@@ -191,6 +195,8 @@ public class EnemyMovement : MonoBehaviour
         {
             if (curWaitTime > 0)
             {
+                //entity.animationManager.ChangeAnimation("idle");
+                StopMovement();
                 curWaitTime -= Time.deltaTime;
                 return;
             }
@@ -268,8 +274,11 @@ public class EnemyMovement : MonoBehaviour
     }
     public void StopAllMovement()
     {
+        entity.animationManager?.ChangeAnimation("idle");
+
         rigidbody2d.velocity = Vector3.zero;
         rigidbody2d.angularVelocity = 0;
+
         /*if (movingHorizontal || movingVertical)
         {
             StartCoroutine(ChangeToKinematicRigidbody(0.2f));

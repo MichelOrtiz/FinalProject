@@ -51,6 +51,7 @@ public class Entity : MonoBehaviour
     [Header ("General additions")]
     public Rigidbody2D rigidbody2d;
     public Animator animator;
+    public AnimationManager animationManager;
     [SerializeField] protected LayerMask[] whatIsObstacle;
     [SerializeField] public Transform feetPos;
 
@@ -60,6 +61,7 @@ public class Entity : MonoBehaviour
     public SomePhysics physics;
 
     public Transform emotePos;
+    
     #endregion
 
     protected virtual void collisionHandler_EnterContact(GameObject contact){}

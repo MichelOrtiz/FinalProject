@@ -32,6 +32,7 @@ public class NormalType : Enemy
         if (!touchingPlayer)
         {
             enemyMovement.DefaultPatrol();
+            //isWalking = true;
             //enemyMovement.GoTo(GetPosition() + Vector3.up, chasing: false, gravity: false);
         }
     }
@@ -41,6 +42,11 @@ public class NormalType : Enemy
         if (!touchingPlayer)
         {
             enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: true);
+
+            if (!groundChecker.isNearEdge)
+            {
+                animationManager.ChangeAnimation("walk", enemyMovement.ChaseSpeed * 1 / enemyMovement.DefaultSpeed);
+            }
         }
     }
 

@@ -172,6 +172,7 @@ public class FieldOfView : MonoBehaviour
             hit = Physics2D.Linecast(fovOrigin.position, endPos, layerMask);//, 1 << LayerMask.NameToLayer("Default"));
             if (hit.collider == null)
             {
+
                 return false;
             }
             return hit.collider.gameObject.CompareTag("Player");

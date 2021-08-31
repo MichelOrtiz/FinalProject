@@ -99,6 +99,8 @@ public abstract class Enemy : Entity
             if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
                 || (GetPosition().x < player.GetPosition().x && facingDirection == LEFT))
                 {
+                        if (this is WeaverArandana) Debug.Log("flip wtf");
+
                     if (rigidbody2d.gravityScale == 0 ||  groundChecker.isGrounded)
                     {
                         ChangeFacingDirection();
@@ -129,6 +131,7 @@ public abstract class Enemy : Entity
                 MainRoutine();
                 break;
         }
+        
     }
     #endregion
 

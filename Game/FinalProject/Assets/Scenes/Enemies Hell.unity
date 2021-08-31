@@ -1000,6 +1000,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 9667857}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1713134920}
@@ -1942,6 +1943,52 @@ Transform:
   m_Father: {fileID: 1174354654}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &108211911
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 108211912}
+  - component: {fileID: 108211913}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &108211912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108211911}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 2136063982}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &108211913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108211911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 2136063979}
+  animator: {fileID: 1561966665}
+  currentState: 
 --- !u!1 &109514639
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,9 +2419,9 @@ MonoBehaviour:
   movingHorizontal: 0
   movingVertical: 0
   waitTime: 1.5
-  defaultSpeedMultiplier: 1
+  defaultSpeedMultiplier: 0.5
   defaultSpeed: 0
-  chaseSpeedMultiplier: 1.5
+  chaseSpeedMultiplier: 0.8
   chaseSpeed: 0
   currentSpeed: 0
   jumpForce: {x: 1, y: 2}
@@ -2613,7 +2660,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123669087}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0211, y: -0.8181, z: 0}
+  m_LocalPosition: {x: 0.0211, y: -0.804, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 687266439}
@@ -2686,6 +2733,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1695399330}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &130930874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 130930876}
+  - component: {fileID: 130930875}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &130930875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130930874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 1315580001}
+  animator: {fileID: 710667960}
+  currentState: 
+--- !u!4 &130930876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130930874}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1315580004}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &131159129
 GameObject:
@@ -4561,7 +4654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279920190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.579996, y: 0.14600027, z: 0}
+  m_LocalPosition: {x: 1.66, y: -3.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1274701632}
@@ -5339,6 +5432,7 @@ MonoBehaviour:
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1748660353}
+  animationManager: {fileID: 880780885}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 2078304933}
@@ -5420,6 +5514,7 @@ Transform:
   - {fileID: 1988169739}
   - {fileID: 67766982}
   - {fileID: 891615641}
+  - {fileID: 880780886}
   m_Father: {fileID: 0}
   m_RootOrder: 50
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10930,6 +11025,7 @@ MonoBehaviour:
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
   animator: {fileID: 396766214}
+  animationManager: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 256
@@ -11061,6 +11157,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1715151733}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &376928172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 376928174}
+  - component: {fileID: 376928173}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &376928173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376928172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 2045357029}
+  animator: {fileID: 394214154}
+  currentState: 
+--- !u!4 &376928174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376928172}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -54.29, y: 13.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 2045357028}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &380104036
 GameObject:
@@ -11429,7 +11571,7 @@ Animator:
   m_GameObject: {fileID: 394214152}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0a852bae6e019a940bd990026b579415, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -12618,6 +12760,52 @@ PrefabInstance:
       objectReference: {fileID: 1394591057}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0cd628f259fb8140b6a938be1a588b6, type: 3}
+--- !u!1 &452594250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 452594252}
+  - component: {fileID: 452594251}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &452594251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452594250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 1049194330}
+  animator: {fileID: 1882282664}
+  currentState: 
+--- !u!4 &452594252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452594250}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1049194328}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &453501684
 GameObject:
   m_ObjectHideFlags: 0
@@ -12811,7 +12999,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459267433}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1099991, y: 3.6900005, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1274701632}
@@ -19009,7 +19197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528900370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -0.047, z: 0}
+  m_LocalPosition: {x: 0.333, y: -0.047, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 950729140}
@@ -19193,6 +19381,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 764047696}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1116014047}
@@ -19424,6 +19613,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1483051900}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 650256278}
@@ -19983,7 +20173,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4864
   feetPos: {fileID: 380104037}
-  checkFeetRadius: 0.25
+  checkFeetRadius: 0.1
   isGrounded: 0
   lastGroundTag: 
   edgeCheck: {fileID: 59616057}
@@ -20591,7 +20781,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 608157046}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.058, y: -0.034, z: 0}
+  m_LocalPosition: {x: 0.034, y: -0.066, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1895146356}
@@ -20654,6 +20844,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 774120027}
@@ -22631,7 +22822,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d30044e3e93bbd74d9c9524e0d9963fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -22891,7 +23082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &739394528
 Transform:
   m_ObjectHideFlags: 0
@@ -23345,6 +23536,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 427998249}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 398246918}
@@ -23661,6 +23853,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1154156905}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 599500495}
@@ -23733,7 +23926,7 @@ Transform:
   m_GameObject: {fileID: 762997278}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 89.9, y: 9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1154156904}
   - {fileID: 1251747781}
@@ -23744,6 +23937,7 @@ Transform:
   - {fileID: 2133195328}
   - {fileID: 2021766847}
   - {fileID: 51500032}
+  - {fileID: 1681126421}
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49203,7 +49397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819193944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.0099945, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 974802595}
@@ -49844,6 +50038,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 340894937}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1793001925}
@@ -49931,6 +50126,52 @@ Transform:
   - {fileID: 165417481}
   m_Father: {fileID: 0}
   m_RootOrder: 48
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &846737686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 846737688}
+  - component: {fileID: 846737687}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &846737687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846737686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 1190441057}
+  animator: {fileID: 112429777}
+  currentState: 
+--- !u!4 &846737688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846737686}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1190441060}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &847240674
 GameObject:
@@ -116451,6 +116692,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 981609402}
+  animationManager: {fileID: 1757076087}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1895146358}
@@ -116478,6 +116720,7 @@ MonoBehaviour:
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   startTimeBtwShot: 3
+  timeInShotAnim: 0.5
 --- !u!114 &871531307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116533,6 +116776,7 @@ Transform:
   - {fileID: 1731319096}
   - {fileID: 515936982}
   - {fileID: 670233715}
+  - {fileID: 1757076088}
   m_Father: {fileID: 0}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116607,6 +116851,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2237de5c9d3a2f47850568f79ea60f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &880780884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 880780886}
+  - component: {fileID: 880780885}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &880780885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880780884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 333909761}
+  animator: {fileID: 1748660353}
+  currentState: 
+--- !u!4 &880780886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880780884}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 333909764}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &885222932
 GameObject:
   m_ObjectHideFlags: 0
@@ -117105,7 +117395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913058278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.22, y: -3.77, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1947022639}
@@ -117572,6 +117862,52 @@ MonoBehaviour:
   radius: 3
   selfTag: Berry
   item: {fileID: 11400000, guid: 2a27c55b7fa682a4da73032f4f452688, type: 2}
+--- !u!1 &933586575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 933586576}
+  - component: {fileID: 933586577}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &933586576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933586575}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1496937095}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &933586577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933586575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 1496937096}
+  animator: {fileID: 796245562}
+  currentState: 
 --- !u!1 &936900882
 GameObject:
   m_ObjectHideFlags: 0
@@ -117846,6 +118182,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 553996229}
+  animationManager: {fileID: 1575175196}
   whatIsObstacle: []
   feetPos: {fileID: 530336125}
   groundChecker: {fileID: 732317803}
@@ -117892,6 +118229,7 @@ Transform:
   - {fileID: 1268970907}
   - {fileID: 2120974187}
   - {fileID: 248827572}
+  - {fileID: 1575175195}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -118229,7 +118567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980913231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.46, y: 2.3, z: 0}
+  m_LocalPosition: {x: 3.2, y: -1.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1274701632}
@@ -118470,6 +118808,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1304836025}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 649322053}
@@ -118983,7 +119322,7 @@ MonoBehaviour:
   chaseSpeed: 0
   currentSpeed: 0
   jumpForce: {x: 0, y: 3}
-  jumpForceMultiplier: {x: 0, y: 0}
+  jumpForceMultiplier: {x: 0, y: 1.5}
   forceMode: 1
   groundChecker: {fileID: 575190474}
   collisionHandler: {fileID: 1189964352}
@@ -119219,6 +119558,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 388655527}
@@ -119377,6 +119717,7 @@ Transform:
   - {fileID: 1811570534}
   - {fileID: 544455916}
   - {fileID: 587124940}
+  - {fileID: 452594252}
   m_Father: {fileID: 0}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119439,6 +119780,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1882282664}
+  animationManager: {fileID: 452594251}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1745587107}
@@ -120573,6 +120915,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1251993974}
@@ -120909,7 +121252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d15e802039df04a820ab576c47fe24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 0}
+  entity: {fileID: 1274701629}
   rigidbody2d: {fileID: 1274701631}
 --- !u!4 &1136743374
 Transform:
@@ -120919,7 +121262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136743372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -105.829994, y: 16.930193, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1274701632}
@@ -121391,7 +121734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173356774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.2000027, y: -3.7799988, z: 0}
+  m_LocalPosition: {x: 2.45, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1947022639}
@@ -121662,6 +122005,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 112429777}
+  animationManager: {fileID: 846737687}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 575190474}
@@ -121743,6 +122087,7 @@ Transform:
   - {fileID: 1398644531}
   - {fileID: 1435104027}
   - {fileID: 2027725485}
+  - {fileID: 846737688}
   m_Father: {fileID: 0}
   m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122556,6 +122901,7 @@ GameObject:
   - component: {fileID: 1251747781}
   - component: {fileID: 1251747779}
   - component: {fileID: 1251747780}
+  - component: {fileID: 1251747782}
   m_Layer: 10
   m_Name: CollisionHandler
   m_TagString: Enemy
@@ -122588,7 +122934,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251747778}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -122605,12 +122951,48 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251747778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.23, y: -2.76, z: 0}
+  m_LocalPosition: {x: 1.1, y: -3.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 762997282}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1251747782
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251747778}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.8511263, y: 1.5634909}
+      - {x: 0.29318237, y: 0.47646713}
+      - {x: -0.43566895, y: 2.0105896}
+      - {x: -2.3645926, y: 1.33514}
+      - {x: -0.4414215, y: 0.2959671}
+      - {x: -3.4407654, y: -0.7344036}
+      - {x: -1.0598526, y: -0.43617058}
+      - {x: -0.692491, y: -0.93466556}
+      - {x: 1.6034409, y: -0.96607566}
+      - {x: 1.1897812, y: 0.037488937}
+      - {x: 1.6865835, y: 1.076807}
 --- !u!1 &1251993973
 GameObject:
   m_ObjectHideFlags: 0
@@ -123091,6 +123473,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 459267435}
+  animationManager: {fileID: 1999923775}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1315423385}
@@ -123099,7 +123482,7 @@ MonoBehaviour:
   emotePos: {fileID: 980913232}
   enemyType: 6
   enemyName: 50
-  flipToPlayerIfSpotted: 1
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 0
   normalSpeed: 0
   chaseSpeedMultiplier: 0
@@ -123119,6 +123502,7 @@ MonoBehaviour:
   touchingPlayer: 0
   enhanceMultiplier: 1.5
   baseEnhancementTime: 60
+  statsModifier: {fileID: 11400000, guid: 21d1fd5b6d1933a45a9b479ad4bb2a15, type: 2}
 --- !u!114 &1274701630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123163,7 +123547,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274701628}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.59, y: -25.32, z: 0}
+  m_LocalPosition: {x: 37.41, y: -24.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 459267434}
@@ -123174,6 +123558,7 @@ Transform:
   - {fileID: 1136743374}
   - {fileID: 980913232}
   - {fileID: 429939956}
+  - {fileID: 1999923776}
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -123571,6 +123956,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1242718691}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 0}
@@ -124046,7 +124432,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1315423384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.669996, y: -1.5529997, z: 0}
+  m_LocalPosition: {x: 1.87, y: -5.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 885222933}
@@ -124137,6 +124523,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1748660353}
+  animationManager: {fileID: 130930875}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1329736773}
@@ -124218,6 +124605,7 @@ Transform:
   - {fileID: 1895467912}
   - {fileID: 779474417}
   - {fileID: 137420931}
+  - {fileID: 130930876}
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -124278,6 +124666,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1525928156}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1511382474}
@@ -124769,6 +125158,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 228553153}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 0}
@@ -126139,6 +126529,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 17061794}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1018663882}
@@ -126426,6 +126817,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 71830314}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 551021962}
@@ -126655,6 +127047,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1944111125}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1592012545}
@@ -127435,6 +127828,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 778672848}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 645619522}
@@ -128171,7 +128565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462581248}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -317.82, y: -18.289806, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 2136063982}
@@ -129730,6 +130124,7 @@ Transform:
   - {fileID: 1315416062}
   - {fileID: 729993035}
   - {fileID: 1747338421}
+  - {fileID: 933586576}
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129771,6 +130166,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 0}
+  animationManager: {fileID: 933586577}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 230571631}
@@ -129812,7 +130208,7 @@ GameObject:
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1503750787
 Transform:
   m_ObjectHideFlags: 0
@@ -130569,6 +130965,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1174354653}
@@ -130873,6 +131270,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1575175194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1575175195}
+  - component: {fileID: 1575175196}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1575175195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575175194}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 974802595}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1575175196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575175194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 974802594}
+  animator: {fileID: 553996229}
+  currentState: 
 --- !u!1 &1579642103
 GameObject:
   m_ObjectHideFlags: 0
@@ -136307,6 +136750,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 2092883369}
@@ -136687,6 +137131,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: 1402067421}
   rigidbody2d: {fileID: 1402067424}
+--- !u!1 &1681126420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1681126421}
+  - component: {fileID: 1681126422}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1681126421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681126420}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 762997282}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1681126422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681126420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 974802594}
+  animator: {fileID: 553996229}
+  currentState: 
 --- !u!1 &1682739516
 GameObject:
   m_ObjectHideFlags: 0
@@ -136744,6 +137234,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1056737020}
@@ -137126,6 +137617,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 2107251337}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1442327385}
@@ -137720,7 +138212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718513373}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.45, y: 0.25, z: 0}
+  m_LocalPosition: {x: 2.19, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1315423386}
@@ -138634,6 +139126,52 @@ MonoBehaviour:
   radius: 3
   selfTag: Berry
   item: {fileID: 11400000, guid: 641cb724f3339ff488333eff0a622e36, type: 2}
+--- !u!1 &1757076086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1757076088}
+  - component: {fileID: 1757076087}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1757076087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757076086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 871531306}
+  animator: {fileID: 981609402}
+  currentState: 
+--- !u!4 &1757076088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757076086}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 871531309}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1758210843
 GameObject:
   m_ObjectHideFlags: 0
@@ -139400,9 +139938,9 @@ MonoBehaviour:
   movingHorizontal: 0
   movingVertical: 0
   waitTime: 1
-  defaultSpeedMultiplier: 0.75
+  defaultSpeedMultiplier: 1.5
   defaultSpeed: 0
-  chaseSpeedMultiplier: 1.7
+  chaseSpeedMultiplier: 1.5
   chaseSpeed: 0
   currentSpeed: 0
   jumpForce: {x: 0, y: 0}
@@ -139458,7 +139996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 4864
   feetPos: {fileID: 11289333}
   checkFeetRadius: 0.35
   isGrounded: 0
@@ -139890,7 +140428,7 @@ MonoBehaviour:
   blockFov: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 523255
+    m_Bits: 521207
   canSeePlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
@@ -140125,6 +140663,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1107096519}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1283517911}
@@ -140322,17 +140861,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 967220688444119503, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.59
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 55.85
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -140377,6 +140920,14 @@ PrefabInstance:
     - target: {fileID: 3829738360394267734, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: isInCooldown
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021038655958402423, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624234521466811570, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
@@ -141057,7 +141608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1895146355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.151, y: -0.516, z: 0}
+  m_LocalPosition: {x: 0.151, y: -0.412, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 608157047}
@@ -141105,7 +141656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 4864
   feetPos: {fileID: 608157047}
   checkFeetRadius: 0.35
   isGrounded: 0
@@ -141138,7 +141689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1895467911}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -177.22, y: -20.589808, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1315580004}
@@ -141215,6 +141766,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 598501781}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1552466624}
@@ -141523,6 +142075,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 2032645879}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 470818692}
@@ -141647,6 +142200,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 2032645879}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 470818692}
@@ -141860,7 +142414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940509650}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.188, y: -0.398, z: 0}
+  m_LocalPosition: {x: 0.188, y: -0.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 763189244}
@@ -142135,7 +142689,7 @@ MonoBehaviour:
   blockFov: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 385845
+    m_Bits: 389941
   canSeePlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
@@ -142153,7 +142707,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947022637}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7099991, y: 4.0200005, z: 0}
+  m_LocalPosition: {x: 1.51, y: -3.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 913058279}
@@ -143079,6 +143633,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: 333909761}
   rigidbody2d: {fileID: 333909763}
+--- !u!1 &1999923774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1999923776}
+  - component: {fileID: 1999923775}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1999923775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999923774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 1274701629}
+  animator: {fileID: 459267435}
+  currentState: 
+--- !u!4 &1999923776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999923774}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1274701632}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2009345281
 GameObject:
   m_ObjectHideFlags: 0
@@ -143416,6 +144016,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1355880617}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 643145347}
@@ -143786,6 +144387,7 @@ Transform:
   - {fileID: 81120198}
   - {fileID: 1372493621}
   - {fileID: 1646290133}
+  - {fileID: 376928174}
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143827,6 +144429,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 394214154}
+  animationManager: {fileID: 376928173}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 1940509651}
@@ -143853,6 +144456,52 @@ MonoBehaviour:
   itemInteractionManager: {fileID: 1372493620}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
+--- !u!1 &2045785250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2045785252}
+  - component: {fileID: 2045785251}
+  m_Layer: 10
+  m_Name: AnimationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2045785251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045785250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 1751263593877876115}
+  animator: {fileID: 4112814276981106364}
+  currentState: 
+--- !u!4 &2045785252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045785250}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4109125728927400115}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2046984900
 GameObject:
   m_ObjectHideFlags: 0
@@ -145174,9 +145823,9 @@ MonoBehaviour:
   movingHorizontal: 0
   movingVertical: 0
   waitTime: 2
-  defaultSpeedMultiplier: 1
+  defaultSpeedMultiplier: 0.4
   defaultSpeed: 0
-  chaseSpeedMultiplier: 2
+  chaseSpeedMultiplier: 1.3
   chaseSpeed: 0
   currentSpeed: 0
   jumpForce: {x: 0, y: 0}
@@ -145851,6 +146500,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 1561966665}
+  animationManager: {fileID: 108211913}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 123669088}
@@ -145925,7 +146575,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136063978}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 197.9, y: 0.9, z: 0}
+  m_LocalPosition: {x: 201.16, y: 11.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 1561966664}
@@ -145936,6 +146586,7 @@ Transform:
   - {fileID: 1462581249}
   - {fileID: 366382216}
   - {fileID: 650116423}
+  - {fileID: 108211912}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -146059,9 +146710,9 @@ MonoBehaviour:
   movingHorizontal: 0
   movingVertical: 0
   waitTime: 1.5
-  defaultSpeedMultiplier: 1
+  defaultSpeedMultiplier: 0.5
   defaultSpeed: 0
-  chaseSpeedMultiplier: 1.5
+  chaseSpeedMultiplier: 0.5
   chaseSpeed: 0
   currentSpeed: 0
   jumpForce: {x: 1, y: 2}
@@ -146447,6 +147098,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 4112814276981106364}
+  animationManager: {fileID: 2045785251}
   whatIsObstacle: []
   feetPos: {fileID: 6261320731830294357}
   groundChecker: {fileID: 1472805631517898187}
@@ -146913,6 +147565,7 @@ Transform:
   - {fileID: 1381762536}
   - {fileID: 427360660}
   - {fileID: 979179406}
+  - {fileID: 2045785252}
   m_Father: {fileID: 0}
   m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

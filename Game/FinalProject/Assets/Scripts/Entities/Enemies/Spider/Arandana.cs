@@ -27,6 +27,7 @@ public class Arandana : Enemy
         if (groundChecker.isGrounded && !fieldOfView.inFrontOfObstacle && !touchingPlayer)
         {
             enemyMovement.Translate(transform.right, chasing: false);
+            animationManager.ChangeAnimation("walk");
         }
     }
 
@@ -36,6 +37,7 @@ public class Arandana : Enemy
         {
             // player has to be in the same ground to use chasing speed
             enemyMovement.Translate(transform.right, chasing: player.groundChecker.lastGroundTag == groundChecker.lastGroundTag);
+            animationManager.ChangeAnimation("walk", enemyMovement.ChaseSpeed * 1 / enemyMovement.DefaultSpeed);
         }
     }
 }
