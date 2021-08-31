@@ -45,7 +45,7 @@ public class NormalType : Enemy
 
             if (!groundChecker.isNearEdge)
             {
-                animationManager.ChangeAnimation("walk", enemyMovement.ChaseSpeed * 1 / enemyMovement.DefaultSpeed);
+                animationManager?.ChangeAnimation("walk", enemyMovement.ChaseSpeed * 1 / enemyMovement.DefaultSpeed);
             }
         }
     }

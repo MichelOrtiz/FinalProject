@@ -13,17 +13,19 @@ public abstract class PlayerClone : Enemy
     {
         public Vector3 position;
         public Quaternion rotation;
-        public AnimationState animation;
+        //public AnimationState animation;
+        public string animationState;
     }
-    protected enum AnimationState
+    /*protected enum AnimationState
     {
         Idle, 
         Walk, 
         Jump, 
         Run, 
         Fall,
-        Fly
-    }
+        Fly, 
+        Aim
+    }*/
     #endregion
 
     protected abstract void CloneMovement();
@@ -43,13 +45,13 @@ public abstract class PlayerClone : Enemy
     new void FixedUpdate()
     {
         // Every frame, a Cloner is added to the Queue, storing position, rotation and animation state from player current state
-        cloners.Enqueue( new Cloner { position = player.GetPosition(), rotation = player.transform.rotation, animation = GetAnimationState() }  );
+        cloners.Enqueue( new Cloner { position = player.GetPosition(), rotation = player.transform.rotation, animationState = GetAnimationState() }  );
         if (curTime > delay)
         {
             // Takes a Cloner out of the Queue, updating the currentCloner
             currentCloner = (Cloner)cloners.Dequeue();
             CloneMovement();
-            SetAnimation(currentCloner.animation);
+            SetAnimation(currentCloner.animationState);
         }
         else
         {
@@ -62,84 +64,18 @@ public abstract class PlayerClone : Enemy
     /// Gets the player current animation state
     /// </summary>
     /// <returns></returns>
-    protected AnimationState GetAnimationState()
+    protected string GetAnimationState()
     {
-        if (player.isWalking)
-        {
-            return AnimationState.Walk;
-        }
-        else if (player.isJumping)
-        {
-            return AnimationState.Jump;
-        }
-        else if (player.isFalling)
-        {
-            return AnimationState.Fall;
-        }
-        else if (player.isRunning)
-        {
-            return AnimationState.Run;
-        }
-        else if (player.isFlying)
-        {
-            return AnimationState.Fly;
-        }
-        else
-        {
-            return AnimationState.Idle;
-        }
+        return player.animationManager.currentState;
     }
 
     /// <summary>
     /// Updates current state so the upper (Entity) class does the animations
     /// </summary>
     /// <param name="animationState"></param>
-    protected void SetAnimation(AnimationState animationState)
+    protected void SetAnimation(string animation)
     {
-        switch (animationState)
-        {
-            case AnimationState.Idle:
-                isWalking = false;
-                isJumping = false;
-                isRunning = false;
-                isFalling = false;
-                break;
-            case AnimationState.Walk:
-                isWalking = true;
-                isJumping = false;
-                isRunning = false;
-                isFalling = false;
-                isFlying = false;
-                break;
-            case AnimationState.Jump:
-                isWalking = false;
-                isJumping = true;
-                isRunning = false;
-                isFalling = false;
-                isFlying = false;
-                break;
-            case AnimationState.Run:
-                isWalking = true;
-                isJumping = false;
-                isRunning = false;
-                isFalling = false;
-                isFlying = false;
-                break;
-            case AnimationState.Fall:
-                isWalking = false;
-                isJumping = false;
-                isRunning = false;
-                isFalling = true;
-                isFlying = false;
-                break;
-            case AnimationState.Fly:
-                isWalking = false;
-                isJumping = false;
-                isRunning = false;
-                isFalling = false;
-                isFlying = true;
-                break;
-        }
+        animationManager.ChangeAnimationNoFilter(animation);
     }
     
 }

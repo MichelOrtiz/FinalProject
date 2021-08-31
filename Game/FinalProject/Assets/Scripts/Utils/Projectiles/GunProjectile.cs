@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,8 +34,12 @@ public class GunProjectile : MonoBehaviour
         PlayerManager.instance.isAiming = false;
     }
     
+
+    public Action ObjectShot;
     public void ShotObject(Item item){
         GameObject projectile = Instantiate(projectilePrefab,shotPoint.position,transform.rotation);
         projectile.GetComponent<ObjProjectile>().SetItem(item);
+
+        ObjectShot?.Invoke();
     }
 }
