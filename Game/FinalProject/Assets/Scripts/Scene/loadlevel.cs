@@ -13,12 +13,12 @@ public class loadlevel : MonoBehaviour
     protected PlayerManager player;
 
     private void Start() {
+        startPosition.gameObject.transform.position = coords;
         if(SceneController.instance.prevScene == iLevelToLoad){
             if(loadPosition!=null){
                 PlayerManager.instance.gameObject.transform.position = loadPosition.position;
             }
         }
-        startPosition.gameObject.transform.position = coords;
     }
     private void Awake()
         {

@@ -293,6 +293,9 @@ public class PlayerManager : Entity
             TakeTirement(damage);
             tirementDrowning = false;
             yield return null;
+        }else{
+            tirementDrowning = false;
+            yield return null;
         }
     }
     public IEnumerator Drowning(float timeDrowned, float drown)
