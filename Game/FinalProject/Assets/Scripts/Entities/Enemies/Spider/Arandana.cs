@@ -1,17 +1,25 @@
 using UnityEngine;
 public class Arandana : Enemy
 {
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    new void Update()
+    {
+        base.Update();
+    }
     new void FixedUpdate()
     {
+        animationManager.ChangeAnimation("walk");
         if (groundChecker.isNearEdge && !groundChecker.isGrounded)
         {
-            enemyMovement.StopMovement();
+            //enemyMovement.StopMovement();
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - 90 );
         }
         
         if (fieldOfView.inFrontOfObstacle)
         {
-            enemyMovement.StopMovement();
+            //enemyMovement.StopMovement();
             ChangeFacingDirection();
         }
 

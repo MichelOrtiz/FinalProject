@@ -125,7 +125,7 @@ public class PlayerManager : Entity
         animator.SetBool("Is Running", isRunning);
         animator.SetBool("Is Aiming", isAiming);
         isStruggling = false;
-        isWalking = inputs.movementX!=0 && isGrounded;
+        isWalking = inputs.movementX!=0 && isGrounded; //&& !isRunning;
         //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < 0f;
         //UpdateAnimation();
@@ -257,12 +257,21 @@ public class PlayerManager : Entity
         if(!inputs.enabled)return;
         if (isInIce)
         {
-            rigidbody2d.AddForce(new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y)); 
+            rigidbody2d.AddForce(new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y));
         }
         else
         {
             rigidbody2d.velocity = new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y);    
         }
+
+        /*if (isWalking)
+        {
+            animationManager.ChangeAnimation("Nico_walk");
+        }
+        else if (isRunning)
+        {
+            animationManager.ChangeAnimation("Nico_run");
+        }*/
     }
 
     void Flying()

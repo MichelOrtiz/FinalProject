@@ -269,12 +269,13 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!entity.isFalling)
         {
+            entity.animationManager?.ChangeAnimation("idle");
             StopAllMovement();
         }
     }
     public void StopAllMovement()
     {
-        entity.animationManager?.ChangeAnimation("idle");
+        //entity.animationManager?.ChangeAnimation("idle");
 
         rigidbody2d.velocity = Vector3.zero;
         rigidbody2d.angularVelocity = 0;

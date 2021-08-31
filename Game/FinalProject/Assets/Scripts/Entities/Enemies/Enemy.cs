@@ -162,7 +162,7 @@ public abstract class Enemy : Entity
     }
     public virtual void ConsumeItem(Item item)
     {
-        Debug.Log("Consumiendo "+ item.nombre);
+        Debug.Log(enemyName + " consumiendo "+ item.nombre);
         itemInteractionManager.Interact(item);
     }
     #endregion
@@ -170,7 +170,7 @@ public abstract class Enemy : Entity
     #region Effects on self or other
     protected virtual void KnockbackEntity(Entity entity)
     {
-        Debug.Log(gameObject + " knock " + entity);
+        //Debug.Log(gameObject + " knock " + entity);
         var entityPos = new Vector3(entity.GetPosition().x, entity.GetPosition().y);
         var facingRight = entity.facingDirection == RIGHT;
         var fixedDir = entity.GetPosition().x >= GetPosition().x ?
