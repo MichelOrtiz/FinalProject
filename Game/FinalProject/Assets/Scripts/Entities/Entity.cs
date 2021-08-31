@@ -12,6 +12,7 @@ public class Entity : MonoBehaviour
     [Header("Normal states")]
     public StateNames currentState;
     public bool isWalking = false;
+    public bool isRunning = false;
     public bool isGrounded = false;
     public bool isJumping = false;
     public bool isFlying = false;
@@ -49,7 +50,8 @@ public class Entity : MonoBehaviour
     #region Layers, rigids, etc...
     [Header ("General additions")]
     public Rigidbody2D rigidbody2d;
-    [SerializeField] protected Animator animator;
+    public Animator animator;
+    public AnimationManager animationManager;
     [SerializeField] protected LayerMask[] whatIsObstacle;
     [SerializeField] public Transform feetPos;
 
@@ -57,6 +59,9 @@ public class Entity : MonoBehaviour
     public GroundChecker groundChecker;
     public CollisionHandler collisionHandler;
     public SomePhysics physics;
+
+    public Transform emotePos;
+    
     #endregion
 
     protected virtual void collisionHandler_EnterContact(GameObject contact){}
@@ -69,7 +74,7 @@ public class Entity : MonoBehaviour
     protected void Start()
     {
         //facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
-        if (transform.eulerAngles.z != 0)
+        if (transform.rotation.z != 0)
         {
             facingDirection = transform.rotation.x == 0? RIGHT:LEFT;
         }
@@ -105,8 +110,18 @@ public class Entity : MonoBehaviour
 
     protected void Update()
     {
-        facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
+        //facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
         //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
+
+
+        if (transform.rotation.z != 0)
+        {
+            facingDirection = transform.rotation.x == -1? LEFT:RIGHT;
+        }
+        else
+        {
+            facingDirection = transform.rotation.y == -1? LEFT:RIGHT;
+        }
 
         if (groundChecker != null)
         {
@@ -168,15 +183,16 @@ public class Entity : MonoBehaviour
     /// <summary>
     /// Rotates the enity Y axis
     /// </summary>
-    protected void ChangeFacingDirection()
+    protected void  ChangeFacingDirection()
     {
-        if (transform.eulerAngles.z != 0)
+        
+        if (transform.localEulerAngles.z != 0)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x + 180, transform.eulerAngles.y, transform.eulerAngles.z);
         }
         else
         {
-            transform.eulerAngles = new Vector3(transform.rotation.x , transform.eulerAngles.y, transform.rotation.z);
+            transform.eulerAngles = new Vector3(transform.rotation.x , transform.eulerAngles.y + 180, transform.rotation.z);
         }
 
     }
@@ -198,4 +214,10 @@ public class Entity : MonoBehaviour
     }
 
     #endregion
+
+    public void DestroyEntity()
+    {
+        EntityDestroyFx.Instance.StartDestroyFx(this);
+        Destroy(gameObject);
+    }
 }

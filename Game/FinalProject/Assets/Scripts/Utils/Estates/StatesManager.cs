@@ -19,24 +19,52 @@ public class StatesManager : MonoBehaviour
         }
     }
 
-    public void AddState(State newState){
+    /// <summary>
+    /// Adds and starts a new state to the entity manager
+    /// </summary>
+    /// <param name="newState">State to add</param>
+    /// <returns>The instantiated state (could be different from the original)</returns>
+    public State AddState(State newState){
         if(newState != null){
             if (!currentStates.Contains(newState))
             {
+                if (newState.onEffect)
+                {
+                    Debug.Log(gameObject + " manager cloned " + newState);
+                    newState = Instantiate(newState);
+                    newState.onEffect = false;
+                }
+
+
                 newState.StartAffect(this);
                 currentStates.Add(newState);
+
+                return newState;
             }
         }
+
+        return null;
     }
-    public void AddState(State newState, Entity newEnemy){
+    public State AddState(State newState, Entity newEnemy){
         if(newState != null){
             if (!currentStates.Contains(newState))
             {
+                if (newState.onEffect)
+                {
+                    Debug.Log(gameObject + " manager cloned " + newState);
+                    newState = Instantiate(newState);
+                    newState.onEffect = false;
+                }
+
                 enemy=newEnemy;
                 newState.StartAffect(this);
                 currentStates.Add(newState);
+
+                return newState;
+
             }
         }
+        return null;
     }
     public void RemoveState(State state){
         if(currentStates.Contains(state)){

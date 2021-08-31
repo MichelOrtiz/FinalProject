@@ -2,6 +2,7 @@ using UnityEngine;
 public class GoalKeeperBear : Enemy
 {
     [Header("Self Additions")]
+    [SerializeField] private State touchedPlayerEffect;
     [SerializeField] private float speedMultiplier;
     [SerializeField] private float speedLimit;
     [SerializeReference] private float speed;
@@ -40,5 +41,11 @@ public class GoalKeeperBear : Enemy
         {
             enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: true);
         }
+    }
+
+    protected override void Attack()
+    {
+        base.Attack();
+        statesManager.AddState(touchedPlayerEffect);
     }
 }

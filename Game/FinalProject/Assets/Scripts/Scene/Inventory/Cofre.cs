@@ -21,13 +21,21 @@ public class Cofre : MonoBehaviour
         if(distance <= rango){
             if(Input.GetKeyDown(KeyCode.E)){
                 CofreUI.instance.gameObject.SetActive(true);
+                CofreUI.instance.cofre = this;
+                CofreUI.instance.inventory = Inventory.instance;
             }
         }
     }
     public void AddItem(Item newItem){
         savedItems.Add(newItem);
+        if(onItemChangedCallBack != null){
+            onItemChangedCallBack.Invoke();
+        }
     }
     public void RemoveItem(Item oldItem){
         savedItems.Remove(oldItem);
+        if(onItemChangedCallBack != null){
+            onItemChangedCallBack.Invoke();
+        }
     }
 }

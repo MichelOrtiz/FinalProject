@@ -4,24 +4,6 @@ using UnityEngine;
 
 public class SpyFox : Enemy
 {
-    new void Start()
-    {
-        base.Start();
-    }
-
-    new void Update()
-    {
-        //isJumping = !isGrounded && !isFalling;
-        
-        /*if (isChasing)
-        {
-            if ((player.GetPosition().x < this.GetPosition().x && facingDirection == RIGHT)
-            || (player.GetPosition().x > this.GetPosition().x && facingDirection == LEFT)) {
-                ChangeFacingDirection();
-            }
-        }*/
-        base.Update();
-    }
 
     protected override void ChasePlayer()
     {
@@ -33,6 +15,8 @@ public class SpyFox : Enemy
              !touchingPlayer)
         {
             enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: true);
+            animationManager.ChangeAnimation("walk", enemyMovement.ChaseSpeed * 1 / enemyMovement.DefaultSpeed);
+
             //isWalking = true;
            // if (!isJumping) rigidbody2d.position = Vector3.MoveTowards(GetPosition(), playerPosition, chaseSpeed * Time.deltaTime);
             //Debug.Log($"In Front Of Obstacle: {InFrontOfObstacle()}");
@@ -45,7 +29,7 @@ public class SpyFox : Enemy
         }
         else
         {
-            Debug.Log("staaaaahp");
+            //Debug.Log("staaaaahp");
             enemyMovement.StopMovement();
             /*isWalking = false;
             rigidbody2d.position = Vector3.MoveTowards(GetPosition(), GetPosition(), chaseSpeed * Time.deltaTime);*/

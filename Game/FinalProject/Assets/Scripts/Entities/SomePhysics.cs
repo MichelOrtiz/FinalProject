@@ -91,4 +91,21 @@ public class SomePhysics : MonoBehaviour
 		CancelInvoke("BeginShake");
 		rigidbody2d.transform.localPosition = Vector3.zero;
 	}
+
+	public void SetKinematic(float duration)
+	{
+		StartCoroutine(Kinematic(duration));
+	}
+
+	private IEnumerator Kinematic(float duration)
+	{
+		var gravity = rigidbody2d.gravityScale;
+		rigidbody2d.isKinematic = true;
+		rigidbody2d.velocity = Vector3.zero;
+        rigidbody2d.angularVelocity = 0;
+
+		yield return new WaitForSeconds(duration);
+		rigidbody2d.isKinematic = false;
+		rigidbody2d.gravityScale = gravity;
+	}
 }

@@ -54,7 +54,7 @@ public class ThiefFox : Enemy
             }
             else
             {
-                Destroy(gameObject);
+                DestroyEntity();
             }
             stolenItemIcon.GetComponent<SpriteRenderer>().sprite = stolenItem.icon;
         }

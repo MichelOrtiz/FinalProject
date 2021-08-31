@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1834541722720378581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8106999793722075475}
+  - component: {fileID: 1300213490127591496}
+  m_Layer: 0
+  m_Name: SquirrelInteraction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8106999793722075475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834541722720378581}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1300213490127591496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834541722720378581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48aa6f546a7185d46b48bf25516b637c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  itemInteraction: {fileID: 0}
+  itemStates:
+  - item: {fileID: 11400000, guid: 7cb96a285f4cd0241879c3c01a9c5681, type: 2}
+    states:
+    - {fileID: 0}
+  - item: {fileID: 11400000, guid: 17c57d73cc9bb7f4c899ccf25e6003dd, type: 2}
+    states:
+    - {fileID: 11400000, guid: 56c84828427ed584e9b26f18cea1ce14, type: 2}
+    - {fileID: 0}
+  - item: {fileID: 11400000, guid: 0333a5251ddbfdd4db5e20c10aa12593, type: 2}
+    states:
+    - {fileID: 11400000, guid: 8430ed6f0a071664caece9debc3560f4, type: 2}
+    - {fileID: 11400000, guid: 54c47018420eb184780c7b95a2959fff, type: 2}
+  - item: {fileID: 11400000, guid: 641cb724f3339ff488333eff0a622e36, type: 2}
+    states:
+    - {fileID: 11400000, guid: 5c2dd73581f3fce4087852992e153695, type: 2}
+  - item: {fileID: 11400000, guid: 13ae9c5cd9701b948a013160ded59e42, type: 2}
+    states:
+    - {fileID: 0}
+  - item: {fileID: 11400000, guid: 548a2dcf393afce4395b59c7566bd430, type: 2}
+    states:
+    - {fileID: 0}
+  interacting: 0

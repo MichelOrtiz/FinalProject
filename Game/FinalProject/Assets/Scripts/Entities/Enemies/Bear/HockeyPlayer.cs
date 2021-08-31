@@ -25,6 +25,7 @@ public class HockeyPlayer : Enemy
     {
         fieldOfView.SetViewDistanceOnRayHitObstacle(facingDirection == RIGHT ? Vector2.right : Vector2.left, maxViewDistance);
         isOnIce = groundChecker.lastGroundTag == "Ice";
+        
         base.Update();
     }
 
@@ -58,10 +59,6 @@ public class HockeyPlayer : Enemy
         }
     }
 
-    protected override void Attack()
-    {
-        return;
-    }
 
     public void projectileShooter_ProjectileTouchedPlayer()
     {

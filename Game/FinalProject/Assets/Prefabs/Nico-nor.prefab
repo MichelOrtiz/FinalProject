@@ -4996,6 +4996,51 @@ MonoBehaviour:
   damageAmount: 0
   effectOnPlayer: {fileID: 0}
   stopEmittingWhenParticleCollide: 0
+--- !u!1 &967220688444119503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4247639306438326030}
+  - component: {fileID: 5629152208467910817}
+  m_Layer: 0
+  m_Name: FollowerObjectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4247639306438326030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967220688444119503}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3829738358529845137}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5629152208467910817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967220688444119503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 497f6fd9644e84a40b2781989352da67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 3829738358529845160}
+  maxFollowers: 10
 --- !u!1 &1607805279977660824
 GameObject:
   m_ObjectHideFlags: 0
@@ -5461,6 +5506,7 @@ Transform:
   - {fileID: 3293527403152256009}
   - {fileID: 2326581359798848867}
   - {fileID: 3114436881078563462}
+  - {fileID: 4247639306438326030}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5605,7 +5651,6 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 0
   feetPos: {fileID: 3829738358953819176}
-  checkFeetRadius: 0.27
   groundChecker: {fileID: 1522910831385704399}
   collisionHandler: {fileID: 6346527060564971197}
   physics: {fileID: 5179934175459153183}

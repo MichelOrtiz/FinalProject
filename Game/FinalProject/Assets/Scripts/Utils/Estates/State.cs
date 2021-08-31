@@ -1,12 +1,15 @@
 using UnityEngine;
-
+using System;
 public abstract class State : ScriptableObject
 {
     [SerializeField] protected StateNames name;
     [SerializeField] protected float duration;
     protected StatesManager manager;
-    public bool onEffect;
+    public bool onEffect = false;
     protected float currentTime;
+
+    public Action StoppedAffect;
+
     public abstract void Affect();
     public virtual void StartAffect(StatesManager newManager){
         manager=newManager;
@@ -21,6 +24,13 @@ public abstract class State : ScriptableObject
         onEffect=false;
         manager.statusCheck-=Affect;
         manager.RemoveState(this);
+
+        StoppedAffect?.Invoke();
     }
     
+  
+    void OnDestroy()
+    {
+        onEffect = false;
+    }
 }

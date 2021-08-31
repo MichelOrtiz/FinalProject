@@ -79,5 +79,8 @@ public class Spore : MonoBehaviour
         }
         InParticleCollsion(other);
     }
-    
+    public void OnParticleSystemStopped()
+    {
+        OnEmmissionEnded(this);
+    }
 }

@@ -21,6 +21,7 @@ public class FieldOfView : MonoBehaviour
         set { viewDistance = value; }
     }
     
+    public bool blockFov;
 
 
     [SerializeField] private LayerMask layerMask;
@@ -73,7 +74,7 @@ public class FieldOfView : MonoBehaviour
     void Update()
     {
         facingDirection = entity.facingDirection;
-        canSeePlayer = CanSeePlayer();
+        canSeePlayer = CanSeePlayer() && !blockFov;
         inFrontOfObstacle = InFrontOfObstacle();
        
         if(inFrontOfObstacle)
@@ -107,7 +108,7 @@ public class FieldOfView : MonoBehaviour
         }
     }
 
-    public bool CanSeePlayer()
+    private bool CanSeePlayer()
     {
         Vector3 endPos = fovOrigin.position;
         
@@ -171,6 +172,7 @@ public class FieldOfView : MonoBehaviour
             hit = Physics2D.Linecast(fovOrigin.position, endPos, layerMask);//, 1 << LayerMask.NameToLayer("Default"));
             if (hit.collider == null)
             {
+
                 return false;
             }
             return hit.collider.gameObject.CompareTag("Player");

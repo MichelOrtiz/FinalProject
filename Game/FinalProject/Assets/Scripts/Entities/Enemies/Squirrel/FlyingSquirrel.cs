@@ -31,6 +31,7 @@ public class FlyingSquirrel : Enemy
         {
             // Jumps
             //rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce * rigidbody2d.gravityScale);
+            animationManager.ChangeAnimation("fly");
             enemyMovement.Jump();
         }
         if (isFalling)

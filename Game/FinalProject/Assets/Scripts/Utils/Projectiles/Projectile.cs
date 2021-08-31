@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -21,6 +20,7 @@ public class Projectile : MonoBehaviour
     #region Main Params
     [Header("MainParams")]
     [SerializeField] public float speedMultiplier;
+    public float StartSpeed { get; private set; }
     [SerializeField] protected float maxShotDistance;
     public float MaxShotDistance
     {
@@ -29,6 +29,7 @@ public class Projectile : MonoBehaviour
     }
     
     public float damage;
+    public float StartDamage { get; set; }
     // Time until destroyed
     [SerializeField] protected float waitTime;
     [SerializeField] protected float impactEffectExitTime;
@@ -60,6 +61,8 @@ public class Projectile : MonoBehaviour
 
     //private Animator animator;
     #endregion
+
+    public Action OnProjectileInstantiated;
 
     public void Setup(Transform startPoint, Vector3 target)
     {
@@ -111,6 +114,13 @@ public class Projectile : MonoBehaviour
         this.colliderTag = colliderTag;
     }
     /* - - - - - - - */
+ 
+    void Awake()
+    {
+        OnProjectileInstantiated?.Invoke();
+        StartSpeed = speedMultiplier;
+        StartDamage = damage;
+    }
     void Start()
     {
         defaultLayer = gameObject.layer;
@@ -241,6 +251,12 @@ public class Projectile : MonoBehaviour
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
     }
 
+
+    public void SetNewValues(float speed, float damage)
+    {
+        this.speedMultiplier = speed;
+        this.damage = damage;
+    }
     
     protected void OnTriggerStay2D(Collider2D other)
     {

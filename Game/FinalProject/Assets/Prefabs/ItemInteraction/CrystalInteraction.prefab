@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6042826744424474624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4190650367593095046}
+  - component: {fileID: 6386876496866111133}
+  m_Layer: 0
+  m_Name: CrystalInteraction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4190650367593095046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042826744424474624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6386876496866111133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042826744424474624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48aa6f546a7185d46b48bf25516b637c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  itemInteraction: {fileID: 0}
+  itemStates:
+  - item: {fileID: 11400000, guid: 0333a5251ddbfdd4db5e20c10aa12593, type: 2}
+    states:
+    - {fileID: 11400000, guid: a6069412891e9274c997a9d667e42b3f, type: 2}
+  - item: {fileID: 11400000, guid: 539a193b023e5e3468899f9d96f84dcc, type: 2}
+    states:
+    - {fileID: 11400000, guid: 718955c0584705a47b170626ca251e99, type: 2}
+  - item: {fileID: 11400000, guid: e57ca6afc035e7344b6ca88766abb04e, type: 2}
+    states:
+    - {fileID: 11400000, guid: 268b9238fa9e341488479fb432e17ef1, type: 2}
+  - item: {fileID: 11400000, guid: 1795efc6f4c679f47b4d6d0626c25f7b, type: 2}
+    states:
+    - {fileID: 11400000, guid: d4692a65181b84743b725354b1098010, type: 2}
+  - item: {fileID: 11400000, guid: 641cb724f3339ff488333eff0a622e36, type: 2}
+    states:
+    - {fileID: 11400000, guid: d5d662331bf273040ad0b07925d64634, type: 2}
+  - item: {fileID: 11400000, guid: 6071216c68a9af145b9042f5647b26b6, type: 2}
+    states:
+    - {fileID: 11400000, guid: 10ae849c58041fd4786a0fe7991f5cfc, type: 2}
+  - item: {fileID: 11400000, guid: 11dbe72ddeda87148aa20a221794c664, type: 2}
+    states:
+    - {fileID: 0}
+  - item: {fileID: 11400000, guid: 13ae9c5cd9701b948a013160ded59e42, type: 2}
+    states:
+    - {fileID: 11400000, guid: c4e3233a8ea900b44ada67e409d78938, type: 2}
+  - item: {fileID: 11400000, guid: 548a2dcf393afce4395b59c7566bd430, type: 2}
+    states:
+    - {fileID: 0}
+  interacting: 0

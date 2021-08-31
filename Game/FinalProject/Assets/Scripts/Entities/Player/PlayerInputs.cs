@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -11,23 +12,35 @@ public class PlayerInputs : MonoBehaviour
     public bool[] ItemHotbarUp = new bool[5];
     public bool[] ItemHotbarDown = new bool[5];
     public bool[] EquipmentHotbar = new bool[5];
+
+    public Action MovedRight;
+    public Action MovedLeft;
+    public Action MovedUp;
+    public Action MovedDown;
+    public Action Jump;
+
+
     void Update()
     {
         #region Right Left Up Dowm
         if(Input.GetButton("MovementRight")){
             movementX=1;
+            MovedRight?.Invoke();
         }
         else if(Input.GetButton("MovementLeft")){
             movementX=-1;
+            MovedLeft?.Invoke();
         }
         else{
             movementX=0;
         }
         if(Input.GetButton("MovementUp")){
             movementY=1;
+            MovedUp?.Invoke();
         }
         else if(Input.GetButton("MovementDown")){
             movementY=-1;
+            MovedDown?.Invoke();
         }
         else{
             movementY=0;
@@ -35,6 +48,10 @@ public class PlayerInputs : MonoBehaviour
         #endregion
 
         jump=Input.GetButton("Jump");
+        if (jump)
+        {
+            Jump?.Invoke();
+        }
 
         OpenInventory=Input.GetButtonDown("Inventory");
 

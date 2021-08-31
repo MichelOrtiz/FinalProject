@@ -7,7 +7,7 @@ public class FatType : Enemy
     [SerializeField] private Item wishedItem;
     [SerializeField] private GameObject wishedItemIcon;
 
-    new void Start()
+    protected new void Start()
     {
         base.Start();
         //iconSprite = GetComponent<SpriteRenderer>();
@@ -15,34 +15,13 @@ public class FatType : Enemy
         wishedItemIcon.GetComponent<SpriteRenderer>().sprite = wishedItem.icon;
     }
 
-    new void Update()
-    {
-        base.Update();    
-    }
-
-
-    protected override void MainRoutine()
-    {
-        return;
-    }
-
-    protected override void ChasePlayer()
-    {
-        return;
-    }
-
-    protected override void Attack()
-    {
-        return;
-    }
-
     public override void ConsumeItem(Item item)
     {
-
+        base.ConsumeItem(item);
         if (item == wishedItem)
         {
             Debug.Log("he liked that");
-            Destroy(gameObject);
+            DestroyEntity();
         }
         else
         {

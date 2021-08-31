@@ -17,8 +17,10 @@ public abstract class Enemy : Entity
 
     [Header("Effect on Player")]
     [SerializeField] protected float damageAmount;
+    public float Damage { get => damageAmount; set => damageAmount = value; }
     [SerializeField] protected State atackEffect;
     [SerializeField] protected bool canKnockbackPlayer;
+    [Range(0, 360)]
     [SerializeField] private float knockbackAngle;
     [SerializeField] private float knockbackDuration;
     [SerializeField] private float knockBackForce;
@@ -31,6 +33,7 @@ public abstract class Enemy : Entity
     public EnemyMovement EnemyMovement { get => enemyMovement; }
     [SerializeField] protected ProjectileShooter projectileShooter;
     [SerializeField] protected LaserShooter laserShooter;
+    [SerializeField] protected ItemInteractionManager itemInteractionManager;
     private RaycastHit2D hit;
     public FieldOfView FieldOfView { get => fieldOfView; }
     [HideInInspector] public EnemyCollisionHandler eCollisionHandler;
@@ -46,6 +49,7 @@ public abstract class Enemy : Entity
         Attack();
     }
     protected virtual void eCollisionHandler_StoppedTouchingPlayer(){}
+    public void ForceAttack() { Attack(); }
     #endregion
 
     #region Unity stuff
@@ -87,19 +91,27 @@ public abstract class Enemy : Entity
     new protected void Update()
     {
         //Debug.DrawLine(GetPosition(), transform.TransformPoint((MathUtils.GetVectorFromAngle(knockbackAngle)).normalized));
+        base.Update();
+
+
         if (isChasing && flipToPlayerIfSpotted && MathUtils.GetAbsXDistance(GetPosition(), player.GetPosition()) > 1f)
         {
             if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
-                || GetPosition().x < player.GetPosition().x && facingDirection == LEFT)
+                || (GetPosition().x < player.GetPosition().x && facingDirection == LEFT))
                 {
-                    if (rigidbody2d.gravityScale == 0 ||  groundChecker.isGrounded) ChangeFacingDirection();
+                        if (this is WeaverArandana) Debug.Log("flip wtf");
+
+                    if (rigidbody2d.gravityScale == 0 ||  groundChecker.isGrounded)
+                    {
+                        ChangeFacingDirection();
+                    }
                 }
         }
         touchingPlayer = eCollisionHandler.touchingPlayer;
         
         SetStates();
         UpdateState();
-        base.Update();
+        
     }
 
     protected void FixedUpdate()
@@ -119,6 +131,7 @@ public abstract class Enemy : Entity
                 MainRoutine();
                 break;
         }
+        
     }
     #endregion
 
@@ -150,30 +163,21 @@ public abstract class Enemy : Entity
     public virtual void ConsumeItem(Item item)
     {
         Debug.Log("Consumiendo "+ item.nombre);
+        itemInteractionManager.Interact(item);
     }
     #endregion
 
     #region Effects on self or other
     protected virtual void KnockbackEntity(Entity entity)
     {
-        entity.Knockback
-            (
-                knockbackDuration, 
-                knockBackForce,
-                
-                facingDirection == entity.facingDirection ?
-                entity.transform.InverseTransformPoint
-                (
-                    entity.GetPosition() + 
-                    (MathUtils.GetVectorFromAngle(knockbackAngle)
-                    ))
-                    :
-                -entity.transform.InverseTransformPoint
-                (
-                    entity.GetPosition() + 
-                    (MathUtils.GetVectorFromAngle(-knockbackAngle)
-                    ))
-            );
+        Debug.Log(gameObject + " knock " + entity);
+        var entityPos = new Vector3(entity.GetPosition().x, entity.GetPosition().y);
+        var facingRight = entity.facingDirection == RIGHT;
+        var fixedDir = entity.GetPosition().x >= GetPosition().x ?
+                        (MathUtils.GetVectorFromAngle(facingRight? knockbackAngle : 180 - knockbackAngle)) :
+                        (MathUtils.GetVectorFromAngle(facingRight? 180 - knockbackAngle : knockbackAngle));
+        var direction =  entity.transform.InverseTransformPoint(entityPos + fixedDir);
+        entity.Knockback(knockbackDuration, knockBackForce, direction);
     }
 
     public void EnhanceValues(float multiplier)
@@ -224,6 +228,9 @@ public abstract class Enemy : Entity
 
     #region Delete Later
 
+
+
+
     /// <summary>
     /// Checks if the enemy is able to see the player based on its field of view
     /// </summary>
@@ -239,4 +246,5 @@ public abstract class Enemy : Entity
     }
 
     #endregion
+
 }
