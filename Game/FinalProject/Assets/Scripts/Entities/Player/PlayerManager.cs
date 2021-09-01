@@ -117,15 +117,18 @@ public class PlayerManager : Entity
         currentMass = defaultMass;
         inputs = gameObject.GetComponent<PlayerInputs>();
         MinimapaActivada = true;
+
+        GunProjectile.instance.ObjectShot += gun_ObjectShot;
     }
 
     new void Update()
     {
+        SetAnimationStates();
         rigidbody2d.mass = currentMass;
-        animator.SetBool("Is Running", isRunning);
-        animator.SetBool("Is Aiming", isAiming);
+        /*animator.SetBool("Is Running", isRunning);
+        animator.SetBool("Is Aiming", isAiming);*/
         isStruggling = false;
-        isWalking = inputs.movementX!=0 && isGrounded;
+        isWalking = inputs.movementX!=0 && isGrounded && !isRunning;
         //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < 0f;
         //UpdateAnimation();
@@ -234,8 +237,12 @@ public class PlayerManager : Entity
         }   
         if (inputs.jump && isJumping)
         {
+            //animationManager.RestartAnimation();
+
             if (jumpTimeCounter>0)
             {
+                //animationManager.RestartAnimation("Nico_jump");
+                animationManager.RestartAnimation();
                 rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             }
@@ -257,12 +264,14 @@ public class PlayerManager : Entity
         if(!inputs.enabled)return;
         if (isInIce)
         {
-            rigidbody2d.AddForce(new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y)); 
+            rigidbody2d.AddForce(new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y));
         }
         else
         {
             rigidbody2d.velocity = new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y);    
         }
+
+        
     }
 
     void Flying()
@@ -413,4 +422,55 @@ public class PlayerManager : Entity
     }
 
 
+    #region Animatioooon
+    // Not proud of this but what can I do
+    void SetAnimationStates()
+    {
+        if (isAiming)
+        {
+            animationManager.ChangeAnimation("Nico_pre_pointing");
+        }
+        else if (animationManager.previousState != "Nico_pre_pointing")
+        {
+            if (isGrounded && !isFlying)
+            {
+                if (isWalking)
+                {
+                    animationManager.ChangeAnimation("Nico_walk");
+                }
+                else if (isRunning)
+                {
+                    animationManager.ChangeAnimation("Nico_run");
+                }
+                else 
+                {
+                    animationManager.ChangeAnimation("Nico_idle");
+                }
+            }
+            else
+            {
+                if (isJumping)
+                {
+                    animationManager.ChangeAnimation("Nico_jump");
+                }
+                else if (isFlying)
+                {
+                    animationManager.ChangeAnimation("Nico_fly");
+                }
+                else if (isFalling)
+                {
+                    animationManager.ChangeAnimation("Nico_fall");
+                }
+            }
+        }
+    }
+
+    void gun_ObjectShot()
+    {
+        Debug.Log("object shot");
+        animationManager.ChangeAnimation("Nico_throw");
+        animationManager.SetNextAnimation("Nico_idle");
+    }
+
+    #endregion
 }

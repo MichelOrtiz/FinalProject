@@ -132,7 +132,7 @@ public class Entity : MonoBehaviour
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
         try
         {
-            UpdateAnimation();
+            //UpdateAnimation();
         }
         catch (System.Exception)
         {

@@ -6,6 +6,7 @@ public class CloneActivator : MonoBehaviour
     [SerializeField] private Transform mirror;
     [SerializeField] private float distanceToActivate;
     [SerializeField] private GameObject warningSign;
+    [SerializeField] private AnimationManager animationManager;
     private MirrorReflex mirrorReflex;
     private Reflex reflex;   
     
@@ -15,6 +16,10 @@ public class CloneActivator : MonoBehaviour
     {
         reflex = GetComponent<Reflex>();
         mirrorReflex = GetComponent<MirrorReflex>();
+        animationManager.Entity = mirrorReflex;
+        
+        mirrorReflex.animationManager = animationManager;
+        reflex.animationManager = animationManager;
     }
     
     void Start()
@@ -29,6 +34,7 @@ public class CloneActivator : MonoBehaviour
             if (!reflex.enabled)
             {
                 Instantiate(warningSign, player.GetPosition(), warningSign.transform.rotation);
+                animationManager.Entity = reflex;
                 reflex.enabled = true;
                 mirrorReflex.enabled = false;
             }
