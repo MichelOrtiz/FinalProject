@@ -9,11 +9,9 @@ public class loadlevel : MonoBehaviour
     [SerializeField]public GameObject startPosition;
     [SerializeField]private Transform loadPosition;
     public static loadlevel instance = null;
-    public Vector2 coords;
     protected PlayerManager player;
 
     private void Start() {
-        startPosition.gameObject.transform.position = coords;
         if(SceneController.instance.prevScene == iLevelToLoad){
             if(loadPosition!=null){
                 PlayerManager.instance.gameObject.transform.position = loadPosition.position;

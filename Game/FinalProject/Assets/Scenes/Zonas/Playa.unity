@@ -278,7 +278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74254052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -324.03, y: 0.23, z: 0}
+  m_LocalPosition: {x: -250.1, y: 7.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -40393,6 +40393,7 @@ MonoBehaviour:
   facingDirection: 
   currentState: 0
   isWalking: 0
+  isRunning: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
@@ -40414,37 +40415,38 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 0
   - serializedVersion: 2
     m_Bits: 0
   feetPos: {fileID: 645042239}
-  checkFeetRadius: 0
   groundChecker: {fileID: 0}
   collisionHandler: {fileID: 0}
-  fovType: 0
+  physics: {fileID: 0}
+  emotePos: {fileID: 0}
+  enemyType: 0
   enemyName: 19
-  damageAmount: 0
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 0
-  chaseSpeedMultiplier: 0
-  atackEffect: {fileID: 0}
-  projectileEffect: {fileID: 0}
-  startWaitTime: 0
   normalSpeed: 0
+  chaseSpeedMultiplier: 0
   chaseSpeed: 0
-  groundCheck: {fileID: 1117609663}
-  fovOrigin: {fileID: 645042239}
-  baseCastDistance: 0.5
-  downDistanceGroundCheck: 0
-  viewDistance: 5
-  fovAngle: 0
+  damageAmount: 0
+  atackEffect: {fileID: 0}
+  canKnockbackPlayer: 0
+  knockbackAngle: 0
+  knockbackDuration: 0
+  knockBackForce: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  projectileShooter: {fileID: 0}
+  laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
-  player: {fileID: 0}
   wishedItem: {fileID: 11400000, guid: c9818b8b6e6f49d4e8041cc49e66a96c, type: 2}
   wishedItemIcon: {fileID: 794428133}
 --- !u!61 &742102025
@@ -40884,6 +40886,7 @@ MonoBehaviour:
   facingDirection: 
   currentState: 0
   isWalking: 0
+  isRunning: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
@@ -40905,37 +40908,38 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 0
   - serializedVersion: 2
     m_Bits: 0
   feetPos: {fileID: 234153807}
-  checkFeetRadius: 0.3
   groundChecker: {fileID: 0}
   collisionHandler: {fileID: 0}
-  fovType: 0
+  physics: {fileID: 0}
+  emotePos: {fileID: 0}
+  enemyType: 0
   enemyName: 0
-  damageAmount: 0
+  flipToPlayerIfSpotted: 0
   normalSpeedMultiplier: 1
-  chaseSpeedMultiplier: 1
-  atackEffect: {fileID: 0}
-  projectileEffect: {fileID: 0}
-  startWaitTime: 2
   normalSpeed: 0
+  chaseSpeedMultiplier: 1
   chaseSpeed: 0
-  groundCheck: {fileID: 766575593}
-  fovOrigin: {fileID: 931650676}
-  baseCastDistance: 0.5
-  downDistanceGroundCheck: 0
-  viewDistance: 3
-  fovAngle: 0
+  damageAmount: 0
+  atackEffect: {fileID: 0}
+  canKnockbackPlayer: 0
+  knockbackAngle: 0
+  knockbackDuration: 0
+  knockBackForce: 0
+  fieldOfView: {fileID: 0}
+  enemyMovement: {fileID: 0}
+  projectileShooter: {fileID: 0}
+  laserShooter: {fileID: 0}
+  itemInteractionManager: {fileID: 0}
+  eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
-  justCapturedPlayer: 0
-  player: {fileID: 0}
   relativeGravity: 2
   verticalDirection: 
 --- !u!61 &847413550
@@ -43043,7 +43047,7 @@ MonoBehaviour:
   iLevelToLoad: 2
   startPosition: {fileID: 74254052}
   loadPosition: {fileID: 197572358}
-  coords: {x: -3, y: 2}
+  coords: {x: 0, y: 0}
 --- !u!61 &1459501031
 BoxCollider2D:
   m_ObjectHideFlags: 0

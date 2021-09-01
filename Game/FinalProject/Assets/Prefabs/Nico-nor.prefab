@@ -132,7 +132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2725911057359720447
 Transform:
   m_ObjectHideFlags: 0
@@ -5479,6 +5479,7 @@ GameObject:
   - component: {fileID: 3829738358529845136}
   - component: {fileID: 1158249951}
   - component: {fileID: 6562861816641404763}
+  - component: {fileID: 5946864857722621958}
   m_Layer: 0
   m_Name: Nico-nor
   m_TagString: Player
@@ -5623,6 +5624,7 @@ MonoBehaviour:
   facingDirection: 
   currentState: 0
   isWalking: 0
+  isRunning: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
@@ -5645,6 +5647,7 @@ MonoBehaviour:
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
   animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 0
@@ -5654,6 +5657,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1522910831385704399}
   collisionHandler: {fileID: 6346527060564971197}
   physics: {fileID: 5179934175459153183}
+  emotePos: {fileID: 0}
   maxStamina: 100
   maxOxygen: 100
   walkingSpeed: 7
@@ -5663,7 +5667,6 @@ MonoBehaviour:
   defaultMass: 10
   currentMass: 0
   dodgePerectCollider: {fileID: 603629796347817875}
-  isRunning: 0
   isSwiming: 0
   isStruggling: 0
   isImmune: 0
@@ -5743,6 +5746,18 @@ MonoBehaviour:
   ItemHotbarUp: 0000000000
   ItemHotbarDown: 0000000000
   EquipmentHotbar: 0000000000
+--- !u!114 &5946864857722621958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829738358529845160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d6f0d5c8df3664da9097319c49a21b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3829738358953819177
 GameObject:
   m_ObjectHideFlags: 0
@@ -5902,7 +5917,7 @@ MonoBehaviour:
   duration: 0
   isInCooldown: 0
   abilityName: 1
-  isUnlocked: 0
+  isUnlocked: 1
   speedMultiplier: 2
   runningSpeed: 0
 --- !u!114 &8716125286967460233
@@ -5912,7 +5927,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fd0bb8305923b94c801993205931f39, type: 3}
   m_Name: 
@@ -5923,7 +5938,7 @@ MonoBehaviour:
   duration: 0.25
   isInCooldown: 1
   abilityName: 2
-  isUnlocked: 1
+  isUnlocked: 0
   body: {fileID: 3829738358529845164}
   altHotkey: 97
   doubleTimeTap: 0.5
@@ -5936,7 +5951,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1efcc23986bb3614b8a475e5db3acc4d, type: 3}
   m_Name: 
@@ -5960,7 +5975,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7980d91f4088ec6498e40c8644e6d288, type: 3}
   m_Name: 
@@ -6001,7 +6016,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a12647b83a7b3604394fc70d2cbe8e54, type: 3}
   m_Name: 
@@ -6021,7 +6036,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 454b5b4bf98f8c34e86930ed0d1a26c0, type: 3}
   m_Name: 
@@ -6041,7 +6056,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4aeb0074b3062d4ca00707e280f9f96, type: 3}
   m_Name: 
@@ -6061,7 +6076,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd9d009b765fd094ab751eaecfb87d1e, type: 3}
   m_Name: 
@@ -6072,7 +6087,7 @@ MonoBehaviour:
   duration: 5
   isInCooldown: 0
   abilityName: 10
-  isUnlocked: 1
+  isUnlocked: 0
   Escudobj: {fileID: 2648981663275236285}
   isInShield: 0
   staminaActual: 0
@@ -6083,7 +6098,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 689c0685a5e4a1948b6731c8fa99f958, type: 3}
   m_Name: 
@@ -6094,7 +6109,7 @@ MonoBehaviour:
   duration: 0
   isInCooldown: 0
   abilityName: 6
-  isUnlocked: 1
+  isUnlocked: 0
   Rafagaobj: {fileID: 0}
   parti: {fileID: 960247108246901055}
   isActivated: 0
@@ -6106,7 +6121,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e34188428bf6df498449dc08da1256f, type: 3}
   m_Name: 
@@ -6126,7 +6141,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f48ee65ddfe188241b2d35bc9f700b51, type: 3}
   m_Name: 
@@ -6146,7 +6161,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c9b16ef29a39b94ca98cbd2fd6b1f4f, type: 3}
   m_Name: 
@@ -6170,7 +6185,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cddd8bca96fad9439176b7fd527ceff, type: 3}
   m_Name: 
@@ -6181,7 +6196,7 @@ MonoBehaviour:
   duration: 0
   isInCooldown: 0
   abilityName: 8
-  isUnlocked: 1
+  isUnlocked: 0
 --- !u!61 &1587736591
 BoxCollider2D:
   m_ObjectHideFlags: 0
