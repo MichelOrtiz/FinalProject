@@ -126,9 +126,9 @@ GameObject:
   - component: {fileID: 2725911057359720447}
   - component: {fileID: 200806198303917004}
   - component: {fileID: 7879049552581725013}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Atacado
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5265,7 +5265,7 @@ GameObject:
   - component: {fileID: 2556715510650825175}
   - component: {fileID: 2034689580703247991}
   - component: {fileID: 1522910831385704399}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundChecker
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -6017,7 +6017,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a12647b83a7b3604394fc70d2cbe8e54, type: 3}
   m_Name: 
@@ -6037,7 +6037,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 454b5b4bf98f8c34e86930ed0d1a26c0, type: 3}
   m_Name: 
@@ -6057,7 +6057,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4aeb0074b3062d4ca00707e280f9f96, type: 3}
   m_Name: 
@@ -6077,7 +6077,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd9d009b765fd094ab751eaecfb87d1e, type: 3}
   m_Name: 
@@ -6088,7 +6088,7 @@ MonoBehaviour:
   duration: 5
   isInCooldown: 0
   abilityName: 10
-  isUnlocked: 0
+  isUnlocked: 1
   Escudobj: {fileID: 2648981663275236285}
   isInShield: 0
   staminaActual: 0
@@ -6099,7 +6099,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 689c0685a5e4a1948b6731c8fa99f958, type: 3}
   m_Name: 
@@ -6142,7 +6142,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f48ee65ddfe188241b2d35bc9f700b51, type: 3}
   m_Name: 
@@ -6162,7 +6162,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c9b16ef29a39b94ca98cbd2fd6b1f4f, type: 3}
   m_Name: 
@@ -6173,7 +6173,7 @@ MonoBehaviour:
   duration: 0.25
   isInCooldown: 0
   abilityName: 11
-  isUnlocked: 0
+  isUnlocked: 1
   body: {fileID: 3829738358529845164}
   nico: {fileID: 3829738358529845160}
   Atacado: {fileID: 603629796347817875}
@@ -6186,7 +6186,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cddd8bca96fad9439176b7fd527ceff, type: 3}
   m_Name: 
@@ -6197,7 +6197,7 @@ MonoBehaviour:
   duration: 0
   isInCooldown: 0
   abilityName: 8
-  isUnlocked: 0
+  isUnlocked: 1
 --- !u!61 &1587736591
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6205,7 +6205,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -6381,7 +6381,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: 3829738358529845165}
   animator: {fileID: 3829738358529845166}
+  previousState: 
   currentState: 
+  nextState: 
+  nextStateEnabled: 0
 --- !u!1 &5021038655958402423
 GameObject:
   m_ObjectHideFlags: 0

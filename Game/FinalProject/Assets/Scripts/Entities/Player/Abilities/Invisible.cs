@@ -47,9 +47,9 @@ public class Invisible : Ability
         {
             player.gameObject.layer = LayerMask.NameToLayer("Default");
             player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Default");
-            player.groundChecker.gameObject.layer = LayerMask.NameToLayer("Default");
+            player.groundChecker.gameObject.layer = LayerMask.NameToLayer("Fake");
             player.abilityManager.gameObject.layer = LayerMask.NameToLayer("Default");
-            Atacado.gameObject.layer = LayerMask.NameToLayer("Default");
+            Atacado.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         }
         if (Input.GetKeyDown(hotkey))
         {

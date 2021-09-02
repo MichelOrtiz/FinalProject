@@ -66,7 +66,7 @@ public class DodgePerfecto : Ability
         {
             
             player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Default");
-            player.groundChecker.gameObject.layer = LayerMask.NameToLayer("Default");
+            player.groundChecker.gameObject.layer = LayerMask.NameToLayer("Fake");
             player.collisionHandler.gameObject.tag = "Player";
             player.groundChecker.gameObject.tag = "Player";
         }
