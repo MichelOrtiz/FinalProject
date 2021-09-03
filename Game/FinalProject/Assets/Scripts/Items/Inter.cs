@@ -49,6 +49,7 @@ public class Inter : MonoBehaviour
         ItemGetter getter = other.gameObject.GetComponent<ItemGetter>();
         if(getter!=null){
             if(getter.GetItem(item)){
+                Debug.Log("ÑOM ÑOM");
                 Destroy(gameObject);
                 return;
             }
