@@ -96,19 +96,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 15b9498472500954b9c27fad6cd169ed, type: 3}
-    m_FontSize: 13
+    m_Font: {fileID: 12800000, guid: 9d013ecc05416aa4bae293e7362a2827, type: 3}
+    m_FontSize: 24
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 1
+    m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 0.7
-  m_Text: Selecciona un objeto
+    m_LineSpacing: 1
+  m_Text: Selecciona un objeto para mover de tu inventario al cofre o del cofre al
+    inventario
 --- !u!1 &1074827261185872782
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,9 +333,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3277886409155722093}
-        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: NextPage
+      - m_Target: {fileID: 8014223712557969434}
+        m_TargetAssemblyTypeName: CofreUI, Assembly-CSharp
+        m_MethodName: NextCof
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -464,9 +465,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3277886409155722093}
-        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: NextPage
+      - m_Target: {fileID: 8014223712557969434}
+        m_TargetAssemblyTypeName: CofreUI, Assembly-CSharp
+        m_MethodName: NextInv
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -672,9 +673,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3277886409155722093}
-        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: PrevPage
+      - m_Target: {fileID: 8014223712557969434}
+        m_TargetAssemblyTypeName: CofreUI, Assembly-CSharp
+        m_MethodName: PrevInv
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -720,7 +721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.5510864, y: -4.252228}
+  m_AnchoredPosition: {x: 2.5512695, y: -4.2521973}
   m_SizeDelta: {x: -396.33655, y: -208.28128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &913597229304727930
@@ -3730,9 +3731,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3277886409155722093}
-        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: PrevPage
+      - m_Target: {fileID: 8014223712557969434}
+        m_TargetAssemblyTypeName: CofreUI, Assembly-CSharp
+        m_MethodName: PrevCof
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

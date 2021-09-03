@@ -21,7 +21,7 @@ public class CofreSlot : ItemSlot
             }
             if(origen == Holder.Cofre){
                 Debug.Log("CofSlot.CofreUI");
-                Inventory.instance.items.Add(item);
+                Inventory.instance.Add(item);
                 Cofre.instance.RemoveItem(item);
             }
         }

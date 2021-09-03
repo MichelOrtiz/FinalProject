@@ -62,6 +62,7 @@ public class CofreUI : MonoBehaviour
 
         //cargar inventario en UI
         //Debug.Log("Cargando objetos en inventario-CofreUI");
+        
         for(int i=0; i<slotsInv.Length;i++){
         slotsInv[i].SetIndex(i+pageInv);
         slotsInv[i].origen = CofreSlot.Holder.Inventario;
@@ -95,5 +96,34 @@ public class CofreUI : MonoBehaviour
                 slotsCof[i].ClearSlot();
             }
         }
+        if(pageCof+20 < cofre.savedItems.Count){
+            nextButtonCof.gameObject.SetActive(true);
+        }
+        else{
+            nextButtonCof.gameObject.SetActive(false);
+        }
+
+        if(pageCof!=0){
+            prevButtonCof.gameObject.SetActive(true);
+        }
+        else{
+            prevButtonCof.gameObject.SetActive(false);
+        }
+    }
+    public void NextInv(){
+        pageInv += 10;
+        UpdateUI();
+    }
+    public void PrevInv(){
+        pageInv -= 10;
+        UpdateUI();
+    }
+    public void NextCof(){
+        pageCof += 20;
+        UpdateUI();
+    }
+    public void PrevCof(){
+        pageCof -= 20;
+        UpdateUI();
     }
 }
