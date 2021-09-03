@@ -101,7 +101,7 @@ public abstract class Enemy : Entity
                 {
                         if (this is WeaverArandana) Debug.Log("flip wtf");
 
-                    if (rigidbody2d.gravityScale == 0 ||  groundChecker.isGrounded)
+                    if (rigidbody2d?.gravityScale == 0 ||  groundChecker.isGrounded)
                     {
                         ChangeFacingDirection();
                     }

@@ -61,7 +61,7 @@ public class MimicCrystal : MonoBehaviour
                 // Stop enemy behaviour
                 if (currentEnemy.enabled)
                 {
-                    currentEnemy.EnemyMovement.StopAllMovement();
+                    currentEnemy.EnemyMovement.StopMovement();
                     currentEnemy.enabled = false;
                 }
                 curStopTime += Time.deltaTime;

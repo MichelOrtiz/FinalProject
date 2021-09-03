@@ -137,7 +137,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        isOnCollider = colliderTag != null && !collisionHandler.Contacts.Exists( c=> c.tag != colliderTag) && collisionHandler.Contacts.Exists( c=> c.tag == colliderTag);
+        isOnCollider = colliderTag != null && collisionHandler.Contacts.Exists( c=> c.tag == colliderTag);
         //rigidbody2d.position = Vector3.MoveTowards(transform.position, shootDir, speedMultiplier * Time.deltaTime); 
         //animator.SetBool("Is Destroying", aboutToDestroy);
         Vector2 distance = startPoint - transform.position;

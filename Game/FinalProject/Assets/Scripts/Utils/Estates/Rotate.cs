@@ -10,6 +10,7 @@ public class Rotate : State
     public override void StartAffect(StatesManager newManager)
     {
         base.StartAffect(newManager);
+        manager.hostEntity.rigidbody2d.gravityScale = 0;
         manager.hostEntity.groundChecker.GetComponent<Collider2D>().isTrigger = true;
         manager.hostEntity.physics.SetKinematic(duration + 0.1f);
 
@@ -33,8 +34,12 @@ public class Rotate : State
     public override void StopAffect()
     {
         manager.hostEntity.groundChecker.GetComponent<Collider2D>().isTrigger = false;
+
+        manager.hostEntity.transform.rotation = initialRotation;
+
         manager.hostEntity.rigidbody2d.velocity = Vector3.zero;
         manager.hostEntity.rigidbody2d.angularVelocity = 0;
+        manager.hostEntity.rigidbody2d.gravityScale = 1;
         base.StopAffect();
     }
 }

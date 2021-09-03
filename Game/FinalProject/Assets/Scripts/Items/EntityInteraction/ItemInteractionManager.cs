@@ -26,15 +26,16 @@ public class ItemInteractionManager : MonoBehaviour
     public void Interact(Item item)
     {
         //var itemState = itemInteraction.itemStates.Find(i => i.item == item);
-        var itemState = itemStates.Find(i => i.item == item);
+        var itemState = itemStates.Find(i => i.item.nombre == item.nombre);
         if (itemState != null)
         {
             if (itemState.states != null && itemState.states[0] != null)
             {
 
                 states = itemState.states;
+                index = 0;
                 //interacting = true;
-
+                currentState = null;
                 UpdateCurrentState();
             }
             else
@@ -52,6 +53,8 @@ public class ItemInteractionManager : MonoBehaviour
         {
             if (currentState != null)
             {
+                Debug.Log("current state not null");
+
                 index++;
             }
             if (index <= states.Count - 1 || (index == 0 ))
@@ -71,6 +74,7 @@ public class ItemInteractionManager : MonoBehaviour
             }
             else
             {
+                Debug.Log("index " + index);
                 //interacting = false;
             }
         }

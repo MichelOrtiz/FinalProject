@@ -29,8 +29,9 @@ public class LevitateComically : State
         else
         {
             // Animation
-            manager.hostEntity.animator.SetBool("Is Walking", true);
-            manager.hostEntity.enabled = false;
+            //manager.hostEntity.animator.SetBool("Is Walking", true);
+            manager.hostEntity.animationManager.ChangeAnimation("walk", 2f);
+            //manager.hostEntity.enabled = false;
 
             /*manager.hostEntity.rigidbody2d.position = 
                 Vector2.MoveTowards(manager.hostEntity.GetPosition(), manager.hostEntity.GetPosition() + Vector3.up , Time.deltaTime);*/
@@ -46,6 +47,8 @@ public class LevitateComically : State
 
         manager.hostEntity.rigidbody2d.isKinematic = false;
         manager.hostEntity.rigidbody2d.gravityScale = 1;
+        manager.hostEntity.enabled = true;
+
         base.StopAffect();
         //manager.hostEntity.DestroyEntity();
     }

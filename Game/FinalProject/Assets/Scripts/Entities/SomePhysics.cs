@@ -106,6 +106,6 @@ public class SomePhysics : MonoBehaviour
 
 		yield return new WaitForSeconds(duration);
 		rigidbody2d.isKinematic = false;
-		rigidbody2d.gravityScale = gravity;
+		rigidbody2d.gravityScale = 1;// gravity;
 	}
 }
