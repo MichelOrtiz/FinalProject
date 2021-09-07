@@ -42,7 +42,7 @@ public class PlayerManager : Entity
     #endregion
 
     #region Layers, rigids, etc
-    //public GameObject camara;
+    public GameObject camara;
     public GameObject Darkness;
     #endregion
 
