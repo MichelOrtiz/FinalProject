@@ -20,8 +20,12 @@ public class LoadMachine : MonoBehaviour
         SaveFile partida = SaveFilesManager.instance.LoadSaveFile(Application.dataPath + "/Partida" + SaveFilesManager.instance.currentSaveSlot.slotFile);
         if(partida!=null){
             Inventory.instance.items.Clear();
-            for(int i=0;i<partida.inventoy.Length;i++){
-                Inventory.instance.Add(partida.inventoy[i]);
+            for(int i=0;i<partida.inventory.Length;i++){
+                Inventory.instance.Add(partida.inventory[i]);
+            }
+            Cofre.instance.savedItems.Clear();
+            for(int i=0; i<partida.chestItems.Length;i++){
+                Cofre.instance.AddItem(partida.chestItems[i]);
             }
             Debug.Log("...cosas se cargaron");
             Debug.Log("DELETE THIS");

@@ -21,8 +21,8 @@ public class Inventory : MonoBehaviour
     private void Start() {
         if(SaveFilesManager.instance?.currentSaveSlot != null){
             items.Clear();
-            for(int i=0;i<SaveFilesManager.instance.currentSaveSlot.inventoy.Length;i++){
-                Add(SaveFilesManager.instance.currentSaveSlot.inventoy[i]);
+            for(int i=0;i<SaveFilesManager.instance.currentSaveSlot.inventory.Length;i++){
+                Add(SaveFilesManager.instance.currentSaveSlot.inventory[i]);
             }
         }
     }

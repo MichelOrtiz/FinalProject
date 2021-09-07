@@ -20,7 +20,8 @@ public class CheckPoint : MonoBehaviour
     void Save(){
         SaveFile progress = SaveFilesManager.instance.currentSaveSlot;
         progress.chestItems = null;
-        progress.inventoy = Inventory.instance.items.ToArray();
+        progress.inventory = Inventory.instance.items.ToArray();
+        progress.chestItems = CofreUI.instance.cofre.savedItems.ToArray();
         progress.prefab = null;
         progress.sceneToLoad = SceneController.instance.currentScene;
         progress.positionSpawn = transform.position;

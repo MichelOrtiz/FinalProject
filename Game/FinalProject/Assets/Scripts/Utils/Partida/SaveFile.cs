@@ -12,7 +12,7 @@ public class SaveFile
     public int timeDaysPlayed;
     public int sceneToLoad;
     public Vector2 positionSpawn;
-    public Item[] inventoy;
+    public Item[] inventory;
     public Item[] chestItems;
     public GameObject prefab;
     public SaveFile(){
@@ -23,7 +23,7 @@ public class SaveFile
         this.timeDaysPlayed = 0;
         this.sceneToLoad = 1;
         this.positionSpawn = new Vector2(0f,0f);
-        this.inventoy = null;
+        this.inventory = null;
         this.chestItems = null;
     }
     public SaveFile(string namePlayer, int slotFile){
@@ -34,7 +34,7 @@ public class SaveFile
         this.timeDaysPlayed = 0;
         this.sceneToLoad = 1;
         this.positionSpawn = new Vector2(0f,0f);
-        this.inventoy = null;
+        this.inventory = null;
         this.chestItems = null;
     }
 }
