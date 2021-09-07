@@ -17,7 +17,7 @@ public class GunProjectile : MonoBehaviour
     public float offset;
     private Vector3 mousePosition;
     private void Update() {
-        mousePosition = GameCamera.instance.GetMousePosition();
+        mousePosition = CameraFollow.instance.GetMousePosition();
         Vector3 dif = mousePosition - transform.position;
         float rotZ = Mathf.Atan2(dif.y,dif.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f,0f,rotZ + offset);

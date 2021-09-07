@@ -13,16 +13,19 @@ public class CofreSlot : ItemSlot
     }
     public override void OnButtonPress(){
         if(item!=null){
-            Debug.Log("Press");
+            //Debug.Log("Press");
             if(origen == Holder.Inventario){
-                Debug.Log("InvSlot.CofreUI");
+                //Debug.Log("InvSlot.CofreUI");
                 Cofre.instance.AddItem(item);
                 Inventory.instance.Remove(item);
             }
             if(origen == Holder.Cofre){
-                Debug.Log("CofSlot.CofreUI");
-                Inventory.instance.Add(item);
-                Cofre.instance.RemoveItem(item);
+                //Debug.Log("CofSlot.CofreUI");
+                if(Inventory.instance.Add(item)){
+                    Cofre.instance.RemoveItem(item);
+                    return;
+                }
+                Debug.Log("Inventory full");
             }
         }
     }
