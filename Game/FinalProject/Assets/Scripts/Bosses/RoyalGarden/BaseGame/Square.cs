@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
-namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden.BaseGame
+namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 {
     public class Square : MonoBehaviour
     {
@@ -22,7 +22,7 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden.BaseGame
         public Action<Square> Clicked;
         void Start()
         {
-            GetComponent<Button>().onClick.AddListener(OnClick);
+            GetComponent<Button>()?.onClick.AddListener(OnClick);
 
             //VectorLocation = 
         }

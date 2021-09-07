@@ -1,17 +1,29 @@
 using UnityEngine;
-namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden.BaseGame
+using System.Collections;
+namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 {
     public class AiGridBehaviour : MonoBehaviour
     {
         public string symbol;
-        [SerializeField] private GridController gridController;
+        private GridController gridController;
+        [SerializeField] private BoardController boardController;
+        [SerializeField] private float delay;
         public void TakeTurn()
         {
-            var squares = gridController.GetAvailableSquares();
-            if (squares != null && squares.Count > 0)
+            var squares = boardController.currentGrid.GetAvailableSquares();
+            gridController = boardController.currentGridControler;
+            if (boardController.currentGrid.SquaresAvailable())
             {
-                gridController.SelectSquare(RandomGenerator.RandomElement<Square>(squares), symbol);
+                var square = RandomGenerator.RandomElement<Square>(squares);
+                StartCoroutine(SelectSquare(square));
             }
+        }
+
+        private IEnumerator SelectSquare(Square square)
+        {
+            yield return new WaitForSeconds(delay);
+            gridController.SelectSquare(square, symbol);
+            boardController.OnSquareClick(square);
         }
     }
 }

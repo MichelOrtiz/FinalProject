@@ -1,4 +1,4 @@
-namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden.BaseGame
+namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 {
     public enum GridLocation
     {
