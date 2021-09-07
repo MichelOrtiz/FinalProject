@@ -24,9 +24,9 @@ public class MouseDirPointer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameCamera.instance.HasMouseMoved() && !Pause.active)
+        if (CameraFollow.instance.HasMouseMoved() && !Pause.active)
         {
-            mousePosition = GameCamera.instance.GetMousePosition();
+            mousePosition = CameraFollow.instance.GetMousePosition();
             angle = MathUtils.GetAngleBetween(transform.position, mousePosition);
         }
         /*float distance = Vector2.Distance(transform.position, mousePosition);
