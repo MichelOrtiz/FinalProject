@@ -34,6 +34,8 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
         {
             entity = transform.parent.GetComponent<Entity>();
         }
+
+        projectilePrefab.GetComponent<Projectile>().targetWarningAvailable = player.abilityManager.IsUnlocked(Ability.Abilities.VisionFutura);
     }
 
     public void ProjectileAttack()

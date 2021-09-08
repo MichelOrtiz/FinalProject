@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
 
 namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 {
@@ -13,6 +14,8 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         [SerializeField] private Text winnerText;
 
         public bool HasWinner { get => winner != ""; }
+
+        public Action<Grid> Finished;
 
         void Awake()
         {
@@ -26,7 +29,13 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
             var squares = ScenesManagers.GetComponentsInChildrenList<Square>(gameObject);
             if (squares != null)
             {
-                squares.ForEach(s => s.GetComponent<Button>().enabled = value);
+                foreach (var square in squares)
+                {
+                    if (square.TryGetComponent<Button>(out var bt))
+                    {
+                        bt.enabled = value;
+                    }
+                }
             }
         }
 
@@ -35,6 +44,7 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
             this.winner = winner;
             winnerText.gameObject.SetActive(true);
             winnerText.text = winner;
+            Finished?.Invoke(this);
         }
 
         public bool SquaresAvailable()

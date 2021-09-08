@@ -25,7 +25,16 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
             currentTurn = playerSymbol;
         }
 
+        public void CheckWinner(Grid grid)
+        {
+            var winner = GetWinner(grid);
 
+            if (winner != "")
+            {
+                grid.SetWinner(winner);
+                grid.ToggleSquares(false);
+            }
+        }
 
         public string GetWinner(Grid grid)
         {

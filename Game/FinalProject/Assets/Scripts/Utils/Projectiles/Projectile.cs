@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected GameObject warning;
     [SerializeField] protected GameObject? impactEffect;
 
-    [SerializeField] protected bool targetWarningAvailable;
+    public bool targetWarningAvailable;
     //[SerializeField] protected bool collidesWithPlayer;
     [SerializeField] protected bool independentAttackEnabled;
     protected LayerMask defaultLayer;

@@ -64,4 +64,14 @@ public class AbilityManager : MonoBehaviour
     {
         return abilities.Find(a => a.abilityName == name);
     }
+
+    public bool IsUnlocked(Ability.Abilities name)
+    {
+        var ability = FindAbility(name);
+        if (ability != null)
+        {
+            return ability.isUnlocked;
+        }
+        return false;
+    }
 }

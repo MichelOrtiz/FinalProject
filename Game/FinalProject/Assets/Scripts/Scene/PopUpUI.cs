@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 public class PopUpUI : MonoBehaviour
 {
     [SerializeField] private GameObject canvas;
@@ -10,6 +11,7 @@ public class PopUpUI : MonoBehaviour
 
     private PopUp popUp = new PopUp();
     public static PopUpUI Instance { get; private set; }
+    public Action closedPopUp;
 
     void Awake()
     {
@@ -53,5 +55,6 @@ public class PopUpUI : MonoBehaviour
     {
         canvas.SetActive(false);
         Pause.ResumeGame();
+        closedPopUp?.Invoke();
     }
 }

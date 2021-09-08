@@ -23,7 +23,7 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         {
             yield return new WaitForSeconds(delay);
             gridController.SelectSquare(square, symbol);
-            boardController.OnSquareClick(square);
+            boardController.OnPlayedTurn(square);
         }
     }
 }

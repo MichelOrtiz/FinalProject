@@ -17,8 +17,8 @@ public class BossFight : MonoBehaviour
     [SerializeField] protected List<Stage> stages;
     [SerializeField] protected GameObject abilityObject;
     
-    [SerializeField] private Ability.Abilities ability;
-    private PopUpTrigger popUpTrigger;
+    [SerializeField] protected Ability.Abilities ability;
+    protected PopUpTrigger popUpTrigger;
 
     public Stage currentStage;
     public bool isCleared;

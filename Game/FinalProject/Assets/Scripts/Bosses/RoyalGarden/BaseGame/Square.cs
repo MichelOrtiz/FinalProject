@@ -9,8 +9,7 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         public string symbol;
         public bool occupied;
         public GridLocation gridLocation;
-
-        public Vector2 VectorLocation;
+        [SerializeField] private Text text;
 
 
         /*public delegate void Clicked(Square square);
@@ -31,6 +30,22 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         {
             //OnClicked(this);
             Clicked(this);
+        }
+
+        public void SetSymbol(string symbol)
+        {
+            Debug.Log((new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name);
+            
+            if (!transform.parent.GetComponent<Grid>().HasWinner)
+            {
+                this.symbol = symbol;
+                if (text != null)
+                {
+                    text.text = symbol;
+                }
+                occupied = true;
+            }
+            
         }
     }
 }

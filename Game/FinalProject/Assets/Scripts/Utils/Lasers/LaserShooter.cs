@@ -26,6 +26,8 @@ public class LaserShooter : MonoBehaviour, ILaser
         player = PlayerManager.instance;
 
         entity = transform.parent.GetComponent<Entity>();
+        laserPrefab.GetComponent<Laser>().targetWarningAvailable = player.abilityManager.IsUnlocked(Ability.Abilities.VisionFutura);
+
     }
 
     void Update()

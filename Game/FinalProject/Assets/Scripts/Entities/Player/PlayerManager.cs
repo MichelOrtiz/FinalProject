@@ -418,7 +418,18 @@ public class PlayerManager : Entity
     }*/
     void FindRespawnPos()
     {
-        transform.position = GameObject.FindWithTag("RespawnPos").transform.position;
+        try
+        {
+            var spawnPos = GameObject.FindWithTag("RespawnPos").transform.position;
+            if (spawnPos != null)
+            {
+                transform.position = spawnPos;
+            }
+        }
+        catch (System.NullReferenceException)
+        {
+            
+        }
     }
 
 
