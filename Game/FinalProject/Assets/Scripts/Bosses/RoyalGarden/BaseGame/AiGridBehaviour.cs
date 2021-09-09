@@ -56,11 +56,16 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
                 }
                 gridController.SelectSquare(bestSquare, symbol);
                 boardController.OnPlayedTurn(bestSquare);*/
-
-
-                var square = RandomGenerator.RandomElement<Square>(avSquares);
+                var square = gameManager.GetWinningSquare(symbol, currentGrid);
+                if (square == null)
+                {
+                    square = gameManager.GetWinningSquare(gameManager.playerSymbol, currentGrid);
+                    if (square == null)
+                    {
+                        square = RandomGenerator.RandomElement<Square>(avSquares);
+                    }
+                }
                 StartCoroutine(SelectSquare(square));
-
             }
         }
 

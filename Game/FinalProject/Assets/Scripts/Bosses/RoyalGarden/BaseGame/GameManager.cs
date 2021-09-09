@@ -21,6 +21,27 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
             {GridLocation.TopLeft, GridLocation.CenterCenter, GridLocation.BottomRight}, 
             {GridLocation.TopRight, GridLocation.CenterCenter, GridLocation.BottomLeft} };
 
+        public static readonly GridLocation[,] partialWinningGridLines = 
+        {
+            {GridLocation.TopLeft, GridLocation.TopCenter}, 
+            {GridLocation.CenterLeft, GridLocation.CenterCenter},
+            {GridLocation.BottomLeft, GridLocation.BottomCenter}, 
+            {GridLocation.TopLeft, GridLocation.CenterLeft}, 
+            {GridLocation.TopCenter, GridLocation.CenterCenter}, 
+            {GridLocation.TopRight, GridLocation.CenterRight}, 
+            {GridLocation.TopLeft, GridLocation.CenterCenter}, 
+            {GridLocation.TopRight, GridLocation.CenterCenter},
+
+            {GridLocation.TopCenter, GridLocation.TopRight}, 
+            {GridLocation.CenterCenter, GridLocation.CenterRight}, 
+            {GridLocation.BottomCenter, GridLocation.BottomRight}, 
+            {GridLocation.CenterLeft, GridLocation.BottomLeft}, 
+            {GridLocation.CenterCenter, GridLocation.BottomCenter}, 
+            {GridLocation.CenterRight, GridLocation.BottomRight}, 
+            {GridLocation.CenterCenter, GridLocation.BottomRight}, 
+            {GridLocation.CenterCenter, GridLocation.BottomLeft}
+        };
+
         void Awake()
         {
             currentTurn = playerSymbol;
@@ -66,7 +87,7 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         bool IsWinner(string symbol, Grid grid)
         {
             var squares = grid.squares;
-            var symbolSquares = squares.FindAll(s => s.symbol == symbol);
+            var symbolSquares = squares.FindAll(s => s.symbol == symbol || s.symbol == tieSymbol);
             for (int i = 0; i < 8; i++)
             {
                 Square square = null;
@@ -84,6 +105,55 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
                 }
             }
             return false;
+        }
+
+        bool IsPartialWinner(string symbol, Grid grid)
+        {
+            return GetWinningSquare(symbol, grid) != null;
+        }
+
+        public Square GetWinningSquare(string symbol, Grid grid)
+        {
+            var squares = grid.squares;
+            var symbolSquares = squares.FindAll(s => s.symbol == symbol || s.symbol == tieSymbol);
+            
+            for (int i = 0; i < 8; i++)
+            {
+                Square square = null;
+                var counter = 0;
+                bool squareOccupied = false;
+                // default value
+                GridLocation winLocation = GridLocation.TopLeft;
+                for (int j = 0; j < 3; j++)
+                {
+                    squareOccupied = false;
+                    square = symbolSquares.Find(s => s.gridLocation == winningGridLines[i, j]);
+                    if (square != null)
+                    {
+                        counter++;
+                    }
+                    else
+                    {
+                        var location = winningGridLines[i, j];
+                        if (!squares.Find(s => s.gridLocation == location).occupied)
+                        {
+                            winLocation = location;
+                        }
+                        else
+                        {
+                            squareOccupied = true;
+                        }
+                    }
+                }
+                if (counter == 2 && !squareOccupied)
+                {
+                    if (!squares.Find(s => s.gridLocation == winLocation).occupied)
+                    {
+                        return squares.Find(s => s.gridLocation == winLocation);
+                    }
+                }
+            }
+            return null;
         }
 
     }
