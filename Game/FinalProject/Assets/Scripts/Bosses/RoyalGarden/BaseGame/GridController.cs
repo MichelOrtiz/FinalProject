@@ -13,7 +13,6 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         private string aiSymbol;
         [SerializeField] private AiGridBehaviour aiGridBehaviour;
         public Grid grid;
-        [SerializeField] private bool useAi;
 
 
 

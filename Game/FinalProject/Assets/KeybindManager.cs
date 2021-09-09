@@ -50,7 +50,7 @@ public class KeybindManager : MonoBehaviour
         BindKey("SKILL3", KeyCode.Alpha7);
         BindKey("SKILL4", KeyCode.Alpha8);
         BindKey("SKILL5", KeyCode.Alpha9);
-        BindKey("SKILL5", KeyCode.Alpha0);
+        BindKey("SKILL6", KeyCode.Alpha0);
     }
 
     public void BindKey(string key, KeyCode keyBind){

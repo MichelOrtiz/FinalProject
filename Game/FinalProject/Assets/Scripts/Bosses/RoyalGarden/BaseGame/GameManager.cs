@@ -8,6 +8,7 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
     {
         public string playerSymbol;
         public string aiSymbol;
+        public string tieSymbol;
         public string currentTurn;
         public List<Vector2[]> winningLines = new List<Vector2[]>();
         public static readonly GridLocation[,] winningGridLines = 
@@ -49,7 +50,7 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
             }
             else if (!grid.SquaresAvailable())
             {
-                return "I";
+                return tieSymbol;
             }
             return string.Empty;
         }

@@ -225,7 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   symbol: O
   boardController: {fileID: 50451924}
-  delay: 1
+  delay: 0.75
+  gameManager: {fileID: 50451925}
 --- !u!114 &50451924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSymbol: X
   aiSymbol: O
+  tieSymbol: 
   currentTurn: 
 --- !u!114 &50451927
 MonoBehaviour:
@@ -3308,7 +3310,6 @@ MonoBehaviour:
   gameManager: {fileID: 50451925}
   aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
-  useAi: 1
 --- !u!114 &275865332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6570,7 +6571,6 @@ MonoBehaviour:
   gameManager: {fileID: 50451925}
   aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
-  useAi: 1
 --- !u!114 &709693981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8188,7 +8188,6 @@ MonoBehaviour:
   gameManager: {fileID: 50451925}
   aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 872605191}
-  useAi: 1
 --- !u!114 &872605191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11609,7 +11608,6 @@ MonoBehaviour:
   gameManager: {fileID: 50451925}
   aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
-  useAi: 1
 --- !u!114 &1128858888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12266,7 +12264,6 @@ MonoBehaviour:
   gameManager: {fileID: 50451925}
   aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
-  useAi: 1
 --- !u!114 &1188844180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14921,7 +14918,6 @@ MonoBehaviour:
   gameManager: {fileID: 50451925}
   aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
-  useAi: 1
 --- !u!114 &1444803697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15065,7 +15061,6 @@ MonoBehaviour:
   gameManager: {fileID: 50451925}
   aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
-  useAi: 1
 --- !u!114 &1457761987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18544,7 +18539,6 @@ MonoBehaviour:
   gameManager: {fileID: 50451925}
   aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
-  useAi: 1
 --- !u!114 &1910720771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20535,7 +20529,6 @@ MonoBehaviour:
   gameManager: {fileID: 50451925}
   aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
-  useAi: 1
 --- !u!114 &2132880522
 MonoBehaviour:
   m_ObjectHideFlags: 0

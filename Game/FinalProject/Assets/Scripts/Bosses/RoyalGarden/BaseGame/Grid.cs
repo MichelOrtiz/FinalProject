@@ -20,6 +20,10 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         void Awake()
         {
             winnerText.gameObject.SetActive(false);
+            if (squares == null)
+            {
+                squares = new List<Square>();
+            }
         }
 
 

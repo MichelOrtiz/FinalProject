@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,10 +29,10 @@ public class UIManager : MonoBehaviour
     public AirHockeyPlayerMovement airHockeyPlayerMovement;
     public AIScript aIScript;
     private KeyCode action1, action2, action3;
-    private GameObject[] keybindButtons;
+    [SerializeReference]private GameObject[] keybindButtons;
     private void Awake()
     {
-        keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");   
+        keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
     }
     private void Start()
     {
@@ -61,7 +62,7 @@ public class UIManager : MonoBehaviour
         aIScript.CenterPosition();
     }
     public void UpdateKeyText(string key, KeyCode code){
-        Text tmp = Array.Find(keybindButtons, x => x.name == key).GetComponentInChildren<Text>();
+        TextMeshProUGUI tmp = Array.Find(keybindButtons, x => x.name == key).GetComponentInChildren<TextMeshProUGUI>();
         tmp.text = code.ToString();
     }
 }

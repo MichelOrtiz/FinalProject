@@ -34,8 +34,6 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 
         public void SetSymbol(string symbol)
         {
-            Debug.Log((new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name);
-            
             if (!transform.parent.GetComponent<Grid>().HasWinner)
             {
                 this.symbol = symbol;
@@ -46,6 +44,16 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
                 occupied = true;
             }
             
+        }
+
+        public void RemoveSymbol()
+        {
+            symbol = "";
+            if (text != null)
+            {
+                text.text = symbol;
+            }
+            occupied = false;
         }
     }
 }
