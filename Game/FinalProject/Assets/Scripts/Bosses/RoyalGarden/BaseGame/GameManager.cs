@@ -1,16 +1,16 @@
 
 using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private float winDelay; 
         public string playerSymbol;
         public string aiSymbol;
         public string tieSymbol;
         public string currentTurn;
-        public List<Vector2[]> winningLines = new List<Vector2[]>();
         public static readonly GridLocation[,] winningGridLines = 
         {   {GridLocation.TopLeft, GridLocation.TopCenter, GridLocation.TopRight},
             {GridLocation.CenterLeft, GridLocation.CenterCenter, GridLocation.CenterRight}, 
@@ -34,7 +34,15 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
             {
                 grid.SetWinner(winner);
                 grid.ToggleSquares(false);
+                //StartCoroutine(SetWinner(grid, winner));
             }
+        }
+
+        IEnumerator SetWinner(Grid grid, string symbol)
+        {
+            yield return new WaitForSeconds(winDelay);
+            grid.SetWinner(symbol);
+            grid.ToggleSquares(false);
         }
 
         public string GetWinner(Grid grid)

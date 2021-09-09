@@ -164,6 +164,34 @@ public class ScenesManagers : MonoBehaviour
         return !gameObjects.Exists(g => !g.activeInHierarchy);
     }
 
+    public static bool IsFullListActive<T>(List<T> objects)
+    {
+        var gameObjects = FindMatchedObjects(GetObjectsOfType<T>());
+        if (gameObjects != null)
+        {
+            return IsFullListActive(gameObjects);
+        }
+        return false;
+    }
+
+    // For inspector components
+    public static bool IsFullListEnabled<T>(List<T> objects)
+    {
+        foreach (var obj in objects)
+        {
+            if (obj is MonoBehaviour)
+            {
+                var mono = obj as MonoBehaviour;
+                if (!mono.enabled) return false; 
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void InvertListActive(List<GameObject> gameObjects)
     {
         SetListActive(gameObjects, !IsFullListActive(gameObjects));

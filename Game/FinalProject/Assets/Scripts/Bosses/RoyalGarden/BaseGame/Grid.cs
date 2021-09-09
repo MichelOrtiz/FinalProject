@@ -8,13 +8,10 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 {
     public class Grid : MonoBehaviour
     {
-
         public List<Square> squares;
         public string winner = "";
         [SerializeField] private Text winnerText;
-
         public bool HasWinner { get => winner != ""; }
-
         public Action<Grid> Finished;
 
         void Awake()
@@ -25,8 +22,6 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
                 squares = new List<Square>();
             }
         }
-
-
 
         public void ToggleSquares(bool value)
         {
@@ -61,6 +56,13 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         {
             var avSquares = squares.FindAll(s => !s.occupied);
             return avSquares;
+        }
+
+        public bool ButtonSquaresEnabled()
+        {
+            List<Button> buttons = new List<Button>();
+            squares.ForEach( s => buttons.Add(s.GetComponent<Button>()));
+            return ScenesManagers.IsFullListEnabled(buttons);
         }
     }
 

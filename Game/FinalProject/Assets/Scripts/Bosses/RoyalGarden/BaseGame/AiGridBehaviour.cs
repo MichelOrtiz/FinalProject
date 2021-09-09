@@ -5,20 +5,17 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 {
     public class AiGridBehaviour : MonoBehaviour
     {
-        public string symbol;
+        public string symbol { get; private set; }
         private GridController gridController;
         [SerializeField] private BoardController boardController;
         [SerializeField] private float delay;
         [SerializeField] private GameManager gameManager;
 
-        private Dictionary<string, short> scores = new Dictionary<string, short>();
+        private Dictionary<string, short> scores;
         
-
-        /// <summary>
-        /// Awake is called when the script instance is being loaded.
-        /// </summary>
         void Awake()
         {
+            symbol = gameManager.aiSymbol;
             scores = new Dictionary<string, short>
             {
                 {gameManager.aiSymbol, 1},
@@ -29,9 +26,11 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 
         public void TakeTurn()
         {
+            if (boardController.mainGrid.HasWinner) return;
+
             var currentGrid = boardController.currentGrid;
             var avSquares = currentGrid.GetAvailableSquares();
-            gridController = boardController.currentGridControler;
+            gridController = boardController.currentGridController;
             /*var bestScore = -2;
             Square bestSquare = RandomGenerator.RandomElement<Square>(avSquares);*/
             if (boardController.currentGrid.SquaresAvailable())
@@ -55,7 +54,9 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
                         bestSquare = square;
                     }
                 }
-                StartCoroutine(SelectSquare(bestSquare));*/
+                gridController.SelectSquare(bestSquare, symbol);
+                boardController.OnPlayedTurn(bestSquare);*/
+
 
                 var square = RandomGenerator.RandomElement<Square>(avSquares);
                 StartCoroutine(SelectSquare(square));
@@ -111,10 +112,7 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
             }
         }
 
-
-
-
-        Grid CreateGridCopy(Grid grid)
+        /*Grid CreateGridCopy(Grid grid)
         {
             var squares = grid.squares;
             var tGrid = Instantiate(grid);
@@ -131,6 +129,6 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
             var tController = Instantiate(gridController);
             tController.grid = grid;
             return tController;
-        }
+        }*/
     }
 }

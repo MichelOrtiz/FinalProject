@@ -11,11 +11,7 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         [SerializeField] private GameManager gameManager;
         private string playerSymbol;
         private string aiSymbol;
-        [SerializeField] private AiGridBehaviour aiGridBehaviour;
         public Grid grid;
-
-
-
         public Action AiTurn;
         public Action<Square> PlayedTurn;
 
@@ -39,16 +35,9 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         public void SelectSquare(Square square, string symbol)
         {
             if (!grid.HasWinner) square.SetSymbol(symbol);
-
             gameManager.CheckWinner(grid);
-
-
             PlayedTurn?.Invoke(square);
             NextTurn();
-            /*else// if (grid.SquaresAvailable())
-            {
-                NextTurn();
-            }*/
         }
 
         public void OnSquareClick(Square square)
@@ -66,9 +55,9 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 
             if (gameManager.currentTurn == aiSymbol)
             {
+                // Lets whatever is controlling the ai to take activate its turn
                 AiTurn?.Invoke();
             }
-
         }
     }
 }

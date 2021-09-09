@@ -10,26 +10,15 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         public bool occupied;
         public GridLocation gridLocation;
         [SerializeField] private Text text;
-
-
-        /*public delegate void Clicked(Square square);
-        public event Clicked ClickedHandler;
-        public void OnClicked(Square square)
-        {
-            ClickedHandler?.Invoke(this);
-        }*/
         public Action<Square> Clicked;
         void Start()
         {
             GetComponent<Button>()?.onClick.AddListener(OnClick);
-
-            //VectorLocation = 
         }
 
         public void OnClick()
         {
-            //OnClicked(this);
-            Clicked(this);
+            Clicked?.Invoke(this);
         }
 
         public void SetSymbol(string symbol)
