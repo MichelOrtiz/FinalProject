@@ -1,9 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    private static UIManager instance; 
+    public static UIManager MyInstance{
+        get{
+            if (instance==null)
+            {
+                instance = FindObjectOfType<UIManager>();
+            }
+            return instance;
+        }
+    }
     [Header("Canvas")]
     public GameObject CanvasGame;
     public GameObject CanvasRestart;
@@ -15,6 +28,16 @@ public class UIManager : MonoBehaviour
     public PuckScript puckScript;
     public AirHockeyPlayerMovement airHockeyPlayerMovement;
     public AIScript aIScript;
+    private KeyCode action1, action2, action3;
+    [SerializeReference]private GameObject[] keybindButtons;
+    private void Awake()
+    {
+        keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
+    }
+    private void Start()
+    {
+        //keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");   
+    }
 
     public void ShowRestartCanvas(bool AiWon){
         Time.timeScale = 0;
@@ -37,5 +60,9 @@ public class UIManager : MonoBehaviour
         puckScript.CenterPuck();
         airHockeyPlayerMovement.CenterPosition();
         aIScript.CenterPosition();
+    }
+    public void UpdateKeyText(string key, KeyCode code){
+        TextMeshProUGUI tmp = Array.Find(keybindButtons, x => x.name == key).GetComponentInChildren<TextMeshProUGUI>();
+        tmp.text = code.ToString();
     }
 }

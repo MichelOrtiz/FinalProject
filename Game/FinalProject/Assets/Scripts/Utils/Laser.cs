@@ -9,7 +9,7 @@ public class Laser : MonoBehaviour
     [SerializeField] private float lifeTime;
     private float currentTime;
 
-    [SerializeField] protected bool targetWarningAvailable;
+    public bool targetWarningAvailable;
     [SerializeField] private GameObject warning;
     private GameObject warningObject;
     private LineRenderer warningLine;

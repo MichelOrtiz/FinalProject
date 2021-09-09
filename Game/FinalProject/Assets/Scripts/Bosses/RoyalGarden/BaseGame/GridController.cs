@@ -15,6 +15,7 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
         public Grid grid;
 
 
+
         public Action AiTurn;
         public Action<Square> PlayedTurn;
 
@@ -37,21 +38,11 @@ namespace FinalProject.Assets.Scripts.Bosses.RoyalGarden
 
         public void SelectSquare(Square square, string symbol)
         {
-            square.occupied = true;
-            square.symbol = symbol;
+            if (!grid.HasWinner) square.SetSymbol(symbol);
 
-            square.GetComponentInChildren<Text>().text = symbol;
+            gameManager.CheckWinner(grid);
 
-            var winner = gameManager.GetWinner(grid);
 
-            if (winner != "")
-            {
-                grid.SetWinner(winner);
-                grid.ToggleSquares(false);
-
-                
-
-            }
             PlayedTurn?.Invoke(square);
             NextTurn();
             /*else// if (grid.SquaresAvailable())

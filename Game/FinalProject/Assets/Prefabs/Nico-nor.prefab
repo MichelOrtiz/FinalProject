@@ -132,7 +132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2725911057359720447
 Transform:
   m_ObjectHideFlags: 0
@@ -5861,6 +5861,7 @@ GameObject:
   - component: {fileID: 447332426354923146}
   - component: {fileID: 1031731497466114772}
   - component: {fileID: 936999293969563206}
+  - component: {fileID: 7712929778528232043}
   - component: {fileID: 1587736591}
   m_Layer: 0
   m_Name: AbilitySystem
@@ -6198,6 +6199,25 @@ MonoBehaviour:
   isInCooldown: 0
   abilityName: 8
   isUnlocked: 1
+--- !u!114 &7712929778528232043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829738360394267735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c42a8f044051e4ca2fd46d8ca2070e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 0
+  hotkey: 0
+  staminaCost: 0
+  duration: 0
+  isInCooldown: 0
+  abilityName: 13
+  isUnlocked: 0
 --- !u!61 &1587736591
 BoxCollider2D:
   m_ObjectHideFlags: 0

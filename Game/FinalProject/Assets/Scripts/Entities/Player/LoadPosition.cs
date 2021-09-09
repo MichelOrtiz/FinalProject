@@ -26,7 +26,17 @@ public class LoadPosition : MonoBehaviour
     }
 
     void FindStartPos(){
-        transform.position = GameObject.FindWithTag("StartPos").transform.position;
-        //transform.position = loadlevel.instance.startPosition.transform.position;
+        try
+        {
+            var spawnPos = GameObject.FindWithTag("RespawnPos").transform.position;
+            if (spawnPos != null)
+            {
+                transform.position = spawnPos;
+            }
+        }
+        catch (System.NullReferenceException)
+        {
+            
+        }
     }
 }
