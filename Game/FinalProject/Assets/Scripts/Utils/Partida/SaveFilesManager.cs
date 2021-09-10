@@ -57,9 +57,18 @@ public class SaveFilesManager : MonoBehaviour
         if(currentSaveSlot==null)return;
         TimeSpan timePlayed = DateTime.Now - startSession;
         Debug.Log(DateTime.Now.ToString() + " - " + startSession.ToString());
-        currentSaveSlot.timeDaysPlayed += timePlayed.Days;
-        currentSaveSlot.timeHoursPlayed += timePlayed.Hours;
+        currentSaveSlot.timeSecondsPlayed += timePlayed.Seconds;
+        if(currentSaveSlot.timeSecondsPlayed >= 60){
+            currentSaveSlot.timeSecondsPlayed -= 60;
+            currentSaveSlot.timeMinutesPlayed += 1;
+        }
         currentSaveSlot.timeMinutesPlayed += timePlayed.Minutes;
+        if(currentSaveSlot.timeMinutesPlayed >= 60){
+            currentSaveSlot.timeMinutesPlayed -= 60;
+            currentSaveSlot.timeHoursPlayed += 1;
+        }
+        currentSaveSlot.timeHoursPlayed += timePlayed.Hours;
+        
         string jsonString = JsonUtility.ToJson(currentSaveSlot);
         string filePath = Application.dataPath + "/Partida" + currentSaveSlot.slotFile;
         using(StreamWriter writer = new StreamWriter(filePath,false)){

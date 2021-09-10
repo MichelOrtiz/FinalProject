@@ -33,7 +33,7 @@ public class GameSlot : MonoBehaviour
             lblName.text = "Nombre: ";
             lblName.text += partida.namePlayer;
             lblTime.text = "Tiempo: ";
-            lblTime.text += partida.timeDaysPlayed + ":" + partida.timeHoursPlayed + ":" + partida.timeMinutesPlayed;
+            lblTime.text += partida.timeHoursPlayed + ":" + partida.timeMinutesPlayed + ":" + partida.timeSecondsPlayed;
             lblZone.text = "Zona: ";
             lblZone.text += partida.sceneToLoad;
         }else{
