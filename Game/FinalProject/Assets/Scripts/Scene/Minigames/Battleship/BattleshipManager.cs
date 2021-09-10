@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class BattleshipManager : MonoBehaviour
     [Header("HUD")]
     public Button nextButton;
     public Button rotateButton;
+    public EnemyScript enemyScript;
 
     private bool setupComplete = false;
     private bool playerTurn = true;
@@ -31,6 +33,8 @@ public class BattleshipManager : MonoBehaviour
             shipIndex++;
             shipScript = ships[shipIndex].GetComponent<ShipScript>();
             //shipScript.FlashColor(Color.yellow);
+        } else{
+            enemyScript.PlaceEnemyShips();
         }
     }
 
