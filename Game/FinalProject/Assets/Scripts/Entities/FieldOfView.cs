@@ -27,6 +27,7 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
 
     public bool canSeePlayer;
+    public bool justSeenPlayer;
     public bool inFrontOfObstacle;
     private RaycastHit2D hit;
     #endregion
@@ -49,6 +50,7 @@ public class FieldOfView : MonoBehaviour
     #region References
     private PlayerManager player;
     [SerializeField] private Entity entity;
+
     #endregion
 
     #region Events
@@ -58,6 +60,9 @@ public class FieldOfView : MonoBehaviour
     {
         FrontOfObstacleHandler?.Invoke();
     }
+
+    public Action PlayerSighted;
+    public Action PlayerUnsighted;
     #endregion
 
     void Start()
@@ -81,10 +86,29 @@ public class FieldOfView : MonoBehaviour
         {
             OnInFrontOfObstacle();
         }
+
+        if (canSeePlayer)
+        {
+            PlayerSighted?.Invoke();
+            justSeenPlayer = true;
+        }
+        if (justSeenPlayer)
+        {
+            PlayerUnsighted?.Invoke();
+        }
     }
 
     void FixedUpdate()
     {
+    }
+
+    /// <summary>
+    /// LateUpdate is called every frame, if the Behaviour is enabled.
+    /// It is called after all Update functions have been called.
+    /// </summary>
+    void LateUpdate()
+    {
+        justSeenPlayer = !CanSeePlayer() && justSeenPlayer;
     }
 
     public void SetViewDistanceOnRayHitObstacle(Vector2 direction, float maxViewDistance)

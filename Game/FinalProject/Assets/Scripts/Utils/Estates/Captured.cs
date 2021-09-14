@@ -20,6 +20,7 @@ public class Captured : State
         capturedPos = manager.hostEntity.GetPosition();
         player = PlayerManager.instance;
         player.GetComponent<PlayerInputs>().enabled=false;
+
     }
     public override void Affect()
     {
@@ -38,6 +39,7 @@ public class Captured : State
     }
     public override void StopAffect(){
         base.StopAffect();
+        Debug.Log("captured stopped");
         inputs.enabled=true;
         if(manager.enemy!=null)manager.enemy.enabled=true;
         player.abilityManager.gameObject.SetActive(true);

@@ -74,7 +74,7 @@ public class ItemInteractionManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("index " + index);
+                //Debug.Log("index " + index);
                 //interacting = false;
             }
         }

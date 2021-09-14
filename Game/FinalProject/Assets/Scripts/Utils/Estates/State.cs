@@ -3,12 +3,14 @@ using System;
 public abstract class State : ScriptableObject
 {
     [SerializeField] protected StateNames name;
-    [SerializeField] protected float duration;
+    public float duration;
     protected StatesManager manager;
     public bool onEffect = false;
     protected float currentTime;
 
     public Action StoppedAffect;
+
+    public EmoteSetter emoteSetter;
 
     public abstract void Affect();
     public virtual void StartAffect(StatesManager newManager){
@@ -18,12 +20,21 @@ public abstract class State : ScriptableObject
         onEffect=true;
         currentTime = 0;
         manager.statusCheck += Affect;
+
+        if (emoteSetter != null)
+        {
+            emoteSetter.duration = duration;
+            manager.AddState(emoteSetter);
+        }
     }
     public virtual void StopAffect(){
         //Debug.Log(this.name.ToString()+" ended in "+ manager.hostEntity.name.ToString());
         onEffect=false;
         manager.statusCheck-=Affect;
+        manager.RemoveState(emoteSetter);
         manager.RemoveState(this);
+
+
 
         StoppedAffect?.Invoke();
     }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName="New Paralisis", menuName = "States/new Paralisis")]
 public class Paralized : State
-{
+{//
     public override void StartAffect(StatesManager newManager)
     {
         base.StartAffect(newManager);

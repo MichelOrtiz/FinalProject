@@ -39,6 +39,11 @@ public abstract class Enemy : Entity
     [HideInInspector] public EnemyCollisionHandler eCollisionHandler;
     protected PlayerManager player;
     public bool touchingPlayer;
+
+
+    [SerializeField] private EmoteSetter sawPlayerEmote;
+    private EmoteSetter sawEmote;
+
     #endregion
 
     #region eCollisionHanlder && FieldOfView Event Subs
@@ -50,6 +55,16 @@ public abstract class Enemy : Entity
     }
     protected virtual void eCollisionHandler_StoppedTouchingPlayer(){}
     public void ForceAttack() { Attack(); }
+
+    void fieldOfView_PlayerSighted()
+    {
+        sawEmote = (EmoteSetter)statesManager.AddState(sawPlayerEmote);
+    }
+
+    void fieldOfView_PlayerUnsighted()
+    {
+        sawEmote?.StopAffect();
+    }
     #endregion
 
     #region Unity stuff
@@ -62,6 +77,8 @@ public abstract class Enemy : Entity
         if (fieldOfView == null)
         {
             fieldOfView = GetComponent<FieldOfView>();
+            fieldOfView.PlayerSighted += fieldOfView_PlayerSighted;
+            fieldOfView.PlayerUnsighted += fieldOfView_PlayerUnsighted;
         }
     }
 
@@ -162,7 +179,7 @@ public abstract class Enemy : Entity
     }
     public virtual void ConsumeItem(Item item)
     {
-        Debug.Log(enemyName + " consumiendo "+ item.nombre);
+        //Debug.Log(enemyName + " consumiendo "+ item.nombre);
         itemInteractionManager.Interact(item);
     }
     #endregion
