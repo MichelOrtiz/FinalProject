@@ -173,6 +173,7 @@ MonoBehaviour:
   itemInteractionManager: {fileID: 7271615647576208984}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
+  sawPlayerEmote: {fileID: 0}
 --- !u!50 &976481536925064706
 Rigidbody2D:
   serializedVersion: 4
@@ -422,14 +423,16 @@ MonoBehaviour:
   blockFov: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 521011
+    m_Bits: 488243
   canSeePlayer: 0
+  justSeenPlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 4864
   obstacleCheckOrigin: {fileID: 2450329340645480465}
   obstacleViewDistance: 0.5
+  blockingCollider: {fileID: 0}
   facingDirection: 
   entity: {fileID: 7975596031832534376}
 --- !u!1 &5201884916193123444

@@ -8,6 +8,8 @@ public class ProbabilitySpawner : MonoBehaviour
     [SerializeField] private List<SpawnedObject> spawnedObjects;
     public List<SpawnedObject> SpawnedObjects {get => spawnedObjects; }
 
+    
+
     void Awake()
     {
         spawnedObjects = new List<SpawnedObject>();
@@ -39,6 +41,17 @@ public class ProbabilitySpawner : MonoBehaviour
             }
             Transform spawnPos = RandomGenerator.RandomElement<Transform>(positions);
             //spawn.SpawnedPos = spawnPos;
+
+            //if (RandomXRotation || RandomYRotation)
+            //{
+                /*Quaternion rotation = new Quaternion
+                (
+                    spawn.randomXRotation? UnityEngine.Random.Range(0, 1) : spawn.gameObject.transform.rotation.x,
+                    spawn.randomYRotation? UnityEngine.Random.Range(0, 1) : spawn.gameObject.transform.rotation.y, 
+                    0, 0
+                );*/
+            //}
+
 
             GameObject instantiated = Instantiate(spawn.gameObject, spawnPos.position, spawn.gameObject.transform.rotation);
             

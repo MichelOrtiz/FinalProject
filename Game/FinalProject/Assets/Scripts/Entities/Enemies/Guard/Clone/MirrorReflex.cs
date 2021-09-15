@@ -5,6 +5,7 @@ public class MirrorReflex : PlayerClone
 
     protected override void CloneMovement()
     {
+        if (!fieldOfView.canSeePlayer) return;
         // Inverts the x scale, so the movement is inverted
         if (transform.lossyScale.x > 0)
         {

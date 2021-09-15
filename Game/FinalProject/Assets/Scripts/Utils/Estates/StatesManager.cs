@@ -66,6 +66,32 @@ public class StatesManager : MonoBehaviour
         }
         return null;
     }
+
+
+    public State AddStateDontRepeate(State newState)
+    {
+        Debug.Log(newState.name);
+        if(newState != null){
+            if (!currentStates.Exists(s => s.name == newState.name))
+            {
+                if (newState.onEffect)
+                {
+                    Debug.Log(gameObject + " manager cloned " + newState);
+                    newState = Instantiate(newState);
+                    newState.onEffect = false;
+                }
+
+
+                newState.StartAffect(this);
+                currentStates.Add(newState);
+
+                return newState;
+            }
+        }
+
+        return null;
+    }
+
     public void RemoveState(State state){
         if(currentStates.Contains(state)){
             //state.StopAffect();

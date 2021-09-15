@@ -46,7 +46,7 @@ public class PatrollGriffin : Enemy
     {
         //base.MainRoutine();
         
-        if ( (!reachedDestination ) && groundChecker.isGrounded  )
+        if ( (!reachedDestination ) && groundChecker.isGrounded)
         {
             enemyMovement.GoToInGround(patrolDestination, chasing: false, checkNearEdge: false);
             reachedDestination = MathUtils.GetAbsXDistance(GetPosition(), patrolDestination) < 0.5f;
@@ -59,6 +59,8 @@ public class PatrollGriffin : Enemy
             {
                 startPosition = GetPosition();
                 goingRight = !goingRight;
+
+                enemyMovement.ChangeFacingDirection();
 
                 UpdatePatrolDestination();
 
@@ -74,7 +76,7 @@ public class PatrollGriffin : Enemy
 
     protected override void ChasePlayer()
     {
-        player.statesManager.AddState(meshEffectOnPlayer);
+        player.statesManager.AddStateDontRepeate(meshEffectOnPlayer);
     }
 
     protected override void groundChecker_Grounded(string groundTag)

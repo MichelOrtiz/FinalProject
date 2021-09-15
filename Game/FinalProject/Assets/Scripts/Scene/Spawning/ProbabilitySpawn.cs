@@ -10,6 +10,9 @@ public class ProbabilitySpawn
     public float probability;
     public byte minQuantity;
     public byte maxQuantity;
+
+    /*public bool randomXRotation;
+    public bool randomYRotation;*/
     
     //public Transform SpawnedPos { get; set; }
 

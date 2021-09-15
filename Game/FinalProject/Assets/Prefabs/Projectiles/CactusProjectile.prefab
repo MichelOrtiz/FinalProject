@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1091648305553625287}
   - component: {fileID: 53733825894341834}
   - component: {fileID: -6107770864380526211}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: CactusProjectile
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,13 +128,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   warning: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
+  impactEffect: {fileID: 0}
   targetWarningAvailable: 1
+  independentAttackEnabled: 0
+  collisionHandler: {fileID: 0}
   speedMultiplier: 2
   maxShotDistance: 25
   damage: 7
   waitTime: 0.5
+  impactEffectExitTime: 0
   touchingPlayer: 0
   touchingObstacle: 0
+  changeSizeByDistance: 0
+  distanceToIncrease: 0
+  sizeByDistanceMultiplier: 0
+  changeSizeByTime: 0
+  timeToIncrease: 0
+  sizeByTimeMultiplier: 0
+  isOnCollider: 0
 --- !u!50 &-6107770864380526211
 Rigidbody2D:
   serializedVersion: 4

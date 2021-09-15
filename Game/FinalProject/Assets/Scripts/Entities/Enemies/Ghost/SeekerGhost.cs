@@ -50,7 +50,8 @@ public class SeekerGhost : Enemy
 
         if (curTimeAfterSpawn > timeAfterSpawnToStopPush && rigidbody2d.velocity.magnitude != 0)
         {
-            enemyMovement.StopMovement();
+            enemyMovement.StopAllMovement();
+            //physics.SetKinematic(0.5f);
         }
         else
         {

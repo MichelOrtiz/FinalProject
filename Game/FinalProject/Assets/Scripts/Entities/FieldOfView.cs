@@ -9,7 +9,7 @@ public class FieldOfView : MonoBehaviour
     public Transform FovOrigin { get => fovOrigin; }
 
     [SerializeField] private FovType fovType;
-    public FovType FovType { get => fovType; }
+    public FovType FovType { get => fovType; set => fovType = value; }
 
     [SerializeField] private float fovAngle;
     public float FovAngle { get => fovAngle; }
@@ -38,6 +38,8 @@ public class FieldOfView : MonoBehaviour
     public LayerMask WhatIsObstacle { get => whatIsObstacle; }
     [SerializeField] private Transform obstacleCheckOrigin;
     [SerializeField] private float obstacleViewDistance;
+
+    [SerializeReference] private GameObject blockingCollider;
     #endregion
 
     #region Direction
@@ -199,6 +201,7 @@ public class FieldOfView : MonoBehaviour
 
                 return false;
             }
+            blockingCollider = hit.collider.gameObject;
             return hit.collider.gameObject.CompareTag("Player");
         }
         //Debug.Log("hit collider of " + entity.gameObject + " false");

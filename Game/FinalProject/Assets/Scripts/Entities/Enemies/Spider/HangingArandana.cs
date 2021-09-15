@@ -22,16 +22,20 @@ public class HangingArandana : Enemy
         base.Start();
         curWaitTime = waitTimeWhenReach;
         startPosition = this.GetPosition();
+        if (transform.rotation.x == 1)
+        {
+            fieldOfView.FovType = FovType.CircularUp;
+        }
     }
 
     new void Update()
     {
         isChasing = fieldOfView.canSeePlayer || justChasedPlayer;
         thread.SetPosition(0, threadPosition.position);
-        RaycastHit2D hit = FieldOfView.GetRaycastOnColliderHit(threadPosition.position, Vector2.up, maxThreadDistance, fieldOfView.WhatIsObstacle);
+        RaycastHit2D hit = FieldOfView.GetRaycastOnColliderHit(threadPosition.position, transform.up, maxThreadDistance, fieldOfView.WhatIsObstacle);
         thread.SetPosition(1, hit.point);
 
-        fieldOfView.SetViewDistanceOnRayHitObstacle(Vector2.down, maxViewDistance);
+        fieldOfView.SetViewDistanceOnRayHitObstacle(-transform.up, maxViewDistance);
 
         if (touchingPlayer)
         {

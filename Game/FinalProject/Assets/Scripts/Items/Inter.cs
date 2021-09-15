@@ -40,7 +40,7 @@ public class Inter : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        Enemy enemigo = other.transform.parent.GetComponentInChildren<Enemy>();
+        Enemy enemigo = other.transform?.parent?.GetComponentInChildren<Enemy>();
         if(enemigo!=null)
         {
             enemigo.ConsumeItem(item);

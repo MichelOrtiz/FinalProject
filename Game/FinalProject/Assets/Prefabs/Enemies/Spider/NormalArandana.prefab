@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054239757198984474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.46, y: 0.14, z: 0}
+  m_LocalPosition: {x: -0.495, y: 0.093, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 6054239759243001533}
@@ -371,7 +371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054239758134800267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.221, y: 0.157, z: 0}
+  m_LocalPosition: {x: 0.293, y: 0.157, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6054239759079425676}
@@ -408,9 +408,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.1114496, y: -0.035822093}
   serializedVersion: 2
-  m_Radius: 0.69
+  m_Radius: 0.54272956
 --- !u!1 &6054239758643353281
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054239758982318524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.308, y: 1.058, z: 0}
+  m_LocalPosition: {x: 1.165, y: 0.521, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 6054239759079425676}
@@ -681,6 +681,7 @@ MonoBehaviour:
   itemInteractionManager: {fileID: 1084451510201986794}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
+  sawPlayerEmote: {fileID: 0}
 --- !u!1 &6054239759193041211
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +707,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054239759193041211}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.194, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 6054239758643353282}
@@ -735,6 +736,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 389939
   canSeePlayer: 0
+  justSeenPlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
@@ -769,7 +771,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054239759243001530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.188, y: -0.31, z: 0}
+  m_LocalPosition: {x: 0.137, y: -0.204, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 6054239757795146388}

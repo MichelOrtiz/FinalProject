@@ -7,6 +7,8 @@ public class CloneActivator : MonoBehaviour
     [SerializeField] private float distanceToActivate;
     [SerializeField] private GameObject warningSign;
     [SerializeField] private AnimationManager animationManager;
+
+    //[SerializeField] private FieldOfView fieldOfView;
     private MirrorReflex mirrorReflex;
     private Reflex reflex;   
     
@@ -29,7 +31,7 @@ public class CloneActivator : MonoBehaviour
 
     void Update()
     {
-        if (MathUtils.GetAbsXDistance(mirror.position, player.GetPosition()) <= distanceToActivate)
+        if (Vector2.Distance(mirror.position, player.GetPosition()) <= distanceToActivate)
         {
             if (!reflex.enabled)
             {

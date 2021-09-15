@@ -127,14 +127,16 @@ MonoBehaviour:
   blockFov: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 521011
+    m_Bits: 488243
   canSeePlayer: 0
+  justSeenPlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 4864
   obstacleCheckOrigin: {fileID: 8982018700400293547}
   obstacleViewDistance: 1.5
+  blockingCollider: {fileID: 0}
   facingDirection: 
   entity: {fileID: 0}
 --- !u!1 &8982018699409623806
@@ -530,6 +532,7 @@ MonoBehaviour:
   itemInteractionManager: {fileID: 1902763541024636972}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
+  sawPlayerEmote: {fileID: 0}
 --- !u!1 &8982018700350833942
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,7 +689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8982018700606510072}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 0.7, z: 0}
+  m_LocalPosition: {x: 1.139, y: 0.725, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 8982018700289530334}
