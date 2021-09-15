@@ -674,6 +674,8 @@ MonoBehaviour:
   distanceToActivate: 3
   warningSign: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
   animationManager: {fileID: 3292009244118683771}
+  cloneDelayIncrease: 0.5
+  fieldOfView: {fileID: 3292009244855784666}
 --- !u!1 &3292009244246724595
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,17 +932,17 @@ MonoBehaviour:
   fovOrigin: {fileID: 3292009243461675410}
   fovType: 2
   fovAngle: 180
-  viewDistance: 40
+  viewDistance: 15
   blockFov: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 357169
+    m_Bits: 352561
   canSeePlayer: 0
   justSeenPlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 4864
+    m_Bits: 256
   obstacleCheckOrigin: {fileID: 3292009243397865748}
   obstacleViewDistance: 1.5
   blockingCollider: {fileID: 0}

@@ -38,6 +38,7 @@ public class Captured : State
         }
     }
     public override void StopAffect(){
+        player.SetImmune();
         base.StopAffect();
         Debug.Log("captured stopped");
         inputs.enabled=true;
@@ -46,5 +47,6 @@ public class Captured : State
         if(manager.enemy!=null){
             manager.enemy.statesManager.AddState(penalization);
         }
+
     }
 }

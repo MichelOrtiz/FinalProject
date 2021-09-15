@@ -92,7 +92,7 @@ public class PlayerManager : Entity
     #region Inputs
     public PlayerInputs inputs;
     #endregion
-    [SerializeField]private State inmunityState;
+    public State inmunityState;
     public AbilityManager abilityManager;
     public static PlayerManager instance;
 
@@ -401,6 +401,11 @@ public class PlayerManager : Entity
     }
     #endregion
 
+
+    public void SetImmune()
+    {
+        statesManager.AddStateDontRepeate(inmunityState);
+    }
 /*
     private void OnLevelWasLoaded(int level){
         base.Start();

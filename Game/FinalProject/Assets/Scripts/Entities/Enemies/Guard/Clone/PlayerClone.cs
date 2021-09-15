@@ -3,7 +3,7 @@ using System.Collections;
 public abstract class PlayerClone : Enemy
 {
     [Header("Self Additions")]
-    [SerializeField] protected float delay;
+    public float delay;
     private float curTime;
 
     #region CloningStuff

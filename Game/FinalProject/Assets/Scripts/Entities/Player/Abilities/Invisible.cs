@@ -46,7 +46,7 @@ public class Invisible : Ability
         }else if(!player.isDodging)
         {
             player.gameObject.layer = LayerMask.NameToLayer("Default");
-            player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Default");
+            if (!player.isImmune) player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Default");
             player.groundChecker.gameObject.layer = LayerMask.NameToLayer("Fake");
             player.abilityManager.gameObject.layer = LayerMask.NameToLayer("Default");
             Atacado.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
