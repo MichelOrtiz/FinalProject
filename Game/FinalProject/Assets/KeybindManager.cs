@@ -51,7 +51,7 @@ public class KeybindManager : MonoBehaviour
         BindKey("SKILL4", KeyCode.Alpha8);
         BindKey("SKILL5", KeyCode.Alpha9);
         BindKey("SKILL6", KeyCode.Alpha0);
-    }//KeybindManager.MyInstance.binds[""]
+    }
 
     public void BindKey(string key, KeyCode keyBind){
         Dictionary<string, KeyCode> currentDictionary = Skillbinds;

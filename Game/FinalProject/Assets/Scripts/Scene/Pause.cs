@@ -27,6 +27,7 @@ public class Pause : MonoBehaviour
             //inputs.enabled = !active;
         }
     }
+    
     public static void PauseGame()
     {
         HandleActive(true);

@@ -16,17 +16,6 @@ public class Cofre : MonoBehaviour
     }
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallBack;
-    private void Start() {
-        if(SaveFilesManager.instance?.currentSaveSlot != null){
-            savedItems.Clear();
-            if(SaveFilesManager.instance.currentSaveSlot.chestItems!=null){
-                for(int i=0;i<SaveFilesManager.instance.currentSaveSlot.chestItems.Length;i++){
-                AddItem(SaveFilesManager.instance.currentSaveSlot.chestItems[i]);
-            }
-            }
-            
-        }
-    }
     private void Update() {
         float distance = Vector2.Distance(PlayerManager.instance.GetPosition(),transform.position);
         if(distance <= rango){
