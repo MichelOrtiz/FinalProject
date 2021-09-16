@@ -55,10 +55,11 @@ namespace FinalProject.Assets.Scripts
 
         private void UpdatePosition(Indicator targetIndicator)
         {
-            if (targetIndicator.target == null)
+            /*if (targetIndicator.target == null)
             {
+                targetIndicators.Remove(targetIndicator);
                 return;
-            }
+            }*/
             var rect = targetIndicator.rectTransform.rect;
             var indicatorPos = activeCamera.WorldToScreenPoint(targetIndicator.target.position);
 
@@ -73,11 +74,11 @@ namespace FinalProject.Assets.Scripts
 
         private IEnumerator<float> UpdateIndicators()
         {
-            while(true)
+            while(targetIndicators.Count > 0)
             {
-                foreach (var targetIndicator in targetIndicators)
+                for (int i = 0; i < targetIndicators.Count; i++)
                 {
-                    UpdatePosition(targetIndicator);
+                    UpdatePosition(targetIndicators[i]);
                 }
                 yield return Timing.WaitForSeconds(checkTime);
             }
