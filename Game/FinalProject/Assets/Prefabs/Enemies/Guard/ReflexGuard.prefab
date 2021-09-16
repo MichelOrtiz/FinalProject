@@ -24,12 +24,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397543241569148797}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.33, y: 0.47, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.08000183, y: 0, z: 0}
+  m_LocalScale: {x: -2, y: 2, z: 0}
   m_Children: []
-  m_Father: {fileID: 3292009243461675410}
-  m_RootOrder: 1
+  m_Father: {fileID: 3292009244150979287}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6583947072751493403
 SpriteRenderer:
@@ -82,6 +82,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2257460913428741306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5771060831292671246}
+  m_Layer: 10
+  m_Name: mirror
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5771060831292671246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257460913428741306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.27, y: -0.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3292009244150979287}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3292009243243413685
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +141,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3292009244150979287}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3292009243243413684
 MonoBehaviour:
@@ -186,7 +216,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3292009244150979287}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3292009243424710186
 MonoBehaviour:
@@ -225,7 +255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3292009243461675410}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ReflexGuard
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -244,7 +274,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3292009244150979287}
-  - {fileID: 4745027379760872349}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -373,7 +402,7 @@ Transform:
   m_LocalScale: {x: -1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3292009244150979287}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3292009243989980647
 GameObject:
@@ -405,7 +434,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3292009244150979287}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3292009243989980649
 SpriteRenderer:
@@ -446,7 +475,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: e3225a7c36c8e1d58bf5a2130829da96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -506,7 +535,7 @@ Transform:
   m_LocalScale: {x: -1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3292009244150979287}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3292009244118683771
 MonoBehaviour:
@@ -558,6 +587,7 @@ Transform:
   m_LocalPosition: {x: 3.25, y: 0.47000027, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
+  - {fileID: 5771060831292671246}
   - {fileID: 3292009243989980648}
   - {fileID: 3292009244246724596}
   - {fileID: 3292009244578323604}
@@ -567,6 +597,7 @@ Transform:
   - {fileID: 5270968037844729267}
   - {fileID: 3292009243927156666}
   - {fileID: 3292009244118683768}
+  - {fileID: 4745027379760872349}
   m_Father: {fileID: 3292009243461675410}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -789,7 +820,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3292009244150979287}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3292009244246724594
 MonoBehaviour:
@@ -857,7 +888,7 @@ Transform:
   - {fileID: 3292009244580240020}
   - {fileID: 3292009244701238627}
   m_Father: {fileID: 3292009244150979287}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3292009244578323605
 MonoBehaviour:
@@ -998,7 +1029,7 @@ Transform:
   - {fileID: 3292009243770479140}
   - {fileID: 3292009243397865748}
   m_Father: {fileID: 3292009244150979287}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3292009244855784666
 MonoBehaviour:
@@ -1013,13 +1044,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fovOrigin: {fileID: 3292009243461675410}
-  fovType: 2
+  fovType: 1
   fovAngle: 180
   viewDistance: 15
   blockFov: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 352561
+    m_Bits: 352625
   canSeePlayer: 0
   justSeenPlayer: 0
   inFrontOfObstacle: 0
@@ -1046,9 +1077,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: GuardInteraction
       objectReference: {fileID: 0}
+    - target: {fileID: 972194580401149923, guid: b7d288c0648cfb64ab9b10614bc0e8c9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7244512206103470181, guid: b7d288c0648cfb64ab9b10614bc0e8c9, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7244512206103470181, guid: b7d288c0648cfb64ab9b10614bc0e8c9, type: 3}
       propertyPath: m_LocalPosition.x
