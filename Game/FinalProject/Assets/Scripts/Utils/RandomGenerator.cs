@@ -1,5 +1,5 @@
 using System.Collections;
-using System;
+//using UnityEngine.;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,9 +8,9 @@ public static class RandomGenerator
     public static ushort NewRandom(ushort min, ushort max)
     {
         ushort num;
-        System.Random random = new System.Random();
+        //var random = new UnityEngine.Random();
         
-        num = (ushort) random.Next(min, max);
+        num = (ushort) UnityEngine.Random.Range(min, max);
 
         return num; 
     }
@@ -18,9 +18,9 @@ public static class RandomGenerator
     public static ushort NewRandom(short min, short max)
     {
         ushort num;
-        System.Random random = new System.Random();
+        //Random random = new UnityEngine.Random();
         
-        num = (ushort) random.Next(min, max+1);
+        num = (ushort) UnityEngine.Random.Range(min, max);
 
         return num; 
     }
@@ -28,9 +28,9 @@ public static class RandomGenerator
     public static int NewRandom(int min, int max)
     {
         int num;
-        System.Random random = new System.Random();
+       //UnityEngine..Random random = new UnityEngine..Random();
         
-        num = new System.Random().Next(min,max+1);
+        num = UnityEngine.Random.Range(min,max);
 
         return num; 
     }
@@ -38,11 +38,11 @@ public static class RandomGenerator
     public static ushort NewRandom(List<ushort> list, ushort min, ushort max)
     {
         ushort num;
-        System.Random random = new System.Random();
+        //UnityEngine..Random random = new UnityEngine..Random();
         
         do
         {
-            num = (ushort) random.Next(min, max+1);
+            num = (ushort) UnityEngine.Random.Range(min, max+1);
         }
         while (list.Contains(num));
 
@@ -51,14 +51,14 @@ public static class RandomGenerator
 
     public static bool MatchProbability(float basedPercentage)
     {
-        System.Random random = new System.Random();
+        //UnityEngine..Random random = new UnityEngine..Random();
         
         return NewRandomDouble() <= basedPercentage;
     }
 
     public static bool MatchProbability(float startPercentage, float endPercentage)
     {
-        System.Random random = new System.Random();
+        //UnityEngine..Random random = new UnityEngine..Random();
         double per =  NewRandomDouble();
         
         return per > startPercentage && per <= endPercentage;;
@@ -66,9 +66,9 @@ public static class RandomGenerator
 
     public static double NewRandomDouble()
     {
-        System.Random random = new System.Random();
+        //UnityEngine..Random random = new UnityEngine..Random();
 
-        return random.NextDouble() * 100;
+        return UnityEngine.Random.value * 100;
     }
 
     public static T RandomElement<T>(List<T> list)
@@ -78,7 +78,7 @@ public static class RandomGenerator
 
     public static int MatchedElement(List<float> percentages)
     {
-        System.Random random = new System.Random();
+       // UnityEngine..Random random = new UnityEngine..Random();
         bool elementMatched = false;
         int matchedElement = 0;
 
@@ -110,7 +110,7 @@ public static class RandomGenerator
 
     public static T MatchedElement<T>(List<ObjectProbability<T>> elements)
     {
-        System.Random random = new System.Random();
+        //UnityEngine..Random random = new UnityEngine..Random();
         double number = NewRandomDouble();
 
         List<float> probabilities = new List<float>();
