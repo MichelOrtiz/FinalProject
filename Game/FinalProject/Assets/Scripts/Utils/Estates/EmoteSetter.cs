@@ -16,8 +16,8 @@ public class EmoteSetter : State
         instantiated = MonoBehaviour.Instantiate(emote, emotePos.position, emotePos.rotation);
         instantiated?.transform.SetParent(emotePos);
 
-        offscreenIndicators = FindObjectOfType<OffscreenIndicators>();
-        offscreenIndicators.AddTargetIndicator(instantiated);
+        //offscreenIndicators = FindObjectOfType<OffscreenIndicators>();
+        //offscreenIndicators.AddTargetIndicator(instantiated);
     }
 
     public override void Affect()
