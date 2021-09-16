@@ -258,6 +258,7 @@ MonoBehaviour:
   itemInteractionManager: {fileID: 5209842021411874304}
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
+  sawPlayerEmote: {fileID: 11400000, guid: 85bd781ef595d39408f5ce69df6b7fb9, type: 2}
 --- !u!1 &2932585517867974405
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,12 +721,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 521011
   canSeePlayer: 0
+  justSeenPlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 4864
   obstacleCheckOrigin: {fileID: 2932585518947580212}
   obstacleViewDistance: 1.5
+  blockingCollider: {fileID: 0}
   facingDirection: 
   entity: {fileID: 0}
 --- !u!1 &2932585519135815309

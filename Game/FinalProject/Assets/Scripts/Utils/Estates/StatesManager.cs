@@ -68,9 +68,8 @@ public class StatesManager : MonoBehaviour
     }
 
 
-    public State AddStateDontRepeate(State newState)
+    public State AddStateDontRepeat(State newState)
     {
-        Debug.Log(newState.name);
         if(newState != null){
             if (!currentStates.Exists(s => s.name == newState.name))
             {

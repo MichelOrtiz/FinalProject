@@ -404,7 +404,7 @@ public class PlayerManager : Entity
 
     public void SetImmune()
     {
-        statesManager.AddStateDontRepeate(inmunityState);
+        statesManager.AddStateDontRepeat(inmunityState);
     }
 /*
     private void OnLevelWasLoaded(int level){

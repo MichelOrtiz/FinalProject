@@ -58,7 +58,7 @@ public abstract class Enemy : Entity
 
     void fieldOfView_PlayerSighted()
     {
-        sawEmote = (EmoteSetter)statesManager.AddState(sawPlayerEmote);
+        //sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
     }
 
     void fieldOfView_PlayerUnsighted()
@@ -125,6 +125,23 @@ public abstract class Enemy : Entity
                 }
         }
         touchingPlayer = eCollisionHandler.touchingPlayer;
+
+        if (fieldOfView.canSeePlayer)
+        {
+            if (sawEmote == null || !sawEmote.onEffect)
+            {
+                sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
+            }
+        }
+        else
+        {
+            if (sawEmote != null)
+            {
+                sawEmote.StopAffect();
+                //statesManager.RemoveState(sawEmote);
+                sawEmote = null;
+            } 
+        }
         
         SetStates();
         UpdateState();

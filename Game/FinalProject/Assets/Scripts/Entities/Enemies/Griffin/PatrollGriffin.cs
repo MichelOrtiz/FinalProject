@@ -76,7 +76,7 @@ public class PatrollGriffin : Enemy
 
     protected override void ChasePlayer()
     {
-        player.statesManager.AddStateDontRepeate(meshEffectOnPlayer);
+        player.statesManager.AddStateDontRepeat(meshEffectOnPlayer);
     }
 
     protected override void groundChecker_Grounded(string groundTag)
