@@ -4,9 +4,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName="New Paralisis", menuName = "States/new Invulnerable")]
 public class Invulnerable : State
 {
+    PlayerManager player;
+    BlinkingSprite blinkingSprite;
     public override void StartAffect(StatesManager newManager){
         base.StartAffect(newManager);
-        manager.hostEntity.gameObject.tag="Invinsible";
+        player = manager.hostEntity as PlayerManager;
+        player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Fake");
+        
+        player.isImmune = true;
+        blinkingSprite = player.GetComponentInChildren<BlinkingSprite>();
+        blinkingSprite.enabled = true;
+
     }
     public override void Affect(){
         currentTime += Time.deltaTime;
@@ -16,7 +24,10 @@ public class Invulnerable : State
     }
     public override void StopAffect()
     {
+        player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Default");
+        player.isImmune = false;
+        blinkingSprite.enabled = false;
+        Debug.Log("Stopped Invulnerable");
         base.StopAffect();
-        manager.hostEntity.gameObject.tag = "Player";
     }
 }

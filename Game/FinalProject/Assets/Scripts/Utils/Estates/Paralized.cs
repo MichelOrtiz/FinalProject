@@ -34,5 +34,10 @@ public class Paralized : State
         }else{
             manager.hostEntity.enabled=true;
         }
+        if (manager.hostEntity is PlayerManager)
+        {
+            var player = manager.hostEntity as PlayerManager;
+            player.SetImmune();
+        }
     }
 }

@@ -41,6 +41,11 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
     public void ProjectileAttack()
     {
         player.TakeTirement(projectile.damage);
+        if (projectile.damage > 0)
+        {
+            player.SetImmune();
+        }
+
         player.statesManager.AddState(effectOnPlayer, entity);
         OnProjectileTouchedPlayer();
     }

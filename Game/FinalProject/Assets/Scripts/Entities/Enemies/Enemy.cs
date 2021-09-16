@@ -58,7 +58,7 @@ public abstract class Enemy : Entity
 
     void fieldOfView_PlayerSighted()
     {
-        sawEmote = (EmoteSetter)statesManager.AddState(sawPlayerEmote);
+        //sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
     }
 
     void fieldOfView_PlayerUnsighted()
@@ -125,6 +125,23 @@ public abstract class Enemy : Entity
                 }
         }
         touchingPlayer = eCollisionHandler.touchingPlayer;
+
+        if (fieldOfView.canSeePlayer)
+        {
+            if (sawEmote == null || !sawEmote.onEffect)
+            {
+                sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
+            }
+        }
+        else
+        {
+            if (sawEmote != null)
+            {
+                sawEmote.StopAffect();
+                //statesManager.RemoveState(sawEmote);
+                sawEmote = null;
+            } 
+        }
         
         SetStates();
         UpdateState();
@@ -169,11 +186,16 @@ public abstract class Enemy : Entity
             player.statesManager.AddState(atackEffect,this);
         }
         player.TakeTirement(damageAmount);
+        if (damageAmount > 0)
+        {
+            player.SetImmune();
+        }
 
         if (canKnockbackPlayer)
         {
             KnockbackEntity(player);
         }
+
 
         enemyMovement?.StopMovement();
     }
@@ -190,9 +212,19 @@ public abstract class Enemy : Entity
         //Debug.Log(gameObject + " knock " + entity);
         var entityPos = new Vector3(entity.GetPosition().x, entity.GetPosition().y);
         var facingRight = entity.facingDirection == RIGHT;
-        var fixedDir = entity.GetPosition().x >= GetPosition().x ?
-                        (MathUtils.GetVectorFromAngle(facingRight? knockbackAngle : 180 - knockbackAngle)) :
-                        (MathUtils.GetVectorFromAngle(facingRight? 180 - knockbackAngle : knockbackAngle));
+        var fixedDir = new Vector3();
+        if (entity.GetPosition().x > GetPosition().x)
+        {
+            fixedDir =  facingRight? MathUtils.GetVectorFromAngle(knockbackAngle) : MathUtils.GetVectorFromAngle(180 - knockbackAngle);
+        }
+        else if (entity.GetPosition().x != GetPosition().x)
+        {
+            fixedDir = facingRight? MathUtils.GetVectorFromAngle(180 - knockbackAngle) : MathUtils.GetVectorFromAngle(knockbackAngle);
+        }
+        else
+        {
+            fixedDir = MathUtils.GetVectorFromAngle(90);
+        }
         var direction =  entity.transform.InverseTransformPoint(entityPos + fixedDir);
         entity.Knockback(knockbackDuration, knockBackForce, direction);
     }

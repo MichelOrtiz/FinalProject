@@ -8,7 +8,9 @@ public class CloneActivator : MonoBehaviour
     [SerializeField] private GameObject warningSign;
     [SerializeField] private AnimationManager animationManager;
 
-    //[SerializeField] private FieldOfView fieldOfView;
+    [SerializeField] private float cloneDelayIncrease;
+
+    [SerializeField] private FieldOfView fieldOfView;
     private MirrorReflex mirrorReflex;
     private Reflex reflex;   
     
@@ -31,7 +33,8 @@ public class CloneActivator : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(mirror.position, player.GetPosition()) <= distanceToActivate)
+        //if (Vector2.Distance(transform.position, player.GetPosition()) <= distanceToActivate)
+        if (Vector2.Distance(transform.position, player.GetPosition()) <= distanceToActivate)
         {
             if (!reflex.enabled)
             {
@@ -39,6 +42,15 @@ public class CloneActivator : MonoBehaviour
                 animationManager.Entity = reflex;
                 reflex.enabled = true;
                 mirrorReflex.enabled = false;
+
+                var reflexs = ScenesManagers.GetObjectsOfType<Reflex>().FindAll(r => r.enabled);
+                if (reflexs != null && reflexs.Count > 1)
+                {
+                    foreach (var rf in reflexs)
+                    {
+                        reflex.delay += cloneDelayIncrease;
+                    }
+                }
             }
         }
     }

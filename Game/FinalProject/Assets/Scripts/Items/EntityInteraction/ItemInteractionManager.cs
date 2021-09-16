@@ -67,8 +67,15 @@ public class ItemInteractionManager : MonoBehaviour
                 }
                 else
                 {
-                    currentState = entity.statesManager.AddState(currentState);
-                    currentState.StoppedAffect += UpdateCurrentState;
+                    try
+                    {
+                        currentState = entity.statesManager.AddState(currentState);
+                        currentState.StoppedAffect += UpdateCurrentState;
+                    }
+                    catch (System.NullReferenceException)
+                    {
+                        Debug.Log("idk why, but whatever");
+                    }
                 }
 
             }

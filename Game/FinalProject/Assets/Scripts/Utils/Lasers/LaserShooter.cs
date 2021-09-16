@@ -48,6 +48,10 @@ public class LaserShooter : MonoBehaviour, ILaser
             player.statesManager.AddState(laserEffect, entity);
         }
         player.TakeTirement(laserDamage);
+        if (laserDamage > 0)
+        {
+            player.SetImmune();
+        }
         OnLaserAttack?.Invoke();
     }
 
