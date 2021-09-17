@@ -28,6 +28,7 @@ public class Cofre : MonoBehaviour
         }
     }
     private void Update() {
+        /* Dumb
         float distance = Vector2.Distance(PlayerManager.instance.GetPosition(),transform.position);
         if(distance <= rango){
             if(Input.GetKeyDown(KeyCode.E)){
@@ -36,6 +37,7 @@ public class Cofre : MonoBehaviour
                 CofreUI.instance.inventory = Inventory.instance;
             }
         }
+        */
     }
     public void AddItem(Item newItem){
         savedItems.Add(newItem);
