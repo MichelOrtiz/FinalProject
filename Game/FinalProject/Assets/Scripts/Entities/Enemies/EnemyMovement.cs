@@ -250,18 +250,18 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Rotates the enity Y axis
-    /// </summary>
+
     public void ChangeFacingDirection()
     {
-        if (entity.transform.eulerAngles.z != 0)
+        var _transform = entity.transform;
+        var rotation = Mathf.RoundToInt(_transform.eulerAngles.z);
+        if (rotation == 0 || rotation == 180)
         {
-            entity.transform.eulerAngles = new Vector3(entity.transform.eulerAngles.x + 180, entity.transform.eulerAngles.y, entity.transform.eulerAngles.z);
+            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x , _transform.eulerAngles.y + 180, rotation);
         }
-        else
+        else 
         {
-            entity.transform.eulerAngles = new Vector3(entity.transform.eulerAngles.x , entity.transform.eulerAngles.y + 180, entity.transform.eulerAngles.z);
+            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x + 180, _transform.eulerAngles.y, rotation);
         }
     }
 

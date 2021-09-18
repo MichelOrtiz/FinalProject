@@ -180,19 +180,17 @@ public class Entity : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// Rotates the enity Y axis
-    /// </summary>
+
     protected void  ChangeFacingDirection()
     {
-        
-        if (transform.localEulerAngles.z != 0)
+        var rotation = Mathf.RoundToInt(transform.eulerAngles.z);
+        if (rotation == 0 || rotation == 180)
         {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x + 180, transform.eulerAngles.y, transform.eulerAngles.z);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x , transform.eulerAngles.y + 180, rotation);
         }
-        else
+        else 
         {
-            transform.eulerAngles = new Vector3(transform.rotation.x , transform.eulerAngles.y + 180, transform.rotation.z);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x + 180, transform.eulerAngles.y, rotation);
         }
 
     }

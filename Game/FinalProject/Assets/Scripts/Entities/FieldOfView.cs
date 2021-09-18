@@ -37,7 +37,9 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private LayerMask whatIsObstacle;
     public LayerMask WhatIsObstacle { get => whatIsObstacle; }
     [SerializeField] private Transform obstacleCheckOrigin;
+    public Transform ObstacleCheckOrigin { get => obstacleCheckOrigin; }
     [SerializeField] private float obstacleViewDistance;
+    public float ObstacleViewDistance { get => obstacleViewDistance; }
 
     [SerializeReference] private GameObject blockingCollider;
     #endregion
@@ -229,7 +231,7 @@ public class FieldOfView : MonoBehaviour
     }
 
 
-    protected bool RayHitObstacle(Vector2 start, Vector2 end)
+    public bool RayHitObstacle(Vector2 start, Vector2 end)
     {
         RaycastHit2D linecast = Physics2D.Linecast(start, end, whatIsObstacle);
         //Debug.Log(entity.gameObject + " Raycast hit " + Physics2D.GetRayIntersection(new Ray(start, end), Vector2.Distance(start, end), whatIsObstacle));// .OverlapArea(start, end, whatIsObstacle)?.gameObject);

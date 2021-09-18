@@ -16,11 +16,12 @@ public class GroundChecker : MonoBehaviour
     [SerializeField] private Transform edgeCheck;
     public Transform EdgeCheck { get => edgeCheck; set => edgeCheck = value; }
     [SerializeField] private float downCheckDistance;
+    public float DownCheckDistance { get; set; }
     public bool isNearEdge;
     #endregion
 
     #region Tags
-    public static List<string> GroundTags = new List<string>{ "Ground", "Platform",  "Ice"};
+    public static List<string> GroundTags = new List<string>{ "Ground", "Platform",  "Ice", "Boundary"};
     #endregion
 
     #region Events

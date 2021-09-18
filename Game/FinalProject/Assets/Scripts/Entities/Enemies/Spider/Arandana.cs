@@ -1,27 +1,45 @@
 using UnityEngine;
 public class Arandana : Enemy
 {
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
+    private CollisionHandler groundHandler;
+    float rotation;
+    new void Start()
+    {
+        base.Start();
+        groundHandler = groundChecker.GetComponent<CollisionHandler>();
+    }
+
+
     new void Update()
     {
         base.Update();
-    }
-    new void FixedUpdate()
-    {
         animationManager.ChangeAnimation("walk");
-        if (groundChecker.isNearEdge && !groundChecker.isGrounded)
-        {
-            //enemyMovement.StopMovement();
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - 90 );
-        }
-        
+        /*var eulerAngles = transform.localEulerAngles;
+        rotation = Mathf.RoundToInt(eulerAngles.z);*/
         if (fieldOfView.inFrontOfObstacle)
-        {
+        {   
             //enemyMovement.StopMovement();
+
             ChangeFacingDirection();
         }
+        else if (groundChecker.isNearEdge && (!groundChecker.isGrounded && groundHandler.Contacts.Exists(c => GroundChecker.GroundTags.Exists(tg => tg == c.tag ))))
+        {
+            enemyMovement.StopAllMovement();
+
+            //ebug.DrawLine(obstacleCheck.position, checkDir);
+
+            /*if (!fieldOfView.RayHitObstacle(obstacleCheck.position, checkDir))
+            {*/
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y,  transform.eulerAngles.z - 90 );
+
+            //}
+
+        }
+    }
+
+    new void FixedUpdate()
+    {
+        
 
         if (touchingPlayer)
         {
