@@ -32,7 +32,7 @@ public class GameCamera : MonoBehaviour
     { 
         if (camera1)
         {
-            transform.position = new Vector3(PlayerManager.instance.transform.position.x,PlayerManager.instance.transform.position.y,-10f);
+            //transform.position = new Vector3(PlayerManager.instance.transform.position.x,PlayerManager.instance.transform.position.y,-10f);
             mousePosition = gameObject.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
         }
     }

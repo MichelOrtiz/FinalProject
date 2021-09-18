@@ -37,15 +37,29 @@ public class CameraFollow : MonoBehaviour
         camBox = GetComponent<BoxCollider2D>();
         FindLimits();
     }
-    void Update()
+    /*void Update()
     { 
+        
+    }*/
+
+    void OnGUI()
+    {
+
         if (camera1)
         {
             //transform.position = new Vector3(PlayerManager.instance.transform.position.x,PlayerManager.instance.transform.position.y,-10f);
             //transform.position.z = new float (-10f);
-            mousePosition = gameObject.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
+            Event   currentEvent = Event.current;
+            Vector2 mousePos = new Vector2();
+
+            // Get the mouse position from Event.
+            // Note that the y position from Event is inverted.
+            mousePos.x = currentEvent.mousePosition.x;
+            mousePos.y = camera.pixelHeight - currentEvent.mousePosition.y;
+            mousePosition = camera.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, camera.nearClipPlane));   
         }
     }
+
     void LateUpdate()
     {
         if (waitForSeconds > 0)
