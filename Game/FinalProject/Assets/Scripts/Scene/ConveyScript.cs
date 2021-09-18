@@ -44,25 +44,46 @@ public class ConveyScript : MonoBehaviour
     }
 
     public void OnCollisionStay2D(Collision2D other){
-        if (clockwise)
-        {
-            other.transform.position  += Vector3.left * speed * Time.fixedDeltaTime;
-
-        }else
-        {
-            other.transform.position  += Vector3.right * speed * Time.fixedDeltaTime;
-            
+        /*if (other.gameObject.transform.parent == null){
+            return;
         }
+        if(other.gameObject.transform.parent.TryGetComponent<Entity>(out var entity)){
+            if(entity is PlayerManager){*/
+            if (other.gameObject.tag=="Player")
+            {
+                if (clockwise)
+                {
+                    other.transform.position  += Vector3.left * speed * Time.fixedDeltaTime;
+
+                }else
+                {
+                    other.transform.position  += Vector3.right * speed * Time.fixedDeltaTime;
+                    
+                }
+            }
+                /*
+            }
+        }*/
     }
     public void OnCollisionExit2D(Collision2D other){
-        if (clockwise)
-        {
-            other.transform.position  += Vector3.left * speed * Time.fixedDeltaTime;
-
-        }else
-        {
-            other.transform.position  += Vector3.right * speed * Time.fixedDeltaTime;
-            
+        /*if (other.gameObject.transform.parent == null){
+            return;
         }
+        if(other.gameObject.transform.parent.TryGetComponent<Entity>(out var entity)){
+            if(entity is PlayerManager){*/
+            if (other.gameObject.tag=="Player")
+            {
+                if (clockwise)
+                {
+                    other.transform.position  += Vector3.left * speed * Time.fixedDeltaTime;
+
+                }else
+                {
+                    other.transform.position  += Vector3.right * speed * Time.fixedDeltaTime;
+                    
+                }
+            }/*
+            }
+        }*/
     }
 }
