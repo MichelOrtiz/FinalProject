@@ -16,14 +16,16 @@ public class AbsorbingCristal : Enemy
 
     [SerializeReference] private bool justChasedPlayer;
     private bool facingRight;
-    private GameObject darknessObject;
+    [SerializeField] private GameObject darknessObject;
+    //[SerializeField] private DarknessScript oscurito;
+    
 
     new void Start()
     {
         base.Start();
         spriteRenderer = animator.GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
-        darknessObject = player.Darkness;
+        //darknessObject = player.Darkness;
     }
 
     new void Update()
@@ -114,6 +116,7 @@ public class AbsorbingCristal : Enemy
 
     void SetActiveDarkness(bool value)
     {
+
         if (darknessObject.activeInHierarchy != value)
         {
             darknessObject.SetActive(value);
