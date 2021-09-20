@@ -115,6 +115,7 @@ public class FlashImage : MonoBehaviour
 
     public void Flash(float secondsForOneFlash, float minAlpha, float maxAlpha)
     {
+        Debug.Log("Flash called");
         SetNewFlashValues(secondsForOneFlash, minAlpha, maxAlpha);
         StopFlashRoutine();
         flashRoutine = StartCoroutine(FlashOnce(SecondsForOneFlash, MinAlpha, MaxAlpha));
