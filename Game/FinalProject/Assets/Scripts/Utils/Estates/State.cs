@@ -17,7 +17,6 @@ public abstract class State : ScriptableObject
     public abstract void Affect();
     public virtual void StartAffect(StatesManager newManager){
         manager=newManager;
-
         //Debug.Log(this.name.ToString()+" started in " + manager.hostEntity.name.ToString());
         onEffect=true;
         currentTime = 0;

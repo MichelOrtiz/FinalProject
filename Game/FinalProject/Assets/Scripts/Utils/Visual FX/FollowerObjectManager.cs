@@ -66,8 +66,11 @@ public class FollowerObjectManager : MonoBehaviour
         int index = 0;
         while(followers.Count > 0)
         {
-            Destroy(followers[index].gameObject);
-            followers.Remove(followers[index]);
+            if (followers[index] != null)
+            {
+                Destroy(followers[index].gameObject);
+                followers.Remove(followers[index]);
+            }
         }
     }
 }

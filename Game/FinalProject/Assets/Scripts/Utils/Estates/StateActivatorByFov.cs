@@ -13,6 +13,7 @@ public class StateActivatorByFov : State
     public override void StartAffect(StatesManager newManager)
     {
         base.StartAffect(newManager);
+        sawPlayer = false;
         if (manager.hostEntity is Enemy)
         {
             enemy = manager.hostEntity as Enemy;

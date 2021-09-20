@@ -27,7 +27,7 @@ public class AbilityManager : MonoBehaviour
     /// <param name="active"></param>
     public void SetActive(bool active){
         foreach(Ability a in abilities){
-            a.isUnlocked=active;
+            //a.isUnlocked=active;
             a.enabled=active;
         }
     }
