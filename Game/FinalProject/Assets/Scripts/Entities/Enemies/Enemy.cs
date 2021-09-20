@@ -202,7 +202,7 @@ public abstract class Enemy : Entity
     public virtual void ConsumeItem(Item item)
     {
         //Debug.Log(enemyName + " consumiendo "+ item.nombre);
-        itemInteractionManager.Interact(item);
+        itemInteractionManager?.Interact(item);
     }
     #endregion
 

@@ -12,16 +12,17 @@ public class EntityDestroyed : MonoBehaviour
 
 
 
-    public void Setup(Vector3 position, Quaternion rotation, Vector3 scale, Sprite sprite)
+    public void Setup(Vector3 position, Quaternion rotation, Vector3 scale, SpriteRenderer spriteRenderer)
     {
         //this.entity = entity;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        this.spriteRenderer = GetComponent<SpriteRenderer>();
 
         transform.position = position;
         transform.rotation = rotation;
         transform.localScale = scale;
 
-        spriteRenderer.sprite = sprite;
+        this.spriteRenderer.sprite = spriteRenderer.sprite;
+        this.spriteRenderer.flipX = spriteRenderer.flipX;
     }
 
 
