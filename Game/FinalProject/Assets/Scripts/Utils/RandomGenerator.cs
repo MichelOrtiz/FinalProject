@@ -10,7 +10,7 @@ public static class RandomGenerator
         ushort num;
         //var random = new UnityEngine.Random();
         
-        num = (ushort) UnityEngine.Random.Range(min, max);
+        num = (ushort) UnityEngine.Random.Range(min, max+1);
 
         return num; 
     }
@@ -20,7 +20,7 @@ public static class RandomGenerator
         ushort num;
         //Random random = new UnityEngine.Random();
         
-        num = (ushort) UnityEngine.Random.Range(min, max);
+        num = (ushort) UnityEngine.Random.Range(min, max+1);
 
         return num; 
     }
@@ -30,7 +30,7 @@ public static class RandomGenerator
         int num;
        //UnityEngine..Random random = new UnityEngine..Random();
         
-        num = UnityEngine.Random.Range(min,max);
+        num = UnityEngine.Random.Range(min,max+1);
 
         return num; 
     }
