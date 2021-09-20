@@ -13,6 +13,9 @@ public class SpotterGnome : Enemy
     private float curInterval;
     [SerializeReference]private bool justChasedPlayer;
     private Vector3 lastSeenPlayerPosition;
+    
+    [SerializeField] private EmoteSetter emoteSetter;
+    private State instantiatedEmote; 
 
     protected new void Start()
     {
@@ -45,11 +48,16 @@ public class SpotterGnome : Enemy
             else
             {
                 enemyMovement.StopMovement();
-
+                
                 if (curWaitTime > 0 && !fieldOfView.canSeePlayer)
                 {
                     if (curInterval > intervalBtwFlipInTarget)
                     {
+                        if (instantiatedEmote == null)
+                        {
+                            instantiatedEmote = statesManager.AddStateDontRepeat(emoteSetter);
+                            instantiatedEmote.duration = waitTimeAfterReachedTarget;
+                        }
                         enemyMovement.ChangeFacingDirection();
                         curInterval = 0;
                     }
@@ -60,6 +68,7 @@ public class SpotterGnome : Enemy
                     curWaitTime -= Time.deltaTime;
                     return;
                 }
+                instantiatedEmote?.StopAffect();
 
                 enemyMovement.ChangeFacingDirection();
                 justChasedPlayer = false;
