@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 5423688295397903850}
   normalMaterial: {fileID: 2100000, guid: 7bb5921486f704e42bb6aa75e2e738ad, type: 2}
-  afterAttackMaterial: {fileID: 2100000, guid: 1cad88689b42ac14a9115dd764ef3cbf, type: 2}
+  afterAttackMaterial: {fileID: 2100000, guid: 45e21fa2e01323c42afb0d08cbc02655, type: 2}
   groundCheck: {fileID: 8605119172209913364}
   damage: 15
   baseTimeBeforeAttack: 0.5
@@ -69,6 +69,7 @@ MonoBehaviour:
   - {x: -277.71, y: 16.8}
   - {x: -300.83, y: 15.7}
   - {x: -285.79, y: 14.7}
+  collisionHandler: {fileID: 7329776088180840645}
   justAttacked: 0
 --- !u!1 &5265310692518030370
 GameObject:
@@ -113,6 +114,7 @@ GameObject:
   - component: {fileID: 53022191280735879}
   - component: {fileID: 7236872929959253006}
   - component: {fileID: 1003979507700995124}
+  - component: {fileID: 7329776088180840645}
   m_Layer: 10
   m_Name: mesh
   m_TagString: Untagged
@@ -222,6 +224,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7329776088180840645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423688295397903850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2237de5c9d3a2f47850568f79ea60f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastColliderTag: 
+  contacts: []
+  touchingPlayer: 0
+  touchingEnemy: 0
+  touchingGround: 0
+  lastEnemyTouched: {fileID: 0}
 --- !u!1001 &3498441347245698681
 PrefabInstance:
   m_ObjectHideFlags: 0

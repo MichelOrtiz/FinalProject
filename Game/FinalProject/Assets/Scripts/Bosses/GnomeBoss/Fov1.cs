@@ -32,6 +32,7 @@ public class Fov1 : GnomeFov
                 }
             }
         }
+        Debug.DrawLine(groundCheck.position, groundCheck.position - groundCheck.up * 1f, Color.black);
         
         base.Update();
     }

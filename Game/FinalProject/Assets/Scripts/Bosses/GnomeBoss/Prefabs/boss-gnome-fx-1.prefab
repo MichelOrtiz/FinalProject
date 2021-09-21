@@ -169,7 +169,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6425492513690431121}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 811e5f0796c9fe6468a696abe02c112e, type: 3}
   m_Name: 
@@ -181,6 +181,9 @@ MonoBehaviour:
   checkFeetRadius: 0.3
   isGrounded: 0
   lastGroundTag: 
+  edgeCheck: {fileID: 0}
+  downCheckDistance: 0
+  isNearEdge: 0
 --- !u!58 &6425492513690431132
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -383,6 +386,7 @@ MonoBehaviour:
   - Fov1-1(Clone)
   - Fov1-2(Clone)
   - Fov1-3(Clone)
+  targetMesh: {fileID: 0}
   colorWhenEnabled: {r: 1, g: 0.7764706, b: 0.7490196, a: 0.9372549}
   colorWhenDisabled: {r: 0.254717, g: 0.1766198, b: 0.1766198, a: 0.9372549}
 --- !u!50 &6425492514495966513

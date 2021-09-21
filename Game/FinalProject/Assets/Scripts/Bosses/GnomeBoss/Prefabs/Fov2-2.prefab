@@ -67,6 +67,7 @@ MonoBehaviour:
   - {x: -282.19, y: -4.07}
   - {x: -293.77, y: -2.39}
   - {x: -275.02, y: -0.12}
+  collisionHandler: {fileID: 5949287923174812518}
   justAttacked: 0
 --- !u!1 &4199682506262333358
 GameObject:
@@ -80,7 +81,7 @@ GameObject:
   - component: {fileID: 4199682506262333352}
   - component: {fileID: 4199682506262333353}
   - component: {fileID: 7771377278451977321}
-  - component: {fileID: 7592733439183576873}
+  - component: {fileID: 5949287923174812518}
   m_Layer: 10
   m_Name: mesh
   m_TagString: Untagged
@@ -178,7 +179,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7592733439183576873
+--- !u!114 &5949287923174812518
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,10 +188,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4199682506262333358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fbe2bbde6a2de941b623b7919540af7, type: 3}
+  m_Script: {fileID: 11500000, guid: a2237de5c9d3a2f47850568f79ea60f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastColliderTag: 
+  contacts: []
   touchingPlayer: 0
+  touchingEnemy: 0
+  touchingGround: 0
+  lastEnemyTouched: {fileID: 0}
 --- !u!1 &6691891908082053907
 GameObject:
   m_ObjectHideFlags: 0

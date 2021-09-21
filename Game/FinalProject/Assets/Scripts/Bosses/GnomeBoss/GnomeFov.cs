@@ -17,6 +17,8 @@ public abstract class GnomeFov : MonoBehaviour
     [SerializeField] protected float speedMultiplier;
     //[SerializeField] private float interval;
     [SerializeField] protected List<Vector2> positions;
+
+    [SerializeField] private EnemyCollisionHandler collisionHandler;
     protected float timeUntilChange;
     protected float timeBeforeAttack;
     protected float timeAfterAttack;
@@ -38,12 +40,13 @@ public abstract class GnomeFov : MonoBehaviour
         
         //GetComponent<MeshFilter>().mesh = mesh;
         mesh.GetComponent<MeshRenderer>().material = normalMaterial;
+        collisionHandler.TouchedPlayerHandler += Attack;
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        touchingPlayer = mesh.GetComponent<MeshCollision>().touchingPlayer;
+        //touchingPlayer = mesh.GetComponent<MeshCollision>().touchingPlayer;
         if (justAttacked)
         {
             if (timeAfterAttack > baseTimeAfterAttack)
@@ -93,14 +96,17 @@ public abstract class GnomeFov : MonoBehaviour
 
     protected bool IsNearEdge()
     {
-        return !(Physics2D.Raycast(groundCheck.position, Vector3.down, 1f)).collider;
+        return !FieldOfView.RayHitObstacle(groundCheck.position, groundCheck.position - groundCheck.up * 1f, LayerMask.NameToLayer("Platforms"));
+        //return !(Physics2D.Linecast(groundCheck.position,  groundCheck.position - groundCheck.up * 1f)).collider;
     }
 
     protected void Attack()
     {
         PlayerManager.instance.TakeTirement(damage);
         justAttacked = true;
+        PlayerManager.instance.SetImmune();
     }
+
 
 
 }

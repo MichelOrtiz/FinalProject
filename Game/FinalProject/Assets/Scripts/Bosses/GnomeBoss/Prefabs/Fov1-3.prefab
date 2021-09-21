@@ -72,6 +72,7 @@ MonoBehaviour:
   - {x: -298.24, y: -58.88}
   - {x: -284.27, y: -58.71}
   - {x: -274.17, y: -58.82}
+  collisionHandler: {fileID: 6753432156936614093}
   justAttacked: 0
 --- !u!1 &5265310692518030370
 GameObject:
@@ -114,8 +115,8 @@ GameObject:
   - component: {fileID: 5055413014740891659}
   - component: {fileID: 916989777602212269}
   - component: {fileID: 53022191280735879}
-  - component: {fileID: 7236872929959253006}
   - component: {fileID: 1003979507700995124}
+  - component: {fileID: 6753432156936614093}
   m_Layer: 10
   m_Name: mesh
   m_TagString: Untagged
@@ -186,19 +187,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7236872929959253006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5423688295397903850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fbe2bbde6a2de941b623b7919540af7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  touchingPlayer: 0
 --- !u!61 &1003979507700995124
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -225,6 +213,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6753432156936614093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423688295397903850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2237de5c9d3a2f47850568f79ea60f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastColliderTag: 
+  contacts: []
+  touchingPlayer: 0
+  touchingEnemy: 0
+  touchingGround: 0
+  lastEnemyTouched: {fileID: 0}
 --- !u!1001 &6012142511416968919
 PrefabInstance:
   m_ObjectHideFlags: 0
