@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using FinalProject.Assets.Scripts.Utils.Sound;
 using UnityEngine;
 
-public class DragonBoss : MonoBehaviour,IProjectile
+public class DragonBoss : MonoBehaviour
 {
-    [SerializeField] private Transform shotPos;
+    //[SerializeField] private Transform shotPos;
     [SerializeField]private Transform head;
     [SerializeField]private Transform tail;
-    [SerializeField]private GameObject projectilePrefab;
+    // [SerializeField]private GameObject projectilePrefab;
+
+    [SerializeField] private ProjectileShooter projectileShooter;
+
     [SerializeField]private float shootInterval;
     [SerializeField]private int nProjectiles;
     private int currentProjectiles;
@@ -23,6 +27,7 @@ public class DragonBoss : MonoBehaviour,IProjectile
     private bool haveRocksFallen;
     [SerializeField]private GameObject smokePrefab;
     [SerializeField]private float smokeInterval;
+    
     private PlayerManager player;
     private Projectile projectile;
     private float currentTime;
@@ -43,7 +48,9 @@ public class DragonBoss : MonoBehaviour,IProjectile
         rockTime += Time.deltaTime;
         if(currentTime>=shootInterval && currentProjectiles<nProjectiles){
             currentTime=0;
-            ShotProjectile(shotPos,player.transform.position);
+            //ShotProjectile(shotPos,player.transform.position);
+
+            projectileShooter.ShootProjectile(player.GetPosition());
             currentProjectiles++;
         }
         if(currentTime>=roarInterval){
@@ -73,13 +80,14 @@ public class DragonBoss : MonoBehaviour,IProjectile
         player.TakeTirement(projectile.damage);
     }
 
-    public void ShotProjectile(Transform from, Vector3 to)
+    /*public void ShotProjectile(Transform from, Vector3 to)
     {
         projectile = Instantiate(projectilePrefab, from.transform.position, Quaternion.identity).GetComponent<Projectile>();
         projectile.Setup(from, to, this);
-    }
+    }*/
     void Roar(){
         //Debug.Log("ROARRR");
+        AudioManager.instance.Play("DragonRoar");
         if(player.isGrounded){
             player.statesManager.AddState(roarEffect);
         }

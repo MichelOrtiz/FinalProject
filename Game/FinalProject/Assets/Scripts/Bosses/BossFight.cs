@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FinalProject.Assets.Scripts.Utils.Sound;
 using UnityEngine;
 
 public class BossFight : MonoBehaviour
@@ -38,6 +39,8 @@ public class BossFight : MonoBehaviour
             currentStage=stages[indexStage];
         }
         currentStage?.Generate();
+
+        //AudioManager.instance?.Play("Theme");
     }
     protected void Update() {
         if(Input.GetKeyDown(KeyCode.L)){

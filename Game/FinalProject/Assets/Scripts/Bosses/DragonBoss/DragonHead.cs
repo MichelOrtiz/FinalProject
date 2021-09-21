@@ -4,9 +4,39 @@ using UnityEngine;
 
 public class DragonHead : MonoBehaviour
 {
-    [SerializeField]private float throwTime;
+    //[SerializeField]private float throwTime;
+    [SerializeField] private float damage; 
+    [SerializeField] private KnockbackState knockbackState;
+    private State stateInstantiated;
     private float currentTime;
-    private void OnCollisionStay2D(Collision2D other) {
+
+    private PlayerManager player;
+
+
+
+    void Start()
+    {
+        player = PlayerManager.instance;
+    }
+
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            player.TakeTirement(damage);
+            stateInstantiated = player.statesManager.AddState(knockbackState);
+            stateInstantiated.StoppedAffect += knockback_Stopped;
+            player.SetImmune();
+        }
+    }
+
+    void knockback_Stopped()
+    {
+        player.SetImmune();
+    }
+
+    /*private void OnCollisionStay2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
             currentTime+=Time.deltaTime;
             if(currentTime>throwTime){
@@ -26,5 +56,5 @@ public class DragonHead : MonoBehaviour
         PlayerManager.instance.TakeTirement(50f);
         PlayerManager.instance.gameObject.GetComponent<Rigidbody2D>().MovePosition(new Vector2(-320f,0f));
         currentTime=0;
-    }
+    }*/
 }

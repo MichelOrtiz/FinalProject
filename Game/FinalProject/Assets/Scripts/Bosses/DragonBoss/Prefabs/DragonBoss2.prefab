@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7944580826894579172
+--- !u!1 &1797330259039176338
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,54 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4533872406364717373}
+  - component: {fileID: 8921422662997219245}
+  - component: {fileID: 8953692315219271028}
+  m_Layer: 0
+  m_Name: ProjectileShooter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8921422662997219245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797330259039176338}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4994979756558790652}
+  m_Father: {fileID: 7983650972196420303}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8953692315219271028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797330259039176338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50bff7df53203b448a70d1cefce2d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8379419199720394817, guid: f6ac9c5ed01ac1443a937bc95da0bd24, type: 3}
+  shotPos: {fileID: 4994979756558790652}
+  effectOnPlayer: {fileID: 0}
+--- !u!1 &6165919557163607755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4994979756558790652}
   m_Layer: 10
   m_Name: ShotPos
   m_TagString: Untagged
@@ -16,19 +63,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4533872406364717373
+--- !u!4 &4994979756558790652
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7944580826894579172}
+  m_GameObject: {fileID: 6165919557163607755}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.58, y: 1.5900002, z: 0}
+  m_LocalPosition: {x: -4.6, y: 1.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
-  m_Father: {fileID: 7983650972196420303}
-  m_RootOrder: 4
+  m_Father: {fileID: 8921422662997219245}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7983650972196420300
 GameObject:
@@ -62,7 +109,7 @@ Transform:
   - {fileID: 7983650972429039281}
   - {fileID: 7983650972630342121}
   - {fileID: 6363312301128974195}
-  - {fileID: 4533872406364717373}
+  - {fileID: 8921422662997219245}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,10 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63e31b9a880a2448bd7b1559f434602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPos: {fileID: 4533872406364717373}
   head: {fileID: 7983650973003351138}
   tail: {fileID: 7983650972630342121}
-  projectilePrefab: {fileID: 8379419199720394817, guid: f6ac9c5ed01ac1443a937bc95da0bd24, type: 3}
+  projectileShooter: {fileID: 8953692315219271028}
   shootInterval: 0.8
   nProjectiles: 5
   roarInterval: 3
@@ -332,7 +378,7 @@ GameObject:
   - component: {fileID: 7983650973003351133}
   - component: {fileID: 7983650973003351132}
   - component: {fileID: 7983650973003351135}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038c0563fef8606499c84453f791b14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwTime: 1
+  damage: 50
+  knockbackState: {fileID: 11400000, guid: fb0255b4acb08bd4f9b0027d32dbcf06, type: 2}
 --- !u!1001 &9008754904994211855
 PrefabInstance:
   m_ObjectHideFlags: 0
