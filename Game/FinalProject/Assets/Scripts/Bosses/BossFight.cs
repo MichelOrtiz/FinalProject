@@ -5,6 +5,9 @@ using UnityEngine;
 public class BossFight : MonoBehaviour
 {
     public static BossFight instance;
+    [SerializeField] protected PopUpTrigger startMessageTrigger;
+    [SerializeField] protected PopUpTrigger endMessageTrigger;
+
     protected void Awake() {
         if(instance!=null){
             Debug.Log("this is bad : BossFight");
@@ -12,13 +15,12 @@ public class BossFight : MonoBehaviour
         }
         instance = this;
 
-        popUpTrigger = GetComponent<PopUpTrigger>();
+        //popUpTrigger = GetComponent<PopUpTrigger>();
     }
     [SerializeField] protected List<Stage> stages;
     [SerializeField] protected GameObject abilityObject;
     
     [SerializeField] protected Ability.Abilities ability;
-    protected PopUpTrigger popUpTrigger;
 
     public Stage currentStage;
     public bool isCleared;
@@ -28,6 +30,8 @@ public class BossFight : MonoBehaviour
 
     protected void Start()
     {
+        startMessageTrigger.TriggerPopUp(pauseGame: true);
+
         indexStage = 0;
         if (stages.Count > 0)
         {
@@ -75,8 +79,8 @@ public class BossFight : MonoBehaviour
 
             
             PlayerManager.instance.abilityManager.SetActiveSingle(ability, true);
-            popUpTrigger.popUp.Message = ability.ToString();
-            popUpTrigger.TriggerPopUp(true);
+            endMessageTrigger.popUp.Message = ability.ToString();
+            endMessageTrigger.TriggerPopUp(true);
 
             Debug.Log("Lo hiciste ganaste!!!1");
         }

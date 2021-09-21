@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue (Dialogue d)
     {
+        Minimap.MinimapWindow.instance.Hide();
         state = DialogState.Start;
         animator.SetBool("IsOpen", true);
         nameText.text = d.name;
@@ -67,5 +68,7 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
         state = DialogState.End;
+
+        Minimap.MinimapWindow.instance.Show();
     }
 }

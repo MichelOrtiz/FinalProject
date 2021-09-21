@@ -4,6 +4,8 @@ using System;
 public class PopUp 
 {
     public String Title;
+
+    [UnityEngine.TextArea]
     public String Message;
 
     public PopUp()

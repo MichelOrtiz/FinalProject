@@ -216,12 +216,12 @@ public class PlayerManager : Entity
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             MinimapaActivada = !MinimapaActivada;
-        }
-        if (MinimapaActivada)
-        {
-            MinimapWindow.instance?.Show();
-        }else{
-            MinimapWindow.instance?.Hide();
+            if (MinimapaActivada)
+            {
+                MinimapWindow.instance?.Show();
+            }else{
+                MinimapWindow.instance?.Hide();
+            }
         }
         base.Update();
     } 

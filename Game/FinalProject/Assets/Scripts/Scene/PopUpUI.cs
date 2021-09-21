@@ -10,16 +10,16 @@ public class PopUpUI : MonoBehaviour
     [SerializeField] private Button closeButton;
 
     private PopUp popUp = new PopUp();
-    public static PopUpUI Instance { get; private set; }
+   //public static PopUpUI Instance { get; private set; }
     public Action closedPopUp;
 
     void Awake()
     {
-        if (Instance != null)
+        /*if (Instance != null)
         {
             return;
         }
-        Instance = this;
+        Instance = this;*/
 
         closeButton.onClick.RemoveAllListeners();
         closeButton.onClick.AddListener(Hide);
@@ -28,13 +28,15 @@ public class PopUpUI : MonoBehaviour
     public PopUpUI SetTitle(string title)
     {
         popUp.Title = title;
-        return Instance;
+        return this;
+        //return Instance;
     }
 
     public PopUpUI SetMessage(string message)
     {
         popUp.Message = message;
-        return Instance;
+        return this;
+        //return Instance;
     }
 
     public void Show(bool pauseGame)

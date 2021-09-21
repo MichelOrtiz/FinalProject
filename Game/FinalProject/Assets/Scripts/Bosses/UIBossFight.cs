@@ -5,18 +5,19 @@ public class UIBossFight : BossFight
     [SerializeField] private string winMessage;
     [SerializeField] private string looseTitle;
     [SerializeField] private string looseMessage;
-    
+    [SerializeField] private PopUpUI endBattlePopUp;    
     new void Start()
     {
         base.Start();
-        PopUpUI.Instance.closedPopUp += PopUpUI_Closed;
+        //PopUpUI.Instance.closedPopUp += PopUpUI_Closed;
+        endBattlePopUp.closedPopUp += PopUpUI_Closed;
     }
 
     public void LooseBattle()
     {
-        popUpTrigger.popUp.Title = looseTitle;
-        popUpTrigger.popUp.Message = looseMessage;
-        popUpTrigger.TriggerPopUp(true);
+        endMessageTrigger.popUp.Title = looseTitle;
+        endMessageTrigger.popUp.Message = looseMessage;
+        endMessageTrigger.TriggerPopUp(true);
     }
 
     public override void EndBattle()
@@ -28,9 +29,9 @@ public class UIBossFight : BossFight
 
             PlayerManager.instance.abilityManager.SetActiveSingle(ability, true);
 
-            popUpTrigger.popUp.Title = winMessage;
-            popUpTrigger.popUp.Message = ability.ToString();
-            popUpTrigger.TriggerPopUp(true);
+            endMessageTrigger.popUp.Title = winMessage;
+            endMessageTrigger.popUp.Message = ability.ToString();
+            endMessageTrigger.TriggerPopUp(true);
         }
         base.EndBattle();
     }
