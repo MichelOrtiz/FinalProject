@@ -12,6 +12,7 @@ public class SaveFile
     public int timeHoursPlayed;
     public int sceneToLoad;
     public Vector2 positionSpawn;
+    public List<WorldState> WorldStates;
     public Item[] inventory;
     public Item[] chestItems;
     public GameObject prefab;
@@ -25,6 +26,7 @@ public class SaveFile
         this.positionSpawn = new Vector2(0f,0f);
         this.inventory = null;
         this.chestItems = null;
+        this.WorldStates = new List<WorldState>();
     }
     public SaveFile(string namePlayer, int slotFile){
         this.namePlayer = namePlayer;
@@ -36,5 +38,6 @@ public class SaveFile
         this.positionSpawn = new Vector2(0f,0f);
         this.inventory = null;
         this.chestItems = null;
+        this.WorldStates = new List<WorldState>();
     }
 }
