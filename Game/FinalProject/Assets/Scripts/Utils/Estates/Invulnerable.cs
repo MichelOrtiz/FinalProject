@@ -9,7 +9,10 @@ public class Invulnerable : State
     public override void StartAffect(StatesManager newManager){
         base.StartAffect(newManager);
         player = manager.hostEntity as PlayerManager;
-        player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Fake");
+        if (player.collisionHandler != null)
+        {
+            player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Fake");
+        }
         
         player.isImmune = true;
         blinkingSprite = player.GetComponentInChildren<BlinkingSprite>();
@@ -24,7 +27,10 @@ public class Invulnerable : State
     }
     public override void StopAffect()
     {
-        player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Default");
+        if (player.collisionHandler != null)
+        {
+            player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
         player.isImmune = false;
         blinkingSprite.enabled = false;
         Debug.Log("Stopped Invulnerable");

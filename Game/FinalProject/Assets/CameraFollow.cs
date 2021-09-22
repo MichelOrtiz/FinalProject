@@ -104,6 +104,8 @@ public class CameraFollow : MonoBehaviour
     public Vector3 GetMousePosition(){
         return mousePosition;
     }
+
+    
     public bool HasMouseMoved()
     {
         return (Input.GetAxis("Mouse X") != 0) || (Input.GetAxis("Mouse Y") != 0);

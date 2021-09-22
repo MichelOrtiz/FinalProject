@@ -2,14 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragonTail : ItemGetter
+
+
+public class DragonTail : MonoBehaviour
 {
-    [SerializeField]private BossFight manager;
-    private void Start() {
+
+    private BossFight manager;
+    [SerializeField] private Item neededItem;
+    [SerializeField] private CollisionHandler collisionHandler;
+    
+    
+    void Awake()
+    {
+        collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;    
+    }
+    
+    private void Start() 
+    {
         manager=BossFight.instance;
     }
-    protected override void Interaction()
+    /*protected override void Interaction()
     {
         manager.NextStage();
+    }*/
+
+    void collisionHandler_EnterContact(GameObject contact)
+    {
+        var inter = contact.GetComponentInChildren<Inter>();
+        if (inter != null && inter.item == neededItem)
+        {
+            manager.NextStage();
+        }
+        Destroy(contact);
     }
 }
