@@ -218,4 +218,10 @@ public class Entity : MonoBehaviour
         EntityDestroyFx.Instance.StartDestroyFx(this);
         Destroy(gameObject);
     }
+    public float GetJumpForce(){
+        return jumpForce;
+    }
+    public void SetJumpForce(float newJumpForce){
+        jumpForce = newJumpForce;
+    }
 }
