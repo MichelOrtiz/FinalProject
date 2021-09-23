@@ -50,7 +50,7 @@ public class WaterPhysics : MonoBehaviour
             GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Player")
         {
-            player.currentGravity = player.defaultGravity;
+            player.currentGravity = PlayerManager.defaultGravity;
             player.isInWater = false;
             player.walkingSpeed = player.defaultwalkingSpeed;
 
