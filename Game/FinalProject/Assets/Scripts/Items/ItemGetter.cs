@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class ItemGetter : MonoBehaviour
 {
-    [SerializeField]private Item neededItem;
+    [SerializeField]protected Item neededItem;
     public bool GetItem(Item item){
         if(item == neededItem){
             Interaction();

@@ -8,10 +8,18 @@ public class SomePhysics : MonoBehaviour
 	[SerializeField] private Rigidbody2D rigidbody2d;
 	private Vector2 position;
 
+	public void StartKnockback(float knockbackDuration, float knockbackForce, float angle)
+	{
+		Vector2 direction = (Vector3)rigidbody2d.position + (MathUtils.GetVectorFromAngle(angle));
+        StartKnockback(knockbackDuration, knockbackForce, direction);
+	}
+
     public void StartKnockback(float knockbackDuration, float knockbackForce, Vector2 knockbackDir)
     {
         StartCoroutine(Knockback(knockbackDuration, knockbackForce, knockbackDir));
     }
+
+
 
     public IEnumerator Knockback(float knockbackDuration, float knockbackForce, Vector2 knockbackDir)
 	{

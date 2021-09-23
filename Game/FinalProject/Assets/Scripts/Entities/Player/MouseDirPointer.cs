@@ -11,6 +11,7 @@ public class MouseDirPointer : MonoBehaviour
 
     private Vector2 mousePosition; 
     private Vector2 mouseDirection;
+    public Vector2 MouseDirection { get => mouseDirection; }
     private Vector2 pointerPos;
     public Vector2 PointerDir { get => pointerPos; }
     private float angle;

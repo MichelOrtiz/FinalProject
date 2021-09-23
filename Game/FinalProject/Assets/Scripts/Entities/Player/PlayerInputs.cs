@@ -118,5 +118,6 @@ public class PlayerInputs : MonoBehaviour
         movementX=0;
         movementY=0;
         jump=false;
+        OpenInventory = false;
     }
 }

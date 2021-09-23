@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6041269583508927419}
   - component: {fileID: 1194127509436482502}
   - component: {fileID: -2989424693179170845}
+  - component: {fileID: 897942891320634695}
+  - component: {fileID: 5658452484338842419}
   m_Layer: 11
   m_Name: ObjProj
   m_TagString: Untagged
@@ -97,7 +99,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -116,7 +118,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -138,3 +140,36 @@ MonoBehaviour:
   bulletImg: {fileID: -7685357867136040108}
   speed: 10
   rigidbody: {fileID: 6041269583508927419}
+  collisionHandler: {fileID: 5658452484338842419}
+  knockback:
+    duration: 0.5
+    force: 0.05
+    angle: 0
+--- !u!114 &897942891320634695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480392800919433828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d15e802039df04a820ab576c47fe24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  rigidbody2d: {fileID: 6041269583508927419}
+--- !u!114 &5658452484338842419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480392800919433828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fcb3f795e3cf1143b10f860f7ddfcec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastColliderTag: 
+  contacts: []
