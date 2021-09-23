@@ -90,4 +90,10 @@ public class Run : Ability
             runningSpeed = player.walkingSpeed * speedMultiplier;
         }
     }
+    public float GetSpeedMultiplier(){
+        return speedMultiplier;
+    }
+    public void SetSpeedMultiplier(float newSpeedMultiplier){
+        speedMultiplier = newSpeedMultiplier;
+    }
 }

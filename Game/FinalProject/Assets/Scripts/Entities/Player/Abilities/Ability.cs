@@ -72,4 +72,10 @@ public class Ability : MonoBehaviour
             }
         }
     }
+    public float GetStaminaCost(){
+        return staminaCost;
+    }
+    public void SetStaminaCost(float newStaminaCost){
+        staminaCost = newStaminaCost;
+    }
 }
