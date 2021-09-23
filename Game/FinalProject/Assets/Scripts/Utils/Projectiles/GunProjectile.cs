@@ -42,4 +42,12 @@ public class GunProjectile : MonoBehaviour
 
         ObjectShot?.Invoke();
     }
+
+    public void ShotObject(Item item, float duration){
+        GameObject projectile = Instantiate(projectilePrefab,shotPoint.position,transform.rotation);
+        var objProj =  projectile.GetComponent<ObjProjectile>();
+        objProj.SetItem(item);
+        objProj.knockback.duration = duration;
+        ObjectShot?.Invoke();
+    }
 }

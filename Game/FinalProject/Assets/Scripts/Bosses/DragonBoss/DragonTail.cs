@@ -28,9 +28,12 @@ public class DragonTail : MonoBehaviour
 
     void collisionHandler_EnterContact(GameObject contact)
     {
+        if (collisionHandler.Contacts.Contains(contact)) return;
         var inter = contact.GetComponentInChildren<Inter>();
+        
         if (inter != null && inter.item == neededItem)
         {
+            Debug.Log("next stage");
             manager.NextStage();
         }
         Destroy(contact);

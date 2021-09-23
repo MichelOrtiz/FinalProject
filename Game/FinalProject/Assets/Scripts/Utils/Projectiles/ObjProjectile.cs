@@ -14,7 +14,7 @@ public class ObjProjectile : MonoBehaviour
     [SerializeField] private CollisionHandler collisionHandler;
     
     private SomePhysics physics;
-    [SerializeField] private Knockback knockback;
+    public Knockback knockback;
     
     Vector2 direction;
     Transform origin;
