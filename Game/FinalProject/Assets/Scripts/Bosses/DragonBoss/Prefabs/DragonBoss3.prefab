@@ -129,13 +129,13 @@ MonoBehaviour:
   tail: {fileID: 7983650972630342121}
   projectileShooter: {fileID: 1834368759453545810}
   shootInterval: 0.5
-  nProjectiles: 5
+  nProjectiles: 12
   roarInterval: 3
   roarEffect: {fileID: 11400000, guid: 74715c49e993b9342a53c9ffa72913ad, type: 2}
   fallingRocks: {fileID: 0}
   fallingRockInterval: 2.5
-  minFallingRocks: 2
-  maxFallingRocks: 7
+  minFallingRocks: 12
+  maxFallingRocks: 16
   smokePrefab: {fileID: 8900722058772105508, guid: 66f250b9c1f26084fb98728e9fe27e16, type: 3}
   smokeInterval: 3
 --- !u!1 &7983650972429039286
@@ -148,7 +148,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7983650972429039281}
   - component: {fileID: 7983650972429039280}
-  m_Layer: 10
+  - component: {fileID: 6716667294455769987}
+  - component: {fileID: 5663069130854240733}
+  m_Layer: 13
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,6 +222,46 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &6716667294455769987
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983650972429039286}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.848053, y: 0.44538116}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 15.94519, y: 7.5945187}
+  m_EdgeRadius: 0
+--- !u!114 &5663069130854240733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983650972429039286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038c0563fef8606499c84453f791b14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 50
+  knockbackState: {fileID: 11400000, guid: fb0255b4acb08bd4f9b0027d32dbcf06, type: 2}
 --- !u!1 &7983650972630342126
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +361,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1.5043488, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -330,7 +372,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4.0086975, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &7983650972630342117
 Rigidbody2D:
@@ -472,7 +514,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7983650973003351139}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -498,7 +540,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7983650973003351139}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 038c0563fef8606499c84453f791b14a, type: 3}
   m_Name: 
@@ -519,6 +561,14 @@ PrefabInstance:
     - target: {fileID: 2687100907498674044, guid: e2007eaf17f50b64aa8313ac1ba40f36, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687100907498674044, guid: e2007eaf17f50b64aa8313ac1ba40f36, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687100907498674044, guid: e2007eaf17f50b64aa8313ac1ba40f36, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2687100907498674044, guid: e2007eaf17f50b64aa8313ac1ba40f36, type: 3}
       propertyPath: m_LocalPosition.x
@@ -559,6 +609,14 @@ PrefabInstance:
     - target: {fileID: 2687100907498674044, guid: e2007eaf17f50b64aa8313ac1ba40f36, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687320531051622608, guid: e2007eaf17f50b64aa8313ac1ba40f36, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687320531051622608, guid: e2007eaf17f50b64aa8313ac1ba40f36, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2861869326685319550, guid: e2007eaf17f50b64aa8313ac1ba40f36, type: 3}
       propertyPath: m_Enabled

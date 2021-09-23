@@ -27,6 +27,7 @@ public class Smoke : MonoBehaviour
             currentTime += Time.deltaTime;
             if(currentTime >= dmgInterval){
                 PlayerManager.instance.TakeTirement(dmg);
+                PlayerManager.instance.SetImmune();
                 currentTime=0;
             }
         }
@@ -47,6 +48,9 @@ public class Smoke : MonoBehaviour
         transform.position += shootDir * speedMultiplier * Time.deltaTime *(rigidbody2d.gravityScale != 0? rigidbody2d.gravityScale : 1);
     }
     private void OnTriggerEnter2D(Collider2D other) {
+        if(other.CompareTag("Player"))isPlayerInside=true;
+    }
+    private void OnTriggerStay2D(Collider2D other) {
         if(other.CompareTag("Player"))isPlayerInside=true;
     }
     private void OnTriggerExit2D(Collider2D other) {

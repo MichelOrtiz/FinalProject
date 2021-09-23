@@ -95,10 +95,12 @@ public class DragonBoss : MonoBehaviour
     void SwingTail(){
         //Debug.Log("Rock");
         //Maybe animation??
+        AudioManager.instance.Play("StonesFalling");
         fallingRocks.GenerateRandomRock();
     }
     void ShotSmoke(){
-        Vector3 startPos = new Vector3(head.position.x,PlayerManager.instance.GetPosition().y,head.position.z);
+        //Vector3 startPos = new Vector3(head.position.x,PlayerManager.instance.GetPosition().y);
+        Vector3 startPos = head.position;
         GameObject smoke = Instantiate(smokePrefab,startPos,Quaternion.identity);
         Smoke smk = smoke.GetComponent<Smoke>();
         smk.SetTarget(PlayerManager.instance.GetPosition());

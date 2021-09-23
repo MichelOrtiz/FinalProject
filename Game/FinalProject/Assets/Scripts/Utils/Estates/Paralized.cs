@@ -32,7 +32,7 @@ public class Paralized : State
     }
     public override void Affect()
     {
-        DisableEntity();
+        SetActiveEntity(false);
 
         Rigidbody2D rb = manager.hostEntity.GetComponent<Rigidbody2D>(); 
         rb.velocity = new Vector2(0f,-rb.gravityScale);
@@ -43,33 +43,27 @@ public class Paralized : State
         }
     }
 
-    void DisableEntity()
+    void SetActiveEntity(bool value)
     {
         if (isPlayer)
         {
-            if (player.inputs.enabled) player.inputs.enabled = false;
-            if (player.abilityManager.gameObject.activeInHierarchy) player.abilityManager.gameObject.SetActive(false);
+            if (player.inputs.enabled != value) player.inputs.enabled = value;
+            if (player.abilityManager.gameObject.activeInHierarchy != value) player.abilityManager.gameObject.SetActive(value);
         }
         else
         {
-            if (entity.enabled) entity.enabled = false;
+            if (entity.enabled != value) entity.enabled = value;
         }
     }
 
     public override void StopAffect()
     {
         base.StopAffect();
+        SetActiveEntity(true);
         bool isPlayer = manager.hostEntity.GetComponent<PlayerManager>() != null;
-        if(isPlayer){
-            manager.hostEntity.GetComponent<PlayerInputs>().enabled=true;
-            manager.hostEntity.GetComponent<PlayerManager>().abilityManager.SetActive(true);
-        }else{
-            manager.hostEntity.enabled=true;
-        }
-        if (manager.hostEntity is PlayerManager)
+        /*if(isPlayer)
         {
-            var player = manager.hostEntity as PlayerManager;
             player.SetImmune();
-        }
+        }*/
     }
 }
