@@ -93,7 +93,6 @@ public class StatesManager : MonoBehaviour
 
     public void RemoveState(State state){
         if(currentStates.Contains(state)){
-            //state.StopAffect();
             currentStates.Remove(state);
         }
     }

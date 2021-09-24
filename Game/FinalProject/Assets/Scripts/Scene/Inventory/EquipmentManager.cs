@@ -5,8 +5,6 @@ using UnityEngine;
 public class EquipmentManager : MonoBehaviour
 {
     public static EquipmentManager instance;
-    public delegate void OnEquipmentChanged(Equipment newItem,Equipment oldItem);
-    public OnEquipmentChanged onEquipmentChanged;
     private void Awake() {
         if(instance!=null){
             Debug.Log("Bad");
@@ -14,12 +12,15 @@ public class EquipmentManager : MonoBehaviour
         }
         instance = this;
     }
-    
+    public delegate void PassiveEquipment();
+    public PassiveEquipment equipmentRutines;
     Equipment[] currentEquipment;
-    // Start is called before the first frame update
+    public ItemSlot equipmentQ;
+    public ItemSlot equipmentR;
+    
     void Start()
     {
-        int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
+        int numSlots = System.Enum.GetNames(typeof(EquipmentPosition)).Length;
         currentEquipment = new Equipment[numSlots];
     }
 
@@ -27,29 +28,54 @@ public class EquipmentManager : MonoBehaviour
         int slotIndex = (int) newItem.equipmentSlot;
         Unequip(slotIndex);
         currentEquipment[slotIndex] = newItem;
-        //Inventory.instance.Remove(newItem);
+        currentEquipment[slotIndex].StartEquip();
+        if(newItem.isPasive){  
+            equipmentRutines += currentEquipment[slotIndex].Rutina;
+        }
     }
 
     public void Unequip(int slotIndex){
-        if(currentEquipment[slotIndex]!=null){
-            Equipment oldItem = currentEquipment[slotIndex];
-            Inventory.instance.Add(oldItem);
+        if(currentEquipment[slotIndex]!=null){ 
+            if(currentEquipment[slotIndex].isPasive){  
+                equipmentRutines -= currentEquipment[slotIndex].Rutina;
+            }
+            currentEquipment[slotIndex].EndEquip();
             currentEquipment[slotIndex] = null;
         }
     }
     public void UnequipAll(){
         for(int i=0;i<currentEquipment.Length;i++){
+            equipmentRutines -= currentEquipment[i].Rutina;
             Unequip(i);
         }
     }
-    // Update is called once per frame
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q)){
+        if(equipmentRutines != null){
+            //Hagan efecto las rutinas de habilidades pasivas 
+            equipmentRutines.Invoke();
+        }
 
+        //Activar cosas de la hotbar Q - R
+        if(Input.GetKeyDown(KeyCode.Q)){
+            if(equipmentQ.GetItem() != null){
+                equipmentQ.GetItem().Use();
+                if(!Inventory.instance.items.Contains(equipmentQ.GetItem())){
+                    equipmentQ.ClearSlot();
+                }
+            }
         }
-        if(Input.GetKeyDown(KeyCode.E)){
-            UnequipAll();
+        if(Input.GetKeyDown(KeyCode.R)){
+            if(equipmentR.GetItem() != null){
+                equipmentR.GetItem().Use();
+                if(!Inventory.instance.items.Contains(equipmentR.GetItem())){
+                    equipmentR.ClearSlot();
+                }
+            }
         }
+    }
+    public Equipment[] GetCurrentEquipment(){
+        return currentEquipment;
     }
 }

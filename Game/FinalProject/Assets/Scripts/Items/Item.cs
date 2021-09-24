@@ -13,7 +13,7 @@ public class Item : ScriptableObject
         //Debug.Log("Usando "+nombre);
         RemoveFromInventory();
     }
-    public void RemoveFromInventory(){
+    public virtual void RemoveFromInventory(){
         Inventory.instance.Remove(this);
     }
 }
