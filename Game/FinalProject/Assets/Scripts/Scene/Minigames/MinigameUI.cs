@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MinigameUI : MonoBehaviour
 {
@@ -32,10 +33,14 @@ public class MinigameUI : MonoBehaviour
     public void EndMinigame(float waitTime){
         Inventory.instance.AddMoney(rewardMoney);
 
-        var monos = ScenesManagers.GetComponentsInChildrenList<MonoBehaviour>(currentMinigame);
+        //var monos = ScenesManagers.GetComponentsInChildrenList<MonoBehaviour>(currentMinigame);
+        var monos = currentMinigame.GetComponentsInChildren<MonoBehaviour>();
+
         if (monos != null)
         {
-            monos.ForEach(m => m.enabled = false);
+            var monosArray = ScenesManagers.ArrayToList<MonoBehaviour>(monos);
+            monosArray.RemoveAll(m => (m is Image) || m is TMPro.TextMeshProUGUI || m is Text || m is Button);
+            monosArray.ForEach(m => m.enabled = false);
         }
 
         Invoke("DestroyMinigame", waitTime);
