@@ -11,6 +11,8 @@ public class MinigameUI : MonoBehaviour
     public TimerBar timerBar;
     public int rewardMoney;
 
+
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -27,32 +29,32 @@ public class MinigameUI : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void endMinigame(){
+    public void EndMinigame(float waitTime){
         Inventory.instance.AddMoney(rewardMoney);
-        if(currentMinigame != null){
-            currentMinigame.SetActive(false);
-            background.SetActive(false);
-            Destroy(currentMinigame);
+
+        var monos = ScenesManagers.GetComponentsInChildrenList<MonoBehaviour>(currentMinigame);
+        if (monos != null)
+        {
+            monos.ForEach(m => m.enabled = false);
         }
+
+        Invoke("DestroyMinigame", waitTime);
     }
 
 
-    public void recieveMinigame(GameObject minigame){
+    public void RecieveMinigame(GameObject minigame){
         currentMinigame = Instantiate(minigame, new Vector3(0, 0, 90), Quaternion.identity);
         currentMinigame.transform.SetParent(canvas.transform, false);
         background.SetActive(true);
     }
 
-    // Start is called before the first frame update
-    void Start(){
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    void DestroyMinigame()
     {
-        
+        if(currentMinigame != null)
+        {
+            background.SetActive(false);
+            Destroy(currentMinigame);
+        }
     }
 
 }
-//inventory.instance.AddMoney(int i);

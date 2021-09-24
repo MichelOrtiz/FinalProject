@@ -206,7 +206,7 @@ GameObject:
   m_Layer: 0
   m_Name: feetPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -218,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3084092307368564122}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.096, y: -0.119, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3084092309309001029}
@@ -1207,7 +1207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
   feetPos: {fileID: 3084092308941644396}
   checkFeetRadius: 0.5
   isGrounded: 0
@@ -1359,12 +1359,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3084092307796075489}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9162cc6d3e48acd4fa6fa992386a6643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: {x: 1, y: 2}
+  jumpForce: {x: 0.5, y: 1}
   timeBtwJump: 1.5
   translationSpeed: 5
   collisionHandler: {fileID: 3084092307938998803}
@@ -1374,6 +1374,7 @@ MonoBehaviour:
   partsHandler: {fileID: 0}
   positionReference: {fileID: 3084092309416185893}
   machineFx: {fileID: 0}
+  isReference: 0
 --- !u!114 &3084092307796075491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2530,12 +2531,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3084092308227282405}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9162cc6d3e48acd4fa6fa992386a6643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: {x: 1, y: 2.5}
+  jumpForce: {x: 0.5, y: 1}
   timeBtwJump: 1.5
   translationSpeed: 5
   collisionHandler: {fileID: 3084092308890720880}
@@ -2545,6 +2546,7 @@ MonoBehaviour:
   partsHandler: {fileID: 3084092309204029340}
   positionReference: {fileID: 3084092309131614916}
   machineFx: {fileID: 0}
+  isReference: 0
 --- !u!1 &3084092308227304298
 GameObject:
   m_ObjectHideFlags: 0
@@ -5630,7 +5632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
   feetPos: {fileID: 3084092307368564123}
   checkFeetRadius: 0.5
   isGrounded: 0

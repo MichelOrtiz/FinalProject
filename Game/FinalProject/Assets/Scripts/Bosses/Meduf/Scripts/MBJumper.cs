@@ -27,7 +27,8 @@ public class MBJumper : MonoBehaviour
     [SerializeField] private GameObject positionReference;
     [SerializeField] private GameObject machineFx;
     private PlayerManager player;
-    private bool isReference;
+    public bool isReference;
+    public bool inStartPos;
     #endregion    
 
 
@@ -47,11 +48,12 @@ public class MBJumper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        inStartPos = Vector2.Distance((Vector2)transform.position, initialPosition) < 0.5f;
         if (justGrounded)
         {
             if (curTimeBtwJump > timeBtwJump)
             {
-                if ((Vector2)transform.position != initialPosition)
+                if (!inStartPos)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, initialPosition, translationSpeed * Time.deltaTime);
                 }
@@ -59,7 +61,7 @@ public class MBJumper : MonoBehaviour
                 {
                     justGrounded = false;
                     curTimeBtwJump = 0;
-                    transform.position = initialPosition;  
+                    //transform.position = initialPosition;  
                 }
                 
             }
@@ -87,6 +89,7 @@ public class MBJumper : MonoBehaviour
         {
             if (!justGrounded && isReference && groundChecker.isGrounded)
             {
+                Debug.Log("should jump");
                 Vector2 jumpDirection = new Vector2
                 (
                     player.GetPosition().x > transform.position.x ?
@@ -101,7 +104,7 @@ public class MBJumper : MonoBehaviour
 
     void groundChecker_Grounded(string groundTag)
     {
-        justGrounded = true;
+        justGrounded = true; 
         rb.velocity = new Vector2();
     }
 

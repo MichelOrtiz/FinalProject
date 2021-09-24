@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9162cc6d3e48acd4fa6fa992386a6643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: {x: 1, y: 2}
+  jumpForce: {x: 0.75, y: 1.5}
   timeBtwJump: 1.5
   translationSpeed: 5
   collisionHandler: {fileID: 4819366672180669884}
@@ -1351,6 +1351,7 @@ MonoBehaviour:
   partsHandler: {fileID: 4819366672043607099}
   positionReference: {fileID: 4819366671386918530}
   machineFx: {fileID: 4819366671425486772}
+  isReference: 0
 --- !u!114 &4819366671458819814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,7 +2012,7 @@ GameObject:
   m_Layer: 0
   m_Name: feetPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2023,7 +2024,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4819366671717435236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.01, y: -0.119, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4819366673040547871}
@@ -3441,7 +3442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
   feetPos: {fileID: 4819366672402920815}
   checkFeetRadius: 0.5
   isGrounded: 0
@@ -3856,7 +3857,7 @@ GameObject:
   m_Layer: 0
   m_Name: feetPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3868,7 +3869,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4819366672402920814}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.096, y: -0.119, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4819366672320468884}
@@ -4452,7 +4453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9162cc6d3e48acd4fa6fa992386a6643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: {x: 1, y: 2}
+  jumpForce: {x: 0.75, y: 1.5}
   timeBtwJump: 1.5
   translationSpeed: 5
   collisionHandler: {fileID: 4819366672912505754}
@@ -4462,6 +4463,7 @@ MonoBehaviour:
   partsHandler: {fileID: 4819366672043607099}
   positionReference: {fileID: 4819366671570613706}
   machineFx: {fileID: 4819366671321605837}
+  isReference: 0
 --- !u!1 &4819366672571597869
 GameObject:
   m_ObjectHideFlags: 0
@@ -5877,14 +5879,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4819366673040547870}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 811e5f0796c9fe6468a696abe02c112e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
   feetPos: {fileID: 4819366671717435237}
   checkFeetRadius: 0.5
   isGrounded: 0

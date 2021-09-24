@@ -15,8 +15,13 @@ public class Minigame : MonoBehaviour{
 
     [SerializeField] private bool hasTime;
     [SerializeField] private float time;
+    
+
+
     private TimerBar timerBar;
     private float currentTime;
+    [SerializeField] private float endWaitTime;
+
 
     public MasterMinigame MasterMinigame { get; set; }
 
@@ -36,7 +41,7 @@ public class Minigame : MonoBehaviour{
         
         if(isUI)
         {
-            MinigameUI.instance.recieveMinigame(minigameObject);
+            MinigameUI.instance.RecieveMinigame(minigameObject);
             Pause.PauseGame();
         }else{
             SceneManager.LoadScene(sceneIndex);
@@ -70,14 +75,14 @@ public class Minigame : MonoBehaviour{
                 currentTime -= Time.unscaledDeltaTime;
                 timerBar.SetTime(currentTime);
             }
-        } 
+        }
     }
 
     public virtual void EndMinigame(bool isCompleted)
     {
         if(isUI)
         {
-            MinigameUI.instance.endMinigame();
+            MinigameUI.instance.EndMinigame(endWaitTime);
             Pause.ResumeGame();
         }else{
             

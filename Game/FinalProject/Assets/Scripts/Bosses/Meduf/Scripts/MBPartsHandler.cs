@@ -77,6 +77,10 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     #endregion
 
 
+    void Awake()
+    {
+        OnChangedReference(currentPositionsReference);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -89,6 +93,8 @@ public class MBPartsHandler : MonoBehaviour, ILaser
             currentPositionsReference = leftPositionReference;
         }
         OnChangedReference(currentPositionsReference);
+        currentPositionsReference.transform.parent.GetComponent<MBJumper>().isReference = true;
+
 
         Center = MathUtils.FindCenterOfTransforms(parts.GetRange(0, parts.Count));
 
@@ -136,10 +142,13 @@ public class MBPartsHandler : MonoBehaviour, ILaser
             {
                 //assembled = false;
                 //movedParts.Clear();
-                movedParts.Clear();
-                ChangePositionReference();
-                OnChangedReference(currentPositionsReference);
-                curAssembledTime = 0;
+                if (currentPositionsReference.GetComponentInParent<MBJumper>().inStartPos)
+                {
+                    movedParts.Clear();
+                    ChangePositionReference();
+                    OnChangedReference(currentPositionsReference);
+                    curAssembledTime = 0;
+                }
             }
             else
             {

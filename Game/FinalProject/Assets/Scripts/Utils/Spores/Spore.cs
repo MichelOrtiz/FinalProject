@@ -64,7 +64,7 @@ public class Spore : MonoBehaviour
     /// <param name="other">The GameObject hit by the particle.</param>
     void OnParticleCollision(GameObject other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !player.isImmune )
         {
             player.TakeTirement(damageAmount);
             if (damageAmount > 0)

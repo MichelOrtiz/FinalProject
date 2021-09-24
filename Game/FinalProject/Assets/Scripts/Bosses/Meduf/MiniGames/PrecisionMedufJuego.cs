@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PrecisionMedufJuego : MonoBehaviour
 {
@@ -14,9 +15,15 @@ public class PrecisionMedufJuego : MonoBehaviour
     bool reloj;
     public bool moviendose;
 
+    [SerializeField] private Image longLine;
+    [SerializeField] private Color solvedColor;
+
+
     [Header("Score Range")]
     [SerializeField] private float minAngle;
     [SerializeField] private float maxAngle;
+
+    bool solved;
 
     void Start()
     {
@@ -52,13 +59,22 @@ public class PrecisionMedufJuego : MonoBehaviour
         }
     }
     
-    public void OnClickButton()
+    public void OnClickButton(Button button)
     {
+        if (solved) return;
         if (transform.localEulerAngles.z <= minAngle || transform.localEulerAngles.z >= maxAngle )
         {
             ScoreController.score++;
+            solved = true;
+            enabled = false;
+            button.interactable = false;
+
+            longLine.color = solvedColor;
         }
-        enabled = false;
+        else
+        {
+            enabled = !enabled;
+        }
     }   
 
 }
