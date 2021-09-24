@@ -96,10 +96,15 @@ public class InventoryUI : MonoBehaviour
             prevButton.gameObject.SetActive(false);
         }
         if(focusedSlot!=null){
-            focusedSlot.icon.color = Color.yellow;
-            focusedSlot.background.color = Color.red;
-            description.text = focusedSlot.GetItem().descripcion;
-            nametxt.text = focusedSlot.GetItem().name;
+            if(focusedSlot.GetItem()!=null){
+                focusedSlot.icon.color = Color.yellow;
+                focusedSlot.background.color = Color.red;
+                description.text = focusedSlot.GetItem().descripcion;
+                nametxt.text = focusedSlot.GetItem().name;
+            }else{
+                RemoveFocusSlot();
+            }
+            
         }else{
             nametxt.text = "";
             description.text = "Selecciona un objeto";
