@@ -66,7 +66,7 @@ public class EnemyCollisionHandler : CollisionHandler
             lastEnemyTouched = other.transform.parent.GetComponent<Enemy>();
             OnTouchedEnemy(lastEnemyTouched);
         }
-        else if (other.gameObject.tag == "Ground"|| other.gameObject.tag == "Platform")
+        else if (GroundChecker.GroundTags.Contains(other.gameObject.tag))
         {
             touchingGround = true;
             OnTouchingGround();
@@ -85,7 +85,7 @@ public class EnemyCollisionHandler : CollisionHandler
         {
             
         }
-        else if (other.gameObject.tag == "Ground"|| other.gameObject.tag == "Platform")
+        else if (GroundChecker.GroundTags.Contains(other.gameObject.tag))
         {
             
         }
@@ -103,7 +103,7 @@ public class EnemyCollisionHandler : CollisionHandler
         {
             touchingEnemy = false;
         }
-        else if (other.gameObject.tag == "Ground"|| other.gameObject.tag == "Platform")
+        else if (GroundChecker.GroundTags.Contains(other.gameObject.tag))
         {
             touchingGround = false;
 
@@ -124,7 +124,7 @@ public class EnemyCollisionHandler : CollisionHandler
             lastEnemyTouched = other.transform.parent.GetComponent<Enemy>();
             OnTouchedEnemy(lastEnemyTouched);
         }
-        else if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Platform")
+        else if (GroundChecker.GroundTags.Contains(other.gameObject.tag))
         {
             touchingGround = true;
             OnTouchingGround();
@@ -145,7 +145,7 @@ public class EnemyCollisionHandler : CollisionHandler
         {
             
         }
-        else if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Platform")
+        else if (GroundChecker.GroundTags.Contains(other.gameObject.tag))
         {
             
         }
@@ -163,7 +163,7 @@ public class EnemyCollisionHandler : CollisionHandler
         {
             touchingEnemy = false;
         }
-        else if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Platform")
+        else if (GroundChecker.GroundTags.Contains(other.gameObject.tag))
         {
             touchingGround = false;
         }

@@ -20,6 +20,10 @@ public class Obstacle : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             player.TakeTirement(damage);
+            if (damage > 0)
+            {
+                player.SetImmune();
+            }
         }
     }
 
@@ -28,6 +32,10 @@ public class Obstacle : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             player.TakeTirement(damage);
+            if (damage > 0)
+            {
+                player.SetImmune();
+            }
         }
     }
 }
