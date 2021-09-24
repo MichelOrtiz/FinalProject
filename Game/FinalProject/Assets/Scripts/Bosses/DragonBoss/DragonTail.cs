@@ -31,11 +31,13 @@ public class DragonTail : MonoBehaviour
         if (collisionHandler.Contacts.Contains(contact)) return;
         var inter = contact.GetComponentInChildren<Inter>();
         
-        if (inter != null && inter.item == neededItem)
+        if (inter != null)
         {
-            Debug.Log("next stage");
-            manager.NextStage();
+            if (inter.item == neededItem)
+            {
+                manager.NextStage();
+            }
+            Destroy(contact);
         }
-        Destroy(contact);
     }
 }

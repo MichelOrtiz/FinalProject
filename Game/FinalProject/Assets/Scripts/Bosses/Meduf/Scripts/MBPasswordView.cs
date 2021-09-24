@@ -30,6 +30,7 @@ public class MBPasswordView : MonoBehaviour
         Debug.Log("password set");
         byte index = 0;
         List<Image> images = ScenesManagers.GetComponentsInChildrenList<Image>(gameObject);
+        images.ForEach(i => i.enabled = false);
         foreach (var direction in directions)
         {
             switch (direction)
@@ -47,8 +48,17 @@ public class MBPasswordView : MonoBehaviour
                     images[index].sprite = right;
                     break;
             }
+            images[index].enabled = true;
             index++;
         }
         images.FindAll(i => i.sprite == null).ForEach(i => i.enabled = false);
     }
+
+
+    public void RemoveImage(byte index)
+    {
+        List<Image> images = ScenesManagers.GetComponentsInChildrenList<Image>(gameObject);
+        images[index].enabled = false;
+    }
+
 }

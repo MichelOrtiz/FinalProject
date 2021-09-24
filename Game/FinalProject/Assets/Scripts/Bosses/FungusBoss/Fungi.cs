@@ -80,7 +80,7 @@ public class Fungi : Enemy
     {
         if (timeUntilDestroyed > baseTimeUntilDestroyed)
         {
-            Destroy(gameObject);
+            DestroyEntity();
         }
         else
         {
@@ -105,7 +105,7 @@ public class Fungi : Enemy
         }
         catch (System.NullReferenceException)
         {
-            Debug.Log("FungusBoss null");
+            //Debug.Log("FungusBoss null");
         }
     }
 }

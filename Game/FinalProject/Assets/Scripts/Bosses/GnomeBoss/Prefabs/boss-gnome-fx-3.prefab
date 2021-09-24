@@ -94,9 +94,9 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.8525944, b: 0.41037738, a: 0.5882353}
-      key1: {r: 1, g: 0.8525944, b: 0.41037738, a: 0.5882353}
-      key2: {r: 0.93333334, g: 0.87058824, b: 0.68235296, a: 1}
+      key0: {r: 0.41176474, g: 0.8365576, b: 1, a: 0.5882353}
+      key1: {r: 0.41176474, g: 0.8365576, b: 1, a: 0.5882353}
+      key2: {r: 1, g: 0.8525944, b: 0.41037738, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 1}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -267,7 +267,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9224c6543bdcbe44b97f7c2595ab6fe0, type: 3}
-  m_Color: {r: 0.90588236, g: 0.85162836, b: 0.56078434, a: 0.9372549}
+  m_Color: {r: 0.6759523, g: 0.85492694, b: 0.9245283, a: 0.9372549}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
   fovNames:
   - Fov3(Clone)
   targetMesh: {fileID: 0}
-  colorWhenEnabled: {r: 0.90588236, g: 0.85490197, b: 0.56078434, a: 0.9372549}
+  colorWhenEnabled: {r: 0.4117647, g: 0.8352941, b: 1, a: 0.9372549}
   colorWhenDisabled: {r: 0.25490198, g: 0.21645588, b: 0.1764706, a: 0.9372549}
 --- !u!50 &29938730308996441
 Rigidbody2D:
@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 29938730580790958}
   - component: {fileID: 29938730580790956}
   - component: {fileID: 29938730580790957}
+  - component: {fileID: 670466540861249454}
   m_Layer: 17
   m_Name: GroundChecker
   m_TagString: Untagged
@@ -399,7 +400,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29938730580790959}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -408,3 +409,29 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.05
+--- !u!61 &670466540861249454
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29938730580790959}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0005440116, y: 0.053387463}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.23740542, y: 0.17883298}
+  m_EdgeRadius: 0

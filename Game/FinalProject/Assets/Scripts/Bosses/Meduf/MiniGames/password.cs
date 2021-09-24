@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FinalProject.Assets.Scripts.Utils.Sound;
 
 public class password : MasterMinigame
 {
@@ -17,12 +18,7 @@ public class password : MasterMinigame
     [SerializeField] private MBPasswordView passwordView;
     void Start()
     {
-        cant = RandomGenerator.NewRandom(5,10);
-        for (int i = 0; i < cant; i++)
-        {
-            ContraCorrect.Add((DireccionMiniJuegoMeduf)(int)UnityEngine.Random.Range(0,Enum.GetValues(typeof(DireccionMiniJuegoMeduf)).Length));
-        }
-        passwordView.SetImages(ContraCorrect);
+        ResetPassword();
     }
 
     // Update is called once per frame
@@ -38,15 +34,20 @@ public class password : MasterMinigame
     void OnMouseDown(){
          
     }
+    
     public void AddPressedCheck(DireccionMiniJuegoMeduf direccion){
         if (index < ContraCorrect.Count)
         {
             ContraUser.Add(direccion);
             if (ContraUser[index] == ContraCorrect[index])
             {
-                index++;    
-            }else
+                passwordView.RemoveImage((byte)index);
+                index++;
+            }
+            else
             {
+                AudioManager.instance.Play("WrongAnswer");
+                ResetPassword();
                 ContraUser.Clear();
                 index=0;
             }
@@ -70,5 +71,16 @@ public class password : MasterMinigame
                 break;
             } 
         }
+    }
+
+    void ResetPassword()
+    {
+        ContraCorrect = new List<DireccionMiniJuegoMeduf>();
+        cant = RandomGenerator.NewRandom(5,10);
+        for (int i = 0; i < cant; i++)
+        {
+            ContraCorrect.Add((DireccionMiniJuegoMeduf)(int)UnityEngine.Random.Range(0,Enum.GetValues(typeof(DireccionMiniJuegoMeduf)).Length));
+        }
+        passwordView.SetImages(ContraCorrect);
     }
 }

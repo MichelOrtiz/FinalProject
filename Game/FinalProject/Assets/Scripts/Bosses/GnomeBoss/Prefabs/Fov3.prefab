@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8ae13aa9d9600c14c8d7f9ebef12c0a0, type: 2}
+  - {fileID: 2100000, guid: b077c84114bde5a4bbcdffdce9c2311b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -170,15 +170,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 1313378973}
-  normalMaterial: {fileID: 2100000, guid: 8ae13aa9d9600c14c8d7f9ebef12c0a0, type: 2}
+  normalMaterial: {fileID: 2100000, guid: b077c84114bde5a4bbcdffdce9c2311b, type: 2}
   afterAttackMaterial: {fileID: 2100000, guid: 1cad88689b42ac14a9115dd764ef3cbf, type: 2}
   groundCheck: {fileID: 871700072405816478}
   damage: 45
   baseTimeBeforeAttack: 0.05
-  baseTimeAfterAttack: 3
+  baseTimeAfterAttack: 2
   baseTimeUntilChange: 0
   speedMultiplier: 1.5
   positions: []
+  collisionHandler: {fileID: 0}
   justAttacked: 0
   center: {fileID: 251960484880025182}
   radius: 13

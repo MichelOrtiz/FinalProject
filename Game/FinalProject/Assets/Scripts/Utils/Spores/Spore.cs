@@ -67,6 +67,10 @@ public class Spore : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             player.TakeTirement(damageAmount);
+            if (damageAmount > 0)
+            {
+                player.SetImmune();
+            }
             if (!player.statesManager.currentStates.Contains(effectOnPlayer))
             {
                 player.statesManager.AddState(effectOnPlayer);
