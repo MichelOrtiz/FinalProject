@@ -8,7 +8,7 @@ public class ItemGiveStatus : ItemStamina
 
     public override void Use()
     {
-        PlayerManager.instance.statesManager.AddState(statusForPlayer);
         base.Use();
+        PlayerManager.instance.statesManager.AddState(statusForPlayer);
     }
 }

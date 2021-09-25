@@ -15,8 +15,9 @@ public class PlayerManager : Entity
     public float defaultMass = 10;
     public float currentMass;
     public GameObject dodgePerectCollider;
-
-    private GameObject[] players;
+    public const float defaultDmgMod = 1;
+    public float dmgMod {get;set;}
+    //private GameObject[] players;
     #endregion
 
     #region Constant change Parameters
@@ -61,7 +62,6 @@ public class PlayerManager : Entity
         private RaycastHit2D hit;
         private void SearchInteraction()
         {
-
             Vector2 startPoint = transform.position;
             Vector2 interactPoint = transform.position;
 
@@ -84,8 +84,6 @@ public class PlayerManager : Entity
                     trigger.TriggerDialogue();
                 }
             }
-
-
         }
     #endregion
 
@@ -115,6 +113,7 @@ public class PlayerManager : Entity
         regenCooldown = 5;
         currentGravity = defaultGravity;
         currentMass = defaultMass;
+        dmgMod = defaultDmgMod;
         inputs = gameObject.GetComponent<PlayerInputs>();
         MinimapaActivada = true;
 
@@ -368,7 +367,7 @@ public class PlayerManager : Entity
     {
         if (currentStamina>0)
         {
-            currentStamina -= damage;
+            currentStamina -= damage * dmgMod;
             loosingStamina = true;
         }
         if (currentStamina<0)
