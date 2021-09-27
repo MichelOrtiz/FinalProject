@@ -17,7 +17,7 @@ public class LootInter : MonoBehaviour
         float distance = Vector2.Distance(player.transform.position, transform.position);
         if(distance <= radius){
             if(Input.GetKeyDown(KeyCode.E)){
-                loot.SetSpawnPoint(player.GetPosition());
+                loot.SetSpawnPoint(PlayerManager.instance.GetPosition());
                 loot.Open();
                 Destroy(gameObject);
             }
