@@ -63,7 +63,7 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (waitForSeconds > 0)
         {
@@ -99,11 +99,11 @@ public class CameraFollow : MonoBehaviour
             (targetBounds.Bounds.min.x + targetBounds.Bounds.max.x)/2;
         float yTarget = camBox.size.y < targetBounds.Bounds.size.y ? Mathf.Clamp(player.position.y, targetBounds.Bounds.min.y + camBox.size.y/2, targetBounds.Bounds.max.y - camBox.size.y/2) : 
             (targetBounds.Bounds.min.y + targetBounds.Bounds.max.y)/2;
-        Vector3 target = new Vector3(xTarget, yTarget, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * speed);
+        Vector3 target = new Vector3(xTarget, yTarget, -10F);
+        //transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * speed);
         //transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, Time.deltaTime * speed);
-        transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-        //transform.position =  target;
+        //transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        transform.position =  target;
         camera.orthographicSize = targetBounds.zCam;
     }
     public Vector3 GetMousePosition(){

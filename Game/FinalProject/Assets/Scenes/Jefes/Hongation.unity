@@ -527,6 +527,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2732698731207278063, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732698731207278063, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732698731207278063, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732698731207278063, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732698731207278063, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732698731207278063, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3036437726750807128, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1111,6 +1135,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8502108929805694115, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502108929805694115, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502108929805694115, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502108929805694115, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502108929805694115, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502108929805694115, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8981681596025662755, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1678,10 +1726,6 @@ PrefabInstance:
     - target: {fileID: 2419702810618214030, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 6610586933523637232, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
-      propertyPath: speed
-      value: 48.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
@@ -10502,8 +10546,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popUp:
-    Title: blyat
-    Message: "\"La zona m\xE1s alta del Pueblo Hongo "
+    Title: Hongos Escurridizos
+    Message: "\"La zona m\xE1s alta del Pueblo Hongo expulsa invisibles esporas venenosas
+      todo el a\xF1o, \xA1una aut\xE9ntica atracci\xF3n tur\xEDstica!\nTristemente,
+      recientemente fue invadida por tres hongos escurridizos, quienes sueltan esporas
+      relajantes a su paso. Ya hay muchas quejas sobre su comportamiento por todo
+      el pueblo, pero nadie ha podido atraparlos, pues son muy r\xE1pidos\"."
   popUpUI: {fileID: 2128057130}
 --- !u!4 &1505757092
 Transform:
@@ -115887,32 +115935,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2023732934 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2419702810618214030, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
-  m_PrefabInstance: {fileID: 730265100}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &2023732942
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023732934}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &2107310531
 GameObject:
   m_ObjectHideFlags: 0
