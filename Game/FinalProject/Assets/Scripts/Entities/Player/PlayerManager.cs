@@ -436,6 +436,12 @@ public class PlayerManager : Entity
         }
     }
 
+    public void SetEnabledPlayer(bool value)
+    {
+        abilityManager.gameObject.SetActive(value);
+        inputs.enabled = value;
+    }
+
 
     #region Animatioooon
     // Not proud of this but what can I do

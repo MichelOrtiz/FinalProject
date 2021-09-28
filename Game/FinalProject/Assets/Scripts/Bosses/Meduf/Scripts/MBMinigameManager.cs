@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class MBMinigameManager : MonoBehaviour
 {
-    [SerializeReference] private GameObject currentHost; 
+    public GameObject currentHost; 
     private GameObject lastHost;
     [SerializeField] private List<AccessMinigame> minigameAccess;
     [SerializeReference] private AccessMinigame currentMinigameAccess;
     [SerializeReference] private byte index;
     private bool assignedEvent;
+    [SerializeField] private float timeBtwMinigames;
 
     private MBPartsHandler partsHandler;
+
+    [Header ("Machine FX")]
+    [SerializeField] private SpriteRenderer machineFx;
+    [SerializeField] private Color enabledColor;
+    [SerializeField] private Color disabledColor;
 
     #region Events
     public delegate void AllMinigamesCompleted();
@@ -21,14 +27,6 @@ public class MBMinigameManager : MonoBehaviour
         AllMinigamesCompletedHandler?.Invoke();
     }
     #endregion
-
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    void Awake()
-    {
-        
-    }
 
     void Start()
     {
@@ -45,14 +43,28 @@ public class MBMinigameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentMinigameAccess?.MasterMinigame != null)
+        if (currentMinigameAccess != null)
         {
-            // so it is only assigned once per object
-            if (!assignedEvent)
+            if (currentMinigameAccess.MasterMinigame != null)
             {
-                currentMinigameAccess.MasterMinigame.WinMinigameHandler += access_WinMinigame;
-                assignedEvent = true;
+                // so it is only assigned once per object
+                if (!assignedEvent)
+                {
+                    currentMinigameAccess.MasterMinigame.WinMinigameHandler += access_WinMinigame;
+                    assignedEvent = true;
+                }
             }
+
+            if (!currentMinigameAccess.available)
+            {
+                Debug.Log("In cooldown");
+                if (machineFx.color == enabledColor) machineFx.color = disabledColor;
+            }
+            else
+            {
+                if (machineFx.color == disabledColor) machineFx.color = enabledColor;
+            }
+
         }
 
         if (FindObjectOfType<Minigame>() == null)
@@ -73,7 +85,10 @@ public class MBMinigameManager : MonoBehaviour
         Destroy(currentMinigameAccess);
 
         currentMinigameAccess = Instantiate(minigameAccess[index], currentHost.transform);
+        machineFx = currentHost.GetComponent<MBJumper>().MachineFx.GetComponent<SpriteRenderer>();
         assignedEvent = false;
+        
+        machineFx.color = enabledColor;
     }
 
     void partsHandler_ChangedReference(GameObject reference)
@@ -84,6 +99,11 @@ public class MBMinigameManager : MonoBehaviour
     }
 
     void access_WinMinigame()
+    {
+        Invoke("HandleWonMinigame", timeBtwMinigames);
+    }
+
+    void HandleWonMinigame()
     {
         if (index < minigameAccess.Count-1)
         {

@@ -26,6 +26,7 @@ public class MBJumper : MonoBehaviour
     [SerializeField] private MBPartsHandler partsHandler;
     [SerializeField] private GameObject positionReference;
     [SerializeField] private GameObject machineFx;
+    public GameObject MachineFx { get => machineFx; }
     private PlayerManager player;
     public bool isReference;
     public bool inStartPos;

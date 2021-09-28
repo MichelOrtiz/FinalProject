@@ -43,7 +43,7 @@ public class MinigameUI : MonoBehaviour
             monosArray.ForEach(m => m.enabled = false);
         }
 
-        Invoke("DestroyMinigame", waitTime);
+        //Invoke("DestroyMinigame", waitTime);
     }
 
 
@@ -53,7 +53,7 @@ public class MinigameUI : MonoBehaviour
         background.SetActive(true);
     }
 
-    void DestroyMinigame()
+    public void DestroyMinigame()
     {
         if(currentMinigame != null)
         {

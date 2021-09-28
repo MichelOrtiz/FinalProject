@@ -40,6 +40,7 @@ public class MBBossFight : BossFight
 
     void minigameManager_AllMinigamesCompleted()
     {
+        EntityDestroyFx.Instance.StartDestroyFx(minigameManager.currentHost);
         EndBattle();
     }
 

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Minigame : MonoBehaviour{
     Overlord overlord;
@@ -21,7 +22,7 @@ public class Minigame : MonoBehaviour{
     private TimerBar timerBar;
     private float currentTime;
     [SerializeField] private float endWaitTime;
-
+    private bool ended;
 
     public MasterMinigame MasterMinigame { get; set; }
 
@@ -43,6 +44,7 @@ public class Minigame : MonoBehaviour{
         {
             MinigameUI.instance.RecieveMinigame(minigameObject);
             Pause.PauseGame();
+            PlayerManager.instance.SetEnabledPlayer(false);
         }else{
             SceneManager.LoadScene(sceneIndex);
         }
@@ -67,7 +69,7 @@ public class Minigame : MonoBehaviour{
 
     void Update()
     {
-        if(hasTime){
+        if(hasTime && !ended){
             if(currentTime<=0){
                 currentTime = time;
                 EndMinigame(false);
@@ -80,21 +82,43 @@ public class Minigame : MonoBehaviour{
 
     public virtual void EndMinigame(bool isCompleted)
     {
+        MinigameCompleted = isCompleted;
+        ended = true;
         if(isUI)
         {
             MinigameUI.instance.EndMinigame(endWaitTime);
-            Pause.ResumeGame();
-        }else{
-            
+            StartCoroutine(EndCoroutine(endWaitTime));
         }
-        if (isCompleted)
+        else
+        {
+            // for now
+            EndMinigameForGood();
+        }
+    }
+
+    IEnumerator EndCoroutine(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        EndMinigameForGood();
+    }
+
+    void EndMinigameForGood()
+    {
+        if (MinigameCompleted)
         {
             Debug.Log("Minigame <<" + minigameObject + ">> completed!");
             Inventory.instance.AddMoney(rewardMoney);
         }
+        if (isUI)
+        {
+            MinigameUI.instance.DestroyMinigame();
+            Pause.ResumeGame();
+            PlayerManager.instance.SetEnabledPlayer(true);
+        }
         OnMinigameEnded();
         Destroy(gameObject);
     }
+    
 
     /*public void WinMinigame()
     {

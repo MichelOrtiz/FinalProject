@@ -6,13 +6,17 @@ public class AccessMinigame : MonoBehaviour
 {
     public float radius;
     public GameObject minigameObject;
-    private Minigame minigame;
+    public Minigame Minigame { get; private set; }
 
     public MasterMinigame MasterMinigame { get; set; }
     //[SerializeReference] private bool isCompleted;
-    [SerializeField] private bool available;
+    public bool available;
     [SerializeField] private float cooldownTime;
     private float curCooldownTime;
+
+    public bool InCooldown { get => curCooldownTime > 0; }
+
+    private bool minigameInstantiated;
     
     // Start is called before the first frame update
     void Start()
@@ -38,20 +42,22 @@ public class AccessMinigame : MonoBehaviour
                 curCooldownTime += Time.deltaTime;
             }
         }
-        else if(Input.GetKeyDown(KeyCode.E)&&distance<radius)
+        else if(!minigameInstantiated && Input.GetKeyDown(KeyCode.E)&&distance<radius)
         {
+            minigameInstantiated = true;
             Debug.Log("should access minigame from " + minigameObject);
             //spawns the minigame as a Unity object so that it recognizes its methods, then runs its code.
-            minigame = Instantiate(minigameObject).GetComponent<Minigame>();  
-            minigame.StartMinigame();
+            Minigame = Instantiate(minigameObject).GetComponent<Minigame>();  
+            Minigame.StartMinigame();
             
-            minigame.MinigameEndedHandler += minigame_Ended;
+            Minigame.MinigameEndedHandler += minigame_Ended;
 
-            MasterMinigame = minigame.MasterMinigame;
+            MasterMinigame = Minigame.MasterMinigame;
 
             if (MasterMinigame != null)
             {
                 MasterMinigame.WinMinigameHandler += masterMinigame_WinMinigame;
+                MasterMinigame.LoseMinigameHandler += masterMinigame_LoseMinigame;
             }
             else
             {
@@ -64,11 +70,17 @@ public class AccessMinigame : MonoBehaviour
     void minigame_Ended()
     {
         available = false;
+        minigameInstantiated = false;
     }
 
     void masterMinigame_WinMinigame()
     {
         //isCompleted = true;
-        minigame.EndMinigame(true);
+        Minigame.EndMinigame(true);
+    }
+
+    void masterMinigame_LoseMinigame()
+    {
+        Minigame.EndMinigame(false);
     }
 }
