@@ -12,6 +12,8 @@ public class MinigameUI : MonoBehaviour
     public TimerBar timerBar;
     public int rewardMoney;
 
+    public bool InMinigame { get => currentMinigame != null; }
+
 
 
     /// <summary>

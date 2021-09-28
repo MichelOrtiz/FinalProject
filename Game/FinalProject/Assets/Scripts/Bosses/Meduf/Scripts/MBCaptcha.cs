@@ -34,13 +34,13 @@ namespace FinalProject.Assets.Scripts.Bosses.Meduf.Scripts
             wordText.text = word;
 
             inputField.onSubmit.AddListener(input_Submit);
-            ResetInput();
         }
 
         void Start()
         {
             PlayerManager.instance.inputs.enabled = false;
             button.onClick.AddListener(button_Click);
+            ResetInput();
         }
 
         void NextWord()

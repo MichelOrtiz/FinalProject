@@ -17,8 +17,8 @@ public class CryingGhost : Enemy
             enemyMovement.GoTo(MathUtils.GetXDirection(GetPosition(), player.GetPosition()), chasing: false, gravity: false);
         }
 
-        Vector2 shotPos = projectileShooter.ShotPos.position;
-        RaycastHit2D hit = Physics2D.Linecast(shotPos, shotPos + Vector2.down * fieldOfView.ViewDistance, 1 << LayerMask.NameToLayer("Ground"));
+        Vector3 shotPos = projectileShooter.ShotPos.position;
+        RaycastHit2D hit = Physics2D.Linecast(shotPos, shotPos - projectileShooter.ShotPos.up * fieldOfView.ViewDistance, 1 << LayerMask.NameToLayer("Ground"));
         if (timeBtwShot <= 0)
         {
             projectileShooter.ShootProjectile(hit.point);

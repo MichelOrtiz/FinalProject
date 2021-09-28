@@ -27,6 +27,14 @@ public class MBJumper : MonoBehaviour
     [SerializeField] private GameObject positionReference;
     [SerializeField] private GameObject machineFx;
     public GameObject MachineFx { get => machineFx; }
+
+    [SerializeField] private AccessMinigame accessMinigame;
+
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private Color defaultColor;
+    [SerializeField] private Color interactableColor;
+    [SerializeField] private Color notInteractColor;
+
     private PlayerManager player;
     public bool isReference;
     public bool inStartPos;
@@ -39,6 +47,8 @@ public class MBJumper : MonoBehaviour
         player = PlayerManager.instance;
 
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         //partsHandler = GetComponent<MBPartsHandler>();
     
         collisionHandler.StayTouchingContactHandler += collisionHandler_TouchingContact;
@@ -49,6 +59,11 @@ public class MBJumper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (accessMinigame == null)
+        {
+            accessMinigame = GetComponentInChildren<AccessMinigame>();
+        }
+
         inStartPos = Vector2.Distance((Vector2)transform.position, initialPosition) < 0.5f;
         if (justGrounded)
         {
@@ -78,6 +93,23 @@ public class MBJumper : MonoBehaviour
             {
                 transform.eulerAngles = new Vector3(0, transform.rotation.y == 0? 180:0);
             }
+        }
+
+
+        if (Vector2.Distance(player.GetPosition(), accessMinigame.transform.position) <= accessMinigame.radius)
+        {
+            if (accessMinigame.available)
+            {
+                if (spriteRenderer.color != interactableColor) spriteRenderer.color = interactableColor;
+            }
+            else
+            {
+                if (spriteRenderer.color != notInteractColor) spriteRenderer.color = notInteractColor;
+            }
+        }
+        else
+        {
+            if (spriteRenderer.color != defaultColor) spriteRenderer.color = defaultColor;
         }
 
         
@@ -117,12 +149,15 @@ public class MBJumper : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = true;
             machineFx.SetActive(true);
             transform.position = initialPosition;
+
         }
         else
         {
             isReference = false;
             GetComponent<SpriteRenderer>().enabled = false;
             machineFx.SetActive(false);
+
+            accessMinigame = null;
         }
     }
 

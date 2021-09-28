@@ -18,11 +18,12 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && !MinigameUI.instance.InMinigame)
         {
             //active = !active;
             HandleActive(!active);
             panel.SetActive(active);
+            PlayerManager.instance.SetEnabledPlayer(!active);
             //Time.timeScale = (active) ? 0 : 1f;
             //inputs.enabled = !active;
         }
