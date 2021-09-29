@@ -3,10 +3,16 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     [SerializeField] private float damage;
+    [SerializeField] private bool drainAllStamina;
     private PlayerManager player;
     void Start()
     {
         player = PlayerManager.instance;
+
+        if (drainAllStamina)
+        {
+            damage = player.maxStamina;
+        }
     }
 
     // Update is called once per frame

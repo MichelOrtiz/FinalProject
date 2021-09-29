@@ -63,7 +63,10 @@ public class EnemyCollisionHandler : CollisionHandler
         else if (other.gameObject.tag == "Enemy")
         {
             touchingEnemy = true;
-            lastEnemyTouched = other.transform.parent.GetComponent<Enemy>();
+            if (other.transform != null)
+            {
+                lastEnemyTouched = other.transform.parent?.GetComponent<Enemy>();
+            }
             OnTouchedEnemy(lastEnemyTouched);
         }
         else if (GroundChecker.GroundTags.Contains(other.gameObject.tag))

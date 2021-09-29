@@ -40,7 +40,7 @@ public class BossFight : MonoBehaviour
         }
         currentStage?.Generate();
 
-        //AudioManager.instance?.Play("Theme");
+        AudioManager.instance?.Play("Theme");
     }
     protected void Update() {
         if(Input.GetKeyDown(KeyCode.L)){

@@ -203,7 +203,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.20690393, y: -0.2350645}
+  m_Offset: {x: -0.20690393, y: 0.003947735}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -214,7 +214,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.93295, y: 5.253749}
+  m_Size: {x: 3.93295, y: 15.770194}
   m_EdgeRadius: 0
 --- !u!114 &8260478909661340024
 MonoBehaviour:
@@ -231,6 +231,7 @@ MonoBehaviour:
   facingDirection: 
   currentState: 0
   isWalking: 0
+  isRunning: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
@@ -252,16 +253,16 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle: []
   feetPos: {fileID: 8260478909848533088}
-  checkFeetRadius: 0.3
   groundChecker: {fileID: 0}
   collisionHandler: {fileID: 0}
-  target: {x: 138, y: 67.6}
-  speedMultiplier: 0.75
+  physics: {fileID: 0}
+  emotePos: {fileID: 0}
+  target: {x: 255, y: 67.6}
+  speedMultiplier: 1.5
 --- !u!1 &8260478909848533089
 GameObject:
   m_ObjectHideFlags: 0
