@@ -23,7 +23,6 @@ public class Pause : MonoBehaviour
             //active = !active;
             HandleActive(!active);
             panel.SetActive(active);
-            PlayerManager.instance.SetEnabledPlayer(!active);
             //Time.timeScale = (active) ? 0 : 1f;
             //inputs.enabled = !active;
         }
@@ -47,5 +46,8 @@ public class Pause : MonoBehaviour
         {
             inputs.enabled = !active;
         }
+
+        PlayerManager.instance.SetEnabledPlayer(!active);
+
     }
 }

@@ -437,7 +437,7 @@ MonoBehaviour:
   isResting: 0
   isChasing: 0
   statesManager: {fileID: 0}
-  jumpForce: 0.4
+  jumpForce: 0.25
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
@@ -456,7 +456,7 @@ MonoBehaviour:
   enemyEffectOnPlayer: {fileID: 11400000, guid: 8de5e72f6bf5ff44fa630dfab5f2bbcf, type: 2}
   enemyEffectOnSelf: {fileID: 11400000, guid: 4d0b64dedb6294445a543b048c02b1a0, type: 2}
   projectileEffectOnPlayer: {fileID: 11400000, guid: 90c69d5edae60f3408126cff60c25dd9, type: 2}
-  damageAmount: 10
+  damageAmount: 5
   projectilePrefab: {fileID: 8805213487483752607, guid: 8703c8c2ae307124ca6abedff2cefb5f, type: 3}
   shotPoint: {fileID: 5831323528851422959}
   minDistanceToShoot: 5
@@ -464,9 +464,9 @@ MonoBehaviour:
   target: {fileID: 0}
   activateDistance: 150
   pathUpdateSeconds: 0.5
-  speedMultiplier: 4000
+  speedMultiplier: 2500
   nextWaypointDistance: 3
-  jumpNodeHeightRequirement: 0.15
+  jumpNodeHeightRequirement: 0.12
   minDistanceFromPlayer: 5
   speedIcreaseMultiplier: 2
   fovOrigin: {fileID: 5831323528851422959}

@@ -6,6 +6,7 @@ public class PraderaBossFight : MonoBehaviour
 {
     [SerializeField] private Vector2 raceStart;
     [SerializeField] private Vector2 raceGoal;
+    [SerializeField] private GameObject afterBattleWall;
     private PlayerManager player;
     private BossFight bossFight;
     
@@ -13,6 +14,8 @@ public class PraderaBossFight : MonoBehaviour
     {
         bossFight = GetComponent<BossFight>();
         bossFight.enabled = false;
+
+        bossFight.BattleEnded += bossFight_BattleEnded;
     }
     void Start()
     {
@@ -30,5 +33,10 @@ public class PraderaBossFight : MonoBehaviour
         {
             bossFight.EndBattle();
         }
+    }
+
+    void bossFight_BattleEnded()
+    {
+        Instantiate(afterBattleWall, afterBattleWall.transform.position, afterBattleWall.transform.rotation);
     }
 }

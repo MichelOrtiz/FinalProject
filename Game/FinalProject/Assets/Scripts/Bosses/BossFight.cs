@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using FinalProject.Assets.Scripts.Utils.Sound;
 using UnityEngine;
@@ -26,6 +26,8 @@ public class BossFight : MonoBehaviour
     public Stage currentStage;
     public bool isCleared;
     protected int indexStage;
+
+    public Action BattleEnded = delegate{};
 
     
 
@@ -86,6 +88,8 @@ public class BossFight : MonoBehaviour
             endMessageTrigger.TriggerPopUp(true);
 
             Debug.Log("Lo hiciste ganaste!!!1");
+
+            BattleEnded?.Invoke();
         }
     }
 }
