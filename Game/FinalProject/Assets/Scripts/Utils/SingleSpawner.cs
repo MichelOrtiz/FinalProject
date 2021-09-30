@@ -14,74 +14,100 @@ public class SingleSpawner : MonoBehaviour
 
     #region Respawn
     [SerializeField] private bool respawnWhenNullInScene;
+    
+    [Obsolete ("Useless. Don't use it")]
+    [Tooltip ("Useless. Don't use it")]
     [SerializeField] private bool respawnWhenNullInInventoryAndScene;
+
+    [SerializeField] private bool respawnWhenNullInInventory;
+
+
     [SerializeField] private bool respawnBasedOnTime;
+    [SerializeField] private bool independentOnTime;
     [SerializeField] private float timeToRespawn;
     private float curTimeToRespawn;
-    private bool spawned;
+    private bool canSpawn;
     #endregion
 
     private PlayerManager player;
     private Inventory inventory;
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
+
+    void Awake()
+    {
+        if (independentOnTime) respawnBasedOnTime = true;
+    }
+
     void Start()
     {
         player = PlayerManager.instance;
         inventory = Inventory.instance;
+
+        /*respawnHandler += HandleRespawnOptions;
+        if (!independentOnTime && startWaitTime > 0)
+        {
+            respawnHandler += HandleRespawnTime;
+        }*/
+        canSpawn = true;
     }
 
 
     void Update()
     {
-        if (curStartWaitTime <= startWaitTime)
+        if (curStartWaitTime < startWaitTime)
         {
             curStartWaitTime += Time.deltaTime;
             return;
         }
         
-        if (!spawned)
+        if (canSpawn)
         {
             SpawnObject();
-            spawned = true;
+            canSpawn = false;
         }
         else
         {
-            if (respawnWhenNullInScene)
-            {
-                //if (ScenesManagers.FindGameObject(g => g.name == gmObject.name + "(Clone)")  == null)
-                if (!ScenesManagers.ExistsGameObject(spawnedObject))
-                {
-                    SpawnObject();
-                }
-            }
-            if (respawnWhenNullInInventoryAndScene)
-            {
-                Item item = gmObject.GetComponentInChildren<Inter>()?.item;
-
-                if (!ScenesManagers.ExistsGameObject(spawnedObject) && !inventory.items.Contains(item))
-                {
-                    SpawnObject();
-                }
-            }
-            if (respawnBasedOnTime)
-            {
-                if (curTimeToRespawn > timeToRespawn)
-                {
-                    SpawnObject();
-                    curTimeToRespawn = 0;
-                }
-                else
-                {
-                    curTimeToRespawn += Time.deltaTime;
-                }
-            }
+            HandleRespawnOptions();
         }
 
 
+    }
+
+    void HandleRespawnOptions()
+    {
+        if (respawnWhenNullInScene)
+        {
+            if (!ScenesManagers.ExistsGameObject(spawnedObject))
+            {
+                HandleRespawnTime();
+            }
+        }
+        if (respawnWhenNullInInventory)
+        {
+            Item item = gmObject.GetComponentInChildren<Inter>()?.item;
+            if (!inventory.items.Contains(item))
+            {
+                HandleRespawnTime();
+            }
+        }
+        if (independentOnTime)
+        {
+            HandleRespawnTime();
+        }
+    }
+
+    void HandleRespawnTime()
+    {
+        if (respawnBasedOnTime)
+        {
+            curTimeToRespawn += Time.deltaTime;
+            canSpawn = curTimeToRespawn >= timeToRespawn;
+            if (canSpawn) curTimeToRespawn = 0;
+        }
+        else
+        {
+            canSpawn = true;
+        }
     }
 
     void SpawnObject()

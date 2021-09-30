@@ -250,6 +250,11 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    public void AddForce(float force, Vector2 direction, ForceMode2D forceMode)
+    {
+        rigidbody2d.AddForce(direction * force, ForceMode2D.Force);
+    }
+
 
     public void ChangeFacingDirection()
     {

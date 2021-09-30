@@ -2,42 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mantis : Enemy//, IBattleBounds
+public class Mantis : Entity//, IBattleBounds
 {
-    [SerializeField] protected float baseTimeBeforeChase;
+    [Header("Giving Item")]
     [SerializeField] protected Item itemToGive;
-    [SerializeField] protected float decreaseSpeedMultiplier;
-    [SerializeField] protected float increaseDamage;
-    [SerializeField] private int timesToGiveItem;
+    [SerializeField] private byte timesToGiveItem;
+    public byte timesItemGiven;
+    [SerializeField] private float forceIncrease;
+    [SerializeField] private float damageIncrease;
+    /*[SerializeField] protected EnemyStatsModifier statsModifier;
+    private State curState;*/
     
-    [SerializeField] private GameObject battleBoundsPrefab;
-    private BattleBounds battleBounds;
 
+    [Header("Time")]
+    [SerializeField] protected float baseTimeBeforeChase;
     protected float timeBeforeChase;
-    protected bool touchingGround;
-    protected bool justTouchedGround;
-    public int timesItemGiven;
+
+    [Header("Other References")]
+    [SerializeField] private float force;
+    [SerializeField] private float damage;
+    [SerializeField] private EnemyCollisionHandler eCollisionHandler;
+    bool canChase;
+
+    private PlayerManager player;
+
+    /*protected bool touchingGround;
+    protected bool justTouchedGround;*/
+
 
 
 
     new protected void Start()
     {
         base.Start();
+        player = PlayerManager.instance;
+
 
         timesItemGiven = 0;
-        //battleBounds = battleBoundsPrefab.GetComponent<BattleBounds>();
-        battleBounds = FindObjectOfType<BattleBounds>();
 
+        eCollisionHandler.TouchedPlayerHandler += eCollisionHanlder_TouchedPlayer;
         eCollisionHandler.StoppedTouchingHandler += eCollisionHandler_StoppedTouchingPlayer;
         eCollisionHandler.TouchingGroundHandler += eCollisionHandler_TouchingGround;
+
+
+        eCollisionHandler.EnterTouchingContactHandler += eCollisionHandler_EnterContact;
+        eCollisionHandler.ExitTouchingContactHandler += eCollisionHandler_ExitContact;
         //battleBounds_SetEventHandler();
     }
 
     // Update is called once per frame
     new protected void Update()
     {
-        if (InFrontOfObstacle() ||( (GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
-            || GetPosition().x < player.GetPosition().x && facingDirection == LEFT) )
+        base.Update();
+        if ( (GetPosition().x < player.GetPosition().x && facingDirection == LEFT)
+            || (GetPosition().x > player.GetPosition().x && facingDirection == RIGHT) )
             {
                 ChangeFacingDirection();
             }
@@ -50,13 +68,12 @@ public class Mantis : Enemy//, IBattleBounds
             rigidbody2d.velocity = new Vector2();
             touchingGround = false;
         }*/
-        base.Update();
     }
 
-    new protected void FixedUpdate()
+    protected void FixedUpdate()
     {
         
-        //if (CanSeePlayer())
+        if (canChase)
         {
             if (timeBeforeChase > baseTimeBeforeChase)
             {
@@ -65,33 +82,61 @@ public class Mantis : Enemy//, IBattleBounds
             }
             else
             {
-
                 timeBeforeChase += Time.deltaTime;
             }
         }
     }
 
-    public override void ConsumeItem(Item item)
+    protected void eCollisionHandler_EnterContact(GameObject contact)
     {
-        if (item == itemToGive)
+
+        if (contact.CompareTag("Berry"))
         {
-            if (timesItemGiven < timesToGiveItem-1)
-            {
-                timesItemGiven++;
-                chaseSpeed *= decreaseSpeedMultiplier;
-                damageAmount += increaseDamage;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            var inter = contact.GetComponent<Inter>();
+            if (inter == null) return;
             
+            var item = inter.item;
+            if (item == itemToGive)
+            {
+                if (timesItemGiven < timesToGiveItem-1)
+                {
+                    timesItemGiven++;
+
+                    /*curState?.StopAffect();
+                    curState = statesManager.AddState(statsModifier);*/
+                    force *= forceIncrease;
+                    damage += damageIncrease;
+                }
+                else
+                {
+                    DestroyEntity();
+                }
+                
+            }
+        }
+        else
+        {
+            if (GroundChecker.IsGround(contact.tag))
+            {
+                canChase = true;
+            }
         }
     }
 
-    protected override void Attack()
+    void eCollisionHandler_ExitContact(GameObject contact)
     {
-        PlayerManager.instance.TakeTirement(damageAmount);
+        if (GroundChecker.IsGround(contact.tag))
+        {
+            canChase = false;
+        }
+    }
+
+    
+
+    protected virtual void eCollisionHanlder_TouchedPlayer()
+    {
+        PlayerManager.instance.TakeTirement(damage);
+        player.SetImmune();
         //ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Fake"));
     }
 
@@ -102,10 +147,11 @@ public class Mantis : Enemy//, IBattleBounds
 
     protected virtual void eCollisionHandler_TouchingGround()
     {
+        canChase = true;
         rigidbody2d.velocity = new Vector2();
     }
 
-    protected override void ChasePlayer()
+    protected virtual void ChasePlayer()
     {
         Vector2 playerPosition = player.GetPosition();
         float angleToPlayer = MathUtils.GetAngleBetween(GetPosition(), player.GetPosition());
@@ -113,28 +159,28 @@ public class Mantis : Enemy//, IBattleBounds
 
         //RaycastHit2D hit = Physics2D.Raycast(GetPosition(), vectorToPlayer, 100f, LayerMask.NameToLayer("Ground"));
         //Debug.DrawLine(GetPosition(), hit.point);
-        Debug.DrawLine(GetPosition(), vectorToPlayer * fieldOfView.ViewDistance, Color.blue);
+        //Debug.DrawLine(GetPosition(), vectorToPlayer * fieldOfView.ViewDistance, Color.blue);
         
        // rigidbody2d.position = Vector2.MoveTowards(GetPosition(), hit.point, chaseSpeed * Time.deltaTime);
-        rigidbody2d.AddForce(vectorToPlayer  * 2500f * 1000f, ForceMode2D.Force);
+
+
+        rigidbody2d.AddForce(vectorToPlayer * force, ForceMode2D.Force);
         //Push(vectorToPlayer.x + (xPushForce * -10000), vectorToPlayer.y + (yPushForce * 10000));
+        
+    
     }
 
-    protected override void MainRoutine()
-    {
-        //throw new System.NotImplementedException();
-    }
 
     
 
-    void ChangeParentAndChildrenLayer(LayerMask layerMask)
+    /*void ChangeParentAndChildrenLayer(LayerMask layerMask)
     {
         gameObject.layer = layerMask;
         foreach (Transform child in GetComponentsInChildren<Transform>(true))
         {
             child.gameObject.layer = layerMask;
         }
-    }
+    }*/
 
     
 

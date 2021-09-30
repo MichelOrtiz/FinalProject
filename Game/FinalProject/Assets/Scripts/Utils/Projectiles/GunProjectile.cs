@@ -15,17 +15,29 @@ public class GunProjectile : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform shotPoint;
     public float offset;
+ 
+    [SerializeField] private MouseDirPointer mouseDirPointer;
+    private PlayerManager player;
     private Vector3 mousePosition;
+
+
+    void Start()
+    {
+        player = PlayerManager.instance;
+    }
+
     private void Update() {
         mousePosition = CameraFollow.instance.GetMousePosition();
         Vector3 dif = mousePosition - transform.position;
         float rotZ = Mathf.Atan2(dif.y,dif.x) * Mathf.Rad2Deg;
+
+        //shotPoint.position = mouseDirPointer.PointerDir;
         transform.rotation = Quaternion.Euler(0f,0f,rotZ + offset);
-        /* Cosas para probar
-        if(Input.GetMouseButtonDown(0)){
+        //osas para probar
+        /*if(Input.GetMouseButtonDown(0)){
             ShotObject(prueba);
-        }
-        */
+        }*/
+        
     }
     public void StartAiming(){
         PlayerManager.instance.isAiming = true;

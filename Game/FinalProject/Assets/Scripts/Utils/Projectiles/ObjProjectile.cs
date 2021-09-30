@@ -49,7 +49,7 @@ public class ObjProjectile : MonoBehaviour
         {
             Debug.Log(other.name);
             physics.StopAllCoroutines();
-            Enemy enemy = other.transform.parent.GetComponentInChildren<Enemy>();
+            Enemy enemy = other.transform?.parent?.GetComponentInChildren<Enemy>();
             if(enemy!=null)
             {
                 Debug.Log("Enemigo consumio objeto proyectil directamente");

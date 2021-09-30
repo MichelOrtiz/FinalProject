@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MantisBoss : MonoBehaviour
 {
-    [SerializeField] private GameObject itemToSpawn;
-    [SerializeField] private Transform spawnPos;
-    [SerializeField] private float timeToRespawnItem;
+    //[SerializeField] private GameObject itemToSpawn;
+    //[SerializeField] private Transform spawnPos;
+    //[SerializeField] private float timeToRespawnItem;
     
-    private GameObject spawnedItem;
+    //private GameObject spawnedItem;
     private float currentTime;
     private List<Mantis> mantises;
     private Inventory inventory;
@@ -34,10 +34,10 @@ public class MantisBoss : MonoBehaviour
             GetComponent<BossFight>().NextStage();
             UpdateMantisList();
             UpdatePlatformsList();
-            spawnPos.position = GetComponent<BossFight>().currentStage.positions[GetComponent<BossFight>().currentStage.gameObjects.IndexOf(itemToSpawn)];
+            //spawnPos.position = GetComponent<BossFight>().currentStage.positions[GetComponent<BossFight>().currentStage.gameObjects.IndexOf(itemToSpawn)];
         }
 
-        if (!SpawnedItem())
+        /*if (!SpawnedItem())
         {
             if (currentTime > timeToRespawnItem)
             {
@@ -49,17 +49,17 @@ public class MantisBoss : MonoBehaviour
             {
                 currentTime += Time.deltaTime;
             }
-        }
+        }*/
     }
 
-    bool SpawnedItem()
+    /*bool SpawnedItem()
     {
         if (spawnedItem != null)
         {
             return ScenesManagers.GetObjectsOfType<Inter>().Contains(spawnedItem.GetComponent<Inter>());
         }
         return false;
-    }
+    }*/
     private void UpdateMantisList()
     {
         mantises =  ScenesManagers.GetObjectsOfType<Mantis>();

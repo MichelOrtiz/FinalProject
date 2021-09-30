@@ -152,4 +152,10 @@ public class GroundChecker : MonoBehaviour
         }
     }
 
+
+    public static bool IsGround(string tag)
+    {
+        return GroundTags.Contains(tag);
+    }
+
 }

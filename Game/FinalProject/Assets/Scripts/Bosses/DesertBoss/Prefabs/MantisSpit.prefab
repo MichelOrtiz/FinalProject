@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1091648305553625287}
   - component: {fileID: 53733825894341834}
   - component: {fileID: -6107770864380526211}
-  m_Layer: 1
+  m_Layer: 2
   m_Name: MantisSpit
   m_TagString: Spit
   m_Icon: {fileID: 0}
@@ -126,11 +126,12 @@ MonoBehaviour:
   rigidbody2d: {fileID: -6107770864380526211}
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4864
   warning: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
   impactEffect: {fileID: 0}
   targetWarningAvailable: 0
-  collidesWithPlayer: 0
+  independentAttackEnabled: 0
+  collisionHandler: {fileID: 0}
   speedMultiplier: 1.5
   maxShotDistance: 25
   damage: 0
@@ -144,6 +145,7 @@ MonoBehaviour:
   changeSizeByTime: 0
   timeToIncrease: 0
   sizeByTimeMultiplier: 0
+  isOnCollider: 0
 --- !u!50 &-6107770864380526211
 Rigidbody2D:
   serializedVersion: 4
