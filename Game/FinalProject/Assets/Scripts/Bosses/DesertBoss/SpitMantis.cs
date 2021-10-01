@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Bosses.DesertBoss;
 using UnityEngine;
 
 public class SpitMantis : Mantis
@@ -17,8 +18,8 @@ public class SpitMantis : Mantis
     [Header ("Chases")]
     [SerializeField] private byte minChases;
     [SerializeField] private byte maxChases;
-    private byte chasesToDo;
-    private byte chasesDone;
+    [SerializeReference]private byte chasesToDo;
+    [SerializeReference]private byte chasesDone;
 
 
     public GameObject targetPlatform;
@@ -44,6 +45,8 @@ public class SpitMantis : Mantis
             {
                 shot = false;
                 timeAfterShot = 0;
+                chasesDone = 0;
+
             }
             else
             {
@@ -57,7 +60,7 @@ public class SpitMantis : Mantis
 
     new void FixedUpdate()
     {
-        if (!shot)
+        //if (!shot)
         {
             if (chasesDone < chasesToDo)
             {
@@ -68,11 +71,11 @@ public class SpitMantis : Mantis
                 if (timeBeforeShot > startTimeBeforeShot)
                 {
                     targetPlatform = GetProjectileTarget();
-                    targetPlatform.GetComponent<Platform>().isTarget = true;
+                    targetPlatform.GetComponent<Platform>().SetTarget();
                     projectileShooter.ShootProjectile(targetPlatform.transform.position);
+                    shot = true;
                     chasesToDo = (byte)RandomGenerator.NewRandom(minChases, maxChases);
                     timeBeforeShot = 0;
-                    chasesDone = 0;
                 }
                 else
                 {
@@ -86,9 +89,8 @@ public class SpitMantis : Mantis
 
     protected override void ChasePlayer()
     {
-        chasesDone++;
-        
         base.ChasePlayer();
+        chasesDone++;
     }
 
     private GameObject GetProjectileTarget()

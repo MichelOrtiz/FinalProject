@@ -71,7 +71,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1358374671270209977}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7299995, y: -0.050000012, z: 0}
+  m_LocalPosition: {x: 1.361, y: 0.289, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 2726397862562662127}
@@ -128,7 +128,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -212,16 +212,18 @@ MonoBehaviour:
   timesToGiveItem: 3
   timesItemGiven: 0
   forceIncrease: 0.75
-  damageIncrease: 10
+  damageIncrease: 3
   baseTimeBeforeChase: 2
   force: 1800
-  damage: 10
+  damage: 1.5
   eCollisionHandler: {fileID: 4416846345686342506}
   projectileShooter: {fileID: 9078906734700120021}
   startTimeBeforeShot: 2
   startTimeAfterShot: 2
   minChases: 3
   maxChases: 5
+  chasesToDo: 0
+  chasesDone: 0
   targetPlatform: {fileID: 0}
 --- !u!1 &1358374672981942443
 GameObject:

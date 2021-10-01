@@ -2,97 +2,116 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+namespace Assets.Scripts.Bosses.DesertBoss
 {
-    private Color defaultColor;
-    [SerializeField] private Color colorWhenTarget;
-    [SerializeField] private Color colorOnEffect;
-
-    [SerializeField] private State effect;
-    [SerializeField] private float baseEffectTime;
-    private float effectTime;
-    public bool onEffect;
-    public bool isTarget;
-    private PlayerManager player;
-    private bool touchingPlayer;
-    void Start()
+    public class Platform : MonoBehaviour
     {
-        player = PlayerManager.instance;
-        //defaultMaterial = gameObject.GetComponent<SpriteRenderer>().material;
-        //ScenesManagers.GetObjectsOfType<Platform>().Find(p => p.gameObject.name == this.gameObject.name).GetComponent<Platform>() = this;
-        isTarget = false;
-        defaultColor = gameObject.GetComponent<SpriteRenderer>().color;
-    }
+        private Color defaultColor;
+        [SerializeField] private Color colorWhenTarget;
+        [SerializeField] private Color colorOnEffect;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isTarget && !onEffect)
+        [SerializeField] private State effect;
+        [SerializeField] private float baseEffectTime;
+        private float effectTime;
+        public bool onEffect;
+        public bool isTarget;
+        private PlayerManager player;
+        private bool touchingPlayer;
+        void Start()
         {
-            gameObject.layer = LayerMask.NameToLayer("Obstacles");
-            //gameObject.GetComponent<SpriteRenderer>().material = materialWhenTarget;
-            gameObject.GetComponent<SpriteRenderer>().color = colorWhenTarget;
-        }
-        else
-        {
-            gameObject.layer = LayerMask.NameToLayer("Platforms");
+            player = PlayerManager.instance;
+            //defaultMaterial = gameObject.GetComponent<SpriteRenderer>().material;
+            //ScenesManagers.GetObjectsOfType<Platform>().Find(p => p.gameObject.name == this.gameObject.name).GetComponent<Platform>() = this;
+            isTarget = false;
+            defaultColor = gameObject.GetComponent<SpriteRenderer>().color;
         }
 
-
-        if (onEffect)
+        // Update is called once per frame
+        void Update()
         {
-            if (effectTime < baseEffectTime)
+            /*if (isTarget && !onEffect)
             {
-                if (touchingPlayer)
-                {
-                    if (!player.GetComponent<StatesManager>().currentStates.Contains(effect))
-                    {
-                        player.GetComponent<StatesManager>().AddState(effect);
-                    }
-                }
-                effectTime += Time.deltaTime;
+                gameObject.layer = LayerMask.NameToLayer("Obstacles");
+                //gameObject.GetComponent<SpriteRenderer>().material = materialWhenTarget;
+                gameObject.GetComponent<SpriteRenderer>().color = colorWhenTarget;
             }
             else
             {
-                onEffect = false;
-                //gameObject.GetComponent<SpriteRenderer>().material = defaultMaterial;
-                gameObject.GetComponent<SpriteRenderer>().color = defaultColor;
-                effectTime = 0;
+                gameObject.layer = LayerMask.NameToLayer("Platforms");
+            }*/
+
+
+            if (onEffect)
+            {
+                if (effectTime < baseEffectTime)
+                {
+                    /*if (touchingPlayer)
+                    {
+                        if (!player.statesManager.currentStates.Contains(effect))
+                        {
+                            player.statesManager.AddState(effect);
+                        }
+                    }*/
+                    effectTime += Time.deltaTime;
+                }
+                else
+                {
+                    onEffect = false;
+                    //gameObject.GetComponent<SpriteRenderer>().material = defaultMaterial;
+                    gameObject.GetComponent<SpriteRenderer>().color = defaultColor;
+                    effectTime = 0;
+                }
             }
         }
-    }
 
-    public void ActivateEffect()
-    {
-        onEffect = true;
-
-        //gameObject.GetComponent<SpriteRenderer>().material = materialOnEffect;
-        gameObject.GetComponent<SpriteRenderer>().color = colorOnEffect;
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
+        public void SetTarget()
         {
-            touchingPlayer = true;
+            isTarget = true;
+            gameObject.GetComponent<SpriteRenderer>().color = colorWhenTarget;
         }
-        if (other.gameObject.tag == "Spit")
+
+        public void ActivateEffect()
         {
             onEffect = true;
+
             //gameObject.GetComponent<SpriteRenderer>().material = materialOnEffect;
             gameObject.GetComponent<SpriteRenderer>().color = colorOnEffect;
         }
-    }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Spit")
+        void OnTriggerEnter2D(Collider2D other)
         {
-            isTarget = false;
+            if (other.gameObject.tag == "Player")
+            {
+                //touchingPlayer = true;
+                if (onEffect)
+                {
+                    player.statesManager.AddStateDontRepeat(effect);
+                }
+            }
+            if (other.gameObject.tag == "Spit")
+            {
+                if (isTarget)
+                {
+                    Destroy(other.gameObject);
+                    onEffect = true;
+                    //gameObject.GetComponent<SpriteRenderer>().material = materialOnEffect;
+                    gameObject.GetComponent<SpriteRenderer>().color = colorOnEffect;
+
+                }
+            }
         }
-        if (other.gameObject.tag == "Player")
+
+        void OnTriggerExit2D(Collider2D other)
         {
-            touchingPlayer = false;
+            if (other.gameObject.tag == "Spit")
+            {
+                isTarget = false;
+            }
+            if (other.gameObject.tag == "Player")
+            {
+                //touchingPlayer = false;
+            }
         }
     }
+    
 }

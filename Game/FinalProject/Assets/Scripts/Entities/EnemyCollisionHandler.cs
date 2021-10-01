@@ -90,7 +90,7 @@ public class EnemyCollisionHandler : CollisionHandler
         }
         else if (GroundChecker.GroundTags.Contains(other.gameObject.tag))
         {
-            
+            touchingGround = true;
         }
     }
     
@@ -150,7 +150,7 @@ public class EnemyCollisionHandler : CollisionHandler
         }
         else if (GroundChecker.GroundTags.Contains(other.gameObject.tag))
         {
-            
+            touchingGround = true;
         }
     }
 
