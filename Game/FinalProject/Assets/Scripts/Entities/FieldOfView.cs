@@ -100,6 +100,8 @@ public class FieldOfView : MonoBehaviour
         {
             PlayerUnsighted?.Invoke();
         }
+
+        if (hit) Debug.DrawLine(fovOrigin.position, hit.point, Color.red);
     }
 
     void FixedUpdate()
@@ -193,18 +195,21 @@ public class FieldOfView : MonoBehaviour
                 endPos = Vector3.MoveTowards(fovOrigin.position, player.GetPosition(), viewDistance);
                 break;
         }
-        Debug.DrawLine(fovOrigin.position, endPos, Color.red);
+        Debug.DrawLine(fovOrigin.position, endPos, Color.green);
 
-        if (!RayHitObstacle(fovOrigin.position, endPos))
+        //if (!RayHitObstacle(fovOrigin.position, endPos))
         {
-            hit = Physics2D.Linecast(fovOrigin.position, endPos, layerMask);//, 1 << LayerMask.NameToLayer("Default"));
-            if (hit.collider == null)
+            var hits = Physics2D.LinecastAll(fovOrigin.position, endPos, layerMask);
+            hit = Array.Find(hits, h => h.collider.CompareTag("Player"));
+            //hit = Physics2D.Linecast(fovOrigin.position, endPos, layerMask);//1 << LayerMask.NameToLayer("Default"));
+            /*if (hit.collider == null)
             {
 
                 return false;
             }
             blockingCollider = hit.collider.gameObject;
-            return hit.collider.gameObject.CompareTag("Player");
+            return hit.collider.gameObject.CompareTag("Player");    */
+            if (hit) return true;
         }
         //Debug.Log("hit collider of " + entity.gameObject + " false");
         return false;
@@ -234,6 +239,8 @@ public class FieldOfView : MonoBehaviour
     public bool RayHitObstacle(Vector2 start, Vector2 end)
     {
         RaycastHit2D linecast = Physics2D.Linecast(start, end, whatIsObstacle);
+        /*var linecast = Array.Find(linecasts, l =>  whatIsObstacle == (whatIsObstacle | (1 << l.collider.gameObject.layer)));
+        if (!linecast) return false;*/
         //Debug.Log(entity.gameObject + " Raycast hit " + Physics2D.GetRayIntersection(new Ray(start, end), Vector2.Distance(start, end), whatIsObstacle));// .OverlapArea(start, end, whatIsObstacle)?.gameObject);
         //return Physics2D.OverlapArea(start, end, whatIsObstacle);
         //return Physics2D.GetRayIntersection(new Ray(start, end), Vector2.Distance(start, end), whatIsObstacle).collider;
