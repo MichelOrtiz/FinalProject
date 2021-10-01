@@ -12,53 +12,65 @@ public class PlayerInputs : MonoBehaviour
     public bool[] ItemHotbarUp = new bool[5];
     public bool[] ItemHotbarDown = new bool[5];
     public bool[] EquipmentHotbar = new bool[5];
+    public float intputLag {get;set;}
+    public const float defaultInputLag = 0;
 
-    public Action MovedRight;
-    public Action MovedLeft;
-    public Action MovedUp;
-    public Action MovedDown;
+    public Action MovedRight = delegate(){PlayerManager.instance.inputs.movementX=1;};
+    public Action MovedLeft = delegate(){PlayerManager.instance.inputs.movementX=-1;};
+    public Action MovedUp = delegate(){PlayerManager.instance.inputs.movementY=1;};
+    public Action MovedDown = delegate(){PlayerManager.instance.inputs.movementY=-1;};
     public Action Jump;
-
-
+    
+    bool checkLag;
+    private void Start() {
+        intputLag = defaultInputLag;  
+        checkLag = false;  
+    }
     void Update()
     {
         #region Right Left Up Dowm
         if(Input.GetButton("MovementRight")){
-            movementX=1;
-            MovedRight?.Invoke();
+            StartCoroutine(ApplyInputLag(MovedRight));
+            //movementX=1;
         }
         else if(Input.GetButton("MovementLeft")){
-            movementX=-1;
-            MovedLeft?.Invoke();
+            //movementX=-1;
+            StartCoroutine(ApplyInputLag(MovedLeft));
         }
         else{
             movementX=0;
         }
         if(Input.GetButton("MovementUp")){
-            movementY=1;
-            MovedUp?.Invoke();
+            StartCoroutine(ApplyInputLag(MovedUp));
+            //movementY=1;
         }
         else if(Input.GetButton("MovementDown")){
-            movementY=-1;
-            MovedDown?.Invoke();
+            StartCoroutine(ApplyInputLag(MovedDown));
+            //movementY=-1;
         }
         else{
             movementY=0;
         }
         #endregion
-
-        jump=Input.GetButton("Jump");
-        if (jump)
-        {
+        if(Input.GetButton("Jump")){
+            //StartCoroutine(ApplyInputLag());
+            jump=true;
             Jump?.Invoke();
         }
+        else{
+            jump=false;
+        }
+        
 
+        
+        
         OpenInventory=Input.GetButtonDown("Inventory");
-
+        
         HotbarInputs();
     }
     public void HotbarInputs(){
         if(Input.GetButton("HotbarObj0")){
+            
             ItemHotbarDown[0]=true;
         }else{
             ItemHotbarDown[0]=false;
@@ -70,6 +82,7 @@ public class PlayerInputs : MonoBehaviour
         }
 
         if(Input.GetButton("HotbarObj1")){
+            
             ItemHotbarDown[1]=true;
         }else{
             ItemHotbarDown[1]=false;
@@ -81,6 +94,7 @@ public class PlayerInputs : MonoBehaviour
         }
 
         if(Input.GetButton("HotbarObj2")){
+            
             ItemHotbarDown[2]=true;
         }else{
             ItemHotbarDown[2]=false;
@@ -92,6 +106,7 @@ public class PlayerInputs : MonoBehaviour
         }
 
         if(Input.GetButton("HotbarObj3")){
+            
             ItemHotbarDown[3]=true;
         }else{
             ItemHotbarDown[3]=false;
@@ -103,6 +118,7 @@ public class PlayerInputs : MonoBehaviour
         }
 
         if(Input.GetButton("HotbarObj4")){
+            
             ItemHotbarDown[4]=true;
         }else{
             ItemHotbarDown[4]=false;
@@ -119,5 +135,9 @@ public class PlayerInputs : MonoBehaviour
         movementY=0;
         jump=false;
         OpenInventory = false;
+    }
+    IEnumerator ApplyInputLag(Action doLast){
+        yield return new WaitForSeconds(intputLag);
+        doLast();
     }
 }

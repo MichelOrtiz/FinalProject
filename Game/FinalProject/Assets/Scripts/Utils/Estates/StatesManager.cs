@@ -7,6 +7,7 @@ public class StatesManager : MonoBehaviour
     public Entity hostEntity;
     public Entity enemy;
     public List<State> currentStates = new List<State>();
+    public List<State> bannedStates = new List<State>();
     public delegate void StatusCheck();
     public StatusCheck statusCheck;   
     private void Start() {
@@ -26,7 +27,7 @@ public class StatesManager : MonoBehaviour
     /// <returns>The instantiated state (could be different from the original)</returns>
     public State AddState(State newState){
         if(newState != null){
-            if (!currentStates.Contains(newState))
+            if (!currentStates.Contains(newState) && !bannedStates.Contains(newState))
             {
                 if (newState.onEffect)
                 {
