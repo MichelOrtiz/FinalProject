@@ -96,20 +96,23 @@ public class MBJumper : MonoBehaviour
         }
 
 
-        if (Vector2.Distance(player.GetPosition(), accessMinigame.transform.position) <= accessMinigame.radius)
+        if (accessMinigame != null)
         {
-            if (accessMinigame.available)
+            if (Vector2.Distance(player.GetPosition(), accessMinigame.transform.position) <= accessMinigame.radius)
             {
-                if (spriteRenderer.color != interactableColor) spriteRenderer.color = interactableColor;
+                if (accessMinigame.available)
+                {
+                    if (spriteRenderer.color != interactableColor) spriteRenderer.color = interactableColor;
+                }
+                else
+                {
+                    if (spriteRenderer.color != notInteractColor) spriteRenderer.color = notInteractColor;
+                }
             }
             else
             {
-                if (spriteRenderer.color != notInteractColor) spriteRenderer.color = notInteractColor;
+                if (spriteRenderer.color != defaultColor) spriteRenderer.color = defaultColor;
             }
-        }
-        else
-        {
-            if (spriteRenderer.color != defaultColor) spriteRenderer.color = defaultColor;
         }
 
         
