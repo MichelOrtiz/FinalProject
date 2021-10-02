@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -87,14 +87,45 @@ public class StatesManager : MonoBehaviour
 
                 return newState;
             }
+
+            return currentStates.Find( s => s.name == newState.name);
         }
 
         return null;
     }
 
+
     public void RemoveState(State state){
         if(currentStates.Contains(state)){
             currentStates.Remove(state);
+        }
+    }
+
+    /*public void RemoveFirst(Type stateType)
+    {
+        var states = currentStates.FindAll(s => s.GetType() == stateType);
+    }*/
+
+    public void RemoveAll( )
+    {
+        currentStates.ForEach(s => s.StopAffect());
+    }
+
+    public void RemoveAll( Type stateType )
+    {
+        if (stateType.Equals(typeof(State)) || stateType.IsSubclassOf (typeof(State)))
+        {
+            var states = currentStates.FindAll(s => s.GetType() == stateType);
+            states.ForEach(s => s.StopAffect());
+        }
+    }
+
+    public void RemoveAll(Type stateType, State exlude)
+    {
+        if (stateType.Equals(typeof(State)) || stateType.IsSubclassOf (typeof(State)))
+        {
+            var states = currentStates.FindAll(s => s != exlude && s.GetType() == stateType);
+            states.ForEach(s => s.StopAffect());
         }
     }
 }

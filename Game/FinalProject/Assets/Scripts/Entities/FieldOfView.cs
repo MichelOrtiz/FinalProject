@@ -27,7 +27,7 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
 
     public bool canSeePlayer;
-    public bool justSeenPlayer;
+    //public bool justSeenPlayer;
     public bool inFrontOfObstacle;
     private RaycastHit2D hit;
     #endregion
@@ -67,6 +67,10 @@ public class FieldOfView : MonoBehaviour
 
     public Action PlayerSighted;
     public Action PlayerUnsighted;
+
+
+    [SerializeReference]private bool playerSightedInvoked;
+    [SerializeReference]private bool playerUnsightedInvoked;
     #endregion
 
     void Start()
@@ -91,14 +95,32 @@ public class FieldOfView : MonoBehaviour
             OnInFrontOfObstacle();
         }
 
-        if (canSeePlayer)
+        if (entity.enabled)
         {
-            PlayerSighted?.Invoke();
-            justSeenPlayer = true;
+            if (canSeePlayer)
+            {
+                playerUnsightedInvoked = false;
+                //if (!playerSightedInvoked)
+                {
+                    PlayerSighted?.Invoke();
+                    playerSightedInvoked = true;
+                    //justSeenPlayer = true;
+                }
+            }
+            else
+            {
+                playerSightedInvoked = false;
+                //if (!playerUnsightedInvoked)
+                {
+                    PlayerUnsighted?.Invoke();
+                    playerUnsightedInvoked = true;
+                }
+            }
         }
-        if (justSeenPlayer)
+        else
         {
-            PlayerUnsighted?.Invoke();
+            playerSightedInvoked = false;
+            playerUnsightedInvoked = false;
         }
 
         if (hit) Debug.DrawLine(fovOrigin.position, hit.point, Color.red);
@@ -114,7 +136,7 @@ public class FieldOfView : MonoBehaviour
     /// </summary>
     void LateUpdate()
     {
-        justSeenPlayer = !CanSeePlayer() && justSeenPlayer;
+        //justSeenPlayer = !CanSeePlayer() && justSeenPlayer;
     }
 
     public void SetViewDistanceOnRayHitObstacle(Vector2 direction, float maxViewDistance)

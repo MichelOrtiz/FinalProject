@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 public class SeekerGhost : Enemy
 {
     [Header("Self Additions")]
@@ -10,10 +11,19 @@ public class SeekerGhost : Enemy
     [SerializeField] private float timeAfterSpawnToStopPush;
     private float curTimeAfterSpawn;
     [SerializeField] private Vector2 pushForceWhenSpawned;
-    [SerializeField] private int maxGhosts;
+    [SerializeField] private byte maxGhosts;
     private bool alreadyDivided;
-    private int ghostsDivisions;
+    private byte ghostsDivisions;
 
+
+    [SerializeReference] private List<SeekerGhost> clones;
+
+    new void Awake()
+    {
+        base.Awake();
+        clones = new List<SeekerGhost>();
+
+    }
 
     new void Start()
     {
@@ -23,7 +33,9 @@ public class SeekerGhost : Enemy
 
     new void FixedUpdate()
     {
-        ghostsDivisions = ScenesManagers.GetObjectsOfType<SeekerGhost>().Count;
+        ghostsDivisions = (byte)clones.Count;//ScenesManagers.GetObjectsOfType<SeekerGhost>().Count;
+
+
         if (ghostsDivisions == 0)
         {
             if (startTimeUntilDivide < baseStartTimeUntilDivide)
@@ -73,6 +85,9 @@ public class SeekerGhost : Enemy
             if (ghostsDivisions < maxGhosts)
             {
                 SeekerGhost ghost = Instantiate(this, dividePos.position, Quaternion.identity);
+                ghost.statesManager.RemoveAll();
+                clones.Add(ghost);
+
                 ghost.curTimeAfterSpawn = 0;
                 ghost.ChangeFacingDirection();
                 ghost.Push(facingDirection == RIGHT? -pushForceWhenSpawned.x : pushForceWhenSpawned.x, pushForceWhenSpawned.y);
