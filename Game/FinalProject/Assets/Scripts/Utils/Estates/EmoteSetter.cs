@@ -13,6 +13,9 @@ public class EmoteSetter : State
     {
         base.StartAffect(newManager);
         var emotePos = manager.hostEntity.emotePos;
+
+        //manager.RemoveAll(typeof(EmoteSetter), exlude: this);
+
         instantiated = MonoBehaviour.Instantiate(emote, emotePos.position, emotePos.rotation);
         instantiated?.transform.SetParent(emotePos);
 
@@ -38,6 +41,19 @@ public class EmoteSetter : State
         if (instantiated != null)
         {
             Destroy(instantiated);
+        }
+        else
+        {
+            try
+            {
+                var emotePos = manager.hostEntity.emotePos;
+                instantiated = emotePos.GetChild(0).gameObject;
+                Destroy(instantiated);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.Log(ex);
+            }
         }
         base.StopAffect();
     }
