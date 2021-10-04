@@ -5,6 +5,9 @@ using System;
 
 public class PlayerInputs : MonoBehaviour
 {
+    #region Inputs binding
+        public Dictionary<string, KeyCode> Movebinds {get; private set;}
+    #endregion
     public int movementX {get;set;}
     public int movementY {get;set;}
     public bool jump { get; set; }
