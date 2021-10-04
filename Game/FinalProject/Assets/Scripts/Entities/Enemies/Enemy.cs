@@ -59,11 +59,16 @@ public abstract class Enemy : Entity
     void fieldOfView_PlayerSighted()
     {
         //sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
+        if (sawEmote == null || !sawEmote.onEffect)
+        {
+            sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
+        }
     }
 
     void fieldOfView_PlayerUnsighted()
     {
         sawEmote?.StopAffect();
+        sawEmote = null;
     }
     #endregion
 
@@ -77,19 +82,13 @@ public abstract class Enemy : Entity
         if (fieldOfView == null)
         {
             fieldOfView = GetComponent<FieldOfView>();
+        }
+
+        if (fieldOfView != null)
+        {
             fieldOfView.PlayerSighted += fieldOfView_PlayerSighted;
             fieldOfView.PlayerUnsighted += fieldOfView_PlayerUnsighted;
         }
-    }
-
-
-    new protected void Start()
-    {
-        base.Start();
-        player = ScenesManagers.Instance.player;
-        chaseSpeed = chaseSpeedMultiplier * averageSpeed;
-        normalSpeed = normalSpeedMultiplier * averageSpeed;
-        
         eCollisionHandler = (EnemyCollisionHandler)base.collisionHandler;
         
         //eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
@@ -103,6 +102,22 @@ public abstract class Enemy : Entity
         {
             fieldOfView.FrontOfObstacleHandler += fieldOfView_InFrontOfObstacle;
         }
+    }
+
+    void OnEnable()
+    {
+        if (fieldOfView.canSeePlayer) fieldOfView_PlayerSighted();
+        else fieldOfView_PlayerUnsighted();
+    }
+
+
+    new protected void Start()
+    {
+        base.Start();
+        player = ScenesManagers.Instance.player;
+        chaseSpeed = chaseSpeedMultiplier * averageSpeed;
+        normalSpeed = normalSpeedMultiplier * averageSpeed;
+        
     }
 
     new protected void Update()
@@ -126,14 +141,12 @@ public abstract class Enemy : Entity
         }
         touchingPlayer = eCollisionHandler.touchingPlayer;
 
-        if (fieldOfView.canSeePlayer)
+        /*if (fieldOfView.canSeePlayer)
         {
-            if (sawEmote == null || !sawEmote.onEffect)
-            {
-                sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
-            }
+            
         }
         else
+        if(!fieldOfView.canSeePlayer)
         {
             if (sawEmote != null)
             {
@@ -141,7 +154,7 @@ public abstract class Enemy : Entity
                 //statesManager.RemoveState(sawEmote);
                 sawEmote = null;
             } 
-        }
+        }*/
         
         SetStates();
         UpdateState();
@@ -269,29 +282,15 @@ public abstract class Enemy : Entity
         return fieldOfView.inFrontOfObstacle;
     }
 
-    protected bool IsNearEdge()
-    {
-        return groundChecker.isNearEdge;
-    }
     #endregion
 
     #region Delete Later
 
 
 
-
-    /// <summary>
-    /// Checks if the enemy is able to see the player based on its field of view
-    /// </summary>
-    /// <returns></returns>
-    protected bool CanSeePlayer()
+    void OnDisable()
     {
-        return fieldOfView.canSeePlayer;
-    }
-
-    public float GetDistanceFromPlayerFov()
-    {
-        return Math.Abs(hit.distance);
+        fieldOfView_PlayerUnsighted();
     }
 
     #endregion

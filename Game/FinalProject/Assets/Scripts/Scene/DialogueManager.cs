@@ -27,6 +27,7 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        panel.SetActive(true);
         sentences = new Queue<string>();
         state = DialogState.Ready;
     }

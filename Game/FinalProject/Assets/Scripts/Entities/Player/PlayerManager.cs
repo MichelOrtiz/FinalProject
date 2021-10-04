@@ -57,36 +57,6 @@ public class PlayerManager : Entity
     private float regenCooldown;
     private bool MinimapaActivada;
     ConveyScript convey;
-
-    #region Dialogues
-        private RaycastHit2D hit;
-        private void SearchInteraction()
-        {
-            Vector2 startPoint = transform.position;
-            Vector2 interactPoint = transform.position;
-
-            if(transform.rotation.y == 0)
-            {
-                startPoint.x += 0.6f;
-                interactPoint.x += 2f;
-            }
-            else
-            {
-                startPoint.x -= 0.6f;
-                interactPoint.x -= 2f;
-            }
-            
-            hit = Physics2D.Raycast(startPoint, transform.forward, Vector2.Distance(startPoint,interactPoint));
-            if (hit.collider != null)
-            {
-                DialogueTrigger trigger = hit.collider.GetComponent<DialogueTrigger>();
-                if(trigger!=null){
-                    trigger.TriggerDialogue();
-                }
-            }
-        }
-    #endregion
-
     #region Inputs
     public PlayerInputs inputs;
     #endregion
@@ -160,12 +130,6 @@ public class PlayerManager : Entity
         {
             transform.eulerAngles = new Vector3(0,180,0);
         }
-
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            SearchInteraction(); 
-        }
-
 
         // animator.SetBool("Turn Left", moveInput<0 ); // Checks if the player turned left to start the turning animation
         if (loosingStamina)
