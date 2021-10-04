@@ -5,6 +5,8 @@ using UnityEngine;
 public class Spore : MonoBehaviour
 {
     [SerializeField] private float damageAmount;
+    [SerializeField] private float damageThreshold = defaultDamageThreshold;
+    public const float defaultDamageThreshold = 0; 
     [SerializeField] private State effectOnPlayer;
     [SerializeField] private bool stopEmittingWhenParticleCollide;
 
@@ -67,7 +69,7 @@ public class Spore : MonoBehaviour
         if (other.gameObject.tag == "Player" && !player.isImmune )
         {
             player.TakeTirement(damageAmount);
-            if (damageAmount > 0)
+            if (damageAmount > damageThreshold)
             {
                 player.SetImmune();
             }
