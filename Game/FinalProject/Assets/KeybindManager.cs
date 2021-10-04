@@ -29,33 +29,7 @@ public class KeybindManager : MonoBehaviour
         
         UIManager uiManager = GameObject.FindObjectOfType<UIManager>();
         uiManager.keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
-        //MOVEMENT
-        BindKey("MOVEUP", KeyCode.W);
-        BindKey("MOVEDOWN", KeyCode.S);
-        BindKey("MOVERIGHT", KeyCode.D);
-        BindKey("MOVELEFT", KeyCode.A);
-        BindKey("MOVEJUMP", KeyCode.Space);
-        //MENU
-        BindKey("MENUPAUSE", KeyCode.Escape);
-        BindKey("MENUMINIMAP", KeyCode.Tab);
-        BindKey("MENUINVENTORY", KeyCode.I);
-        BindKey("MENUINTERACTION", KeyCode.E);
-        //ACTION 
-        BindKey("RUN", KeyCode.LeftShift);
-        BindKey("OBJ1", KeyCode.Q);
-        BindKey("OBJ2", KeyCode.R);
-        BindKey("FOOD1", KeyCode.Alpha1);
-        BindKey("FOOD2", KeyCode.Alpha2);
-        BindKey("FOOD3", KeyCode.Alpha3);
-        BindKey("FOOD4", KeyCode.Alpha4);
-        BindKey("FOOD5", KeyCode.Alpha0);
-        BindKey("SKILL1", KeyCode.Alpha5);
-        BindKey("SKILL2", KeyCode.Alpha6);
-        BindKey("SKILL3", KeyCode.Alpha7);
-        BindKey("SKILL4", KeyCode.Alpha8);
-        BindKey("SKILL5", KeyCode.Alpha9);
-        
-
+        ResetBindValues();
         foreach(GameObject obj in uiManager.keybindButtons){
             Button b = obj.GetComponentInChildren<Button>();
             if(b != null){
@@ -131,6 +105,33 @@ public class KeybindManager : MonoBehaviour
                 StartCoroutine(NaviIsAnnoying());
             }
         }
+    }
+    public void ResetBindValues(){
+        //MOVEMENT
+        BindKey("MOVEUP", KeyCode.W);
+        BindKey("MOVEDOWN", KeyCode.S);
+        BindKey("MOVERIGHT", KeyCode.D);
+        BindKey("MOVELEFT", KeyCode.A);
+        BindKey("MOVEJUMP", KeyCode.Space);
+        //MENU
+        BindKey("MENUPAUSE", KeyCode.Escape);
+        BindKey("MENUMINIMAP", KeyCode.Tab);
+        BindKey("MENUINVENTORY", KeyCode.I);
+        BindKey("MENUINTERACTION", KeyCode.E);
+        //ACTION 
+        BindKey("RUN", KeyCode.LeftShift);
+        BindKey("OBJ1", KeyCode.Q);
+        BindKey("OBJ2", KeyCode.R);
+        BindKey("FOOD1", KeyCode.Alpha1);
+        BindKey("FOOD2", KeyCode.Alpha2);
+        BindKey("FOOD3", KeyCode.Alpha3);
+        BindKey("FOOD4", KeyCode.Alpha4);
+        BindKey("FOOD5", KeyCode.Alpha0);
+        BindKey("SKILL1", KeyCode.Alpha5);
+        BindKey("SKILL2", KeyCode.Alpha6);
+        BindKey("SKILL3", KeyCode.Alpha7);
+        BindKey("SKILL4", KeyCode.Alpha8);
+        BindKey("SKILL5", KeyCode.Alpha9);
     }
 
     IEnumerator NaviIsAnnoying(){
