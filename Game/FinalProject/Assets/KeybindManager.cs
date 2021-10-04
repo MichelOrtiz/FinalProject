@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class KeybindManager : MonoBehaviour
 {
+    public GameObject navi;
+    public GameObject optionsMenu;
     private static KeybindManager instance;
     public  static KeybindManager MyInstance{
         get{
@@ -117,5 +119,23 @@ public class KeybindManager : MonoBehaviour
             }
         }
         return KeyCode.None;
+    }
+
+    public void ExitUI(){
+        if(!controlbinds.ContainsValue(KeyCode.None))
+        {
+            gameObject.SetActive(false);
+            optionsMenu.SetActive(true);
+        }else{
+            if(navi != null){
+                StartCoroutine(NaviIsAnnoying());
+            }
+        }
+    }
+
+    IEnumerator NaviIsAnnoying(){
+            navi.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            navi.SetActive(false);
     }
 }
