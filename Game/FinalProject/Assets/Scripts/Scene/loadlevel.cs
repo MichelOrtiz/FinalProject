@@ -29,7 +29,7 @@ public class loadlevel : MonoBehaviour
                 instance = this;
             }
         }
-    private void OnTriggerEnter2D(Collider2D collision){
+    protected void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
         /*if (collisionGameObject.tag == "Untagged")
         {
@@ -43,7 +43,7 @@ public class loadlevel : MonoBehaviour
         }
     }
 
-    void LoadScene(){
+    protected void LoadScene(){
         SceneController.instance.LoadScene(iLevelToLoad);
         //Camera.instance.gameObject.SetActive(true);
     }

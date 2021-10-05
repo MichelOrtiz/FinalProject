@@ -9,18 +9,17 @@ public class KeybindManager : MonoBehaviour
 {
     public GameObject navi;
     public GameObject optionsMenu;
-    private static KeybindManager instance;
-    public  static KeybindManager MyInstance{
-        get{
-            if (instance==null)
-            {
-                instance = FindObjectOfType<KeybindManager>();
-            }
-            return instance;
+    public static KeybindManager instance;
+    
+    private void Awake() {
+        if(instance != null){
+            Destroy(this);
+        }else{
+            instance = this;
         }
     }
     
-    public Dictionary<string, KeyCode> controlbinds {get; private set;}
+    public Dictionary<string, KeyCode> controlbinds {get; set;}
     
     private string bindName;
     void Start()
@@ -29,7 +28,23 @@ public class KeybindManager : MonoBehaviour
         
         UIManager uiManager = GameObject.FindObjectOfType<UIManager>();
         uiManager.keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
-        ResetBindValues();
+        SaveFilesManager saveFilesManager = SaveFilesManager.instance;
+        if(saveFilesManager != null){
+            if(saveFilesManager.currentSaveSlot != null){
+                if(saveFilesManager.currentSaveSlot.controlbinds != null){
+                controlbinds = saveFilesManager.currentSaveSlot.controlbinds;
+            }else{
+                ResetBindValues();
+                saveFilesManager.currentSaveSlot.controlbinds = controlbinds;
+            }
+            }else{
+                ResetBindValues();
+            }
+            
+        }else{
+            ResetBindValues();
+        }
+
         foreach(GameObject obj in uiManager.keybindButtons){
             Button b = obj.GetComponentInChildren<Button>();
             if(b != null){

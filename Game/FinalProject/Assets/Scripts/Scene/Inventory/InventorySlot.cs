@@ -9,7 +9,7 @@ public class InventorySlot : ItemSlot
     }
     public override void OnButtonPress(){
         if(PlayerManager.instance.inputs.leftShift){
-            Debug.Log("YES");
+            //Debug.Log("YES");
             foreach(HotbarSlot slot in HotbarUI.instance.slotsHotbar0){
                 if(slot.GetItem()==null){
                     slot.SetItem(this.item);
@@ -18,7 +18,7 @@ public class InventorySlot : ItemSlot
             }
             return;
         }else{
-            Debug.Log("No");
+            //Debug.Log("No");
         }
         if(inventoryUI.GetMoveItem()!=null){
             inventoryUI.MoveItems(this.index);

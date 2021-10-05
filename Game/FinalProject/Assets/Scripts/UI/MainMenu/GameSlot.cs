@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameSlot : MonoBehaviour
 {
-    [SerializeField]private SaveFile partida = null;
+    private SaveFile partida = null;
     private string filePath;
     [SerializeField] private int slot;
     #region UIelements
@@ -17,7 +17,7 @@ public class GameSlot : MonoBehaviour
     [SerializeField]private InputCreateGame createInput;
     #endregion
     private void Start() {
-        partida = null;
+        //partida = null;
     }
     void UpdateUI() {
         if(partida!=null){
@@ -52,11 +52,13 @@ public class GameSlot : MonoBehaviour
     }
     public void CrearPartida(string name){
         partida = new SaveFile(name,slot);
+        //partida.controlbinds = KeybindManager.instance.controlbinds;
         SaveFilesManager.instance.WriteSaveFile(partida,filePath);
         UpdateUI();
     }
     public void CargarPartida(){
         //Boy ... cargar cosas
+        
         SaveFilesManager.instance.currentSaveSlot = partida;
         SaveFilesManager.instance.SetStartSession(DateTime.Now);
         SceneController.instance.Load(SaveFilesManager.instance.currentSaveSlot);

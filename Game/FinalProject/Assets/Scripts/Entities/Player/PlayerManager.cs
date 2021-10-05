@@ -79,7 +79,6 @@ public class PlayerManager : Entity
         base.Start();
         currentStamina = maxStamina;
         currentOxygen = maxOxygen;
-        //FindStartPos();
         regenCooldown = 5;
         currentGravity = defaultGravity;
         currentMass = defaultMass;
@@ -88,6 +87,9 @@ public class PlayerManager : Entity
         MinimapaActivada = true;
 
         GunProjectile.instance.ObjectShot += gun_ObjectShot;
+        if(SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
+            transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
+        }
     }
 
     new void Update()
