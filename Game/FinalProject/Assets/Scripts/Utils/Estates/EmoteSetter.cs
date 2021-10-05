@@ -12,15 +12,12 @@ public class EmoteSetter : State
     public override void StartAffect(StatesManager newManager)
     {
         base.StartAffect(newManager);
-        var emotePos = manager.hostEntity.emotePos;
+        
+        //newManager.StopAll(typeof(EmoteSetter), exlude: this);
+        //newManager.RemoveEmotes();
 
-        //manager.RemoveAll(typeof(EmoteSetter), exlude: this);
-
-        instantiated = MonoBehaviour.Instantiate(emote, emotePos.position, emotePos.rotation);
-        instantiated?.transform.SetParent(emotePos);
-
-        offscreenIndicators = FindObjectOfType<OffscreenIndicators>();
-        offscreenIndicators?.AddTargetIndicator(instantiated);
+        InstantiateEmote();
+        
     }
 
     public override void Affect()
@@ -28,10 +25,16 @@ public class EmoteSetter : State
         if (currentTime > duration)
         {
             currentTime = 0;
+            
+
             StopAffect();
         }
         else
         {
+            if (manager.hostEntity.emotePos.childCount == 0)
+            {
+                InstantiateEmote();
+            }
             currentTime += Time.deltaTime;
         }
     }
@@ -56,5 +59,16 @@ public class EmoteSetter : State
             }
         }
         base.StopAffect();
+    }
+
+    void InstantiateEmote()
+    {
+        var emotePos = manager.hostEntity.emotePos;
+
+        instantiated = MonoBehaviour.Instantiate(emote, emotePos.position, emotePos.rotation);
+        instantiated?.transform.SetParent(emotePos);
+
+        offscreenIndicators = FindObjectOfType<OffscreenIndicators>();
+        offscreenIndicators?.AddTargetIndicator(instantiated);
     }
 }
