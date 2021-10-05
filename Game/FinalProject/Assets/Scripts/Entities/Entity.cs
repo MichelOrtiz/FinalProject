@@ -70,6 +70,14 @@ public class Entity : MonoBehaviour
     protected virtual void groundChecker_Grounded(string groundTag){}
 
 
+
+    protected void Awake()
+    {
+        statesManager = gameObject.GetComponent<StatesManager>();
+        
+        statesManager?.StopAll();
+    }
+
     #region Unity stuff
     protected void Start()
     {
@@ -92,7 +100,6 @@ public class Entity : MonoBehaviour
         {
             rigidbody2d = GetComponent<Rigidbody2D>();
         }
-        statesManager = gameObject.GetComponent<StatesManager>();
 
         if (collisionHandler != null)
         {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -29,14 +29,14 @@ public class UIManager : MonoBehaviour
     public AirHockeyPlayerMovement airHockeyPlayerMovement;
     public AIScript aIScript;
     private KeyCode action1, action2, action3;
-    [SerializeReference]private GameObject[] keybindButtons;
+    public GameObject[] keybindButtons;
     private void Awake()
     {
-        keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
+        
     }
     private void Start()
     {
-        //keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");   
+          
     }
 
     public void ShowRestartCanvas(bool AiWon){
@@ -63,7 +63,11 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateKeyText(string key, KeyCode code){
         TextMeshProUGUI tmp = Array.Find(keybindButtons, x => x.name == key).GetComponentInChildren<TextMeshProUGUI>();
-        tmp.text = code.ToString();
+        if(code == KeyCode.None){
+            tmp.text = "Asigna tecla";
+        }else{
+            tmp.text = code.ToString();
+        } 
         if (tmp.text.Length > 6 && tmp.text.Length <= 9)
         {
             tmp.fontSize = 12;

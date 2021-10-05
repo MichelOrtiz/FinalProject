@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class CameraFollow : MonoBehaviour
             }
             else if (instance != this)
             {
+                instance.gameObject.transform.position = PlayerManager.instance.GetPosition();
                 Destroy(gameObject);
             }
             DontDestroyOnLoad(this);
@@ -38,12 +40,9 @@ public class CameraFollow : MonoBehaviour
         camera = GetComponent<Camera>();
         player = PlayerManager.instance.transform;
         camBox = GetComponent<BoxCollider2D>();
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
         FindLimits();
     }
-    /*void Update()
-    { 
-        
-    }*/
 
     void OnGUI()
     {
@@ -114,5 +113,11 @@ public class CameraFollow : MonoBehaviour
     public bool HasMouseMoved()
     {
         return (Input.GetAxis("Mouse X") != 0) || (Input.GetAxis("Mouse Y") != 0);
+    }
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        FindLimits();
+        Debug.Log(scene.name);
+        Debug.Log(mode);
     }
 }

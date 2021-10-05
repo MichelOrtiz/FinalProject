@@ -13,6 +13,7 @@ public class SaveFile
     public int sceneToLoad;
     public Vector2 positionSpawn;
     public List<WorldState> WorldStates;
+    public Dictionary<string, KeyCode> controlbinds;
     public Item[] inventory;
     public Item[] chestItems;
     public GameObject prefab;

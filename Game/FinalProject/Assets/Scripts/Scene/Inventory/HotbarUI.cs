@@ -9,7 +9,7 @@ public class HotbarUI : MonoBehaviour
     Inventory inventory;
     InventoryUI inventoryUI;
     public Transform itemsParentHotbar0;
-    HotbarSlot[] slotsHotbar0;
+    public HotbarSlot[] slotsHotbar0;
     private float timeKeyPressed;
     private void Awake() {
         if(instance!=null){

@@ -53,7 +53,7 @@ public class ItemInteractionManager : MonoBehaviour
         {
             if (currentState != null)
             {
-                Debug.Log("current state not null");
+                //Debug.Log("current state not null");
 
                 index++;
             }

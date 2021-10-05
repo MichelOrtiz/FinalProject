@@ -86,7 +86,7 @@ public class Run : Ability
         GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Water")
         {
-            player.walkingSpeed = player.defaultwalkingSpeed;
+            player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
             runningSpeed = player.walkingSpeed * speedMultiplier;
         }
     }

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6344818130785464620
 Transform:
   m_ObjectHideFlags: 0
@@ -211,7 +211,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 352561
   canSeePlayer: 0
-  justSeenPlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
@@ -221,6 +220,8 @@ MonoBehaviour:
   blockingCollider: {fileID: 0}
   facingDirection: 
   entity: {fileID: 0}
+  playerSightedInvoked: 0
+  playerUnsightedInvoked: 0
 --- !u!1 &8005391966358337077
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +440,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.3, y: 2.3}
+  m_Size: {x: 0.8, y: 1.9}
   m_Direction: 0
 --- !u!1 &8005391967038926447
 GameObject:
@@ -555,6 +556,7 @@ GameObject:
   - component: {fileID: 8005391967062765067}
   - component: {fileID: 8005391967062765064}
   - component: {fileID: 8005391967062765065}
+  - component: {fileID: 6111517609436038206}
   m_Layer: 10
   m_Name: SeekerGhost
   m_TagString: Untagged
@@ -621,6 +623,7 @@ MonoBehaviour:
   hostEntity: {fileID: 0}
   enemy: {fileID: 0}
   currentStates: []
+  bannedStates: []
 --- !u!114 &8005391967062765065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,12 +690,25 @@ MonoBehaviour:
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   sawPlayerEmote: {fileID: 11400000, guid: 85bd781ef595d39408f5ce69df6b7fb9, type: 2}
-  dividePos: {fileID: 8005391967235934615}
-  baseStartTimeUntilDivide: 5
-  baseMainTimeUntilDivide: 5
   timeAfterSpawnToStopPush: 0.25
   pushForceWhenSpawned: {x: 1.2, y: 0}
-  maxGhosts: 8
+--- !u!114 &6111517609436038206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8005391967062765070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423bcb30c13bf87439c648a85021ad45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceObject: {fileID: 8005391967062765070}
+  dividePos: {fileID: 8005391967235934615}
+  maxClones: 6
+  forceRemoveNewCloner: 1
+  divisionInterval: 7
 --- !u!1 &8005391967235934612
 GameObject:
   m_ObjectHideFlags: 0

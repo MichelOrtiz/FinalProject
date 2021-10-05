@@ -54,6 +54,7 @@ public class Mantis : Entity//, IBattleBounds
     new protected void Update()
     {
         base.Update();
+        if (Pause.active) return;
         if ( (GetPosition().x < player.GetPosition().x && facingDirection == LEFT)
             || (GetPosition().x > player.GetPosition().x && facingDirection == RIGHT) )
             {
@@ -96,6 +97,7 @@ public class Mantis : Entity//, IBattleBounds
             if (inter == null) return;
             
             var item = inter.item;
+            Destroy(contact);
             if (item == itemToGive)
             {
                 if (timesItemGiven < timesToGiveItem-1)
@@ -129,14 +131,18 @@ public class Mantis : Entity//, IBattleBounds
         {
             canChase = false;
         }
+        else
+        {
+            canChase = eCollisionHandler.touchingGround;
+        }
     }
 
     
 
     protected virtual void eCollisionHanlder_TouchedPlayer()
     {
-        PlayerManager.instance.TakeTirement(damage);
         player.SetImmune();
+        PlayerManager.instance.TakeTirement(damage);
         //ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Fake"));
     }
 

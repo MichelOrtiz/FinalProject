@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class WorldState 
 {
-    public string Tag { get; set; }
-    public int id { get; set; }
-    public bool state { get; set; }
+    public string Tag;
+    public int id;
+    public bool state;
 }

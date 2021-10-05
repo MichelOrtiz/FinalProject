@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4162052939880878649}
   - component: {fileID: 9087328019014877009}
   - component: {fileID: 7892075548320804545}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: CollisionHandler
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093548249620700292}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.071258545, y: -0.167, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 3404244852907316298}
@@ -346,10 +346,10 @@ MonoBehaviour:
   timesToGiveItem: 3
   timesItemGiven: 0
   forceIncrease: 0.75
-  damageIncrease: 10
+  damageIncrease: 3
   baseTimeBeforeChase: 2
-  force: 1800
-  damage: 10
+  force: 2000
+  damage: 2.5
   eCollisionHandler: {fileID: 7892075548320804545}
 --- !u!1 &3404244853046143593
 GameObject:

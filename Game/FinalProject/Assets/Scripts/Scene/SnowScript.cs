@@ -57,7 +57,7 @@ public class SnowScript : MonoBehaviour
         if (collisionGameObject.tag == "Player")
         {
             player.isInSnow = false;
-            player.walkingSpeed = player.defaultwalkingSpeed;
+            player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
         }
     }
 }

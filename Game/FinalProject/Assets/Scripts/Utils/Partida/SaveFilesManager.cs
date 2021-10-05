@@ -28,7 +28,7 @@ public class SaveFilesManager : MonoBehaviour
             } 
         }else{
             File.Create(path);
-           WriteSaveFile(null,path);
+            WriteSaveFile(null,path);
             return null;
         }
         SaveFile saveFile = JsonUtility.FromJson<SaveFile>(jsonString);

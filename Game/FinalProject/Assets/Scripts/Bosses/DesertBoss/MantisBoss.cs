@@ -1,65 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Bosses.DesertBoss;
 using UnityEngine;
 
-public class MantisBoss : MonoBehaviour
+public class MantisBoss : BossFight
 {
     //[SerializeField] private GameObject itemToSpawn;
     //[SerializeField] private Transform spawnPos;
     //[SerializeField] private float timeToRespawnItem;
     
     //private GameObject spawnedItem;
-    private float currentTime;
     private List<Mantis> mantises;
-    private Inventory inventory;
-    private bool pickedUpItem;
-
     public List<Platform> allPlatforms;
+    [SerializeField] private SingleSpawner singleSpawner;
 
-    void Start()
+    new void Start()
     {
-        inventory = Inventory.instance;
-        UpdateMantisList();
+        base.Start();
+        //UpdateMantisList();
         UpdatePlatformsList();
     }
 
-    void Update()
+    new void Update()
     {
         /****/
         // uncomment if want to test with 'L' to change stage 
-        // UpdatePlatformsList();
         /****/
+        // base.Update();
+
         if (ScenesManagers.GetObjectsOfType<Mantis>().Count == 0)
         {
-            GetComponent<BossFight>().NextStage();
-            UpdateMantisList();
+            NextStage();
+            //UpdateMantisList();
             UpdatePlatformsList();
-            //spawnPos.position = GetComponent<BossFight>().currentStage.positions[GetComponent<BossFight>().currentStage.gameObjects.IndexOf(itemToSpawn)];
         }
-
-        /*if (!SpawnedItem())
-        {
-            if (currentTime > timeToRespawnItem)
-            {
-                Debug.Log("spawned item");
-                spawnedItem = Instantiate(itemToSpawn, spawnPos.position, Quaternion.identity);
-                currentTime = 0;
-            }
-            else
-            {
-                currentTime += Time.deltaTime;
-            }
-        }*/
     }
-
-    /*bool SpawnedItem()
-    {
-        if (spawnedItem != null)
-        {
-            return ScenesManagers.GetObjectsOfType<Inter>().Contains(spawnedItem.GetComponent<Inter>());
-        }
-        return false;
-    }*/
     private void UpdateMantisList()
     {
         mantises =  ScenesManagers.GetObjectsOfType<Mantis>();
@@ -68,5 +43,11 @@ public class MantisBoss : MonoBehaviour
     private void UpdatePlatformsList()
     {
         allPlatforms = ScenesManagers.GetObjectsOfType<Platform>();
+    }
+
+    public override void EndBattle()
+    {
+        base.EndBattle();
+        Destroy(singleSpawner);
     }
 }

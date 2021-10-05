@@ -52,7 +52,7 @@ public class WaterPhysics : MonoBehaviour
         {
             player.currentGravity = PlayerManager.defaultGravity;
             player.isInWater = false;
-            player.walkingSpeed = player.defaultwalkingSpeed;
+            player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
 
         }
     }

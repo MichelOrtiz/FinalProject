@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BossFight : MonoBehaviour
 {
+    public WorldState isBossDefeated;
     public static BossFight instance;
     [SerializeField] protected PopUpTrigger startMessageTrigger;
     [SerializeField] protected PopUpTrigger endMessageTrigger;
@@ -33,15 +34,7 @@ public class BossFight : MonoBehaviour
 
     protected void Start()
     {
-        startMessageTrigger.TriggerPopUp(pauseGame: true);
-
-        indexStage = 0;
-        if (stages.Count > 0)
-        {
-            currentStage=stages[indexStage];
-        }
-        currentStage?.Generate();
-
+        StartBattle();
         //AudioManager.instance?.Play("Theme");
     }
     protected void Update() {
@@ -91,5 +84,15 @@ public class BossFight : MonoBehaviour
 
             BattleEnded?.Invoke();
         }
+    }
+    public void StartBattle(){
+        startMessageTrigger.TriggerPopUp(pauseGame: true);
+
+        indexStage = 0;
+        if (stages.Count > 0)
+        {
+            currentStage=stages[indexStage];
+        }
+        currentStage?.Generate();
     }
 }

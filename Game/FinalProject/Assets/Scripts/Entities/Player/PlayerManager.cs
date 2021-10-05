@@ -9,7 +9,7 @@ public class PlayerManager : Entity
     public float maxStamina = 100;
     public float maxOxygen = 100;
     public float walkingSpeed;
-    public float defaultwalkingSpeed = 7;
+    public const float defaultwalkingSpeed = 7;
     public const float defaultGravity = 2.5f;
     public float currentGravity;
     public float defaultMass = 10;
@@ -57,36 +57,6 @@ public class PlayerManager : Entity
     private float regenCooldown;
     private bool MinimapaActivada;
     ConveyScript convey;
-
-    #region Dialogues
-        private RaycastHit2D hit;
-        private void SearchInteraction()
-        {
-            Vector2 startPoint = transform.position;
-            Vector2 interactPoint = transform.position;
-
-            if(transform.rotation.y == 0)
-            {
-                startPoint.x += 0.6f;
-                interactPoint.x += 2f;
-            }
-            else
-            {
-                startPoint.x -= 0.6f;
-                interactPoint.x -= 2f;
-            }
-            
-            hit = Physics2D.Raycast(startPoint, transform.forward, Vector2.Distance(startPoint,interactPoint));
-            if (hit.collider != null)
-            {
-                DialogueTrigger trigger = hit.collider.GetComponent<DialogueTrigger>();
-                if(trigger!=null){
-                    trigger.TriggerDialogue();
-                }
-            }
-        }
-    #endregion
-
     #region Inputs
     public PlayerInputs inputs;
     #endregion
@@ -94,11 +64,9 @@ public class PlayerManager : Entity
     public AbilityManager abilityManager;
     public static PlayerManager instance;
 
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    void Awake()
+    new void Awake()
     {
+        base.Awake();
         if(instance==null)instance=this;
         else if(instance!=this)Destroy(gameObject);
         DontDestroyOnLoad(this);
@@ -109,7 +77,6 @@ public class PlayerManager : Entity
         base.Start();
         currentStamina = maxStamina;
         currentOxygen = maxOxygen;
-        //FindStartPos();
         regenCooldown = 5;
         currentGravity = defaultGravity;
         currentMass = defaultMass;
@@ -118,6 +85,9 @@ public class PlayerManager : Entity
         MinimapaActivada = true;
 
         GunProjectile.instance.ObjectShot += gun_ObjectShot;
+        if(SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
+            transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
+        }
     }
 
     new void Update()
@@ -160,12 +130,6 @@ public class PlayerManager : Entity
         {
             transform.eulerAngles = new Vector3(0,180,0);
         }
-
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            SearchInteraction(); 
-        }
-
 
         // animator.SetBool("Turn Left", moveInput<0 ); // Checks if the player turned left to start the turning animation
         if (loosingStamina)

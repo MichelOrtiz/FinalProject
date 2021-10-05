@@ -40,7 +40,7 @@ public class IceScript : MonoBehaviour
         if (contact.tag == "Player")
         {
             player.isInIce = false;
-            player.walkingSpeed = player.defaultwalkingSpeed;
+            player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
         }
     }
 

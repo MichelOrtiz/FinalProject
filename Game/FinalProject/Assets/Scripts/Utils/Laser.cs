@@ -168,7 +168,14 @@ public class Laser : MonoBehaviour
             }
         }
 
-        rayHitObstacle = FieldOfView.RayHitObstacle(summoner.ShotPos.position, endPoint.position, whatIsObstacle) && collidesWithObstacles;
+        try
+        {
+            rayHitObstacle = FieldOfView.RayHitObstacle(summoner.ShotPos.position, endPoint.position, whatIsObstacle) && collidesWithObstacles;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning(ex.Message + " -/*/* Probably ok");
+        }
     }
 
     void FixedUpdate()
