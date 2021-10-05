@@ -2,6 +2,8 @@ using UnityEngine;
 using System;
 public abstract class State : ScriptableObject
 {
+    public string ObjectName { get => base.name; }
+    private string objectName;
     [SerializeField] new public StateNames name;
     public StateNames Name { get => this.name; }
     public float duration;
@@ -16,6 +18,7 @@ public abstract class State : ScriptableObject
 
     public abstract void Affect();
     public virtual void StartAffect(StatesManager newManager){
+        objectName = ObjectName;
         manager=newManager;
         //Debug.Log(this.name.ToString()+" started in " + manager.hostEntity.name.ToString());
         onEffect=true;

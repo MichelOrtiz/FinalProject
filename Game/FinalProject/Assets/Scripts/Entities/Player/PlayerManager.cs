@@ -64,11 +64,9 @@ public class PlayerManager : Entity
     public AbilityManager abilityManager;
     public static PlayerManager instance;
 
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    void Awake()
+    new void Awake()
     {
+        base.Awake();
         if(instance==null)instance=this;
         else if(instance!=this)Destroy(gameObject);
         DontDestroyOnLoad(this);

@@ -61,20 +61,26 @@ public abstract class Enemy : Entity
         //sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
         if (sawEmote == null || !sawEmote.onEffect)
         {
-            sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
+            statesManager.Stop(s => s.ObjectName.Contains(sawPlayerEmote.ObjectName));
+
+            sawEmote = (EmoteSetter)statesManager.AddStateDontRepeatName(sawPlayerEmote);
         }
     }
 
     void fieldOfView_PlayerUnsighted()
     {
+        if (sawEmote == null) sawEmote = statesManager.currentStates.Find( s => s.ObjectName.Contains(sawPlayerEmote.ObjectName)) as EmoteSetter;
+
         sawEmote?.StopAffect();
         sawEmote = null;
+        //statesManager.RemoveEmotes();
     }
     #endregion
 
     #region Unity stuff
-    protected void Awake()
+    new protected void Awake()
     {
+        base.Awake();
         if (enemyMovement == null)
         {
             enemyMovement = GetComponent<EnemyMovement>();
@@ -102,10 +108,15 @@ public abstract class Enemy : Entity
         {
             fieldOfView.FrontOfObstacleHandler += fieldOfView_InFrontOfObstacle;
         }
+
+        //sawEmote = null;
+
+        statesManager?.RemoveEmotes();
     }
 
     void OnEnable()
     {
+
         if (fieldOfView.canSeePlayer) fieldOfView_PlayerSighted();
         else fieldOfView_PlayerUnsighted();
     }
@@ -117,7 +128,6 @@ public abstract class Enemy : Entity
         player = ScenesManagers.Instance.player;
         chaseSpeed = chaseSpeedMultiplier * averageSpeed;
         normalSpeed = normalSpeedMultiplier * averageSpeed;
-        
     }
 
     new protected void Update()
@@ -141,17 +151,21 @@ public abstract class Enemy : Entity
         }
         touchingPlayer = eCollisionHandler.touchingPlayer;
 
-        /*if (fieldOfView.canSeePlayer)
+        
+       /* if (fieldOfView.canSeePlayer)
         {
-            
+            if (sawEmote == null || !sawEmote.onEffect)
+            {
+                statesManager.Stop(s => s.ObjectName.Contains(sawPlayerEmote.ObjectName));
+                sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
+            }
         }
         else
-        if(!fieldOfView.canSeePlayer)
         {
             if (sawEmote != null)
             {
-                sawEmote.StopAffect();
                 //statesManager.RemoveState(sawEmote);
+                sawEmote.StopAffect();
                 sawEmote = null;
             } 
         }*/
@@ -242,7 +256,7 @@ public abstract class Enemy : Entity
         entity.Knockback(knockbackDuration, knockBackForce, direction);
     }
 
-    public void EnhanceValues(float multiplier)
+    /*public void EnhanceValues(float multiplier)
     {
         enemyMovement.DefaultSpeed *= multiplier;
         enemyMovement.ChaseSpeed *= multiplier;
@@ -256,7 +270,7 @@ public abstract class Enemy : Entity
         enemyMovement.ChaseSpeed /= divider;
         enemyMovement.JumpForce /= divider;
         damageAmount /= divider;
-    }
+    }*/
     #endregion
 
     #region Self state methods

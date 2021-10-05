@@ -8,7 +8,13 @@ public class MultipleStates : State
     private byte index;
     public override void StartAffect(StatesManager newManager)
     {
+        
+        //manager.RemoveEmotes();
         base.StartAffect(newManager);
+
+
+        //var addedStates = new List<State>();
+
         if (states != null && states.Count > 0)
         {
             foreach (var state in states)
