@@ -14,11 +14,14 @@ public class TilesScript : MonoBehaviour
     void Start()
     {
         battleshipManager = GameObject.Find("BattleshipManager").GetComponent<BattleshipManager>();
+        hitColor[0] = gameObject.GetComponent<MeshRenderer>().material.color;
+        hitColor[1] = gameObject.GetComponent<MeshRenderer>().material.color;
     }
 
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void onClickTile(){
@@ -27,5 +30,18 @@ public class TilesScript : MonoBehaviour
         }
         
     }
-    
+
+    private void OnCollisionEnter(Collision collision){
+        if(collision.gameObject.CompareTag("Missile")){
+            missileHit = true;
+        }
+        //else if Where the enemy missile would go
+    }
+
+    public void SetTileColor(int index, Color32 color){
+        hitColor[index] = color;
+    } 
+    public void SwitchColors(int colorIndex){
+        GetComponent<Renderer>().material.color = hitColor[colorIndex];
+    }   
 }
