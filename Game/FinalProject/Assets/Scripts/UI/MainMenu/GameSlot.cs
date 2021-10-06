@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class GameSlot : MonoBehaviour
 {
@@ -53,6 +54,8 @@ public class GameSlot : MonoBehaviour
     public void CrearPartida(string name){
         partida = new SaveFile(name,slot);
         //partida.controlbinds = KeybindManager.instance.controlbinds;
+        partida.controlBindsKeys = KeybindManager.instance.controlbinds.Keys.ToList<string>();
+        partida.controlBindsValues = KeybindManager.instance.controlbinds.Values.ToList<KeyCode>();
         SaveFilesManager.instance.WriteSaveFile(partida,filePath);
         UpdateUI();
     }

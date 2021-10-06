@@ -9,6 +9,7 @@ public class KeybindManager : MonoBehaviour
 {
     public GameObject navi;
     public GameObject optionsMenu;
+    public GameObject keybindUI;
     public static KeybindManager instance;
     
     private void Awake() {
@@ -25,17 +26,30 @@ public class KeybindManager : MonoBehaviour
     void Start()
     {
         controlbinds = new Dictionary<string, KeyCode>();
-        
+        if(FindObjectOfType<Pause>() != null){
+            FindObjectOfType<Pause>().panel.SetActive(true);
+        }
+        keybindUI.SetActive(true);
         UIManager uiManager = GameObject.FindObjectOfType<UIManager>();
         uiManager.keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
         SaveFilesManager saveFilesManager = SaveFilesManager.instance;
         if(saveFilesManager != null){
             if(saveFilesManager.currentSaveSlot != null){
-                if(saveFilesManager.currentSaveSlot.controlbinds != null){
-                controlbinds = saveFilesManager.currentSaveSlot.controlbinds;
+                if(saveFilesManager.currentSaveSlot.controlBindsKeys != null){
+                    //Debug.Log("Cargando keybinds");
+                    controlbinds = new Dictionary<string, KeyCode>();
+                    List<string> keys = saveFilesManager.currentSaveSlot.controlBindsKeys;
+                    List<KeyCode> values = saveFilesManager.currentSaveSlot.controlBindsValues;
+                    foreach(string key in keys){
+                        int i = keys.IndexOf(key);
+                        //Debug.Log(key + "-" + values[i].ToString());
+                        BindKey(key, values[i]);
+                    }
             }else{
                 ResetBindValues();
-                saveFilesManager.currentSaveSlot.controlbinds = controlbinds;
+                //saveFilesManager.currentSaveSlot.controlbinds = controlbinds;
+                saveFilesManager.currentSaveSlot.controlBindsKeys = KeybindManager.instance.controlbinds.Keys.ToList<string>();
+                saveFilesManager.currentSaveSlot.controlBindsValues = KeybindManager.instance.controlbinds.Values.ToList<KeyCode>();
             }
             }else{
                 ResetBindValues();
@@ -51,7 +65,14 @@ public class KeybindManager : MonoBehaviour
                 b.onClick.AddListener(delegate(){OnClickGetBinding(b.name);});
             }
         }
-
+        
+        keybindUI.SetActive(false);
+        if(FindObjectOfType<Pause>() != null){
+            FindObjectOfType<Pause>().panel.SetActive(false);
+        }
+        if(FindObjectOfType<PlayerInputs>() != null){
+            FindObjectOfType<PlayerInputs>().controlBinds = controlbinds;
+        }
     }//KeybindManager.MyInstance.binds[""]
 
     public void BindKey(string key, KeyCode keyBind){
@@ -113,7 +134,7 @@ public class KeybindManager : MonoBehaviour
     public void ExitUI(){
         if(!controlbinds.ContainsValue(KeyCode.None))
         {
-            gameObject.SetActive(false);
+            keybindUI.SetActive(false);
             optionsMenu.SetActive(true);
         }else{
             if(navi != null){
