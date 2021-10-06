@@ -46,7 +46,6 @@ public class CameraFollow : MonoBehaviour
 
     void OnGUI()
     {
-
         if (camera1)
         {
             //transform.position = new Vector3(PlayerManager.instance.transform.position.x,PlayerManager.instance.transform.position.y,-10f);

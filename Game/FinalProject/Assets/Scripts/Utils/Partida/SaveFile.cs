@@ -28,6 +28,7 @@ public class SaveFile
         this.inventory = null;
         this.chestItems = null;
         this.WorldStates = new List<WorldState>();
+        this.controlbinds = new Dictionary<string, KeyCode>();
     }
     public SaveFile(string namePlayer, int slotFile){
         this.namePlayer = namePlayer;
@@ -40,5 +41,6 @@ public class SaveFile
         this.inventory = null;
         this.chestItems = null;
         this.WorldStates = new List<WorldState>();
+        this.controlbinds = new Dictionary<string, KeyCode>();
     }
 }

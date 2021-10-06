@@ -5,7 +5,6 @@ using UnityEngine;
 public class OpenSesame : MonoBehaviour
 {
     public float rango = 3f;
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -17,7 +16,7 @@ public class OpenSesame : MonoBehaviour
         float distance = Vector2.Distance(PlayerManager.instance.GetPosition(),transform.position);
         if(distance <= rango){
             if(Input.GetKeyDown(KeyCode.E)){
-                CofreUI.instance.gameObject.SetActive(true);
+                CofreUI.instance.SetUIActive(true);
             }
         }
     }

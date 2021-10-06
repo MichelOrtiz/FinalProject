@@ -14,15 +14,15 @@ public class CofreUI : MonoBehaviour
         instance = this;
     }
     private ItemSlot focusedSlot;
+    public GameObject cofreUI;
     public Button nextButtonCof;
     public Button prevButtonCof;
     public Button nextButtonInv;
     public Button prevButtonInv;
-
     public Text description;
     public Text nametxt;
-    public Cofre cofre;
-    public Inventory inventory;
+    private Cofre cofre;
+    private Inventory inventory;
     public Transform slotsCofUI;
     public Transform slotsInvUI;
     CofreSlot[] slotsCof;
@@ -47,16 +47,9 @@ public class CofreUI : MonoBehaviour
         pageCof = 0;
         pageInv = 0;
         UpdateUI();
-        gameObject.SetActive(false);
     }
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.I)){ //cerrar la ventana ... deberia ser con ESC pero la pausa tambien se activa con ESC
-            gameObject.SetActive(false);
-        }
-        if(inventory == null || cofre == null){ //probablemente no es necesario solo soy paranoico
-            inventory = Inventory.instance;
-            cofre = Cofre.instance;
-        }
+    private void Update(){
+        
     }
     public void UpdateUI(){
 
@@ -125,5 +118,8 @@ public class CofreUI : MonoBehaviour
     public void PrevCof(){
         pageCof -= 20;
         UpdateUI();
+    }
+    public void SetUIActive(bool x){
+        cofreUI.SetActive(x);
     }
 }
