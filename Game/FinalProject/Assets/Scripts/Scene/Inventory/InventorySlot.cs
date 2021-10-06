@@ -8,7 +8,7 @@ public class InventorySlot : ItemSlot
         index = 0;
     }
     public override void OnButtonPress(){
-        if(PlayerManager.instance.inputs.leftShift){
+        if(PlayerManager.instance.inputs.ctrlLeft){
             //Debug.Log("YES");
             foreach(HotbarSlot slot in HotbarUI.instance.slotsHotbar0){
                 if(slot.GetItem()==null){

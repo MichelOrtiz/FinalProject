@@ -27,15 +27,15 @@ public class ObjProjectile : MonoBehaviour
 
     private void Start()
     {
-        //rigidbody.velocity = transform.right * speed;
-        var shotPos = new Vector2(transform.position.x, transform.position.y);
+        rigidbody.velocity = transform.right * speed;
+        /*var shotPos = new Vector2(transform.position.x, transform.position.y);
         var mouseDir = PlayerManager.instance.GetComponentInChildren<MouseDirPointer>().MouseDirection;
         var mouseDirSt = new Vector2(mouseDir.x, mouseDir.y);
 
         origin = PlayerManager.instance.GetComponentInChildren<GunProjectile>().shotPoint;
         direction =  origin.position + (Vector3) mouseDir;
 
-        physics.StartKnockback(knockback.duration, knockback.force, origin.TransformDirection(-direction/2));
+        physics.StartKnockback(knockback.duration, knockback.force, origin.TransformDirection(-direction/2));*/
     }
 
     void Update()

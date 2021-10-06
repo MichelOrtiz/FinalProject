@@ -11,7 +11,7 @@ public class PlayerInputs : MonoBehaviour
     public int movementX {get;set;}
     public int movementY {get;set;}
     public bool jump { get; set; }
-    public bool leftShift { get; set; }
+    public bool ctrlLeft { get; set; }
     public bool OpenInventory { get; set; }
     public bool[] ItemHotbarUp = new bool[5];
     public bool[] ItemHotbarDown = new bool[5];
@@ -67,7 +67,7 @@ public class PlayerInputs : MonoBehaviour
         
 
         
-        leftShift = Input.GetKey(KeyCode.LeftShift);
+        ctrlLeft = Input.GetKey(KeyCode.LeftControl);
         OpenInventory=Input.GetButtonDown("Inventory");
         
         HotbarInputs();

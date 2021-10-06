@@ -106,7 +106,7 @@ public class WallCristal : Enemy
     void flashImage_OnFlashInComplete()
     {
         if (!projectileShot) return;
-        if (positions.Count > 1)
+        if (positions.Count >= 1)
         {
             Vector3 newPosition;
             do
