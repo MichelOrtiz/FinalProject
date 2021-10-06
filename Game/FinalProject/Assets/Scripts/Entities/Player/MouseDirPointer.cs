@@ -30,25 +30,8 @@ public class MouseDirPointer : MonoBehaviour
             mousePosition = CameraFollow.instance.GetMousePosition();
             angle = MathUtils.GetAngleBetween(transform.position, mousePosition);
         }
-        /*float distance = Vector2.Distance(transform.position, mousePosition);
-        if (distance < maxRadius && distance > minRadius)
-        {
-            pointerPos = mousePosition;
-        }
-        else*/
-        {
-            mouseDirection = MathUtils.GetVectorFromAngle(angle);
-            
-            //if (distance < maxRadius)
-            {
-            //    pointerPos = (Vector2)transform.position + mouseDirection * minRadius;
-            }
-            //else
-            {
-                pointerPos = (Vector2)transform.position + mouseDirection * maxRadius;
-            }
-            
-        }
+        mouseDirection = MathUtils.GetVectorFromAngle(angle);
+        pointerPos = (Vector2)transform.position + mouseDirection * maxRadius;
         pointer.transform.position = pointerPos;
     }
 }

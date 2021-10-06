@@ -11,33 +11,22 @@ public class GunProjectile : MonoBehaviour
         }
         instance = this;
     }
-    public Item prueba;
+    //public Item prueba;
     public GameObject projectilePrefab;
     public Transform shotPoint;
     public float offset;
- 
     [SerializeField] private MouseDirPointer mouseDirPointer;
     private PlayerManager player;
-    private Vector3 mousePosition;
-
-
+    private Vector2 mousePosition; //No necesario la posicion exacta del mouse
     void Start()
     {
         player = PlayerManager.instance;
     }
-
     private void Update() {
-        mousePosition = CameraFollow.instance.GetMousePosition();
-        Vector3 dif = mousePosition - transform.position;
+        mousePosition = mouseDirPointer.PointerDir;
+        Vector2 dif = mousePosition - (Vector2)transform.position;
         float rotZ = Mathf.Atan2(dif.y,dif.x) * Mathf.Rad2Deg;
-
-        //shotPoint.position = mouseDirPointer.PointerDir;
         transform.rotation = Quaternion.Euler(0f,0f,rotZ + offset);
-        //osas para probar
-        /*if(Input.GetMouseButtonDown(0)){
-            ShotObject(prueba);
-        }*/
-        
     }
     public void StartAiming(){
         PlayerManager.instance.isAiming = true;
@@ -54,7 +43,7 @@ public class GunProjectile : MonoBehaviour
 
         ObjectShot?.Invoke();
     }
-
+    /*
     public void ShotObject(Item item, float duration){
         GameObject projectile = Instantiate(projectilePrefab,shotPoint.position,transform.rotation);
         var objProj =  projectile.GetComponent<ObjProjectile>();
@@ -62,4 +51,5 @@ public class GunProjectile : MonoBehaviour
         objProj.knockback.duration = duration;
         ObjectShot?.Invoke();
     }
+    */
 }
