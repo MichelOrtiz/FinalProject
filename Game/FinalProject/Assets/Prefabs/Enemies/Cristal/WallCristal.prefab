@@ -276,7 +276,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.28842306}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -287,7 +287,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9301758, y: 0.31381035}
+  m_Size: {x: 0.9301758, y: 0.8906565}
   m_EdgeRadius: 0
 --- !u!1 &8905826359997050971
 GameObject:
@@ -373,7 +373,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 389937
   canSeePlayer: 0
-  justSeenPlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
@@ -383,6 +382,8 @@ MonoBehaviour:
   blockingCollider: {fileID: 0}
   facingDirection: 
   entity: {fileID: 0}
+  playerSightedInvoked: 0
+  playerUnsightedInvoked: 0
 --- !u!1 &8905826360249868735
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +566,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 2.7279768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -576,7 +577,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2.682253}
   m_EdgeRadius: 0
 --- !u!1 &8905826360815812312
 GameObject:
@@ -590,7 +591,8 @@ GameObject:
   - component: {fileID: 8905826360815812315}
   - component: {fileID: 8905826360815812314}
   - component: {fileID: 8905826360815812313}
-  m_Layer: 10
+  - component: {fileID: 9214889729808232021}
+  m_Layer: 8
   m_Name: WallCristal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,6 +658,7 @@ MonoBehaviour:
   hostEntity: {fileID: 0}
   enemy: {fileID: 0}
   currentStates: []
+  bannedStates: []
 --- !u!114 &8905826360815812313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,6 +732,32 @@ MonoBehaviour:
   timeBtwShot: 1
   spriteRenderer: {fileID: 8905826359493505187}
   spriteWhenChase: {fileID: 21300000, guid: cb66d96618433ec478a176c8d91eba99, type: 3}
+--- !u!61 &9214889729808232021
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8905826360815812312}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.4985752}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5.9971504}
+  m_EdgeRadius: 0
 --- !u!1 &8905826360894656659
 GameObject:
   m_ObjectHideFlags: 0

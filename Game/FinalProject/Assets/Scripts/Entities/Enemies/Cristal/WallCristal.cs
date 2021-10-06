@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 public class WallCristal : Enemy
 {
     [Header("Self Additions")]
@@ -26,6 +27,7 @@ public class WallCristal : Enemy
     private List<Transform> positions;
     private Vector2 spawnedPos;
 
+    ProbabilitySpawner spawner;
     new void Awake()
     {
         base.Awake();
@@ -39,8 +41,8 @@ public class WallCristal : Enemy
         projectileShooter.ProjectileTouchedPlayerHandler += projectileShooter_ProjectileTouchedPlayer;
         flashImage.FlashInCompleteHandler += flashImage_OnFlashInComplete;
 
-        ProbabilitySpawner spawner = FindObjectOfType<ProbabilitySpawner>();
-        ProbabilitySpawn spawn = spawner?.ProbabilitySpawns.Find(g => g.gameObject.GetComponent<Enemy>()?.enemyName == enemyName); 
+        spawner = GameObject.FindWithTag("EnemySpawner")?.GetComponent<ProbabilitySpawner>();
+        ProbabilitySpawn spawn = spawner?.SpawnedObjects.Find(g => g.gameObject == gameObject).probabilitySpawn; 
         if (spawn != null)
         {
             positions = spawn.positions;
@@ -57,6 +59,7 @@ public class WallCristal : Enemy
     
     new void Update()
     {
+        if (groundChecker.isGrounded && rigidbody2d.velocity.magnitude != 0) enemyMovement.StopMovement();
         if (projectileShot && projectileShooter.Projectile == null && !projectileTouchedPlayer)
         {
             projectileShot = false;
@@ -130,6 +133,4 @@ public class WallCristal : Enemy
             projectileShot = false;
         }
     }
-
-
 }

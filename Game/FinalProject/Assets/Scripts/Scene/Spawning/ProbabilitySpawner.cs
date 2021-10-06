@@ -55,7 +55,7 @@ public class ProbabilitySpawner : MonoBehaviour
 
             GameObject instantiated = Instantiate(spawn.gameObject, spawnPos.position, spawn.gameObject.transform.rotation);
             
-            spawnedObjects.Add(new SpawnedObject(instantiated, spawnPos.position));
+            spawnedObjects.Add(new SpawnedObject(instantiated, spawnPos.position, spawn));
 
             positions.Remove(spawnPos);
         }
