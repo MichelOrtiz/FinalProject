@@ -70,7 +70,9 @@ public class KeybindManager : MonoBehaviour
         if(FindObjectOfType<Pause>() != null){
             FindObjectOfType<Pause>().panel.SetActive(false);
         }
-        
+        if(FindObjectOfType<PlayerInputs>() != null){
+            FindObjectOfType<PlayerInputs>().controlBinds = controlbinds;
+        }
     }//KeybindManager.MyInstance.binds[""]
 
     public void BindKey(string key, KeyCode keyBind){

@@ -6,7 +6,7 @@ using System;
 public class PlayerInputs : MonoBehaviour
 {
     #region Inputs binding
-        public Dictionary<string, KeyCode> Movebinds {get; private set;}
+    public Dictionary<string, KeyCode> controlBinds {get; set;}
     #endregion
     public int movementX {get;set;}
     public int movementY {get;set;}
@@ -33,7 +33,7 @@ public class PlayerInputs : MonoBehaviour
     void Update()
     {
         #region Right Left Up Dowm
-        if(Input.GetButton("MovementRight")){
+        if(Input.GetKey(controlBinds["MOVERIGHT"])){
             StartCoroutine(ApplyInputLag(MovedRight));
             //movementX=1;
         }
