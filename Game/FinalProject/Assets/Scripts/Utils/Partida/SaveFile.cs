@@ -13,7 +13,9 @@ public class SaveFile
     public int sceneToLoad;
     public Vector2 positionSpawn;
     public List<WorldState> WorldStates;
-    public Dictionary<string, KeyCode> controlbinds;
+    //public Dictionary<string, KeyCode> controlbinds;
+    public List<string> controlBindsKeys;
+    public List<KeyCode> controlBindsValues;
     public Item[] inventory;
     public Item[] chestItems;
     public GameObject prefab;
@@ -28,7 +30,8 @@ public class SaveFile
         this.inventory = null;
         this.chestItems = null;
         this.WorldStates = new List<WorldState>();
-        this.controlbinds = new Dictionary<string, KeyCode>();
+        this.controlBindsKeys = new List<string>();
+        this.controlBindsValues = new List<KeyCode>();
     }
     public SaveFile(string namePlayer, int slotFile){
         this.namePlayer = namePlayer;
@@ -41,6 +44,7 @@ public class SaveFile
         this.inventory = null;
         this.chestItems = null;
         this.WorldStates = new List<WorldState>();
-        this.controlbinds = new Dictionary<string, KeyCode>();
+        this.controlBindsKeys = new List<string>();
+        this.controlBindsValues = new List<KeyCode>();
     }
 }

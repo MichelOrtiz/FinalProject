@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
@@ -21,6 +22,8 @@ public class CheckPoint : MonoBehaviour
         SaveFile progress = SaveFilesManager.instance.currentSaveSlot;
         progress.inventory = Inventory.instance.items.ToArray();
         //progress.controlbinds = KeybindManager.instance.controlbinds;
+        progress.controlBindsKeys = KeybindManager.instance.controlbinds.Keys.ToList<string>();
+        progress.controlBindsValues = KeybindManager.instance.controlbinds.Values.ToList<KeyCode>();
         if(Cofre.instance.savedItems != null){
             progress.chestItems = Cofre.instance.savedItems.ToArray();
         }else{
