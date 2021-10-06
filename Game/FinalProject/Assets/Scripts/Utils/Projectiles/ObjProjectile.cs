@@ -38,10 +38,6 @@ public class ObjProjectile : MonoBehaviour
         physics.StartKnockback(knockback.duration, knockback.force, origin.TransformDirection(-direction/2));*/
     }
 
-    void Update()
-    {
-        Debug.DrawLine(origin.position, direction);
-    }
 
     void collisionHandler_EnterContact(GameObject other)
     {

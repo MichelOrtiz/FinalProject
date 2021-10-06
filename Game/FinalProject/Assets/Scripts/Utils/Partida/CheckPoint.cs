@@ -21,6 +21,7 @@ public class CheckPoint : MonoBehaviour
     void Save(){
         SaveFile progress = SaveFilesManager.instance.currentSaveSlot;
         progress.inventory = Inventory.instance.items.ToArray();
+        progress.money = Inventory.money;
         //progress.controlbinds = KeybindManager.instance.controlbinds;
         progress.controlBindsKeys = KeybindManager.instance.controlbinds.Keys.ToList<string>();
         progress.controlBindsValues = KeybindManager.instance.controlbinds.Values.ToList<KeyCode>();
@@ -29,8 +30,6 @@ public class CheckPoint : MonoBehaviour
         }else{
             progress.chestItems = null;
         }
-        
-        progress.prefab = null;
         progress.sceneToLoad = SceneController.instance.currentScene;
         progress.positionSpawn = transform.position;
         SaveFilesManager.instance.SaveProgress();

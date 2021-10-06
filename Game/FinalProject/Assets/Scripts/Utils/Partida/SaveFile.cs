@@ -18,7 +18,7 @@ public class SaveFile
     public List<KeyCode> controlBindsValues;
     public Item[] inventory;
     public Item[] chestItems;
-    public GameObject prefab;
+    public int money;
     public SaveFile(){
         this.slotFile = 0;
         this.namePlayer = "NoName";
@@ -29,6 +29,7 @@ public class SaveFile
         this.positionSpawn = new Vector2(0f,0f);
         this.inventory = null;
         this.chestItems = null;
+        this.money = 0;
         this.WorldStates = new List<WorldState>();
         this.controlBindsKeys = new List<string>();
         this.controlBindsValues = new List<KeyCode>();
@@ -43,6 +44,7 @@ public class SaveFile
         this.positionSpawn = new Vector2(0f,0f);
         this.inventory = null;
         this.chestItems = null;
+        this.money = 0;
         this.WorldStates = new List<WorldState>();
         this.controlBindsKeys = new List<string>();
         this.controlBindsValues = new List<KeyCode>();
