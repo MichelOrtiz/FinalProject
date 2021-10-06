@@ -34,22 +34,38 @@ public class PlayerInputs : MonoBehaviour
     {
         #region Right Left Up Dowm
         if(Input.GetKey(controlBinds["MOVERIGHT"])){
-            StartCoroutine(ApplyInputLag(MovedRight));
-            //movementX=1;
+            if(intputLag > 0){   
+                StartCoroutine(ApplyInputLag(MovedRight));
+            }else{
+                MovedRight?.Invoke();
+            }
         }
         else if(Input.GetButton("MovementLeft")){
+            if(intputLag > 0){
+                StartCoroutine(ApplyInputLag(MovedLeft));
+            }else{
+                MovedLeft?.Invoke();
+            }
             //movementX=-1;
-            StartCoroutine(ApplyInputLag(MovedLeft));
         }
         else{
             movementX=0;
         }
         if(Input.GetButton("MovementUp")){
-            StartCoroutine(ApplyInputLag(MovedUp));
+            if(intputLag > 0){
+                StartCoroutine(ApplyInputLag(MovedUp));
+            }else{
+                MovedUp?.Invoke();
+            }  
             //movementY=1;
         }
         else if(Input.GetButton("MovementDown")){
-            StartCoroutine(ApplyInputLag(MovedDown));
+            if(intputLag > 0){
+                StartCoroutine(ApplyInputLag(MovedDown));
+            }else{
+                MovedDown?.Invoke();
+            }
+            
             //movementY=-1;
         }
         else{
