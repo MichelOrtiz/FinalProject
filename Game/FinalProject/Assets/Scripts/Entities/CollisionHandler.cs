@@ -59,7 +59,20 @@ public class CollisionHandler : MonoBehaviour
 
     public bool TouchingContact(GameObject contact)
     {
-        return Contacts.Contains(contact);
+        if (Contacts != null)
+        {
+            return Contacts.Contains(contact);
+        }
+        return false;
+    }
+
+    public bool TouchingContact(string tag)
+    {
+        if (Contacts != null)
+        {
+            return Contacts.Exists(c => c.tag == tag);
+        }
+        return false;
     }
 
 
@@ -79,6 +92,10 @@ public class CollisionHandler : MonoBehaviour
 
     protected virtual void OnTriggerStay2D(Collider2D other)
     {
+        if (!Contacts.Contains(other.gameObject))
+        {
+            Contacts.Add(other.gameObject);
+        }
         OnStayTouchingContact(other.gameObject);
     }
 
@@ -107,6 +124,10 @@ public class CollisionHandler : MonoBehaviour
     }
     protected virtual void OnCollisionStay2D(Collision2D other)
     {
+        if (!Contacts.Contains(other.gameObject))
+        {
+            Contacts.Add(other.gameObject);
+        }
         OnStayTouchingContact(other.gameObject);
     }
 

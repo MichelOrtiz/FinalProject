@@ -9,6 +9,8 @@ public class AbsorbingCristal : Enemy
     [SerializeField] private Color colorWhenChasing;
     private Color defaultColor;
 
+    private bool curValue;
+
     [Header("Self Knockback")] 
     [SerializeField] private float selfKnockbackDuration;
     [SerializeField] private float selfKnockBackForce;
@@ -16,15 +18,25 @@ public class AbsorbingCristal : Enemy
 
     [SerializeReference] private bool justChasedPlayer;
     private bool facingRight;
-    [SerializeField] private GameObject darknessObject;
+    [SerializeField] private string darknessName;
+    private GameObject darknessObject;
+
+    private DarknessScript darknessScript;
     //[SerializeField] private DarknessScript oscurito;
     
+
+
 
     new void Start()
     {
         base.Start();
         spriteRenderer = animator.GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
+
+        darknessObject = GameObject.Find(darknessName);
+        darknessScript = darknessObject.GetComponent<DarknessScript>();
+
+        darknessScript.ExitDarkness += darknessScript_Exit;
         //darknessObject = player.Darkness;
     }
 
@@ -88,7 +100,7 @@ public class AbsorbingCristal : Enemy
 
     protected override void Attack()
     {
-        Destroy(gameObject);
+        DestroyEntity();
     }
 
     void RunFromPlayer()
@@ -117,9 +129,11 @@ public class AbsorbingCristal : Enemy
     void SetActiveDarkness(bool value)
     {
 
-        if (darknessObject.activeInHierarchy != value)
+        if (player.isInDark != value)
         {
-            darknessObject.SetActive(value);
+            curValue = value;
+            //darknessObject.GetComponent<DarknessScript>().ObscureLight.SetActive(value);
+            darknessScript.SetActiveDarkness(value);
         }
     }
 
@@ -129,6 +143,13 @@ public class AbsorbingCristal : Enemy
         {
             spriteRenderer.color = color;
         }
+    }
+
+    void darknessScript_Exit()
+    {
+        //curValue = false;
+        Debug.Log("exit called");
+        SetActiveDarkness(false);
     }
 
     void OnDestroy()
