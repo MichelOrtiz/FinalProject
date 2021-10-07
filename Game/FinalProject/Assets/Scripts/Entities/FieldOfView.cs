@@ -220,9 +220,16 @@ public class FieldOfView : MonoBehaviour
         Debug.DrawLine(fovOrigin.position, endPos, Color.green);
 
         //if (!RayHitObstacle(fovOrigin.position, endPos))
-        {
+        //{
             var hits = Physics2D.LinecastAll(fovOrigin.position, endPos, layerMask);
-            hit = Array.Find(hits, h => h.collider.CompareTag("Player"));
+            if (hits.Length == 1)
+            {
+                hit = Array.Find(hits, h => h.collider.CompareTag("Player"));
+            }
+            else
+            {
+                return false;
+            }
             //hit = Physics2D.Linecast(fovOrigin.position, endPos, layerMask);//1 << LayerMask.NameToLayer("Default"));
             /*if (hit.collider == null)
             {
@@ -232,7 +239,7 @@ public class FieldOfView : MonoBehaviour
             blockingCollider = hit.collider.gameObject;
             return hit.collider.gameObject.CompareTag("Player");    */
             if (hit) return true;
-        }
+        //}
         //Debug.Log("hit collider of " + entity.gameObject + " false");
         return false;
     }

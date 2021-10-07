@@ -4994,6 +4994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 0
+  damageThreshold: 0
   effectOnPlayer: {fileID: 0}
   stopEmittingWhenParticleCollide: 0
 --- !u!1 &967220688444119503
@@ -5540,6 +5541,7 @@ Transform:
   - {fileID: 4247639306438326030}
   - {fileID: 9222204404642810428}
   - {fileID: 3515353368617961078}
+  - {fileID: 9140434770867883638}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5693,7 +5695,6 @@ MonoBehaviour:
   maxStamina: 100
   maxOxygen: 100
   walkingSpeed: 7
-  defaultwalkingSpeed: 7
   currentGravity: 0
   defaultMass: 10
   currentMass: 0
@@ -5709,7 +5710,7 @@ MonoBehaviour:
   DeathActive: 0
   isInvisible: 0
   camara: {fileID: 2419702810618214030, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
-  Darkness: {fileID: 573736898881928076}
+  Darkness: {fileID: 5191406608977327521}
   loosingStamina: 0
   loosingOxygen: 0
   inputs: {fileID: 0}
@@ -5864,7 +5865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56026f88b32ef9a4ea9c47a72770ddd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prueba: {fileID: 0}
   projectilePrefab: {fileID: 5480392800919433828, guid: ab6d9da1d3132ef4585fe15a14ba7fec, type: 3}
   shotPoint: {fileID: 3829738360406266948}
   offset: 0
@@ -6535,6 +6535,78 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5191406608977327521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9140434770867883638}
+  - component: {fileID: 7929950654259507207}
+  m_Layer: 0
+  m_Name: Point Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9140434770867883638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191406608977327521}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.8, y: 7, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3829738358529845137}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7929950654259507207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191406608977327521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 0.47472408, g: 0.62878865, b: 0.7924528, a: 1}
+  m_Intensity: 0.5
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 3
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &8624234521466811570
 GameObject:
   m_ObjectHideFlags: 0

@@ -400,7 +400,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -510,6 +510,7 @@ MonoBehaviour:
   hostEntity: {fileID: 0}
   enemy: {fileID: 0}
   currentStates: []
+  bannedStates: []
 --- !u!114 &5695393909381088478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,7 +869,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 521011
   canSeePlayer: 0
-  justSeenPlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
@@ -878,6 +878,8 @@ MonoBehaviour:
   blockingCollider: {fileID: 0}
   facingDirection: 
   entity: {fileID: 5695393909381088478}
+  playerSightedInvoked: 0
+  playerUnsightedInvoked: 0
 --- !u!1001 &5695393909495653949
 PrefabInstance:
   m_ObjectHideFlags: 0
