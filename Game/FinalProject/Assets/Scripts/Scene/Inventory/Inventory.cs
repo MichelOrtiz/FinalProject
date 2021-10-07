@@ -19,11 +19,14 @@ public class Inventory : MonoBehaviour
         instance = this;
     }
     private void Start() {
-        if(SaveFilesManager.instance?.currentSaveSlot != null){
+        if(SaveFilesManager.instance!= null && SaveFilesManager.instance.currentSaveSlot != null){
             items.Clear();
-            for(int i=0;i<SaveFilesManager.instance.currentSaveSlot.inventory.Length;i++){
-                Add(SaveFilesManager.instance.currentSaveSlot.inventory[i]);
+            if(SaveFilesManager.instance.currentSaveSlot.inventory != null){
+                for(int i=0;i<SaveFilesManager.instance.currentSaveSlot.inventory.Length;i++){
+                    Add(SaveFilesManager.instance.currentSaveSlot.inventory[i]);
+                }
             }
+            
         }
     }
     
