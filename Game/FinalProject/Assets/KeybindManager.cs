@@ -154,6 +154,7 @@ public class KeybindManager : MonoBehaviour
         BindKey("MENUMINIMAP", KeyCode.Tab);
         BindKey("MENUINVENTORY", KeyCode.I);
         BindKey("MENUINTERACTION", KeyCode.E);
+        BindKey("MENUFASTASSIGN", KeyCode.LeftControl);
         //ACTION 
         BindKey("RUN", KeyCode.LeftShift);
         BindKey("OBJ1", KeyCode.Q);
