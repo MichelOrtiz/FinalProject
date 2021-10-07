@@ -1,17 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using static UnityEngine.Experimental.Rendering.Universal.Light2D;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class VisionMejorada : Ability
 {
-    public GameObject SpriteMask;
+    PlayerManager Player;
+    [SerializeField] Light2D lt;
+    [SerializeField] float Range;
+    private void Awake()
+    {
+        Range = lt.pointLightOuterRadius;
+    }
     protected override void Update() {
-        if (isUnlocked)
+        if (!isUnlocked)
         {
-            SpriteMask.transform.localScale=new Vector3(10,10,0);
+            Range = 3;
         }else
         {
-            SpriteMask.transform.localScale=new Vector3(5,5,0);
+            Range = 7;
         }
+        lt.pointLightOuterRadius = Range;
+    }
+    void OnEnable(){
     }
 }
