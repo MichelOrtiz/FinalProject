@@ -32,7 +32,7 @@ public class SaveFilesManager : MonoBehaviour
             return null;
         }
         SaveFile saveFile = JsonUtility.FromJson<SaveFile>(jsonString);
-        Debug.Log(saveFile.ToString());
+        //Debug.Log(saveFile.ToString());
         return saveFile;
     }
     public void WriteSaveFile(SaveFile file,string filePath){
