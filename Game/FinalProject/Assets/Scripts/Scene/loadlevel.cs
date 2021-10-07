@@ -14,8 +14,8 @@ public class loadlevel : MonoBehaviour
     private void Start() {
         if (SceneController.instance != null)
         {
-            if(SceneController.instance.prevScene != null && SceneController.instance.prevScene == iLevelToLoad ){
-                if(loadPosition!=null){
+            if(SceneController.instance.prevScene != null && SceneController.instance.prevScene == iLevelToLoad){
+                if(loadPosition!=null && !PlayerManager.isDeath){
                     PlayerManager.instance.gameObject.transform.position = loadPosition.position;
                 }
             }

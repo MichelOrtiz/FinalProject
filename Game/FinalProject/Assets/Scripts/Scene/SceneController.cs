@@ -24,6 +24,9 @@ public class SceneController : MonoBehaviour
         prevScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene);
         currentScene = scene;
+        
+        PlayerManager.instance.currentStamina = PlayerManager.instance.maxStamina;
+        PlayerManager.instance.currentOxygen = PlayerManager.instance.maxOxygen;
     }
     public void Load(SaveFile partida){
         LoadScene(partida.sceneToLoad);

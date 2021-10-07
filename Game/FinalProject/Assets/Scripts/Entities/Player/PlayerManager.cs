@@ -38,7 +38,7 @@ public class PlayerManager : Entity
     public bool isDoubleJumping;
     public bool isDodging;
     public bool DeathActive;
-
+    public static bool isDeath { get; set;}
     public bool isInvisible;
     #endregion
 
@@ -88,6 +88,7 @@ public class PlayerManager : Entity
         if(SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
             transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
         }
+        isDeath = false;
     }
 
     new void Update()
@@ -172,8 +173,6 @@ public class PlayerManager : Entity
             if (currentStamina<1)
             {
                 FindRespawnPos();
-                currentStamina = maxStamina;
-                currentOxygen = maxOxygen;
             }
         }
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -386,18 +385,15 @@ public class PlayerManager : Entity
     }*/
     void FindRespawnPos()
     {
-        try
-        {
-            var spawnPos = GameObject.FindWithTag("RespawnPos").transform.position;
-            if (spawnPos != null)
-            {
-                transform.position = spawnPos;
-            }
+        Debug.Log("ImdeadTnx4EvEr");
+        if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
+            isDeath = true;
+            SceneController.instance.Load(SaveFilesManager.instance.currentSaveSlot);
         }
-        catch (System.NullReferenceException)
-        {
-            
-        }
+        /*if(SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
+            transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
+        }*/
+
     }
 
     public void SetEnabledPlayer(bool value)
