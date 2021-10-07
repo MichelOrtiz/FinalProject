@@ -28,7 +28,7 @@ public class PlayerInputs : MonoBehaviour
     bool checkLag;
     private void Start() {
         intputLag = defaultInputLag;  
-        checkLag = false;  
+        checkLag = false;
     }
     void Update()
     {

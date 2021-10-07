@@ -96,11 +96,7 @@ public class KeybindManager : MonoBehaviour
             UIManager.MyInstance.UpdateKeyText(key, keyBind);
             return;
         }
-        /*
-        currentDictionary[key] = keyBind;
-        UIManager.MyInstance.UpdateKeyText(key, keyBind);
-        updateKey = string.Empty;
-        */
+        
     }
     
     string updateKey = null;
@@ -140,6 +136,9 @@ public class KeybindManager : MonoBehaviour
             if(navi != null){
                 StartCoroutine(NaviIsAnnoying());
             }
+        }
+        if(FindObjectOfType<PlayerInputs>() != null){
+            FindObjectOfType<PlayerInputs>().controlBinds = controlbinds;
         }
     }
     public void ResetBindValues(){

@@ -22,13 +22,13 @@ public class SceneController : MonoBehaviour
     }
     public void LoadScene(int scene){
         prevScene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(scene);
         currentScene = scene;
+        SceneManager.LoadScene(scene);
         
-        PlayerManager.instance.currentStamina = PlayerManager.instance.maxStamina;
-        PlayerManager.instance.currentOxygen = PlayerManager.instance.maxOxygen;
     }
     public void Load(SaveFile partida){
+        //Instantiate(playerPrefab);
         LoadScene(partida.sceneToLoad);
+        
     }
 }
