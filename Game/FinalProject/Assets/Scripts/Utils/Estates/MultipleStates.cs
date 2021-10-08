@@ -20,7 +20,11 @@ public class MultipleStates : State
             foreach (var state in states)
             {
                 var st = manager.hostEntity.statesManager.AddState(state);
-                st.StoppedAffect += state_StoppedAffect;
+                
+                if (st != null)
+                {
+                    st.StoppedAffect += state_StoppedAffect;
+                }
             }
         }
     }

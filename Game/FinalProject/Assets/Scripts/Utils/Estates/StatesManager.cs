@@ -20,6 +20,7 @@ public class StatesManager : MonoBehaviour
         }
     }
 
+
     /// <summary>
     /// Adds and starts a new state to the entity manager
     /// </summary>

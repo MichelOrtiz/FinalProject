@@ -35,6 +35,10 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float impactEffectExitTime;
     public bool touchingPlayer;
     public bool touchingObstacle;
+
+
+    public bool hasLifeTime;
+    [SerializeField] protected float lifeTime;
     #endregion
 
     #region Misc
@@ -53,7 +57,7 @@ public class Projectile : MonoBehaviour
     protected Vector3 startPoint;
     protected IProjectile enemy;
     public Vector3 shootDir { get; set; }
-    private Vector3 target;
+    protected Vector3 target;
     protected string colliderTag;
     [SerializeReference]protected bool isOnCollider;
 
@@ -120,6 +124,11 @@ public class Projectile : MonoBehaviour
         OnProjectileInstantiated?.Invoke();
         StartSpeed = speedMultiplier;
         StartDamage = damage;
+
+        if (hasLifeTime)
+        {
+            Invoke("Destroy", lifeTime);
+        }
     }
     void Start()
     {
@@ -172,7 +181,7 @@ public class Projectile : MonoBehaviour
         {
             ChangeSizeByTime();
         }
-        
+
     }
     
     protected void FixedUpdate()

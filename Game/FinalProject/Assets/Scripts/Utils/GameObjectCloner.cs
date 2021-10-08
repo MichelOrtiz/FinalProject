@@ -21,6 +21,8 @@ public class GameObjectCloner : MonoBehaviour
 
 
     [Header("Time")]
+    [Tooltip("Enables the use of time to divide in a loop until max clones intanstiated")]
+    [SerializeField] private bool loop;
     [SerializeField] private float divisionInterval;
     private float curTime;
 
@@ -31,23 +33,31 @@ public class GameObjectCloner : MonoBehaviour
 
     void Update()
     {
-        if (curTime >= divisionInterval)
+        if (loop)
         {
-            if (clones.Count < maxClones)
+
+            if (curTime >= divisionInterval)
             {
-                Divide();
-                curTime = 0;
+                if (clones.Count < maxClones)
+                {
+                    Divide(checkMax: true);
+                    curTime = 0;
+                }
             }
-        }
-        else
-        {
-            curTime += Time.deltaTime;
+            else
+            {
+                curTime += Time.deltaTime;
+            }
         }
         
     }
 
-    private void Divide()
+    public void Divide(bool checkMax)
     {
+        if (checkMax)
+        {
+            if (clones.Count == maxClones) return;
+        }
         GameObject clone = Instantiate(sourceObject, dividePos.position, Quaternion.identity);
         if (forceRemoveNewCloner)
         {

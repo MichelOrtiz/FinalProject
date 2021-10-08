@@ -2,12 +2,28 @@ using System;
 using UnityEngine;
 public class ProjectileShooter : MonoBehaviour, IProjectile
 {
-    [SerializeField] private GameObject projectilePrefab;
+    public GameObject projectilePrefab;
+
+    
+    public Projectile ProjectileFromPrefab
+    {
+        get
+        {
+            return projectilePrefab.GetComponentInChildren<Projectile>();
+        } 
+        set
+        {
+            var proj = projectilePrefab.GetComponentInChildren<Projectile>();
+            proj = value;
+        }
+    }
+
     private Projectile projectile;
     public Projectile Projectile { get => projectile; set => projectile = value; }
     [SerializeField] private Transform shotPos;
     public Transform ShotPos { get => shotPos; }
     [SerializeField] private State effectOnPlayer;
+    public State EffectOnPlayer { get => effectOnPlayer; }
     /*
     [SerializeField] private bool canKnockbackPlayer;
     [SerializeField] private float knockbackDuration;
@@ -50,6 +66,12 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
         OnProjectileTouchedPlayer();
     }
 
+    public void ShootSeekerProjectile(Transform to)
+    {
+        projectile = Instantiate(projectilePrefab, shotPos.position, projectilePrefab.transform.rotation).GetComponent<Projectile>();
+        var seeker = projectile as SeekerProjectile;
+        seeker.Setup(shotPos, to, this);
+    }
 
     public void ShootProjectile(Vector2 to)
     {

@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostBossEnemy : Entity, IProjectile
+public class GhostBossEnemy : Entity
 {
-    #region Params
     [Header("Params")]
     [SerializeField] private float timeBeforeStart;
+    private float curTime;
     [SerializeField] private float speedMultiplier;
     private float speed;
     [SerializeField] private float damageAmount;
     private bool touchingPlayer;
 
     private PlayerManager player;
-    #endregion
 
-    #region Division
     [Header("Division")]
     [SerializeField] private Transform divisionPoint;
     [SerializeField] private float maxDivisions;
@@ -31,29 +29,38 @@ public class GhostBossEnemy : Entity, IProjectile
 
 
     private bool InLight;
-    #endregion
-    
-    #region Projectile Stuff
+
     [Header("Projectile stuff")]
-    [SerializeField] private Transform shotPoint;
-    [SerializeField] private GameObject projectilePrefab;
-    private SeekerProjectile projectile;
-    [SerializeField] private State projectileEffectOnPlayer;
+    [SerializeField] private ProjectileShooter projectileShooter;
+    [SerializeField] private GameObject seekerProj;
+    [SerializeField] private GameObject bouncingProj;
 
     [SerializeField] private float timeBtwShot;
     private float curTimeBtwShot;
-    #endregion
-    
-    #region References
-    [SerializeReference] private LightZone currentLZ;
 
-    #endregion
+
+    [Header("References")]
+    [SerializeField] private EnemyMovement enemyMovement;
+    private GameObjectCloner gameObjectCloner;
+    [SerializeReference] private LightZone currentLZ;
+    private EnemyCollisionHandler enemyCollisionHandler;
     
+    new void Awake()
+    {
+        gameObjectCloner = GetComponent<GameObjectCloner>();
+        enemyCollisionHandler = collisionHandler as EnemyCollisionHandler;
+        enemyCollisionHandler.TouchedPlayerHandler += eCollisionHandler_Attack;
+    }
+
+
     new void Start()
     {
         base.Start();
         player = PlayerManager.instance;
         speed = averageSpeed * speedMultiplier;
+
+        curTimeBtwShot = 0;
+        timeInLight = 0;
     }
 
     new void Update()
@@ -72,7 +79,8 @@ public class GhostBossEnemy : Entity, IProjectile
 
             if (curTimeBtwShot > timeBtwShot)
             {
-                ShotProjectile(shotPoint, player.GetPosition());
+                //ShotProjectile(shotPoint, player.GetPosition());
+                projectileShooter.ShootSeekerProjectile(player.transform);
                 curTimeBtwShot = 0;
             }
             else
@@ -80,22 +88,22 @@ public class GhostBossEnemy : Entity, IProjectile
                 curTimeBtwShot += Time.deltaTime;
             }
 
-            if (InLight)
-            {
-                if (timeInLight > timeUntilDivide)
-                {
-                    Divide();
-                    InLight = false;
-                    timeInLight = 0;
-
-                    //currentLZ?.UnableDoor();
-                }
-                else
-                {
-                    timeInLight += Time.deltaTime;
-                }
-            }
             
+        }
+        if (InLight)
+        {
+            if (timeInLight > timeUntilDivide)
+            {
+                Divide();
+                InLight = false;
+                timeInLight = 0;
+
+                //currentLZ?.UnableDoor();
+            }
+            else
+            {
+                timeInLight += Time.deltaTime;
+            }
         }
 
         
@@ -107,7 +115,8 @@ public class GhostBossEnemy : Entity, IProjectile
     {
         if (timeBeforeStart <= 0)
         {
-            ChasePlayer();
+            enemyMovement.GoTo(player.GetPosition(), chasing: true, gravity: false);
+            //ChasePlayer();
         }
 
     }
@@ -119,46 +128,42 @@ public class GhostBossEnemy : Entity, IProjectile
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void eCollisionHandler_Attack()
     {
-        
+        var effect = projectileShooter.EffectOnPlayer;
+        if (player.statesManager.currentStates.Contains(effect))
+        {
+            effect.StopAffect();
+            player.currentStamina = 0;
+        }
+        else
+        {
+            player.TakeTirement(damageAmount);
+            player.SetImmune();    
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    protected override void collisionHandler_EnterContact(GameObject contact)
     {
-        if (other.tag == "Player")
-        {
-            touchingPlayer = true;
-
-            if (player.GetComponent<StatesManager>().currentStates.Contains(projectileEffectOnPlayer))
-            {
-                projectileEffectOnPlayer.StopAffect();
-                //player.GetComponent<StatesManager>().RemoveState(projectileEffectOnPlayer);
-                player.currentStamina = 0; //insta kill??
-            }
-            else
-            {
-                player.TakeTirement(damageAmount);
-            }
-        }
-
-        if (other.tag == "Light")
+        if (contact.tag == "Light")
         {
             InLight = true;
-            currentLZ = other.transform.parent.GetComponentInChildren<LightZone>();
+            currentLZ = contact.transform?.parent?.GetComponentInChildren<LightZone>();
+
+            
+
+            // reset time, so the enemy doesn't chase
+            //curTime = 0;
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    protected override void collisionHandler_ExitContact(GameObject contact)
     {
-        if (other.tag == "Player")
-        {
-            touchingPlayer = false;
-        }
-
-        if (other.tag == "Light")
+        if (contact.tag == "Light")
         {
             InLight = false;
+
+            //timeInLight = 0;
         }
     }
 
@@ -166,46 +171,32 @@ public class GhostBossEnemy : Entity, IProjectile
     {
         if (currentDivisions < maxDivisions)
         {
-            if (!alreadyDivided)
-            {
 
+            transform.localScale *= sizeDecreaseMultiplier;
+        
+            //speedMultiplier += speedIncrease;
 
-                transform.localScale *= sizeDecreaseMultiplier;
+            enemyMovement.ChaseSpeed += speedIncrease;
+            curTime = timeBeforeStart;
+            //projectileShooter.ProjectileFromPrefab.speedMultiplier += projectileSpeedIncrease;
+
+            currentDivisions++;
+            gameObjectCloner.Divide(checkMax: true);
             
-                speedMultiplier += speedIncrease;
-
-                if (projectile != null)
-                {
-                    projectile.speedMultiplier += projectileSpeedIncrease;
-                }
-
-                currentDivisions++;
-                Instantiate(this, divisionPoint.position, Quaternion.identity).currentDivisions = currentDivisions;
-
-
-
-                //alreadyDivided = true;
-            }
         }
         else
         {
-            Destroy(gameObject);
+            DestroyEntity();
         }
     }
-
-    public void ProjectileAttack()
+    void ShootBouncingProj()
     {
-        player.GetComponent<StatesManager>().AddState(projectileEffectOnPlayer);
+        SetProjectile(bouncingProj);
+        projectileShooter.ShootProjectile(player.GetPosition());
     }
 
-    public void ShotProjectile(Transform from, Vector3 to)
+    void SetProjectile(GameObject projectile)
     {
-        projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<SeekerProjectile>();
-        projectile.Setup(from, player.transform, this);
-    }
-
-    void OnDestroy()
-    {
-        
+        projectileShooter.projectilePrefab = projectile;
     }
 }

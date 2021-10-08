@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SeekerProjectile : Projectile
 {
-    [SerializeField] private float lifeTime;
+    //[SerializeField] private float lifeTime;
 
     PlayerManager player;
-    private Transform target;
+    private new Transform target;
 
     public void Setup(Transform startPoint, Transform target)
     {
@@ -32,6 +32,8 @@ public class SeekerProjectile : Projectile
             impactEffect.SetActive(false);
         }
         speedMultiplier *= Entity.averageSpeed;
+
+
         /*if (targetWarningAvailable)
         {
             Instantiate(warning, target.position, Quaternion.identity);
@@ -40,16 +42,16 @@ public class SeekerProjectile : Projectile
 
     void Update()
     {
-        if (lifeTime <= 0)
+        /*if (lifeTime <= 0)
         {
             Destroy();
         }
         else
         {
-            lifeTime -= Time.deltaTime;
+            lifeTime -= Time.deltaTime;*/
 
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speedMultiplier * Time.deltaTime);
-        }
+            if (target != null && !touchingObstacle) transform.position = Vector2.MoveTowards(transform.position, target.position, speedMultiplier * Time.deltaTime);
+        //}
         
         if (touchingObstacle)
         {

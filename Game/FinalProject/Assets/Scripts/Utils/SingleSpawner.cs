@@ -122,5 +122,6 @@ public class SingleSpawner : MonoBehaviour
             Destroy(spawnedObject);
         }
     }
+
 }
     
