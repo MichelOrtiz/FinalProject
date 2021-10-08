@@ -236,6 +236,7 @@ MonoBehaviour:
   hostEntity: {fileID: 0}
   enemy: {fileID: 0}
   currentStates: []
+  bannedStates: []
 --- !u!114 &7800449908840761812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,15 +414,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fovOrigin: {fileID: 7800449909574800930}
-  fovType: 2
+  fovType: 1
   fovAngle: 180
   viewDistance: 8
   blockFov: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 488243
+    m_Bits: 2102017
   canSeePlayer: 0
-  justSeenPlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
@@ -431,6 +431,8 @@ MonoBehaviour:
   blockingCollider: {fileID: 0}
   facingDirection: 
   entity: {fileID: 0}
+  playerSightedInvoked: 0
+  playerUnsightedInvoked: 0
 --- !u!1 &7800449909574800931
 GameObject:
   m_ObjectHideFlags: 0

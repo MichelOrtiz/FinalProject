@@ -7,7 +7,6 @@ public class ProbabilitySpawner : MonoBehaviour
     public List<ProbabilitySpawn> ProbabilitySpawns { get => probabilitySpawns; }
     [SerializeField] private List<SpawnedObject> spawnedObjects;
     public List<SpawnedObject> SpawnedObjects {get => spawnedObjects; }
-
     
 
     void Awake()

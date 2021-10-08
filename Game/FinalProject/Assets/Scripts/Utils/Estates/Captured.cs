@@ -20,7 +20,8 @@ public class Captured : State
         capturedPos = manager.hostEntity.GetPosition();
         player = PlayerManager.instance;
         player.GetComponent<PlayerInputs>().enabled=false;
-
+        player.ResetAnimations();
+        player.isCaptured = true;
     }
     public override void Affect()
     {
@@ -38,6 +39,7 @@ public class Captured : State
         }
     }
     public override void StopAffect(){
+        player.isCaptured = false;
         player.SetImmune();
         base.StopAffect();
         Debug.Log("captured stopped");
@@ -47,6 +49,9 @@ public class Captured : State
         if(manager.enemy!=null){
             manager.enemy.statesManager.AddState(penalization);
         }
-
+        player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
+        inputs.ResetHotbarInputs();
+        GunProjectile.instance.StopAiming();
+        //player.ResetAnimations();
     }
 }

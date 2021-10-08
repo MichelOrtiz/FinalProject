@@ -45,7 +45,6 @@ public class DarknessScript : MonoBehaviour
 
         player.isInDark = false;
         Oscuridad.SetActive(false);
-        
     }
 
     public void SetActiveDarkness(bool value)
@@ -70,6 +69,14 @@ public class DarknessScript : MonoBehaviour
         }
     }
 
+    void collisionHandler_StayContact(GameObject contact)
+        {
+            if (contact == playerCollision)
+            {
+                SetActiveDarkness(true);
+            }
+        }
+
     void collisionHandler_ExitContact(GameObject contact)
     {
         if (contact == playerCollision)
@@ -77,6 +84,11 @@ public class DarknessScript : MonoBehaviour
             SetActiveDarkness(false);
             ExitDarkness?.Invoke();
         }
+    }
+
+    private void OnDestroy()
+    {
+        Oscuridad.SetActive(false);    
     }
 
     /*private void OnTriggerEnter2D(Collider2D collision){

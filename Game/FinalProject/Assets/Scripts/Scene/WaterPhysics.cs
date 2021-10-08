@@ -16,16 +16,6 @@ public class WaterPhysics : MonoBehaviour
 
     void Update()
     {
-        if (player.isInWater)
-        {
-            GameObject collisionGameObject = collision.gameObject;
-            if (collisionGameObject.tag == "Player")
-            {
-                player.currentGravity = .5f;
-                player.isInWater = true;
-                player.walkingSpeed = 3.5f;
-            }
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision){

@@ -14,10 +14,17 @@ public class LootChest : ScriptableObject {
     [SerializeField] private GameObject prefab;
     private Vector3 spawnPoint;
     
+    public List<ObjectProbability<Item>> Berries;
+    
     public void Open(){
         int numItems = RandomGenerator.NewRandom(minItems,maxItems);
+        Item[] newItems = new Item[numItems];
+        for (int i = 0; i < maxItems; i++)
+        {
+            newItems[i] = RandomGenerator.MatchedElement<Item>(Berries);
+        }
         int money = RandomGenerator.NewRandom(minMoney,maxMoney);
-        Item[] newItems = new Item[numItems]; 
+        /*Item[] newItems = new Item[numItems]; 
         for(int i=0;i<newItems.Length;){
             for(int x=0;x<items.Length;x++){
                 if(Random.value > spawnProbability[x]){
@@ -26,9 +33,10 @@ public class LootChest : ScriptableObject {
                     break;
                 }
             }
-        }
+        }*/
 
         Inventory.instance.AddMoney(money);
+
         for(int i=0;i<newItems.Length;i++){
             prefab.GetComponent<Inter>().SetItem(newItems[i]);
             GameObject x = Instantiate(prefab,spawnPoint,Quaternion.identity);

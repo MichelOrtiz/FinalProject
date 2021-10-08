@@ -56,6 +56,7 @@ public class loadlevel : MonoBehaviour
         }*/
         if (collisionGameObject.tag == "Player")
         {
+            RestoreValuesForOtherScene();
             LoadScene();
         }
     }
@@ -63,5 +64,14 @@ public class loadlevel : MonoBehaviour
     protected void LoadScene(){
         SceneController.instance.LoadScene(iLevelToLoad);
         //Camera.instance.gameObject.SetActive(true);
+    }
+    protected void RestoreValuesForOtherScene(){
+        PlayerManager.instance.walkingSpeed = PlayerManager.defaultwalkingSpeed;
+        PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
+        PlayerManager.instance.isInWater = false;
+        PlayerManager.instance.isInDark = false;
+        PlayerManager.instance.isInSnow = false;  
+        PlayerManager.instance.isInIce = false;
+        PlayerManager.instance.ResetAnimations();
     }
 }

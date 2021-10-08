@@ -6,31 +6,34 @@ public class Run : Ability
 {
     [SerializeField] private float speedMultiplier;
     [SerializeField] public float runningSpeed;
+    [SerializeField] private float LimitStamCost;
+    [SerializeField] private Rigidbody2D body;
     public override void UseAbility()
     {
-        if(player.currentStamina < staminaCost)return;
-        if (isInCooldown)
-        {
-            player.TakeTirement(staminaCost);
-            //Debug.Log("Usando en cooldown");
-        }
-        player.walkingSpeed = runningSpeed;
-        if (player.isInWater)
-        {
-            player.walkingSpeed = 7f;
-        }
-        if (player.isInIce)
-        {
-            player.walkingSpeed = 75f;
-        }
-        if (player.isInSnow && !player.isInIce)
-        {
-            player.walkingSpeed = 8.5f;
-        }
-        if (player.isInConvey)
-        {
-            player.walkingSpeed = 75f;
-        }
+        //if(player.currentStamina >= LimitStamCost && body.velocity.magnitude != 0){
+            if (isInCooldown)
+            {
+                player.TakeTirement(staminaCost);
+                //Debug.Log("Usando en cooldown");
+            }
+            player.walkingSpeed = runningSpeed;
+            if (player.isInWater)
+            {
+                player.walkingSpeed = 7f;
+            }
+            if (player.isInIce)
+            {
+                player.walkingSpeed = 75f;
+            }
+            if (player.isInSnow && !player.isInIce)
+            {
+                player.walkingSpeed = 8.5f;
+            }
+            if (player.isInConvey)
+            {
+                player.walkingSpeed = 75f;
+            }
+        //}
     }
 
     protected override void Start()
@@ -53,7 +56,7 @@ public class Run : Ability
         }
         if (Input.GetKey(hotkey))
         {
-            if (player.currentStamina > staminaCost)
+            if (player.currentStamina > staminaCost && player.currentStamina >= LimitStamCost && player.inputs.movementX != 0)
             {
                 UseAbility();
                 player.isRunning = true;
@@ -71,6 +74,8 @@ public class Run : Ability
             else
             {
                 player.isRunning = false;
+                player.walkingSpeed = runningSpeed/speedMultiplier;
+                isInCooldown = false;
             }
         }
         

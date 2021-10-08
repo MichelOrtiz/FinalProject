@@ -85,11 +85,15 @@ public class PlayerManager : Entity
         MinimapaActivada = true;
         isDeath = false;
         GunProjectile.instance.ObjectShot += gun_ObjectShot;
+        
     }
 
     new void Update()
     {
-        SetAnimationStates();
+        if (!isCaptured)
+        {
+            SetAnimationStates();
+        }
         rigidbody2d.mass = currentMass;
         /*animator.SetBool("Is Running", isRunning);
         animator.SetBool("Is Aiming", isAiming);*/
@@ -381,8 +385,7 @@ public class PlayerManager : Entity
     }*/
     void WhenHeDied()
     {
-        currentOxygen = maxOxygen;
-        currentStamina = maxStamina;
+        RestoreValuesForDead();
         Debug.Log("ImdeadTnx4EvEr");
         if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
             isDeath = true;
@@ -442,6 +445,15 @@ public class PlayerManager : Entity
         }
     }
 
+    public void ResetAnimations(){
+        isWalking = false;
+        isRunning = false;
+        isJumping = false;
+        isFlying = false;
+        isFalling = false;
+        isAiming = false;
+        SetAnimationStates();
+    }
     void gun_ObjectShot()
     {
         Debug.Log("object shot");
@@ -449,5 +461,16 @@ public class PlayerManager : Entity
         animationManager.SetNextAnimation("Nico_idle");
     }
 
+    void RestoreValuesForDead(){
+        walkingSpeed = defaultwalkingSpeed;
+        currentGravity = defaultGravity;
+        currentStamina = maxStamina;
+        currentOxygen = maxOxygen;
+        isInWater = false;
+        isInDark = false;
+        isInSnow = false;  
+        isInIce = false;
+        ResetAnimations();
+    }
     #endregion
 }

@@ -6,6 +6,7 @@ public class ObjectProbability<T>
 {
     [SerializeField] private T tObject;
     public T TObject { get => tObject; }
+    [Range(0,100)]
     [SerializeField] private float probability;
     public float Probability { get => probability; }
 

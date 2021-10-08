@@ -85,9 +85,10 @@ public class PlayerInputs : MonoBehaviour
         
         ctrlLeft = Input.GetKey(controlBinds["MENUFASTASSIGN"]);
         OpenInventory=Input.GetKeyDown(controlBinds["MENUINVENTORY"]);
-        
         HotbarInputs();
+        
     }
+
     public void HotbarInputs(){
         if(Input.GetKey(controlBinds["FOOD1"])){
             
@@ -149,6 +150,16 @@ public class PlayerInputs : MonoBehaviour
             ItemHotbarUp[4]=false;
         }
         
+    }
+    
+    public void ResetHotbarInputs(){
+        for (int i = 0; i < ItemHotbarUp.Length; i++)
+        {
+            ItemHotbarUp[i] = false;
+            ItemHotbarDown[i] = false;
+            
+        }
+        PlayerManager.instance.isAiming = false;
     }
     private void OnDisable() {
         movementX=0;

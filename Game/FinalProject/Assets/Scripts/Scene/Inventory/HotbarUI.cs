@@ -10,7 +10,7 @@ public class HotbarUI : MonoBehaviour
     InventoryUI inventoryUI;
     public Transform itemsParentHotbar0;
     public HotbarSlot[] slotsHotbar0;
-    private float timeKeyPressed;
+    [HideInInspector] public float timeKeyPressed;
     private void Awake() {
         if(instance!=null){
             Debug.Log("NANI!!!");
@@ -36,6 +36,11 @@ public class HotbarUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerManager.instance.isCaptured)
+        {
+            timeKeyPressed = 0f;
+            return;
+        }
         if(inputs == null){
             inputs = PlayerManager.instance.inputs;
         }
