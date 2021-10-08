@@ -28,7 +28,7 @@ public class PlayerInputs : MonoBehaviour
     bool checkLag;
     private void Start() {
         intputLag = defaultInputLag;  
-        checkLag = false;  
+        checkLag = false;
     }
     void Update()
     {
@@ -40,7 +40,7 @@ public class PlayerInputs : MonoBehaviour
                 MovedRight?.Invoke();
             }
         }
-        else if(Input.GetButton("MovementLeft")){
+        else if(Input.GetKey(controlBinds["MOVELEFT"])){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedLeft));
             }else{
@@ -51,7 +51,7 @@ public class PlayerInputs : MonoBehaviour
         else{
             movementX=0;
         }
-        if(Input.GetButton("MovementUp")){
+        if(Input.GetKey(controlBinds["MOVEUP"])){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedUp));
             }else{
@@ -59,7 +59,7 @@ public class PlayerInputs : MonoBehaviour
             }  
             //movementY=1;
         }
-        else if(Input.GetButton("MovementDown")){
+        else if(Input.GetKey(controlBinds["MOVEDOWN"])){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedDown));
             }else{
@@ -72,7 +72,7 @@ public class PlayerInputs : MonoBehaviour
             movementY=0;
         }
         #endregion
-        if(Input.GetButton("Jump")){
+        if(Input.GetKey(controlBinds["MOVEJUMP"])){
             //StartCoroutine(ApplyInputLag());
             jump=true;
             Jump?.Invoke();
@@ -83,67 +83,67 @@ public class PlayerInputs : MonoBehaviour
         
 
         
-        ctrlLeft = Input.GetKey(KeyCode.LeftControl);
-        OpenInventory=Input.GetButtonDown("Inventory");
+        ctrlLeft = Input.GetKey(controlBinds["MENUFASTASSIGN"]);
+        OpenInventory=Input.GetKeyDown(controlBinds["MENUINVENTORY"]);
         
         HotbarInputs();
     }
     public void HotbarInputs(){
-        if(Input.GetButton("HotbarObj0")){
+        if(Input.GetKey(controlBinds["FOOD1"])){
             
             ItemHotbarDown[0]=true;
         }else{
             ItemHotbarDown[0]=false;
         }
-        if(Input.GetButtonUp("HotbarObj0")){
+        if(Input.GetKeyUp(controlBinds["FOOD1"])){
             ItemHotbarUp[0]=true;
         }else{
             ItemHotbarUp[0]=false;
         }
 
-        if(Input.GetButton("HotbarObj1")){
+        if(Input.GetKey(controlBinds["FOOD2"])){
             
             ItemHotbarDown[1]=true;
         }else{
             ItemHotbarDown[1]=false;
         }
-        if(Input.GetButtonUp("HotbarObj1")){
+        if(Input.GetKeyUp(controlBinds["FOOD2"])){
             ItemHotbarUp[1]=true;
         }else{
             ItemHotbarUp[1]=false;
         }
 
-        if(Input.GetButton("HotbarObj2")){
+        if(Input.GetKey(controlBinds["FOOD3"])){
             
             ItemHotbarDown[2]=true;
         }else{
             ItemHotbarDown[2]=false;
         }
-        if(Input.GetButtonUp("HotbarObj2")){
+        if(Input.GetKeyUp(controlBinds["FOOD3"])){
             ItemHotbarUp[2]=true;
         }else{
             ItemHotbarUp[2]=false;
         }
 
-        if(Input.GetButton("HotbarObj3")){
+        if(Input.GetKey(controlBinds["FOOD4"])){
             
             ItemHotbarDown[3]=true;
         }else{
             ItemHotbarDown[3]=false;
         }
-        if(Input.GetButtonUp("HotbarObj3")){
+        if(Input.GetKeyUp(controlBinds["FOOD4"])){
             ItemHotbarUp[3]=true;
         }else{
             ItemHotbarUp[3]=false;
         }
 
-        if(Input.GetButton("HotbarObj4")){
+        if(Input.GetKey(controlBinds["FOOD5"])){
             
             ItemHotbarDown[4]=true;
         }else{
             ItemHotbarDown[4]=false;
         }
-        if(Input.GetButtonUp("HotbarObj4")){
+        if(Input.GetKeyUp(controlBinds["FOOD5"])){
             ItemHotbarUp[4]=true;
         }else{
             ItemHotbarUp[4]=false;

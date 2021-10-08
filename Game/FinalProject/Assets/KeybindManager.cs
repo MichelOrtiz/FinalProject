@@ -96,11 +96,7 @@ public class KeybindManager : MonoBehaviour
             UIManager.MyInstance.UpdateKeyText(key, keyBind);
             return;
         }
-        /*
-        currentDictionary[key] = keyBind;
-        UIManager.MyInstance.UpdateKeyText(key, keyBind);
-        updateKey = string.Empty;
-        */
+        
     }
     
     string updateKey = null;
@@ -141,6 +137,9 @@ public class KeybindManager : MonoBehaviour
                 StartCoroutine(NaviIsAnnoying());
             }
         }
+        if(FindObjectOfType<PlayerInputs>() != null){
+            FindObjectOfType<PlayerInputs>().controlBinds = controlbinds;
+        }
     }
     public void ResetBindValues(){
         //MOVEMENT
@@ -154,6 +153,7 @@ public class KeybindManager : MonoBehaviour
         BindKey("MENUMINIMAP", KeyCode.Tab);
         BindKey("MENUINVENTORY", KeyCode.I);
         BindKey("MENUINTERACTION", KeyCode.E);
+        BindKey("MENUFASTASSIGN", KeyCode.LeftControl);
         //ACTION 
         BindKey("RUN", KeyCode.LeftShift);
         BindKey("OBJ1", KeyCode.Q);

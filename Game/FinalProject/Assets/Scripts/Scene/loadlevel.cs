@@ -6,17 +6,34 @@ using UnityEngine;
 public class loadlevel : MonoBehaviour
 {
     public int iLevelToLoad;
-    [SerializeField]public GameObject startPosition;
     [SerializeField]private Transform loadPosition;
     public static loadlevel instance = null;
     protected PlayerManager player;
 
     private void Start() {
-        if(SceneController.instance.prevScene == iLevelToLoad){
-            if(loadPosition!=null){
-                PlayerManager.instance.gameObject.transform.position = loadPosition.position;
+        if (SceneController.instance != null)
+        {
+            if(PlayerManager.instance.isDeath){
+                    Debug.Log("Cargando en el ultimo checkpoint");
+                    PlayerManager.instance.isDeath = false;
+                    PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
+            }else{
+                if(SceneController.instance.prevScene != 34 && SceneController.instance.prevScene == iLevelToLoad){
+                        if(loadPosition!=null && !PlayerManager.instance.isDeath){
+                            PlayerManager.instance.gameObject.transform.position = loadPosition.position;
+                        }
+                    }
+                    else{
+                        //if loading from 34 spawnpoint = startPosition
+                        if(SceneController.instance.prevScene == 34){
+                            Debug.Log("Cargando desde main menu");
+                            PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
+                        }
+                    }
             }
+            
         }
+
     }
     private void Awake()
         {

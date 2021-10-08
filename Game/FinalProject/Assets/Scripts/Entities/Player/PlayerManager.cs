@@ -38,7 +38,7 @@ public class PlayerManager : Entity
     public bool isDoubleJumping;
     public bool isDodging;
     public bool DeathActive;
-
+    public bool isDeath;
     public bool isInvisible;
     #endregion
 
@@ -83,11 +83,8 @@ public class PlayerManager : Entity
         dmgMod = defaultDmgMod;
         inputs = gameObject.GetComponent<PlayerInputs>();
         MinimapaActivada = true;
-
+        isDeath = false;
         GunProjectile.instance.ObjectShot += gun_ObjectShot;
-        if(SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
-            transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
-        }
     }
 
     new void Update()
@@ -169,11 +166,9 @@ public class PlayerManager : Entity
             StartCoroutine(Drowning(1f, 0.05f));
         }
         if(DeathActive){
-            if (currentStamina<1)
+            if (currentStamina < 1 || currentOxygen < 1)
             {
-                FindRespawnPos();
-                currentStamina = maxStamina;
-                currentOxygen = maxOxygen;
+                WhenHeDied();
             }
         }
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -384,20 +379,17 @@ public class PlayerManager : Entity
         transform.position = GameObject.FindWithTag("StartPos").transform.position;
         //transform.position = loadlevel.instance.startPosition.transform.position;
     }*/
-    void FindRespawnPos()
+    void WhenHeDied()
     {
-        try
-        {
-            var spawnPos = GameObject.FindWithTag("RespawnPos").transform.position;
-            if (spawnPos != null)
-            {
-                transform.position = spawnPos;
-            }
+        currentOxygen = maxOxygen;
+        currentStamina = maxStamina;
+        Debug.Log("ImdeadTnx4EvEr");
+        if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
+            isDeath = true;
+            SceneController.instance.prevScene = 34; //Cambiar si int Scene main menu cambia
+            SceneController.instance.Load(SaveFilesManager.instance.currentSaveSlot);
         }
-        catch (System.NullReferenceException)
-        {
-            
-        }
+
     }
 
     public void SetEnabledPlayer(bool value)
