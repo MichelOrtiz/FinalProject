@@ -15,9 +15,10 @@ public class Diana : MonoBehaviour
     void Update()
     {
     }
-    void OnTriggerEnter2D(Collider2D target){
+    void OnTriggerStay2D(Collider2D target){
         if (target.tag == "Fruit")
         {
+            GetComponent<Collider2D>().enabled=false;
             activado = false;
             StartCoroutine(SpawnRandomGameObject(target));
             Debug.Log("Increased score");
