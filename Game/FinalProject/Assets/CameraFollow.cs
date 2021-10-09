@@ -5,20 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
-    private Transform player;
+    private PlayerManager player;
     private BoxCollider2D camBox;
     private ZoomCamera[] boundaries;
     private ZoomCamera[] allBounds;
+
+
+    private ZoomCamera lastTargetBounds;
     private ZoomCamera targetBounds;
+
     private float waitForSeconds = 0.5f;
     private Vector3 mousePosition;
+    
     public float speed;
+    public float zoomSpeed;
+
     public static CameraFollow instance = null;
     public bool camera1;
     public Camera camera;
 
 
+    [SerializeField] private bool canFollow = true;
+
+    [SerializeField] private float zCamOffsset;
+
+
+    private float xTarget, yTarget;
+    private Vector3 target;
+
+
     private Vector3 velocity = Vector3.zero;
+
     void Awake()
     {
         if (camera1)
@@ -34,14 +51,19 @@ public class CameraFollow : MonoBehaviour
             }
             DontDestroyOnLoad(this);
         }
+
     }
     void Start()
     {
         camera = GetComponent<Camera>();
-        player = PlayerManager.instance.transform;
+        player = PlayerManager.instance;
         camBox = GetComponent<BoxCollider2D>();
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         FindLimits();
+        foreach (var bound in boundaries)
+        {
+            bound.EnterBounds += bound_Enter;
+        }
     }
 
     void OnGUI()
@@ -61,14 +83,21 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (waitForSeconds > 0)
         {
             waitForSeconds -= Time.deltaTime;
         } else {
             SetOneLimit();
-            FollowPlayer();
+
+            FindTarget();
+            //if (canFollow)
+            {
+                FollowTarget();
+            }
+
+            //transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.fixedDeltaTime);
         }
     }
 
@@ -83,27 +112,61 @@ public class CameraFollow : MonoBehaviour
         }*/
     }
     void SetOneLimit(){
+
         for (int i = 0; i < boundaries.Length; i++)
         {
-            if (player.position.x > boundaries[i].Bounds.min.x && player.position.x < boundaries[i].Bounds.max.x && player.position.y > boundaries[i].Bounds.min.y && player.position.y < boundaries[i].Bounds.max.y)
+            if (player.GetPosition().x > boundaries[i].Bounds.min.x && player.GetPosition().x < boundaries[i].Bounds.max.x && player.GetPosition().y > boundaries[i].Bounds.min.y && player.GetPosition().y < boundaries[i].Bounds.max.y)
             {
-                targetBounds = boundaries[i];
+                if (targetBounds != boundaries[i])
+                {
+                    targetBounds = boundaries[i];
+                }
                 return;
             }
         }
     }
-    void FollowPlayer(){
-        float xTarget = camBox.size.x < targetBounds.Bounds.size.x ? Mathf.Clamp(player.position.x, targetBounds.Bounds.min.x + camBox.size.x/2, targetBounds.Bounds.max.x - camBox.size.x/2) : 
+    void FindTarget(){
+        xTarget = camBox.size.x < targetBounds.Bounds.size.x ? Mathf.Clamp(player.GetPosition().x, targetBounds.Bounds.min.x + camBox.size.x/2, targetBounds.Bounds.max.x - camBox.size.x/2) : 
             (targetBounds.Bounds.min.x + targetBounds.Bounds.max.x)/2;
-        float yTarget = camBox.size.y < targetBounds.Bounds.size.y ? Mathf.Clamp(player.position.y, targetBounds.Bounds.min.y + camBox.size.y/2, targetBounds.Bounds.max.y - camBox.size.y/2) : 
+        yTarget = camBox.size.y < targetBounds.Bounds.size.y ? Mathf.Clamp(player.GetPosition().y, targetBounds.Bounds.min.y + camBox.size.y/2, targetBounds.Bounds.max.y - camBox.size.y/2) : 
             (targetBounds.Bounds.min.y + targetBounds.Bounds.max.y)/2;
-        Vector3 target = new Vector3(xTarget, yTarget, -10F);
-        //transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * speed);
+        target = new Vector3(xTarget, yTarget, -10F);
+        
         //transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, Time.deltaTime * speed);
         //transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-        transform.position =  target;
-        camera.orthographicSize = targetBounds.zCam;
+        //transform.position =  target;
+
     }
+
+    void FollowTarget()
+    {
+        float xPos = Mathf.Lerp(transform.position.x, target.x, Time.fixedDeltaTime * speed);
+        float yPos = Mathf.Lerp(transform.position.y, target.y, Time.fixedDeltaTime * speed);
+        transform.position = new Vector3(xPos, yPos, -10f);
+        //transform.position = Mathf.Lerp(transform.position, target, Time.fixedDeltaTime * speed);
+        camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetBounds.zCam, Time.fixedDeltaTime * zoomSpeed);
+    }
+
+
+    void bound_Enter(ZoomCamera sender)
+    {
+        //if (targetBounds != sender)
+        {
+            //targetBounds = sender;
+            //if (targetBounds != null) camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetBounds.zCam * 2, Time.fixedDeltaTime * zoomSpeed / 2);
+            
+            //canFollow = false;
+
+            //transform.position = Vector3.MoveTowards(transform.position, target, 25f * Time.deltaTime);
+            //Invoke("FollowTarget", 1f);
+
+            /*targetBounds.zCam *= 2;
+            Invoke("ResetTargetZoom", 1);*/
+        }
+    }
+
+
+
     public Vector3 GetMousePosition(){
         return mousePosition;
     }
