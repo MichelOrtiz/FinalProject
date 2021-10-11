@@ -354,13 +354,18 @@ public class PlayerManager : Entity
 
     public void RegenStaminaDontLimit(float regen)
     {
-        if (currentStamina<maxStamina)
+        
+        if (currentStamina<maxStamina )
         {
-        currentStamina += regen;
+            currentStamina += regen;
         }
         if (currentStamina>maxStamina)
         {
             currentStamina = maxStamina;
+        }
+        if (currentStamina > currentStaminaLimit)
+        {
+            currentStaminaLimit = currentStaminaLimit + (currentStamina - currentStaminaLimit);   
         }
     }
     void RegenOxygen(float regen)
@@ -476,6 +481,7 @@ public class PlayerManager : Entity
 
     void RestoreValuesForDead(){
         walkingSpeed = defaultwalkingSpeed;
+        currentStaminaLimit = maxStamina;
         currentGravity = defaultGravity;
         currentStamina = maxStamina;
         currentOxygen = maxOxygen;

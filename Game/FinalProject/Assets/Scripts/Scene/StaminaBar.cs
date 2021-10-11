@@ -18,7 +18,7 @@ public class StaminaBar : MonoBehaviour
     private void Update() {
         slider.value = player.currentStamina;
 
-        limitSlider.value = player.currentStaminaLimit;
+        limitSlider.value = player.maxStamina - player.currentStaminaLimit;
     }
 
     public void SetMaxStamina(float stamina){
