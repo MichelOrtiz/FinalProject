@@ -6,6 +6,7 @@ public class SomePhysics : MonoBehaviour
 {
 	[SerializeField] private Entity entity;
 	[SerializeField] private Rigidbody2D rigidbody2d;
+	
 	private Vector2 position;
 
 	public void StartKnockback(float knockbackDuration, float knockbackForce, float angle)
@@ -48,6 +49,12 @@ public class SomePhysics : MonoBehaviour
 			}
 		}
     }
+
+	public void ResetAll()
+	{
+		StopAllCoroutines();
+		SetEnableEntity(entity, true);
+	}
 
 	public void Shake(float amount, float duration)
 	{

@@ -11,9 +11,12 @@ public class ObjectProbability<T>
     public float Probability { get => probability; }
 
 
+    readonly float minProbability = 0.0001f;
+
     public ObjectProbability(T tObject, float probability)
     {
         this.tObject = tObject;
+        //if (probability == 0 || probability < minProbability) probability = minProbability; 
         this.probability = probability;
     }
 }

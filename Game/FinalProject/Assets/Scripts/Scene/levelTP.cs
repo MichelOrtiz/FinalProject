@@ -15,7 +15,9 @@ public class levelTP : MonoBehaviour
         GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Player")
         {
-           player.transform.position = new Vector2(posx,posy);
+            player.transform.position = new Vector2(posx,posy);
+            player.SetImmune();
+
         }
     }
 }

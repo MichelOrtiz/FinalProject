@@ -88,7 +88,7 @@ public class DarknessScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        Oscuridad.SetActive(false);    
+        Oscuridad?.SetActive(false);    
     }
 
     /*private void OnTriggerEnter2D(Collider2D collision){

@@ -75,7 +75,7 @@ public class WallCristal : Enemy
 
     protected override void ChasePlayer()
     {
-        ChangeSprite(spriteWhenChase);
+        //ChangeSprite(spriteWhenChase);
         
         if (curTimeBtwShot > timeBtwShot)
         {
@@ -99,6 +99,11 @@ public class WallCristal : Enemy
         {
             spriteRenderer.sprite = sprite;
         }
+    }
+    protected override void groundChecker_Grounded(string groundTag)
+    {
+        base.groundChecker_Grounded(groundTag);
+        collisionHandler.GetComponent<Collider2D>().isTrigger = false;
     }
 
     void projectileShooter_ProjectileTouchedPlayer()

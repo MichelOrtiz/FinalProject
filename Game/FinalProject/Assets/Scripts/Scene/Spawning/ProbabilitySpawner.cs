@@ -26,6 +26,7 @@ public class ProbabilitySpawner : MonoBehaviour
 
     public void Spawn(ProbabilitySpawn spawn)
     {
+        if (spawn == null) return;
         List<Transform> positions = new List<Transform> (spawn.positions);
         byte maxSpawns = (byte)positions.Count;
         byte spawns = (byte)RandomGenerator.NewRandom((byte)spawn.minQuantity, spawn.maxQuantity);
@@ -51,12 +52,22 @@ public class ProbabilitySpawner : MonoBehaviour
                 );*/
             //}
 
+            try
+            {
+                GameObject instantiated = Instantiate(spawn.gameObject, spawnPos.position, spawn.gameObject.transform.rotation);
+                
+                spawnedObjects.Add(new SpawnedObject(instantiated, spawnPos.position, spawn));
 
-            GameObject instantiated = Instantiate(spawn.gameObject, spawnPos.position, spawn.gameObject.transform.rotation);
-            
-            spawnedObjects.Add(new SpawnedObject(instantiated, spawnPos.position, spawn));
+                positions.Remove(spawnPos);
+                 
+            }
+            catch (System.Exception ex)
+            {
+                
+                Debug.Log(ex.GetType() + " ---- spawning " + spawn.gameObject + " --- Probably null transform(s) in position list.");
+            }
 
-            positions.Remove(spawnPos);
+
         }
     }
     public void Spawn(List<ProbabilitySpawn> probSpawns)
