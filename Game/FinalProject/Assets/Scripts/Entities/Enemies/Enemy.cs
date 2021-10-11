@@ -18,6 +18,7 @@ public abstract class Enemy : Entity
     [Header("Effect on Player")]
     [SerializeField] protected float damageAmount;
     public float Damage { get => damageAmount; set => damageAmount = value; }
+    [SerializeField] private float punishDamage;
     [SerializeField] protected State atackEffect;
     [SerializeField] protected bool canKnockbackPlayer;
     [Range(0, 360)]
@@ -216,6 +217,7 @@ public abstract class Enemy : Entity
         if (damageAmount > 0)
         {
             player.SetImmune();
+            player.currentStaminaLimit -= punishDamage;
         }
 
         if (canKnockbackPlayer)

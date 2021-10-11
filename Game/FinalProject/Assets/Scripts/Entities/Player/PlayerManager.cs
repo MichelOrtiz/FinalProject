@@ -7,6 +7,7 @@ public class PlayerManager : Entity
 {
     #region Main Parameters
     public float maxStamina = 100;
+    public float currentStaminaLimit = 100;
     public float maxOxygen = 100;
     public float walkingSpeed;
     public const float defaultwalkingSpeed = 7;
@@ -341,13 +342,25 @@ public class PlayerManager : Entity
     }
     public void RegenStamina(float regen)
     {
-        if (currentStamina<100)
+        if (currentStamina<currentStaminaLimit)
         {
         currentStamina += regen;
         }
-        if (currentStamina>100)
+        if (currentStamina>currentStaminaLimit)
         {
-            currentStamina = 100;
+            currentStamina = currentStaminaLimit;
+        }
+    }
+
+    public void RegenStaminaDontLimit(float regen)
+    {
+        if (currentStamina<maxStamina)
+        {
+        currentStamina += regen;
+        }
+        if (currentStamina>maxStamina)
+        {
+            currentStamina = maxStamina;
         }
     }
     void RegenOxygen(float regen)

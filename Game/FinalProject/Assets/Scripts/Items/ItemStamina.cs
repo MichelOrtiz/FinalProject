@@ -11,7 +11,7 @@ public class ItemStamina : Item
         if(staminaGain < 0){
             PlayerManager.instance.TakeTirement(-staminaGain);
         }else{
-            PlayerManager.instance.RegenStamina(staminaGain);
+            PlayerManager.instance.RegenStaminaDontLimit(staminaGain);
         }
         base.Use();
     }

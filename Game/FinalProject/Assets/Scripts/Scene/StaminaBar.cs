@@ -8,6 +8,8 @@ public class StaminaBar : MonoBehaviour
     PlayerManager player = PlayerManager.instance;
     private Slider slider;
 
+    [SerializeField] private Slider limitSlider;
+
     private void Start() {
         slider = gameObject.GetComponent<Slider>();
         player = PlayerManager.instance;
@@ -15,6 +17,8 @@ public class StaminaBar : MonoBehaviour
     }
     private void Update() {
         slider.value = player.currentStamina;
+
+        limitSlider.value = player.currentStaminaLimit;
     }
 
     public void SetMaxStamina(float stamina){
