@@ -248,7 +248,6 @@ MonoBehaviour:
   - {fileID: 709693981}
   - {fileID: 1444803697}
   - {fileID: 275865332}
-  boardSquares: []
   gameManager: {fileID: 50451925}
   aiGridBehaviour: {fileID: 50451923}
   gridController: {fileID: 0}
@@ -257,7 +256,7 @@ MonoBehaviour:
   highlightColor: {r: 0.3757767, g: 0.9433962, b: 0.20024922, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   currentGrid: {fileID: 0}
-  currentGridControler: {fileID: 0}
+  currentGridController: {fileID: 0}
   endDelay: 1
 --- !u!114 &50451925
 MonoBehaviour:
@@ -3311,7 +3310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 50451925}
-  aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
 --- !u!114 &275865332
 MonoBehaviour:
@@ -6572,7 +6570,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 50451925}
-  aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
 --- !u!114 &709693981
 MonoBehaviour:
@@ -7245,6 +7242,7 @@ MonoBehaviour:
   popUp:
     Title: 
     Message: 
+  popUpUI: {fileID: 0}
 --- !u!114 &749337505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7257,6 +7255,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835407bd59130894286972b5530263aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBossDefeated:
+    Tag: 
+    id: 0
+    state: 0
+  startMessageTrigger: {fileID: 0}
+  endMessageTrigger: {fileID: 0}
   stages: []
   abilityObject: {fileID: 0}
   ability: 13
@@ -7265,6 +7269,7 @@ MonoBehaviour:
   winMessage: 'Nueva habilidad obtenida: '
   looseTitle: Parece que no eres digno
   looseMessage: Perdiste
+  endBattlePopUp: {fileID: 0}
 --- !u!4 &749337506
 Transform:
   m_ObjectHideFlags: 0
@@ -8189,7 +8194,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 50451925}
-  aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 872605191}
 --- !u!114 &872605191
 MonoBehaviour:
@@ -11609,7 +11613,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 50451925}
-  aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
 --- !u!114 &1128858888
 MonoBehaviour:
@@ -12265,7 +12268,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 50451925}
-  aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
 --- !u!114 &1188844180
 MonoBehaviour:
@@ -14919,7 +14921,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 50451925}
-  aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
 --- !u!114 &1444803697
 MonoBehaviour:
@@ -15062,7 +15063,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 50451925}
-  aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
 --- !u!114 &1457761987
 MonoBehaviour:
@@ -18540,7 +18540,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 50451925}
-  aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
 --- !u!114 &1910720771
 MonoBehaviour:
@@ -20530,7 +20529,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 50451925}
-  aiGridBehaviour: {fileID: 50451923}
   grid: {fileID: 0}
 --- !u!114 &2132880522
 MonoBehaviour:
