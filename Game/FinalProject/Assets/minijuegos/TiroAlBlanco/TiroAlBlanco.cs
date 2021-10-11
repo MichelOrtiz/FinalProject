@@ -7,7 +7,6 @@ public class TiroAlBlanco : MasterMinigame
     [SerializeField] private byte scoreToWin;
     void Start()
     {
-        
     }
 
     // Update is called once per frame

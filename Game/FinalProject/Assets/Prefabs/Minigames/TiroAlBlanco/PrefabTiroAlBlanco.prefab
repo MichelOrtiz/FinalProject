@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8200696174696885291}
   - component: {fileID: 4512483650772541345}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PrefabTiroAlBlanco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3484790074491759039}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Puntaje
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6544764430930787449}
   - component: {fileID: 6544764430930787448}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SpawnerArriba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,8 +120,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: 211}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 225}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6544764430930787448
 MonoBehaviour:
@@ -136,15 +136,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruits: []
-  bomb: {fileID: 0}
+  bomb: {fileID: 1848046232358029454, guid: 733bf0869edf65d46afdbbe5429d2ad8, type: 3}
   square: {fileID: 6408840329140754589, guid: 9b028db5be312e346812398ca5c53636, type: 3}
   parents: {fileID: 2721724319585887360}
-  xBound1: 100
-  xBound2: 650
-  xBounds: 0
-  yBound1: 400
-  yBound2: 400
-  yBounds: 250
+  xBound1: 850
+  xBound2: 150
+  yBound1: 450
+  yBound2: 450
   speed: 0
   cuadradito: 1
 --- !u!1 &6544764431104260421
@@ -156,7 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6544764431104260422}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Spawners
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.037225, y: 5.5404644}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6544764431734618986
@@ -196,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6544764431734618987}
   - component: {fileID: 6544764431734618988}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SpawnerAbajo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +217,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -336.21475, y: -225}
+  m_AnchoredPosition: {x: 0, y: -225}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6544764431734618988
@@ -238,12 +236,10 @@ MonoBehaviour:
   bomb: {fileID: 0}
   square: {fileID: 5774990991688414606, guid: 31b5d266c37e1b94d934f7010d3477cc, type: 3}
   parents: {fileID: 2721724319585887360}
-  xBound1: 650
-  xBound2: 100
-  xBounds: 0
-  yBound1: 50
-  yBound2: 50
-  yBounds: -250
+  xBound1: 850
+  xBound2: 150
+  yBound1: 100
+  yBound2: 100
   speed: 0
   cuadradito: 1
 --- !u!1 &6544764432719890952
@@ -256,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6544764432719890953}
   - component: {fileID: 6544764432719890954}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SpawnerIzquierda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400, y: -6.038472}
+  m_AnchoredPosition: {x: -400, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6544764432719890954
@@ -298,12 +294,10 @@ MonoBehaviour:
   bomb: {fileID: 0}
   square: {fileID: 5740465609250673251, guid: b716349b69e430d4ba4895949d092468, type: 3}
   parents: {fileID: 2721724319585887360}
-  xBound1: 100
-  xBound2: 100
-  xBounds: -400
-  yBound1: 400
-  yBound2: 50
-  yBounds: 0
+  xBound1: 150
+  xBound2: 150
+  yBound1: 450
+  yBound2: 100
   speed: 0
   cuadradito: 1
 --- !u!1 &6544764432824108469
@@ -316,7 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6544764432824108470}
   - component: {fileID: 6544764432824108471}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SpawnerDerecha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 372, y: -6.038472}
+  m_AnchoredPosition: {x: 400, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6544764432824108471
@@ -358,12 +352,10 @@ MonoBehaviour:
   bomb: {fileID: 0}
   square: {fileID: 9023693881167457175, guid: 2b776eddf2e9c0949ba2fb7d3debdb36, type: 3}
   parents: {fileID: 2721724319585887360}
-  xBound1: 650
-  xBound2: 650
-  xBounds: 400
-  yBound1: 400
-  yBound2: 50
-  yBounds: 0
+  xBound1: 850
+  xBound2: 850
+  yBound1: 450
+  yBound2: 100
   speed: 0
   cuadradito: 1
 --- !u!1 &7648246472374192387
@@ -378,7 +370,7 @@ GameObject:
   - component: {fileID: 8407358059644143515}
   - component: {fileID: 6670734651752587734}
   - component: {fileID: 1106176687433892921}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PuntajeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
