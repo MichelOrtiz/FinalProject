@@ -8,33 +8,40 @@ public class Spawner : MonoBehaviour
     public GameObject bomb;
     public GameObject square;
     public GameObject parents;
-    public float xBound1, xBound2, xBounds, yBound1, yBound2, yBounds;
-    public float speed;
+    public float xBound1, xBound2, yBound1, yBound2;
+    float time = 1;
     public bool cuadradito;
     void Start()
     {
         StartCoroutine(SpawnRandomGameObject());
     }
     IEnumerator SpawnRandomGameObject(){
-        yield return new WaitForSeconds(Random.Range(1,2));
+        //Debug.Log("NoPaseElYield");
+        //Debug.Log("PaseElYield");
         if(cuadradito){
+            yield return new WaitForSecondsRealtime(.5f);
             Instantiate(square,  new Vector2(Random.Range(xBound1, xBound2), Random.Range(yBound1, yBound2)), Quaternion.identity, transform.parent);
         }else
         {
+            yield return new WaitForSeconds(Random.Range(time -.5f, 1f));
             int randomFruit = Random.Range(0,fruits.Length);
-            if(Random.value <= .6f){
+            if(Random.value <= .8f){
                 Instantiate(fruits[randomFruit], new Vector2(Random.Range(xBound1, xBound2), Random.Range(yBound1, yBound2)), Quaternion.identity);
             }else{
                 Instantiate(bomb, new Vector2(Random.Range(xBound1, xBound2), Random.Range(yBound1, yBound2)), Quaternion.identity);
             }
+            time -= .05f;
         }
-        DestroyGameObject();
         StartCoroutine(SpawnRandomGameObject());
+        DestroyGameObject();
+        //yield return new WaitForSeconds(Random.Range(1,2));
     }
     IEnumerator DestroyGameObject(){
-        yield return new WaitForSeconds(10);
+        StartCoroutine(SpawnRandomGameObject());
+        yield return new WaitForSeconds(5);
         if(tag == "Fruit" || tag == "Square"){
             Destroy(gameObject);
         }
     }
+    
 }

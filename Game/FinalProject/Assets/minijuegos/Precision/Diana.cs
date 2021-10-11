@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Diana : MonoBehaviour
 {
+    public float MaxDist;
     public bool activado;
     void Start()
     {
@@ -15,7 +16,8 @@ public class Diana : MonoBehaviour
     void Update()
     {
     }
-    void OnTriggerStay2D(Collider2D target){
+    /*void OnTriggerEnter2D(Collider2D target){
+        Debug.Log("Punto");
         if (target.tag == "Fruit")
         {
             GetComponent<Collider2D>().enabled=false;
@@ -24,10 +26,15 @@ public class Diana : MonoBehaviour
             Debug.Log("Increased score");
             ScoreController.score++;
         }
-        
-    }
+    }*/
     IEnumerator SpawnRandomGameObject(Collider2D target){
         yield return new WaitForSeconds(.5f);
         GetComponent<Collider2D>().enabled=false;
+    }
+    public void CheckDistance(GameObject circle){
+        if (Vector2.Distance(transform.position, circle.transform.position) <= MaxDist)
+        {
+            ScoreController.score++;
+        }
     }
 }

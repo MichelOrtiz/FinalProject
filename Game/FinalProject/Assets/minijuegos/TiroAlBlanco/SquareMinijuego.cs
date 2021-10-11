@@ -24,7 +24,7 @@ public class SquareMinijuego : MonoBehaviour
     void Update()
     {
         transform.position += (Vector3)rotation * speed * Time.unscaledDeltaTime;
-        if (transform.position.x<99 || transform.position.x>651 || transform.position.y<49 || transform.position.y>401)
+        if (transform.position.x<149 || transform.position.x>851 || transform.position.y<99 || transform.position.y>451)
         {
             Destroy(gameObject);
         }
