@@ -18,9 +18,9 @@ public class PiceseScript : MasterMinigame
         lado = Random.Range(0,2);
         if (lado == 0)
         {
-            transform.position = new Vector2(Random.Range(220,180),Random.Range(310,120));
+            transform.localPosition = new Vector2(Random.Range(-250, -250),Random.Range(-150, 150));
         }else{
-            transform.position = new Vector2(Random.Range(590,550),Random.Range(215,120));
+            transform.localPosition = new Vector2(Random.Range(250, 250),Random.Range(-150, 50));
         }
     }
 

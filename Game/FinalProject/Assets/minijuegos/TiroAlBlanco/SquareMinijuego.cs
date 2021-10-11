@@ -23,8 +23,8 @@ public class SquareMinijuego : MonoBehaviour
     }
     void Update()
     {
-        transform.position += (Vector3)rotation * speed * Time.unscaledDeltaTime;
-        if (transform.position.x<149 || transform.position.x>851 || transform.position.y<99 || transform.position.y>451)
+        transform.localPosition += (Vector3)rotation * speed * Time.unscaledDeltaTime;
+        if (transform.localPosition.x<-351 || transform.localPosition.x>351 || transform.localPosition.y<-201 || transform.localPosition.y>201)
         {
             Destroy(gameObject);
         }
@@ -39,7 +39,7 @@ public class SquareMinijuego : MonoBehaviour
         }else
         {
             speed = speed/2;
-            transform.position += (Vector3)rotation * speed * Time.unscaledDeltaTime;
+            transform.localPosition += (Vector3)rotation * speed * Time.unscaledDeltaTime;
         }
     }
 }
