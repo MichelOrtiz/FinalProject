@@ -18,7 +18,7 @@ public class CricleJump : MonoBehaviour
     void Start()
     {
         Body = GetComponent<Rigidbody2D>();
-        Body.position = new Vector2(806, 226);
+        //Body.position = new Vector2(806, 226);
         radius = Vector2.Distance(diana.position,center.position);
         reloj = true;
     }
@@ -47,8 +47,8 @@ public class CricleJump : MonoBehaviour
         }
         x = Mathf.Cos(angle)*radius + center.position.x;
         y = Mathf.Sin(angle)*radius + center.position.y;
-        Debug.Log("x: " + x);
-        Debug.Log("y: " + y);
+        /*Debug.Log("x: " + x);
+        Debug.Log("y: " + y);*/
         position = new Vector2(x,y);
         transform.position = position;
     }
