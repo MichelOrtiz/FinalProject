@@ -9,6 +9,12 @@ public class BossFight : MonoBehaviour
     public static BossFight instance;
     [SerializeField] protected PopUpTrigger startMessageTrigger;
     [SerializeField] protected PopUpTrigger endMessageTrigger;
+    [SerializeField] protected int levelToLoad; 
+
+    public WorldState condition;
+
+
+
 
     protected void Awake() {
         if(instance!=null){
@@ -17,6 +23,8 @@ public class BossFight : MonoBehaviour
         }
         instance = this;
 
+        startMessageTrigger.popUpUI.exitButton.onClick.RemoveAllListeners();
+        startMessageTrigger.popUpUI.exitButton.onClick.AddListener(ReturnToLastScene);
         //popUpTrigger = GetComponent<PopUpTrigger>();
     }
     [SerializeField] protected List<Stage> stages;
@@ -82,6 +90,8 @@ public class BossFight : MonoBehaviour
 
             Debug.Log("Lo hiciste ganaste!!!1");
 
+
+            condition.state = true;
             BattleEnded?.Invoke();
         }
     }
@@ -94,5 +104,11 @@ public class BossFight : MonoBehaviour
             currentStage=stages[indexStage];
         }
         currentStage?.Generate();
+    }
+
+    public void ReturnToLastScene()
+    {
+        SceneController.instance.LoadScene(levelToLoad);
+        Pause.ResumeGame();
     }
 }

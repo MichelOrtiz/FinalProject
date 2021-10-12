@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName="New Paralisis", menuName = "States/new StaminaReduced")]
+[CreateAssetMenu(fileName="New StaminaReduced", menuName = "States/new StaminaReduced")]
 public class StaminaReduced : State
 {
     [SerializeField] private float staminaSet;

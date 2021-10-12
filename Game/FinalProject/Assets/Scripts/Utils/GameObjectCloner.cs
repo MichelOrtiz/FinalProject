@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class GameObjectCloner : MonoBehaviour
 {
     [Header("Clones")]
-    [SerializeField] private GameObject sourceObject;
+    public GameObject sourceObject;
     [SerializeField] private Transform dividePos;
     [SerializeField] private byte maxClones;
     private List<GameObject> clones;
@@ -17,7 +17,7 @@ public class GameObjectCloner : MonoBehaviour
     /// To remove this script if the instantiated clone has it
     /// </summary>
     [Tooltip("To remove this script if the instantiated clone has it")]
-    [SerializeField] private bool forceRemoveNewCloner;
+    public bool forceRemoveNewCloner;
 
 
     [Header("Time")]

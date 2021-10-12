@@ -7,8 +7,7 @@ public class GhostBossEnemy : Entity
     [Header("Params")]
     [SerializeField] private float timeBeforeStart;
     private float curTime;
-    [SerializeField] private float speedMultiplier;
-    private float speed;
+    [SerializeField] private float speedModifierInLight;
     [SerializeField] private float damageAmount;
     private bool touchingPlayer;
 
@@ -18,7 +17,7 @@ public class GhostBossEnemy : Entity
     [SerializeField] private Transform divisionPoint;
     [SerializeField] private float maxDivisions;
     private float currentDivisions;
-    private bool alreadyDivided;
+    private List<GameObject> divisions = new List<GameObject>();
     [SerializeField] private float timeUntilDivide;
     private float timeInLight;
     [SerializeField] private float speedIncrease;
@@ -39,17 +38,22 @@ public class GhostBossEnemy : Entity
     private float curTimeBtwShot;
 
 
+
     [Header("References")]
     [SerializeField] private EnemyMovement enemyMovement;
     private GameObjectCloner gameObjectCloner;
     [SerializeReference] private LightZone currentLZ;
     private EnemyCollisionHandler enemyCollisionHandler;
+    private GhostBoss ghostBoss;
+    [SerializeField] SpriteRenderer spriteRenderer;
     
     new void Awake()
     {
         gameObjectCloner = GetComponent<GameObjectCloner>();
         enemyCollisionHandler = collisionHandler as EnemyCollisionHandler;
         enemyCollisionHandler.TouchedPlayerHandler += eCollisionHandler_Attack;
+
+        divisions.Add(gameObject);
     }
 
 
@@ -57,10 +61,13 @@ public class GhostBossEnemy : Entity
     {
         base.Start();
         player = PlayerManager.instance;
-        speed = averageSpeed * speedMultiplier;
+        ghostBoss = FindObjectOfType<GhostBoss>();
+
 
         curTimeBtwShot = 0;
         timeInLight = 0;
+
+        spriteRenderer.color = Color.white;
     }
 
     new void Update()
@@ -69,7 +76,7 @@ public class GhostBossEnemy : Entity
         {
             timeBeforeStart -= Time.deltaTime;
         }
-        else
+        else if(!ghostBoss.inPush)
         {
             if (( facingDirection == RIGHT && player.GetPosition().x < GetPosition().x )
                 || ( facingDirection == LEFT && player.GetPosition().x > GetPosition().x ))
@@ -80,7 +87,7 @@ public class GhostBossEnemy : Entity
             if (curTimeBtwShot > timeBtwShot)
             {
                 //ShotProjectile(shotPoint, player.GetPosition());
-                projectileShooter.ShootSeekerProjectile(player.transform);
+                projectileShooter.ShootProjectile(player.GetPosition());
                 curTimeBtwShot = 0;
             }
             else
@@ -97,11 +104,12 @@ public class GhostBossEnemy : Entity
                 Divide();
                 InLight = false;
                 timeInLight = 0;
-
+                spriteRenderer.color = Color.white;
                 //currentLZ?.UnableDoor();
             }
             else
             {
+                spriteRenderer.color =  Color.Lerp(Color.white, Color.red, timeInLight / timeUntilDivide);
                 timeInLight += Time.deltaTime;
             }
         }
@@ -115,32 +123,30 @@ public class GhostBossEnemy : Entity
     {
         if (timeBeforeStart <= 0)
         {
-            enemyMovement.GoTo(player.GetPosition(), chasing: true, gravity: false);
+            if (!ghostBoss.inPush)
+            {
+                enemyMovement.GoTo(player.GetPosition(), chasing: false, gravity: false);
+            
+            }
             //ChasePlayer();
         }
 
-    }
-    void ChasePlayer()
-    {
-        if (!touchingPlayer)
-        {
-            rigidbody2d.position = Vector2.MoveTowards(GetPosition(), player.GetPosition(), speedMultiplier * Time.deltaTime);
-        }
     }
 
     void eCollisionHandler_Attack()
     {
         var effect = projectileShooter.EffectOnPlayer;
-        if (player.statesManager.currentStates.Contains(effect))
+        /*if (player.statesManager.currentStates.Contains(effect))
         {
             effect.StopAffect();
             player.currentStamina = 0;
         }
-        else
-        {
+        else*/
+        //{
             player.TakeTirement(damageAmount);
-            player.SetImmune();    
-        }
+            player.currentStaminaLimit -= 10;
+            player.SetImmune();
+        //}
     }
 
     protected override void collisionHandler_EnterContact(GameObject contact)
@@ -151,9 +157,14 @@ public class GhostBossEnemy : Entity
             currentLZ = contact.transform?.parent?.GetComponentInChildren<LightZone>();
 
             
-
+            enemyMovement.DefaultSpeed *= speedModifierInLight;
             // reset time, so the enemy doesn't chase
             //curTime = 0;
+        }
+        if (contact.tag != "Platform" && contact.tag != "Boundary" && GroundChecker.GroundTags.Contains(contact.tag))
+        {
+            rigidbody2d.velocity = new Vector2();
+            ghostBoss.StopPush();
         }
     }
 
@@ -162,6 +173,9 @@ public class GhostBossEnemy : Entity
         if (contact.tag == "Light")
         {
             InLight = false;
+
+            enemyMovement.DefaultSpeed /= speedModifierInLight;
+
 
             //timeInLight = 0;
         }
@@ -181,8 +195,23 @@ public class GhostBossEnemy : Entity
             //projectileShooter.ProjectileFromPrefab.speedMultiplier += projectileSpeedIncrease;
 
             currentDivisions++;
-            gameObjectCloner.Divide(checkMax: true);
+
+            //direction = (player.GetPosition() - GetPosition()).normalized;
+            //target = new Vector2(direction.x, direction.y);
+
             
+
+            var obj = Instantiate(this, divisionPoint.position, transform.rotation);
+            obj.currentDivisions = currentDivisions;
+
+            divisions.Add(obj.gameObject);
+            ghostBoss.StartPush(transform, divisions);
+
+
+
+            /*gameObjectCloner.sourceObject = gameObject;
+            gameObjectCloner.sourceObject.GetComponent<GhostBossEnemy>().currentDivisions = currentDivisions;
+            gameObjectCloner.Divide(checkMax: true);*/
         }
         else
         {

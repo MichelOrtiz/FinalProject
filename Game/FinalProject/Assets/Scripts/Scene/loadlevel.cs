@@ -6,16 +6,16 @@ using UnityEngine;
 public class loadlevel : MonoBehaviour
 {
     public int iLevelToLoad;
-    [SerializeField]private Transform loadPosition;
+    [SerializeField]protected Transform loadPosition;
     public static loadlevel instance = null;
     protected PlayerManager player;
 
     private void Start() {
         if (SceneController.instance != null)
         {
+            PlayerManager.instance.physics.ResetAll();
             if(PlayerManager.instance.isDeath){
                     Debug.Log("Cargando en el ultimo checkpoint");
-                    PlayerManager.instance.physics.ResetAll();
 
                     PlayerManager.instance.isDeath = false;
                     PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;

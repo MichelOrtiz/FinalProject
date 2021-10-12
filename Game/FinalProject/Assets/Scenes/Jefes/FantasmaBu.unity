@@ -123,6 +123,62 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &27996314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27996315}
+  - component: {fileID: 27996316}
+  m_Layer: 1
+  m_Name: MapLimit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &27996315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27996314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.19, y: 12.31, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 43380468}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &27996316
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27996314}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 1
+  m_Points:
+  - {x: 20.817339, y: 3.1007013}
+  - {x: 20.90409, y: -12.865653}
+  - {x: -22.680166, y: -13.090371}
+  - {x: -22.621414, y: 2.803359}
+  - {x: 20.809605, y: 3.0231857}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &43380466
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +222,7 @@ Transform:
   - {fileID: 1356633998}
   - {fileID: 1042594678}
   - {fileID: 473049729}
+  - {fileID: 27996315}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -469,6 +526,18 @@ PrefabInstance:
     - target: {fileID: 3277886409155722095, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672358929195501984, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672358929195501984, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672358929195501984, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4702110148641229178, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -53203,6 +53272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51a7c6d8be197d469d610c27f36490e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushForce: 500
+  inPush: 0
 --- !u!114 &510367935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53221,6 +53292,11 @@ MonoBehaviour:
     state: 0
   startMessageTrigger: {fileID: 1657473576}
   endMessageTrigger: {fileID: 403240739}
+  levelToLoad: 0
+  condition:
+    Tag: 
+    id: 0
+    state: 0
   stages:
   - {fileID: 11400000, guid: 1b80f87e7f257e045ac50aa6cec5458f, type: 2}
   abilityObject: {fileID: 1306339398552099941, guid: 725848658486a464faea4a9a492d62cd, type: 3}
@@ -53240,6 +53316,7 @@ Transform:
   m_Children:
   - {fileID: 1657473575}
   - {fileID: 403240738}
+  - {fileID: 1512824293}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54416,7 +54493,7 @@ Transform:
   - {fileID: 1912687128}
   - {fileID: 693732785}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &901618332
 LineRenderer:
@@ -54523,10 +54600,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2419702809766606158, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 262144
-      objectReference: {fileID: 0}
     - target: {fileID: 2419702810618214027, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -54575,10 +54648,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 2419702810630332637, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
 --- !u!1 &933503391
@@ -55294,7 +55363,7 @@ Transform:
   - {fileID: 392236904}
   - {fileID: 729708424}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1038555075
 LineRenderer:
@@ -56657,7 +56726,7 @@ MonoBehaviour:
   doorsAttached:
   - {fileID: 1038555070}
   hasTime: 1
-  timeActivated: 3
+  timeActivated: 5
 --- !u!212 &1127608007
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74173,7 +74242,7 @@ Transform:
   - {fileID: 1428713797}
   - {fileID: 569745135}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1401047676
 LineRenderer:
@@ -74459,7 +74528,7 @@ MonoBehaviour:
   doorsAttached:
   - {fileID: 1757620675}
   hasTime: 1
-  timeActivated: 3
+  timeActivated: 5
 --- !u!212 &1433112596
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74591,7 +74660,7 @@ MonoBehaviour:
   doorsAttached:
   - {fileID: 1999409595}
   hasTime: 1
-  timeActivated: 3
+  timeActivated: 5
 --- !u!212 &1434961436
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74875,6 +74944,58 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!1 &1512824292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1512824293}
+  - component: {fileID: 1512824294}
+  m_Layer: 0
+  m_Name: tempParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1512824293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512824292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 510367936}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1512824294
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512824292}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &1550665477 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4034062880095803228, guid: bde3f9f8345affb44b70f2000e167a63, type: 3}
@@ -74978,7 +75099,7 @@ MonoBehaviour:
   doorsAttached:
   - {fileID: 1401047671}
   hasTime: 1
-  timeActivated: 3
+  timeActivated: 5
 --- !u!212 &1573632305
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -75128,7 +75249,7 @@ Transform:
   - {fileID: 933503393}
   - {fileID: 999449589}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1657132990
 LineRenderer:
@@ -75273,12 +75394,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popUp:
     Title: Rebeca
-    Message: "\"Rebeca es una fantasma floja. Desde el incidente, no sale de su tronco
-      y prefiere dormir entre las hojas. Sus ronquidos se rumoran que generan sonidos
-      escalofriantes y si mencionas algo sobre su peso, se reir\xE1 de ti al frente
-      y te dir\xE1 que las almas no pesan, pero en su mente estar\xE1 planeando una
-      venganza de poco esfuerzo y grandes resultados. No le gusta la luz, pues le
-      fatiga.\" "
+    Message: "\"Rebeca es una fantasma floja y no le gusta que le hablen sobre su
+      peso. Para evitar el tema, se reir\xE1 de ti y te dir\xE1 que las almas no
+      pesan. Si insistes en el tema, te amenazar\xE1 con lanzarte plasma aterrrorizante.\nVive
+      en la oscuridad porque no le gusta la luz, pues le fatiga.\" "
   popUpUI: {fileID: 701732080}
 --- !u!1 &1672989170
 GameObject:
@@ -75473,7 +75592,7 @@ Transform:
   - {fileID: 1026430897}
   - {fileID: 1460070874}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1692551493
 LineRenderer:
@@ -75573,43 +75692,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!1 &1731338203 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2419702810618214030, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
-  m_PrefabInstance: {fileID: 927540650}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1731338211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731338203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
 --- !u!1001 &1735668797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75702,7 +75784,7 @@ MonoBehaviour:
   doorsAttached:
   - {fileID: 1657132985}
   hasTime: 1
-  timeActivated: 3
+  timeActivated: 5
 --- !u!212 &1739100494
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -75852,7 +75934,7 @@ Transform:
   - {fileID: 657920437}
   - {fileID: 1502873390}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1757620680
 LineRenderer:
@@ -76094,7 +76176,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 3
   m_FalloffIntensity: 0.5
   m_Color: {r: 0.5036935, g: 0.51237094, b: 0.7264151, a: 1}
-  m_Intensity: 0.05
+  m_Intensity: 0.015
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 0000000049675f9e
   m_LightCookieSprite: {fileID: 0}
@@ -76168,7 +76250,7 @@ MonoBehaviour:
   doorsAttached:
   - {fileID: 901618327}
   hasTime: 1
-  timeActivated: 3
+  timeActivated: 5
 --- !u!212 &1861377390
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76420,7 +76502,7 @@ MonoBehaviour:
   doorsAttached:
   - {fileID: 1692551488}
   hasTime: 1
-  timeActivated: 3
+  timeActivated: 5
 --- !u!212 &1994669370
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76570,7 +76652,7 @@ Transform:
   - {fileID: 500157889}
   - {fileID: 2047586384}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1999409600
 LineRenderer:
@@ -76824,6 +76906,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 936999293969563206, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
+      propertyPath: isUnlocked
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2045655037443601998, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -76922,7 +77008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9140434770867883638, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}

@@ -5,12 +5,22 @@ public class UIBossFight : BossFight
     [SerializeField] private string winMessage;
     [SerializeField] private string looseTitle;
     [SerializeField] private string looseMessage;
-    [SerializeField] private PopUpUI endBattlePopUp;    
+    [SerializeField] private PopUpUI endBattlePopUp;
+
     new void Start()
     {
         base.Start();
         //PopUpUI.Instance.closedPopUp += PopUpUI_Closed;
         endBattlePopUp.closedPopUp += PopUpUI_Closed;
+    }
+
+    new void Update()
+    {
+        if (Input.GetKey(KeyCode.Return))
+        {
+            EndBattle();
+        }
+        base.Update();
     }
 
     public void LooseBattle()
@@ -32,6 +42,10 @@ public class UIBossFight : BossFight
             endMessageTrigger.popUp.Title = winMessage;
             endMessageTrigger.popUp.Message = ability.ToString();
             endMessageTrigger.TriggerPopUp(true);
+
+            condition.state = true;
+            BattleEnded?.Invoke();
+
         }
         base.EndBattle();
     }
@@ -46,6 +60,7 @@ public class UIBossFight : BossFight
         else
         {
             // return to last scene
+            ReturnToLastScene();
         }
     }
 }

@@ -7,7 +7,8 @@ public class PopUpUI : MonoBehaviour
     [SerializeField] private GameObject canvas;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI message;
-    [SerializeField] private Button closeButton;
+    public Button closeButton;
+    public Button exitButton;
 
     private PopUp popUp = new PopUp();
    //public static PopUpUI Instance { get; private set; }

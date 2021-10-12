@@ -138,7 +138,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -191,14 +191,17 @@ MonoBehaviour:
   movingHorizontal: 0
   movingVertical: 0
   waitTime: 0
-  defaultSpeedMultiplier: 0
+  defaultSpeedMultiplier: 0.5
   defaultSpeed: 0
-  chaseSpeedMultiplier: 0.35
+  chaseSpeedMultiplier: 0.5
   chaseSpeed: 0
   currentSpeed: 0
   jumpForce: {x: 0, y: 0}
   jumpForceMultiplier: {x: 0, y: 0}
   forceMode: 0
+  pushForce: {x: 10, y: 10}
+  pushMultiplier: {x: 15, y: 15}
+  pushForceMode: 1
   groundChecker: {fileID: 1490647802988189394}
   collisionHandler: {fileID: 5281821335268834370}
   fieldOfView: {fileID: 0}
@@ -341,7 +344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7572631089766817057
 Transform:
   m_ObjectHideFlags: 0
@@ -420,7 +423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7822935964956746317
 Transform:
   m_ObjectHideFlags: 0
@@ -481,9 +484,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50bff7df53203b448a70d1cefce2d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 8805213487483752607, guid: 741b6521573af3c4086683bf467ab2ba, type: 3}
+  projectilePrefab: {fileID: 8805213487483752607, guid: e6e7f9ca99e2a9f458dd9f8386675fbd, type: 3}
   shotPos: {fileID: 7651909674331589603}
-  effectOnPlayer: {fileID: 11400000, guid: 4f30c56b04814194684c372b83657ace, type: 2}
+  effectOnPlayer: {fileID: 11400000, guid: f2addd2a558feac4886e2824798f34f4, type: 2}
 --- !u!1 &7651909673708087745
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,12 +685,12 @@ MonoBehaviour:
   physics: {fileID: 0}
   emotePos: {fileID: 569398792580602597}
   timeBeforeStart: 3
-  speedMultiplier: 0.3
-  damageAmount: 10
+  speedModifierInLight: 0.7
+  damageAmount: 40
   divisionPoint: {fileID: 7651909673708087746}
-  maxDivisions: 2
+  maxDivisions: 4
   timeUntilDivide: 5
-  speedIncrease: 0.4
+  speedIncrease: 0.75
   projectileSpeedIncrease: 0.1
   sizeDecreaseMultiplier: 0.9
   projectileShooter: {fileID: 7751305141682183864}
@@ -696,6 +699,7 @@ MonoBehaviour:
   timeBtwShot: 4
   enemyMovement: {fileID: 9160799727804685026}
   currentLZ: {fileID: 0}
+  spriteRenderer: {fileID: 8575276855107967319}
 --- !u!114 &6161553646717903393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,7 +759,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

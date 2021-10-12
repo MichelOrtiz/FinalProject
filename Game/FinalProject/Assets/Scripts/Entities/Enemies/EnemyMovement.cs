@@ -46,6 +46,18 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private ForceMode2D forceMode;
 
 
+    [Header("Push")]
+    [SerializeField] private Vector2 pushForce;
+    public Vector2 PushForce
+    {
+        get { return pushForce; }
+        set { pushForce = value; }
+    }
+    
+    [SerializeField] private Vector2 pushMultiplier;
+    [SerializeField] private ForceMode2D pushForceMode;
+
+
     [Header("References")]
     [SerializeField] private GroundChecker groundChecker;
     [SerializeField] private EnemyCollisionHandler collisionHandler;
@@ -73,11 +85,17 @@ public class EnemyMovement : MonoBehaviour
         {
             jumpForce *= jumpForceMultiplier;
         }
+        if (pushMultiplier.magnitude > 0)
+        {
+            pushForce *= pushMultiplier;
+        }
+
         curWaitTime = waitTime;
         if (groundChecker != null)
         {
             groundChecker.GroundedHandler += groundChecker_Grounded;
         }
+
     }
 
     void Start()
@@ -160,6 +178,11 @@ public class EnemyMovement : MonoBehaviour
     public void Translate(Vector2 target, float speed)
     {
         rigidbody2d.transform.position += (Vector3)target * speed * Time.deltaTime; 
+    }
+
+    public void PushTo(Vector2 target)
+    {
+        rigidbody2d.AddForce(target * pushForce * Time.deltaTime, forceMode);
     }
 
     public void DefaultPatrol()
