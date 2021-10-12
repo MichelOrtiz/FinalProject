@@ -7342,6 +7342,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &749337504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749337503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1551865160f624ba5ea7ea553cbb5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popUp:
+    Title: 
+    Message: 
+  popUpUI: {fileID: 0}
 --- !u!114 &749337505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7358,13 +7374,8 @@ MonoBehaviour:
     Tag: 
     id: 0
     state: 0
-  startMessageTrigger: {fileID: 1988456109}
-  endMessageTrigger: {fileID: 814820762}
-  levelToLoad: 16
-  condition:
-    Tag: JardinBoss
-    id: 5654
-    state: 0
+  startMessageTrigger: {fileID: 0}
+  endMessageTrigger: {fileID: 0}
   stages: []
   abilityObject: {fileID: 0}
   ability: 13
@@ -7373,7 +7384,7 @@ MonoBehaviour:
   winMessage: 'Nueva habilidad obtenida: '
   looseTitle: Parece que no eres digno
   looseMessage: Perdiste
-  endBattlePopUp: {fileID: 48726126}
+  endBattlePopUp: {fileID: 0}
 --- !u!4 &749337506
 Transform:
   m_ObjectHideFlags: 0

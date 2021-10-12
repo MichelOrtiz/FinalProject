@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     public GameObject[] fruits;
     public GameObject bomb;
     public GameObject square;
-    public GameObject parents;
+    public Transform parents;
     public float xBound1, xBound2, yBound1, yBound2;
     float time = 1;
     public bool cuadradito;
@@ -20,7 +20,10 @@ public class Spawner : MonoBehaviour
         //Debug.Log("PaseElYield");
         if(cuadradito){
             yield return new WaitForSecondsRealtime(.5f);
-            Instantiate(square,  new Vector2(Random.Range(xBound1, xBound2), Random.Range(yBound1, yBound2)), Quaternion.identity, transform.parent);
+            var position = new Vector2 (Random.Range(xBound1, xBound2), Random.Range(yBound1, yBound2));
+            var obj = Instantiate(square);
+            obj.transform.SetParent(parents);
+            obj.transform.localPosition = position;
         }else
         {
             yield return new WaitForSeconds(Random.Range(time -.5f, 1f));

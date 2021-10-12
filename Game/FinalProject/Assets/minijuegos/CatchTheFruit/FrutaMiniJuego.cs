@@ -15,6 +15,11 @@ public class FrutaMiniJuego : MonoBehaviour
     private int score;
     void Start()
     {
+        var miniMaps = GameObject.FindGameObjectsWithTag("MiniMap");
+        foreach (var x in miniMaps)
+        {
+            x.SetActive(false);
+        }
         Body = GetComponent<Rigidbody2D>();
     }
     void Update()
@@ -42,7 +47,7 @@ public class FrutaMiniJuego : MonoBehaviour
             }else
             {
                 Destroy(gameObject);
-                ScoreController.score++;
+                Inventory.instance.AddMoney(1);
             }
         }
     }
