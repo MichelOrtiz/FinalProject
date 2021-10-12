@@ -109,10 +109,11 @@ public class SpotterGnome : Enemy
         animationManager.ChangeAnimation("walk", enemyMovement.ChaseSpeed * 1 / enemyMovement.DefaultSpeed);
     }
 
-    protected override void Attack()
+    /*protected override void Attack()
     {
         player.TakeTirement(damageAmount);
-    }
+
+    }*/
 
     protected override void MainRoutine()
     {
