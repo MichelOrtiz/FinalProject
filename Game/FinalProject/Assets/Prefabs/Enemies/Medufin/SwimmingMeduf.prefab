@@ -49,7 +49,7 @@ MonoBehaviour:
   waitTime: 1
   defaultSpeedMultiplier: 0.8
   defaultSpeed: 0
-  chaseSpeedMultiplier: 1.2
+  chaseSpeedMultiplier: 40
   chaseSpeed: 0
   currentSpeed: 0
   jumpForce: {x: 1, y: 2}
@@ -706,7 +706,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1064771327054367231}
   - component: {fileID: 1064771327054367225}
-  - component: {fileID: 1064771327054367230}
+  - component: {fileID: 7396574284157626821}
+  - component: {fileID: 7369520699134452806}
   m_Layer: 10
   m_Name: CollisionHandler
   m_TagString: Enemy
@@ -746,8 +747,8 @@ MonoBehaviour:
   touchingEnemy: 0
   touchingGround: 0
   lastEnemyTouched: {fileID: 0}
---- !u!58 &1064771327054367230
-CircleCollider2D:
+--- !u!70 &7396574284157626821
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -760,8 +761,24 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 2.3, y: 1}
+  m_Direction: 1
+--- !u!70 &7369520699134452806
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064771327054367224}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 2, y: 0.8}
+  m_Direction: 1
 --- !u!1 &1064771327133232482
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2684342094917115199
 Transform:
   m_ObjectHideFlags: 0

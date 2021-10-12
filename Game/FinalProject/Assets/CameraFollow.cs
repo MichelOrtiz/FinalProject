@@ -83,7 +83,7 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (waitForSeconds > 0)
         {
@@ -131,7 +131,7 @@ public class CameraFollow : MonoBehaviour
         yTarget = camBox.size.y < targetBounds.Bounds.size.y ? Mathf.Clamp(player.GetPosition().y, targetBounds.Bounds.min.y + camBox.size.y/2, targetBounds.Bounds.max.y - camBox.size.y/2) : 
             (targetBounds.Bounds.min.y + targetBounds.Bounds.max.y)/2;
         target = new Vector3(xTarget, yTarget, -10F);
-        
+        //transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
         //transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, Time.deltaTime * speed);
         //transform.position = new Vector3(transform.position.x, transform.position.y, -10);
         //transform.position =  target;
@@ -145,6 +145,7 @@ public class CameraFollow : MonoBehaviour
         transform.position = new Vector3(xPos, yPos, -10f);
         //transform.position = Mathf.Lerp(transform.position, target, Time.fixedDeltaTime * speed);
         camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetBounds.zCam, Time.fixedDeltaTime * zoomSpeed);
+        //camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetBounds.zCam, Time.fixedDeltaTime * speed);
     }
 
 
