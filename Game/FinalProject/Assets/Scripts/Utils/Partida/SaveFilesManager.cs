@@ -7,7 +7,23 @@ public class SaveFilesManager : MonoBehaviour
 {
     //string filePath;
     //string jsonString;
-    public SaveFile currentSaveSlot {get;set;}
+    public SaveFile currentSaveSlot {
+        get {
+            if(partida==null){
+                //asignar savefile de tester
+                Debug.Log("Usando partida tester");
+                SaveFile partidaTest = new SaveFile("PTest",3);
+                string filePath = Application.dataPath + "/Partida" + partidaTest.slotFile;
+                if(!File.Exists(filePath)) WriteSaveFile(partidaTest,filePath);
+                partida = LoadSaveFile(filePath); 
+            }
+            return partida;
+        }
+        set{
+            partida = value;
+        }
+    }
+    private SaveFile partida;
     private DateTime startSession;
     public static SaveFilesManager instance;
     private void Awake() {

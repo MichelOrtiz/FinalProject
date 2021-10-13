@@ -35,4 +35,8 @@ public class CheckPoint : MonoBehaviour
         SaveFilesManager.instance.SaveProgress();
         Debug.Log("Guardando partida");
     }
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, radius);
+    }
 }
