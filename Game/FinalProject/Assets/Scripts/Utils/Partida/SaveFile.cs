@@ -19,6 +19,7 @@ public class SaveFile
     public Item[] inventory;
     public Item[] chestItems;
     public int money;
+    public float staminaLimit;
     public SaveFile(){
         this.slotFile = 0;
         this.namePlayer = "NoName";
@@ -33,6 +34,7 @@ public class SaveFile
         this.WorldStates = new List<WorldState>();
         this.controlBindsKeys = new List<string>();
         this.controlBindsValues = new List<KeyCode>();
+        this.staminaLimit = 100f;
     }
     public SaveFile(string namePlayer, int slotFile){
         this.namePlayer = namePlayer;
@@ -48,5 +50,6 @@ public class SaveFile
         this.WorldStates = new List<WorldState>();
         this.controlBindsKeys = new List<string>();
         this.controlBindsValues = new List<KeyCode>();
+        this.staminaLimit = 100f;
     }
 }
