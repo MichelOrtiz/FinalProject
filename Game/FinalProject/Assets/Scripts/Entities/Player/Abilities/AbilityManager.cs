@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class AbilityManager : MonoBehaviour
 {
-    public List<Ability> abilities = new List<Ability>();
+    public List<Ability> abilities {
+        get{
+            return abiltySystem.GetComponents<Ability>().ToList<Ability>();
+        }
+    }
     public static AbilityManager instance;
     public GameObject abiltySystem;
     private void Awake() {
@@ -16,9 +21,24 @@ public class AbilityManager : MonoBehaviour
     }
     private void Start() {
         Ability[] abs = abiltySystem.GetComponents<Ability>();
+        /*
         for(int i=0;i<abs.Length;i++){
             abilities.Add(abs[i]);
         }
+        */
+
+        //Load saved abilities in savefiles
+        SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
+        if(partida.unlockedAbilities != null){
+            int i = 0;
+            foreach(Ability a in abilities){
+                if(i>partida.unlockedAbilities.Length)break;
+                a.isUnlocked = partida.unlockedAbilities[i];
+                a.enabled = a.isUnlocked;
+                i++;
+            }
+        }
+        
     }
 
     /// <summary>
