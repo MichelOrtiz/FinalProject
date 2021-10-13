@@ -79,14 +79,20 @@ MonoBehaviour:
   ray: {fileID: 930200630163608275}
   endPoint: {fileID: 930200629135861536}
   hasLifeTime: 1
-  lifeTime: 3
+  lifeTime: 3.5
   targetWarningAvailable: 1
   warning: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
   warningTime: 0.5
-  speed: 15
-  secondSpeed: 8
+  speed: 22
+  secondSpeed: 5
   chaseTargetPosition: 0
   chaseOnReachedEndPos: 1
+  collidesWithObstacles: 0
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 0
+  collisionHandler: {fileID: 0}
+  edge: {fileID: 0}
 --- !u!68 &5896100059345284874
 EdgeCollider2D:
   m_ObjectHideFlags: 0

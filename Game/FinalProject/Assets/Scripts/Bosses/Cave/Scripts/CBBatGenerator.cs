@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CBBatGenerator : MonoBehaviour, IProjectile
+public class CBBatGenerator : MonoBehaviour
 {
     #region ProjectileStuff
     [Header("Projectile Stuff")]
-    [SerializeField] private Transform shotPos;
-    [SerializeField] private GameObject projectilePrefab;
-    private Projectile projectile;
+    [SerializeField] private ProjectileShooter projectileShooter;
     [SerializeField] private float timeBtwBat;
     private float curTimeBtwBat;
     [SerializeField] private int batPerShot;
@@ -77,8 +75,7 @@ public class CBBatGenerator : MonoBehaviour, IProjectile
 
                 if (curTimeBtwBat > timeBtwBat)
                 {
-                    
-                    ShotProjectile(shotPos, direction);
+                    projectileShooter.ShootProjectile(direction);
                     batsShot++;
                     curTimeBtwBat = 0;
                 }
@@ -97,21 +94,5 @@ public class CBBatGenerator : MonoBehaviour, IProjectile
         {
             batsShot = 0;
         } 
-    }
-
-
-    public void ProjectileAttack()
-    {
-        player.TakeTirement(projectile.damage);
-        if (effectOnPlayer != null)
-        {
-            player.statesManager.AddState(effectOnPlayer);
-        }
-    }
-
-    public void ShotProjectile(Transform from, Vector3 to)
-    {
-        projectile = Instantiate(projectilePrefab, from.position, transform.rotation).GetComponent<Projectile>();
-        projectile.Setup(from, to, this);
     }
 }

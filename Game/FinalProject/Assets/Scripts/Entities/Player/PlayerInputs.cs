@@ -23,6 +23,9 @@ public class PlayerInputs : MonoBehaviour
     public Action MovedLeft = delegate(){PlayerManager.instance.inputs.movementX=-1;};
     public Action MovedUp = delegate(){PlayerManager.instance.inputs.movementY=1;};
     public Action MovedDown = delegate(){PlayerManager.instance.inputs.movementY=-1;};
+
+    public Action Interact = delegate(){};
+
     public Action Jump;
     
     bool checkLag;
@@ -84,9 +87,15 @@ public class PlayerInputs : MonoBehaviour
         }
         
 
+        if (Input.GetKey(controlBinds["MENUINTERACTION"]))
+        {
+            Interact?.Invoke();
+        }
         
         ctrlLeft = Input.GetKey(controlBinds["MENUFASTASSIGN"]);
         OpenInventory=Input.GetKeyDown(controlBinds["MENUINVENTORY"]);
+        
+
         HotbarInputs();
         
     }

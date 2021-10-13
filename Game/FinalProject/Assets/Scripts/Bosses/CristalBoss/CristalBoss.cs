@@ -9,6 +9,7 @@ public class CristalBoss : MonoBehaviour
     
     [SerializeField] private float intervalCristalBars;
     [SerializeField] private float warningTime;
+    [SerializeField] private LayerMask layerDetection;
     
     private float currentTimeAfterWarning;
     private float currentTimeBeforeWarning;
@@ -25,12 +26,18 @@ public class CristalBoss : MonoBehaviour
     private RaycastHit2D groundHitForPlayer;
     private RaycastHit2D groundHitForCristal;
 
+
+
+    bool positionsSet;
+
     
 
     void Start()
     {
         player = PlayerManager.instance;
         cristal = FindObjectOfType<CristalBossEnemy>();
+
+        GetComponent<BossFight>().BattleEnded += bossFight_Ended;
     }
 
     // Update is called once per frame
@@ -58,19 +65,26 @@ public class CristalBoss : MonoBehaviour
 
                 currentTimeAfterWarning = 0;
                 currentTimeBeforeWarning = 0;
+                positionsSet = false;
             }
             else
             {
-                if (currentWarningPlayer == null && currentWarningCristal == null)
+                if (!positionsSet)
                 {
-                    groundHitForPlayer = Physics2D.Raycast(player.GetPosition(), Vector2.down, 30f, 1 << LayerMask.NameToLayer("Ground"));
-                    groundHitForCristal = Physics2D.Raycast(cristal.GetPosition(), Vector2.down, 30f, 1 << LayerMask.NameToLayer("Ground"));
+                    groundHitForPlayer = Physics2D.Raycast(player.GetPosition(), Vector2.down, 30f, layerDetection);
+                    groundHitForCristal = Physics2D.Raycast(cristal.GetPosition(), Vector2.down, 30f, layerDetection);
+
                     
                     cristalBarSpawnPosPlayer = groundHitForPlayer.point;
                     cristalBarSpawnPosCristal = groundHitForCristal.point;
 
-                    currentWarningPlayer = Instantiate(cristalBarWarning, cristalBarSpawnPosPlayer, Quaternion.identity);
-                    currentWarningCristal = Instantiate(cristalBarWarning, cristalBarSpawnPosCristal, Quaternion.identity);
+                    if (player.abilityManager.IsUnlocked(Ability.Abilities.VisionFutura))
+                    {
+                        currentWarningPlayer = Instantiate(cristalBarWarning, cristalBarSpawnPosPlayer, Quaternion.identity);
+                        currentWarningCristal = Instantiate(cristalBarWarning, cristalBarSpawnPosCristal, Quaternion.identity);
+                    } 
+
+                    positionsSet = true;
                 }
                 else
                 {
@@ -82,5 +96,21 @@ public class CristalBoss : MonoBehaviour
         {
             currentTimeBeforeWarning += Time.deltaTime;
         }
+    }
+
+    void bossFight_Ended()
+    {
+        int index = 0;
+        var cristalBars = ScenesManagers.GetObjectsOfType<CristalBar>();
+        while(cristalBars.Count > 0)
+        {
+            if (cristalBars[index] != null)
+            {
+                Destroy(cristalBars[index].gameObject);
+                cristalBars.Remove(cristalBars[index]);
+            }
+        }
+
+        this.enabled = false;
     }
 }

@@ -2,34 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CristalBossEnemy : NormalType, ILaser
+public class CristalBossEnemy : Entity
 {
     #region LaserBeam
     [Header("Laser Beam")]
-    [SerializeField] private Transform shotPos;
-    public Transform ShotPos { get => shotPos; }
-    private Vector2 endPos;
-    public Vector2 EndPos { get => endPos; }
     [SerializeField] private float minDistanceToShotRay;
     [SerializeField] private float intervalToShot;
     private float timeToShot;
 
     //[SerializeField] private LineRenderer laser;
-    [SerializeField] private GameObject laserPrefab;
-    private Laser laser;
-    [SerializeField] private float laserDamage;
-    [SerializeField] private float laserSpeed;
+    [SerializeField] private LaserShooter laserShooter;
 
     #endregion
 
     #region RunFromPlayerParams
     [Header("Run from player")]
+    [SerializeField] private float speed;
     [SerializeField] private float minDistanceToPlayer;
     private float distanceToPlayer;
 
-    [SerializeField] private List<Transform> platformPositions;
-    private Transform nearestPlatform;
+    [SerializeField] private List<Vector2> platformPositions;
+    private Vector2 currentPlatform;
+    private Vector2 lastPlatform;
+    private Vector2 nearestPlatform;
     private bool runningFromPlayer;
+    private PlayerManager player;
     #endregion
 
     #region Player Interaction
@@ -53,61 +50,51 @@ public class CristalBossEnemy : NormalType, ILaser
 
     #endregion
 
-    void Awake()
+    new void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        base.Awake();
+        speed *= Entity.averageSpeed;
         blinkingSprite = GetComponent<BlinkingSprite>();
         blinkingSprite.enabled = false;
 
         defaultColor = spriteRenderer.color;
+
+        
     }
 
 
     new void Start()
     {
         base.Start();
-        laserSpeed *= averageSpeed;
+        player = PlayerManager.instance;
+        player.inputs.Interact += inputs_Interact;
+        lastPlatform = GetPosition();
     }
 
     new void Update()
     {
-        endPos = player.GetPosition();
+        distanceToPlayer = Vector2.Distance(GetPosition(), player.GetPosition());
 
-        if (!runningFromPlayer)
+        if (runningFromPlayer)
         {
-            if (InFrontOfObstacle() ||( (GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
-            || GetPosition().x < player.GetPosition().x && facingDirection == LEFT) )
-            {
-                ChangeFacingDirection();
-            }
+            if ((GetPosition().x > player.GetPosition().x && facingDirection == LEFT)
+                || (GetPosition().x < player.GetPosition().x && facingDirection == RIGHT))
+                {
+                    ChangeFacingDirection();
+                }
         }
-        else
+
+        /*else
         {
             if (InFrontOfObstacle() ||( (GetPosition().x > player.GetPosition().x && facingDirection == LEFT)
             || GetPosition().x < player.GetPosition().x && facingDirection == RIGHT ))
             {
                 ChangeFacingDirection();
             }
-        }
+        }*/
         
-        distanceToPlayer = Vector2.Distance(GetPosition(), player.GetPosition());
-
-        if (!justInteracted)
-        {
-            if (distanceToPlayer <= interactionRadius)
-            {
-                spriteRenderer.color = colorWhenInteractuable;
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    OnInteraction();
-                }
-            }
-            else
-            {
-                spriteRenderer.color = defaultColor;
-            }
-        }
-        else
+        
+        if (justInteracted)
         {
             if (curCooldown > cooldownAfterInteraction)
             {
@@ -117,7 +104,7 @@ public class CristalBossEnemy : NormalType, ILaser
 
                 if (interactions == interactionsToDestroy)
                 {
-                    Destroy(gameObject);
+                    DestroyEntity();
                 }
             }
             else
@@ -125,35 +112,35 @@ public class CristalBossEnemy : NormalType, ILaser
                 curCooldown += Time.deltaTime;
             }
         }
+        else
+        {
+            if (distanceToPlayer <= interactionRadius)
+            {
+                if (spriteRenderer.color != colorWhenInteractuable)
+                {
+                    spriteRenderer.color = colorWhenInteractuable;
+                }
+            }
+            else
+            {
+                if (spriteRenderer.color != Color.white)
+                {
+                    spriteRenderer.color = Color.white;
+                }
+            }
+        }
         base.Update();
     }
 
-    new void FixedUpdate()
+    void FixedUpdate()
     {
-        //ChasePlayer();
-        base.FixedUpdate();
-    }
-
-    public override void ConsumeItem(Item item)
-    {
-        return;
-    }
-
-    protected override void Attack()
-    {
-        return;
-    }
-
-    protected override void ChasePlayer()
-    {
-
         if (distanceToPlayer >= minDistanceToShotRay)
         {
             if (timeToShot > intervalToShot)
             {
-                if (laser == null)
+                if (laserShooter.Laser == null)
                 {
-                    ShootLaser(shotPos.position, EndPos);
+                    laserShooter.ShootLaserAndSetEndPos(player.transform);
                 }
                 timeToShot = 0;
             }
@@ -170,7 +157,7 @@ public class CristalBossEnemy : NormalType, ILaser
 
             if (distanceToPlayer <= minDistanceToPlayer)
             {
-                if (nearestPlatform == null)
+                if (nearestPlatform == new Vector2())
                 {
                     nearestPlatform = FindNearestPlatform();
                     runningFromPlayer = true;
@@ -180,49 +167,35 @@ public class CristalBossEnemy : NormalType, ILaser
             }
             if (runningFromPlayer)
             {
-                rigidbody2d.position = Vector2.MoveTowards(GetPosition(), nearestPlatform.position, chaseSpeed * Time.deltaTime);
+                rigidbody2d.position = Vector2.MoveTowards(GetPosition(), nearestPlatform, speed * Time.deltaTime);
 
-                runningFromPlayer = rigidbody2d.position != (Vector2)nearestPlatform.position;
+                runningFromPlayer = (Vector2) GetPosition() != nearestPlatform;
             }        
             else
             {
-                nearestPlatform = null;
+                nearestPlatform = new Vector2();
             }
     }
 
-    protected override void MainRoutine(){}
+    private Vector2 FindNearestPlatform()
+    {
+        Vector2 nearest;
 
-    public void ShootLaser(Vector2 from, Vector2 to)
-    {
-        laser = Instantiate(laserPrefab, from, Quaternion.identity).GetComponent<Laser>();
-        laser.Setup(from, to, this);
-    }
-    public void LaserAttack()
-    {
-        player.TakeTirement(laserDamage);
-    }
+        List<Vector2> platforms = new List<Vector2>(platformPositions);
 
-    private void Jump()
-    {
-        if (isGrounded)
-        {
-            rigidbody2d.AddForce(new Vector2((facingDirection == RIGHT? 5000f : -5000f), jumpForce * 450), ForceMode2D.Impulse);
-        }
-    }
+        // Filter: remove last and current platform
+        platforms.RemoveAll(p => p == lastPlatform);
+        platforms.RemoveAll(p => p == currentPlatform);
 
-    private Transform FindNearestPlatform()
-    {
-        Transform pos;
-        
-        float curDistance;
-        List<Transform> platforms;
-        if (facingDirection == LEFT)
+        // Filter: remove all that are not in facing direction (if any)
+        var availableOnSide = platforms.FindAll
+        (
+            p => facingDirection == LEFT? 
+                p.x < GetPosition().x:
+                p.x > GetPosition().x);
+        if (availableOnSide != null && availableOnSide.Count > 0)
         {
-            platforms = platformPositions.FindAll(p => p.position.x > GetPosition().x);
-        }
-        else
-        {
-            platforms = platformPositions.FindAll(p => p.position.x < GetPosition().x);
+            platforms.RemoveAll(p => !availableOnSide.Contains(p));
         }
         
         float shortestDistance = 10f;//Vector2.Distance(GetPosition(), platformPositions[0].position);
@@ -232,27 +205,49 @@ public class CristalBossEnemy : NormalType, ILaser
             platforms = platformPositions;
         }
 
-        pos = platforms[0];
+        nearest = platforms[0];
 
 
         foreach (var platformPos in platforms)
         {   
-            curDistance = Vector2.Distance(GetPosition(), platformPos.position);
-            if (curDistance < shortestDistance && curDistance > 2f && !( 
-                    (platformPos.position.x < GetPosition().x && player.GetPosition().x < GetPosition().x) &&
-                    (platformPos.position.x > GetPosition().x && player.GetPosition().x > GetPosition().x) ) )
+            var curDistance = Vector2.Distance(GetPosition(), platformPos);
+            if (curDistance < shortestDistance && !( 
+                    (platformPos.x < GetPosition().x && player.GetPosition().x < GetPosition().x) &&
+                    (platformPos.x > GetPosition().x && player.GetPosition().x > GetPosition().x) ) )
             {
                 shortestDistance = curDistance;
-                pos = platformPos;
+                nearest = platformPos;
+                
+                lastPlatform = new Vector2(currentPlatform.x, currentPlatform.y);
+                currentPlatform = nearest;
+                break;
             }
         }
-        return pos;
+        return nearest;
+    }
+
+
+    void inputs_Interact()
+    {
+
+        if (!justInteracted)
+        {
+            if (distanceToPlayer <= interactionRadius)
+            {
+                spriteRenderer.color = colorWhenInteractuable;
+                OnInteraction();
+            }
+            else
+            {
+                spriteRenderer.color = defaultColor;
+            }
+        }
     }
 
     private void OnInteraction()
     {
         blinkingSprite.enabled = true;
-        spriteRenderer.color = colorWhenInteraction;
+        spriteRenderer.color = Color.white;
         interactions++;
         justInteracted = true;
     }

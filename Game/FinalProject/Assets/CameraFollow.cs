@@ -83,7 +83,7 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (waitForSeconds > 0)
         {

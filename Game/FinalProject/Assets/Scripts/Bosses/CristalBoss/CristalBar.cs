@@ -31,6 +31,7 @@ public class CristalBar : MonoBehaviour
         if (other.tag == "Player")
         {
             player.TakeTirement(damageAmount);
+            player.SetImmune();
         }
 
     }

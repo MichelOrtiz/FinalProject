@@ -127,7 +127,8 @@ public class Entity : MonoBehaviour
         }
         else
         {
-            facingDirection = transform.rotation.y == -1? LEFT:RIGHT;
+            var rotation = Mathf.RoundToInt(transform.rotation.y);
+            facingDirection = rotation == 0? RIGHT:LEFT;
         }
 
         if (groundChecker != null)
