@@ -10,7 +10,7 @@ public class loadlevel : MonoBehaviour
     public static loadlevel instance = null;
     protected PlayerManager player;
 
-    private void Start() {
+    protected void Start() {
         if (SceneController.instance != null)
         {
             PlayerManager.instance.physics.ResetAll();
