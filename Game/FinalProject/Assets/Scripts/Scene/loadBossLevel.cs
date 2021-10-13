@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class loadBossLevel : loadlevel
 {
-    public WorldState worldState;
+    public WorldState worldState = new WorldState();
     SaveFilesManager saveFilesManager;
 
     new private void Start() {
@@ -15,16 +15,15 @@ public class loadBossLevel : loadlevel
                     worldState = w;
                     if(w.state){
                         Destroy(gameObject);
-                        return;
+                        break;
                     }else{
                         worldState = w;
-                        return;
+                        break;
                     }
                 }
             }
             partida.WorldStates.Add(worldState);
         }
-
         if (SceneController.instance != null)
         {
             PlayerManager.instance.physics.ResetAll();
@@ -53,10 +52,10 @@ public class loadBossLevel : loadlevel
             }
             
         }
+
+        
+
+        
     }
 
-    new void OnTriggerEnter2D(Collider2D collision) {
-        GameObject collisionGameObject = collision.gameObject;
-        saveFilesManager = SaveFilesManager.instance;
-    }
 }

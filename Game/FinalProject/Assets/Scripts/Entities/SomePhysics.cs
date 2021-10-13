@@ -41,7 +41,9 @@ public class SomePhysics : MonoBehaviour
 		{
 			if (entity == PlayerManager.instance)
 			{
-				PlayerManager.instance.inputs.enabled = enable;
+				if(PlayerManager.instance.inputs != null){	
+					PlayerManager.instance.inputs.enabled = enable;
+				}
 			}
 			else
 			{

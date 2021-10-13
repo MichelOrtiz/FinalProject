@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BossFight : MonoBehaviour
 {
-    public WorldState isBossDefeated;
     public static BossFight instance;
     [SerializeField] protected PopUpTrigger startMessageTrigger;
     [SerializeField] protected PopUpTrigger endMessageTrigger;
