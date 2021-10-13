@@ -162,12 +162,12 @@ public class KeybindManager : MonoBehaviour
         BindKey("FOOD2", KeyCode.Alpha2);
         BindKey("FOOD3", KeyCode.Alpha3);
         BindKey("FOOD4", KeyCode.Alpha4);
-        BindKey("FOOD5", KeyCode.Alpha0);
-        BindKey("SKILL1", KeyCode.Alpha5);
-        BindKey("SKILL2", KeyCode.Alpha6);
-        BindKey("SKILL3", KeyCode.Alpha7);
-        BindKey("SKILL4", KeyCode.Alpha8);
-        BindKey("SKILL5", KeyCode.Alpha9);
+        BindKey("FOOD5", KeyCode.Alpha5);
+        BindKey("SKILL1", KeyCode.Alpha6);
+        BindKey("SKILL2", KeyCode.Alpha7);
+        BindKey("SKILL3", KeyCode.Alpha8);
+        BindKey("SKILL4", KeyCode.Alpha9);
+        BindKey("SKILL5", KeyCode.Alpha0);
     }
 
     IEnumerator NaviIsAnnoying(){
@@ -175,4 +175,6 @@ public class KeybindManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
             navi.SetActive(false);
     }
+    public static readonly string[] defaultKeys = {"MOVEUP","MOVEDOWN","MOVERIGHT","MOVELEFT","MOVEJUMP","MENUPAUSE","MENUMINIMAP","MENUINVENTORY","MENUINTERACTION","MENUFASTASSIGN","RUN","OBJ1","OBJ2","FOOD1","FOOD2","FOOD3","FOOD4","FOOD5","SKILL1","SKILL2","SKILL3","SKILL4","SKILL5"};
+    public static readonly KeyCode[] defaultValues = {KeyCode.W,KeyCode.S,KeyCode.D,KeyCode.A,KeyCode.Space,KeyCode.Escape,KeyCode.Tab,KeyCode.I,KeyCode.E,KeyCode.LeftControl,KeyCode.LeftShift,KeyCode.Q,KeyCode.R,KeyCode.Alpha1,KeyCode.Alpha2,KeyCode.Alpha3,KeyCode.Alpha4,KeyCode.Alpha5,KeyCode.Alpha6,KeyCode.Alpha7,KeyCode.Alpha8,KeyCode.Alpha9,KeyCode.Alpha0};
 }

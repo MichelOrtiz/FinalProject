@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using System.IO;
 using UnityEngine.Serialization;
+using System.Linq;
+using System.Collections.Generic;
 
 public class SaveFilesManager : MonoBehaviour
 {
@@ -10,12 +12,16 @@ public class SaveFilesManager : MonoBehaviour
     public SaveFile currentSaveSlot {
         get {
             if(partida==null){
-                //asignar savefile de tester
-                Debug.Log("Usando partida tester");
-                SaveFile partidaTest = new SaveFile("PTest",3);
-                string filePath = Application.dataPath + "/Partida" + partidaTest.slotFile;
-                if(!File.Exists(filePath)) WriteSaveFile(partidaTest,filePath);
-                partida = LoadSaveFile(filePath); 
+                Debug.Log("Usando partida tester"); //asignar savefile de tester
+                string filePath = Application.dataPath + "/Partida3"; //ubicacion de la partida
+                partida = LoadSaveFile(filePath);
+                if(partida == null){
+                    partida = new SaveFile("PTest",3);
+                    //partida.controlbinds = KeybindManager.instance.controlbinds;
+                    partida.controlBindsKeys = KeybindManager.defaultKeys.ToList<string>();
+                    partida.controlBindsValues = KeybindManager.defaultValues.ToList<KeyCode>();
+                    WriteSaveFile(partida,filePath);
+                } 
             }
             return partida;
         }
