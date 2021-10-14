@@ -20,25 +20,19 @@ public class AbilityManager : MonoBehaviour
         instance=this;
     }
     private void Start() {
-        Ability[] abs = abiltySystem.GetComponents<Ability>();
-        /*
-        for(int i=0;i<abs.Length;i++){
-            abilities.Add(abs[i]);
-        }
-        */
-
         //Load saved abilities in savefiles
-        SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
-        if(partida.unlockedAbilities != null){
-            int i = 0;
-            foreach(Ability a in abilities){
-                if(i>partida.unlockedAbilities.Length)break;
-                a.isUnlocked = partida.unlockedAbilities[i];
-                a.enabled = a.isUnlocked;
-                i++;
+        if(SaveFilesManager.instance != null){
+            SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
+            if(partida.unlockedAbilities != null){
+                int i = 0;
+                foreach(Ability a in abilities){
+                    if(i>partida.unlockedAbilities.Length)break;
+                    a.isUnlocked = partida.unlockedAbilities[i];
+                    a.enabled = a.isUnlocked;
+                    i++;
+                }
             }
         }
-        
     }
 
     /// <summary>

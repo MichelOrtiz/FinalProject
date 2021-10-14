@@ -43,7 +43,6 @@ public class MultipleStates : State
 
     public override void StopAffect()
     {
-//
         base.StopAffect();
     }
 
