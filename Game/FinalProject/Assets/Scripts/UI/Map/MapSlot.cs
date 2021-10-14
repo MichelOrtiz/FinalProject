@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class MapSlot : MonoBehaviour
 {
-    int Scene;
-    bool isObtained;
-    bool isHere;
+    public bool isObtained;
+    public bool isHere;
+    public int Scene;
+    [SerializeField] GameObject zonaMapa;
     [SerializeField] Button boton;
 
     // Start is called before the first frame update
@@ -21,13 +22,13 @@ public class MapSlot : MonoBehaviour
     {
         
     }
-    void UpdateUI(){
+    public void UpdateUI(){
         if (isHere)
         {
-            GetComponent<Image>().color = Color.red;
+
         }else
         {
-            GetComponent<Image>().color = Color.white;
+
         }
         if (isObtained)
         {
@@ -38,5 +39,8 @@ public class MapSlot : MonoBehaviour
             boton.enabled = false;
             boton.gameObject.GetComponent<Image>().color = Color.gray;
         }
+    }
+    public void OnBottonClicked(){
+        zonaMapa.SetActive(true);
     }
 }
