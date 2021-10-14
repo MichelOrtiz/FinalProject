@@ -22,13 +22,14 @@ public class AccessMinigame : MonoBehaviour
     void Start()
     {
         available = true;
+        PlayerManager.instance.inputs.Interact += Inputs_interact ;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Place where the oject is - place where Nico is
-        float distance = Vector2.Distance(PlayerManager.instance.transform.position, transform.position);
+        
 
         if (!available)
         {
@@ -42,7 +43,34 @@ public class AccessMinigame : MonoBehaviour
                 curCooldownTime += Time.deltaTime;
             }
         }
-        else if(!minigameInstantiated && Input.GetKeyDown(KeyCode.E)&&distance<radius)
+        //else 
+        
+    }
+
+    void minigame_Ended()
+    {
+        available = false;
+        minigameInstantiated = false;
+    }
+
+    void masterMinigame_WinMinigame()
+    {
+        //isCompleted = true;
+        Minigame.EndMinigame(true);
+    }
+
+    void masterMinigame_LoseMinigame()
+    {
+        Minigame.EndMinigame(false);
+    }
+
+    void Inputs_interact(){
+        if (!available)
+        {
+            return;
+        }
+        float distance = Vector2.Distance(PlayerManager.instance.transform.position, transform.position);
+        if(!minigameInstantiated && distance<radius)
         {
             minigameInstantiated = true;
             Debug.Log("should access minigame from " + minigameObject);
@@ -64,23 +92,5 @@ public class AccessMinigame : MonoBehaviour
                 Debug.Log("Master minigame null smh");
             }
         }
-        
-    }
-
-    void minigame_Ended()
-    {
-        available = false;
-        minigameInstantiated = false;
-    }
-
-    void masterMinigame_WinMinigame()
-    {
-        //isCompleted = true;
-        Minigame.EndMinigame(true);
-    }
-
-    void masterMinigame_LoseMinigame()
-    {
-        Minigame.EndMinigame(false);
     }
 }

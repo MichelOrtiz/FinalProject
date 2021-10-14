@@ -5,6 +5,7 @@ public class SceneController : MonoBehaviour
 {
     public int prevScene { get; set; }
     public int currentScene { get; set; }
+    public int altDoor;
     [SerializeField]private GameObject playerPrefab;
     SceneManager manager;
 

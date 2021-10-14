@@ -102,7 +102,7 @@ public class MimicCrystal : MonoBehaviour
         }
         catch (System.NullReferenceException)
         {
-            Debug.Log("couldn't find the right enemy bro");
+            //Debug.Log("couldn't find the right enemy bro");
         }
     }
     

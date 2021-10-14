@@ -12,9 +12,6 @@ GameObject:
   - component: {fileID: 569911525740699882}
   - component: {fileID: 4052356652991262649}
   - component: {fileID: 1606274398868421533}
-  - component: {fileID: 8241025561190349056}
-  - component: {fileID: 338800392450207217}
-  - component: {fileID: 8328594378576709950}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -103,56 +100,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8241025561190349056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51775308259417537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63edba271d43ecf40bc122e6bed62c97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moneyText: {fileID: 0}
-  items: []
-  capacidad: 20
---- !u!114 &338800392450207217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51775308259417537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d7675b1eef15744a6cc649c4ba4038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nametxt: {fileID: 0}
-  description: {fileID: 0}
-  menuDesplegable: {fileID: 0}
-  invetoryUI: {fileID: 0}
-  itemsParent: {fileID: 0}
-  nextButton: {fileID: 0}
-  prevButton: {fileID: 0}
-  moveItemIndex: 0
---- !u!114 &8328594378576709950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51775308259417537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc842e7354865304a9bfa633bbd6c620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsParentHotbar0: {fileID: 0}
-  slotsHotbar0: []
-  timeKeyPressed: 0
 --- !u!1 &103264957021329608
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,9 +246,6 @@ GameObject:
   - component: {fileID: 5042959530236695598}
   - component: {fileID: 4802641634299759046}
   - component: {fileID: 6282473897880565462}
-  - component: {fileID: 1173976513964738781}
-  - component: {fileID: 5199003660004753052}
-  - component: {fileID: 4822892253022544275}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -390,56 +334,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1173976513964738781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109044093544046600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63edba271d43ecf40bc122e6bed62c97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moneyText: {fileID: 0}
-  items: []
-  capacidad: 20
---- !u!114 &5199003660004753052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109044093544046600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d7675b1eef15744a6cc649c4ba4038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nametxt: {fileID: 0}
-  description: {fileID: 0}
-  menuDesplegable: {fileID: 0}
-  invetoryUI: {fileID: 0}
-  itemsParent: {fileID: 0}
-  nextButton: {fileID: 0}
-  prevButton: {fileID: 0}
-  moveItemIndex: 0
---- !u!114 &4822892253022544275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109044093544046600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc842e7354865304a9bfa633bbd6c620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsParentHotbar0: {fileID: 0}
-  slotsHotbar0: []
-  timeKeyPressed: 0
 --- !u!1 &178553452299183701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2264,9 +2158,6 @@ GameObject:
   - component: {fileID: 7543675768999962148}
   - component: {fileID: 2204631027995878363}
   - component: {fileID: 2885285455869608758}
-  - component: {fileID: 941785143763922843}
-  - component: {fileID: 5224565794323686653}
-  - component: {fileID: 3920079747579150242}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -2355,56 +2246,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &941785143763922843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1718105190220777369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63edba271d43ecf40bc122e6bed62c97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moneyText: {fileID: 0}
-  items: []
-  capacidad: 20
---- !u!114 &5224565794323686653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1718105190220777369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d7675b1eef15744a6cc649c4ba4038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nametxt: {fileID: 0}
-  description: {fileID: 0}
-  menuDesplegable: {fileID: 0}
-  invetoryUI: {fileID: 0}
-  itemsParent: {fileID: 0}
-  nextButton: {fileID: 0}
-  prevButton: {fileID: 0}
-  moveItemIndex: 0
---- !u!114 &3920079747579150242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1718105190220777369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc842e7354865304a9bfa633bbd6c620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsParentHotbar0: {fileID: 0}
-  slotsHotbar0: []
-  timeKeyPressed: 0
 --- !u!1 &1773899068985104939
 GameObject:
   m_ObjectHideFlags: 0
@@ -9544,9 +9385,6 @@ GameObject:
   - component: {fileID: 6392235980126500196}
   - component: {fileID: 9221126595184469200}
   - component: {fileID: 2910904317081669232}
-  - component: {fileID: 9017408927376718068}
-  - component: {fileID: 2465964724595603875}
-  - component: {fileID: 5907689890575362164}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -9635,56 +9473,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &9017408927376718068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8198547717533487474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63edba271d43ecf40bc122e6bed62c97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moneyText: {fileID: 0}
-  items: []
-  capacidad: 20
---- !u!114 &2465964724595603875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8198547717533487474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d7675b1eef15744a6cc649c4ba4038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nametxt: {fileID: 0}
-  description: {fileID: 0}
-  menuDesplegable: {fileID: 0}
-  invetoryUI: {fileID: 0}
-  itemsParent: {fileID: 0}
-  nextButton: {fileID: 0}
-  prevButton: {fileID: 0}
-  moveItemIndex: 0
---- !u!114 &5907689890575362164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8198547717533487474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc842e7354865304a9bfa633bbd6c620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsParentHotbar0: {fileID: 0}
-  slotsHotbar0: []
-  timeKeyPressed: 0
 --- !u!1 &8450029569915604089
 GameObject:
   m_ObjectHideFlags: 0
@@ -10501,9 +10289,6 @@ GameObject:
   - component: {fileID: 3659907120877550870}
   - component: {fileID: 7909181052879950911}
   - component: {fileID: 3987180672042334403}
-  - component: {fileID: 5307026081175893053}
-  - component: {fileID: 4867556220782924997}
-  - component: {fileID: 1378004003272470549}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -10592,56 +10377,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5307026081175893053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9016013405873272650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63edba271d43ecf40bc122e6bed62c97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moneyText: {fileID: 0}
-  items: []
-  capacidad: 20
---- !u!114 &4867556220782924997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9016013405873272650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d7675b1eef15744a6cc649c4ba4038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nametxt: {fileID: 0}
-  description: {fileID: 0}
-  menuDesplegable: {fileID: 0}
-  invetoryUI: {fileID: 0}
-  itemsParent: {fileID: 0}
-  nextButton: {fileID: 0}
-  prevButton: {fileID: 0}
-  moveItemIndex: 0
---- !u!114 &1378004003272470549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9016013405873272650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc842e7354865304a9bfa633bbd6c620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemsParentHotbar0: {fileID: 0}
-  slotsHotbar0: []
-  timeKeyPressed: 0
 --- !u!1 &9063884289494046828
 GameObject:
   m_ObjectHideFlags: 0

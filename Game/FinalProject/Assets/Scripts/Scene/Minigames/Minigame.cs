@@ -39,17 +39,22 @@ public class Minigame : MonoBehaviour{
 
 
     public virtual void StartMinigame(){
-        
+        GameObject minigame;
         if(isUI)
         {
-            MinigameUI.instance.RecieveMinigame(minigameObject);
+            minigame = MinigameUI.instance.RecieveMinigame(minigameObject);
             Pause.PauseGame();
             PlayerManager.instance.SetEnabledPlayer(false);
+            MasterMinigame = minigame.GetComponentInChildren<MasterMinigame>();
         }else{
-            SceneManager.LoadScene(sceneIndex);
+            SceneController.instance.LoadScene(sceneIndex);
+            MasterMinigame = ScenesManagers.FindObjectOfType<MasterMinigame>();
         }
-
-        MasterMinigame = ScenesManagers.FindObjectOfType<MasterMinigame>();
+        
+        if (MasterMinigame == null)
+        {
+            Debug.Log("mrda");
+        }
     }
 
     void Start()
@@ -86,7 +91,7 @@ public class Minigame : MonoBehaviour{
         ended = true;
         if(isUI)
         {
-            MinigameUI.instance.EndMinigame(endWaitTime);
+            MinigameUI.instance?.EndMinigame(endWaitTime);
             StartCoroutine(EndCoroutine(endWaitTime));
         }
         else
