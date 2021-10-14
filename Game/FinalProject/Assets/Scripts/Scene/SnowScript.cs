@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SnowScript : MonoBehaviour
 {
-    public Rigidbody2D body;
+    [SerializeField] State snowState;
+
     PlayerManager player;
     Collider2D collision;
     // Start is called before the first frame update
@@ -16,18 +17,7 @@ public class SnowScript : MonoBehaviour
 
     void Update()
     {
-        /*if (player.isInSnow)
-        {
-            GameObject collisionGameObject = collision.gameObject;
-            if (collisionGameObject.tag == "Player")
-            {
-                if (!player.isInIce)
-                {
-                    player.isInSnow = true;
-                    player.walkingSpeed = 4.25f;
-                }
-            }
-        }*/
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision){
@@ -37,7 +27,7 @@ public class SnowScript : MonoBehaviour
             if (!player.isInIce)
             {
                 player.isInSnow = true;
-                player.walkingSpeed = 4.25f;
+                player.statesManager.AddState(snowState);
             }
         }
     }
@@ -48,7 +38,7 @@ public class SnowScript : MonoBehaviour
             if (!player.isInIce)
             {
                 player.isInSnow = true;
-                player.walkingSpeed = 4.25f;
+                player.statesManager.AddState(snowState);
             }
         }
     }
@@ -57,7 +47,7 @@ public class SnowScript : MonoBehaviour
         if (collisionGameObject.tag == "Player")
         {
             player.isInSnow = false;
-            player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
+            player.statesManager.RemoveState(snowState);//ojala funcione
         }
     }
 }

@@ -36,7 +36,7 @@ public abstract class State : ScriptableObject
         onEffect=false;
         manager.statusCheck-=Affect;
         emoteInstance?.StopAffect();
-        manager.RemoveState(this);
+        manager.currentStates.Remove(this);
         StoppedAffect?.Invoke();
     }
     
