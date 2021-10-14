@@ -7,4 +7,9 @@ public class WorldState
     public string Tag;
     public int id;
     public bool state;
+    public WorldState(){
+        Tag = "Default";
+        id = 5471460;
+        state = false;
+    }
 }

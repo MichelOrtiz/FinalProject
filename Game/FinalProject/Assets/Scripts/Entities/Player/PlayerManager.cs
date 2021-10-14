@@ -87,6 +87,11 @@ public class PlayerManager : Entity
         isDeath = false;
         GunProjectile.instance.ObjectShot += gun_ObjectShot;
         
+        //Cargar cosas de la partida
+        if(SaveFilesManager.instance!=null && SaveFilesManager.instance.currentSaveSlot!=null){
+            SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
+            currentStaminaLimit = partida.staminaLimit;
+        }
     }
 
     new void Update()

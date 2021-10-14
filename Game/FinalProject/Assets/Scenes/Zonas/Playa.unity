@@ -37644,6 +37644,10 @@ MonoBehaviour:
   sawPlayerEmote: {fileID: 0}
   wishedItem: {fileID: 11400000, guid: c9818b8b6e6f49d4e8041cc49e66a96c, type: 2}
   wishedItemIcon: {fileID: 794428133}
+  worldState:
+    Tag: 
+    id: 0
+    state: 0
 --- !u!61 &742102025
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -37769,7 +37773,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742102023}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -249.58002, y: 8.91, z: -1.5819737}
+  m_LocalPosition: {x: -249.39, y: 9.66, z: -1.5819737}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1117609663}
@@ -42279,6 +42283,14 @@ PrefabInstance:
     - target: {fileID: 6094071260494364134, guid: 1f1070637004e5048b7209ce55676237, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094071260494364153, guid: 1f1070637004e5048b7209ce55676237, type: 3}
+      propertyPath: worldState.id
+      value: 404
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094071260494364153, guid: 1f1070637004e5048b7209ce55676237, type: 3}
+      propertyPath: worldState.Tag
+      value: isPlayaGordoDefeated
       objectReference: {fileID: 0}
     - target: {fileID: 6094071260494364154, guid: 1f1070637004e5048b7209ce55676237, type: 3}
       propertyPath: m_Name

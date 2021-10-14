@@ -90,7 +90,14 @@ public class SaveFilesManager : MonoBehaviour
             currentSaveSlot.timeHoursPlayed += 1;
         }
         currentSaveSlot.timeHoursPlayed += timePlayed.Hours;
-        
+        currentSaveSlot.staminaLimit = PlayerManager.instance.currentStaminaLimit;
+        int i = 0;
+        foreach(Ability a in AbilityManager.instance.abilities){
+            currentSaveSlot.unlockedAbilities[i] = a.isUnlocked;
+            i++;
+        }
+        currentSaveSlot.money = Inventory.money;
+
         string jsonString = JsonUtility.ToJson(currentSaveSlot);
         string filePath = Application.dataPath + "/Partida" + currentSaveSlot.slotFile;
         using(StreamWriter writer = new StreamWriter(filePath,false)){

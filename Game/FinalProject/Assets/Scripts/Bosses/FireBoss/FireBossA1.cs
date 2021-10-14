@@ -24,7 +24,7 @@ public class FireBossA1 : FireBossEnemy
                 projectilesShot = true;
                 timeBtwShot = 0;
             }
-            else if(!projectilesShot)
+            else //if(!projectilesShot)
             {
                 timeBtwShot += Time.deltaTime;
             }

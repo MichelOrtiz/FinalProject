@@ -201,6 +201,7 @@ MonoBehaviour:
   facingDirection: 
   currentState: 0
   isWalking: 0
+  isRunning: 0
   isGrounded: 0
   isJumping: 0
   isFlying: 0
@@ -222,21 +223,21 @@ MonoBehaviour:
   jumpTime: 0
   fallingCriteria: 0.1
   rigidbody2d: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  animator: {fileID: 0}
+  animationManager: {fileID: 0}
   whatIsObstacle:
   - serializedVersion: 2
     m_Bits: 512
   feetPos: {fileID: 7523984613045640119}
-  checkFeetRadius: 0.3
   groundChecker: {fileID: 0}
   collisionHandler: {fileID: 0}
+  physics: {fileID: 0}
+  emotePos: {fileID: 0}
   TimeBeforeStart: 1
   collisionCheck: {fileID: 7523984613158353784}
   baseCastDistance: 1.5
   shotPoint: {fileID: 7523984612341500373}
-  baseTimeBtwShot: 2
+  baseTimeBtwShot: 1
   projectilePrefab: {fileID: 8805213487483752607, guid: 28931128b38fdcb4db0569b5e0f9c98f, type: 3}
   timeChangeMultiplier: 0.5
   damageChangeIncrease: 10

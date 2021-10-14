@@ -4,36 +4,58 @@ using UnityEngine;
 
 public class loadBossLevel : loadlevel
 {
-    public WorldState condition;
+    public WorldState worldState = new WorldState();
     SaveFilesManager saveFilesManager;
 
-    new void OnTriggerEnter2D(Collider2D collision) {
-        GameObject collisionGameObject = collision.gameObject;
-        saveFilesManager = SaveFilesManager.instance;
-        if(saveFilesManager != null){
-            if(saveFilesManager.currentSaveSlot != null){
-                if(saveFilesManager.currentSaveSlot.WorldStates.Contains(condition)){
-                    WorldState c = saveFilesManager.currentSaveSlot.WorldStates.Find(s => s.id == condition.id);
-                    if(c.state){
-                        //Ejecutar algo cuando el jefe ya haya sido derrotado
-                        Debug.Log("Jefe ya habia sido derrotado");
-                        //hacer cosas siguiente zona?
+    new private void Start() {
+        if(SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
+            SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
+            foreach(WorldState w in partida.WorldStates){
+                if(w.id == worldState.id){
+                    worldState = w;
+                    if(w.state){
+                        Destroy(gameObject);
+                        break;
                     }else{
-                        //Ejecutar batalla normal
-                        Debug.Log("Caso 1");
-                        if (collisionGameObject.tag == "Player")LoadScene();
+                        worldState = w;
+                        break;
                     }
-                }else{
-                    Debug.Log("Caso 2");
-                    saveFilesManager.currentSaveSlot.WorldStates.Add(condition);
-                    if (collisionGameObject.tag == "Player")LoadScene();
                 }
-            }else{
-                Debug.Log("No hay una partida seleccionada... de seguro estar testeando pase buen hombre");
-                if (collisionGameObject.tag == "Player")LoadScene();
             }
-        }else{
-            Debug.Log("OMG where's the lamb sauce (no hay SaveFilesManager)");
+            partida.WorldStates.Add(worldState);
         }
+        if (SceneController.instance != null)
+        {
+            PlayerManager.instance.physics.ResetAll();
+            if(PlayerManager.instance.isDeath){
+                    Debug.Log("Cargando en el ultimo checkpoint");
+
+                    PlayerManager.instance.isDeath = false;
+                    PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
+
+            }else{
+                if(SceneController.instance.prevScene != 34 && SceneController.instance.prevScene == iLevelToLoad){
+                        if(loadPosition!=null && !PlayerManager.instance.isDeath){
+                            PlayerManager.instance.gameObject.transform.position = loadPosition.position;
+                            //Jugador salio de la sala del jefe... entonces lo derroto no?
+                            worldState.state = true;
+                            Destroy(gameObject);
+                        }
+                    }
+                    else{
+                        //if loading from 34 spawnpoint = startPosition
+                        if(SceneController.instance.prevScene == 34){
+                            Debug.Log("Cargando desde main menu");
+                            PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
+                        }
+                    }
+            }
+            
+        }
+
+        
+
+        
     }
+
 }

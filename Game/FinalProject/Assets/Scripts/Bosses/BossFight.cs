@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class BossFight : MonoBehaviour
 {
-    public WorldState isBossDefeated;
     public static BossFight instance;
     [SerializeField] protected PopUpTrigger startMessageTrigger;
     [SerializeField] protected PopUpTrigger endMessageTrigger;
-    [SerializeField] protected int levelToLoad; 
+    [SerializeField] protected int levelToLoad;
+
+    [SerializeField] private GameObject loadlevel;
 
     public WorldState condition;
 
@@ -25,6 +26,8 @@ public class BossFight : MonoBehaviour
 
         startMessageTrigger.popUpUI.exitButton.onClick.RemoveAllListeners();
         startMessageTrigger.popUpUI.exitButton.onClick.AddListener(ReturnToLastScene);
+
+
         //popUpTrigger = GetComponent<PopUpTrigger>();
     }
     [SerializeField] protected List<Stage> stages;
@@ -43,6 +46,7 @@ public class BossFight : MonoBehaviour
     protected void Start()
     {
         StartBattle();
+        loadlevel?.SetActive(false);
         //AudioManager.instance?.Play("Theme");
     }
     protected void Update() {
@@ -92,6 +96,8 @@ public class BossFight : MonoBehaviour
 
 
             condition.state = true;
+
+            loadlevel?.SetActive(true);
             BattleEnded?.Invoke();
         }
     }

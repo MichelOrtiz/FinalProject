@@ -154,6 +154,7 @@ MonoBehaviour:
   impactEffect: {fileID: 0}
   targetWarningAvailable: 0
   independentAttackEnabled: 0
+  collisionHandler: {fileID: 0}
   speedMultiplier: 2
   maxShotDistance: 40
   damage: 15
@@ -161,12 +162,15 @@ MonoBehaviour:
   impactEffectExitTime: 0.5
   touchingPlayer: 0
   touchingObstacle: 0
+  hasLifeTime: 0
+  lifeTime: 0
   changeSizeByDistance: 0
   distanceToIncrease: 0
   sizeByDistanceMultiplier: 0
   changeSizeByTime: 0
   timeToIncrease: 0
   sizeByTimeMultiplier: 0
+  isOnCollider: 0
 --- !u!114 &8231594080307718534
 MonoBehaviour:
   m_ObjectHideFlags: 0

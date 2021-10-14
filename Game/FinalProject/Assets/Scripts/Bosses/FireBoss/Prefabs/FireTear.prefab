@@ -154,6 +154,7 @@ MonoBehaviour:
   impactEffect: {fileID: 0}
   targetWarningAvailable: 0
   independentAttackEnabled: 0
+  collisionHandler: {fileID: 0}
   speedMultiplier: 2
   maxShotDistance: 20
   damage: 15
@@ -161,12 +162,15 @@ MonoBehaviour:
   impactEffectExitTime: 0.5
   touchingPlayer: 0
   touchingObstacle: 0
+  hasLifeTime: 0
+  lifeTime: 0
   changeSizeByDistance: 0
   distanceToIncrease: 0
   sizeByDistanceMultiplier: 0
   changeSizeByTime: 0
   timeToIncrease: 0
   sizeByTimeMultiplier: 0
+  isOnCollider: 0
 --- !u!114 &8525880897558847225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48932fd3b5d57b4cb726271555d27de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 4
+  interactionRadius: 1.5
   speedMultiplier: 3.5
   colorWhenInRadius: {r: 0.90588236, g: 0.28235295, b: 0.1764706, a: 1}
   colorWhenHit: {r: 0.9058824, g: 0.28235295, b: 0.1764706, a: 1}
