@@ -1213,6 +1213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionHandler: {fileID: 0}
+  iceState: {fileID: 11400000, guid: c0f8d618a93b90d4587e759cb1487e80, type: 2}
 --- !u!114 &115718942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1666,6 +1667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iLevelToLoad: 0
+  noDoor: 1
   loadPosition: {fileID: 0}
 --- !u!61 &204460333
 BoxCollider2D:
@@ -37824,6 +37826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iLevelToLoad: 0
+  noDoor: 1
   loadPosition: {fileID: 0}
 --- !u!61 &850712004
 BoxCollider2D:
@@ -107019,6 +107022,15 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: 64c736a63809f4541ad2be7378477df8, type: 3}
   shotPos: {fileID: 0}
   effectOnPlayer: {fileID: 11400000, guid: 947522ec14db08b45a7d965100ae076a, type: 2}
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!4 &1390036197
 Transform:
   m_ObjectHideFlags: 0
@@ -108365,6 +108377,15 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: af049fa7bf620ca4ab26aaa651d1a939, type: 3}
   shotPos: {fileID: 0}
   effectOnPlayer: {fileID: 0}
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!4 &1439455947
 Transform:
   m_ObjectHideFlags: 0
@@ -116788,6 +116809,15 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: 5faf4e910337d6b4d8f0c4ef83123897, type: 3}
   shotPos: {fileID: 0}
   effectOnPlayer: {fileID: 0}
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!4 &1689469220
 Transform:
   m_ObjectHideFlags: 0
@@ -117426,7 +117456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e991586ca3c78048bdc5a60aa76fd44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snowState: {fileID: 0}
+  snowState: {fileID: 11400000, guid: 8d1afa600b74b294ca9d1d638acf2a26, type: 2}
 --- !u!61 &1721812271
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120606,6 +120636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 0}
+  waterSlowState: {fileID: 0}
 --- !u!1 &2063230425
 GameObject:
   m_ObjectHideFlags: 0

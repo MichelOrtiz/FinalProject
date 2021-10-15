@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpeedMultiplier : State
 {
     [SerializeField] private float speedMultiplier;
-    private float defaultWalkingSpeed;
     PlayerManager player;
     Run runOverride = null;
 
@@ -16,8 +15,8 @@ public class SpeedMultiplier : State
         if(isPlayer)
         {
             player = manager.hostEntity.GetComponent<PlayerManager>();
-            defaultWalkingSpeed = player.walkingSpeed;
-            player.walkingSpeed *= speedMultiplier;
+            //Hacer que camines rapido
+            player.speedMods *= speedMultiplier;
             //Hacer que la habilidad correr sea mas rapida
             foreach(Ability a in player.abilityManager.abilities){
                 if(a.abilityName == Ability.Abilities.Correr){
@@ -48,7 +47,8 @@ public class SpeedMultiplier : State
         base.StopAffect();
         bool isPlayer = manager.hostEntity.GetComponent<PlayerManager>() != null;
         if(isPlayer){
-            player.walkingSpeed /= speedMultiplier;
+            //regresar la velocidad 
+            player.speedMods /= speedMultiplier;
             //regresar la velocidad de la habilidad run a sus valores anteriores...
             if(runOverride != null){
                 float newSpeedMultiplier = runOverride.GetSpeedMultiplier() / speedMultiplier;

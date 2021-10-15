@@ -10,6 +10,8 @@ public class PlayerManager : Entity
     public float currentStaminaLimit = 100;
     public float maxOxygen = 100;
     public float walkingSpeed;
+    public float currentSpeed;
+    public float speedMods = 1;
     public const float defaultwalkingSpeed = 7f;
     public const float defaultGravity = 2.5f;
     public float currentGravity;
@@ -86,7 +88,7 @@ public class PlayerManager : Entity
         MinimapaActivada = true;
         isDeath = false;
         GunProjectile.instance.ObjectShot += gun_ObjectShot;
-        
+        walkingSpeed = defaultwalkingSpeed;
         //Cargar cosas de la partida
         if(SaveFilesManager.instance!=null && SaveFilesManager.instance.currentSaveSlot!=null){
             SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
@@ -229,14 +231,16 @@ public class PlayerManager : Entity
 
     void Move()
     {
+        walkingSpeed = defaultwalkingSpeed * speedMods;
+        if(!isRunning) currentSpeed = walkingSpeed;
         if(!inputs.enabled)return;
         if (isInIce)
         {
-            rigidbody2d.AddForce(new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y));
+            rigidbody2d.AddForce(new Vector2(inputs.movementX * currentSpeed, rigidbody2d.velocity.y));
         }
         else
         {
-            rigidbody2d.velocity = new Vector2(inputs.movementX * walkingSpeed, rigidbody2d.velocity.y);    
+            rigidbody2d.velocity = new Vector2(inputs.movementX * currentSpeed, rigidbody2d.velocity.y);    
         }
 
         
@@ -245,7 +249,7 @@ public class PlayerManager : Entity
     void Flying()
     {
         if(!inputs.enabled)return;
-        rigidbody2d.velocity = new Vector2(inputs.movementX, inputs.movementY)*walkingSpeed;
+        rigidbody2d.velocity = new Vector2(inputs.movementX, inputs.movementY)*currentSpeed;
     }
 
     // Call these methods to decrease or increase stamina periodically
@@ -487,6 +491,7 @@ public class PlayerManager : Entity
 
     void RestoreValuesForDead(){
         walkingSpeed = defaultwalkingSpeed;
+        currentSpeed = walkingSpeed;
         currentStaminaLimit = maxStamina;
         currentGravity = defaultGravity;
         currentStamina = maxStamina;

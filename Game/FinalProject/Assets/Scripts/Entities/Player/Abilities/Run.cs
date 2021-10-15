@@ -12,9 +12,12 @@ public class Run : Ability
     {
         if (isInCooldown)
         {
+            
             player.TakeTirement(staminaCost);
         }
-        player.walkingSpeed = runningSpeed;
+        player.isRunning = true;
+        player.currentSpeed = runningSpeed;
+        isInCooldown = true;
     } 
     protected override void Start()
     {
@@ -81,12 +84,11 @@ public class Run : Ability
         runningSpeed = PlayerManager.defaultwalkingSpeed * speedMultiplier;
     }
     void StartRunning(){
-        runningSpeed = PlayerManager.defaultwalkingSpeed* speedMultiplier;
-        player.isRunning = true;
+        runningSpeed = PlayerManager.defaultwalkingSpeed * speedMultiplier;
         isInCooldown = true;
     }
     void StopRunning(){
-        player.walkingSpeed = runningSpeed / speedMultiplier;
+        player.currentSpeed = player.walkingSpeed;
         isInCooldown = false;
         player.isRunning = false;
     }

@@ -7,6 +7,7 @@ public class WaterPhysics : MonoBehaviour
     public Rigidbody2D body;
     PlayerManager player;
     Collider2D collision;
+    [SerializeField] State waterSlowState;
 
     void Start()
     {
@@ -24,7 +25,8 @@ public class WaterPhysics : MonoBehaviour
         {
             player.currentGravity = .5f;
             player.isInWater = true;
-            player.walkingSpeed = 3.5f;
+            //player.walkingSpeed = 3.5f;
+            player.statesManager.AddState(waterSlowState);
         }
     }
     private void OnTriggerStay2D(Collider2D collision){
@@ -33,7 +35,8 @@ public class WaterPhysics : MonoBehaviour
         {
             player.currentGravity = .5f;
             player.isInWater = true;
-            player.walkingSpeed = 3.5f;
+            //player.walkingSpeed = 3.5f;
+            player.statesManager.AddState(waterSlowState);
         }
     }
     private void OnTriggerExit2D(Collider2D collision){
@@ -42,8 +45,8 @@ public class WaterPhysics : MonoBehaviour
         {
             player.currentGravity = PlayerManager.defaultGravity;
             player.isInWater = false;
-            player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
-
+            //player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
+            player.statesManager.RemoveState(waterSlowState);
         }
     }
 }

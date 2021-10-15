@@ -18,7 +18,7 @@ public class IceScript : MonoBehaviour
         player = PlayerManager.instance;
 
         collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;
-        //collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
+        collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
         collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
     }
 
@@ -51,10 +51,10 @@ public class IceScript : MonoBehaviour
     {
         SetEffects(contact);
     }
-   /* void collisionHandler_StayContact(GameObject contact)
+    void collisionHandler_StayContact(GameObject contact)
     {
         SetEffects(contact);
-    }*/
+    }
 
     void collisionHandler_ExitContact(GameObject contact)
     {
