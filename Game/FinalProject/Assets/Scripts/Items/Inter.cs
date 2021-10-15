@@ -41,6 +41,7 @@ public class Inter : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) {
         Enemy enemigo = other.transform?.parent?.GetComponentInChildren<Enemy>();
+        Debug.Log(other.gameObject);
         if(enemigo!=null)
         {
             enemigo.ConsumeItem(item);
