@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1708280095486505793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2660716082572757339}
+  m_Layer: 10
+  m_Name: obstacleCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2660716082572757339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708280095486505793}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.72, y: -0.95, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2748352018925640745}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2748352018737289924
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,6 +104,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 2748352020231857869}
+  - {fileID: 2660716082572757339}
   m_Father: {fileID: 2748352020438788290}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,7 +133,7 @@ MonoBehaviour:
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 4864
-  obstacleCheckOrigin: {fileID: 2748352020231857869}
+  obstacleCheckOrigin: {fileID: 2660716082572757339}
   obstacleViewDistance: 2
   blockingCollider: {fileID: 0}
   facingDirection: 
@@ -164,6 +195,9 @@ MonoBehaviour:
   jumpForce: {x: 1, y: 2}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 2748352019656667024}
   collisionHandler: {fileID: 2748352020271630749}
   fieldOfView: {fileID: 2748352018925640746}
@@ -459,6 +493,15 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: 224a24dbab467bf41868d0202b88250c, type: 3}
   shotPos: {fileID: 2748352019544890961}
   effectOnPlayer: {fileID: 0}
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!1 &2748352020231857870
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +559,7 @@ Transform:
   m_GameObject: {fileID: 2748352020271630750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2748352020438788290}
   m_RootOrder: 1
@@ -553,7 +596,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.18, y: 2.84}
+  m_Size: {x: 1.18, y: 2.96}
   m_Direction: 0
 --- !u!1 &2748352020387302249
 GameObject:
