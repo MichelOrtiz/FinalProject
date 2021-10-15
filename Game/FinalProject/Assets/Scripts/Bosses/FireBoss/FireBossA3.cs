@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class FireBossA3 : FireBossEnemy
 {
-    
     [SerializeField] private float speedMultiplier;
     private float speed;
+    [SerializeField] private byte shotsUntilDeflect;
+    private byte curShots;
 
     new void Start()
     {
@@ -23,8 +24,20 @@ public class FireBossA3 : FireBossEnemy
         {
             if (timeBtwShot > baseTimeBtwShot)
             {
-                base.ShotProjectile(shotPoint, shotPoint.position + Vector3.down);
-                projectilesShot = true;
+                var proj = projectileShooter.ShootProjectile(projectileShooter.ShotPos.position + Vector3.down);
+                
+                proj.GetComponent<ProjectileDeflector>().enabled = curShots == shotsUntilDeflect;
+                proj.GetComponent<BlinkingSprite>().enabled = curShots == shotsUntilDeflect;
+
+                if (curShots < shotsUntilDeflect)
+                {
+                    curShots++;
+                }
+                else
+                {
+                    curShots = 0;
+                }
+
                 timeBtwShot = 0;
             }
             else// if(!projectilesShot)

@@ -13,15 +13,23 @@ public class FireBoss : BossFight
     // Hits until the boss gets beaten
     public int maxHits;
     private int currentHits;
+
+    [Header("Modifiers")]
+    [SerializeField] private float timeBfStartMod;
+    public float curTimeBfStartMod = 1;
+    [SerializeField] private float timeBtwShotMod;
+    public float curTimeBtwShotMod = 1;
+
+
     private int currentStageIndex;
-    private enum Zone
+    /*private enum Zone
     {
         First,
         Second,
         Third
     }
 
-    private Zone currentZone;
+    private Zone currentZone;*/
     // Start is called before the first frame update
     new void Start()
     {
@@ -85,6 +93,8 @@ public class FireBoss : BossFight
         if (currentHits < maxHits)
         {
             currentHits++;
+            curTimeBfStartMod *= timeBfStartMod;
+            curTimeBtwShotMod *= timeBtwShotMod;
         }
         else
         {
