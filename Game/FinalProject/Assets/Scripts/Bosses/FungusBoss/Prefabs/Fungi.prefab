@@ -4828,7 +4828,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 0
-  effectOnPlayer: {fileID: 11400000, guid: 8666c37dbf9d12047882b98fe93e1059, type: 2}
+  damageThreshold: 0
+  effectOnPlayer: {fileID: 11400000, guid: 0838117578a7c3540b83fd41c058c963, type: 2}
   stopEmittingWhenParticleCollide: 0
 --- !u!1 &1254405717892209806
 GameObject:
@@ -5379,6 +5380,7 @@ MonoBehaviour:
   chaseSpeedMultiplier: 2
   chaseSpeed: 0
   damageAmount: 0
+  punishDamage: 0
   atackEffect: {fileID: 0}
   canKnockbackPlayer: 0
   knockbackAngle: 0
@@ -5412,6 +5414,7 @@ MonoBehaviour:
   hostEntity: {fileID: 0}
   enemy: {fileID: 0}
   currentStates: []
+  bannedStates: []
 --- !u!1 &8856376182929455395
 GameObject:
   m_ObjectHideFlags: 0
@@ -5465,7 +5468,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 485559
   canSeePlayer: 0
-  justSeenPlayer: 0
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
@@ -5475,6 +5477,8 @@ MonoBehaviour:
   blockingCollider: {fileID: 0}
   facingDirection: 
   entity: {fileID: 1366316943}
+  playerSightedInvoked: 0
+  playerUnsightedInvoked: 0
 --- !u!1 &9066195042036543874
 GameObject:
   m_ObjectHideFlags: 0
@@ -5530,6 +5534,9 @@ MonoBehaviour:
   jumpForce: {x: 3, y: 5}
   jumpForceMultiplier: {x: 2, y: 2}
   forceMode: 1
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 1393568496588355870}
   collisionHandler: {fileID: 840220677433600684}
   fieldOfView: {fileID: 2822644962153146944}
