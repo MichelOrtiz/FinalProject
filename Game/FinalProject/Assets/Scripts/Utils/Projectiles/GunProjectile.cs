@@ -15,6 +15,7 @@ public class GunProjectile : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform shotPoint;
     public float offset;
+    public GameObject linterna;
     [SerializeField] private MouseDirPointer mouseDirPointer;
     private PlayerManager player;
     private Vector2 mousePosition; //No necesario la posicion exacta del mouse
