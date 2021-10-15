@@ -19,8 +19,8 @@ public class Interaction : ScriptableObject {
     [SerializeField] Dialogue dialogue;
     [SerializeField] WorldState mision;
     [SerializeField] Item giveObject;
-
-    
+    public delegate void OnEndInteraction();
+    public OnEndInteraction onEndInteraction;    
     public void DoInteraction(){
         switch(type){
             case InteractionType.Dialogue:{
@@ -48,6 +48,7 @@ public class Interaction : ScriptableObject {
                 break;
             }
         }
+        onEndInteraction?.Invoke();
     }
     void OpenDialogueBox(){
         if(FindObjectOfType<DialogueManager>() != null){
