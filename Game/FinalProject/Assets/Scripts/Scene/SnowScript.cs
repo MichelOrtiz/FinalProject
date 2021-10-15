@@ -26,7 +26,7 @@ public class SnowScript : MonoBehaviour
         {
             if (!player.isInIce)
             {
-                player.isInSnow = true;
+                //player.isInSnow = true;
                 player.statesManager.AddState(snowState);
             }
         }
@@ -37,7 +37,7 @@ public class SnowScript : MonoBehaviour
         {            
             if (!player.isInIce)
             {
-                player.isInSnow = true;
+                //player.isInSnow = true;
                 player.statesManager.AddState(snowState);
             }
         }
@@ -46,7 +46,7 @@ public class SnowScript : MonoBehaviour
             GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Player")
         {
-            player.isInSnow = false;
+            //player.isInSnow = false;
             player.statesManager.RemoveState(snowState);//ojala funcione
         }
     }

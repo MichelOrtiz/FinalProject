@@ -6,6 +6,11 @@ public class SpeedMultiplier : State
 {
     [SerializeField] private float speedMultiplier;
     PlayerManager player;
+    enum Hazard
+    {
+        Nieve,Hielo,Nada
+    }
+    [SerializeField] Hazard hazard = Hazard.Nada;
     Run runOverride = null;
 
     public override void StartAffect(StatesManager newManager)
@@ -28,6 +33,20 @@ public class SpeedMultiplier : State
                 float newSpeedMultiplier = runOverride.GetSpeedMultiplier() * speedMultiplier;
                 runOverride.SetSpeedMultiplier(newSpeedMultiplier);
             }
+            switch(hazard){
+                case Hazard.Nieve:{
+                    player.isInSnow = true;
+                    break;
+                }
+                case Hazard.Hielo:{
+                    player.isInIce = true;
+                    break;
+                }
+                default:{
+                    break;
+                }
+            }
+            
         }
         else if (manager.hostEntity.GetComponent<Enemy>() != null)
         {
@@ -54,6 +73,21 @@ public class SpeedMultiplier : State
                 float newSpeedMultiplier = runOverride.GetSpeedMultiplier() / speedMultiplier;
                 runOverride.SetSpeedMultiplier(newSpeedMultiplier);
             }
+            
+            switch(hazard){
+                case Hazard.Nieve:{
+                    player.isInSnow = false;
+                    break;
+                }
+                case Hazard.Hielo:{
+                    player.isInIce = false;
+                    break;
+                }
+                default:{
+                    break;
+                }
+            }
+            
         }
     }
 }
