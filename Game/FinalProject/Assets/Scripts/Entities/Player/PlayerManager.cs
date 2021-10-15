@@ -82,7 +82,7 @@ public class PlayerManager : Entity
         currentGravity = defaultGravity;
         currentMass = defaultMass;
         dmgMod = defaultDmgMod;
-        inputs = gameObject.GetComponent<PlayerInputs>();
+        //inputs = gameObject.GetComponent<PlayerInputs>();
         MinimapaActivada = true;
         isDeath = false;
         GunProjectile.instance.ObjectShot += gun_ObjectShot;

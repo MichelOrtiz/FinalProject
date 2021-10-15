@@ -43,7 +43,8 @@ public class FrutaMiniJuego : MonoBehaviour
         {
             if (tipo == Tipo.Fruta)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneController.instance.LoadScene(SceneController.instance.prevScene);
+                //SceneManager.LoadScene(SceneController.instance.prevScene);
             }else
             {
                 Destroy(gameObject);

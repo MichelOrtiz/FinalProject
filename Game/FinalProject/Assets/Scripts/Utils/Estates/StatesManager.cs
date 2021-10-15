@@ -33,8 +33,8 @@ public class StatesManager : MonoBehaviour
                 if (newState.onEffect)
                 {
                     Debug.Log(gameObject + " manager cloned " + newState);
-                    newState = Instantiate(newState);
-                    newState.onEffect = false;
+                    //newState = Instantiate(newState);
+                    //newState.onEffect = false;
                 }
 
 
@@ -123,7 +123,8 @@ public class StatesManager : MonoBehaviour
 
     public void RemoveState(State state){
         if(currentStates.Contains(state)){
-            currentStates.Remove(state);
+            state.StopAffect();
+            //currentStates.Remove(state);
         }
     }
     

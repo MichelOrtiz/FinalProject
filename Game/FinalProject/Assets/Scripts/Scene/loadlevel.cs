@@ -6,6 +6,7 @@ using UnityEngine;
 public class loadlevel : MonoBehaviour
 {
     public int iLevelToLoad;
+    public int noDoor = 1;
     [SerializeField]protected Transform loadPosition;
     public static loadlevel instance = null;
     protected PlayerManager player;
@@ -22,7 +23,7 @@ public class loadlevel : MonoBehaviour
 
             }else{
                 if(SceneController.instance.prevScene != 34 && SceneController.instance.prevScene == iLevelToLoad){
-                        if(loadPosition!=null && !PlayerManager.instance.isDeath){
+                        if(loadPosition!=null && !PlayerManager.instance.isDeath && SceneController.instance.altDoor == noDoor){
                             PlayerManager.instance.gameObject.transform.position = loadPosition.position;
                         }
                     }
@@ -61,11 +62,14 @@ public class loadlevel : MonoBehaviour
         {
             RestoreValuesForOtherScene();
             LoadScene();
+
         }
     }
 
     protected void LoadScene(){
+        SceneController.instance.altDoor = noDoor;
         SceneController.instance.LoadScene(iLevelToLoad);
+
         //Camera.instance.gameObject.SetActive(true);
     }
     protected void RestoreValuesForOtherScene(){

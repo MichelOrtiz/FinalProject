@@ -5,9 +5,11 @@ public class SceneController : MonoBehaviour
 {
     public int prevScene { get; set; }
     public int currentScene { get; set; }
+    public int altDoor;
     [SerializeField]private GameObject playerPrefab;
     SceneManager manager;
-
+    public delegate void onSceneChange();
+    public onSceneChange SceneChanged;
     public static SceneController instance;
 
     private void Awake() {
@@ -24,7 +26,7 @@ public class SceneController : MonoBehaviour
         prevScene = SceneManager.GetActiveScene().buildIndex;
         currentScene = scene;
         SceneManager.LoadScene(scene);
-        
+        SceneChanged?.Invoke();
     }
     public void Load(SaveFile partida){
         //Instantiate(playerPrefab);

@@ -24,19 +24,26 @@ public class MinigameUI : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            try
+            {
+                DontDestroyOnLoad(this);
+            }
+            catch (System.Exception)
+            {
+                
+            }
         }
         else if (instance != this)
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(this);
     }
 
     public void EndMinigame(float waitTime){
         Inventory.instance.AddMoney(rewardMoney);
 
         //var monos = ScenesManagers.GetComponentsInChildrenList<MonoBehaviour>(currentMinigame);
-        var monos = currentMinigame.GetComponentsInChildren<MonoBehaviour>();
+        var monos = currentMinigame?.GetComponentsInChildren<MonoBehaviour>();
 
         if (monos != null)
         {
@@ -49,10 +56,11 @@ public class MinigameUI : MonoBehaviour
     }
 
 
-    public void RecieveMinigame(GameObject minigame){
+    public GameObject RecieveMinigame(GameObject minigame){
         currentMinigame = Instantiate(minigame, new Vector3(0, 0, 90), Quaternion.identity);
         currentMinigame.transform.SetParent(canvas.transform, false);
         background.SetActive(true);
+        return currentMinigame;
     }
 
     public void DestroyMinigame()

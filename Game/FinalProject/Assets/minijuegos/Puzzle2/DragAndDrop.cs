@@ -10,7 +10,9 @@ public class DragAndDrop : MasterMinigame
    [SerializeField]int ganar=0;
     void Start()
     {
-        
+        SelectedPiece = null;
+        LastSelectedPiece = null;
+        //WinMinigameHandler += CosasAlGanar;
     }
 
     // Update is called once per frame
@@ -30,13 +32,15 @@ public class DragAndDrop : MasterMinigame
             Vector2 MousePoint = Input.mousePosition;
             SelectedPiece.transform.position = new Vector2(MousePoint.x, MousePoint.y);
         }
-        if(LastSelectedPiece.GetComponent<PiceseScript>().correcta){
+        if(LastSelectedPiece != null && LastSelectedPiece.GetComponent<PiceseScript>().correcta){
             ganar++;
             LastSelectedPiece = null;
-            if (ganar==36)
-            {
-                OnWinMinigame();
-            }
+            Debug.Log(ganar);
+        }
+        if (ganar==36)
+        {
+            Debug.Log("ganaste");
+            OnWinMinigame();
         }
     }
 
@@ -50,5 +54,8 @@ public class DragAndDrop : MasterMinigame
                 OrderInLayer++;
             }
         }
+    }
+    void CosasAlGanar(){
+
     }
 }

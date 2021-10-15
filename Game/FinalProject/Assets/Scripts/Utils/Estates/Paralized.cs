@@ -60,10 +60,5 @@ public class Paralized : State
     {
         base.StopAffect();
         SetActiveEntity(true);
-        bool isPlayer = manager.hostEntity.GetComponent<PlayerManager>() != null;
-        /*if(isPlayer)
-        {
-            player.SetImmune();
-        }*/
     }
 }

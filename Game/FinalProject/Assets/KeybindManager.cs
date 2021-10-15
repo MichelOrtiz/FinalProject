@@ -150,8 +150,9 @@ public class KeybindManager : MonoBehaviour
         BindKey("MOVEJUMP", KeyCode.Space);
         //MENU
         BindKey("MENUPAUSE", KeyCode.Escape);
+        BindKey("MENUMAP", KeyCode.M);
         BindKey("MENUMINIMAP", KeyCode.Tab);
-        BindKey("MENUINVENTORY", KeyCode.I);
+        BindKey("MENUINVENTORY", KeyCode.Mouse1);
         BindKey("MENUINTERACTION", KeyCode.E);
         BindKey("MENUFASTASSIGN", KeyCode.LeftControl);
         //ACTION 
@@ -175,6 +176,6 @@ public class KeybindManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
             navi.SetActive(false);
     }
-    public static readonly string[] defaultKeys = {"MOVEUP","MOVEDOWN","MOVERIGHT","MOVELEFT","MOVEJUMP","MENUPAUSE","MENUMINIMAP","MENUINVENTORY","MENUINTERACTION","MENUFASTASSIGN","RUN","OBJ1","OBJ2","FOOD1","FOOD2","FOOD3","FOOD4","FOOD5","SKILL1","SKILL2","SKILL3","SKILL4","SKILL5"};
-    public static readonly KeyCode[] defaultValues = {KeyCode.W,KeyCode.S,KeyCode.D,KeyCode.A,KeyCode.Space,KeyCode.Escape,KeyCode.Tab,KeyCode.I,KeyCode.E,KeyCode.LeftControl,KeyCode.LeftShift,KeyCode.Q,KeyCode.R,KeyCode.Alpha1,KeyCode.Alpha2,KeyCode.Alpha3,KeyCode.Alpha4,KeyCode.Alpha5,KeyCode.Alpha6,KeyCode.Alpha7,KeyCode.Alpha8,KeyCode.Alpha9,KeyCode.Alpha0};
+    public static readonly string[] defaultKeys = {"MOVEUP","MOVEDOWN","MOVERIGHT","MOVELEFT","MOVEJUMP","MENUPAUSE","MENUMAP","MENUMINIMAP","MENUINVENTORY","MENUINTERACTION","MENUFASTASSIGN","RUN","OBJ1","OBJ2","FOOD1","FOOD2","FOOD3","FOOD4","FOOD5","SKILL1","SKILL2","SKILL3","SKILL4","SKILL5"};
+    public static readonly KeyCode[] defaultValues = {KeyCode.W,KeyCode.S,KeyCode.D,KeyCode.A,KeyCode.Space,KeyCode.Escape,KeyCode.M,KeyCode.Tab,KeyCode.Mouse1,KeyCode.E,KeyCode.LeftControl,KeyCode.LeftShift,KeyCode.Q,KeyCode.R,KeyCode.Alpha1,KeyCode.Alpha2,KeyCode.Alpha3,KeyCode.Alpha4,KeyCode.Alpha5,KeyCode.Alpha6,KeyCode.Alpha7,KeyCode.Alpha8,KeyCode.Alpha9,KeyCode.Alpha0};
 }
