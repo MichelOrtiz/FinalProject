@@ -10,7 +10,7 @@ public class PlayerManager : Entity
     public float currentStaminaLimit = 100;
     public float maxOxygen = 100;
     public float walkingSpeed;
-    public const float defaultwalkingSpeed = 7;
+    public const float defaultwalkingSpeed = 7f;
     public const float defaultGravity = 2.5f;
     public float currentGravity;
     public float defaultMass = 10;

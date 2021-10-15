@@ -10,36 +10,15 @@ public class Run : Ability
     [SerializeField] private Rigidbody2D body;
     public override void UseAbility()
     {
-        //if(player.currentStamina >= LimitStamCost && body.velocity.magnitude != 0){
-            if (isInCooldown)
-            {
-                player.TakeTirement(staminaCost);
-                //Debug.Log("Usando en cooldown");
-            }
-            player.walkingSpeed = runningSpeed;
-            if (player.isInWater)
-            {
-                player.walkingSpeed = 7f;
-            }
-            if (player.isInIce)
-            {
-                player.walkingSpeed = 75f;
-            }
-            if (player.isInSnow && !player.isInIce)
-            {
-                player.walkingSpeed = 8.5f;
-            }
-            if (player.isInConvey)
-            {
-                player.walkingSpeed = 75f;
-            }
-        //}
-    }
-
+        if (isInCooldown)
+        {
+            player.TakeTirement(staminaCost);
+        }
+        player.walkingSpeed = runningSpeed;
+    } 
     protected override void Start()
     {
         base.Start();
-        runningSpeed = player.walkingSpeed * speedMultiplier;
     }
 
     protected override void Update()
@@ -50,36 +29,34 @@ public class Run : Ability
         }
         if (Input.GetKeyUp(hotkey))
         {
-            player.walkingSpeed = runningSpeed/speedMultiplier;
-            isInCooldown = false;
-            player.isRunning = false;
+            StopRunning();
+        }
+        if(Input.GetKeyDown(hotkey)){
+            StartRunning();
         }
         if (Input.GetKey(hotkey))
         {
             if (player.currentStamina > staminaCost && player.currentStamina >= LimitStamCost && player.inputs.movementX != 0)
             {
                 UseAbility();
-                player.isRunning = true;
                 if (time > 0)
                 {
                     time -= Time.deltaTime;
-                    isInCooldown = false;
+                    isInCooldown = false; //evita que se consuma inmediatamente la stamina
                 }
                 else if(time <= 0)
                 {
                     time = cooldownTime;
-                    isInCooldown = true;
                 }
             }
             else
             {
-                player.isRunning = false;
-                player.walkingSpeed = runningSpeed/speedMultiplier;
-                isInCooldown = false;
+                StopRunning();
             }
         }
         
     }
+    /*
     private void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Water")
@@ -95,10 +72,22 @@ public class Run : Ability
             runningSpeed = player.walkingSpeed * speedMultiplier;
         }
     }
+    */
     public float GetSpeedMultiplier(){
         return speedMultiplier;
     }
     public void SetSpeedMultiplier(float newSpeedMultiplier){
         speedMultiplier = newSpeedMultiplier;
+        runningSpeed = PlayerManager.defaultwalkingSpeed * speedMultiplier;
+    }
+    void StartRunning(){
+        runningSpeed = PlayerManager.defaultwalkingSpeed* speedMultiplier;
+        player.isRunning = true;
+        isInCooldown = true;
+    }
+    void StopRunning(){
+        player.walkingSpeed = runningSpeed / speedMultiplier;
+        isInCooldown = false;
+        player.isRunning = false;
     }
 }
