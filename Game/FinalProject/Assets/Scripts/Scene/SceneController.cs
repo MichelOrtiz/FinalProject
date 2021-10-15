@@ -20,13 +20,14 @@ public class SceneController : MonoBehaviour
     private void Start() {
         if(currentScene==0)
         currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneChanged?.Invoke();
         //Debug.Log("Start scenecontroller");
     }
     public void LoadScene(int scene){
         prevScene = SceneManager.GetActiveScene().buildIndex;
         currentScene = scene;
-        SceneManager.LoadScene(scene);
         SceneChanged?.Invoke();
+        SceneManager.LoadScene(scene);
     }
     public void Load(SaveFile partida){
         //Instantiate(playerPrefab);

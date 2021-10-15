@@ -6,10 +6,11 @@ using UnityEngine;
 public class MapSlot : MonoBehaviour
 {
     public bool isObtained;
-    public bool isHere;
     public int Scene;
+    public bool isHere {get => SceneController.instance.currentScene == Scene;}
     [SerializeField] GameObject zonaMapa;
     [SerializeField] Button boton;
+    [SerializeField] GameObject nicoIsHere;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +26,10 @@ public class MapSlot : MonoBehaviour
     public void UpdateUI(){
         if (isHere)
         {
-
+            nicoIsHere.SetActive(true);
         }else
         {
-
+            nicoIsHere.SetActive(false);
         }
         if (isObtained)
         {
@@ -37,7 +38,7 @@ public class MapSlot : MonoBehaviour
         }else
         {
             boton.enabled = false;
-            boton.gameObject.GetComponent<Image>().color = Color.gray;
+            boton.gameObject.GetComponent<Image>().color = Color.clear;
         }
     }
     public void OnBottonClicked(){
