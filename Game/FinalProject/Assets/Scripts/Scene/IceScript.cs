@@ -31,7 +31,7 @@ public class IceScript : MonoBehaviour
         if (contact.tag == "Player")
         {
             //player.rigidbody2d.AddForce(new Vector2( 300f * player.rigidbody2d.velocity.x, player.rigidbody2d.velocity.y));
-            player.isInIce = true;
+            //player.isInIce = true;
             player.statesManager.AddState(iceState);
             Debug.Log("esta en ice");
         }
@@ -41,7 +41,7 @@ public class IceScript : MonoBehaviour
     {
         if (contact.tag == "Player")
         {
-            player.isInIce = false;
+            //player.isInIce = false;
             player.statesManager.RemoveState(iceState);
             
         }
