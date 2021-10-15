@@ -18,7 +18,7 @@ public class InteractionTrigger : MonoBehaviour
     void TriggerInteraction(){
         if(distance > radius) return;
         if(inter.condition != null){
-            if(inter.condition){
+            if(inter.condition.isDone){
                 inter.DoInteraction();
             }else{
                 Debug.Log("No se cumple lo necesario para esta interaccion");

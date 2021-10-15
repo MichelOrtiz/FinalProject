@@ -7,6 +7,7 @@ public class Interaction : ScriptableObject {
     public InterCondition condition = null;
     enum InteractionType
     {
+        Dialogue,
         UI,
         Mision,
         GG,
@@ -15,12 +16,17 @@ public class Interaction : ScriptableObject {
     }
     [SerializeField] InteractionType type = InteractionType.None;
     [SerializeField] GameObject UI;
+    [SerializeField] Dialogue dialogue;
     [SerializeField] WorldState mision;
     [SerializeField] Item giveObject;
 
     
     public void DoInteraction(){
         switch(type){
+            case InteractionType.Dialogue:{
+                OpenDialogueBox();
+                break;
+            }
             case InteractionType.UI:{
                 OpenUIElement();
                 break;
@@ -43,8 +49,16 @@ public class Interaction : ScriptableObject {
             }
         }
     }
+    void OpenDialogueBox(){
+        if(FindObjectOfType<DialogueManager>() != null){
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        }else{
+            Instantiate(UI);
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        }
+    }
     void OpenUIElement(){
-        UI.SetActive(true);
+        Instantiate(UI);
     }
     void GiveMision(){
         List<WorldState> worldStates =
