@@ -39613,11 +39613,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
---- !u!50 &1236385782 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 3829738358529845164, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-  m_PrefabInstance: {fileID: 1547909381}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1250434447
 GameObject:
   m_ObjectHideFlags: 0
@@ -41486,6 +41481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iLevelToLoad: 2
+  noDoor: 1
   loadPosition: {fileID: 197572358}
 --- !u!61 &1459501031
 BoxCollider2D:
@@ -41664,14 +41660,6 @@ PrefabInstance:
     - target: {fileID: 3829738358529845160, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_Name
       value: Nico-nor
-      objectReference: {fileID: 0}
-    - target: {fileID: 3829738360394267734, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-      propertyPath: body
-      value: 
-      objectReference: {fileID: 1236385782}
-    - target: {fileID: 3829738360394267734, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
-      propertyPath: isUnlocked
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
