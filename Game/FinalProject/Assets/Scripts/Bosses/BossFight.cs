@@ -12,7 +12,6 @@ public class BossFight : MonoBehaviour
 
     [SerializeField] private GameObject loadlevel;
 
-    public WorldState condition;
 
 
 
@@ -94,8 +93,6 @@ public class BossFight : MonoBehaviour
 
             Debug.Log("Lo hiciste ganaste!!!1");
 
-
-            condition.state = true;
 
             loadlevel?.SetActive(true);
             BattleEnded?.Invoke();
