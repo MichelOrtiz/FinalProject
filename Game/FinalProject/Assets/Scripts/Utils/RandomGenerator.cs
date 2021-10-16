@@ -35,6 +35,15 @@ public static class RandomGenerator
 
         return num; 
     }
+    public static float NewRandom(float min, float max)
+    {
+        float num;
+       //UnityEngine..Random random = new UnityEngine..Random();
+        
+        num = UnityEngine.Random.Range(min,max+1);
+
+        return num; 
+    }
 
     public static ushort NewRandom(List<ushort> list, ushort min, ushort max)
     {
