@@ -72,6 +72,8 @@ public class KeybindManager : MonoBehaviour
         }
         if(FindObjectOfType<PlayerInputs>() != null){
             FindObjectOfType<PlayerInputs>().controlBinds = controlbinds;
+            FindObjectOfType<PlayerInputs>().Pause = controlbinds["MENUPAUSE"];
+            FindObjectOfType<PlayerInputs>().Map = controlbinds["MENUMAP"];
         }
     }//KeybindManager.MyInstance.binds[""]
 
@@ -139,6 +141,8 @@ public class KeybindManager : MonoBehaviour
         }
         if(FindObjectOfType<PlayerInputs>() != null){
             FindObjectOfType<PlayerInputs>().controlBinds = controlbinds;
+            FindObjectOfType<PlayerInputs>().Pause = controlbinds["MENUPAUSE"];
+            FindObjectOfType<PlayerInputs>().Map = controlbinds["MENUMAP"];
         }
     }
     public void ResetBindValues(){
