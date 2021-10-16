@@ -19,6 +19,8 @@ public class PlayerInputs : MonoBehaviour
     public bool[] EquipmentHotbar = new bool[5];
     public float intputLag {get;set;}
     public const float defaultInputLag = 0;
+    public KeyCode Pause;
+    public KeyCode Map;
 
     public Action MovedRight = delegate(){PlayerManager.instance.inputs.movementX=1;};
     public Action MovedLeft = delegate(){PlayerManager.instance.inputs.movementX=-1;};

@@ -61,9 +61,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isObtained: 0
   Scene: 0
-  zonaMapa: {fileID: 5708428867961840721}
+  fondo: {fileID: 0}
   boton: {fileID: 8691792095631442582}
   nicoIsHere: {fileID: 7520283301401281941}
+  zonaMapa: {fileID: 0}
 --- !u!1 &5708428867961840721
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,13 +186,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 8088047046392759942}
+        m_TargetAssemblyTypeName: MapSlot, Assembly-CSharp
+        m_MethodName: OnBottonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

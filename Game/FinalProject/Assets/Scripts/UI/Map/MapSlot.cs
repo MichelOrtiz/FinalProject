@@ -8,9 +8,12 @@ public class MapSlot : MonoBehaviour
     public bool isObtained;
     public int Scene;
     public bool isHere {get => SceneController.instance.currentScene == Scene;}
-    [SerializeField] GameObject zonaMapa;
+    [SerializeField] GameObject fondo;
     [SerializeField] Button boton;
     [SerializeField] GameObject nicoIsHere;
+    [SerializeField] Sprite zonaMapa;
+    [SerializeField] Image imagenZona;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +45,7 @@ public class MapSlot : MonoBehaviour
         }
     }
     public void OnBottonClicked(){
-        zonaMapa.SetActive(true);
+        fondo.SetActive(true);
+        imagenZona.sprite = zonaMapa;
     }
 }

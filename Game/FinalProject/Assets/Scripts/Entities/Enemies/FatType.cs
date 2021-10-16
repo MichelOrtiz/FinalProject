@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FatType : Enemy
 {
+    [SerializeField] private int amount = 1;
     [SerializeField] private Item wishedItem;
     [SerializeField] private GameObject wishedItemIcon;
     [SerializeField] private WorldState worldState = new WorldState();
@@ -37,13 +38,31 @@ public class FatType : Enemy
         //base.ConsumeItem(item);
         if (item == wishedItem)
         {
+            amount--;
             Debug.Log("he liked that");
+            if (amount != 0)
+            {
+                updateVisual();
+                return;
+            }
             worldState.state = true;
+            List<MapSlot> map = FindObjectOfType<MapUI>().mapitas;
+            foreach (MapSlot slot in map)
+            {
+                if (slot.Scene == SceneController.instance.currentScene)
+                {
+                    slot.isObtained = true;
+                    slot.UpdateUI();
+                }
+            }
             DestroyEntity();
         }
         else
         {
             Debug.Log("he didn't like that...");
         }
+    }
+    public void updateVisual(){
+        
     }
 }
