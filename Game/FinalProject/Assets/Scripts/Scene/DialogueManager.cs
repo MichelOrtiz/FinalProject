@@ -5,21 +5,7 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    #region Singleton
-    public static DialogueManager instance;
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            return;
-        }
-        instance = this;
-    }
-    #endregion
-    public enum DialogState { Ready,Start,End};
-    public DialogState state;
-    private Queue<string> sentences = new Queue<string>();
-    public GameObject panel;
+    private Queue<string> sentences;
     public Animator animator;
     public Text nameText;
     public Text dialogueText;
@@ -27,19 +13,16 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        panel.SetActive(true);
         sentences = new Queue<string>();
-        state = DialogState.Ready;
     }
 
-    public void StartDialogue (Dialogue d)
+    public void StartDialogue (Dialogue dialogue)
     {
         Minimap.MinimapWindow.instance.Hide();
-        state = DialogState.Start;
-        animator.SetBool("IsOpen", true);
-        nameText.text = d.name;
+        nameText.text = dialogue.name;
         sentences.Clear();
-        foreach(string sentence in d.sentences)
+        animator.SetBool("IsOpen", true);
+        foreach(string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
@@ -68,8 +51,6 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
-        state = DialogState.End;
-
         Minimap.MinimapWindow.instance.Show();
     }
 }

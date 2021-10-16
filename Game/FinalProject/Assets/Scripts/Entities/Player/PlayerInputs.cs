@@ -88,7 +88,7 @@ public class PlayerInputs : MonoBehaviour
         }
         
 
-        if (Input.GetKey(controlBinds["MENUINTERACTION"]))
+        if (Input.GetKeyDown(controlBinds["MENUINTERACTION"]))
         {
             Interact?.Invoke();
         }
