@@ -63,15 +63,15 @@ public class VientoHazard : MonoBehaviour
     {
         if (other.tag == "Player" && !player.isImmune )
         {
-            player.TakeTirement(damageAmount);
-            if (damageAmount > damageThreshold)
-            {
-                player.SetImmune();
-            }
             player.statesManager.AddState(hazardState);
             ParticleSystem.CollisionModule collisionModule = particleSystem.collision;
             if(player.statesManager.currentStates.Contains(hazardState)){
                 collisionModule.colliderForce = windForce;
+                player.TakeTirement(damageAmount);
+                if (damageAmount > damageThreshold)
+                {
+                    player.SetImmune();
+                }
             }else{
                 collisionModule.colliderForce = 0f;
             }

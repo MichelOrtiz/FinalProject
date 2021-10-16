@@ -8,7 +8,7 @@ public class SpeedMultiplier : State
     PlayerManager player;
     enum Hazard
     {
-        Nieve,Hielo,Viento,Nada
+        Nieve,Hielo,Viento,Arena,Agua,Nada
     }
     [SerializeField] Hazard hazard = Hazard.Nada;
     Run runOverride = null;
