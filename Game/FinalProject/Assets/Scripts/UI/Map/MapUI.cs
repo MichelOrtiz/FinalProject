@@ -27,7 +27,7 @@ public class MapUI : MonoBehaviour
             mapUI.SetActive(!mapUI.activeSelf);
             if (mapUI.activeSelf)
             {
-                Pause.PauseGame();
+                //Pause.PauseGame();
             }else
             {
                 Pause.ResumeGame();

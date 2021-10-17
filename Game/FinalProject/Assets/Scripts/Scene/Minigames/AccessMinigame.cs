@@ -24,6 +24,9 @@ public class AccessMinigame : MonoBehaviour
         available = true;
         PlayerManager.instance.inputs.Interact += Inputs_interact ;
     }
+    private void OnDestroy() {
+        PlayerManager.instance.inputs.Interact -= Inputs_interact ;
+    }
 
     // Update is called once per frame
     void Update()
