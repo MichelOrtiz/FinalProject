@@ -21,16 +21,14 @@ public class Inter : MonoBehaviour
         {
             imagen.sprite = item.icon;
         }
+        player.inputs.Interact += PickUpObj;
     }
-    private void Update() {
+    public void PickUpObj(){
         float distance = Vector2.Distance(player.transform.position, transform.position);
         if(distance <= radius){
-            if(Input.GetKeyDown(KeyCode.E)){
-                //Debug.Log("Agarrando " + item.nombre);
-                bool IsPicked = Inventory.instance.Add(item);
-                if(IsPicked){
-                    Destroy(gameObject);
-                }
+            bool IsPicked = Inventory.instance.Add(item);
+            if(IsPicked){
+                Destroy(gameObject);
             }
         }
     }
@@ -39,6 +37,7 @@ public class Inter : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
+    //Estoy pensando en crear una funcion sincrona para evitar que dos cosas sean afectadas por el mismo objeto
     private void OnTriggerEnter2D(Collider2D other) {
         Enemy enemigo = other.transform?.parent?.GetComponentInChildren<Enemy>();
         Debug.Log(other.gameObject);
@@ -59,5 +58,9 @@ public class Inter : MonoBehaviour
     public void SetItem(Item newItem){
         item = newItem;
         imagen.sprite = item.icon;
+    }
+    private void OnDestroy() {
+        //Es necesario esto o estoy siendo paranoico
+        player.inputs.Interact -= PickUpObj;
     }
 }
