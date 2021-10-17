@@ -96,7 +96,7 @@ public class SaveFilesManager : MonoBehaviour
             currentSaveSlot.unlockedAbilities[i] = a.isUnlocked;
             i++;
         }
-        currentSaveSlot.money = Inventory.money;
+        currentSaveSlot.money = Inventory.instance.GetMoney();
 
         string jsonString = JsonUtility.ToJson(currentSaveSlot);
         string filePath = Application.dataPath + "/Partida" + currentSaveSlot.slotFile;

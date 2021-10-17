@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
-    public static int money;
+    private int money;
     public Text moneyText;
     public static Inventory instance;
     public List<Item> items = new List<Item>();
@@ -20,6 +20,7 @@ public class Inventory : MonoBehaviour
     }
     private void Start() {
         if(SaveFilesManager.instance!= null && SaveFilesManager.instance.currentSaveSlot != null){
+            AddMoney(SaveFilesManager.instance.currentSaveSlot.money);
             items.Clear();
             if(SaveFilesManager.instance.currentSaveSlot.inventory != null){
                 for(int i=0;i<SaveFilesManager.instance.currentSaveSlot.inventory.Length;i++){
@@ -42,18 +43,20 @@ public class Inventory : MonoBehaviour
         }
         
     }
-    
+    public int GetMoney(){
+        return money;
+    }
     public void AddMoney(int i){
         money+=i;
         UpdateMoneyUI();
         return;
     }
     public bool RemoveMoney(int i){
-        if(money<i){
+        if(money < i){
             Debug.Log("No hay suficiente dinero");
             return false;
         }
-        money-=i;
+        money -= i;
         UpdateMoneyUI();
         return true;
     }

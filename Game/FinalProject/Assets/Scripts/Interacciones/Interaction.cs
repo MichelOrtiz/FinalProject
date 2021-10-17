@@ -33,33 +33,39 @@ public class Interaction : ScriptableObject {
             }
             case InteractionType.Mision:{
                 GiveMision();
+                onEndInteraction?.Invoke();
                 break;
             }
             case InteractionType.GG:{
                 GenerateAndGive();
+                onEndInteraction?.Invoke();
                 break;
             }
             case InteractionType.Condition:{
                 DealCondition();
+                onEndInteraction?.Invoke();
                 break;
             }
             default:{
                 Debug.Log("What am I supposed to do?");
+                onEndInteraction?.Invoke();
                 break;
             }
         }
-        onEndInteraction?.Invoke();
     }
     void OpenDialogueBox(){
         if(FindObjectOfType<DialogueManager>() != null){
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            FindObjectOfType<DialogueManager>().currentInteraction = this;
         }else{
             Instantiate(UI);
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            FindObjectOfType<DialogueManager>().currentInteraction = this;
         }
     }
     void OpenUIElement(){
-        Instantiate(UI);
+        GameObject x = Instantiate(UI);
+        x.GetComponent<InteractionUI>().currentInteraction = this;
     }
     void GiveMision(){
         List<WorldState> worldStates =

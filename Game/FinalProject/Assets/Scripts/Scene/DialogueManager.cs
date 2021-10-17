@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : InteractionUI
 {
     private Queue<string> sentences;
     public Animator animator;
@@ -11,8 +11,9 @@ public class DialogueManager : MonoBehaviour
     public Text dialogueText;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         sentences = new Queue<string>();
     }
 
@@ -52,5 +53,6 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
         Minimap.MinimapWindow.instance.Show();
+        Exit();
     }
 }

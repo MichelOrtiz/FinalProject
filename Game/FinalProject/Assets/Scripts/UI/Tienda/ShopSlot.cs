@@ -21,27 +21,27 @@ public class ShopSlot : MonoBehaviour
         price = article.price;
         UpdateUI();
     }
-    void UpdateUI(){
+    public void UpdateUI(){
         if(item != null) itemImage.sprite = item.icon;
         if(amount > 0)txt_amount.text = "X" + amount.ToString();
         else txt_amount.text = "";
-        if(Inventory.money < price){
+        if(Inventory.instance.GetMoney() < price){
             btn_buy.GetComponent<Image>().color = Color.red;
         }else{
             btn_buy.GetComponent<Image>().color = Color.green;
         }
     }
     public void Purchase(){
-        if(Inventory.money < price) return;
-        for(int i = 0; i > amount; i++){
+        if(!Inventory.instance.RemoveMoney(price)) return;
+        for(int i = 0; i < amount; i++){
             if(!Inventory.instance.Add(item)){
                 Debug.Log("No hay espacio");
                 for(int x = 0;x < i; x++){
                     Inventory.instance.Remove(item);
                 }
+                Inventory.instance.AddMoney(price);
             }
         }
-        Inventory.money -= price;
-        UpdateUI();
+        FindObjectOfType<ShopUI>().UpdateUI();
     }
 }
