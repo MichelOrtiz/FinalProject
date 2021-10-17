@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
-public class ShopSlot : MonoBehaviour
+public class ShopSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
     public Item item;
     [SerializeField] private Image itemImage;
@@ -12,6 +13,7 @@ public class ShopSlot : MonoBehaviour
     [SerializeField] private int price;
     [SerializeField] private int amount;
     [SerializeField] private TextMeshProUGUI txt_amount;
+    [SerializeField] private TextMeshProUGUI txt_toChange;
     private void Start() {
         //UpdateUI();
     }
@@ -43,5 +45,11 @@ public class ShopSlot : MonoBehaviour
             }
         }
         FindObjectOfType<ShopUI>().UpdateUI();
+    }
+    public void OnPointerEnter(PointerEventData eventData){
+        txt_toChange.text = price.ToString()+"G";
+    }
+    public void OnPointerExit(PointerEventData eventData){
+        txt_toChange.text = "BUY";
     }
 }
