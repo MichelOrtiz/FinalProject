@@ -17,6 +17,7 @@ public class SaveFile
     public List<string> controlBindsKeys;
     public List<KeyCode> controlBindsValues;
     public Item[] inventory;
+    public int capacidad;
     public Item[] chestItems;
     public int money;
     public float staminaLimit;
@@ -29,6 +30,7 @@ public class SaveFile
         this.timeHoursPlayed = 0;
         this.sceneToLoad = 1;
         this.positionSpawn = new Vector2(-324f, 0f);
+        this.capacidad = 20;
         this.inventory = null;
         this.chestItems = null;
         this.money = 0;
@@ -46,6 +48,7 @@ public class SaveFile
         this.timeHoursPlayed = 0;
         this.sceneToLoad = 1;
         this.positionSpawn = new Vector2(-324f, 0f);
+        this.capacidad = 20;
         this.inventory = null;
         this.chestItems = null;
         this.money = 0;

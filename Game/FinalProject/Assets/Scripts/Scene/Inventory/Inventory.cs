@@ -20,6 +20,7 @@ public class Inventory : MonoBehaviour
     }
     private void Start() {
         if(SaveFilesManager.instance!= null && SaveFilesManager.instance.currentSaveSlot != null){
+            capacidad = SaveFilesManager.instance.currentSaveSlot.capacidad;
             AddMoney(SaveFilesManager.instance.currentSaveSlot.money);
             items.Clear();
             if(SaveFilesManager.instance.currentSaveSlot.inventory != null){
