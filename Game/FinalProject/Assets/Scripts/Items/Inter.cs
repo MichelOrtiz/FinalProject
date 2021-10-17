@@ -28,6 +28,7 @@ public class Inter : MonoBehaviour
         if(distance <= radius){
             bool IsPicked = Inventory.instance.Add(item);
             if(IsPicked){
+                Debug.Log(item.name + " picked");
                 Destroy(gameObject);
             }
         }
@@ -40,7 +41,7 @@ public class Inter : MonoBehaviour
     //Estoy pensando en crear una funcion sincrona para evitar que dos cosas sean afectadas por el mismo objeto
     private void OnTriggerEnter2D(Collider2D other) {
         Enemy enemigo = other.transform?.parent?.GetComponentInChildren<Enemy>();
-        Debug.Log(other.gameObject);
+        //Debug.Log(other.gameObject);
         if(enemigo!=null)
         {
             enemigo.ConsumeItem(item);

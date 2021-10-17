@@ -17,17 +17,15 @@ public class EmoteSetter : State
         //newManager.RemoveEmotes();
 
         InstantiateEmote();
-        
+        currentTime = 0;
     }
 
     public override void Affect()
     {
         if (currentTime > duration)
         {
-            currentTime = 0;
-            
-
             StopAffect();
+            currentTime = 0;
         }
         else
         {

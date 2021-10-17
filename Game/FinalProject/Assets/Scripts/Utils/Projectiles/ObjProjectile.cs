@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FinalProject.Assets.Scripts.Utils.Physics;
 using UnityEngine;
+using System.Threading;
 
 [RequireComponent(typeof(SomePhysics))]
 public class ObjProjectile : MonoBehaviour
@@ -43,14 +44,15 @@ public class ObjProjectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy") || GroundChecker.GroundTags.Exists(tg => tg != "Boundary" && tg == other.tag) )
         {
+            //Encontre varios casos donde ObjProjectile generaba mas de un objeto PickUp al colisionar con una superficie... esto evitara que eso pase
             Debug.Log(other.name);
             physics.StopAllCoroutines();
             Enemy enemy = other.transform?.parent?.GetComponentInChildren<Enemy>();
             if(enemy!=null)
             {
+                Destroy(gameObject);
                 Debug.Log("Enemigo consumio objeto proyectil directamente");
                 enemy.ConsumeItem(item);
-                Destroy(gameObject);
                 return;
             }
             ItemGetter getter = other.gameObject.GetComponent<ItemGetter>();
@@ -63,41 +65,17 @@ public class ObjProjectile : MonoBehaviour
                     return;
                 }
             }
-            Vector3 newPosition = new Vector3 (transform.position.x,transform.position.y + 0.5f,transform.position.z);
-            Debug.Log("Generendo objeto en posicion de colision: " + newPosition.ToString());
-            GameObject x = Instantiate(itemPickPrefab,newPosition,Quaternion.identity);
-            x.GetComponent<Inter>().SetItem(item);
-            Destroy(gameObject);
+            lock (this) 
+            {
+                
+                Vector3 newPosition = new Vector3 (transform.position.x,transform.position.y + 0.5f,transform.position.z);
+                Debug.Log("Generendo objeto en posicion de colision: " + newPosition.ToString());
+                Destroy(gameObject);
+                GameObject x = Instantiate(itemPickPrefab,newPosition,Quaternion.identity);
+                x.GetComponent<Inter>().SetItem(item);
+            }
         }
     }
-    /*private void OnTriggerEnter2D(Collider2D other) {
-       if(!other.CompareTag("Player")){
-            //Debug.Log(other.name);
-            if(other.CompareTag("Enemy")){
-                Enemy enemy = other.transform.parent.GetComponentInChildren<Enemy>();
-                if(enemy!=null){
-                    Debug.Log("Enemigo consumio objeto proyectil directamente");
-                    enemy.ConsumeItem(item);
-                    Destroy(gameObject);
-                    return;
-                }
-                ItemGetter getter = other.gameObject.GetComponent<ItemGetter>();
-                if(getter!=null){
-                    if(getter.GetItem(item)){
-                        Debug.Log("Interactuable (ItemGetter) consumio objeto proyectil directamente");
-                        Destroy(gameObject);
-                        return;
-                    }
-                }
-            }
-            Vector3 newPosition = new Vector3 (transform.position.x,transform.position.y + 0.5f,transform.position.z);
-            Debug.Log("Generendo objeto en posicion de colision: " + newPosition.ToString());
-            GameObject x = Instantiate(itemPickPrefab,newPosition,Quaternion.identity);
-            x.GetComponent<Inter>().SetItem(item);
-            Destroy(gameObject);
-        }
-        
-    }*/
     public Item GetItem(){
         return item;
     }
