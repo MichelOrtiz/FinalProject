@@ -7,6 +7,7 @@ public class Spore : MonoBehaviour
     [SerializeField] private float damageAmount;
     [SerializeField] private float damageThreshold = defaultDamageThreshold;
     public const float defaultDamageThreshold = 0; 
+    [SerializeField] private float staminaPunish;
     [SerializeField] private State effectOnPlayer;
     [SerializeField] private bool stopEmittingWhenParticleCollide;
 
@@ -72,6 +73,7 @@ public class Spore : MonoBehaviour
             if (damageAmount > damageThreshold)
             {
                 player.SetImmune();
+                player.currentStaminaLimit -= staminaPunish;
             }
             if (!player.statesManager.currentStates.Contains(effectOnPlayer))
             {
