@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Mantis : Entity//, IBattleBounds
 {
+    [Header("Self Additions")]
+    [SerializeField] protected float punish;
+
     [Header("Giving Item")]
     [SerializeField] protected Item itemToGive;
     [SerializeField] private byte timesToGiveItem;
@@ -142,7 +145,8 @@ public class Mantis : Entity//, IBattleBounds
     protected virtual void eCollisionHanlder_TouchedPlayer()
     {
         player.SetImmune();
-        PlayerManager.instance.TakeTirement(damage);
+        player.TakeTirement(damage);
+        player.currentStaminaLimit -= punish;
         //ChangeParentAndChildrenLayer(LayerMask.NameToLayer("Fake"));
     }
 
