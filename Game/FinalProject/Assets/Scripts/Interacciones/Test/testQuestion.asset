@@ -9,9 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 486dff2548ba0e04eb3582f6a3f6e729, type: 3}
-  m_Name: testInterface
+  m_Script: {fileID: 11500000, guid: a87124b38c95dbc41ad92cce28a55ffa, type: 3}
+  m_Name: testQuestion
   m_EditorClassIdentifier: 
   condition: {fileID: 11400000, guid: aab70b2713c356d4088b2afe0970d495, type: 2}
-  type: 1
-  UIElement: {fileID: 3593694622491262247, guid: 0a7940ce38956a94781e11a4499c9df7, type: 3}
+  type: 3
+  question:
+    text: "\xBFQuieres checar mis productos?"
+    answers:
+    - text: Yes
+      isChosed: 1
+    - text: No
+      isChosed: 1
+  QuestionUI: {fileID: 1327342927890773980, guid: ed38d3415c79ec14cbc7fd6941be1f47, type: 3}

@@ -10,6 +10,7 @@ public class InteractionUI : MonoBehaviour
     }
     protected virtual void Exit(){
         currentInteraction.onEndInteraction?.Invoke();
+        Destroy(gameObject);
         //Permitir movimiento al jugador
     }
 }
