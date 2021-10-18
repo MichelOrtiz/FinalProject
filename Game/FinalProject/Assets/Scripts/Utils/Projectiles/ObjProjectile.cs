@@ -7,6 +7,7 @@ using System.Threading;
 [RequireComponent(typeof(SomePhysics))]
 public class ObjProjectile : MonoBehaviour
 {
+    bool hasCollided;
     public GameObject itemPickPrefab;
     public SpriteRenderer bulletImg;
     private Item item;
@@ -29,6 +30,7 @@ public class ObjProjectile : MonoBehaviour
     private void Start()
     {
         rigidbody.velocity = transform.right * speed;
+        hasCollided = false;
         /*var shotPos = new Vector2(transform.position.x, transform.position.y);
         var mouseDir = PlayerManager.instance.GetComponentInChildren<MouseDirPointer>().MouseDirection;
         var mouseDirSt = new Vector2(mouseDir.x, mouseDir.y);
@@ -42,9 +44,10 @@ public class ObjProjectile : MonoBehaviour
 
     void collisionHandler_EnterContact(GameObject other)
     {
+        if(hasCollided) return;
         if (other.CompareTag("Enemy") || GroundChecker.GroundTags.Exists(tg => tg != "Boundary" && tg == other.tag) )
         {
-            //Encontre varios casos donde ObjProjectile generaba mas de un objeto PickUp al colisionar con una superficie... esto evitara que eso pase
+            hasCollided = true; //Encontre varios casos donde ObjProjectile generaba mas de un objeto PickUp al colisionar con una superficie... esto evitara que eso pase
             Debug.Log(other.name);
             physics.StopAllCoroutines();
             Enemy enemy = other.transform?.parent?.GetComponentInChildren<Enemy>();

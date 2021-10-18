@@ -55,13 +55,11 @@ public class MapUI : MonoBehaviour
             {
                 if (slot.Scene == scenes[index])
                 {
-                    Debug.Log("Escena" + scenes[index]);
                     wState = 200+index;
                     foreach (WorldState w in currentStates)
                     {
                         if (w.id == wState && w.state)
                         {
-                            Debug.Log("Correct");
                             slot.isObtained = true;
                             slot.UpdateUI();
                             break;
