@@ -65,15 +65,12 @@ public class ObjProjectile : MonoBehaviour
                     return;
                 }
             }
-            lock (this) 
-            {
-                
-                Vector3 newPosition = new Vector3 (transform.position.x,transform.position.y + 0.5f,transform.position.z);
-                Debug.Log("Generendo objeto en posicion de colision: " + newPosition.ToString());
-                Destroy(gameObject);
-                GameObject x = Instantiate(itemPickPrefab,newPosition,Quaternion.identity);
-                x.GetComponent<Inter>().SetItem(item);
-            }
+            Vector3 newPosition = new Vector3 (transform.position.x,transform.position.y,transform.position.z);
+            Debug.Log("Generendo objeto en posicion de colision: " + newPosition.ToString());
+            Destroy(gameObject);
+            GameObject x = Instantiate(itemPickPrefab,newPosition,Quaternion.identity);
+            x.GetComponent<Inter>().SetItem(item);
+            
         }
     }
     public Item GetItem(){
