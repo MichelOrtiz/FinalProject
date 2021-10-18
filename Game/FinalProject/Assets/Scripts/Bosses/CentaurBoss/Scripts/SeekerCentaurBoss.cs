@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class SeekerCentaurBoss : Entity, IProjectile
+public class SeekerCentaurBoss : Entity
 {
     [Header("Effect On Player")]
     [SerializeField] private State enemyEffectOnPlayer;
     [SerializeField] private State enemyEffectOnSelf;
-    [SerializeField] private State projectileEffectOnPlayer;
     [SerializeField] private float damageAmount;
 
 
     [Header("Projectile")]
-    [SerializeField] private GameObject projectilePrefab;
-    private Projectile projectile;
-    [SerializeField] private Transform shotPoint;
+    [SerializeField] private ProjectileShooter projectileShooter;
     [SerializeField] private float minDistanceToShoot;
     [SerializeField] private float timeBtwShot;
     private float currentTimeBtwShot;
@@ -81,7 +78,7 @@ public class SeekerCentaurBoss : Entity, IProjectile
         {
             if (currentTimeBtwShot > timeBtwShot)
             {
-                ShotProjectile(shotPoint, player.GetPosition());
+                projectileShooter.ShootProjectile(player.GetPosition());
                 currentTimeBtwShot = 0;
             }
             else
@@ -217,17 +214,6 @@ public class SeekerCentaurBoss : Entity, IProjectile
         float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
         Vector3 targetPos = fovOrigin.position + (facingDirection == LEFT? Vector3.left : Vector3.right) * castDistance;
         return RayHitObstacle(fovOrigin.position, targetPos);
-    }
-
-    public void ProjectileAttack()
-    {
-        player.statesManager.AddState(projectileEffectOnPlayer);
-    }
-
-    public void ShotProjectile(Transform from, Vector3 to)
-    {
-        projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to, this);
     }
 
     /*void OnCollisionEnter2D(Collision2D other)
