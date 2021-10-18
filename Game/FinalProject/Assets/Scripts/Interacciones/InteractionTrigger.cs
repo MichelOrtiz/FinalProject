@@ -36,17 +36,7 @@ public class InteractionTrigger : MonoBehaviour
             return;
         }
         Interaction inter = cola.Dequeue();
-        if(inter.condition != null){
-            if(inter.condition.isDone){
-                inter.DoInteraction();
-            }else{
-                Debug.Log("No se cumple lo necesario para esta interaccion");
-                NextInteraction();
-            }
-        }else{
-            Debug.Log("No se necesita algo para esta interaccion");
-            inter.DoInteraction();
-        }
+        inter.DoInteraction();
     }
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.magenta;
