@@ -5,16 +5,20 @@ using UnityEngine.UI;
 
 public class DialogueManager : InteractionUI
 {
+    public enum UIStatus{Ready,Busy}
+    public UIStatus status;
     private Queue<string> sentences;
     public Animator animator;
     public Text nameText;
     public Text dialogueText;
-
+    private void Awake() {
+        sentences = new Queue<string>();
+    }
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        sentences = new Queue<string>();
+        //StartDialogue(new Dialogue());
     }
 
     public void StartDialogue (Dialogue dialogue)
