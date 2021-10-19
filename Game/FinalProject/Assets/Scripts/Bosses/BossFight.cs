@@ -100,6 +100,9 @@ public class BossFight : MonoBehaviour
                 worldState.state = true;
                 partida.WorldStates.Add(worldState);
             }
+
+            loadlevel?.SetActive(true);
+            BattleEnded?.Invoke();
         }
     }
     public void StartBattle(){
