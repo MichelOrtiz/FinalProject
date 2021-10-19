@@ -6,15 +6,16 @@ public class FatType : Enemy
 {
     [SerializeField] private int amount = 1;
     [SerializeField] private Item wishedItem;
-    [SerializeField] private GameObject wishedItemIcon;
+    [SerializeField] private Bubble wishedItemBubble;
     [SerializeField] private WorldState worldState = new WorldState();
+    [SerializeField] private float bubbleRadius = 5f;
 
     protected new void Start()
     {
         base.Start();
         //iconSprite = GetComponent<SpriteRenderer>();
         //wishedItemSprite = wishedItem.icon;
-        wishedItemIcon.GetComponent<SpriteRenderer>().sprite = wishedItem.icon;
+        wishedItemBubble.SetImage(wishedItem.icon,amount);
         if(SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
             SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
             foreach(WorldState w in partida.WorldStates){
@@ -62,7 +63,20 @@ public class FatType : Enemy
             Debug.Log("he didn't like that...");
         }
     }
+    protected new void Update(){
+        base.Update();
+        float distance = Vector2.Distance(player.GetPosition(), transform.position);
+        if(distance <= bubbleRadius){
+            wishedItemBubble.gameObject.SetActive(true);
+        }else{
+            wishedItemBubble.gameObject.SetActive(false);
+        }
+    }
     public void updateVisual(){
-        
+        wishedItemBubble.UpdateAmount(amount);
+    }
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position,bubbleRadius);
     }
 }
