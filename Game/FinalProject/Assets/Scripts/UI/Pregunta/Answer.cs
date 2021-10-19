@@ -5,5 +5,5 @@ using UnityEngine;
 public class Answer
 {
     public string text;
-    public bool isChosed;
+    public bool isChosed = false;
 }

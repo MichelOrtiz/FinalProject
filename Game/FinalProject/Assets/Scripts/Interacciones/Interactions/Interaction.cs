@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Interaction : ScriptableObject {
-    public enum InteractionType{Dialogue,Interface,GiveItem,None}
+    public enum InteractionType{Dialogue,Interface,GiveItem,Question,None}
     public InterCondition condition = null;
     public InteractionType type = InteractionType.None;
     public delegate void OnEndInteraction();

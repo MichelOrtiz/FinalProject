@@ -12922,6 +12922,7 @@ MonoBehaviour:
   puckScript: {fileID: 1053711530}
   airHockeyPlayerMovement: {fileID: 884989934}
   aIScript: {fileID: 1649645735}
+  keybindButtons: []
 --- !u!114 &1701990147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12934,6 +12935,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0dc1f377096634f8a8776ad665e758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMessageTrigger: {fileID: 0}
+  endMessageTrigger: {fileID: 0}
+  levelToLoad: 0
+  worldState:
+    Tag: isHocked
+    id: 87
+    state: 0
+  loadlevel: {fileID: 0}
   stages: []
   abilityObject: {fileID: 0}
   ability: 12
@@ -12954,6 +12963,7 @@ MonoBehaviour:
   popUp:
     Title: 'Nueva habilidad obtenida: '
     Message: 
+  popUpUI: {fileID: 0}
 --- !u!114 &1701990149
 MonoBehaviour:
   m_ObjectHideFlags: 0
