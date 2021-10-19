@@ -18,8 +18,9 @@ public class CPressedKey : InterCondition
         }
         return wasPressed;
     }
-    public override void RestardValues()
+    public override void RestardValues(GameObject gameObject)
     {
+        this.gameObject = gameObject;
         wasPressed = false;
     }
 }

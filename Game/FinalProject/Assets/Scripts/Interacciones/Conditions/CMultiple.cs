@@ -16,11 +16,11 @@ public class CMultiple : InterCondition
         }
         return isClear;
     }
-    public override void RestardValues()
+    public override void RestardValues(GameObject gameObject)
     {
         isClear = false;
         foreach(InterCondition con in conditions){
-            con.RestardValues();
+            con.RestardValues(gameObject);
         }
     }
 }

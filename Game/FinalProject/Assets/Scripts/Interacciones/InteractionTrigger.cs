@@ -30,7 +30,10 @@ public class InteractionTrigger : MonoBehaviour
         {
             inter.onEndInteraction += NextInteraction;
             inter.gameObject = this.gameObject;
-            inter.condition.RestardValues();
+            if(inter.condition != null){
+                inter.condition.RestardValues(gameObject);
+            }
+            
             cola.Enqueue(inter);
         }
         NextInteraction();
@@ -38,7 +41,7 @@ public class InteractionTrigger : MonoBehaviour
     protected void NextInteraction(){
         if(cola.Count == 0){
             Debug.Log("No hay mas interacciones");
-            busy = false;
+            //busy = false;
             return;
         }
         Interaction inter = cola.Dequeue();

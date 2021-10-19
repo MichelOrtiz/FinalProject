@@ -16,7 +16,9 @@ public class IntRemoteTrigger : InteractionTrigger
             cola.Enqueue(inter);
             inter.onEndInteraction += NextInteraction;
             inter.gameObject = this.gameObject;
-            inter.condition?.RestardValues();
+            if(inter.condition != null){
+                inter.condition.RestardValues(gameObject);
+            }
         }
         NextInteraction();
     }
