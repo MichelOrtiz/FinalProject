@@ -46,7 +46,7 @@ public class BossFight : MonoBehaviour
     {
         StartBattle();
         loadlevel?.SetActive(false);
-        //AudioManager.instance?.Play("Theme");
+        AudioManager.instance?.Play("Theme");
     }
     protected void Update() {
         if(Input.GetKeyDown(KeyCode.L)){
