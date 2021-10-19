@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using FinalProject.Assets.Scripts.Utils.Sound;
 using UnityEngine;
 
-public class CBWallCollision : MonoBehaviour, IProjectile
+public class CBWallCollision : MonoBehaviour
 {
     [Header("Projectile stuff")]
+    [SerializeField] private ProjectileShooter projectileShooter;
     [SerializeField] private GameObject projectilePrefab;
     private Projectile projectile;
     [SerializeField] Transform shootPos;
-    private bool shotProjectile;
 
     [Header("Hits")]
     [SerializeField] List<string> collisionTags;
@@ -32,12 +33,6 @@ public class CBWallCollision : MonoBehaviour, IProjectile
         return;
     }
 
-    public void ShotProjectile(Transform from, Vector3 to)
-    {
-        projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to);
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (collisionTags.Exists(c => c == other.tag))
@@ -46,10 +41,12 @@ public class CBWallCollision : MonoBehaviour, IProjectile
             {
                 currentHits++;
             }
-            else if (!shotProjectile)
+            else
             {
-                ShotProjectile(shootPos, other.gameObject.transform.position);
-                shotProjectile = true;
+                //ShotProjectile(shootPos, other.gameObject.transform.position);
+                AudioManager.instance?.Play("FallWall");
+                projectileShooter.ShootProjectile(other.transform.position);
+                currentHits = 0;
             }
         }
     }

@@ -26,6 +26,7 @@ public class CaveBoss : BossFight
 
     new void Start()
     {
+        base.Start();
         indexStage = 0;
         currentStage=stages[indexStage];
         currentStage.Generate();
@@ -34,13 +35,6 @@ public class CaveBoss : BossFight
         
         
         UpdateCurrentBoss();
-    }
-
-    
-    new void Update()
-    {
-        base.Update();
-
     }
 
     public override void NextStage()

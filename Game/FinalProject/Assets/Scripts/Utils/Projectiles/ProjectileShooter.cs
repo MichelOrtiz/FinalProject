@@ -70,7 +70,7 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
         player = PlayerManager.instance;
         if (entity == null)
         {
-            entity = transform.parent.GetComponent<Entity>();
+            entity = transform?.parent?.GetComponent<Entity>();
         }
 
         centerAngle = startingAngle;
@@ -103,11 +103,11 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
 
     public void ProjectileAttack()
     {
-        player.TakeTirement(projectile.damage);
         if (projectile.damage > 0)
         {
             player.SetImmune();
         }
+        player.TakeTirement(projectile.damage);
 
         player.statesManager.AddState(effectOnPlayer, entity);
         OnProjectileTouchedPlayer();
@@ -173,9 +173,12 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
         float angle = startingAngle;
         var projectiles = new List<Projectile>();
         for (int i = 0; i < bustSize; i++)
+        //while(angle + burstAngle <= 360)
         {
-            targetDirection = center.position + MathUtils.GetVectorFromAngle(angle);
-            var proj = ShootProjectile(center.position, targetDirection + (Vector2) MathUtils.GetVectorFromAngle(centerAngle));
+            targetDirection = center.position + 
+                MathUtils.GetVectorFromAngle(angle + (rotate? centerAngle : 0));
+                
+            var proj = ShootProjectile(center.position, targetDirection);
             projectiles.Add(proj);
             if (burstClockwise)
             {

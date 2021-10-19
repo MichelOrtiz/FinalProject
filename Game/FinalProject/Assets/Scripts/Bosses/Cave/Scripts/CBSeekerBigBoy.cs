@@ -1,17 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using FinalProject.Assets.Scripts.Utils.Sound;
 using UnityEngine;
 
 public class CBSeekerBigBoy : CaveBossBehaviour
 {
     private bool canStart;
 
-    #region OnPlayerEffects
-    [Header("Effects on Player")]
-    [SerializeField] private State effectOnPlayer;
-    [SerializeField] private float damageAmount;
-
-    #endregion
+    
     #region Physics
     [Header("Physic Params")]
     [SerializeField] private float speedMultiplier;
@@ -65,35 +61,21 @@ public class CBSeekerBigBoy : CaveBossBehaviour
 
     
 
-    // Might inherit later *-*-*-*-*-*
-    private PlayerManager player;
-    private EnemyCollisionHandler eCollisionHandler;
-
-    void Awake()
+    new void Awake()
     {
-        eCollisionHandler = (EnemyCollisionHandler) collisionHandler;
-        //eCollisionHandler.TouchingGroundHandler += eCollisionHandler_TouchingGround;
-        eCollisionHandler.EnterTouchingContactHandler += eCollisionHandler_EnterCollision;
-        eCollisionHandler.ExitTouchingContactHandler += eCollisionHandler_ExitCollision;
-
-        eCollisionHandler.StayTouchingContactHandler += eCollisionHandler_StayInCollision;
-
-        eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
-
-
-        groundChecker.GroundedHandler += groundChecker_Grounded;
-        //groundChecker.GroundedGameObjectHandler += groundChecker_GroundedGameObject;
+        base.Awake();
 
 
         speed = averageSpeed * speedMultiplier;
-
+        
        
     }
 
     new void Start()
     {
         base.Start();
-        player = PlayerManager.instance;
+        //eCollisionHandler.TouchingGroundHandler += eCollisionHandler_TouchingGround;
+
         defaultGravityScale = rigidbody2d.gravityScale;
 
         if (roomManager == null)
@@ -170,7 +152,7 @@ public class CBSeekerBigBoy : CaveBossBehaviour
     {
         if (canStart)
         {
-            if (inPush)
+            if (inPush && !hitWall)
             {
                 rigidbody2d.AddForce(push * Time.deltaTime, ForceMode2D.Impulse);
                 HandleStopPushing();
@@ -271,31 +253,72 @@ public class CBSeekerBigBoy : CaveBossBehaviour
     }
 
 
-    void eCollisionHandler_EnterCollision(GameObject contact)
+    protected override void collisionHandler_StayInContact(GameObject contact)
     {
 
         // Stops the enemy if touches any of the walls
-        
+        //Debug.Log("Dasdas");
         if (walls.Contains(contact))
         {
-            if (inPush)
-            {
-                if (inSameWallThanPlayer || currentPush == RoomComponent.Air)
-                {
-                    StopMoving();
-
-                }
-            }
+            
             if (!grounds.Contains(contact))
             {
                 rigidbody2d.gravityScale = 0;
             }
+
+            inSameWallThanPlayer = player.collisionHandler.Contacts.Contains(contact) && !inGroundWithPlayer;;
             
+        }
+
+        if (grounds.Contains(contact))
+        {
+            inGroundWithPlayer = isGrounded && player.collisionHandler.Contacts.Contains(contact);
         }
         
 
+        /*if (contact.tag == "Ceiling")
+        {
+            Debug.Log("boss hit by ceiling");
+            inColor = true;
+            spriteRenderer.color = colorWhenHit;
+            if (projectileHits < maxProjectileHits-1)
+            {
+                projectileHits++;
+            }
+            else
+            {
+                OnFinished(GetPosition());
+            }
+        }*/
+
+    }
+
+    protected override void collisionHandler_EnterContact(GameObject contact)
+    {
+        if (walls.Contains(contact))
+        {
+            AudioManager.instance.Play("HitWall");
+            inSameWallThanPlayer = player.collisionHandler.Contacts.Contains(contact) && !inGroundWithPlayer;
+
+            if (inPush)
+            {
+                if (inSameWallThanPlayer || currentPush == RoomComponent.Air)
+                {
+                    hitWall = true;
+                    StopMoving();
+
+                }
+            }
+        }
+        if (grounds.Contains(contact))
+        {
+            inGroundWithPlayer = isGrounded && player.collisionHandler.Contacts.Contains(contact);
+            inSameWallThanPlayer = false;
+        }
+
         if (contact.tag == "Ceiling")
         {
+            Debug.Log("boss hit by ceiling");
             inColor = true;
             spriteRenderer.color = colorWhenHit;
             if (projectileHits < maxProjectileHits-1)
@@ -310,20 +333,7 @@ public class CBSeekerBigBoy : CaveBossBehaviour
 
     }
 
-    void eCollisionHandler_StayInCollision(GameObject contact)
-    {
-        if (walls.Contains(contact))
-        {
-            inSameWallThanPlayer = player.collisionHandler.Contacts.Contains(contact);
-        }
-        if (grounds.Contains(contact))
-        {
-            inGroundWithPlayer = isGrounded && player.collisionHandler.Contacts.Contains(contact);
-        }
-
-    }
-
-    void eCollisionHandler_ExitCollision(GameObject contact)
+    protected override void collisionHandler_ExitContact(GameObject contact)
     {
 
         // Stops the enemy if touches any of the walls
@@ -332,8 +342,8 @@ public class CBSeekerBigBoy : CaveBossBehaviour
         {
             rigidbody2d.gravityScale = defaultGravityScale;
         }
-        inWall = false;
-        inGroundWithPlayer = false;
+        //inWall = false;
+        //inGroundWithPlayer = false;
 
         if (!isGrounded)
         {
@@ -341,20 +351,17 @@ public class CBSeekerBigBoy : CaveBossBehaviour
         }
     }
 
-    void groundChecker_Grounded(string groundTag)
+    protected override void groundChecker_Grounded(string groundTag)
     {
         if (groundTag == "Ground")
         {
+            AudioManager.instance.Play("HitWall");
             StopMoving();
             HandlePreStart();
             shockWake.SetActive(true);
         }
     }
 
-    void eCollisionHandler_TouchingPlayer()
-    {
-        player.TakeTirement(damageAmount);
-        //player.statesManager.AddState(effectOnPlayer);
-    }
+    
 
 }

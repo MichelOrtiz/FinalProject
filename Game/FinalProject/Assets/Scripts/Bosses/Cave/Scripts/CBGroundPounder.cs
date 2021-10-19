@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using FinalProject.Assets.Scripts.Utils.Sound;
 using UnityEngine;
 
-public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
+public class CBGroundPounder : CaveBossBehaviour
 {
     #region TargetPosition
     [Header("Target Position")]
@@ -15,9 +16,6 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
     #endregion
 
     #region OnPlayerEffects
-    [Header("Effects on Player")]
-    [SerializeField] private State effectOnPlayer;
-    [SerializeField] private float damageAmount;
     private  bool sawPlayer;
     #endregion
 
@@ -46,54 +44,28 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
 
     #region Thread/Laser
     [Header("Thread/Laser")]
-    [SerializeField] private GameObject laserPrefab;
-    private Laser laser;
-
-    [SerializeField] private Transform shotPos;
-    public Transform ShotPos { get => shotPos; }
+    [SerializeField] private LaserShooter laserShooter;
     [SerializeField] private Vector2 endPos;
-   // private Transform endPosClone;
-    public Vector2 EndPos { get => endPos; }
     #endregion
 
     #region ProjectileStuff
     [Header("Projectile Stuff")]
-    [SerializeField] private GameObject projectilePrefab;
-    private Projectile projectile;
-    [SerializeField] private Transform projectileShotPos;
-    private Vector2 shotPoint;
+    [SerializeField] private ProjectileShooter projectileShooter;
     [SerializeField] private float timeBtwShot;
     private float currentTimeBtwShot;
-    [SerializeField] private int minAnglePerShot;
-    [SerializeField] private int maxAnglePerShot;
-    [SerializeField] private int minAngleBtwProjectiles;
-    [SerializeField] private Transform center;
-    [SerializeField] private byte shotsPerBurst;
+    [SerializeField] private float timeMod;
+    [SerializeField] private float timeToChangeRotation;
 
     private bool hit;
     #endregion
 
 
     // Might inherit later *-*-*-*-*-*
-    private PlayerManager player;
-    private EnemyCollisionHandler eCollisionHandler;
-
     
 
-    void Awake()
+    new void Awake()
     {
-        eCollisionHandler = (EnemyCollisionHandler) collisionHandler;
-        //eCollisionHandler.TouchingGroundHandler += eCollisionHandler_TouchingGround;
-        eCollisionHandler.EnterTouchingContactHandler += eCollisionHandler_EnterCollision;
-        eCollisionHandler.ExitTouchingContactHandler += eCollisionHandler_ExitCollision;
-
-
-        eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
-
-
-        groundChecker.GroundedHandler += groundChecker_Grounded;
-        //groundChecker.GroundedGameObjectHandler += groundChecker_GroundedGameObject;
-
+        base.Awake();
 
         speed = averageSpeed * speedMultiplier;
 
@@ -111,7 +83,9 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
         }
 
         grounds = roomManager.grounds;*/
-        ShootLaser(shotPos.position, endPos);
+        laserShooter.ShootLaser(endPos);
+        InvokeRepeating("ChangeProjectileRotation", timeToChangeRotation, timeToChangeRotation);
+        
     }
 
     // Update is called once per frame
@@ -131,7 +105,7 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
         {
             if (currentTimeBtwShot > timeBtwShot)
             {
-                ShootProjectiles();
+                projectileShooter.ShootRotating();
                 currentTimeBtwShot = 0;
             }
             else
@@ -194,7 +168,7 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
     }
 
 
-    void groundChecker_Grounded(string groundTag)
+    protected override void groundChecker_Grounded(string groundTag)
     {
         if (groundTag == "Ground")
         {
@@ -205,6 +179,10 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
             sawPlayer = false;
 
             currentGroundHits++;
+            timeBtwShot *= timeMod;
+            
+            AudioManager.instance.Play("HitWall");
+
             if (currentGroundHits >= maxGroundHits)
             {
                 rigidbody2d.gravityScale = 1;
@@ -214,14 +192,8 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
         }
     }
 
-    void eCollisionHandler_TouchingPlayer()
-    {
-        touchingPlayer = true;
-        player.TakeTirement(damageAmount);
-        //player.statesManager.AddState(effectOnPlayer);
-    }
 
-    void eCollisionHandler_EnterCollision(GameObject contact)
+    protected override void collisionHandler_EnterContact(GameObject contact)
     {
         if (contact.tag == "Player")
         {
@@ -237,56 +209,9 @@ public class CBGroundPounder : CaveBossBehaviour, ILaser, IProjectile
             hit = true;
         }
     }
-    void eCollisionHandler_ExitCollision(GameObject contact)
+
+    void ChangeProjectileRotation()
     {
-        if (contact.tag == "Player")
-        {
-            touchingPlayer = false;
-        }
-    }
-
-    public void ShootLaser(Vector2 from, Vector2 to)
-    {
-        laser = Instantiate(laserPrefab, from, Quaternion.identity).GetComponent<Laser>();
-        laser.Setup(from, to, this);
-    }
-
-    public void LaserAttack()
-    {
-        return;
-    }
-
-    public void ProjectileAttack()
-    {
-        player.TakeTirement(projectile.damage);
-    }
-
-    public void ShootProjectiles()
-    {
-        int lastAngle = 0;
-        int angle = 0;
-        byte shotsDone = 0;
-        while (shotsDone < shotsPerBurst)
-        {
-            do
-            {
-                angle = Random.Range(minAnglePerShot, maxAnglePerShot);
-            }
-            while (Mathf.Abs(lastAngle - angle) < minAngleBtwProjectiles);
-            
-            shotPoint = center.position + MathUtils.GetVectorFromAngle(angle);
-
-            ShotProjectile(center.position, shotPoint );
-            shotsDone++;
-
-            lastAngle = angle;
-        }
-    }
-
-    public void ShotProjectile(Transform from, Vector3 to){}  
-    public void ShotProjectile(Vector2 from, Vector3 to)
-    {
-        projectile = Instantiate(projectilePrefab, from, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to, this);
+        projectileShooter.ChangeRotation();
     }
 }
