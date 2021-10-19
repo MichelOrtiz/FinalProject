@@ -23,7 +23,7 @@ public class InteractionTrigger : MonoBehaviour
         updateForInteractions?.Invoke();
     }
     protected virtual void TriggerInteraction(){
-        if(distance > radius && !busy) return;
+        if(distance > radius || busy) return;
         busy = true;
         cola.Clear();
         foreach (Interaction inter in interactions)
@@ -41,7 +41,7 @@ public class InteractionTrigger : MonoBehaviour
     protected void NextInteraction(){
         if(cola.Count == 0){
             Debug.Log("No hay mas interacciones");
-            //busy = false;
+            busy = false;
             return;
         }
         Interaction inter = cola.Dequeue();
