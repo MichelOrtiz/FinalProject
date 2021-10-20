@@ -5,13 +5,22 @@ using UnityEngine;
 public class CMultiple : InterCondition
 {
     [SerializeField] List<InterCondition> conditions;
+    bool isClear = false;
     protected override bool checkIsDone()
     {
+        isClear = true;
         foreach(InterCondition condition in conditions){
             if(!condition.isDone){
-                return false;
+                isClear = false;
             }
         }
-        return true;
+        return isClear;
+    }
+    public override void RestardValues(GameObject gameObject)
+    {
+        isClear = false;
+        foreach(InterCondition con in conditions){
+            con.RestardValues(gameObject);
+        }
     }
 }
