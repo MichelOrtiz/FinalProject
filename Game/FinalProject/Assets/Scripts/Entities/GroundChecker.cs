@@ -138,7 +138,8 @@ public class GroundChecker : MonoBehaviour
             if (tag != lastGroundTag)
             {
                 lastGroundTag = tag;
-                OnChangedGroundTag();
+
+                if (isGrounded) OnChangedGroundTag();
             }
         }
     }
