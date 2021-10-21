@@ -17,13 +17,14 @@ public class CastleBMaster : BossFight
 
     //private IBossFinishedBehaviour bossBehaviour;
 
-    void Awake()
+    new void Awake()
     {
-        
+        base.Awake();
     }
 
     new void Start()
     {
+        base.Start();
         lamps = ScenesManagers.GetObjectsOfType<CastleBLamp>();
         if (lamps != null)
         {

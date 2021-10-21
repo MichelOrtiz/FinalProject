@@ -5067,6 +5067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 0
   damageThreshold: 0
+  staminaPunish: 0
   effectOnPlayer: {fileID: 0}
   stopEmittingWhenParticleCollide: 0
 --- !u!1 &967220688444119503
@@ -5855,6 +5856,8 @@ MonoBehaviour:
   ItemHotbarUp: 0000000000
   ItemHotbarDown: 0000000000
   EquipmentHotbar: 0000000000
+  Pause: 0
+  Map: 0
 --- !u!114 &5946864857722621958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5971,7 +5974,6 @@ GameObject:
   - component: {fileID: 447332426354923146}
   - component: {fileID: 1031731497466114772}
   - component: {fileID: 936999293969563206}
-  - component: {fileID: 7712929778528232043}
   - component: {fileID: 1587736591}
   m_Layer: 0
   m_Name: AbilitySystem
@@ -6010,6 +6012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abiltySystem: {fileID: 3829738360394267735}
+  abilityUI: {fileID: 0}
 --- !u!114 &3829738360394267734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6022,6 +6025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 082209b4d0e3ff94896a6382ab2e8809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 0.0625
   hotkey: 304
   staminaCost: 0.625
@@ -6045,6 +6050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd0bb8305923b94c801993205931f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 2
   hotkey: 100
   staminaCost: 20
@@ -6069,6 +6076,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efcc23986bb3614b8a475e5db3acc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 2
   hotkey: 119
   staminaCost: 60
@@ -6093,6 +6102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7980d91f4088ec6498e40c8644e6d288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 0
   hotkey: 32
   staminaCost: 0
@@ -6115,6 +6126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279c7c088dcf7af4780f57fce50b9328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 0
   hotkey: 303
   staminaCost: 0
@@ -6134,6 +6147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12647b83a7b3604394fc70d2cbe8e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 0
   hotkey: 0
   staminaCost: 0
@@ -6154,6 +6169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 454b5b4bf98f8c34e86930ed0d1a26c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 0.0625
   hotkey: 256
   staminaCost: 1
@@ -6174,6 +6191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4aeb0074b3062d4ca00707e280f9f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 10
   hotkey: 257
   staminaCost: 15
@@ -6194,6 +6213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9d009b765fd094ab751eaecfb87d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 5
   hotkey: 258
   staminaCost: 25
@@ -6216,6 +6237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689c0685a5e4a1948b6731c8fa99f958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 5
   hotkey: 259
   staminaCost: 20
@@ -6239,6 +6262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e34188428bf6df498449dc08da1256f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 0
   hotkey: 0
   staminaCost: 0
@@ -6260,6 +6285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48ee65ddfe188241b2d35bc9f700b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 0
   hotkey: 0
   staminaCost: 0
@@ -6280,6 +6307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9b16ef29a39b94ca98cbd2fd6b1f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 3
   hotkey: 263
   staminaCost: 5
@@ -6304,6 +6333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cddd8bca96fad9439176b7fd527ceff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
   cooldownTime: 0
   hotkey: 0
   staminaCost: 0
@@ -6312,25 +6343,6 @@ MonoBehaviour:
   abilityName: 8
   isUnlocked: 0
   staminaIncrease: 20
---- !u!114 &7712929778528232043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50c42a8f044051e4ca2fd46d8ca2070e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 0
-  hotkey: 0
-  staminaCost: 0
-  duration: 0
-  isInCooldown: 0
-  abilityName: 13
-  isUnlocked: 0
 --- !u!61 &1587736591
 BoxCollider2D:
   m_ObjectHideFlags: 0

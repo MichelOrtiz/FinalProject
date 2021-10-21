@@ -6,9 +6,11 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey.PowerUps
     public abstract class PowerUp : ScriptableObject
     {
         public float duration;
+        public string Name;
 
         [SerializeField] protected AffectedObject affectedObject;
-        protected enum AffectedObject
+        public AffectedObject Affected { get => affectedObject; }
+        public enum AffectedObject
         {
             Player, AI, Puck
         }
