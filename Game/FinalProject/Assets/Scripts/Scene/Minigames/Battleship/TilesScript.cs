@@ -32,7 +32,7 @@ public class TilesScript : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision){
-        if(collision.gameObject.CompareTag("Missile")){
+        if(collision.gameObject.CompareTag("BattleshipMissile")){
             missileHit = true;
         }
         //else if Where the enemy missile would go
