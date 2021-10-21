@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
+using System;
 
 namespace FinalProject.Assets.Scripts.Bosses.AirHockey.PowerUps
 {
@@ -13,6 +15,9 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey.PowerUps
 
         private PowerUp instantiated;
         private CollisionHandler collisionHandler;
+
+        [SerializeField] private TMP_InputField playerLog;
+        [SerializeField] private TMP_InputField enemyLog;
 
 
         void Awake()
@@ -52,16 +57,32 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey.PowerUps
                 instantiated.StartAffect();
                 Invoke("StopPowerUp", instantiated.duration);
                 
+                SetLog(instantiated, true);
                 
-                Debug.Log("Power Up start: " + instantiated);
+                //Debug.Log("Power Up start: " + instantiated);
             }
         }
 
         void StopPowerUp()
         {
-            Debug.Log("Power Up stop: " + instantiated);
-
+            //Debug.Log("Power Up stop: " + instantiated);
+            SetLog(instantiated, false);
             instantiated.StopAffect();
+        }
+
+        void SetLog(PowerUp powerUp, bool start)
+        {
+            var affected = powerUp.Affected;
+            string log = $"\n{(start? "Start: ": "Ended: ")} {powerUp.Name}";
+            //playerLog.on
+            if (affected == PowerUp.AffectedObject.Player)
+            {
+                playerLog.text += log;
+            }
+            else
+            {
+                enemyLog.text += log;
+            }
         }
 
         void Enable()
