@@ -26,4 +26,10 @@ public class AbilityUI : MonoBehaviour
             slot.popUp = popUp.GetComponent<PopUpHabUI>();
         }
     }
+    public void SetOpen(bool isOpen){
+        UI.SetActive(isOpen);
+    }
+    public bool GetOpen(){
+        return UI.activeSelf;
+    }
 }
