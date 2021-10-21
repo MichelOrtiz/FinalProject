@@ -12,6 +12,7 @@ public class AbilityManager : MonoBehaviour
     }
     public static AbilityManager instance;
     public GameObject abiltySystem;
+    public AbilityUI abilityUI;
     private void Awake() {
         if(instance!=null){
             //Badthings
@@ -21,18 +22,23 @@ public class AbilityManager : MonoBehaviour
     }
     private void Start() {
         //Load saved abilities in savefiles
+        abilityUI = AbilityUI.instance;
         if(SaveFilesManager.instance != null){
             SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
             if(partida.unlockedAbilities != null){
                 int i = 0;
                 foreach(Ability a in abilities){
-                    if(i>partida.unlockedAbilities.Length)break;
+                    if( i > partida.unlockedAbilities.Length) break;
                     a.isUnlocked = partida.unlockedAbilities[i];
                     a.enabled = a.isUnlocked;
                     i++;
                 }
             }
+            abilityUI.UI.SetActive(true);
+            abilityUI.UpdateUI(abilities);
+            abilityUI.UI.SetActive(false);
         }
+
     }
 
     /// <summary>
