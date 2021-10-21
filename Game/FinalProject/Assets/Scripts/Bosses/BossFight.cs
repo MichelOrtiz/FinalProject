@@ -9,10 +9,9 @@ public class BossFight : MonoBehaviour
     [SerializeField] protected PopUpTrigger startMessageTrigger;
     [SerializeField] protected PopUpTrigger endMessageTrigger;
     [SerializeField] protected int levelToLoad;
-
+    [SerializeField] WorldState worldState;
     [SerializeField] private GameObject loadlevel;
 
-    public WorldState condition;
 
 
 
@@ -47,7 +46,7 @@ public class BossFight : MonoBehaviour
     {
         StartBattle();
         loadlevel?.SetActive(false);
-        //AudioManager.instance?.Play("Theme");
+        AudioManager.instance?.Play("Theme");
     }
     protected void Update() {
         if(Input.GetKeyDown(KeyCode.L)){
@@ -93,9 +92,14 @@ public class BossFight : MonoBehaviour
             endMessageTrigger.TriggerPopUp(true);
 
             Debug.Log("Lo hiciste ganaste!!!1");
-
-
-            condition.state = true;
+            SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
+            if(partida.WorldStates.Exists(x => x.id == worldState.id)){
+                WorldState w = partida.WorldStates.Find(x => x.id == worldState.id);
+                w.state = true;
+            }else{
+                worldState.state = true;
+                partida.WorldStates.Add(worldState);
+            }
 
             loadlevel?.SetActive(true);
             BattleEnded?.Invoke();
@@ -114,7 +118,7 @@ public class BossFight : MonoBehaviour
 
     public void ReturnToLastScene()
     {
-        SceneController.instance.LoadScene(levelToLoad);
+        SceneController.instance.LoadScene(loadlevel.GetComponent<loadlevel>().iLevelToLoad);
         Pause.ResumeGame();
     }
 }

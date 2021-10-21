@@ -41,7 +41,7 @@ public class WallCristal : Enemy
         projectileShooter.ProjectileTouchedPlayerHandler += projectileShooter_ProjectileTouchedPlayer;
         flashImage.FlashInCompleteHandler += flashImage_OnFlashInComplete;
 
-        spawner = GameObject.FindWithTag("EnemySpawner")?.GetComponent<ProbabilitySpawner>();
+        spawner = GameObject.FindWithTag("EnemySpawner")?.GetComponent<ProbabilitySpawner>();   
         ProbabilitySpawn spawn = spawner?.SpawnedObjects.Find(g => g.gameObject == gameObject).probabilitySpawn; 
         if (spawn != null)
         {

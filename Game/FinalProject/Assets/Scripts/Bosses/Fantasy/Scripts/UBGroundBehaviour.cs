@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UBGroundBehaviour : UBBehaviour, ILaser
+public class UBGroundBehaviour : UBBehaviour
 {
     #region TargetPosition
     [Header("Target Position")]
@@ -13,10 +13,13 @@ public class UBGroundBehaviour : UBBehaviour, ILaser
 
     #region LaserBeam
     [Header("Laser Beam")]
+    [SerializeField] private LaserShooter laserShooter;
     [SerializeField] private Transform shotPos;
     public Transform ShotPos { get => shotPos; }
     private Vector2 endPos;
     public Vector2 EndPos { get => endPos; }
+
+
     [SerializeField] private float intervalToShot;
     private float timeToShot;
     private bool shotLaser;
@@ -48,7 +51,8 @@ public class UBGroundBehaviour : UBBehaviour, ILaser
                 if (!shotLaser)
                 {
                     endPos = player.GetPosition();
-                    ShootLaser(shotPos.position, endPos);
+                    //ShootLaser(shotPos.position, endPos);
+                    laserShooter.ShootLaserAndSetEndPos(player.transform);
                     shotLaser = true;
                 }
                 else if (laser == null)
@@ -75,16 +79,16 @@ public class UBGroundBehaviour : UBBehaviour, ILaser
         return Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius;
     }
 
-    public void ShootLaser(Vector2 from, Vector2 to)
+    /*public void ShootLaser(Vector2 from, Vector2 to)
     {
         laser = Instantiate(laserPrefab, from, Quaternion.identity).GetComponent<Laser>();
         laser.Setup(from, to, this);
-    }
+    }*/
 
-    public void LaserAttack()
+    /*public void LaserAttack()
     {
         player.TakeTirement(laserDamage);
-    }
+    }*/
 
     new void OnFinishedAttack()
     {

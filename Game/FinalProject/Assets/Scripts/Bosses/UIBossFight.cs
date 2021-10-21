@@ -43,7 +43,6 @@ public class UIBossFight : BossFight
             endMessageTrigger.popUp.Message = ability.ToString();
             endMessageTrigger.TriggerPopUp(true);
 
-            condition.state = true;
             BattleEnded?.Invoke();
 
         }

@@ -83,10 +83,16 @@ MonoBehaviour:
   targetWarningAvailable: 1
   warning: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
   warningTime: 0.5
-  speed: 0
+  speed: 45
   secondSpeed: 0
   chaseTargetPosition: 0
   chaseOnReachedEndPos: 0
+  collidesWithObstacles: 0
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 0
+  collisionHandler: {fileID: 0}
+  edge: {fileID: 0}
 --- !u!68 &5896100059345284874
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -159,7 +165,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2370855a4475079408d4f298685d2f0b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,7 +191,7 @@ LineRenderer:
   - {x: 0, y: 1, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.35108697
+    widthMultiplier: 1.8042123
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -233,7 +239,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1

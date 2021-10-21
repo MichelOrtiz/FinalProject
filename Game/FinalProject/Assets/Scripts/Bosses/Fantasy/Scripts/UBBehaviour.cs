@@ -32,17 +32,17 @@ public abstract class UBBehaviour : Entity
     [SerializeField] private float speedMultiplier;
     protected float speed;
     [SerializeField] protected float startDamageAmount;
+    [SerializeField] protected float staminaPunish;
     protected EnemyCollisionHandler eCollisionHandler;
 
     #endregion
 
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    protected virtual void Awake()
+
+    new protected void Awake()
     {
+        base.Awake();
         eCollisionHandler = (EnemyCollisionHandler) base.collisionHandler;
-        eCollisionHandler.TouchingPlayerHandler += eCollisionHandler_TouchingPlayer;
+        eCollisionHandler.TouchedPlayerHandler += eCollisionHandler_Attack;
         
         speed = averageSpeed * speedMultiplier;
     }
@@ -65,8 +65,10 @@ public abstract class UBBehaviour : Entity
         base.Update();
     }
 
-    protected virtual void eCollisionHandler_TouchingPlayer()
+    protected virtual void eCollisionHandler_Attack()
     {
         player.TakeTirement(startDamageAmount);
+        player.currentStaminaLimit -= staminaPunish;
+        player.SetImmune();
     }
 }

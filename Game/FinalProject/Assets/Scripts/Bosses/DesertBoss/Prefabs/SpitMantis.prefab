@@ -47,6 +47,15 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: 5387dc8c1d869224b9e805cee9d3ceaa, type: 3}
   shotPos: {fileID: 1358374671270209978}
   effectOnPlayer: {fileID: 0}
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!1 &1358374671270209977
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,6 +217,7 @@ MonoBehaviour:
   collisionHandler: {fileID: 4416846345686342506}
   physics: {fileID: 0}
   emotePos: {fileID: 7393217150747051625}
+  punish: 5
   itemToGive: {fileID: 11400000, guid: 52696d60e7cfb1b4396a07f30573cbb8, type: 2}
   timesToGiveItem: 3
   timesItemGiven: 0

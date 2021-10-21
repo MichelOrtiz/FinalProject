@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 public class ProjectileShooter : MonoBehaviour, IProjectile
 {
     public GameObject projectilePrefab;
@@ -24,6 +25,22 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
     public Transform ShotPos { get => shotPos; }
     [SerializeField] private State effectOnPlayer;
     public State EffectOnPlayer { get => effectOnPlayer; }
+
+    [Header("Modifications")]
+    [InspectorName("RotateTargetDirection")]
+    [SerializeField] private bool rotate;
+    [SerializeField] private Transform center;
+    [SerializeField] private float startingAngle;
+    [SerializeField] private float rotationRate;
+    [SerializeField] private float timeToCompleteCircle;
+    private float rotationSpeed;
+    [InspectorName("RotateClockwise")]
+    public bool isClockwise;
+    [SerializeField] private byte bustSize;
+    [SerializeField] private byte burstAngle;
+    [SerializeField] private bool burstClockwise;
+    private float centerAngle;
+    private Vector2 targetDirection;
     /*
     [SerializeField] private bool canKnockbackPlayer;
     [SerializeField] private float knockbackDuration;
@@ -43,24 +60,54 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
     private PlayerManager player;
     private Entity entity;
 
+    void Awake()
+    {
+        rotationSpeed = (2*Mathf.PI)/timeToCompleteCircle;
+    }
+
     void Start()
     {
         player = PlayerManager.instance;
         if (entity == null)
         {
-            entity = transform.parent.GetComponent<Entity>();
+            entity = transform?.parent?.GetComponent<Entity>();
         }
+
+        centerAngle = startingAngle;
 
         projectilePrefab.GetComponent<Projectile>().targetWarningAvailable = player.abilityManager.IsUnlocked(Ability.Abilities.VisionFutura);
     }
 
+    
+    void Update()
+    {
+        if (rotate)
+        {
+            RotateTargetDirection();
+        }
+    }
+
+    void RotateTargetDirection()
+    {
+        if (isClockwise)
+        {
+            centerAngle -= rotationSpeed * Time.deltaTime;
+        }
+        else
+        {
+            centerAngle += rotationSpeed * Time.deltaTime;
+        }
+        //shotPos.position = center.position + MathUtils.GetVectorFromAngle(centerAngle + rotationRate);
+        //targetDirection = shotPos.position;
+    }
+
     public void ProjectileAttack()
     {
-        player.TakeTirement(projectile.damage);
         if (projectile.damage > 0)
         {
             player.SetImmune();
         }
+        player.TakeTirement(projectile.damage);
 
         player.statesManager.AddState(effectOnPlayer, entity);
         OnProjectileTouchedPlayer();
@@ -73,16 +120,18 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
         seeker.Setup(shotPos, to, this);
     }
 
-    public void ShootProjectile(Vector2 to)
+    public Projectile ShootProjectile(Vector2 to)
     {
         projectile = Instantiate(projectilePrefab, shotPos.position, projectilePrefab.transform.rotation).GetComponent<Projectile>();
         projectile.Setup(shotPos, to, this);
+        return projectile;
     }
 
-    public void ShootProjectile(Vector2 from, Vector2 to)
+    public Projectile ShootProjectile(Vector2 from, Vector2 to)
     {
         projectile = Instantiate(projectilePrefab, from, projectilePrefab.transform.rotation).GetComponent<Projectile>();
         projectile.Setup(from, to, this);
+        return projectile;
     }
 
     public void ShootProjectile(Vector2 to, string colliderTag)
@@ -118,11 +167,41 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
         ShootProjectile(from, to, colliderTag);
         projectile.MaxShotDistance = Vector2.Distance(from, to);
     }
+
+    public List<Projectile> ShootRotating()
+    {
+        float angle = startingAngle;
+        var projectiles = new List<Projectile>();
+        for (int i = 0; i < bustSize; i++)
+        //while(angle + burstAngle <= 360)
+        {
+            targetDirection = center.position + 
+                MathUtils.GetVectorFromAngle(angle + (rotate? centerAngle : 0));
+                
+            var proj = ShootProjectile(center.position, targetDirection);
+            projectiles.Add(proj);
+            if (burstClockwise)
+            {
+                angle -= burstAngle;
+            }
+            else
+            {
+                angle += burstAngle;
+            }
+        }
+        return projectiles;
+    }
     
     [Obsolete("maybe delete later idk")]
     public void ShotProjectile(Transform from, Vector3 to)
     {
         projectile = Instantiate(projectilePrefab, from.transform.position, projectilePrefab.transform.rotation).GetComponent<Projectile>();
         projectile.Setup(shotPos, to, this);
+    }
+
+
+    public void ChangeRotation()
+    {
+        isClockwise = !isClockwise;
     }
 }

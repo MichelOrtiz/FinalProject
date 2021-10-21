@@ -13,11 +13,14 @@ public class PlayerInputs : MonoBehaviour
     public bool jump { get; set; }
     public bool ctrlLeft { get; set; }
     public bool OpenInventory { get; set; }
+    public bool OpenMap { get; set; }
     public bool[] ItemHotbarUp = new bool[5];
     public bool[] ItemHotbarDown = new bool[5];
     public bool[] EquipmentHotbar = new bool[5];
     public float intputLag {get;set;}
     public const float defaultInputLag = 0;
+    public KeyCode Pause;
+    public KeyCode Map;
 
     public Action MovedRight = delegate(){PlayerManager.instance.inputs.movementX=1;};
     public Action MovedLeft = delegate(){PlayerManager.instance.inputs.movementX=-1;};
@@ -35,17 +38,21 @@ public class PlayerInputs : MonoBehaviour
 
         
     }
+    private void OnEnable() {
+        movementX = 0;
+        movementY = 0;
+    }
     void Update()
     {
         #region Right Left Up Dowm
-        if(Input.GetKey(controlBinds["MOVERIGHT"])){
+        if(Input.GetKey(controlBinds["MOVERIGHT"]) && this.enabled){
             if(intputLag > 0){   
                 StartCoroutine(ApplyInputLag(MovedRight));
             }else{
                 MovedRight?.Invoke();
             }
         }
-        else if(Input.GetKey(controlBinds["MOVELEFT"])){
+        else if(Input.GetKey(controlBinds["MOVELEFT"]) && this.enabled){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedLeft));
             }else{
@@ -56,7 +63,7 @@ public class PlayerInputs : MonoBehaviour
         else{
             movementX=0;
         }
-        if(Input.GetKey(controlBinds["MOVEUP"])){
+        if(Input.GetKey(controlBinds["MOVEUP"]) && this.enabled){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedUp));
             }else{
@@ -64,7 +71,7 @@ public class PlayerInputs : MonoBehaviour
             }  
             //movementY=1;
         }
-        else if(Input.GetKey(controlBinds["MOVEDOWN"])){
+        else if(Input.GetKey(controlBinds["MOVEDOWN"]) && this.enabled){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedDown));
             }else{
@@ -87,13 +94,14 @@ public class PlayerInputs : MonoBehaviour
         }
         
 
-        if (Input.GetKey(controlBinds["MENUINTERACTION"]))
+        if (Input.GetKeyDown(controlBinds["MENUINTERACTION"]))
         {
             Interact?.Invoke();
         }
         
         ctrlLeft = Input.GetKey(controlBinds["MENUFASTASSIGN"]);
         OpenInventory=Input.GetKeyDown(controlBinds["MENUINVENTORY"]);
+        OpenMap=Input.GetKeyDown(controlBinds["MENUMAP"]);
         
 
         HotbarInputs();
@@ -177,6 +185,7 @@ public class PlayerInputs : MonoBehaviour
         movementY=0;
         jump=false;
         OpenInventory = false;
+        OpenMap = false;
     }
     IEnumerator ApplyInputLag(Action doLast){
         yield return new WaitForSeconds(intputLag);

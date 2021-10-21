@@ -43,7 +43,6 @@ public abstract class State : ScriptableObject
   
     void OnDestroy()
     {
-
         onEffect = false;
     }
 }

@@ -3,43 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : InteractionUI
 {
-    #region Singleton
-    public static DialogueManager instance;
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            return;
-        }
-        instance = this;
-    }
-    #endregion
-    public enum DialogState { Ready,Start,End};
-    public DialogState state;
-    private Queue<string> sentences = new Queue<string>();
-    public GameObject panel;
+    public enum UIStatus{Ready,Busy}
+    public UIStatus status;
+    private Queue<string> sentences;
     public Animator animator;
     public Text nameText;
     public Text dialogueText;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        panel.SetActive(true);
+    private void Awake() {
         sentences = new Queue<string>();
-        state = DialogState.Ready;
+    }
+    // Start is called before the first frame update
+    protected override void Start()
+    {
+        base.Start();
+        //StartDialogue(new Dialogue());
     }
 
-    public void StartDialogue (Dialogue d)
+    public void StartDialogue (Dialogue dialogue)
     {
         Minimap.MinimapWindow.instance.Hide();
-        state = DialogState.Start;
-        animator.SetBool("IsOpen", true);
-        nameText.text = d.name;
+        nameText.text = dialogue.name;
         sentences.Clear();
-        foreach(string sentence in d.sentences)
+        animator.SetBool("IsOpen", true);
+        foreach(string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
@@ -68,8 +56,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
-        state = DialogState.End;
-
         Minimap.MinimapWindow.instance.Show();
+        Exit();
     }
 }

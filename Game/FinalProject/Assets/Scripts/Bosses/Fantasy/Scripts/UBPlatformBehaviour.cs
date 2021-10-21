@@ -32,6 +32,12 @@ public class UBPlatformBehaviour : UBBehaviour
     {
         base.Awake();
         eCollisionHandler.TouchingGroundHandler += eCollisionHandler_TouchingGround;
+        //eCollisionHandler.TouchedPlayerHandler += eCollisionHandler_Attack;
+    }
+
+    void OnEnable()
+    {
+        SetDefaults();
     }
     
     new void Start()
@@ -40,11 +46,6 @@ public class UBPlatformBehaviour : UBBehaviour
         SetDefaults();
     }
 
-    new void Update()
-    {
-        
-        base.Update();
-    }
 
     void FixedUpdate()
     {
@@ -72,7 +73,6 @@ public class UBPlatformBehaviour : UBBehaviour
 
     void eCollisionHandler_TouchingGround()
     {
-        Debug.Log("preparing " + preparing);
         if (currentStartingTime > startingTime)
         {
             preparing = false;
@@ -89,7 +89,7 @@ public class UBPlatformBehaviour : UBBehaviour
     }
 
 
-    new void eCollisionHandler_Attack()
+    protected override void eCollisionHandler_Attack()
     {
         if (inPush)
         {
@@ -99,6 +99,8 @@ public class UBPlatformBehaviour : UBBehaviour
         {
             player.TakeTirement(startDamageAmount);
         }
+        player.currentStaminaLimit -= staminaPunish;
+        player.SetImmune();
     }
 
     

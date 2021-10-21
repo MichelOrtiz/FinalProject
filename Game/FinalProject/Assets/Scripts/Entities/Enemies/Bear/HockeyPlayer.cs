@@ -9,7 +9,7 @@ public class HockeyPlayer : Enemy
     [SerializeField] private float pushTime;
     [SerializeField] private Vector2 pushVector;
     [SerializeField] private float pushForce;
-    private bool isOnIce;
+    public bool IsOnIce { get => collisionHandler.Contacts.Exists(g => g.tag == "Ice"); }
 
     new void Start()
     {
@@ -24,14 +24,14 @@ public class HockeyPlayer : Enemy
     new void Update()
     {
         fieldOfView.SetViewDistanceOnRayHitObstacle(facingDirection == RIGHT ? Vector2.right : Vector2.left, maxViewDistance);
-        isOnIce = groundChecker.lastGroundTag == "Ice";
+        //isOnIce = groundChecker.lastGroundTag == "Ice";
         
         base.Update();
     }
 
     protected override void MainRoutine()
     {
-        if (isOnIce)
+        if (IsOnIce)
         {
             enemyMovement.DefaultPatrol("Ice");
         }

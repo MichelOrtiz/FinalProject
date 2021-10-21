@@ -487,6 +487,15 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: e6e7f9ca99e2a9f458dd9f8386675fbd, type: 3}
   shotPos: {fileID: 7651909674331589603}
   effectOnPlayer: {fileID: 11400000, guid: f2addd2a558feac4886e2824798f34f4, type: 2}
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!1 &7651909673708087745
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,7 +697,7 @@ MonoBehaviour:
   speedModifierInLight: 0.7
   damageAmount: 40
   divisionPoint: {fileID: 7651909673708087746}
-  maxDivisions: 4
+  maxDivisions: 3
   timeUntilDivide: 5
   speedIncrease: 0.75
   projectileSpeedIncrease: 0.1

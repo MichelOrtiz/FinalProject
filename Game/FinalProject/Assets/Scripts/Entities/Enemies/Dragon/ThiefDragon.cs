@@ -60,7 +60,7 @@ public class ThiefDragon : Enemy
     {
         base.Attack();
         Inventory inventory = Inventory.instance;
-        int money = Inventory.money;
+        int money = Inventory.instance.GetMoney();
         if (money >= minMoneyToSteal)
         {
             int moneyToRemove = Mathf.RoundToInt(money * percentageMoneySteal);

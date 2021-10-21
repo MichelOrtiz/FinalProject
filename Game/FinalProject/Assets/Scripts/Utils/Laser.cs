@@ -239,7 +239,6 @@ public class Laser : MonoBehaviour
         {
             touchingPlayer = true;
         }
-        Debug.Log(other.gameObject.layer);
     }
 
     void OnTriggerExit2D(Collider2D other)

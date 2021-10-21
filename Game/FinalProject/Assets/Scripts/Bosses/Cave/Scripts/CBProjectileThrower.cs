@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CBProjectileThrower : Entity, IProjectile
+public class CBProjectileThrower : Entity
 {
     #region ProjectileStuff
     [Header("Projectile Stuff")]
+    [SerializeField] private ProjectileShooter projectileShooter;
     [SerializeField] private GameObject projectilePrefab;
     private Projectile projectile;
     //[SerializeField] private Transform shotPoint; 
@@ -66,14 +67,15 @@ public class CBProjectileThrower : Entity, IProjectile
 
     public void ShotProjectiles()
     {
-        float angle = 0;
+        projectileShooter.ShootRotating();
+        /*float angle = 0;
         while (angle + angleBtwShots <= 360)
         {
             shotPoint = center.position + MathUtils.GetVectorFromAngle(angle);
 
             ShotProjectile(center.position, shotPoint );
             angle += angleBtwShots;
-        }
+        }*/
     }
 
     public void ShotProjectile(Transform from, Vector3 to)
@@ -92,11 +94,11 @@ public class CBProjectileThrower : Entity, IProjectile
         }
     }
 
-    public void ShotProjectile(Vector2 from, Vector3 to)
+    /*public void ShotProjectile(Vector2 from, Vector3 to)
     {
         projectile = Instantiate(projectilePrefab, from, Quaternion.identity).GetComponent<Projectile>();
         projectile.Setup(from, to, this);
-    }
+    }*/
 
     /*protected override void SetDefaults()
     {

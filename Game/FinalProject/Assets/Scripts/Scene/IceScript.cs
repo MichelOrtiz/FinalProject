@@ -5,9 +5,10 @@ using UnityEngine;
 public class IceScript : MonoBehaviour
 {
     [SerializeField] private CollisionHandler collisionHandler;
+    [SerializeField] private State iceState;
     PlayerManager player;
     Collider2D collision;
-
+    
     void Start()
     {
         if (collisionHandler == null)
@@ -17,7 +18,7 @@ public class IceScript : MonoBehaviour
         player = PlayerManager.instance;
 
         collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;
-        //collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
+        collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
         collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
     }
 
@@ -30,8 +31,9 @@ public class IceScript : MonoBehaviour
         if (contact.tag == "Player")
         {
             //player.rigidbody2d.AddForce(new Vector2( 300f * player.rigidbody2d.velocity.x, player.rigidbody2d.velocity.y));
-            player.isInIce = true;
-            player.walkingSpeed = 100f;
+            //player.isInIce = true;
+            player.statesManager.AddState(iceState);
+            Debug.Log("esta en ice");
         }
     }
 
@@ -39,8 +41,9 @@ public class IceScript : MonoBehaviour
     {
         if (contact.tag == "Player")
         {
-            player.isInIce = false;
-            player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
+            //player.isInIce = false;
+            player.statesManager.RemoveState(iceState);
+            
         }
     }
 
@@ -48,10 +51,10 @@ public class IceScript : MonoBehaviour
     {
         SetEffects(contact);
     }
-   /* void collisionHandler_StayContact(GameObject contact)
+    void collisionHandler_StayContact(GameObject contact)
     {
         SetEffects(contact);
-    }*/
+    }
 
     void collisionHandler_ExitContact(GameObject contact)
     {

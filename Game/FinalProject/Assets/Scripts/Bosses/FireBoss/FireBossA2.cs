@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FireBossA2 : FireBossEnemy
 {
+    
     new void Start()
     {
         base.Start();
@@ -17,11 +18,12 @@ public class FireBossA2 : FireBossEnemy
         {
             if (timeBtwShot > baseTimeBtwShot)
             {
-                base.ShotProjectile(shotPoint, shotPoint.position + facingDirection == LEFT? Vector2.left : Vector2.right);
-                projectilesShot = true;
+                //base.ShotProjectile(shotPoint, );
+                var proj = projectileShooter.ShootProjectile(projectileShooter.ShotPos.position + facingDirection == LEFT? Vector2.left : Vector2.right);
+                
                 timeBtwShot = 0;
             }
-            else if(!projectilesShot)
+            else
             {
                 timeBtwShot += Time.deltaTime;
             }

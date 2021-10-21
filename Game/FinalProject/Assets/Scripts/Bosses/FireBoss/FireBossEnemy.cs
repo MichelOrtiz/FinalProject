@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class FireBossEnemy : Entity, IProjectile
+public abstract class FireBossEnemy : Entity
 {
-    private FireBoss fireBoss;
+    [Header("Self Additions")]
+    [SerializeField] private LayerMask obstacles;
+    protected FireBoss fireBoss;
     private PlayerManager player;
     [SerializeField] protected float TimeBeforeStart;
     [SerializeField] private Transform collisionCheck;
@@ -13,18 +15,14 @@ public abstract class FireBossEnemy : Entity, IProjectile
 
     #region Projectile Stuff
     [Header("Projectile Stuff")]
-    [SerializeField] protected Transform shotPoint;
+    [SerializeField] protected ProjectileShooter projectileShooter;
     [SerializeField] protected float baseTimeBtwShot;
     protected float timeBtwShot;
-    [SerializeField] protected GameObject projectilePrefab;
-    protected Projectile projectile;
-    protected bool projectilesShot;
 
     #endregion
 
     #region Hit Handler
     [Header("Hit Handler")]
-    private int maxHits;
     private int currentHits;
     // To change time before start each time the enemy gets hit
     [SerializeField] protected float timeChangeMultiplier;
@@ -38,14 +36,10 @@ public abstract class FireBossEnemy : Entity, IProjectile
     protected new void Start()
     {
         base.Start();
-
-        fireBoss = FindObjectOfType<FireBoss>();
         player = PlayerManager.instance;
 
-        if (fireBoss != null)
-        {
-            maxHits = fireBoss.maxHits;
-        }
+        fireBoss = FindObjectOfType<FireBoss>();
+        UpdateValues();
 
     }
 
@@ -68,38 +62,28 @@ public abstract class FireBossEnemy : Entity, IProjectile
 
     protected bool InFrontOfObstacle()
     {
-
-        float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
-        Vector3 targetPos = collisionCheck.position + (facingDirection == LEFT? Vector3.left : Vector3.right) * castDistance;
-        return RayHitObstacle(collisionCheck.position, targetPos);
+        return FieldOfView.RayHitObstacle(collisionCheck.position, collisionCheck.right * baseCastDistance, obstacles);
     }
 
-    protected void ChangeFacingDirection()
+    void UpdateValues()
     {
-        transform.eulerAngles = new Vector3(0, facingDirection == LEFT? 0:180);
+        TimeBeforeStart *= fireBoss.curTimeBfStartMod;
+        baseTimeBtwShot *= fireBoss.curTimeBtwShotMod;
     }
     
-    public void ProjectileAttack()
+    protected override void collisionHandler_EnterContact(GameObject contact)
     {
-        player.TakeTirement(projectile.damage);
-    }
-    public void ShotProjectile(Transform from, Vector3 to)
-    {
-        projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to, this);
-    }
-    protected void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Projectile")
+        if (contact.tag == "Projectile")
         {
-            fireBoss.AddHit();
-            TimeBeforeStart = TimeBeforeStart + TimeBeforeStart * timeChangeMultiplier;
-            if (projectile != null)
+            if (contact.TryGetComponent<ProjectileDeflector>(out var deflector))
             {
-                projectile.damage +=  damageChangeIncrease;
-                projectile.speedMultiplier += speedChangeIncrease;
-                projectile.speedMultiplier *= Entity.averageSpeed;
-
+                if (deflector.Deflected)
+                {
+                    fireBoss.AddHit();
+                    TimeBeforeStart = TimeBeforeStart + TimeBeforeStart * timeChangeMultiplier;
+                    UpdateValues();
+                    Destroy(contact);
+                }
             }
         }
     }

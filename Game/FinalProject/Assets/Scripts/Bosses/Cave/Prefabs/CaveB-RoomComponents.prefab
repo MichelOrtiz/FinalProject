@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 784908957486150344}
   - component: {fileID: 784908957486150359}
   - component: {fileID: 784908957486150346}
+  - component: {fileID: 8338380809860042156}
   m_Layer: 8
   m_Name: LeftWall
   m_TagString: Ground
@@ -202,12 +203,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc6cfd3d18743c4d9abf807b08c75f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileShooter: {fileID: 8338380809860042156}
   projectilePrefab: {fileID: 4690660590625237830, guid: 492695ceaaa815240afe9850a65825e7, type: 3}
   shootPos: {fileID: 784908957005846497}
   collisionTags:
   - Enemy
-  - Fake
   maxHits: 3
+--- !u!114 &8338380809860042156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784908957486150358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50bff7df53203b448a70d1cefce2d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4690660590625237830, guid: 492695ceaaa815240afe9850a65825e7, type: 3}
+  shotPos: {fileID: 784908957005846497}
+  effectOnPlayer: {fileID: 0}
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!1 &784908957680288943
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +299,7 @@ GameObject:
   - component: {fileID: 784908957689661941}
   - component: {fileID: 784908957689661940}
   - component: {fileID: 784908957689661943}
+  - component: {fileID: 8492725915597278354}
   m_Layer: 8
   m_Name: RightWall
   m_TagString: Ground
@@ -355,12 +381,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc6cfd3d18743c4d9abf807b08c75f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileShooter: {fileID: 8492725915597278354}
   projectilePrefab: {fileID: 4690660590625237830, guid: 492695ceaaa815240afe9850a65825e7, type: 3}
   shootPos: {fileID: 784908958249690726}
   collisionTags:
   - Enemy
-  - Fake
   maxHits: 3
+--- !u!114 &8492725915597278354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784908957689661939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50bff7df53203b448a70d1cefce2d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4690660590625237830, guid: 492695ceaaa815240afe9850a65825e7, type: 3}
+  shotPos: {fileID: 784908958249690726}
+  effectOnPlayer: {fileID: 0}
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!1 &784908958223544472
 GameObject:
   m_ObjectHideFlags: 0

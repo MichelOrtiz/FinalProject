@@ -241,6 +241,7 @@ public class Projectile : MonoBehaviour
              if (independentAttackEnabled)
             {
                 PlayerManager.instance.TakeTirement(damage);
+                PlayerManager.instance.SetImmune();
             }
             aboutToDestroy = true;
             if (enemy != null)
