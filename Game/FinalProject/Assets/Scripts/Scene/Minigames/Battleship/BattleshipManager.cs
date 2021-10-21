@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,12 +13,19 @@ public class BattleshipManager : MonoBehaviour
     [Header("HUD")]
     public Button nextButton;
     public Button rotateButton;
-    public EnemyScript enemyScript;
+    public Text topText;
+    [Header("Objects")]
+    public GameObject missilePrefab;
+
 
     private bool setupComplete = false;
     private bool playerTurn = true;
     private int shipIndex = 0;
     private ShipScript shipScript;
+    public EnemyScript enemyScript;
+    private List<int[]> enemyShips;
+
+    private int enemyShipCount = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +34,7 @@ public class BattleshipManager : MonoBehaviour
         nextButton.onClick.AddListener(() => NextShipClicked());
         rotateButton.onClick.AddListener(() => RotateClicked());
         ////if (Input.GetMouseButtonUp(0)) {
+        enemyShips = enemyScript.PlaceEnemyShips();
     }
 
     private void NextShipClicked(){
@@ -66,5 +76,37 @@ public class BattleshipManager : MonoBehaviour
 
     void SetShipClickedTile(GameObject tile){
         shipScript.SetClickedTile(tile);
+    }
+
+    public void CheckHit(GameObject tile){
+        //Take the tile's individual number and name, and compare them with the enemy ships coordinates
+        int tileNum = Int32.Parse(Regex.Match(tile.name, @"\d+").Value);
+        int hitCount = 0;
+        foreach (int[] tileNumArray in enemyShips){
+            if(tileNumArray.Contains(tileNum)){
+                for(int i=0; i< tileNumArray.Length; i++){
+                    if(tileNumArray[i]== tileNum){
+                        /*if our tile index matches the enemy tile number, 
+                        we hit the ship(truck indexes are -5)*/
+                        tileNumArray[i] = -5;
+                        hitCount++;
+                    }
+                    else if(tileNumArray[i]==-5){
+                        //We have already hit the tile
+                        hitCount++;
+                    }
+                }//check wether we have sunk the ship
+                if(hitCount == tileNumArray.Length){
+                    enemyShipCount--;
+                    topText.text = "SUNK!!";
+                }else{
+                    topText.text = "HIT!!";
+                }
+                break;
+            }
+            if(hitCount == 0){
+                topText.text = "Missed. There is no ship there";
+            }
+        }
     }
 }

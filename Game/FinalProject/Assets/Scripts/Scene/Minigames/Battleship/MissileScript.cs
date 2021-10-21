@@ -12,7 +12,7 @@ public class MissileScript : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision){
-        // battleshipManager.CheckHit(collision.gameObject);
+        battleshipManager.CheckHit(collision.gameObject);
         Destroy(gameObject);
     }
 }
