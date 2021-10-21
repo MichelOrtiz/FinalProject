@@ -204,6 +204,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5188500442514610797, guid: 7dffae94b5551f44083745c49088fd92, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 869152504}
+    - target: {fileID: 5188500442514610797, guid: 7dffae94b5551f44083745c49088fd92, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 755728952}
+    - target: {fileID: 5188500442514610797, guid: 7dffae94b5551f44083745c49088fd92, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 755728953}
     - target: {fileID: 5188500442514610798, guid: 7dffae94b5551f44083745c49088fd92, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -31826,6 +31838,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2065996651391424933, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2732698731207278063, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -31968,6 +31984,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4672358929195501984, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460441060571770118, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460441060571770118, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8502108929805694115, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
@@ -32116,6 +32140,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+--- !u!114 &755728952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5587018649552673416, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+  m_PrefabInstance: {fileID: 755728951}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &755728953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 24001125020208477, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+  m_PrefabInstance: {fileID: 755728951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &868836817
 GameObject:
   m_ObjectHideFlags: 0
@@ -32190,6 +32230,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 61, y: 20}
   m_EdgeRadius: 0
+--- !u!114 &869152504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1349883737453444262, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+  m_PrefabInstance: {fileID: 755728951}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &932725081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32656,11 +32707,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.3
+      value: 30.74
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.8
+      value: 8.53
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.z

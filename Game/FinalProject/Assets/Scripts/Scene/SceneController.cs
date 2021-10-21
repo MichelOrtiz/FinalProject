@@ -1,8 +1,14 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 
 public class SceneController : MonoBehaviour
 {
+    public GameObject loadingScreen;
+    public Slider slider;
+    public Text text;
     public int prevScene { get; set; }
     public int currentScene { get; set; }
     public int altDoor;
@@ -27,11 +33,24 @@ public class SceneController : MonoBehaviour
         prevScene = SceneManager.GetActiveScene().buildIndex;
         currentScene = scene;
         SceneChanged?.Invoke();
-        SceneManager.LoadScene(scene);
+        StartCoroutine(LoadAsynchronously(scene));
     }
     public void Load(SaveFile partida){
         //Instantiate(playerPrefab);
         LoadScene(partida.sceneToLoad);
         
+    }
+    IEnumerator LoadAsynchronously (int sceneInd){
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneInd);
+        loadingScreen.SetActive(true);
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+             slider.value = progress;
+             text.text = progress * 100f + "%";
+
+             yield return null;
+        }
+        loadingScreen.SetActive(false);
     }
 }
