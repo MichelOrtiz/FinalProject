@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Ability : MonoBehaviour
 {
+    public Sprite iconAbility;
+    public string description;
     public enum Abilities
     {
         Invisibilidad, 
