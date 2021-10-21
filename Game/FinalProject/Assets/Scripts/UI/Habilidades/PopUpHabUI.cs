@@ -10,14 +10,15 @@ public class PopUpHabUI : MonoBehaviour
     [SerializeField] Image icon;
     [SerializeField] TextMeshProUGUI name_Ab;
     [SerializeField] TextMeshProUGUI desc_Ab;
-    void Start()
-    {
-        
+    [SerializeField] GameObject holder;
+    public void UpdateUI(Ability ability){
+        this.ability = ability;
+        icon.sprite = ability.iconAbility;
+        name_Ab.text = ability.abilityName.ToString();
+        desc_Ab.text = ability.description;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void GoBack(){
+        holder.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

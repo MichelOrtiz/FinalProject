@@ -13,8 +13,9 @@ public class AbilityUI : MonoBehaviour
         }
     }
     public GameObject UI;
-    [SerializeField] private Transform abilitiesHolder;
-    [SerializeField] private GameObject prefabAbilitySlot;
+    [SerializeField] Transform abilitiesHolder;
+    [SerializeField] GameObject prefabAbilitySlot;
+    [SerializeField] GameObject popUp;
     
     public void UpdateUI(List<Ability> abilities){
         foreach(Ability ab in abilities){
@@ -22,6 +23,7 @@ public class AbilityUI : MonoBehaviour
             obj.transform.SetParent(abilitiesHolder,false);
             AbilitySlot slot = obj.GetComponent<AbilitySlot>();
             slot.UpdateUISlot(ab);
+            slot.popUp = popUp.GetComponent<PopUpHabUI>();
         }
     }
 }

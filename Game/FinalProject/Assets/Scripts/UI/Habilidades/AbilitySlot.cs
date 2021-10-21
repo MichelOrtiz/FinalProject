@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class AbilitySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [HideInInspector] public Ability ability;
+    [HideInInspector] public PopUpHabUI popUp;
     [SerializeField] Image ab_img;
     [SerializeField] Image cover;
     public void OnPointerEnter(PointerEventData data){
@@ -18,7 +19,9 @@ public class AbilitySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         ab_img.color = Color.white;
     }
     public void OnClickBtn(){
-
+        popUp.gameObject.SetActive(true);
+        popUp.UpdateUI(ability);
+        gameObject.transform.parent.gameObject.SetActive(false);
     }
     public void UpdateUISlot(Ability ability){
         this.ability = ability;
