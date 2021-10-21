@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ability : MonoBehaviour
 {
     public Sprite iconAbility;
-    public string description;
+    [TextArea (3,10)]public string description;
     public enum Abilities
     {
         Invisibilidad, 
@@ -25,7 +25,7 @@ public class Ability : MonoBehaviour
         Volar
     }
     [SerializeField] protected float cooldownTime;
-    [SerializeField] protected KeyCode hotkey;
+    public KeyCode hotkey;
     [SerializeField] protected float staminaCost;
     [SerializeField] protected float duration;
     [SerializeField] protected bool isInCooldown;

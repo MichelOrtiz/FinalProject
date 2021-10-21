@@ -39,7 +39,7 @@ public class loadBossLevel : loadlevel
                             PlayerManager.instance.gameObject.transform.position = loadPosition.position;
                             //Jugador salio de la sala del jefe... entonces lo derroto no?
                             //worldState.state = true;
-                            Destroy(gameObject);
+                            //Destroy(gameObject);
                         }
                     }
                     else{
