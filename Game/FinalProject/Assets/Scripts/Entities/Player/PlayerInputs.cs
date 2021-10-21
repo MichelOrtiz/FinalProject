@@ -44,6 +44,7 @@ public class PlayerInputs : MonoBehaviour
     }
     void Update()
     {
+        if (controlBinds == null) return;
         #region Right Left Up Dowm
         if(Input.GetKey(controlBinds["MOVERIGHT"]) && this.enabled){
             if(intputLag > 0){   

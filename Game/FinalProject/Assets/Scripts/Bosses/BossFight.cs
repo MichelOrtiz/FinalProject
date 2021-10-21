@@ -30,7 +30,6 @@ public class BossFight : MonoBehaviour
         //popUpTrigger = GetComponent<PopUpTrigger>();
     }
     [SerializeField] protected List<Stage> stages;
-    [SerializeField] protected GameObject abilityObject;
     
     [SerializeField] protected Ability.Abilities ability;
 

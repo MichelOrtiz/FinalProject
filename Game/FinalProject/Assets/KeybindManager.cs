@@ -23,6 +23,8 @@ public class KeybindManager : MonoBehaviour
     public Dictionary<string, KeyCode> controlbinds {get; set;}
     
     private string bindName;
+
+    
     void Start()
     {
         controlbinds = new Dictionary<string, KeyCode>();

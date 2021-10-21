@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreScript : MonoBehaviour
+namespace FinalProject.Assets.Scripts.Bosses.AirHockey
 {
-    public enum Score
+    public class ScoreScript : MonoBehaviour
     {
-        AiScore, PlayerScore
-    }
-    public Text AiScoreText, PlayerScoreText;
-    public UIManager uIManager;
-    public AirHockeyPlayerMovement airHockeyPlayer;
+        public enum Score
+        {
+            AiScore, PlayerScore
+        }
+        public Text AiScoreText, PlayerScoreText;
 
-    #region Scores
+        #region Scores
         public int MaxScore, aiScore, playerScore;
         private int AiScore { 
             get{
@@ -24,6 +24,7 @@ public class ScoreScript : MonoBehaviour
                 if (value == MaxScore)
                 {
                     //uIManager.ShowRestartCanvas(true);
+                    GetComponent<UIBossFight>().LooseBattle();
                 }
             }
         }
@@ -35,25 +36,28 @@ public class ScoreScript : MonoBehaviour
                 playerScore = value;    
                 if (value == MaxScore)
                 {
-                    GetComponent<BossFight>().EndBattle();
+                    GetComponent<UIBossFight>().EndBattle();
                     //uIManager.ShowRestartCanvas(false);
                 }
             }
         }
-    #endregion
+        #endregion
 
 
-    public void Increment(Score whichScore){
-        if (whichScore == Score.AiScore)
+        public void Increment(Score whichScore)
         {
-            AiScoreText.text = (++AiScore).ToString();
-        }else
-        {
-            PlayerScoreText.text = (++PlayerScore).ToString();
+            if (whichScore == Score.AiScore)
+            {
+                AiScoreText.text = (++AiScore).ToString();
+            }else
+            {
+                PlayerScoreText.text = (++PlayerScore).ToString();
+            }
         }
-    }
-    public void ResetScores(){
-        AiScore = PlayerScore = 0;
-        AiScoreText.text = PlayerScoreText.text = "0";
+        public void ResetScores()
+        {
+            AiScore = PlayerScore = 0;
+            AiScoreText.text = PlayerScoreText.text = "0";
+        }
     }
 }
