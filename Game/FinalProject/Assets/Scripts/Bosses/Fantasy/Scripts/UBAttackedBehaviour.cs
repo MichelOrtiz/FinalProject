@@ -12,6 +12,7 @@ public class UBAttackedBehaviour : UBBehaviour
     
 
     #region Tears
+    [Header("Tears")]
     [SerializeField] private int minTears;
     [SerializeField] private int maxTears;
     [SerializeField] private float rainTime;
@@ -20,14 +21,38 @@ public class UBAttackedBehaviour : UBBehaviour
     private float currentTimeBtwDrops;
     private int nTears;
     private int index;
-
     #endregion
+    
+    #region Projectiles
+    [Header("Projectiles")]
+    [SerializeField] private ProjectileShooter projectileShooter;
+    [SerializeField] private float timeBtwShot;
+    [SerializeField] private float timeTilChangeRot;
+    #endregion
+
+    [Header("Modifiers")]
+    [SerializeField] private float timeBtwShotMod;
+    [SerializeField] private float dropsIntervalMod;
+
+    public void ModValues()
+    {
+        timeBtwShot *= timeBtwShotMod;
+        intervalBtwDrops*= dropsIntervalMod;
+    }
+
+
+    void OnEnable()
+    {
+        InvokeRepeating("ShootProjectiles", 2f, timeBtwShot);
+        InvokeRepeating("ChangeProjectilesRotation", 2f, timeTilChangeRot);
+    }
 
 
     new void Start()
     {
         base.Start();
         SetDefaults();
+
     }
 
     // Update is called once per frame
@@ -80,6 +105,22 @@ public class UBAttackedBehaviour : UBBehaviour
         {
             rigidbody2d.position = Vector2.MoveTowards(GetPosition(), positionToGo, speed * Time.deltaTime);
         }
+    }
+
+
+    void ShootProjectiles()
+    {
+        if (ReachedDestination()) projectileShooter.ShootRotating();
+    }
+
+    void ChangeProjectilesRotation()
+    {
+        if (ReachedDestination()) projectileShooter.ChangeRotation();
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke();
     }
 
     protected override void SetDefaults()

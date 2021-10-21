@@ -25,6 +25,7 @@ public class UnicornHead : MonoBehaviour
     {
         lamps = ScenesManagers.GetObjectsOfType<UBLamp>();
     }
+
     void Start()
     {
         player = PlayerManager.instance;
@@ -85,9 +86,10 @@ public class UnicornHead : MonoBehaviour
     {
         if (playerGroundChecker.lastGroundTag == "Ground")
         {
-            if (child != GroundAttack)
+            
+            if (child != GroundAttack && nextChild != RainAttack)
             {
-                Debug.Log("Changed atatck to ground");
+                Debug.Log("Changed attack to ground");
                 nextChild = GroundAttack;
                 //ChangeChild(GroundAttack);
             }
@@ -105,11 +107,15 @@ public class UnicornHead : MonoBehaviour
 
     void lamp_Activated()
     {
-        if (nextChild != RainAttack)
+        if (child != RainAttack)
         {
             nextChild = RainAttack;
         }
         lampsActivated++;
+        if (lampsActivated > 1)
+        {
+            RainAttack.GetComponent<UBAttackedBehaviour>().ModValues();
+        }
         /*if (!changingAttack)
         {
             ChangeChild(RainAttack);
@@ -166,6 +172,7 @@ public class UnicornHead : MonoBehaviour
 
     void RainAttack_FinishedAttack()
     {
+        nextChild = GroundAttack;
         changingAttack = true;
         playerGroundChecker_ChangedGroundTagHandler();
     }

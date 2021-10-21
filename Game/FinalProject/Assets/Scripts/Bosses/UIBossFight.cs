@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+
 public class UIBossFight : BossFight
 {
     [SerializeField] private string winMessage;
@@ -7,11 +9,21 @@ public class UIBossFight : BossFight
     [SerializeField] private string looseMessage;
     [SerializeField] private PopUpUI endBattlePopUp;
 
+    [SerializeField] private List<GameObject> objectsToHide;
+
+
+    new void Awake()
+    {
+        base.Awake();
+        ScenesManagers.SetListActive(objectsToHide, false);
+    }
+
     new void Start()
     {
         base.Start();
         //PopUpUI.Instance.closedPopUp += PopUpUI_Closed;
         endBattlePopUp.closedPopUp += PopUpUI_Closed;
+        PlayerManager.instance.gameObject?.SetActive(false);
     }
 
     new void Update()
@@ -59,6 +71,8 @@ public class UIBossFight : BossFight
         else
         {
             // return to last scene
+            ScenesManagers.SetListActive(objectsToHide, true);
+            PlayerManager.instance.gameObject?.SetActive(true);       
             ReturnToLastScene();
         }
     }

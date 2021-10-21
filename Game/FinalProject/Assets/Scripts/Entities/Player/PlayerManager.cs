@@ -425,8 +425,8 @@ public class PlayerManager : Entity
     public void SetEnabledPlayer(bool value)
     {
         abilityManager.gameObject.SetActive(value);
-        
         if (inputs != null) inputs.enabled = value;
+        PlayerManager.instance.inputs.movementX = 0;
     }
 
 

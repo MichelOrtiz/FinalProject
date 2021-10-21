@@ -38,17 +38,22 @@ public class PlayerInputs : MonoBehaviour
 
         
     }
+    private void OnEnable() {
+        movementX = 0;
+        movementY = 0;
+    }
     void Update()
     {
+        if (controlBinds == null) return;
         #region Right Left Up Dowm
-        if(Input.GetKey(controlBinds["MOVERIGHT"])){
+        if(Input.GetKey(controlBinds["MOVERIGHT"]) && this.enabled){
             if(intputLag > 0){   
                 StartCoroutine(ApplyInputLag(MovedRight));
             }else{
                 MovedRight?.Invoke();
             }
         }
-        else if(Input.GetKey(controlBinds["MOVELEFT"])){
+        else if(Input.GetKey(controlBinds["MOVELEFT"]) && this.enabled){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedLeft));
             }else{
@@ -59,7 +64,7 @@ public class PlayerInputs : MonoBehaviour
         else{
             movementX=0;
         }
-        if(Input.GetKey(controlBinds["MOVEUP"])){
+        if(Input.GetKey(controlBinds["MOVEUP"]) && this.enabled){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedUp));
             }else{
@@ -67,7 +72,7 @@ public class PlayerInputs : MonoBehaviour
             }  
             //movementY=1;
         }
-        else if(Input.GetKey(controlBinds["MOVEDOWN"])){
+        else if(Input.GetKey(controlBinds["MOVEDOWN"]) && this.enabled){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedDown));
             }else{

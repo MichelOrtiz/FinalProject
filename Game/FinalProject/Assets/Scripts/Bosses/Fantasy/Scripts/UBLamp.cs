@@ -1,12 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class UBLamp : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite spriteWhenEnabled;
     [SerializeField] private Sprite spriteWhenDisabled;
+
+    [SerializeField] private Color enabledColor;
+    [SerializeField] private Color disabledColor;
+    [SerializeField] private Light2D light2D;
+
     
     [SerializeField] private float interactionRadius;
     //[SerializeField] private float effectRadius;
@@ -23,6 +28,9 @@ public class UBLamp : MonoBehaviour
     protected virtual void OnActivated()
     {
         ActivatedHandler?.Invoke();
+        
+        light2D.enabled = false;
+        collisionHandler.gameObject.SetActive(false);
         enabled = false;
     }
 
@@ -33,50 +41,45 @@ public class UBLamp : MonoBehaviour
     {
         if (collisionHandler != null)
         {
+            //collisionHandler.StayTouchingContactHandler += collisionHandler_StayTouchingContact;
             collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterTouchingContact;
             collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitTouchingContact;
         }
         //spriteRenderer = GetComponent<SpriteRenderer>();
-        ChangeSprite(spriteWhenEnabled);
+        //ChangeSprite(spriteWhenEnabled);
+        light2D.enabled = false;
+
+        collisionHandler.gameObject.SetActive(false);
     }
 
     void Start()
     {
         player = PlayerManager.instance;
         canActivate = true;
+
+        player.inputs.Interact += inputs_Interact;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distanceFromPlayer = Vector2.Distance(transform.position, player.GetPosition());
         //distanceFromTarget = Vector2.Distance(transform.position, targetObject.position);
         //Debug.Log(targetObject.position);
         if (canActivate)
         {
-            ChangeSprite(spriteWhenEnabled);
-            if (distanceFromPlayer <= interactionRadius)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    ChangeSprite(spriteWhenDisabled);
-                    if (targetEnteredZone)
-                    {
-                        OnActivated();
-                    }
-                    else
-                    {
-                        canActivate = false;
-                    }
-                }
-            }
+            //ChangeSprite(spriteWhenEnabled);
         }
         else
         {
             if (currentTime > waitTimeIfFailActivate)
             {
-                canActivate = true;
                 currentTime = 0;
+                light2D.enabled = false;
+                collisionHandler.gameObject.SetActive(false);
+
+                canActivate = true;
+                ChangeSpriteColor(enabledColor);
+
             }
             else
             {
@@ -85,11 +88,35 @@ public class UBLamp : MonoBehaviour
         }
     }
 
+    void inputs_Interact()
+    {
+        float distanceFromPlayer = Vector2.Distance(transform.position, player.GetPosition());
+        if (distanceFromPlayer > interactionRadius || !canActivate) return;
+
+        //ChangeSprite(spriteWhenDisabled);
+        light2D.enabled = true;
+        collisionHandler.gameObject.SetActive(true);
+
+        ChangeSpriteColor(disabledColor);
+        /*else
+        {
+        }*/
+        canActivate = false;
+    }
+
     void ChangeSprite(Sprite sprite)
     {
         if (spriteRenderer.sprite != sprite)
         {
             spriteRenderer.sprite = sprite;
+        }
+    }
+
+    void ChangeSpriteColor(Color color)
+    {
+        if (spriteRenderer.color != color)
+        {
+            spriteRenderer.color = color;
         }
     }
 
@@ -108,6 +135,11 @@ public class UBLamp : MonoBehaviour
         {
             targetEnteredZone = true;
         }
+        if (targetEnteredZone)
+        {
+            OnActivated();
+            targetEnteredZone = false;
+        }
     }
 
     void collisionHandler_ExitTouchingContact(GameObject contact)
@@ -116,5 +148,10 @@ public class UBLamp : MonoBehaviour
         {
             targetEnteredZone = false;
         }
+    }
+
+    void OnDestroy()
+    {
+        player.inputs.Interact -= inputs_Interact;
     }
 }
