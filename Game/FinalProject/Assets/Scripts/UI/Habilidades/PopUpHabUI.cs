@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class PopUpHabUI : MonoBehaviour
@@ -39,7 +40,7 @@ public class PopUpHabUI : MonoBehaviour
             hotkey.AddOptions(options);
             if(currentHotKey == null) currentHotKey = opt;
             hotkey.value = hotkey.options.IndexOf(currentHotKey);
-            
+            hotkey.onValueChanged.AddListener(updateAlgo);
         }
         else if(ability.isPasive){
             groupHotkey.SetActive(false);
@@ -57,5 +58,12 @@ public class PopUpHabUI : MonoBehaviour
         }
         
     }
-
+    void updateAlgo(int i){
+        string key = hotkey.options[hotkey.value].text;
+        if(key == "Ninguna"){
+            ability.hotkey = KeyCode.None;
+        }else{
+            ability.hotkey = (KeyCode) System.Enum.Parse(typeof(KeyCode),key);
+        }
+    }
 }
