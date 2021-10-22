@@ -1,41 +1,38 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class InventorySlot : ItemSlot
+using UnityEngine.EventSystems;
+
+public class InventorySlot : ItemSlot,IPointerEnterHandler,IPointerExitHandler
 {
     private InventoryUI inventoryUI;
     private void Start() {
         inventoryUI = InventoryUI.instance;
-        index = 0;
+        icon.color = Color.clear;
     }
-    public override void OnButtonPress(){
-        if(PlayerManager.instance.inputs.ctrlLeft){
-            //Debug.Log("YES");
-            foreach(HotbarSlot slot in HotbarUI.instance.slotsHotbar0){
-                if(slot.GetItem()==null){
-                    slot.SetItem(this.item);
-                    return;
-                }
-            }
-            return;
-        }else{
-            //Debug.Log("No");
-        }
-        if(inventoryUI.GetMoveItem()!=null){
-            inventoryUI.MoveItems(this.index);
-        }
-        if(inventoryUI.GetFocusSlot()!=this){
-            inventoryUI.FocusSlot(this);
-        }else{
-            inventoryUI.ShowMenuDesp();
-        }
-        
+    public override void OnButtonPress()
+    {
+        //Desplegar menu con opciones
+
     }
-    public override void UseItem(){
-        item.Use();
-        inventoryUI.RemoveFocusSlot();
+    public override void MoveItem(){
+        ItemSlot mItem = InventoryUI.instance.moveItem;
+        if(mItem == item){
+            mItem = null;
+        }else if(mItem == null){
+            mItem = this;
+        }else if(mItem != null){
+            //cambiar de lugar objetos dentro del inv?
+            Inventory.instance.SwapItems(mItem.GetIndex(),index);
+        }
     }
-    public override void RemoveItem(){
-        item.RemoveFromInventory();
-        inventoryUI.RemoveFocusSlot();
+    public void OnPointerEnter(PointerEventData eventData){
+        if(item == null) return;
+        inventoryUI.focusedSlot = this;
+        inventoryUI.UpdateText();
+    }
+    public void OnPointerExit(PointerEventData eventData){
+        if(item == null) return;
+        inventoryUI.focusedSlot = null;
+        inventoryUI.UpdateText();
     }
 }

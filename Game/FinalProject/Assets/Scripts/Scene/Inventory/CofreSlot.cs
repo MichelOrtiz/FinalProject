@@ -9,7 +9,6 @@ public class CofreSlot : ItemSlot
     public Holder origen;
     private void Start() {
         cofreUI = CofreUI.instance;
-        index = 0;
     }
     public override void OnButtonPress(){
         if(item!=null){

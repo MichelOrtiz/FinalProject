@@ -4,20 +4,19 @@ using UnityEngine.UI;
 public abstract class ItemSlot : MonoBehaviour
 {
     public Image icon;
-    public Image background;
     protected Item item;
-    [SerializeField]
     protected int index;
     public void SetItem (Item newItem){
         item = newItem;
         if(newItem!=null){
             icon.sprite = item.icon;
+            icon.color = Color.white;
         }
         else{
+            icon.color = Color.clear;
             icon.sprite = null;
         }
         icon.enabled = true;
-        background.color = Color.white;
     }
     public Item GetItem(){
         return item;
@@ -33,12 +32,16 @@ public abstract class ItemSlot : MonoBehaviour
         item = null;
         icon.sprite = null;
         icon.enabled = false;
+        icon.color = Color.clear;
     }
+
     public virtual void UseItem(){
         item.Use();
     }
     public virtual void RemoveItem(){
         item.RemoveFromInventory();
+    }
+    public virtual void MoveItem(){
     }
     public abstract void OnButtonPress();
 }

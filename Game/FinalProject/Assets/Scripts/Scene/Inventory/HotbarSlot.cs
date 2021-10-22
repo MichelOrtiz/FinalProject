@@ -13,9 +13,9 @@ public class HotbarSlot : ItemSlot
     }
     public override void OnButtonPress()
     {
-        if(inventoryUI.GetMoveItem()!=null){
-            SetItem(inventoryUI.GetMoveItem());
-            inventoryUI.RemoveMoveItem();
+        if(inventoryUI.moveItem!=null){
+            SetItem(inventoryUI.moveItem.GetItem());
+            inventoryUI.moveItem = null;
             inventoryUI.UpdateUI();
         }
     }

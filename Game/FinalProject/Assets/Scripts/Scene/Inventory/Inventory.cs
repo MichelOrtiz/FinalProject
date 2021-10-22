@@ -36,6 +36,7 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallBack;
     private void Update() 
     {
+        //Cheats
         if(Input.GetKeyDown(KeyCode.P)){
             AddMoney(1);
         }

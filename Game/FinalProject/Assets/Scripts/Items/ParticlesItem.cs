@@ -6,7 +6,7 @@ public class ParticlesItem : Item
     
     public override void Use(){
         base.Use();
-        InventoryUI.instance.ForceCloseUI();
+        InventoryUI.instance.UI.SetActive(false);
         ParticleSystemController.instance.Play();
     }
 }
