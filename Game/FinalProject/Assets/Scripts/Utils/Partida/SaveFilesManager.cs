@@ -92,8 +92,10 @@ public class SaveFilesManager : MonoBehaviour
         currentSaveSlot.timeHoursPlayed += timePlayed.Hours;
         currentSaveSlot.staminaLimit = PlayerManager.instance.currentStaminaLimit;
         int i = 0;
+        currentSaveSlot.abilitiesBinds = new List<KeyCode>();
         foreach(Ability a in AbilityManager.instance.abilities){
             currentSaveSlot.unlockedAbilities[i] = a.isUnlocked;
+            currentSaveSlot.abilitiesBinds.Add(a.hotkey);
             i++;
         }
         currentSaveSlot.money = Inventory.instance.GetMoney();

@@ -16,6 +16,7 @@ public class SaveFile
     //public Dictionary<string, KeyCode> controlbinds;
     public List<string> controlBindsKeys;
     public List<KeyCode> controlBindsValues;
+    public List<KeyCode> abilitiesBinds;
     public Item[] inventory;
     public int capacidad;
     public Item[] chestItems;
@@ -39,6 +40,7 @@ public class SaveFile
         this.controlBindsValues = new List<KeyCode>();
         this.staminaLimit = 100f;
         this.unlockedAbilities = new bool[14];
+        abilitiesBinds = null;
     }
     public SaveFile(string namePlayer, int slotFile){
         this.namePlayer = namePlayer;
@@ -57,5 +59,6 @@ public class SaveFile
         this.controlBindsValues = new List<KeyCode>();
         this.staminaLimit = 100f;
         this.unlockedAbilities = new bool[14];
+        abilitiesBinds = null;
     }
 }

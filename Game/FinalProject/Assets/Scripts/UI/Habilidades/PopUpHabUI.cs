@@ -50,7 +50,12 @@ public class PopUpHabUI : MonoBehaviour
         holder.SetActive(true);
         gameObject.SetActive(false);
         string key = hotkey.options[hotkey.value].text;
-        ability.hotkey = (KeyCode) System.Enum.Parse(typeof(KeyCode),key);
+        if(key == "Ninguna"){
+            ability.hotkey = KeyCode.None;
+        }else{
+            ability.hotkey = (KeyCode) System.Enum.Parse(typeof(KeyCode),key);
+        }
+        
     }
 
 }

@@ -19,6 +19,7 @@ public class AbilitySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         ab_img.color = Color.white;
     }
     public void OnClickBtn(){
+        ab_img.color = Color.white;
         popUp.gameObject.SetActive(true);
         popUp.UpdateUI(ability);
         gameObject.transform.parent.gameObject.SetActive(false);

@@ -25,8 +25,13 @@ public class AbilityManager : MonoBehaviour
         abilityUI = AbilityUI.instance;
         if(SaveFilesManager.instance != null){
             SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
+            int i = 0;
+            foreach(KeyCode key in partida.abilitiesBinds){
+                abilities[i].hotkey = key;
+                i++;
+            }
             if(partida.unlockedAbilities != null){
-                int i = 0;
+                i = 0;
                 foreach(Ability a in abilities){
                     if( i > partida.unlockedAbilities.Length) break;
                     a.isUnlocked = partida.unlockedAbilities[i];
