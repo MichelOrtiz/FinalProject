@@ -8,6 +8,7 @@ public class SceneController : MonoBehaviour
     public Slider slider;
     public TMP_Text text;
     public GameObject loadingScreen;
+    public GameObject mainCanvas;
 
     public int prevScene { get; set; }
     public int currentScene { get; set; }
@@ -27,6 +28,8 @@ public class SceneController : MonoBehaviour
         if(currentScene==0)
         currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneChanged?.Invoke();
+
+        
         //Debug.Log("Start scenecontroller");
     }
     public void LoadScene(int scene){
@@ -48,6 +51,7 @@ public class SceneController : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneInd);
         loadingScreen.SetActive(true);
+        //mainCanvas.SetActive(false);
         while (!operation.isDone)
         {
             float progress = Mathf. Clamp01(operation.progress / .9f);
@@ -56,5 +60,6 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
         loadingScreen.SetActive(false);
+        //mainCanvas.SetActive(true);
     }
 }
