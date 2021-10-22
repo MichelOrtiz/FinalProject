@@ -12,7 +12,7 @@ public class InventorySlot : ItemSlot,IPointerEnterHandler,IPointerExitHandler
     public override void OnButtonPress()
     {
         //Desplegar menu con opciones
-
+        inventoryUI.OpenDesMenu(this);
     }
     public override void MoveItem(){
         ItemSlot mItem = InventoryUI.instance.moveItem;
