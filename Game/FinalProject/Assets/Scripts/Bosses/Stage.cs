@@ -10,9 +10,9 @@ public class Stage : ScriptableObject
     
     [SerializeField] public List<GameObject> gameObjects;
     [SerializeField] public List<Vector2> positions;
-    public List<GameObject> currentObjects { get; set; }
+    public List<GameObject> currentObjects = new List<GameObject>();
     public void Generate(){
-        currentObjects = new List<GameObject>();
+        
         for (int i = 0; i < gameObjects.Count; i++)
         {
             currentObjects.Add(Instantiate(gameObjects[i], positions[i], gameObjects[i].transform.rotation));
