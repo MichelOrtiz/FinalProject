@@ -34,11 +34,16 @@ public class AbilityManager : MonoBehaviour
                     i++;
                 }
             }
-            abilityUI.UI.SetActive(true);
+            abilityUI.SetOpen(true);
             abilityUI.UpdateUI(abilities);
-            abilityUI.UI.SetActive(false);
+            abilityUI.SetOpen(false);
         }
 
+    }
+    private void Update() {
+        if(PlayerManager.instance.inputs.OpenAbilites){
+            abilityUI.SetOpen(!abilityUI.GetOpen());
+        }
     }
 
     /// <summary>

@@ -14,6 +14,7 @@ public class PlayerInputs : MonoBehaviour
     public bool ctrlLeft { get; set; }
     public bool OpenInventory { get; set; }
     public bool OpenMap { get; set; }
+    public bool OpenAbilites {get;set;}
     public bool[] ItemHotbarUp = new bool[5];
     public bool[] ItemHotbarDown = new bool[5];
     public bool[] EquipmentHotbar = new bool[5];
@@ -103,6 +104,7 @@ public class PlayerInputs : MonoBehaviour
         ctrlLeft = Input.GetKey(controlBinds["MENUFASTASSIGN"]);
         OpenInventory=Input.GetKeyDown(controlBinds["MENUINVENTORY"]);
         OpenMap=Input.GetKeyDown(controlBinds["MENUMAP"]);
+        OpenAbilites = Input.GetKeyDown(controlBinds["MENUHABILIDAD"]);
         
 
         HotbarInputs();

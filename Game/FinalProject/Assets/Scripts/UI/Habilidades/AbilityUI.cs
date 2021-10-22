@@ -12,7 +12,7 @@ public class AbilityUI : MonoBehaviour
             Destroy(this);
         }
     }
-    public GameObject UI;
+    [SerializeField] GameObject UI;
     [SerializeField] Transform abilitiesHolder;
     [SerializeField] GameObject prefabAbilitySlot;
     [SerializeField] GameObject popUp;
@@ -25,5 +25,11 @@ public class AbilityUI : MonoBehaviour
             slot.UpdateUISlot(ab);
             slot.popUp = popUp.GetComponent<PopUpHabUI>();
         }
+    }
+    public void SetOpen(bool isOpen){
+        UI.SetActive(isOpen);
+    }
+    public bool GetOpen(){
+        return UI.activeSelf;
     }
 }
