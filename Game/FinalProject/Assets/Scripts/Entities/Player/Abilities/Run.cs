@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Run : Ability
 {
+    public override KeyCode hotkey {get => PlayerManager.instance.inputs.controlBinds["RUN"];}
     [SerializeField] private float speedMultiplier;
     [SerializeField] public float runningSpeed;
     [SerializeField] private float LimitStamCost;

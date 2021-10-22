@@ -12,21 +12,45 @@ public class PopUpHabUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI desc_Ab;
     [SerializeField] GameObject holder;
     [SerializeField] GameObject groupHotkey;
-    [SerializeField] TextMeshProUGUI hotkey_text;
+    [SerializeField] GameObject isPasiveNotice;
+    [SerializeField] TMP_Dropdown hotkey;
     public void UpdateUI(Ability ability){
         this.ability = ability;
         icon.sprite = ability.iconAbility;
         name_Ab.text = ability.abilityName.ToString();
         desc_Ab.text = ability.description;
-        if(ability.hotkey != KeyCode.None){
-            hotkey_text.text = "<" + ability.hotkey.ToString() + ">";
+        if(!ability.isPasive){
+            groupHotkey.SetActive(true);
+            isPasiveNotice.SetActive(false);
+            hotkey.ClearOptions();
+            TMP_Dropdown.OptionData currentHotKey = null;
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+            foreach(KeyCode key in PlayerManager.instance.inputs.skillHotkeys){
+                TMP_Dropdown.OptionData option = new TMP_Dropdown.OptionData();
+                option.text = key.ToString();
+                options.Add(option);
+                if(key.ToString().Equals(ability.hotkey.ToString())){
+                    currentHotKey = option;
+                }
+            }
+            TMP_Dropdown.OptionData opt = new TMP_Dropdown.OptionData();
+            opt.text = "Ninguna";
+            options.Add(opt);
+            hotkey.AddOptions(options);
+            if(currentHotKey == null) currentHotKey = opt;
+            hotkey.value = hotkey.options.IndexOf(currentHotKey);
+            
         }
-        else{
-            hotkey_text.text = "<Sin asignar>";
+        else if(ability.isPasive){
+            groupHotkey.SetActive(false);
+            isPasiveNotice.SetActive(true);
         }
     }
     public void GoBack(){
         holder.SetActive(true);
         gameObject.SetActive(false);
+        string key = hotkey.options[hotkey.value].text;
+        ability.hotkey = (KeyCode) System.Enum.Parse(typeof(KeyCode),key);
     }
+
 }

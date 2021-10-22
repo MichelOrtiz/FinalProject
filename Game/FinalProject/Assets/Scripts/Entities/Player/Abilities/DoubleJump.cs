@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoubleJump : Ability
 {
+    public override KeyCode hotkey {get => PlayerManager.instance.inputs.controlBinds["MOVEJUMP"];}
     public Rigidbody2D body;
     private float prevGravity;
     public float speed;

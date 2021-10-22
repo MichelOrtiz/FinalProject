@@ -6,7 +6,7 @@ using System;
 public class PlayerInputs : MonoBehaviour
 {
     #region Inputs binding
-    public Dictionary<string, KeyCode> controlBinds {get; set;}
+    public Dictionary<string, KeyCode> controlBinds {get;set;}
     #endregion
     public int movementX {get;set;}
     public int movementY {get;set;}
@@ -18,6 +18,17 @@ public class PlayerInputs : MonoBehaviour
     public bool[] ItemHotbarUp = new bool[5];
     public bool[] ItemHotbarDown = new bool[5];
     public bool[] EquipmentHotbar = new bool[5];
+    public List<KeyCode> skillHotkeys {
+        get{
+            List<KeyCode> keys = new List<KeyCode>();
+            foreach(String k in controlBinds.Keys){
+                if(k.StartsWith("SKILL")){
+                    keys.Add(controlBinds[k]);
+                }
+            }
+            return keys;
+        }
+    }
     public float intputLag {get;set;}
     public const float defaultInputLag = 0;
     public KeyCode Pause;
@@ -113,7 +124,6 @@ public class PlayerInputs : MonoBehaviour
 
     public void HotbarInputs(){
         if(Input.GetKey(controlBinds["FOOD1"])){
-            
             ItemHotbarDown[0]=true;
         }else{
             ItemHotbarDown[0]=false;

@@ -26,7 +26,7 @@ public class Ability : MonoBehaviour
         Volar
     }
     [SerializeField] protected float cooldownTime;
-    public KeyCode hotkey;
+    public virtual KeyCode hotkey {get;set;}
     [SerializeField] protected float staminaCost;
     [SerializeField] protected float duration;
     [SerializeField] protected bool isInCooldown;

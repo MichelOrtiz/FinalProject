@@ -5,7 +5,8 @@ using UnityEngine;
 public class DashV : Ability
 {
     [SerializeField]private Rigidbody2D body;
-    [SerializeField] protected KeyCode altHotkey;
+    public override KeyCode hotkey {get => PlayerManager.instance.inputs.controlBinds["MOVEUP"];}
+    protected KeyCode altHotkey {get => PlayerManager.instance.inputs.controlBinds["MOVEDOWN"];}
     private float prevGravity;
     private float timeKeyPressed;
     public float doubleTimeTap;
