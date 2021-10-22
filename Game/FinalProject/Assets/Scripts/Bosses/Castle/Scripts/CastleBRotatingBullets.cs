@@ -14,7 +14,6 @@ public class CastleBRotatingBullets : MonoBehaviour, IBossFinishedBehaviour
     [Header("Projectile Stuff")]
     [SerializeField] private ProjectileShooter projectileShooter;
     [SerializeField] private float timeBtwShot;
-    private float currentTimeBtwShot;
 
     [SerializeField] private float burstTime;
     private float curBurstTime;
@@ -38,7 +37,8 @@ public class CastleBRotatingBullets : MonoBehaviour, IBossFinishedBehaviour
         player = PlayerManager.instance;
 
         InvokeRepeating("ShootProjectiles", timeBtwShot, timeBtwShot);
-        InvokeRepeating("ChangeProjectilesRotation", burstTime, burstTime + timeBtwBurst);
+        InvokeRepeating("ChangeProjectilesRotation", burstTime, burstTime);
+        Invoke("FinishBehaviour", totalTime);
 
     }
 
@@ -57,29 +57,29 @@ public class CastleBRotatingBullets : MonoBehaviour, IBossFinishedBehaviour
 
     void Update()
     {
-        if (currentTime <= totalTime)
+        if (curBurstTime > burstTime)
         {
-            if (curBurstTime > burstTime)
+            if (curTimeBtwBurst > timeBtwBurst)
             {
-                if (curTimeBtwBurst > timeBtwBurst)
-                {
-                    curBurstTime = 0;
-                    curTimeBtwBurst = 0;
-                }
-                else
-                {
-                    curTimeBtwBurst += Time.deltaTime;
-                }
+                curBurstTime = 0;
+                curTimeBtwBurst = 0;
+                CancelInvoke("ShootProjectiles");
+                InvokeRepeating("ShootProjectiles", 0, timeBtwShot); 
             }
             else
             {
-                curBurstTime += Time.deltaTime;
+                curTimeBtwBurst += Time.deltaTime;
             }
         }
         else
         {
-            // Next stage
-            OnFinished(transform.position);
+            curBurstTime += Time.deltaTime;
         }
     }
+
+    void FinishBehaviour()
+    {
+        OnFinished(transform.position);
+    }
+    
 }

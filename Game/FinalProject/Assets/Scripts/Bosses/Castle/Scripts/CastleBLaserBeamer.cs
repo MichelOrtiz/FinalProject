@@ -33,10 +33,11 @@ public class CastleBLaserBeamer : MonoBehaviour, IBossFinishedBehaviour
     void Start()
     {
         player = PlayerManager.instance;
+
+        InvokeRepeating("ShootLaser", timeBtwShot, timeBtwShot);
     }
 
-    // Update is called once per frame
-    void Update()
+    void ShootLaser()
     {
         RaycastHit2D hit = Physics2D.Linecast(laserShooter.ShotPos.position, (player.GetPosition() - laserShooter.ShotPos.position) * maxRayDistance, 1 << LayerMask.NameToLayer("Ground"));
         
@@ -50,27 +51,22 @@ public class CastleBLaserBeamer : MonoBehaviour, IBossFinishedBehaviour
         }
 
         Debug.DrawLine(laserShooter.ShotPos.position, endPos);
-
         if (shotsDone < shots)
         {
-            if (currentTimeBtwShot > timeBtwShot)
-            {
-                
-
-                //ShootLaser(shotPos.position, player.GetPosition());
-                //ShootLaser(shotPos.position, endPos);
-                laserShooter.ShootLaser(endPos);
-                shotsDone++;
-                currentTimeBtwShot = 0;
-            }
-            else
-            {
-                currentTimeBtwShot += Time.deltaTime;
-            }
+            laserShooter.ShootLaser(endPos);
+            shotsDone++;
         }
-        else if (laserShooter.Laser == null)
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (shotsDone >= shots)
         {
-            OnFinished(transform.position);
+            if (laserShooter.Laser == null)
+            {
+                OnFinished(transform.position);
+            }
         }
     }
 

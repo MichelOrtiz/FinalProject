@@ -2,32 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleBRangeBullets : MonoBehaviour, IProjectile, IBossFinishedBehaviour
+public class CastleBRangeBullets : MonoBehaviour, IBossFinishedBehaviour
 {
     #region TotalTime
     [Header("Total Time")]
     [SerializeField] private float totalTime;
-    private float currentTime;
     #endregion
 
     #region ProjectileStuff
     [Header("Projectile Stuff")]
-    
-    [SerializeField] private GameObject projectilePrefab;
-    private Projectile projectile;
-    //[SerializeField] private Transform shotTarget;
-    [SerializeField] private Transform shotPoint;
-    
+    [SerializeField] private ProjectileShooter projectileShooter;
     private Vector2 shotTarget;
-
     [SerializeField] private float timeBtwShot;
-    private float currentTimeBtwShot;
-
-    /// <summary>
-    /// Shots to do per given time
-    /// </summary>
     [SerializeField] private int shotsPerTime;
-
     #endregion
 
     #region TargetRangeStuff
@@ -46,42 +33,22 @@ public class CastleBRangeBullets : MonoBehaviour, IProjectile, IBossFinishedBeha
         FinishedHandler?.Invoke(lastPosition);
     }
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
         player = PlayerManager.instance;
+        InvokeRepeating("ShootProjectiles", timeBtwShot, timeBtwShot);
+        Invoke("FinishBehaviour", totalTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    void ShootProjectiles()
     {
-        if (currentTime <= totalTime)
+        for (int i = 0; i < shotsPerTime; i++)
         {
-            if (currentTimeBtwShot > timeBtwShot)
-            {
-                for (int i = 0; i < shotsPerTime; i++)
-                {
-                    ShotProjectiles();
-                }
-                currentTimeBtwShot = 0;
-            }
-            else
-            {
-                currentTimeBtwShot += Time.deltaTime;
-            }
-            currentTime += Time.deltaTime;
+            ShootProjectile();
         }
-        else
-        {
-            // next stage
-            OnFinished(transform.position);
-        }
-        
     }
 
-    public void ShotProjectiles()
+    void ShootProjectile()
     {
         Vector2 playerPosition = player.GetPosition();
         
@@ -90,17 +57,11 @@ public class CastleBRangeBullets : MonoBehaviour, IProjectile, IBossFinishedBeha
 
         shotTarget = playerPosition + (Vector2) transform.InverseTransformPoint(new Vector2(x, y)) ;
 
-        ShotProjectile(shotPoint, shotTarget);
+        projectileShooter.ShootProjectile(shotTarget);
     }
 
-    public void ShotProjectile(Transform from, Vector3 to)
+    void FinishBehaviour()
     {
-        projectile = Instantiate(projectilePrefab, from.position, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to, this);
-    }
-
-    public void ProjectileAttack()
-    {
-        player.TakeTirement(projectile.damage);
+        OnFinished(transform.position); 
     }
 }
