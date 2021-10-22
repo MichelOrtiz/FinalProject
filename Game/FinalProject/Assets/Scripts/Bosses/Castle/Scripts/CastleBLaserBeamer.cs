@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleBLaserBeamer : MonoBehaviour, ILaser, IBossFinishedBehaviour
+public class CastleBLaserBeamer : MonoBehaviour, IBossFinishedBehaviour
 {
     #region LaserStuff
     [Header("Laser Stuff")]
-    [SerializeField] private float laserDamage;
-    [SerializeField] private GameObject laserPrefab;
-    private Laser laser; 
-    [SerializeField] private Transform shotPos;
-    public Transform ShotPos { get => shotPos; }
+    [SerializeField] private LaserShooter laserShooter;
     private Vector2 endPos; 
-    public Vector2 EndPos { get => endPos; }
 
     [SerializeField] private byte shots;
     private byte shotsDone;
@@ -43,7 +38,7 @@ public class CastleBLaserBeamer : MonoBehaviour, ILaser, IBossFinishedBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Linecast(shotPos.position, (player.GetPosition() - shotPos.position) * maxRayDistance, 1 << LayerMask.NameToLayer("Ground"));
+        RaycastHit2D hit = Physics2D.Linecast(laserShooter.ShotPos.position, (player.GetPosition() - laserShooter.ShotPos.position) * maxRayDistance, 1 << LayerMask.NameToLayer("Ground"));
         
         if (hit.collider == null)
         {
@@ -54,7 +49,7 @@ public class CastleBLaserBeamer : MonoBehaviour, ILaser, IBossFinishedBehaviour
             endPos = hit.point;
         }
 
-        Debug.DrawLine(shotPos.position, endPos);
+        Debug.DrawLine(laserShooter.ShotPos.position, endPos);
 
         if (shotsDone < shots)
         {
@@ -63,8 +58,8 @@ public class CastleBLaserBeamer : MonoBehaviour, ILaser, IBossFinishedBehaviour
                 
 
                 //ShootLaser(shotPos.position, player.GetPosition());
-                ShootLaser(shotPos.position, endPos);
-
+                //ShootLaser(shotPos.position, endPos);
+                laserShooter.ShootLaser(endPos);
                 shotsDone++;
                 currentTimeBtwShot = 0;
             }
@@ -73,28 +68,10 @@ public class CastleBLaserBeamer : MonoBehaviour, ILaser, IBossFinishedBehaviour
                 currentTimeBtwShot += Time.deltaTime;
             }
         }
-        else if (laser == null)
+        else if (laserShooter.Laser == null)
         {
             OnFinished(transform.position);
         }
     }
 
-    /// <summary>
-    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void FixedUpdate()
-    {
-        
-    }
-
-    public void LaserAttack()
-    {
-        player.TakeTirement(laserDamage);
-    }
-
-    public void ShootLaser(Vector2 from, Vector2 to)
-    {
-        laser = Instantiate(laserPrefab, from, Quaternion.identity).GetComponent<Laser>();
-        laser.Setup(from, to, this);
-    }
 }

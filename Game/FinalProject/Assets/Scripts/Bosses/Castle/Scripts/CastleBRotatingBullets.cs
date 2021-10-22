@@ -12,6 +12,7 @@ public class CastleBRotatingBullets : MonoBehaviour, IProjectile, IBossFinishedB
 
     #region ProjectileStuff
     [Header("Projectile Stuff")]
+    [SerializeField] private ProjectileShooter projectileShooter;
     [SerializeField] private GameObject projectilePrefab;
     private Projectile projectile;
     //[SerializeField] private Transform shotPoint; 
@@ -50,6 +51,20 @@ public class CastleBRotatingBullets : MonoBehaviour, IProjectile, IBossFinishedB
     {
        rotationSpeed = (2*Mathf.PI)/timeToCompleteCircle;
         player = PlayerManager.instance;
+
+        InvokeRepeating("ShootProjectiles", timeBtwShot, timeBtwShot);
+        InvokeRepeating("ChangeProjectilesRotation", burstTime, burstTime + timeBtwBurst);
+
+    }
+
+    void ChangeProjectilesRotation()
+    {
+        projectileShooter.ChangeRotation();
+    }
+
+    void ShootProjectiles()
+    {
+        if (curTimeBtwBurst > timeBtwBurst) projectileShooter.ShootRotating();
     }
 
     // Update is called once per frame
@@ -57,7 +72,7 @@ public class CastleBRotatingBullets : MonoBehaviour, IProjectile, IBossFinishedB
     {
         if (currentTime <= totalTime)
         {
-            RotateCenter();
+            //RotateCenter();
             if (curTimeBtwBurst > timeBtwBurst)
             {
                 if (curBurstTime > burstTime)
