@@ -22,17 +22,6 @@ public class CastleBSeeker : MonoBehaviour, IBossFinishedBehaviour
     }
 
 
-
-
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    void Awake()
-    {
-        
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -41,7 +30,6 @@ public class CastleBSeeker : MonoBehaviour, IBossFinishedBehaviour
     }
         
 
-    // Update is called once per frame
     void Update()
     {
         if (followPlayer)
@@ -54,9 +42,6 @@ public class CastleBSeeker : MonoBehaviour, IBossFinishedBehaviour
         }
     }
 
-    /// <summary>
-    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
-    /// </summary>
     void FixedUpdate()
     {
         rigidbody2d.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);

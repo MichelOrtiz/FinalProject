@@ -10,7 +10,7 @@ public class BossFight : MonoBehaviour
     [SerializeField] protected PopUpTrigger endMessageTrigger;
     [SerializeField] protected int levelToLoad;
     [SerializeField] WorldState worldState;
-    [SerializeField] private GameObject loadlevel;
+    [SerializeField] protected GameObject loadlevel;
 
 
 

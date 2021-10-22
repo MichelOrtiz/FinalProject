@@ -138,9 +138,13 @@ public class CastleBMaster : BossFight
         if (!isCleared)
         {
             currentStage?.Destroy();
+            
             isCleared=true;
+
+            loadlevel?.SetActive(true);
+            BattleEnded?.Invoke();
+            
             Debug.Log("Lo hiciste ganaste!!!1");
         }
-
     }
 }
