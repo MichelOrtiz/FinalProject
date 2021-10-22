@@ -12,6 +12,7 @@ public class CastleBRangeBullets : MonoBehaviour, IProjectile, IBossFinishedBeha
 
     #region ProjectileStuff
     [Header("Projectile Stuff")]
+    
     [SerializeField] private GameObject projectilePrefab;
     private Projectile projectile;
     //[SerializeField] private Transform shotTarget;
