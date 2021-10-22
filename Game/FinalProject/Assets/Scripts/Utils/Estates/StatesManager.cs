@@ -33,8 +33,8 @@ public class StatesManager : MonoBehaviour
                 if (newState.onEffect)
                 {
                     Debug.Log(gameObject + " manager cloned " + newState);
-                    //newState = Instantiate(newState);
-                    //newState.onEffect = false;
+                    newState = Instantiate(newState);
+                    newState.onEffect = false;
                 }
 
 
