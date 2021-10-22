@@ -5,6 +5,11 @@ using UnityEngine;
 public class IntRemoteTrigger : InteractionTrigger
 {
     [SerializeField] Transform triggerPoint;
+    protected override void Start()
+    {
+        cola = new Queue<Interaction>();
+        busy = false;
+    }
     protected override void TriggerInteraction()
     {
         if(busy) return;
