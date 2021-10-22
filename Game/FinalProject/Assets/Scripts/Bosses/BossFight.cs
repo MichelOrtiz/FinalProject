@@ -60,7 +60,7 @@ public class BossFight : MonoBehaviour
         if(indexStage<stages.Count-1){
             indexStage++;
             currentStage.Destroy();
-            currentStage=stages[indexStage];
+            currentStage = stages[indexStage];
             currentStage.Generate();
         }
         else

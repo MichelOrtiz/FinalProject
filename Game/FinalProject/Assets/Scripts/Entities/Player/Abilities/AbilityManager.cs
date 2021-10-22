@@ -35,7 +35,7 @@ public class AbilityManager : MonoBehaviour
                 }
             }
             abilityUI.SetOpen(true);
-            abilityUI.UpdateUI(abilities);
+            abilityUI.UpdateUI();
             abilityUI.SetOpen(false);
         }
 
@@ -43,6 +43,7 @@ public class AbilityManager : MonoBehaviour
     private void Update() {
         if(PlayerManager.instance.inputs.OpenAbilites){
             abilityUI.SetOpen(!abilityUI.GetOpen());
+            if(abilityUI.GetOpen()) abilityUI.UpdateUI();
         }
     }
 

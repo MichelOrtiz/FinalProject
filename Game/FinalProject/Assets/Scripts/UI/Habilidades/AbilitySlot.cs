@@ -35,4 +35,14 @@ public class AbilitySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             gameObject.GetComponent<Button>().enabled = false;
         }
     }
+    public void UpdateUISlot(){
+        if(ability.isUnlocked){
+            cover.gameObject.SetActive(false);
+            gameObject.GetComponent<Button>().enabled = true;
+        }
+        else{
+            cover.gameObject.SetActive(true);
+            gameObject.GetComponent<Button>().enabled = false;
+        }
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ability : MonoBehaviour
 {
     public Sprite iconAbility;
+    public bool isPasive;
     [TextArea (3,10)]public string description;
     public enum Abilities
     {

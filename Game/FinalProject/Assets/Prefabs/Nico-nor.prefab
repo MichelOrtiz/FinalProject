@@ -5974,6 +5974,7 @@ GameObject:
   - component: {fileID: 447332426354923146}
   - component: {fileID: 1031731497466114772}
   - component: {fileID: 936999293969563206}
+  - component: {fileID: 5857950921813008133}
   - component: {fileID: 1587736591}
   m_Layer: 0
   m_Name: AbilitySystem
@@ -6343,6 +6344,27 @@ MonoBehaviour:
   abilityName: 8
   isUnlocked: 0
   staminaIncrease: 20
+--- !u!114 &5857950921813008133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829738360394267735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c42a8f044051e4ca2fd46d8ca2070e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
+  description: 
+  cooldownTime: 0
+  hotkey: 0
+  staminaCost: 0
+  duration: 0
+  isInCooldown: 0
+  abilityName: 13
+  isUnlocked: 0
 --- !u!61 &1587736591
 BoxCollider2D:
   m_ObjectHideFlags: 0
