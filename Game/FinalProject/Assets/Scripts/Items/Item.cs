@@ -3,6 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName="New Item", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
 {
+    public enum ItemType{
+        Consumible,
+        Equipable,
+        Basura,
+        Test
+    }
+    public ItemType type;
     public string nombre = "Nombre objeto";
     [TextArea(3, 10)]
     public string descripcion = "Un objeto objetuoso";

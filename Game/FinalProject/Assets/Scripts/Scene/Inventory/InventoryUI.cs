@@ -7,12 +7,15 @@ public class InventoryUI : MonoBehaviour
 {
     #region ObjectsUI
         public GameObject UI;
-        public TextMeshProUGUI nametxt;
-        public TextMeshProUGUI description;
+        [SerializeField] TextMeshProUGUI nametxt;
+        [SerializeField] TextMeshProUGUI description;
+        [SerializeField] TextMeshProUGUI typeText;
+        [SerializeField] TextMeshProUGUI typeLabel;
         [SerializeField] GameObject menuDesplegable;
         public Transform slotsParent;
         public Button nextButton;
         public Button prevButton;
+        
         [SerializeField] private GameObject InvSlotPrefab;
     #endregion
     
@@ -43,7 +46,7 @@ public class InventoryUI : MonoBehaviour
         slots = new List<InventorySlot>();
         for(int i=0; i < slotsInPage; i++){
             GameObject obj = Instantiate(InvSlotPrefab);
-            obj.transform.SetParent(slotsParent);
+            obj.transform.SetParent(slotsParent,false);
             InventorySlot slot = obj.GetComponent<InventorySlot>();
             slots.Add(slot);
         }
@@ -113,9 +116,13 @@ public class InventoryUI : MonoBehaviour
     public void UpdateText(){
         nametxt.text = "";
         description.text = "";
+        typeText.text = "";
+        typeLabel.text = "";
         if(focusedSlot == null) return;
         nametxt.text = focusedSlot.GetItem().name;
         description.text = focusedSlot.GetItem().descripcion;
+        typeLabel.text = "Tipo";
+        typeText.text = focusedSlot.GetItem().type.ToString();
     }
     public void OpenDesMenu(InventorySlot slot){
         menuDesplegable.SetActive(true);
