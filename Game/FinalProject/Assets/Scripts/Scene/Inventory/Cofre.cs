@@ -20,8 +20,12 @@ public class Cofre : MonoBehaviour
             savedItems.Clear();
             if(SaveFilesManager.instance.currentSaveSlot.chestItems!=null){
                 for(int i=0;i<SaveFilesManager.instance.currentSaveSlot.chestItems.Length;i++){
-                AddItem(SaveFilesManager.instance.currentSaveSlot.chestItems[i]);
-            }
+                    if(SaveFilesManager.instance.currentSaveSlot.chestItems[i] == null){
+                        Debug.Log("Corrupted data");
+                    }else{
+                        AddItem(SaveFilesManager.instance.currentSaveSlot.chestItems[i]);
+                    }
+                }
             }
             
         }

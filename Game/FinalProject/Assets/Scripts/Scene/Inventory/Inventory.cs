@@ -25,7 +25,11 @@ public class Inventory : MonoBehaviour
             items.Clear();
             if(SaveFilesManager.instance.currentSaveSlot.inventory != null){
                 for(int i=0;i<SaveFilesManager.instance.currentSaveSlot.inventory.Length;i++){
-                    Add(SaveFilesManager.instance.currentSaveSlot.inventory[i]);
+                    if(SaveFilesManager.instance.currentSaveSlot.inventory[i] == null){
+                        Debug.Log("Corrupted data");
+                    }else{
+                        Add(SaveFilesManager.instance.currentSaveSlot.inventory[i]);
+                    }
                 }
             }
             
