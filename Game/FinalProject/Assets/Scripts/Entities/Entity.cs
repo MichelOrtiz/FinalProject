@@ -68,6 +68,7 @@ public class Entity : MonoBehaviour
     protected virtual void collisionHandler_StayInContact(GameObject contact){}
     protected virtual void collisionHandler_ExitContact(GameObject contact){}
     protected virtual void groundChecker_Grounded(string groundTag){}
+    protected virtual void groundChecker_ExitGround(){}
 
 
 
@@ -111,6 +112,7 @@ public class Entity : MonoBehaviour
         if (groundChecker != null)
         {
             groundChecker.GroundedHandler += groundChecker_Grounded;
+            groundChecker.ExitGroundHandler += groundChecker_ExitGround;
         }
 
     }

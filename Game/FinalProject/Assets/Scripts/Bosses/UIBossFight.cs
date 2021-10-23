@@ -55,6 +55,15 @@ public class UIBossFight : BossFight
             endMessageTrigger.popUp.Message = ability.ToString();
             endMessageTrigger.TriggerPopUp(true);
 
+            SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
+            if(partida.WorldStates.Exists(x => x.id == worldState.id)){
+                WorldState w = partida.WorldStates.Find(x => x.id == worldState.id);
+                w.state = true;
+            }else{
+                worldState.state = true;
+                partida.WorldStates.Add(worldState);
+            }
+
             BattleEnded?.Invoke();
 
         }
@@ -72,7 +81,7 @@ public class UIBossFight : BossFight
         {
             // return to last scene
             ScenesManagers.SetListActive(objectsToHide, true);
-            PlayerManager.instance.gameObject?.SetActive(true);       
+            PlayerManager.instance.gameObject?.SetActive(true);
             ReturnToLastScene();
         }
     }

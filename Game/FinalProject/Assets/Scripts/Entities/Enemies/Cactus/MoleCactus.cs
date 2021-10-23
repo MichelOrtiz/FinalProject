@@ -9,6 +9,13 @@ public class MoleCactus : Enemy
     [SerializeField] private byte surfaceTagIndex;
     private bool surfaceActive;
 
+    [SerializeField] private Vector2 groundCheckerToSurface;
+    [SerializeField] private Vector2 groundCheckerToGround;
+
+    bool justStarted = true;
+    bool inGround;
+
+
     #region PathFinding variables
     [Header("Pathfinfing")]
     [SerializeField] private Transform target;
@@ -24,6 +31,47 @@ public class MoleCactus : Enemy
     
     #endregion
 
+    protected override void groundChecker_ExitGround()
+    {
+        if(!canMove) return;
+        justStarted = false;
+        inGround = false;
+        Debug.Log("ExitGround");
+        canMove = false;
+
+        var groundCheckerPos = groundChecker.transform.position;
+
+        transform.position = new Vector2(transform.position.x, groundCheckerPos.y + +2f);
+        animationManager.ChangeAnimation("exit_ground");
+        animationManager.SetNextAnimation("exit_ground_2");
+        Invoke("ActivateMove", 4f);
+
+        //groundChecker.transform.localPosition = groundCheckerToGround;
+    }
+
+    protected override void groundChecker_Grounded(string groundTag)
+    {
+        if (justStarted || !canMove) return;
+        inGround = true;
+        Debug.Log("EnterGround");
+        canMove = false;
+
+        var groundCheckerPos = groundChecker.transform.position;
+
+        transform.position = new Vector2(transform.position.x, groundCheckerPos.y + -2f);
+        animationManager.ChangeAnimation("enter_ground");
+        animationManager.SetNextAnimation("enter_ground_2");
+        Invoke("ActivateMove", 4f);
+
+        //groundChecker.transform.localPosition = groundCheckerToSurface;
+    }
+
+    void ActivateMove()
+    {
+        canMove = true;
+        animationManager.nextStateEnabled = false;
+    }
+
     new void Start()
     {
         base.Start();
@@ -31,6 +79,9 @@ public class MoleCactus : Enemy
         target = player.transform;
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
         lastGroundPos = GetPosition();
+
+        //groundChecker.transform.localPosition = groundCheckerToSurface;
+
     }
 
     new void Update()
@@ -53,11 +104,14 @@ public class MoleCactus : Enemy
                 surfaceActive = false;
             }
         }
+
+        
         base.Update();
     }
 
     protected override void MainRoutine()
     {
+        animationManager.ChangeAnimation("idle_in_ground");
         enemyMovement.GoTo(lastGroundPos, chasing: false, gravity: false);
     }
 
@@ -65,7 +119,26 @@ public class MoleCactus : Enemy
     {
         if (TargetInDistance() && canMove)
         {
+            
+            //animationManager.ChangeAnimation("idle_in_ground", enemyMovement.ChaseSpeed / 4);
             FollowPath();
+        }
+    }
+
+    new void FixedUpdate()
+    {
+        base.FixedUpdate();
+        try
+        {
+            if (canMove)
+            {
+                groundChecker.transform.position = Vector3.MoveTowards(groundChecker.transform.position, path.vectorPath[currentWaypoint], enemyMovement.ChaseSpeed * Time.deltaTime );
+            }
+             
+        }
+        catch (System.Exception)
+        {
+            
         }
     }
 
@@ -76,6 +149,7 @@ public class MoleCactus : Enemy
         {
             seeker.StartPath(GetPosition(), target.position, OnPathComplete);
         }
+        
     }
 
     void FollowPath()

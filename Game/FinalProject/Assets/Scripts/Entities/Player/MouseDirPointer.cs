@@ -18,7 +18,7 @@ public class MouseDirPointer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Pause.active) return;
+        if (Pause.active || CameraFollow.instance == null) return;
         if (CameraFollow.instance.HasMouseMoved() && !Pause.active)
         {
             mousePosition = CameraFollow.instance.GetMousePosition();

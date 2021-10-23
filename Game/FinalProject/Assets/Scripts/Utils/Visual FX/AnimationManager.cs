@@ -78,7 +78,7 @@ public class AnimationManager : MonoBehaviour
 
     public void SetNextAnimation(string state)
     {
-        nextState = FilterEnemy(state);
+        nextState = state;
         nextStateEnabled = true;
     }
 
