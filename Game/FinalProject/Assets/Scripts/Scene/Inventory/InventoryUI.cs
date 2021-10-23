@@ -22,7 +22,7 @@ public class InventoryUI : MonoBehaviour
         Inventory inventory;
         List<InventorySlot> slots;
         [SerializeField] int slotsInPage;
-        public ItemSlot moveItem {get;set;}
+        public ItemSlot moveItem;
         private int invPage;
     #endregion
     
@@ -38,6 +38,7 @@ public class InventoryUI : MonoBehaviour
         inventory = Inventory.instance;
         inventory.onItemChangedCallBack += UpdateUI;
         invPage = 0;
+        moveItem = null;
         menuDesplegable.SetActive(false);
         slots = new List<InventorySlot>();
         for(int i=0; i < slotsInPage; i++){
@@ -46,7 +47,9 @@ public class InventoryUI : MonoBehaviour
             InventorySlot slot = obj.GetComponent<InventorySlot>();
             slots.Add(slot);
         }
+        UI.SetActive(true);
         UpdateUI();
+        UI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -76,12 +79,18 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void UpdateUI(){
-        UI.SetActive(true);
-        for(int i=0; i < slotsInPage && (i+invPage) < inventory.items.Count; i++){
-            InventorySlot slot = slots[i];
-            Item slotItem = inventory.items[i + invPage];
-            slot.SetItem(slotItem);
-            slot.SetIndex(i + invPage);
+        for(int i=0; i < slotsInPage; i++){
+            if((i+invPage) < inventory.items.Count){
+                InventorySlot slot = slots[i];
+                Item slotItem = inventory.items[i + invPage];
+                slot.SetItem(slotItem);
+                slot.SetIndex(i + invPage);
+            }else{
+                InventorySlot slot = slots[i];
+                slot.SetItem(null);
+                slot.SetIndex(i + invPage);
+            }
+            
         }
 
         //Next button
@@ -100,7 +109,6 @@ public class InventoryUI : MonoBehaviour
             prevButton.gameObject.SetActive(false);
         }
         UpdateText();
-        UI.SetActive(false);
     }
     public void UpdateText(){
         nametxt.text = "";
@@ -111,5 +119,10 @@ public class InventoryUI : MonoBehaviour
     }
     public void OpenDesMenu(InventorySlot slot){
         menuDesplegable.SetActive(true);
+        MenuDes menuDes = menuDesplegable.GetComponent<MenuDes>();
+        menuDes.onUse += slot.UseItem;
+        menuDes.onMove += slot.MoveItem;
+        menuDes.onLeave += slot.RemoveItem;
+        menuDes.transform.position = Input.mousePosition;
     }
 }
