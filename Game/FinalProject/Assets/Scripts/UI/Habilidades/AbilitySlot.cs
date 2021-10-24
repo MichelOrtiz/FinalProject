@@ -20,9 +20,7 @@ public class AbilitySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
     public void OnClickBtn(){
         ab_img.color = Color.white;
-        popUp.gameObject.SetActive(true);
         popUp.UpdateUI(ability);
-        gameObject.transform.parent.gameObject.SetActive(false);
     }
     public void UpdateUISlot(Ability ability){
         this.ability = ability;
@@ -37,6 +35,7 @@ public class AbilitySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
     }
     public void UpdateUISlot(){
+        if(ability == null) return;
         if(ability.isUnlocked){
             cover.gameObject.SetActive(false);
             gameObject.GetComponent<Button>().enabled = true;

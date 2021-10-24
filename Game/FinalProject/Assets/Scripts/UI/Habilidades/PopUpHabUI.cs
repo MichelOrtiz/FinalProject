@@ -8,21 +8,18 @@ using TMPro;
 public class PopUpHabUI : MonoBehaviour
 {
     [HideInInspector] public Ability ability;
-    [SerializeField] Image icon;
     [SerializeField] TextMeshProUGUI name_Ab;
     [SerializeField] TextMeshProUGUI desc_Ab;
-    [SerializeField] GameObject holder;
     [SerializeField] GameObject groupHotkey;
-    [SerializeField] GameObject isPasiveNotice;
+    [SerializeField] TextMeshProUGUI isPasiveNotice;
     [SerializeField] TMP_Dropdown hotkey;
     public void UpdateUI(Ability ability){
         this.ability = ability;
-        icon.sprite = ability.iconAbility;
         name_Ab.text = ability.abilityName.ToString();
         desc_Ab.text = ability.description;
         if(!ability.isPasive){
             groupHotkey.SetActive(true);
-            isPasiveNotice.SetActive(false);
+            isPasiveNotice.text = "Activa";
             hotkey.ClearOptions();
             TMP_Dropdown.OptionData currentHotKey = null;
             List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
@@ -44,11 +41,10 @@ public class PopUpHabUI : MonoBehaviour
         }
         else if(ability.isPasive){
             groupHotkey.SetActive(false);
-            isPasiveNotice.SetActive(true);
+            isPasiveNotice.text = "Pasiva";
         }
     }
     public void GoBack(){
-        holder.SetActive(true);
         gameObject.SetActive(false);
         string key = hotkey.options[hotkey.value].text;
         if(key == "Ninguna"){

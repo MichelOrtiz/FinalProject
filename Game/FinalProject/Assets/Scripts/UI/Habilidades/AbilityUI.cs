@@ -14,19 +14,19 @@ public class AbilityUI : MonoBehaviour
     }
     [SerializeField] GameObject UI;
     [SerializeField] Transform abilitiesHolder;
-    [SerializeField] GameObject prefabAbilitySlot;
+    //[SerializeField] GameObject prefabAbilitySlot;
+    public AbilitySlot[] slots { get => abilitiesHolder.GetComponentsInChildren<AbilitySlot>();}
     [SerializeField] GameObject popUp;
     private void Start() {
+        int i = 0;
         foreach(Ability ab in AbilityManager.instance.abilities){
-            GameObject obj = Instantiate(prefabAbilitySlot);
-            obj.transform.SetParent(abilitiesHolder,false);
-            AbilitySlot slot = obj.GetComponent<AbilitySlot>();
-            slot.UpdateUISlot(ab);
-            slot.popUp = popUp.GetComponent<PopUpHabUI>();
+            slots[i].UpdateUISlot(ab);
+            slots[i].popUp = popUp.GetComponent<PopUpHabUI>();
+            i++;
         }
     }
     public void UpdateUI(){
-        foreach(AbilitySlot slot in abilitiesHolder.GetComponentsInChildren<AbilitySlot>()){
+        foreach(AbilitySlot slot in slots){
             slot.UpdateUISlot();
         }
     }
