@@ -48,6 +48,8 @@ public class AbilityManager : MonoBehaviour
     private void Update() {
         if(PlayerManager.instance.inputs.OpenAbilites){
             abilityUI.SetOpen(!abilityUI.GetOpen());
+            MapUI.instance.mapUI.SetActive(false);
+            InventoryUI.instance.UI.SetActive(false);
             if(abilityUI.GetOpen()) abilityUI.UpdateUI();
         }
     }

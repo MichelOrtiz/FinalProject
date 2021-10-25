@@ -5,6 +5,14 @@ using System.Linq;
 
 public class MapUI : MonoBehaviour
 {
+    public static MapUI instance;
+    private void Awake() {
+        if(instance != null){
+            return;
+            //Destroy(this);
+        }
+        instance = this;
+    }
     public List<MapSlot> mapitas;
     public GameObject mapUI;
 
@@ -25,6 +33,8 @@ public class MapUI : MonoBehaviour
         if (Input.GetKeyDown(PlayerManager.instance.inputs.Map) && !FindObjectOfType<Pause>().panel.activeSelf)
         {
             mapUI.SetActive(!mapUI.activeSelf);
+            InventoryUI.instance.UI.SetActive(false);
+            AbilityUI.instance.UI.SetActive(false);
             if (mapUI.activeSelf)
             {
                 //Pause.PauseGame();

@@ -12,7 +12,7 @@ public class AbilityUI : MonoBehaviour
             Destroy(this);
         }
     }
-    [SerializeField] GameObject UI;
+    public GameObject UI;
     [SerializeField] Transform abilitiesHolder;
     //[SerializeField] GameObject prefabAbilitySlot;
     public AbilitySlot[] slots { get => abilitiesHolder.GetComponentsInChildren<AbilitySlot>();}

@@ -61,6 +61,8 @@ public class InventoryUI : MonoBehaviour
         if (PlayerManager.instance.inputs.OpenInventory)
         {
             UI.SetActive(!UI.activeSelf);
+            MapUI.instance.mapUI.SetActive(false);
+            AbilityUI.instance.UI.SetActive(false);
         }
        
     }
