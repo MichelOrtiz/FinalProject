@@ -3,17 +3,16 @@ using UnityEngine;
 
 public abstract class Enemy : Entity
 {
-    //public static Enemy instance = null;
 
     #region Main Parameters
     [Header("Main parameters")]
     [SerializeField] public EnemyType enemyType;
     [SerializeField] public EnemyName enemyName;
     [SerializeField] protected bool flipToPlayerIfSpotted;
-    [SerializeField] protected float normalSpeedMultiplier;
+    /*[SerializeField] protected float normalSpeedMultiplier;
     [SerializeReference] public float normalSpeed;
     [SerializeField] protected float chaseSpeedMultiplier;
-    [SerializeReference] public float chaseSpeed;
+    [SerializeReference] public float chaseSpeed;*/
 
     [Header("Effect on Player")]
     [SerializeField] protected float damageAmount;
@@ -35,7 +34,6 @@ public abstract class Enemy : Entity
     [SerializeField] protected ProjectileShooter projectileShooter;
     [SerializeField] protected LaserShooter laserShooter;
     [SerializeField] protected ItemInteractionManager itemInteractionManager;
-    private RaycastHit2D hit;
     public FieldOfView FieldOfView { get => fieldOfView; }
     [HideInInspector] public EnemyCollisionHandler eCollisionHandler;
     protected PlayerManager player;
@@ -127,8 +125,8 @@ public abstract class Enemy : Entity
     {
         base.Start();
         player = ScenesManagers.Instance.player;
-        chaseSpeed = chaseSpeedMultiplier * averageSpeed;
-        normalSpeed = normalSpeedMultiplier * averageSpeed;
+        //chaseSpeed = chaseSpeedMultiplier * averageSpeed;
+        //normalSpeed = normalSpeedMultiplier * averageSpeed;
     }
 
     new protected void Update()
@@ -142,8 +140,6 @@ public abstract class Enemy : Entity
             if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
                 || (GetPosition().x < player.GetPosition().x && facingDirection == LEFT))
                 {
-                        if (this is WeaverArandana) Debug.Log("flip wtf");
-
                     if (rigidbody2d?.gravityScale == 0 ||  groundChecker.isGrounded)
                     {
                         ChangeFacingDirection();
@@ -182,12 +178,6 @@ public abstract class Enemy : Entity
         {
             case StateNames.Chasing:
                 ChasePlayer();
-                break;
-            case StateNames.Paralized:
-                //justCapturedPlayer;
-                break;
-            case StateNames.Fear:
-                //Fear();
                 break;
             case StateNames.Patrolling:
                 MainRoutine();
@@ -257,22 +247,6 @@ public abstract class Enemy : Entity
         var direction =  entity.transform.InverseTransformPoint(entityPos + fixedDir);
         entity.Knockback(knockbackDuration, knockBackForce, direction);
     }
-
-    /*public void EnhanceValues(float multiplier)
-    {
-        enemyMovement.DefaultSpeed *= multiplier;
-        enemyMovement.ChaseSpeed *= multiplier;
-        enemyMovement.JumpForce *= multiplier;
-        damageAmount *= multiplier;
-    }
-
-    public void NerfValues(float divider)
-    {
-        enemyMovement.DefaultSpeed /= divider;
-        enemyMovement.ChaseSpeed /= divider;
-        enemyMovement.JumpForce /= divider;
-        damageAmount /= divider;
-    }*/
     #endregion
 
     #region Self state methods
@@ -293,22 +267,12 @@ public abstract class Enemy : Entity
         isChasing = fieldOfView.canSeePlayer;
     }
     
-    protected bool InFrontOfObstacle()
-    {
-        return fieldOfView.inFrontOfObstacle;
-    }
 
     #endregion
-
-    #region Delete Later
-
 
 
     void OnDisable()
     {
         fieldOfView_PlayerUnsighted();
     }
-
-    #endregion
-
 }

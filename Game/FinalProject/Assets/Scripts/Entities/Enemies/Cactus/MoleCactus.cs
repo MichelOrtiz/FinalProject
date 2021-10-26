@@ -1,6 +1,9 @@
 using UnityEngine;
 using System;
 using Pathfinding;
+using System.Collections;
+using UnityEngine.Tilemaps;
+
 public class MoleCactus : Enemy
 {
     [Header("Self Additions")]
@@ -21,7 +24,7 @@ public class MoleCactus : Enemy
     [SerializeField] private Transform target;
     [SerializeField] private float activateDistance;
     [SerializeField] private float pathUpdateSeconds;
-    [SerializeField] private bool canMove = true;
+    public bool canMove = true;
     [SerializeField] private float nextWaypointDistance;
     [SerializeField] private float jumpNodeHeightRequirement;
     private Path path;
@@ -31,45 +34,14 @@ public class MoleCactus : Enemy
     
     #endregion
 
-    protected override void groundChecker_ExitGround()
+    [Header("Animation")]
+    [SerializeField] private float distanceToAnimate;
+    [SerializeField] private float delayAfterAnim;
+    bool canAnimate = true;
+
+    void ActivateAnimation()
     {
-        if(!canMove) return;
-        justStarted = false;
-        inGround = false;
-        Debug.Log("ExitGround");
-        canMove = false;
-
-        var groundCheckerPos = groundChecker.transform.position;
-
-        transform.position = new Vector2(transform.position.x, groundCheckerPos.y + +2f);
-        animationManager.ChangeAnimation("exit_ground");
-        animationManager.SetNextAnimation("exit_ground_2");
-        Invoke("ActivateMove", 4f);
-
-        //groundChecker.transform.localPosition = groundCheckerToGround;
-    }
-
-    protected override void groundChecker_Grounded(string groundTag)
-    {
-        if (justStarted || !canMove) return;
-        inGround = true;
-        Debug.Log("EnterGround");
-        canMove = false;
-
-        var groundCheckerPos = groundChecker.transform.position;
-
-        transform.position = new Vector2(transform.position.x, groundCheckerPos.y + -2f);
-        animationManager.ChangeAnimation("enter_ground");
-        animationManager.SetNextAnimation("enter_ground_2");
-        Invoke("ActivateMove", 4f);
-
-        //groundChecker.transform.localPosition = groundCheckerToSurface;
-    }
-
-    void ActivateMove()
-    {
-        canMove = true;
-        animationManager.nextStateEnabled = false;
+        canAnimate = true;
     }
 
     new void Start()
@@ -86,32 +58,47 @@ public class MoleCactus : Enemy
 
     new void Update()
     {
+        if (canAnimate)
+        {
+            if (Vector2.Distance(GetPosition(), player.GetPosition()) <= distanceToAnimate)
+            {
+                OnSurfaceChange(true);
+            }
+            else
+            {
+                OnSurfaceChange(false);
+            }
+        }
         // Enables or disables the Surface graph to be transvarsable, so it can follow a path there
         if (Vector2.Distance(fieldOfView.FovOrigin.position, player.GetPosition()) <= secondFovDistance)
         {
-            if (!surfaceActive)
+            //if (!surfaceActive)
             {
                 seeker.traversableTags = MathUtils.EditBitInBitmask(seeker.traversableTags, surfaceTagIndex, true);
                 surfaceActive = true;
                 lastGroundPos = GetPosition();
+                
+                //OnSurfaceChange(exitGround: true);
             }
         }
         else
         {
-            if (surfaceActive)
+            //if (surfaceActive)
             {
                 seeker.traversableTags = MathUtils.EditBitInBitmask(seeker.traversableTags, surfaceTagIndex, false);
                 surfaceActive = false;
+
+                //OnSurfaceChange(exitGround: false);
             }
         }
-
+        
         
         base.Update();
     }
 
     protected override void MainRoutine()
     {
-        animationManager.ChangeAnimation("idle_in_ground");
+        //animationManager.ChangeAnimation("idle_in_ground");
         enemyMovement.GoTo(lastGroundPos, chasing: false, gravity: false);
     }
 
@@ -119,8 +106,7 @@ public class MoleCactus : Enemy
     {
         if (TargetInDistance() && canMove)
         {
-            
-            //animationManager.ChangeAnimation("idle_in_ground", enemyMovement.ChaseSpeed / 4);
+            var currentAnim = animationManager.currentState;
             FollowPath();
         }
     }
@@ -132,9 +118,10 @@ public class MoleCactus : Enemy
         {
             if (canMove)
             {
+                
                 groundChecker.transform.position = Vector3.MoveTowards(groundChecker.transform.position, path.vectorPath[currentWaypoint], enemyMovement.ChaseSpeed * Time.deltaTime );
+                
             }
-             
         }
         catch (System.Exception)
         {
@@ -173,6 +160,8 @@ public class MoleCactus : Enemy
         //enemyMovement.Translate(direction, chasing: surfaceActive);
         //rigidbody2d.AddForce(force, ForceMode2D.Force);
         // Next Waypoint
+        
+
         float distance = Vector2.Distance(GetPosition(), path.vectorPath[currentWaypoint]);
         if (distance < nextWaypointDistance)
         {
@@ -193,5 +182,54 @@ public class MoleCactus : Enemy
             currentWaypoint = 0;
         }
     }
+
     #endregion
+
+    void OnSurfaceChange(bool exitGround)
+    {
+        if (exitGround)
+        {
+            inGround = false;
+            if (animationManager.currentState == "exit_ground")
+            {
+                animationManager.ChangeAnimation("idle_outside_ground");
+            }
+            else
+            {
+                animationManager.ChangeAnimation("exit_ground");
+            }
+        }
+        else// if (MathUtils.BoundsIsEncapsulated(ground.GetBounds(), groundChecker.Collider2D.bounds))
+        {
+            inGround = true;
+            try
+            {
+                transform.position = path.vectorPath[currentWaypoint];
+            }
+            catch (System.Exception)
+            {
+
+            }
+            if (animationManager.currentState == "enter_ground")
+            {
+                animationManager.ChangeAnimation("idle_in_ground");
+            }
+            else
+            {
+                animationManager.ChangeAnimation("enter_ground");
+            }
+        }
+        canAnimate = false;
+        Invoke("ActivateAnimation", delayAfterAnim);
+
+        collisionHandler.gameObject.SetActive(exitGround);
+        //Invoke("ActivateMove", 1.5f);
+    }
+
+    void ActivateMove()
+    {
+        groundChecker.transform.position = path.vectorPath[currentWaypoint];
+        canMove = true;
+        animationManager.nextStateEnabled = false;
+    }
 }

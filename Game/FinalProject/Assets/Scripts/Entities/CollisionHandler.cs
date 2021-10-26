@@ -8,6 +8,8 @@ public class CollisionHandler : MonoBehaviour
     //[SerializeField] private List<string> contacts;
     //public List<string> Contacts { get; private set; }
     public string lastColliderTag;
+    public Collider2D Collider2D { get => GetComponent<Collider2D>(); }
+
 
     [SerializeField] private List<GameObject> contacts;
     public List<GameObject> Contacts

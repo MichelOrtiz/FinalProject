@@ -85,6 +85,12 @@ public static class MathUtils
         return bound.center;
     }
 
+    public static bool BoundsIsEncapsulated(Bounds Encapsulator, Bounds Encapsulating)
+    {
+        return Encapsulator.Contains(Encapsulating.min) && Encapsulator.Contains(Encapsulating.max);
+    }
+
+
     public static int EditBitInBitmask(int bitmask, int pos, bool value)
     {
         if (value)

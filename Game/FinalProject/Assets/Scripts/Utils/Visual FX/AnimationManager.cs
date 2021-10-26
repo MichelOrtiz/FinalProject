@@ -1,13 +1,17 @@
+using System;
+using System.Collections;
 using UnityEngine;
 public class AnimationManager : MonoBehaviour
 {
     [SerializeField] private Entity entity;
     public Entity Entity { get => entity; set => entity = value; }
-    [SerializeField] private Animator animator;
+    public Animator animator;
     public string previousState;
     public string currentState;
     public string nextState;
     public bool nextStateEnabled;
+
+    public Action currentAnimFinished;
 
 
     /// <summary>
@@ -62,7 +66,9 @@ public class AnimationManager : MonoBehaviour
 
     public void StopAnimation()
     {
-        animator.enabled = false;
+        animator.StopPlayback();
+        currentState = "";
+        nextState = "";
     }
 
     public void RestartAnimation()
@@ -82,12 +88,24 @@ public class AnimationManager : MonoBehaviour
         nextStateEnabled = true;
     }
 
-    private bool CurrentAnimationFinished()
+    public bool CurrentAnimationFinished()
     {
-        return animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1;
+        //return GetCurrentAnimatorStateInfo(0).normalizedTime > 1;
+        return !(AnimatorIsPlaying(currentState));
     }
 
-    private string FilterEnemy(string state)
+    public bool AnimatorIsPlaying()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).length >
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
+
+    public bool AnimatorIsPlaying(string animation)
+    {
+        return AnimatorIsPlaying() && animator.GetCurrentAnimatorStateInfo(0).IsName(animation);
+    }
+
+    public string FilterEnemy(string state)
     {
         if (entity is Enemy)
         {
@@ -97,4 +115,24 @@ public class AnimationManager : MonoBehaviour
         return state;
     }
 
+
+    public void ChangeAnimationUntil(Func<bool> checkMethod, string nextAnimation) 
+    {
+        StartCoroutine(SetNextAnimUntil(checkMethod, nextAnimation));
+    }
+
+
+    IEnumerator SetNextAnimUntil(Func<bool> checkMethod, string nextAnimation)
+    {
+        yield return WaitUntilTrue(checkMethod);
+        SetNextAnimation(nextAnimation);
+    }
+
+    IEnumerator WaitUntilTrue(Func<bool> checkMethod)
+    {
+        while (checkMethod() == false)
+        {
+            yield return null;
+        }
+    }
 }

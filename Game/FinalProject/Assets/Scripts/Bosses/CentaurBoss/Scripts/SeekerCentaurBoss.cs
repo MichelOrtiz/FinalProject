@@ -208,14 +208,6 @@ public class SeekerCentaurBoss : Entity
     }
 
 
-    protected bool InFrontOfObstacle()
-    {
-
-        float castDistance = facingDirection == LEFT ? -baseCastDistance : baseCastDistance;
-        Vector3 targetPos = fovOrigin.position + (facingDirection == LEFT? Vector3.left : Vector3.right) * castDistance;
-        return RayHitObstacle(fovOrigin.position, targetPos);
-    }
-
     /*void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")

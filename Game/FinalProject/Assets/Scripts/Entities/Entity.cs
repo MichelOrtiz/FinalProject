@@ -70,8 +70,6 @@ public class Entity : MonoBehaviour
     protected virtual void groundChecker_Grounded(string groundTag){}
     protected virtual void groundChecker_ExitGround(){}
 
-
-
     protected void Awake()
     {
         statesManager = gameObject.GetComponent<StatesManager>();
@@ -82,7 +80,6 @@ public class Entity : MonoBehaviour
     #region Unity stuff
     protected void Start()
     {
-        //facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
         if (transform.rotation.z != 0)
         {
             facingDirection = transform.rotation.x == 0? RIGHT:LEFT;
@@ -119,10 +116,6 @@ public class Entity : MonoBehaviour
 
     protected void Update()
     {
-        //facingDirection = transform.rotation.y == 0? RIGHT:LEFT;
-        //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
-
-
         if (transform.rotation.z != 0)
         {
             facingDirection = transform.rotation.x == -1? LEFT:RIGHT;
@@ -136,61 +129,20 @@ public class Entity : MonoBehaviour
         if (groundChecker != null)
         {
             isGrounded = groundChecker.isGrounded;
-            //isInIce = groundChecker.lastGroundTag == "Ice";
         }
 
         isFalling = rigidbody2d.velocity.y < - fallingCriteria;
-        try
-        {
-            //UpdateAnimation();
-        }
-        catch (System.Exception)
-        {
-            throw;
-        }
     }
 
-    public void UpdateAnimation()
-    {
-        if (animator != null && animator.runtimeAnimatorController)
-        {
-            animator.SetBool("Is Grounded", isGrounded);
-            animator.SetBool("Is Walking", isWalking);
-            animator.SetBool("Is Falling", isFalling);
-            animator.SetBool("Is Jumping", isJumping);
-            animator.SetBool("Is Flying", isFlying);
-            animator.SetBool("Is Paralized", isParalized);
-            animator.SetBool("Is Captured", isCaptured);
-            animator.SetBool("Is In Fear", isInFear);
-            animator.SetBool("Is Brain Frozen", isBrainFrozen);
-            animator.SetBool("Is Resting", isResting);
-            animator.SetBool("Is Chasing", isChasing);
-            
-        }
-    }
 
     public Vector3 GetPosition()
     {
-        //return rigidbody2d.position;
         return this.transform.position;
     }
 
     #endregion
 
     #region Self state methods
-    protected bool RayHitObstacle(Vector2 start, Vector2 end)
-    {
-        foreach (var obstacle in whatIsObstacle)
-        {
-            if (Physics2D.Linecast(start, end, obstacle))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     protected void  ChangeFacingDirection()
     {
         var rotation = Mathf.RoundToInt(transform.eulerAngles.z);
@@ -221,17 +173,18 @@ public class Entity : MonoBehaviour
         physics.StartKnockback(knockbackDuration, knockbackForce, knockbackDir);
     }
 
+    public float GetJumpForce(){
+        return jumpForce;
+    }
+    public void SetJumpForce(float newJumpForce){
+        jumpForce = newJumpForce;
+    }
+
     #endregion
 
     public void DestroyEntity()
     {
         EntityDestroyFx.Instance.StartDestroyFx(this);
         Destroy(gameObject);
-    }
-    public float GetJumpForce(){
-        return jumpForce;
-    }
-    public void SetJumpForce(float newJumpForce){
-        jumpForce = newJumpForce;
     }
 }

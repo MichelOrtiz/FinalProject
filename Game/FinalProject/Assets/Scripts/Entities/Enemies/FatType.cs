@@ -16,15 +16,21 @@ public class FatType : Enemy
         //iconSprite = GetComponent<SpriteRenderer>();
         //wishedItemSprite = wishedItem.icon;
         wishedItemBubble.SetImage(wishedItem.icon,amount);
-        if(SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
+        if(SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null)
+        {
             SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
-            foreach(WorldState w in partida.WorldStates){
-                if(w.id == worldState.id){
+            foreach(WorldState w in partida.WorldStates)
+            {
+                if(w.id == worldState.id)
+                {
                     worldState = w;
-                    if(w.state){
+                    if(w.state)
+                    {
                         Destroy(gameObject);
                         return;
-                    }else{
+                    }
+                    else
+                    {
                         worldState = w;
                         return;
                     }
@@ -63,7 +69,9 @@ public class FatType : Enemy
             Debug.Log("he didn't like that...");
         }
     }
-    protected new void Update(){
+
+    protected new void Update()
+    {
         base.Update();
         float distance = Vector2.Distance(player.GetPosition(), transform.position);
         if(distance <= bubbleRadius){
@@ -72,10 +80,14 @@ public class FatType : Enemy
             wishedItemBubble.gameObject.SetActive(false);
         }
     }
-    public void updateVisual(){
+
+    public void updateVisual()
+    {
         wishedItemBubble.UpdateAmount(amount);
     }
-    private void OnDrawGizmosSelected() {
+
+    private void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position,bubbleRadius);
     }

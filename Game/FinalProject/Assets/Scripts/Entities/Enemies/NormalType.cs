@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class NormalType : Enemy
 {
-    // Waiting patrolling time
-    
-
     #region Unity stuff
-
     protected new void Update()
     {
         isChasing = fieldOfView.canSeePlayer;
@@ -32,8 +28,6 @@ public class NormalType : Enemy
         if (!touchingPlayer)
         {
             enemyMovement.DefaultPatrol();
-            //isWalking = true;
-            //enemyMovement.GoTo(GetPosition() + Vector3.up, chasing: false, gravity: false);
         }
     }
 
@@ -49,13 +43,5 @@ public class NormalType : Enemy
             }
         }
     }
-
-    /*protected override void Attack()
-    {
-        if(atackEffect != null){
-            player.statesManager.AddState(atackEffect,this);
-        }
-        player.TakeTirement(damageAmount);
-    }*/
     #endregion
 }

@@ -22,11 +22,11 @@ public class SpeedDecrease : State
         else if (manager.hostEntity.GetComponent<Enemy>() != null)
         {
             enemy = manager.hostEntity.GetComponent<Enemy>();
-            defaultWalkingSpeed = enemy.normalSpeed;
+            /*defaultWalkingSpeed = enemy.normalSpeed;
             defaultRunningSpeed = enemy.chaseSpeed;
 
             enemy.normalSpeed *= decreaseMultiplier;
-            enemy.chaseSpeed *= decreaseMultiplier;
+            enemy.chaseSpeed *= decreaseMultiplier;*/
         }
     }
     public override void Affect()
@@ -44,8 +44,8 @@ public class SpeedDecrease : State
         if(isPlayer){
             player.walkingSpeed = defaultWalkingSpeed;
         }else{
-            enemy.normalSpeed = defaultWalkingSpeed;
-            enemy.chaseSpeed = defaultRunningSpeed;
+            /*enemy.normalSpeed = defaultWalkingSpeed;
+            enemy.chaseSpeed = defaultRunningSpeed;*/
         }
     }
 }

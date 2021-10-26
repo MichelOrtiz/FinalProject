@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GroundChecker : MonoBehaviour
 {
+    public Collider2D Collider2D { get => GetComponent<Collider2D>(); }
     #region Ground And Edge Variables
     [Header("Ground")]
     [SerializeField] private LayerMask whatIsGround;
