@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public class ProjectileShooter : MonoBehaviour, IProjectile
 {
     public GameObject projectilePrefab;
-
-    
     public Projectile ProjectileFromPrefab
     {
         get
@@ -25,6 +23,7 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
     public Transform ShotPos { get => shotPos; }
     [SerializeField] private State effectOnPlayer;
     public State EffectOnPlayer { get => effectOnPlayer; }
+    [SerializeField] private float punishDamage;
 
     [Header("Modifications")]
     [InspectorName("RotateTargetDirection")]
@@ -108,6 +107,7 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
             player.SetImmune();
         }
         player.TakeTirement(projectile.damage);
+        player.currentStaminaLimit -= punishDamage;
 
         player.statesManager.AddState(effectOnPlayer, entity);
         OnProjectileTouchedPlayer();

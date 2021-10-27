@@ -47,6 +47,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4690660590625237830, guid: 0693dd816cb7c4c49a4c143f6d71e94a, type: 3}
   shotPos: {fileID: 5750470805829005607}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 0
   rotate: 0
   center: {fileID: 0}
   startingAngle: 0
@@ -130,11 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083df5b5bb9101744a9c2f5df5784255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 12
+  totalTime: 15
   projectileShooter: {fileID: 866227492}
   timeBtwShot: 0.15
-  shotsPerBurst: 5
-  timeBtwBurst: 1
+  shotsPerBurst: 6
+  timeBtwBurst: 0.28
 --- !u!1 &6134830991788356167
 GameObject:
   m_ObjectHideFlags: 0

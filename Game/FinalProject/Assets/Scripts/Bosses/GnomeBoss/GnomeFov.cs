@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class GnomeFov : MonoBehaviour
 {
-
     [SerializeField] protected GameObject mesh;
     [SerializeField] protected Material normalMaterial;
     [SerializeField] protected Material afterAttackMaterial;
@@ -15,7 +13,6 @@ public abstract class GnomeFov : MonoBehaviour
     [SerializeField] protected float baseTimeAfterAttack;
     [SerializeField] protected float baseTimeUntilChange;
     [SerializeField] protected float speedMultiplier;
-    //[SerializeField] private float interval;
     [SerializeField] protected List<Vector2> positions;
 
     [SerializeField] private EnemyCollisionHandler collisionHandler;
@@ -24,29 +21,19 @@ public abstract class GnomeFov : MonoBehaviour
     protected float timeAfterAttack;
     protected bool touchingPlayer;
     public bool justAttacked;
-    protected MeshCollision meshCollision;
     protected Vector2 lastPosition;
-    //protected float speed;
     int index = 0;
-    //private float currentTime;
 
     protected abstract void Move();
 
-    // Start is called before the first frame update
     protected void Start()
     {
-        //speed = speed * Entity.averageSpeed;
-        //Mesh mesh = new Mesh();
-        
-        //GetComponent<MeshFilter>().mesh = mesh;
         mesh.GetComponent<MeshRenderer>().material = normalMaterial;
         collisionHandler.TouchedPlayerHandler += Attack;
     }
 
-    // Update is called once per frame
     protected void Update()
     {
-        //touchingPlayer = mesh.GetComponent<MeshCollision>().touchingPlayer;
         if (justAttacked)
         {
             if (timeAfterAttack > baseTimeAfterAttack)
@@ -75,8 +62,6 @@ public abstract class GnomeFov : MonoBehaviour
             }
             
         }
-
-        //Debug.Log(touchingPlayer? "yesyes":"nono");
     }
 
 
@@ -97,7 +82,6 @@ public abstract class GnomeFov : MonoBehaviour
     protected bool IsNearEdge()
     {
         return !FieldOfView.RayHitObstacle(groundCheck.position, groundCheck.position - groundCheck.up * 1f, LayerMask.NameToLayer("Platforms"));
-        //return !(Physics2D.Linecast(groundCheck.position,  groundCheck.position - groundCheck.up * 1f)).collider;
     }
 
     protected void Attack()
@@ -106,7 +90,4 @@ public abstract class GnomeFov : MonoBehaviour
         justAttacked = true;
         PlayerManager.instance.SetImmune();
     }
-
-
-
 }
