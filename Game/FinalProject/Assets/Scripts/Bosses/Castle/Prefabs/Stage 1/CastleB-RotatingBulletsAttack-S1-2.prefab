@@ -47,6 +47,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4690660590625237830, guid: f2eb9658d4d7ce440abbd219f22bd6a2, type: 3}
   shotPos: {fileID: 5529827434156495331}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 5
   rotate: 1
   center: {fileID: 5529827434156495331}
   startingAngle: 0
@@ -203,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed79f3a17b3db484da3a747c5f79cc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 0.25
+  speedMultiplier: 0.5
   followPlayer: 1
   targetPosition: {x: 0, y: 0}
 --- !u!1 &3893527164351458779
@@ -250,9 +251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3fb90ea976e4d44a80cf977ed4ef4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 15
+  totalTime: 20
   projectileShooter: {fileID: 1327198296}
-  timeBtwShot: 0.5
+  timeBtwShot: 0.35
   burstTime: 3
   timeBtwBurst: 1
 --- !u!1 &4893126920284406024

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GnomeBoss : MonoBehaviour
@@ -13,7 +11,6 @@ public class GnomeBoss : MonoBehaviour
         bossFight = GetComponent<BossFight>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (stageSwitch == null)

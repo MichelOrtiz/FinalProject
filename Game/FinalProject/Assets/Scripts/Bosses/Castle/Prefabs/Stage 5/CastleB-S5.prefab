@@ -46,6 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82955b69b50160c43aa4f0cdf6dd0b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMessageTrigger: {fileID: 0}
+  endMessageTrigger: {fileID: 0}
+  levelToLoad: 0
+  worldState:
+    Tag: Default
+    id: 5471460
+    state: 0
+  loadlevel: {fileID: 0}
   stages:
   - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
   - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
@@ -53,7 +61,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
   - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
   - {fileID: 11400000, guid: bdb10d2aa3065b241a2043f7a4285eae, type: 2}
-  abilityObject: {fileID: 0}
+  ability: 0
   currentStage: {fileID: 0}
   isCleared: 0
   behaviours:
@@ -62,7 +70,7 @@ MonoBehaviour:
   - {fileID: 6134830991788356167, guid: 2fe0a8afcd549e046beb19bfb7d2a36b, type: 3}
   - {fileID: 3205889313457394505, guid: fd3a588dad9276f4abaab5fd44cad564, type: 3}
   - {fileID: 8992072323137076789, guid: df5cdf9584c65cd49be12c16573b3c8b, type: 3}
-  - {fileID: 728410515910533597, guid: 482b498e23f9c0740a2482d64c5da746, type: 3}
+  - {fileID: 728410515910533597, guid: 4df1604cb297bb94dbf0ed383b4c13fc, type: 3}
   startBossEntityPosition: {x: 139, y: -90}
   finalStageFight: 1
 --- !u!114 &217597533622469371
@@ -83,6 +91,7 @@ MonoBehaviour:
   loop: 1
   useWorldPosition: 1
   worldPosition: {x: 139, y: -90}
+  box: {fileID: 0}
 --- !u!114 &217597533622469370
 MonoBehaviour:
   m_ObjectHideFlags: 0

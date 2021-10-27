@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class Fov3 : GnomeFov
 {
     [SerializeField] private Transform center;
@@ -11,13 +8,12 @@ public class Fov3 : GnomeFov
     private float angle =0;
     private float speed=(2*Mathf.PI)/4 ; //2*PI in degress is 360, so you get 4 seconds to complete a circle
 
-
     private enum Direction
     {
         Clockwise, 
-        Anticlockwise
+        CounterClock
     }
-    private Direction direction;
+    private Direction direction = Direction.Clockwise;
 
     protected override void Move()
     {
@@ -35,17 +31,9 @@ public class Fov3 : GnomeFov
         Debug.DrawLine(center.position, endPoint, Color.red);
         return;
     }
-
-    // Start is called before the first frame update
-    new void Start()
-    {
-        direction = Direction.Clockwise;
-        //base.Start();
-    }
     
     new void Update()
     {
-         //if you want to switch direction, use -= instead of +=
         if (!justAttacked)
         {
             Move();
@@ -64,7 +52,7 @@ public class Fov3 : GnomeFov
     {
         if (direction == Direction.Clockwise)
         {
-            direction = Direction.Anticlockwise;
+            direction = Direction.CounterClock;
         }
         else
         {

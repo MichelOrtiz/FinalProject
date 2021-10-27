@@ -47,14 +47,15 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4690660590625237830, guid: e0556495cdbe8c841b5f5df64f84e98f, type: 3}
   shotPos: {fileID: 502715038}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 5
   rotate: 1
   center: {fileID: 5081991445827882764}
   startingAngle: 0
   rotationRate: 0
   timeToCompleteCircle: 0.15
   isClockwise: 1
-  bustSize: 8
-  burstAngle: 45
+  bustSize: 10
+  burstAngle: 36
   burstClockwise: 1
 --- !u!1 &3205889313457394505
 GameObject:
@@ -280,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3fb90ea976e4d44a80cf977ed4ef4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 15
+  totalTime: 20
   projectileShooter: {fileID: 502715039}
   timeBtwShot: 0.25
   burstTime: 3
