@@ -14,7 +14,9 @@ public class EquipmentManager : MonoBehaviour
     }
     public delegate void PassiveEquipment();
     public PassiveEquipment equipmentRutines;
-    Equipment[] currentEquipment;
+    [SerializeField] Transform holderSlots;
+    public Equipment[] currentEquipment;
+    public HotbarSlotEq[] slotsEquipment {get => holderSlots.GetComponentsInChildren<HotbarSlotEq>();}
     public ItemSlot equipmentQ;
     public ItemSlot equipmentR;
     
@@ -22,6 +24,7 @@ public class EquipmentManager : MonoBehaviour
     {
         int numSlots = System.Enum.GetNames(typeof(EquipmentPosition)).Length;
         currentEquipment = new Equipment[numSlots];
+        Inventory.instance.onItemChangedCallBack += UpdateUI;
     }
 
     public void Equip(Equipment newItem){
@@ -77,5 +80,10 @@ public class EquipmentManager : MonoBehaviour
     }
     public Equipment[] GetCurrentEquipment(){
         return currentEquipment;
+    }
+    public void UpdateUI(){
+        foreach(HotbarSlotEq slot in slotsEquipment){
+            slot.UpdateUI();
+        }
     }
 }

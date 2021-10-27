@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5897520343088184235}
   - component: {fileID: 7333879555608026988}
   - component: {fileID: 4448874902765283596}
-  - component: {fileID: 7203934540250861588}
+  - component: {fileID: -8911288970026430967}
   m_Layer: 5
-  m_Name: ItemSlotHotbar
+  m_Name: ItemSlotHotbarEq
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7203934540250861588
+--- !u!114 &-8911288970026430967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 345258942387750268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3af1766fcc9f41346be2d609cfb58913, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ff06d4c466d4d74a8a39995a9c37557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 5041748838195962869}
@@ -210,8 +210,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7203934540250861588}
-        m_TargetAssemblyTypeName: HotbarSlot, Assembly-CSharp
+      - m_Target: {fileID: -8911288970026430967}
+        m_TargetAssemblyTypeName: HotbarSlotEq, Assembly-CSharp
         m_MethodName: OnButtonPress
         m_Mode: 1
         m_Arguments:

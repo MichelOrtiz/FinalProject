@@ -44,4 +44,15 @@ public abstract class ItemSlot : MonoBehaviour
     public virtual void MoveItem(){
     }
     public abstract void OnButtonPress();
+    public virtual void UpdateUI(){
+        if(item == null){
+            icon.sprite = null;
+            icon.enabled = false;
+            icon.color = Color.clear;
+        }else{
+            icon.sprite = item.icon;
+            icon.enabled = true;
+            icon.color = Color.white;
+        }
+    }
 }

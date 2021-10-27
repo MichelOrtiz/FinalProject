@@ -31,10 +31,10 @@ public class Captured : State
         if(currentTime>=duration){
             StopAffect();
         }
-        if(Input.GetKeyDown(KeyCode.A)){
+        if(Input.GetKeyDown(PlayerManager.instance.inputs.controlBinds["MOVERIGHT"])){
             currentTime++;
         }
-        if(Input.GetKeyDown(KeyCode.D)){
+        if(Input.GetKeyDown(PlayerManager.instance.inputs.controlBinds["MOVELEFT"])){
             currentTime++;
         }
     }
