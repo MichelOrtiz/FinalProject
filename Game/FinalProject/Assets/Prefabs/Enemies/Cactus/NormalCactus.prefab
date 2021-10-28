@@ -1,54 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2932585517344547235
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2932585517344547233}
-  - component: {fileID: 2932585517344547232}
-  m_Layer: 10
-  m_Name: AnimationManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2932585517344547233
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2932585517344547235}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
-  m_Children: []
-  m_Father: {fileID: 2932585517460194936}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2932585517344547232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2932585517344547235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 2932585517460194941}
-  animator: {fileID: 2932585517867974402}
-  previousState: 
-  currentState: 
-  nextState: 
-  nextStateEnabled: 0
 --- !u!1 &2932585517433120713
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +103,6 @@ Transform:
   - {fileID: 2932585518662497218}
   - {fileID: 2932585518104701203}
   - {fileID: 2932585518164169876}
-  - {fileID: 2932585517344547233}
   - {fileID: 3082577248875288347}
   - {fileID: 311460835784485521}
   m_Father: {fileID: 0}
@@ -233,7 +183,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 0}
-  animationManager: {fileID: 2932585517344547232}
+  animationManager: {fileID: 5421586715383864900}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 2932585518675624144}
@@ -243,10 +193,6 @@ MonoBehaviour:
   enemyType: 2
   enemyName: 34
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 30
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 30
   punishDamage: 10
   atackEffect: {fileID: 0}
@@ -273,6 +219,7 @@ GameObject:
   - component: {fileID: 2932585517867974400}
   - component: {fileID: 2932585517867974403}
   - component: {fileID: 2932585517867974402}
+  - component: {fileID: 5421586715383864900}
   m_Layer: 10
   m_Name: SpriteFx
   m_TagString: Untagged
@@ -364,6 +311,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5421586715383864900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2932585517867974405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 2932585517460194941}
+  animator: {fileID: 2932585517867974402}
+  previousState: 
+  currentState: 
+  nextState: 
+  nextStateEnabled: 0
 --- !u!1 &2932585517895037221
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +519,9 @@ MonoBehaviour:
   jumpForce: {x: 0, y: 0}
   jumpForceMultiplier: {x: 0, y: 0}
   forceMode: 0
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 2932585518675624144}
   collisionHandler: {fileID: 2932585517433120710}
   fieldOfView: {fileID: 2932585518995072441}
@@ -794,7 +762,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_Children: []
   m_Father: {fileID: 2932585517460194936}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4279084279248117512
 SpriteRenderer:
@@ -856,7 +824,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 177084393416234238, guid: 14d0f277bfa2f6847b3c7b8578d8b1cb, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 177084393416234238, guid: 14d0f277bfa2f6847b3c7b8578d8b1cb, type: 3}
       propertyPath: m_LocalPosition.x

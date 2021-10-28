@@ -7,7 +7,6 @@ public class CastleBRotatingBullets : MonoBehaviour, IBossFinishedBehaviour
     #region TotalTime
     [Header("Total Time")]
     [SerializeField] private float totalTime;
-    private float currentTime;
     #endregion
 
     #region ProjectileStuff

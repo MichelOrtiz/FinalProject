@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CastleBLamp : MonoBehaviour
@@ -40,7 +38,7 @@ public class CastleBLamp : MonoBehaviour
         {
             if (Vector2.Distance(player.GetPosition(), transform.position) <= interactionRadius)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(player.inputs.controlBinds["MENUINTERACTION"]))
                 {
                     OnActivated();
                 }

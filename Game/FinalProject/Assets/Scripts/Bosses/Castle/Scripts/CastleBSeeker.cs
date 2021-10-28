@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class CastleBSeeker : MonoBehaviour, IBossFinishedBehaviour
 {
     private Rigidbody2D rigidbody2d;
@@ -46,6 +43,4 @@ public class CastleBSeeker : MonoBehaviour, IBossFinishedBehaviour
     {
         rigidbody2d.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }
-
-    
 }

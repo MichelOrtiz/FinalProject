@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class CastleBLaserBeamer : MonoBehaviour, IBossFinishedBehaviour
 {
     #region LaserStuff
@@ -12,12 +9,8 @@ public class CastleBLaserBeamer : MonoBehaviour, IBossFinishedBehaviour
     [SerializeField] private byte shots;
     private byte shotsDone;
     [SerializeField] private float timeBtwShot;
-    private float currentTimeBtwShot;
-
-
     #endregion
 
-    RaycastHit2D raycast;
     [SerializeField] private int maxRayDistance;
 
     private PlayerManager player;
@@ -28,8 +21,6 @@ public class CastleBLaserBeamer : MonoBehaviour, IBossFinishedBehaviour
         FinishedHandler?.Invoke(lastPosition);
     }
     
-
-    // Start is called before the first frame update
     void Start()
     {
         player = PlayerManager.instance;
@@ -58,7 +49,6 @@ public class CastleBLaserBeamer : MonoBehaviour, IBossFinishedBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (shotsDone >= shots)
@@ -69,5 +59,4 @@ public class CastleBLaserBeamer : MonoBehaviour, IBossFinishedBehaviour
             }
         }
     }
-
 }

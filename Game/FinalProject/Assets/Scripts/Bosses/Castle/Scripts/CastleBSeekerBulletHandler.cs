@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CastleBSeekerBulletHandler : MonoBehaviour
 {
-    
-
     [SerializeField] private bool activateBasedOnTime;
     [SerializeField] private float timeBtwShot;
     private float curTimeBtwShot;
@@ -25,13 +23,6 @@ public class CastleBSeekerBulletHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.E))
-        {
-            ActivateBullets();
-        }*/
-
-        
-
         if (activateBasedOnTime)
         {
             if (curTimeBtwShot > timeBtwShot)

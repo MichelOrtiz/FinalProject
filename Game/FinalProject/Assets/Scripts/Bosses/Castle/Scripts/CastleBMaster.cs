@@ -16,12 +16,6 @@ public class CastleBMaster : BossFight
     private CastleBStageFight stageFight;
 
     //private IBossFinishedBehaviour bossBehaviour;
-
-    new void Awake()
-    {
-        base.Awake();
-    }
-
     new void Start()
     {
         base.Start();
@@ -141,10 +135,18 @@ public class CastleBMaster : BossFight
             
             isCleared=true;
 
+            Debug.Log("Lo hiciste ganaste!!!1");
+            SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
+            if(partida.WorldStates.Exists(x => x.id == worldState.id)){
+                WorldState w = partida.WorldStates.Find(x => x.id == worldState.id);
+                w.state = true;
+            }else{
+                worldState.state = true;
+                partida.WorldStates.Add(worldState);
+            }
+
             loadlevel?.SetActive(true);
             BattleEnded?.Invoke();
-            
-            Debug.Log("Lo hiciste ganaste!!!1");
         }
     }
 }

@@ -20,7 +20,7 @@ public class ProjectileShooter : MonoBehaviour, IProjectile
     private Projectile projectile;
     public Projectile Projectile { get => projectile; set => projectile = value; }
     [SerializeField] private Transform shotPos;
-    public Transform ShotPos { get => shotPos; }
+    public Transform ShotPos { get => shotPos; set => shotPos = value; }
     [SerializeField] private State effectOnPlayer;
     public State EffectOnPlayer { get => effectOnPlayer; }
     [SerializeField] private float punishDamage;

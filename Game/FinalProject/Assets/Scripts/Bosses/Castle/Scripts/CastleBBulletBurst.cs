@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class CastleBBulletBurst : MonoBehaviour, IBossFinishedBehaviour
 {
     #region TotalTime
     [Header("Total Time")]
     [SerializeField] private float totalTime;
-    private float currentTime;
     #endregion
 
     #region ProjectileStuff
@@ -16,7 +12,6 @@ public class CastleBBulletBurst : MonoBehaviour, IBossFinishedBehaviour
     private Vector2 shootTarget;
     
     [SerializeField] private float timeBtwShot;
-    private float currentTimeBtwShot;
 
     /*[SerializeField] private float burstTime;
     private float curBurstTime;*/
@@ -29,7 +24,6 @@ public class CastleBBulletBurst : MonoBehaviour, IBossFinishedBehaviour
     #endregion
 
     private PlayerManager player;
-    private Vector2 lastPlayerPos;
 
 
     public event IBossFinishedBehaviour.Finished FinishedHandler;
@@ -60,7 +54,6 @@ public class CastleBBulletBurst : MonoBehaviour, IBossFinishedBehaviour
         }
     }
 
-
     void Update()
     {
         if (curShots >= shotsPerBurst)
@@ -78,7 +71,6 @@ public class CastleBBulletBurst : MonoBehaviour, IBossFinishedBehaviour
             }
         }
     }
-
 
     void FinishBehaviour()
     {

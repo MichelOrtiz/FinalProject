@@ -11,6 +11,10 @@ public class ThrowerCactus : Enemy
     [SerializeField] private byte maxAllucinations;
     private bool allucinationsInstantiated;
 
+    [Header("Projectiles")]
+    [SerializeField] private Transform firstShotPos;
+    [SerializeField] private Transform secondShotPos;
+
     new void Start()
     {
         base.Start();
@@ -19,15 +23,34 @@ public class ThrowerCactus : Enemy
 
     protected override void ChasePlayer()
     {
-        if (timeBtwShot <= 0)
+        if (timeBtwShot > startTimeBtwShot)
         {
-            projectileShooter.ShootProjectile(player.GetPosition());
-            timeBtwShot = startTimeBtwShot;
+            animationManager.ChangeAnimation(projectileShooter.ShotPos == firstShotPos ? "first_shot" : "second_shot");
+
+
+            // Shoot projectile inm 0.3s, so the animation has time to prepar
+            Invoke("HandleShootProjectile", 0.3f);
+            timeBtwShot = 0;
         }
         else
         {
-            timeBtwShot -= Time.deltaTime;
+            if (animationManager.previousState == "ThrowerCactus_idle" || animationManager.previousState == "")
+            {
+                animationManager.ChangeAnimation("chase");
+            }
+            else
+            {
+                animationManager.SetNextAnimation("chase");
+            }
+            timeBtwShot += Time.deltaTime;
         }
+    }
+
+    void HandleShootProjectile()
+    {
+        projectileShooter.ShootProjectile(player.GetPosition());
+        projectileShooter.ShotPos = projectileShooter.ShotPos == firstShotPos? secondShotPos : firstShotPos;
+        timeBtwShot = 0;
     }
 
     public void projectileShooter_ProjectileTouchedPlayer()
@@ -39,7 +62,7 @@ public class ThrowerCactus : Enemy
             int numberOfAllucinations = RandomGenerator.NewRandom(minAllucinations, maxAllucinations);
             for (int i = 0; i < numberOfAllucinations; i++)
             {
-                Instantiate(allucination, allucinationsPos[i].position, Quaternion.identity);
+                var obj = Instantiate(allucination.GetComponent<NormalType>(), allucinationsPos[i].position, allucination.transform.rotation);
             }
             allucinationsInstantiated = true;
         }
@@ -47,6 +70,7 @@ public class ThrowerCactus : Enemy
 
     protected override void MainRoutine()
     {
-        return;
+        timeBtwShot = 0;
+        animationManager.ChangeAnimation("idle");
     }
 }

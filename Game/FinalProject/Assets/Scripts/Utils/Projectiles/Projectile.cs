@@ -258,7 +258,13 @@ public class Projectile : MonoBehaviour
         }*/
 
         touchingObstacle = Physics2D.OverlapCircle(transform.position, GetComponent<Collider2D>().bounds.extents.magnitude, whatIsObstacle);
-        //touchingObstacle = other.gameObject.layer == whatIsObstacle;
+        if (touchingObstacle)
+        {
+            if (TryGetComponent<Animator>(out var anim))
+            {
+                anim.enabled = false;
+            }
+        }
     }
 
 
@@ -281,7 +287,13 @@ public class Projectile : MonoBehaviour
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
         touchingObstacle = Physics2D.OverlapCircle(transform.position, GetComponent<Collider2D>().bounds.extents.magnitude, whatIsObstacle);
         //touchingObstacle = other.gameObject.layer == whatIsObstacle;
-
+        if (touchingObstacle)
+        {
+            if (TryGetComponent<Animator>(out var anim))
+            {
+                anim.enabled = false;
+            }
+        }
     }
     
     protected void OnCollisionStay2D(Collision2D other)

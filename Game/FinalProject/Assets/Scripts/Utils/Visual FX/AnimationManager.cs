@@ -11,12 +11,7 @@ public class AnimationManager : MonoBehaviour
     public string nextState;
     public bool nextStateEnabled;
 
-    public Action currentAnimFinished;
 
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
     void Update()
     {
         if (nextStateEnabled)
@@ -36,7 +31,7 @@ public class AnimationManager : MonoBehaviour
 
         state = FilterEnemy(state);
 
-        if (currentState == state) return;
+        if (currentState == state && AnimatorIsPlaying()) return;
 
         animator.Play(state);
 
@@ -49,7 +44,7 @@ public class AnimationManager : MonoBehaviour
     {
         animator.speed = 1;
         
-        if (currentState == state) return;
+        if (currentState == state && AnimatorIsPlaying()) return;
 
         animator.Play(state);
 
