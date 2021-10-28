@@ -5,12 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
-    private int money;
-    public Text moneyText;
     public static Inventory instance;
-    public List<Item> items = new List<Item>();
-    //public UnityEngine.Object[] hotbar1;
-    public int capacidad;
     private void Awake() {
         if(instance!=null){
             Debug.Log("HOW!!!");
@@ -18,6 +13,14 @@ public class Inventory : MonoBehaviour
         }
         instance = this;
     }
+    private int money;
+    public Text moneyText;
+    public List<Item> items = new List<Item>();
+    public int capacidad;
+
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallBack;
+    
     private void Start() {
         if(SaveFilesManager.instance!= null && SaveFilesManager.instance.currentSaveSlot != null){
             capacidad = SaveFilesManager.instance.currentSaveSlot.capacidad;
@@ -36,8 +39,6 @@ public class Inventory : MonoBehaviour
         }
     }
     
-    public delegate void OnItemChanged();
-    public OnItemChanged onItemChangedCallBack;
     private void Update() 
     {
         //Cheats
@@ -83,7 +84,6 @@ public class Inventory : MonoBehaviour
             return false;
         }
     }
-    
     public void Remove(Item item){
         items.Remove(item);
         if(onItemChangedCallBack != null){
@@ -93,7 +93,6 @@ public class Inventory : MonoBehaviour
     public void SwapItems(int originIndex, int destinationIndex){
         Item origin = items[originIndex];
         Item destination = items[destinationIndex];
-
         items.Insert(destinationIndex,origin);
         items.RemoveAt(destinationIndex+1);
         items.Insert(originIndex,destination);

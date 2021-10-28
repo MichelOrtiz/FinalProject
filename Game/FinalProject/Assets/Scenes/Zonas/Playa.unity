@@ -37370,19 +37370,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 538206983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbee3da4efa67004da731426d79019d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2142e49cca07ebb40b6f9a5eaedc286e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactions:
   - {fileID: 11400000, guid: 1468ee9d6e453fa48823ac87aab715e6, type: 2}
   - {fileID: 11400000, guid: f53ae1d26e8aff74fa6f25eb30899f1b, type: 2}
   - {fileID: 11400000, guid: fd847333cabc44943880cdbce76d2d70, type: 2}
-  - {fileID: 11400000, guid: fd847333cabc44943880cdbce76d2d70, type: 2}
   - {fileID: 11400000, guid: 50e2edb07e978b242b5019c076b75823, type: 2}
+  - {fileID: 11400000, guid: 8a8778d0c2bfd2f4b84a09c7873b4d3b, type: 2}
   - {fileID: 11400000, guid: b0ce4bfec7b5c214c808ec5eb001ee26, type: 2}
   - {fileID: 11400000, guid: 12452ce79b7699949b28acf76e59b82f, type: 2}
-  radius: 2.44
+  - {fileID: 11400000, guid: de35c55609dfe8a4f858bfe6774bacda, type: 2}
+  radius: 2
   triggerPoint: {fileID: 1582842662}
+  isTutorialDone:
+    Tag: isTutorialDone
+    id: 34994
+    state: 0
 --- !u!4 &556600432 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6094071260494364134, guid: 1f1070637004e5048b7209ce55676237, type: 3}
@@ -38178,6 +38183,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2984303545391695466, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984303545391695466, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984303545391695466, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984303545391695466, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984303545391695466, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984303545391695466, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3277886407244493897, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -38292,6 +38321,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4672358929195501984, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202843420824588159, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202843420824588159, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202843420824588159, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202843420824588159, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202843420824588159, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202843420824588159, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8502108929805694115, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}

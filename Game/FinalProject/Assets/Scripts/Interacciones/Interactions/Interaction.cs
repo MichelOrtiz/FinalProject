@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Interaction : ScriptableObject {
     [System.NonSerialized] public GameObject gameObject;
-    public enum InteractionType{Dialogue,Interface,GiveItem,Question,Animation,WaitCon,None}
+    public enum InteractionType{Dialogue,Interface,GiveItem,Question,Animation,WaitCon,WorldState,None}
     public InterCondition condition = null;
     public InteractionType type = InteractionType.None;
     public delegate void OnEndInteraction();
