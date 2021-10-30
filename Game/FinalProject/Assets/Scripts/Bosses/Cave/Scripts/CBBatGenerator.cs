@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class CBBatGenerator : MonoBehaviour
 {
     #region ProjectileStuff
@@ -9,7 +8,7 @@ public class CBBatGenerator : MonoBehaviour
     private float curTimeBtwBat;
     [SerializeField] private int batPerShot;
     private int batsShot;
-    private bool shooting;
+    //private bool shooting;
     private bool keepShooting;
 
     #endregion
@@ -21,9 +20,7 @@ public class CBBatGenerator : MonoBehaviour
     //private Vector2 directionCheck;
     [SerializeField] private float minXDistanceCheck;
     [SerializeField] private float yOffsetCheck;
-    [SerializeField] private State effectOnPlayer;
     private PlayerManager player;
-    private float playerYPos;
     private float distanceFromY;
     private float distanceFromX;
 

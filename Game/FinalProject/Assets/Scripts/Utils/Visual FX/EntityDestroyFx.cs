@@ -35,13 +35,13 @@ public class EntityDestroyFx : MonoBehaviour
     public void DestroyAllEntitiesDestroyed()
     {
         int index = 0;
-        List<EntityDestroyed> entityDestroyeds = ScenesManagers.GetObjectsOfType<EntityDestroyed>();
-        if (entityDestroyeds != null)
+        List<EntityDestroyed> entitiesDestroyed = ScenesManagers.GetObjectsOfType<EntityDestroyed>();
+        if (entitiesDestroyed != null)
         {
-            while(entityDestroyeds.Count > 0)
+            while(entitiesDestroyed.Count > 0)
             {
-                Destroy(entityDestroyeds[index].gameObject);
-                entityDestroyeds.Remove(entityDestroyeds[index]);
+                Destroy(entitiesDestroyed[index].gameObject);
+                entitiesDestroyed.Remove(entitiesDestroyed[index]);
             }
         }
 

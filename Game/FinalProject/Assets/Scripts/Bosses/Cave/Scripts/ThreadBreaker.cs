@@ -14,7 +14,6 @@ public class ThreadBreaker : MonoBehaviour
 
     public bool isActivated { get; private set;}
 
-
     public delegate void Activated();
     public event Activated ActivatedHandler;
     protected virtual void OnActivated()
@@ -22,11 +21,6 @@ public class ThreadBreaker : MonoBehaviour
         ActivatedHandler?.Invoke();
     }
 
-    
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
     void Start()
     {
         player = PlayerManager.instance;
@@ -34,9 +28,6 @@ public class ThreadBreaker : MonoBehaviour
         spriteRenderer.sprite = idleSprite;
     }
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
     void Update()
     {
         if (!isActivated)
@@ -44,8 +35,9 @@ public class ThreadBreaker : MonoBehaviour
             float distance = Vector2.Distance(player.GetPosition(), transform.position);
             if (distance <= radius)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(player.inputs.controlBinds["MENUINTERACTION"]))
                 {
+                    isActivated = true;
                     spriteRenderer.sprite = activatedSprite;
                     DestroyLines();
                 }
@@ -59,7 +51,6 @@ public class ThreadBreaker : MonoBehaviour
         {
             Destroy(line);
         }
-        isActivated = true;
         OnActivated();
     }
     

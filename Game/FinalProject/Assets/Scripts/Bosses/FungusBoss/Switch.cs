@@ -38,7 +38,7 @@ public class Switch : MonoBehaviour
         float distanceFromPlayer = Vector2.Distance(player.GetPosition(), transform.position);
         if (distanceFromPlayer <= radius)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(player.inputs.controlBinds["MENUINTERACTION"]))
             {
                 activado = !activado;
                 GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;

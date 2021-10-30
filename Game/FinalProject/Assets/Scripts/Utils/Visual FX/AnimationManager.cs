@@ -31,7 +31,7 @@ public class AnimationManager : MonoBehaviour
 
         state = FilterEnemy(state);
 
-        if (currentState == state && AnimatorIsPlaying()) return;
+        if (currentState == state) return;
 
         animator.Play(state);
 

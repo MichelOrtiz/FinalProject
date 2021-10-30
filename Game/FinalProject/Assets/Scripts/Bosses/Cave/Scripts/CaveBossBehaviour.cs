@@ -4,7 +4,7 @@ public class CaveBossBehaviour : Entity
 
     #region OnPlayerEffects
     [Header("Effects on Player")]
-    [SerializeField] private State effectOnPlayer;
+    //[SerializeField] private State effectOnPlayer;
     [SerializeField] private float damageAmount;
     [SerializeField] private float staminaPunish;
 

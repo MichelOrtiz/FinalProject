@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fungi : Enemy
@@ -8,12 +6,12 @@ public class Fungi : Enemy
     [SerializeField] private float selfKnockBackDuration;
     [SerializeField] private float selfKnockBackForce;
     [SerializeField] private Vector2 selfKnockBackDir;
-    private bool inKnockback;
     [SerializeField] private float baseTimeUntilDestroyed;
     [SerializeField] private float baseTimeUntilReset;
     private float timeUntilDestroyed;
     private float timeUntilReset;
     private bool facingRight;
+
 
     new void Update()
     {

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using FinalProject.Assets.Scripts.Utils.Sound;
 using UnityEngine;
@@ -17,7 +16,6 @@ public class CBSeekerBigBoy : CaveBossBehaviour
     private Vector2 push;
     public bool inPush;
     public RoomComponent currentPush;
-    private bool stopped;
 
     [SerializeField] private float timeBeforePush;
     private float currentTimeBeforePush; 
@@ -37,7 +35,6 @@ public class CBSeekerBigBoy : CaveBossBehaviour
 
     [SerializeField] private float distanceFromPlayerToStop;
 
-    private bool inWall;
     public bool inSameWallThanPlayer;
     public bool inGroundWithPlayer;
 
@@ -50,9 +47,7 @@ public class CBSeekerBigBoy : CaveBossBehaviour
     //private bool touchingGround;
     #endregion
 
-    #region ShockWave
     [SerializeField] private GameObject shockWake;
-    #endregion
 
 
     private Vector2 lastPlayerPosition;
@@ -185,7 +180,6 @@ public class CBSeekerBigBoy : CaveBossBehaviour
                 push = new Vector2(direction.x * pushForce * speed, 0);
                 break;
             case RoomComponent.Wall:
-                inWall = true;
                 push = new Vector2(0, direction.y * pushForce * speed);
                 break;
             default:
@@ -266,7 +260,7 @@ public class CBSeekerBigBoy : CaveBossBehaviour
                 rigidbody2d.gravityScale = 0;
             }
 
-            inSameWallThanPlayer = player.collisionHandler.Contacts.Contains(contact) && !inGroundWithPlayer;;
+            inSameWallThanPlayer = player.collisionHandler.Contacts.Contains(contact) && !inGroundWithPlayer;
             
         }
 
@@ -274,23 +268,6 @@ public class CBSeekerBigBoy : CaveBossBehaviour
         {
             inGroundWithPlayer = isGrounded && player.collisionHandler.Contacts.Contains(contact);
         }
-        
-
-        /*if (contact.tag == "Ceiling")
-        {
-            Debug.Log("boss hit by ceiling");
-            inColor = true;
-            spriteRenderer.color = colorWhenHit;
-            if (projectileHits < maxProjectileHits-1)
-            {
-                projectileHits++;
-            }
-            else
-            {
-                OnFinished(GetPosition());
-            }
-        }*/
-
     }
 
     protected override void collisionHandler_EnterContact(GameObject contact)
@@ -310,6 +287,7 @@ public class CBSeekerBigBoy : CaveBossBehaviour
                 }
             }
         }
+
         if (grounds.Contains(contact))
         {
             inGroundWithPlayer = isGrounded && player.collisionHandler.Contacts.Contains(contact);
@@ -361,7 +339,4 @@ public class CBSeekerBigBoy : CaveBossBehaviour
             shockWake.SetActive(true);
         }
     }
-
-    
-
 }

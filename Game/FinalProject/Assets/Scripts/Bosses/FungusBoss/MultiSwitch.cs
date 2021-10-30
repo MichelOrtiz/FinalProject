@@ -5,7 +5,7 @@ using UnityEngine;
 public class MultiSwitch : MonoBehaviour
 {
     public int numberOfSwitch;
-    public bool jugando;
+    //public bool jugando;
     [SerializeField] private List<Switch> Orden;
     //[SerializeField] private List<bool> OrdenJugador;
     
@@ -38,7 +38,7 @@ public class MultiSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!jugando)
+        /*if (!jugando)
         {
             jugando = Jugando();
         }
@@ -66,8 +66,8 @@ public class MultiSwitch : MonoBehaviour
                     }
                     break;
                 }
-            }*/
-        }
+            }
+        }*/
         if (Activados()&& !door.isOpen)
         {
             door.Activate();
@@ -89,7 +89,7 @@ public class MultiSwitch : MonoBehaviour
         playerOrder.Clear();
         index = 0;
 
-        jugando = false;
+        //jugando = false;
     }
     bool Jugando()
     {

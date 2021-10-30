@@ -8,7 +8,6 @@ public class CaveBoss : BossFight
     [SerializeField] private Vector2 startBossEntityPosition;
 
     private byte scissorsActivated;    
-    private List<Entity> currentEntities;
     private Vector2 currentPos;
 
     private CaveBossBehaviour caveBossBehaviour;

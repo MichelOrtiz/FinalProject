@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using FinalProject.Assets.Scripts.Utils.Sound;
 using UnityEngine;
@@ -7,31 +6,11 @@ public class CBWallCollision : MonoBehaviour
 {
     [Header("Projectile stuff")]
     [SerializeField] private ProjectileShooter projectileShooter;
-    [SerializeField] private GameObject projectilePrefab;
-    private Projectile projectile;
-    [SerializeField] Transform shootPos;
 
     [Header("Hits")]
     [SerializeField] List<string> collisionTags;
     [SerializeField] private byte maxHits;
     private byte currentHits;
-
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void ProjectileAttack()
-    {
-        return;
-    }
 
     void OnTriggerEnter2D(Collider2D other)
     {

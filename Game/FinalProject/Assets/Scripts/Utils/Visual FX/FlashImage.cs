@@ -51,7 +51,7 @@ public class FlashImage : MonoBehaviour
     Image flashImage;
 
     // events
-    public delegate void FlashStop();
+    /*public delegate void FlashStop();
     public event FlashStop FlashStopHandler;
     protected virtual void OnStop()
     {
@@ -74,12 +74,12 @@ public class FlashImage : MonoBehaviour
     protected virtual void OnFlashInComplete()
     {
         FlashInCompleteHandler?.Invoke();
-    }
+    }*/
 
-    /*public event Action OnStop = delegate{ };
-    public event Action OnCycleStart = delegate { };
-    public event Action OnCycleComplete = delegate { };
-    public event Action OnFlashInComplete = delegate { };*/
+    public Action OnStop = delegate{ };
+    public Action OnCycleStart = delegate { };
+    public Action OnCycleComplete = delegate { };
+    public Action OnFlashInComplete = delegate { };
 
     #region Initialization
     private void Awake()
@@ -146,8 +146,8 @@ public class FlashImage : MonoBehaviour
         StopFlashRoutine();
         SetAlphaToDefault();
 
-        //OnStop?.Invoke();
-        OnStop();
+        OnStop?.Invoke();
+        //OnStop();
     }
     #endregion
 
@@ -159,8 +159,8 @@ public class FlashImage : MonoBehaviour
         float flashInDuration = secondsForOneFlash / 2;
         float flashOutDuration = secondsForOneFlash / 2;
 
-        //OnCycleStart?.Invoke();
-        OnCycleStart();
+        OnCycleStart?.Invoke();
+        //OnCycleStart();
         // flash in
         for (float t = 0f; t <= flashInDuration; t += Time.deltaTime)
         {
@@ -169,8 +169,8 @@ public class FlashImage : MonoBehaviour
             flashImage.color = newColor;
             yield return null;
         }
-        //OnFlashInComplete?.Invoke();
-        OnFlashInComplete();
+        OnFlashInComplete?.Invoke();
+        //OnFlashInComplete();
         // flash out
         for (float t = 0f; t <= flashOutDuration; t += Time.deltaTime)
         {
@@ -180,8 +180,8 @@ public class FlashImage : MonoBehaviour
             yield return null;
         }
 
-        //OnCycleComplete?.Invoke();
-        OnCycleComplete();
+        OnCycleComplete?.Invoke();
+        //OnCycleComplete();
     }
 
     IEnumerator FlashLoop(float secondsForOneFlash, float minAlpha, float maxAlpha)
@@ -192,7 +192,8 @@ public class FlashImage : MonoBehaviour
         // start the flash cycle
         while (true)
         {
-            OnCycleStart();
+            OnCycleStart?.Invoke();
+            //OnCycleStart();
             // flash in
             for (float t = 0f; t <= flashInDuration; t += Time.deltaTime)
             {
@@ -201,7 +202,8 @@ public class FlashImage : MonoBehaviour
                 flashImage.color = newColor;
                 yield return null;
             }
-            OnFlashInComplete();
+            OnFlashInComplete?.Invoke();
+            //OnFlashInComplete();
             // flash out
             for (float t = 0f; t <= flashOutDuration; t += Time.deltaTime)
             {
@@ -211,7 +213,8 @@ public class FlashImage : MonoBehaviour
                 yield return null;
             }
                 
-            OnCycleComplete();
+            //OnCycleComplete();
+            OnCycleComplete?.Invoke();
         }
     }
 

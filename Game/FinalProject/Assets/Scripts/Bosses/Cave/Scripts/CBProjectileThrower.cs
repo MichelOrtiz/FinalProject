@@ -7,17 +7,7 @@ public class CBProjectileThrower : Entity
     #region ProjectileStuff
     [Header("Projectile Stuff")]
     [SerializeField] private ProjectileShooter projectileShooter;
-    [SerializeField] private GameObject projectilePrefab;
-    private Projectile projectile;
-    //[SerializeField] private Transform shotPoint; 
-    private Vector2 shotPoint;
     [SerializeField] private float timeBtwShot;
-    private float currentTimeBtwShot;
-    [SerializeField] private float angleBtwShots;
-    [SerializeField] private Transform center;
-    [SerializeField] private float radius;
-
-    [SerializeField] private float timeToCompleteCircle;
 
     #endregion
 
@@ -31,56 +21,18 @@ public class CBProjectileThrower : Entity
     new void Start()
     {
         base.Start();
-        /*byte index = 0;
-        foreach (var thread in threads)
-        {
-            Instantiate(thread, startPositions[index], thread.transform.rotation);
-        }*/
+        InvokeRepeating("ShootProjectiles", timeBtwShot, timeBtwShot);
     }
 
     // Update is called once per frame
     new void Update()
     {
         UpdateThreadPositions();
-        //if (!finishedAttack)
-        //{
-            if (currentTimeBtwShot > timeBtwShot)
-            {
-                ShotProjectiles();
-                currentTimeBtwShot = 0;
-            }
-            else
-            {
-                currentTimeBtwShot += Time.deltaTime;
-            }
-        //}
-        
-
-
         base.Update();
     }
-
-    public void ProjectileAttack()
-    {
-        
-    }
-
-    public void ShotProjectiles()
+    public void ShootProjectiles()
     {
         projectileShooter.ShootRotating();
-        /*float angle = 0;
-        while (angle + angleBtwShots <= 360)
-        {
-            shotPoint = center.position + MathUtils.GetVectorFromAngle(angle);
-
-            ShotProjectile(center.position, shotPoint );
-            angle += angleBtwShots;
-        }*/
-    }
-
-    public void ShotProjectile(Transform from, Vector3 to)
-    {
-        
     }
 
     void UpdateThreadPositions()
@@ -93,15 +45,4 @@ public class CBProjectileThrower : Entity
             index++;
         }
     }
-
-    /*public void ShotProjectile(Vector2 from, Vector3 to)
-    {
-        projectile = Instantiate(projectilePrefab, from, Quaternion.identity).GetComponent<Projectile>();
-        projectile.Setup(from, to, this);
-    }*/
-
-    /*protected override void SetDefaults()
-    {
-        //throw new System.NotImplementedException();
-    }*/
 }

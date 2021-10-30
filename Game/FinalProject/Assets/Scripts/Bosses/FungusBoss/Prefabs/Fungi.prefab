@@ -4769,7 +4769,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4829,6 +4829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 0
   damageThreshold: 0
+  staminaPunish: 0
   effectOnPlayer: {fileID: 11400000, guid: 0838117578a7c3540b83fd41c058c963, type: 2}
   stopEmittingWhenParticleCollide: 0
 --- !u!1 &1254405717892209806
@@ -5375,10 +5376,6 @@ MonoBehaviour:
   enemyType: 7
   enemyName: 39
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 2
-  chaseSpeed: 0
   damageAmount: 0
   punishDamage: 0
   atackEffect: {fileID: 0}

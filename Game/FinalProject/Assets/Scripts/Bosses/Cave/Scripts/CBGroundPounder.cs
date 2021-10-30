@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using FinalProject.Assets.Scripts.Utils.Sound;
 using UnityEngine;
 
@@ -29,17 +27,11 @@ public class CBGroundPounder : CaveBossBehaviour
 
     #region Collisions
     [Header("Collisions")]
-    //[SerializeField] private CBRoomManager roomManager;
-    //private List<GameObject> grounds;
     private bool hitGround;
     [SerializeField] private byte maxGroundHits;
     [SerializeReference]private byte currentGroundHits;
-    //[SerializeField] private byte maxProjectileHits;
-    //private byte projectileHits;
     [SerializeField] private float waitTimeWhenCollide;
     private float currentWaitTime;
-    private bool touchingPlayer;
-    //private bool touchingGround;
     #endregion
 
     #region Thread/Laser
@@ -56,12 +48,8 @@ public class CBGroundPounder : CaveBossBehaviour
     [SerializeField] private float timeMod;
     [SerializeField] private float timeToChangeRotation;
 
-    private bool hit;
     #endregion
 
-
-    // Might inherit later *-*-*-*-*-*
-    
 
     new void Awake()
     {
@@ -76,13 +64,6 @@ public class CBGroundPounder : CaveBossBehaviour
     {
         base.Start();
         player = PlayerManager.instance;
-
-        /*if (roomManager == null)
-        {
-            roomManager = FindObjectOfType<CBRoomManager>();
-        }
-
-        grounds = roomManager.grounds;*/
         laserShooter.ShootLaser(endPos);
         InvokeRepeating("ChangeProjectileRotation", timeToChangeRotation, timeToChangeRotation);
         
@@ -95,11 +76,10 @@ public class CBGroundPounder : CaveBossBehaviour
         {
             sawPlayer = reachedDestination && Mathf.Abs(GetPosition().x - player.GetPosition().x) <= xRangeToSeePlayer;
         }
-        // So it is true forever, but only once the enemy reached destination for the first time
+        
         if (!reachedDestination)
         {
-            reachedDestination = Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius
-                                && player.GetPosition().y < GetPosition().y;
+            reachedDestination = Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius;
         }
         else
         {
@@ -173,6 +153,7 @@ public class CBGroundPounder : CaveBossBehaviour
         if (groundTag == "Ground")
         {
             inColor = true;
+            spriteRenderer.color = colorWhenHit;
             StopMoving();
             hitGround = true;
             reachedDestination = false;
@@ -206,7 +187,6 @@ public class CBGroundPounder : CaveBossBehaviour
             {
                OnFinished(GetPosition());
             }
-            hit = true;
         }
     }
 
