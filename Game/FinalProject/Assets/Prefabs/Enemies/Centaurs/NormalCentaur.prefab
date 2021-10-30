@@ -82,6 +82,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2529731039404922193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3102577403615037679}
+  m_Layer: 10
+  m_Name: ObstacleCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3102577403615037679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2529731039404922193}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.63, y: -1.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 5695393910146182961}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5695393908257977569
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,10 +589,6 @@ MonoBehaviour:
   enemyType: 3
   enemyName: 35
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 20
   punishDamage: 10
   atackEffect: {fileID: 0}
@@ -813,6 +839,9 @@ MonoBehaviour:
   jumpForce: {x: 0, y: 0}
   jumpForceMultiplier: {x: 0, y: 0}
   forceMode: 0
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 5695393909480267048}
   collisionHandler: {fileID: 5695393908279610517}
   fieldOfView: {fileID: 5695393910146182960}
@@ -846,6 +875,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 5695393910004482119}
+  - {fileID: 3102577403615037679}
   m_Father: {fileID: 5695393909381088472}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -874,7 +904,7 @@ MonoBehaviour:
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 4864
-  obstacleCheckOrigin: {fileID: 5695393910004482119}
+  obstacleCheckOrigin: {fileID: 3102577403615037679}
   obstacleViewDistance: 0.5
   blockingCollider: {fileID: 0}
   facingDirection: 
@@ -942,6 +972,11 @@ PrefabInstance:
       objectReference: {fileID: 5695393909381088478}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89001b91b94c7b848a2193788bc9d970, type: 3}
+--- !u!4 &8564930558064921730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4167699251900476095, guid: 89001b91b94c7b848a2193788bc9d970, type: 3}
+  m_PrefabInstance: {fileID: 5695393909495653949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1465410326187539865 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6583194448429161380, guid: 89001b91b94c7b848a2193788bc9d970, type: 3}
@@ -953,8 +988,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48aa6f546a7185d46b48bf25516b637c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &8564930558064921730 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4167699251900476095, guid: 89001b91b94c7b848a2193788bc9d970, type: 3}
-  m_PrefabInstance: {fileID: 5695393909495653949}
-  m_PrefabAsset: {fileID: 0}

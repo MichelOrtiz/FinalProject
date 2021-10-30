@@ -39,8 +39,13 @@ public class GladiatorCentaur : Enemy
 
     protected override void ChasePlayer()
     {
-        if (!pushedPlayer)
+        if (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge)
         {
+            animationManager.ChangeAnimation("idle_chase");
+        }
+        else if (!pushedPlayer)
+        {
+            animationManager.ChangeAnimation("chase");
             enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: true);
         }
     }
@@ -68,6 +73,10 @@ public class GladiatorCentaur : Enemy
             enemyTouched = eCollisionHandler.lastEnemyTouched;
             enemyTouched.Push(facingDirection == RIGHT? enemyPushForce.x : -enemyPushForce.x, enemyPushForce.y);
         }*/
+        if (rigidbody2d.velocity.magnitude == 0)
+        {
+            //animationManager.ChangeAnimation("idle");
+        }
         base.FixedUpdate();
     }
 
@@ -79,7 +88,6 @@ public class GladiatorCentaur : Enemy
     
     protected override void KnockbackEntity(Entity entity)
     {
-        if (rigidbody2d.velocity.magnitude == 0) return;
 
         if (entity == player)
         {

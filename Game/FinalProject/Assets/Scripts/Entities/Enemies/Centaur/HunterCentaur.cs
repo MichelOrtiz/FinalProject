@@ -13,8 +13,10 @@ public class HunterCentaur : Enemy
         {
             enemyMovement.StopMovement();
         }
-        if (curTimeBtwFlip > timeBtwFlip || groundChecker.isNearEdge)
+        if (curTimeBtwFlip > timeBtwFlip)
         {
+            animationManager.ChangeAnimation("search");
+            animationManager.SetNextAnimation("idle");
             ChangeFacingDirection();
             curTimeBtwFlip = 0;
         }
@@ -26,7 +28,6 @@ public class HunterCentaur : Enemy
 
     protected override void ChasePlayer()
     {
-        enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: false);
 
         if (timeBtwShot <= 0)
         {
@@ -42,7 +43,9 @@ public class HunterCentaur : Enemy
         {
             enemyMovement.Jump();
         }
-        
-        //rigidbody2d.position = Vector3.MoveTowards(GetPosition(), player.GetPosition(), chaseSpeed * Time.deltaTime);
+        else
+        {
+            enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: false);
+        }
     }
 }
