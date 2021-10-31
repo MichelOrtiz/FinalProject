@@ -47,25 +47,26 @@ public class PlayerInputs : MonoBehaviour
     private void Start() {
         intputLag = defaultInputLag;  
         checkLag = false;
-
-        
     }
-    private void OnEnable() {
-        movementX = 0;
-        movementY = 0;
-    }
+    
     void Update()
     {
+        if(!enabled){ 
+            movementX=0;
+            movementY=0;
+            jump=false;
+            return;
+        }
         //if (controlBinds == null) return;
         #region Right Left Up Dowm
-        if(Input.GetKey(controlBinds["MOVERIGHT"]) && this.enabled){
+        if(Input.GetKey(controlBinds["MOVERIGHT"])){
             if(intputLag > 0){   
                 StartCoroutine(ApplyInputLag(MovedRight));
             }else{
                 MovedRight?.Invoke();
             }
         }
-        else if(Input.GetKey(controlBinds["MOVELEFT"]) && this.enabled){
+        else if(Input.GetKey(controlBinds["MOVELEFT"])){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedLeft));
             }else{
@@ -76,7 +77,7 @@ public class PlayerInputs : MonoBehaviour
         else{
             movementX=0;
         }
-        if(Input.GetKey(controlBinds["MOVEUP"]) && this.enabled){
+        if(Input.GetKey(controlBinds["MOVEUP"])){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedUp));
             }else{
@@ -84,7 +85,7 @@ public class PlayerInputs : MonoBehaviour
             }  
             //movementY=1;
         }
-        else if(Input.GetKey(controlBinds["MOVEDOWN"]) && this.enabled){
+        else if(Input.GetKey(controlBinds["MOVEDOWN"])){
             if(intputLag > 0){
                 StartCoroutine(ApplyInputLag(MovedDown));
             }else{
@@ -192,13 +193,6 @@ public class PlayerInputs : MonoBehaviour
             
         }
         PlayerManager.instance.isAiming = false;
-    }
-    private void OnDisable() {
-        movementX=0;
-        movementY=0;
-        jump=false;
-        OpenInventory = false;
-        OpenMap = false;
     }
     IEnumerator ApplyInputLag(Action doLast){
         yield return new WaitForSeconds(intputLag);

@@ -6,8 +6,8 @@ using UnityEngine;
 public class Dialogue
 {
     public string name;
-    [TextArea(3, 10)]
-    public string[] sentences;
+    
+    [TextArea(5, 10)] public string[] sentences;
     public Dialogue(){
         name = "Empty";
         string[] s = {"Hola","Peter"};

@@ -106,7 +106,7 @@ public class PlayerManager : Entity
         /*animator.SetBool("Is Running", isRunning);
         animator.SetBool("Is Aiming", isAiming);*/
         isStruggling = false;
-        isWalking = inputs.movementX!=0 && isGrounded && !isRunning;
+        isWalking = inputs.movementX != 0 && isGrounded && !isRunning;
         //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < 0f;
         //UpdateAnimation();
@@ -233,7 +233,10 @@ public class PlayerManager : Entity
     {
         walkingSpeed = defaultwalkingSpeed * speedMods;
         if(!isRunning) currentSpeed = walkingSpeed;
-        if(!inputs.enabled)return;
+        if(!inputs.enabled){
+            rigidbody2d.velocity = new Vector2(0f, rigidbody2d.velocity.y);
+            return;
+            }
         if (isInIce)
         {
             rigidbody2d.AddForce(new Vector2(inputs.movementX * currentSpeed, rigidbody2d.velocity.y));
@@ -425,8 +428,13 @@ public class PlayerManager : Entity
     public void SetEnabledPlayer(bool value)
     {
         abilityManager.gameObject.SetActive(value);
-        if (inputs != null) inputs.enabled = value;
-        PlayerManager.instance.inputs.movementX = 0;
+        if (inputs != null) {
+            inputs.enabled = value;
+            if(!value){
+                inputs.movementX = 0;
+                inputs.movementY = 0;
+            }
+        }
     }
 
 

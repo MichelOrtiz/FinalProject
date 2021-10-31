@@ -38,14 +38,17 @@ public class InteractionTrigger : MonoBehaviour
         }
         NextInteraction();
     }
-    protected void NextInteraction(){
+    protected virtual void NextInteraction(){
         if(cola.Count == 0){
             Debug.Log("No hay mas interacciones");
             busy = false;
             return;
         }
         Interaction inter = cola.Dequeue();
-        if(inter == lastInter)return;
+        Debug.Log("Current interaction: " + inter.name);
+        if(inter.condition != null){
+            inter.condition.RestardValues(gameObject);
+        }
         inter.DoInteraction();
         lastInter = inter;
     }

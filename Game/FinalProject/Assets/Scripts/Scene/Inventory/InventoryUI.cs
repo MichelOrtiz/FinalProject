@@ -58,7 +58,7 @@ public class InventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerManager.instance.inputs.OpenInventory)
+        if (PlayerManager.instance.inputs.enabled && PlayerManager.instance.inputs.OpenInventory)
         {
             UI.SetActive(!UI.activeSelf);
             MapUI.instance.mapUI.SetActive(false);
