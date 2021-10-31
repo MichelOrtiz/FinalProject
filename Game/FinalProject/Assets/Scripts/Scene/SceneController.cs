@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections; 
 using TMPro;
+using FinalProject.Assets.Scripts.Utils.Sound;
+
 public class SceneController : MonoBehaviour
 {
     public Slider slider;
@@ -31,6 +33,7 @@ public class SceneController : MonoBehaviour
 
         
         //Debug.Log("Start scenecontroller");
+
     }
     public void LoadScene(int scene){
         prevScene = SceneManager.GetActiveScene().buildIndex;
@@ -38,10 +41,14 @@ public class SceneController : MonoBehaviour
         SceneChanged?.Invoke();
         //SceneManager.LoadScene(scene);
         StartCoroutine(LoadAsynchronously(scene));
+
+
+
     }
     public void Load(SaveFile partida){
         //Instantiate(playerPrefab);
         LoadScene(partida.sceneToLoad);
+
         
     }
 
@@ -60,6 +67,8 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
         loadingScreen.SetActive(false);
+
+
         //mainCanvas.SetActive(true);
     }
 }

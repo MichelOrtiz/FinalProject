@@ -11,17 +11,21 @@ namespace FinalProject.Assets.Scripts.Utils.Sound
         
         void Awake()
         {
-            if (instance == null)
+            instance = this;
+            /*if (instance == null)
             {
                 instance = this;
+                PlayMainTheme();
             }
             else
             {
+                instance.sounds = sounds;
+                instance.PlayMainTheme();
                 Destroy(gameObject);
                 return;
-            }
+            }*/
 
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
 
             foreach (var sound in sounds)
             {
@@ -32,6 +36,7 @@ namespace FinalProject.Assets.Scripts.Utils.Sound
                 sound.source.loop = sound.loop;
                 sound.source.outputAudioMixerGroup = sound.output;
             }    
+            PlayMainTheme();
         }
 
         public void Play(string name)
@@ -45,6 +50,17 @@ namespace FinalProject.Assets.Scripts.Utils.Sound
             {
                 Debug.LogWarning("Sound \"" +  name + "\" not found: check the name is correct");
             }
+        }
+
+        public void PlayMainTheme()
+        {
+            StopAll();
+            Play("Theme");
+        }
+
+        public void StopAll()
+        {
+            sounds.ForEach(s => s.source.Stop());
         }
     }
 }
