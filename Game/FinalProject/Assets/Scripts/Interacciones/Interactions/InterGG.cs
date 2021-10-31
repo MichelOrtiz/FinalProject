@@ -5,6 +5,7 @@ using UnityEngine;
 public class InterGG : Interaction
 {
     [SerializeField] Item giveItem;
+    [SerializeField] int cantidad = 1;
     public override void DoInteraction()
     {
         if(condition!=null){
@@ -18,7 +19,9 @@ public class InterGG : Interaction
         }
     }
     void GenerateAndGive(){
-        Inventory.instance.Add(giveItem);
+        for(int i=0;i < cantidad; i++){
+            Inventory.instance.Add(giveItem);
+        }
         onEndInteraction?.Invoke();
     }
 }

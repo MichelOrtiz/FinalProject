@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tutorial : IntRemoteTrigger
 {
     [SerializeField] WorldState isTutorialDone;
+    
     protected override void Start()
     {
         cola = new Queue<Interaction>();
@@ -19,6 +20,7 @@ public class Tutorial : IntRemoteTrigger
             partida.WorldStates.Add(isTutorialDone);
         }
     }
+    
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(triggerPoint.position, radius);
