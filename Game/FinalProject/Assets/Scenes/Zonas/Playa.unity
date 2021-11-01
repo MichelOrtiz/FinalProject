@@ -480,6 +480,17 @@ Transform:
   m_Father: {fileID: 798497645}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &474725095 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8884825812507710113, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+  m_PrefabInstance: {fileID: 1234639225}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1145d3ba8f4fce147bbbbec030fea747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &491931724
 GameObject:
   m_ObjectHideFlags: 0
@@ -38460,6 +38471,26 @@ PrefabInstance:
     - target: {fileID: 7202843420824588159, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353279227804784305, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353279227804784305, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353279227804784305, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 474725095}
+    - target: {fileID: 8353279227804784305, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBottonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353279227804784305, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MapSlot, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8502108929805694115, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_AnchorMax.y
