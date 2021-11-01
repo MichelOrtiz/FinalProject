@@ -43,6 +43,7 @@ public class DialogueManager : InteractionUI
         }
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
+        StartCoroutine(AudioManager.instance.SoundSpeakingLoop());
         StartCoroutine(TypeSentence(sentence));
     }
     IEnumerator TypeSentence (string sentence)
@@ -51,10 +52,12 @@ public class DialogueManager : InteractionUI
         foreach(char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            AudioManager.instance.Play("TextSFX");
-            yield return new WaitForSeconds(0.1f);
+
+            yield return new WaitForSeconds(0.01f);
         }
+        AudioManager.instance.isSpeaking = false;
     }
+    
     public void EndDialogue()
     {
         animator.SetBool("IsOpen", false);

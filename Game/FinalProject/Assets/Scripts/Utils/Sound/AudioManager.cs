@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace FinalProject.Assets.Scripts.Utils.Sound
 {
@@ -8,7 +9,7 @@ namespace FinalProject.Assets.Scripts.Utils.Sound
     {
         public List<Sound> sounds;
         public static AudioManager instance;
-        
+        public bool isSpeaking;
         void Awake()
         {
             instance = this;
@@ -38,7 +39,9 @@ namespace FinalProject.Assets.Scripts.Utils.Sound
             }    
             PlayMainTheme();
         }
-
+        private void Start() {
+            isSpeaking = false;
+        }
         public void Play(string name)
         {
             var sound = sounds.Find( s => s.name == name);
@@ -61,6 +64,17 @@ namespace FinalProject.Assets.Scripts.Utils.Sound
         public void StopAll()
         {
             sounds.ForEach(s => s.source.Stop());
+        }
+        public IEnumerator SoundSpeakingLoop(){
+            isSpeaking = true;
+            while(isSpeaking){
+                sounds[1].source.Stop();
+                sounds[1].source.clip = sounds[1].clip;
+                sounds[1].source.Play();
+                while(sounds[1].source.isPlaying){
+                    yield return null;
+                }
+            }
         }
     }
 }
