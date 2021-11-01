@@ -5,12 +5,14 @@ using UnityEngine;
 public class Invisible : Ability
 {
     public GameObject Atacado;
-
+    [SerializeField] SpriteRenderer sprite;
+    Color tmp;
     public override void UseAbility()
     {   
         if(player.currentStamina < staminaCost)return;
         player.isInvisible=true;
         base.UseAbility();
+        tmp = sprite.color;
     }
     protected override void Start()
     {
@@ -23,6 +25,7 @@ public class Invisible : Ability
         if (!isUnlocked)
         {
             this.enabled = false;
+
         }
         if (isInCooldown)
         {
@@ -38,13 +41,22 @@ public class Invisible : Ability
         }
         if (player.isInvisible)
         {
+            
+            if (sprite.color.a == 1)
+            {
+                sprite.color = new Color(1,1,1,.5f);
+            }
             player.gameObject.layer = LayerMask.NameToLayer("Invisible");
             player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Invisible");
             player.groundChecker.gameObject.layer = LayerMask.NameToLayer("Invisible");
             player.abilityManager.gameObject.layer = LayerMask.NameToLayer("Invisible");
             Atacado.gameObject.layer = LayerMask.NameToLayer("Invisible");
-        }else if(!player.isDodging)
+        }else
         {
+            if (sprite.color.a == .5)
+            {
+                sprite.color = new Color(1,1,1,1);
+            }
             player.gameObject.layer = LayerMask.NameToLayer("Default");
             if (!player.isImmune) player.collisionHandler.gameObject.layer = LayerMask.NameToLayer("Default");
             player.groundChecker.gameObject.layer = LayerMask.NameToLayer("Fake");
