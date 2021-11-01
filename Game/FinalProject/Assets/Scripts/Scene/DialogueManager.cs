@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FinalProject.Assets.Scripts.Utils.Sound;
 
 public class DialogueManager : InteractionUI
 {
@@ -50,7 +51,8 @@ public class DialogueManager : InteractionUI
         foreach(char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return null;
+            AudioManager.instance.Play("TextSFX");
+            yield return new WaitForSeconds(0.1f);
         }
     }
     public void EndDialogue()
