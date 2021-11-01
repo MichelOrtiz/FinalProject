@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UnpoweredWireBehaviour : MonoBehaviour
 {
-    public bool prueba = false;
     public UnpoweredWireStat unpoweredWireS;
     [SerializeField] private PoweredWireBehaviour poweredWireAttached;
     [SerializeField] private float checkRadius;
@@ -35,7 +34,6 @@ public class UnpoweredWireBehaviour : MonoBehaviour
         Debug.Log(gameObject + " Collision: " + collision);
         if (collision.GetComponent<PoweredWireStats>())
         {
-            prueba = true;
             PoweredWireStats poweredWireS = collision.GetComponent<PoweredWireStats>();
             if (poweredWireS.objectColor == unpoweredWireS.objectColor)
             {
