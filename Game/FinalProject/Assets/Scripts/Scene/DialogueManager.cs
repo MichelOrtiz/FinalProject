@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using FinalProject.Assets.Scripts.Utils.Sound;
 
 public class DialogueManager : InteractionUI
@@ -10,8 +11,8 @@ public class DialogueManager : InteractionUI
     public UIStatus status;
     private Queue<string> sentences;
     public Animator animator;
-    public Text nameText;
-    public Text dialogueText;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI dialogueText;
     private void Awake() {
         sentences = new Queue<string>();
     }
