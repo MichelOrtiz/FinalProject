@@ -508,6 +508,7 @@ public class PlayerManager : Entity
         isInDark = false;
         isInSnow = false;  
         isInIce = false;
+        statesManager.ClearAllStates();
         ResetAnimations();
     }
     #endregion
