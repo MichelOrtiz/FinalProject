@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 [CreateAssetMenu(fileName="New Item", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
@@ -15,12 +16,21 @@ public class Item : ScriptableObject
     public string descripcion = "Un objeto objetuoso";
     public Sprite icon = null;
     public bool isConsumable = true;
+    public bool isInCooldown = false;
     public virtual void Use(){
         if(!isConsumable)return;
-        //Debug.Log("Usando "+nombre);
+        if(isInCooldown){
+            Debug.Log("Objeto en cooldown");
+            return;
+        }
         RemoveFromInventory();
     }
     public virtual void RemoveFromInventory(){
         Inventory.instance.Remove(this);
+    }
+    public IEnumerator UndoCooldown(){
+        isInCooldown = true;
+        yield return new WaitForSeconds(15f);
+        isInCooldown = false;
     }
 }

@@ -196,4 +196,10 @@ public class StatesManager : MonoBehaviour
             }
         }
     }
+
+    public void ClearAllStates(){
+        foreach(State state in currentStates){
+            state.StopAffect();
+        }
+    }
 }
