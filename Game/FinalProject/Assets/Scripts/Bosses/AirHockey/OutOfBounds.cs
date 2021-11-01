@@ -10,7 +10,6 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey
         public AIScript aIScript;
         public void OnTriggerEnter2D(Collider2D other){
             if (other.tag == "Spit"){
-                Debug.Log("Centracion");    
                 puckScript.CenterPuck();
                 airHockeyPlayerMovement.CenterPosition();
                 aIScript.CenterPosition();

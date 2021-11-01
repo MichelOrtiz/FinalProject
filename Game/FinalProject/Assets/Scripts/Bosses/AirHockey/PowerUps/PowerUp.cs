@@ -52,7 +52,6 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey.PowerUps
                     break;
             }
         }
-        protected abstract void Affect();
         public virtual void StopAffect()
         {
             StoppedAffect?.Invoke();
