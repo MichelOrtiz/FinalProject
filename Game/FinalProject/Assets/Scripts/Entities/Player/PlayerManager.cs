@@ -508,6 +508,7 @@ public class PlayerManager : Entity
         isInDark = false;
         isInSnow = false;  
         isInIce = false;
+        gameObject.GetComponent<SpriteRenderer>().color= new Color(1,1,1,1);
         ResetAnimations();
     }
     #endregion
