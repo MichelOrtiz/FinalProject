@@ -32,10 +32,9 @@ public class CameraFollow : MonoBehaviour
 
     private float xTarget, yTarget;
     private Vector3 target;
-
-
     private Vector3 velocity = Vector3.zero;
-
+    public bool isCinematic;
+    public Vector3 cinematicTarget;
     void Awake()
     {
         if (camera1)
@@ -58,6 +57,7 @@ public class CameraFollow : MonoBehaviour
         camera = GetComponent<Camera>();
         player = PlayerManager.instance;
         camBox = GetComponent<BoxCollider2D>();
+        isCinematic = false;
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         FindLimits();
         foreach (var bound in boundaries)
@@ -126,10 +126,16 @@ public class CameraFollow : MonoBehaviour
         }
     }
     void FindTarget(){
-        xTarget = camBox.size.x < targetBounds.Bounds.size.x ? Mathf.Clamp(player.GetPosition().x, targetBounds.Bounds.min.x + camBox.size.x/2, targetBounds.Bounds.max.x - camBox.size.x/2) : 
+        if(isCinematic){
+            xTarget = cinematicTarget.x;
+            yTarget = cinematicTarget.y;
+        }else{
+            xTarget = camBox.size.x < targetBounds.Bounds.size.x ? Mathf.Clamp(player.GetPosition().x, targetBounds.Bounds.min.x + camBox.size.x/2, targetBounds.Bounds.max.x - camBox.size.x/2) : 
             (targetBounds.Bounds.min.x + targetBounds.Bounds.max.x)/2;
-        yTarget = camBox.size.y < targetBounds.Bounds.size.y ? Mathf.Clamp(player.GetPosition().y, targetBounds.Bounds.min.y + camBox.size.y/2, targetBounds.Bounds.max.y - camBox.size.y/2) : 
+            yTarget = camBox.size.y < targetBounds.Bounds.size.y ? Mathf.Clamp(player.GetPosition().y, targetBounds.Bounds.min.y + camBox.size.y/2, targetBounds.Bounds.max.y - camBox.size.y/2) : 
             (targetBounds.Bounds.min.y + targetBounds.Bounds.max.y)/2;
+        }
+        
         target = new Vector3(xTarget, yTarget, -10F);
         //transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
         //transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, Time.deltaTime * speed);
