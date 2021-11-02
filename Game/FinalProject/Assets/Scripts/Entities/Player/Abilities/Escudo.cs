@@ -48,9 +48,16 @@ public class Escudo : Ability
             }
         }else
         {
-            if (player.statesManager.currentStates.Exists(x=>x.name == inmuniScudo.name))
+            
+            try
             {
-                player.statesManager.RemoveState(inmuniScudo);
+                 if (player.statesManager.currentStates.Exists(x=>x.name == inmuniScudo.name))
+                {
+                    player.statesManager.RemoveState(inmuniScudo);
+                }
+            }
+            catch (System.Exception)
+            {
             }
         }
         if (Input.GetKeyDown(hotkey))

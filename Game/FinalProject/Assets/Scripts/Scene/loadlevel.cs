@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class loadlevel : MonoBehaviour
 {
+    public StatesManager statesManager;
     public int iLevelToLoad;
     public int noDoor = 1;
     [SerializeField]protected Transform loadPosition;
@@ -73,6 +74,7 @@ public class loadlevel : MonoBehaviour
         //Camera.instance.gameObject.SetActive(true);
     }
     protected void RestoreValuesForOtherScene(){
+        //statesManager.ClearAllStates();
         PlayerManager.instance.walkingSpeed = PlayerManager.defaultwalkingSpeed;
         PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
         PlayerManager.instance.isInWater = false;

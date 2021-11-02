@@ -42,6 +42,10 @@ public class SpeedMultiplier : State
                     player.isInIce = true;
                     break;
                 }
+                case Hazard.Agua:{
+                    player.isInWater = true;
+                    break;
+                }
                 default:{
                     break;
                 }
@@ -81,6 +85,10 @@ public class SpeedMultiplier : State
                 }
                 case Hazard.Hielo:{
                     player.isInIce = false;
+                    break;
+                }
+                case Hazard.Agua:{
+                    player.isInWater = false;
                     break;
                 }
                 default:{
