@@ -21,19 +21,8 @@ public class Tutorial : IntRemoteTrigger
         }
     }
     protected override void NextInteraction(){
-        if(cola.Count == 0){
-            Debug.Log("No hay mas interacciones");
-            Destroy(gameObject);
-            busy = false;
-            return;
-        }
-        Interaction inter = cola.Dequeue();
-        Debug.Log("Current interaction: " + inter.name);
-        if(inter.condition != null){
-            inter.condition.RestardValues(gameObject);
-        }
-        inter.DoInteraction();
-        lastInter = inter;
+        base.NextInteraction();
+        if(cola.Count == 0) Destroy(gameObject);
     }
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.magenta;

@@ -31,12 +31,12 @@ public class InterCameraMov : Interaction
         onEndInteraction?.Invoke();
     }
     void Countdown(){
-        if(countdown <= 0 && whenEnd == null){
+        if(countdown <= 0){
             cam.cinematicTarget = PlayerManager.instance.GetPosition();
             cam.isCinematic = false;
             gameObject.GetComponent<InteractionTrigger>().updateForInteractions -= Countdown;
             Debug.Log("Coutdown ended");
-        }else{
+        }else if(whenEnd == null){
             countdown -= Time.deltaTime;
         }
         if(!gameObject.GetComponent<InteractionTrigger>().busy){
@@ -44,6 +44,13 @@ public class InterCameraMov : Interaction
         }
         if(whenEnd != null && whenEnd.isDone){
             countdown = 0;
+        }
+    }
+    public override void RestardCondition()
+    {
+        base.RestardCondition();
+        if(whenEnd != null){
+            whenEnd.RestardValues(gameObject);
         }
     }
 }

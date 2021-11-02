@@ -6,7 +6,18 @@ public class InteractionTrigger : MonoBehaviour
 {
     [SerializeField] protected List<Interaction> interactions;
     protected Queue<Interaction> cola;
-    protected Interaction lastInter;
+    public Interaction currentInter;
+    public Interaction lastInter { 
+            get{
+                if(currentInter==null) return null;
+                int i = interactions.FindIndex( x => x == currentInter);
+                if(i > 0){
+                    return interactions[i-1];
+                }else{
+                    return null;
+                }
+            } 
+        }
     [SerializeField] protected float radius;
     protected float distance;
     public bool busy;
@@ -30,10 +41,7 @@ public class InteractionTrigger : MonoBehaviour
         {
             inter.onEndInteraction += NextInteraction;
             inter.gameObject = this.gameObject;
-            if(inter.condition != null){
-                inter.condition.RestardValues(gameObject);
-            }
-            
+            inter.RestardCondition();
             cola.Enqueue(inter);
         }
         NextInteraction();
@@ -45,12 +53,10 @@ public class InteractionTrigger : MonoBehaviour
             return;
         }
         Interaction inter = cola.Dequeue();
-        Debug.Log("Current interaction: " + inter.name);
-        if(inter.condition != null){
-            inter.condition.RestardValues(gameObject);
-        }
+        currentInter = inter;
+        Debug.Log("Current interaction: " + currentInter.name);
+        inter.RestardCondition();
         inter.DoInteraction();
-        lastInter = inter;
     }
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.magenta;

@@ -10,6 +10,9 @@ public abstract class Interaction : ScriptableObject {
     public delegate void OnEndInteraction();
     public OnEndInteraction onEndInteraction;    
     public abstract void DoInteraction();
+    public virtual void RestardCondition(){
+        if(condition != null) condition.RestardValues(gameObject);
+    }
 }
 
 
