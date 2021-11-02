@@ -260,7 +260,6 @@ MonoBehaviour:
   collisionHandler: {fileID: 4912847326714027527}
   physics: {fileID: 0}
   emotePos: {fileID: 3353582841347878283}
-  effectOnPlayer: {fileID: 11400000, guid: 4c22bfd67c6572543a94cf2731a50266, type: 2}
   damageAmount: 40
   staminaPunish: 10
   colorWhenHit: {r: 0.7529412, g: 0.11372549, b: 0.05882353, a: 1}
@@ -279,7 +278,7 @@ MonoBehaviour:
   projectileShooter: {fileID: 3703096314818104227}
   timeBtwShot: 0.25
   timeMod: 0.75
-  timeToChangeRotation: 5
+  timeToChangeRotation: 3.5
 --- !u!1 &4912847326158715067
 GameObject:
   m_ObjectHideFlags: 0
@@ -10320,6 +10319,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4690660590625237830, guid: 9fe37f48a9f628f47807f58a3072858e, type: 3}
   shotPos: {fileID: 4912847327136516643}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 0
   rotate: 1
   center: {fileID: 4912847327068073870}
   startingAngle: 0

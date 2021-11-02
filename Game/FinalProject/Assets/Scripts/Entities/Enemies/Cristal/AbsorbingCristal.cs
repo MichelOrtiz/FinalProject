@@ -85,6 +85,8 @@ public class AbsorbingCristal : Enemy
     {
         SetActiveDarkness(true);
         ChangeSpriteColor(defaultColor);
+
+        animationManager.ChangeAnimation("idle");
     }
 
     protected override void ChasePlayer()
@@ -110,6 +112,7 @@ public class AbsorbingCristal : Enemy
             if (isGrounded)
             {
                 enemyMovement.Translate(rigidbody2d.transform.right * 2f, chasing: true);
+                animationManager.ChangeAnimation("walk");
             }
         }
         else
@@ -123,6 +126,8 @@ public class AbsorbingCristal : Enemy
         if (groundChecker.isNearEdge)
         {
             enemyMovement.Jump();
+            animationManager.ChangeAnimation("jump");
+
         }
     }
 

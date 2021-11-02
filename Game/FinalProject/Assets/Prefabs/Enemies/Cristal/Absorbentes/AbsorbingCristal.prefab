@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 7221298447464003440}
   - component: {fileID: 7221298447464003443}
   - component: {fileID: 7221298447464003442}
+  - component: {fileID: 888810106228459496}
   m_Layer: 10
   m_Name: SpriteFx
   m_TagString: Untagged
@@ -138,12 +139,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 12
-  m_Sprite: {fileID: 21300000, guid: cb66d96618433ec478a176c8d91eba99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 937de965e0662c3449c35aa7262aa420, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8, y: 8}
+  m_Size: {x: 4.6, y: 3.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -159,7 +160,7 @@ Animator:
   m_GameObject: {fileID: 7221298447464003445}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 41e1bee51a604394792466f8971db9a4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -168,6 +169,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &888810106228459496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7221298447464003445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 7221298447796802833}
+  animator: {fileID: 7221298447464003442}
+  previousState: 
+  currentState: 
+  nextState: 
+  nextStateEnabled: 0
 --- !u!1 &7221298447474621031
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7221298447474621031}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14, y: -2.082, z: 0}
+  m_LocalPosition: {x: 0.14, y: -1.575, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 7221298449038501278}
@@ -237,7 +256,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1309433, y: 0.74652576}
+  m_Offset: {x: -0.1309433, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -248,7 +267,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.77033997, y: 1.247755}
+  m_Size: {x: 0.77033997, y: 0.7001076}
   m_EdgeRadius: 0
 --- !u!1 &7221298447582546675
 GameObject:
@@ -397,7 +416,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 7221298447464003442}
-  animationManager: {fileID: 0}
+  animationManager: {fileID: 888810106228459496}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 7221298447474621028}
@@ -407,11 +426,8 @@ MonoBehaviour:
   enemyType: 4
   enemyName: 0
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 0
+  punishDamage: 0
   atackEffect: {fileID: 0}
   canKnockbackPlayer: 0
   knockbackAngle: 0
@@ -487,6 +503,9 @@ MonoBehaviour:
   jumpForce: {x: 3, y: 4}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 7221298447474621028}
   collisionHandler: {fileID: 0}
   fieldOfView: {fileID: 7221298448172092058}

@@ -24,6 +24,8 @@ public abstract class GnomeFov : MonoBehaviour
     protected Vector2 lastPosition;
     int index = 0;
 
+    [SerializeField] private LayerMask whatIsPlatform;
+
     protected abstract void Move();
 
     protected void Start()
@@ -81,7 +83,7 @@ public abstract class GnomeFov : MonoBehaviour
 
     protected bool IsNearEdge()
     {
-        return !FieldOfView.RayHitObstacle(groundCheck.position, groundCheck.position - groundCheck.up * 1f, LayerMask.NameToLayer("Platforms"));
+        return !FieldOfView.RayHitObstacle(groundCheck.position, groundCheck.position - groundCheck.up * 1f, whatIsPlatform);
     }
 
     protected void Attack()

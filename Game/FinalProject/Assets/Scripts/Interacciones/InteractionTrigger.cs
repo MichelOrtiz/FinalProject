@@ -9,7 +9,7 @@ public class InteractionTrigger : MonoBehaviour
     protected Interaction lastInter;
     [SerializeField] protected float radius;
     protected float distance;
-    protected bool busy;
+    public bool busy;
     public delegate void RunInUpdate();
     public RunInUpdate updateForInteractions;
     protected virtual void Start()
