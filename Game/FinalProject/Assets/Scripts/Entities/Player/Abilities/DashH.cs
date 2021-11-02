@@ -23,6 +23,10 @@ public class DashH : Ability
         prevGravity = body.gravityScale;
         body.gravityScale = 0;
         body.velocity = new Vector2(0f,0f);
+        if (player.abilityManager.IsUnlocked(Abilities.DodgePerfecto))
+        {
+            player.SetImmune(duration);
+        }
     }
 
 

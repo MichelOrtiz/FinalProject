@@ -10,7 +10,7 @@ public class Rafaga : Ability
     private Spore spore;
     [SerializeField] private float empuje;
     private List<Enemy> enemies;
-
+    [SerializeField] KnockbackState push;
     public override void UseAbility()
     {   
         if(player.currentStamina < staminaCost)return;
@@ -49,7 +49,7 @@ public class Rafaga : Ability
         }else
         {
             parti.SetActive(false);
-            if (enemies != null)
+            /*if (enemies != null)
             {
                 foreach (var enemy in enemies)
                 {
@@ -58,7 +58,7 @@ public class Rafaga : Ability
                         enemy.GetComponent<Rigidbody2D>().velocity = new Vector2();
                     }
                 }
-            }
+            }*/
         }
         if (Input.GetKeyDown(hotkey))
         {
@@ -69,15 +69,14 @@ public class Rafaga : Ability
         }
     }
     void spore_ParticleCollision(GameObject other){
+        
         if(other.TryGetComponent<Enemy>(out Enemy enemy)){
-            enemies.Add(enemy);
-            if (player.facingDirection == "left")
+            var knockback = Instantiate(push);
+            if (player.facingDirection == enemy.facingDirection)
             {
-                enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.left * empuje);
-            }else if (player.facingDirection == "right")
-            {
-                enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.right * empuje);
+                    knockback.angle += 180;
             }
+            enemy.statesManager.AddState(knockback);
         }   
     }
 }

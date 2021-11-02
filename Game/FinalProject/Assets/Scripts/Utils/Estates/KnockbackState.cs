@@ -3,7 +3,7 @@ using UnityEngine;
 public class KnockbackState : State
 {
     [Range(0, 360)]
-    [SerializeField] private float angle;
+    [SerializeField] public float angle;
     [SerializeField] private float force;
 
     public override void StartAffect(StatesManager newManager)

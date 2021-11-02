@@ -398,6 +398,13 @@ public class PlayerManager : Entity
     {
         statesManager.AddStateDontRepeat(inmunityState);
     }
+    public void SetImmune(float time)
+    {
+        var inmun = Instantiate(inmunityState);
+        inmun.duration = time;
+        statesManager.AddStateDontRepeat(inmun);
+
+    }
 /*
     private void OnLevelWasLoaded(int level){
         base.Start();

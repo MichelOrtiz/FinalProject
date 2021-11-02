@@ -7,6 +7,7 @@ public class Escudo : Ability
     public GameObject Escudobj;
     public bool isInShield;
     public float staminaActual;
+    [SerializeField] State inmuniScudo;
 
     public override void UseAbility()
     {   
@@ -41,13 +42,16 @@ public class Escudo : Ability
         }
         if (isInShield)
         {
-            Escudobj.gameObject.GetComponent<CircleCollider2D>().enabled = true;
-            player.currentStamina = staminaActual;
-            //player.abilityManager.escudo.gameObject.GetComponent<CircleCollider2D>().enabled = true;
+            if (!player.statesManager.currentStates.Exists(x=>x.name == inmuniScudo.name))
+            {
+                player.statesManager.AddState(inmuniScudo);
+            }
         }else
         {
-            Escudobj.gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            //player.abilityManager.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            if (player.statesManager.currentStates.Exists(x=>x.name == inmuniScudo.name))
+            {
+                player.statesManager.RemoveState(inmuniScudo);
+            }
         }
         if (Input.GetKeyDown(hotkey))
         {

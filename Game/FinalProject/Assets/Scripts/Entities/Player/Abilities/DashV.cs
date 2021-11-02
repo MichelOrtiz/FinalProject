@@ -25,6 +25,10 @@ public class DashV : Ability
         body.velocity = new Vector2(0f,0f);
         isInCooldown = true;
         player.isJumping = true;
+        if (player.abilityManager.IsUnlocked(Abilities.DodgePerfecto))
+        {
+            player.SetImmune(duration);
+        }
     }
 
     protected override void Start()
