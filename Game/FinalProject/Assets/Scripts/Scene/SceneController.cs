@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Collections; 
 using TMPro;
 using FinalProject.Assets.Scripts.Utils.Sound;
+using FinalProject.Assets.Scripts.Scene;
 
 public class SceneController : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class SceneController : MonoBehaviour
     public onSceneChange SceneChanged;
     public static SceneController instance;
 
+
+    private SceneTitle sceneTitle;
+
     private void Awake() {
         if(instance == null) instance = this;
         else if (instance != this) Destroy(this);
@@ -31,11 +35,13 @@ public class SceneController : MonoBehaviour
         currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneChanged?.Invoke();
 
-        
+        sceneTitle = FindObjectOfType<SceneTitle>();
         //Debug.Log("Start scenecontroller");
 
     }
     public void LoadScene(int scene){
+        sceneTitle?.gameObject?.SetActive(false);
+
         prevScene = SceneManager.GetActiveScene().buildIndex;
         currentScene = scene;
         SceneChanged?.Invoke();
@@ -57,6 +63,7 @@ public class SceneController : MonoBehaviour
     IEnumerator LoadAsynchronously (int sceneInd)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneInd);
+
         loadingScreen.SetActive(true);
         //mainCanvas.SetActive(false);
         while (!operation.isDone)
@@ -67,6 +74,8 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
         loadingScreen.SetActive(false);
+        
+        sceneTitle = FindObjectOfType<SceneTitle>();
 
 
         //mainCanvas.SetActive(true);

@@ -10,7 +10,5 @@ namespace FinalProject.Assets.Scripts.Scene
         {
             text.text = title;
         }
-
-        
     }
 }
