@@ -28,10 +28,7 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey.PowerUps
             instantiated = Instantiate(smoke, position, smoke.transform.rotation);
             
         }
-        protected override void Affect()
-        {
-            return;
-        }
+        
 
 
         public override void StopAffect()

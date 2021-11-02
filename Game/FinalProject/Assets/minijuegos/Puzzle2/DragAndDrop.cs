@@ -55,7 +55,4 @@ public class DragAndDrop : MasterMinigame
             }
         }
     }
-    void CosasAlGanar(){
-
-    }
 }

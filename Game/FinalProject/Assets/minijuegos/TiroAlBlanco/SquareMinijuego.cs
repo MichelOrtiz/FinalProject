@@ -12,7 +12,6 @@ public class SquareMinijuego : MonoBehaviour
     [SerializeField] Vector2 rotation;
     int speed;
     Rigidbody2D Body;
-    private int score;
     public int dif;
 
     void Start()

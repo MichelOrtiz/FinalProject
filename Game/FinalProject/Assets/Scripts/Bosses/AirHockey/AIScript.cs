@@ -7,7 +7,6 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey
     public class AIScript : MonoBehaviour
     {
         [Header("References")]
-        public GameObject PuckGO;
         private Rigidbody2D rb;
         private Vector2 startingPosition;
         public Rigidbody2D Puck;
@@ -36,12 +35,7 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey
 
         [Header("Speed")]
         public float aIMaxMovementSpeed = 30;
-        [SerializeField] private float returnSpeed, returnSpeedMod;
-
-
-
-
-        public ScoreScript scoreScript;
+        [SerializeField] private float returnSpeed;
 
         private void Start(){
             rb = GetComponent<Rigidbody2D>();
@@ -50,7 +44,7 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey
                                         PlayerBoundaryHolder.GetChild(1).position.y,
                                         PlayerBoundaryHolder.GetChild(2).position.x,
                                         PlayerBoundaryHolder.GetChild(3).position.x);
-            playerBoundary = new Boundary(PuckBoundaryHolder.GetChild(0).position.y,
+            playerBoundary = new Boundary(PuckBoundaryHolder.GetChild(0).position.y,//weird
                                         PuckBoundaryHolder.GetChild(1).position.y,
                                         PuckBoundaryHolder.GetChild(2).position.x,
                                         PuckBoundaryHolder.GetChild(3).position.x);

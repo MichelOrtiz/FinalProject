@@ -8,6 +8,10 @@ public class ItemGiveStatus : ItemStamina
 
     public override void Use()
     {
+        if(isInCooldown){
+            Debug.Log("Objeto en cooldown");
+            return;
+        }
         base.Use();
         PlayerManager.instance.statesManager.AddState(statusForPlayer);
     }

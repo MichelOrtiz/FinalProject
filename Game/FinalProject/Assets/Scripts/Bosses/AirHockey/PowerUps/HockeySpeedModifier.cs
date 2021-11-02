@@ -24,10 +24,7 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey.PowerUps
                     break;
             }
         }
-        protected override void Affect()
-        {
-            return;
-        }
+        
 
 
         public override void StopAffect()

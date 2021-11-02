@@ -5972,7 +5972,7 @@ GameObject:
   - component: {fileID: 1533819169538553012}
   - component: {fileID: 1814029372052625239}
   - component: {fileID: 447332426354923146}
-  - component: {fileID: 1031731497466114772}
+  - component: {fileID: 5818888678663339838}
   - component: {fileID: 936999293969563206}
   - component: {fileID: 5857950921813008133}
   - component: {fileID: 1587736591}
@@ -6030,7 +6030,6 @@ MonoBehaviour:
   isPasive: 1
   description: 
   cooldownTime: 0.0625
-  hotkey: 304
   staminaCost: 0.625
   duration: 0
   isInCooldown: 0
@@ -6056,14 +6055,12 @@ MonoBehaviour:
   isPasive: 1
   description: 
   cooldownTime: 2
-  hotkey: 100
-  staminaCost: 20
+  staminaCost: 10
   duration: 0.25
   isInCooldown: 1
   abilityName: 2
   isUnlocked: 0
   body: {fileID: 3829738358529845164}
-  altHotkey: 97
   doubleTimeTap: 0.5
   movimiento: 15
   speed: 100
@@ -6083,14 +6080,12 @@ MonoBehaviour:
   isPasive: 1
   description: 
   cooldownTime: 2
-  hotkey: 119
-  staminaCost: 60
+  staminaCost: 15
   duration: 0.25
   isInCooldown: 0
   abilityName: 7
   isUnlocked: 0
   body: {fileID: 3829738358529845164}
-  altHotkey: 115
   doubleTimeTap: 0.5
   movimiento: 10
   speed: 50
@@ -6110,7 +6105,6 @@ MonoBehaviour:
   isPasive: 1
   description: 
   cooldownTime: 0
-  hotkey: 32
   staminaCost: 0
   duration: 0
   isInCooldown: 0
@@ -6135,7 +6129,6 @@ MonoBehaviour:
   isPasive: 0
   description: 
   cooldownTime: 0
-  hotkey: 303
   staminaCost: 0
   duration: 0
   isInCooldown: 0
@@ -6157,7 +6150,6 @@ MonoBehaviour:
   isPasive: 1
   description: useless ...
   cooldownTime: 0
-  hotkey: 0
   staminaCost: 0
   duration: 0
   isInCooldown: 0
@@ -6180,7 +6172,6 @@ MonoBehaviour:
   isPasive: 1
   description: 
   cooldownTime: 0.0625
-  hotkey: 256
   staminaCost: 1
   duration: 0
   isInCooldown: 0
@@ -6201,15 +6192,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
   isPasive: 0
-  description: 
+  description: Vuelve al Nico transparente, haciendo que no pueda ser detectado,
+    pero, ojos que no ven, cuerpo que si siente 7w7
   cooldownTime: 10
-  hotkey: 257
   staminaCost: 15
   duration: 5
   isInCooldown: 0
   abilityName: 0
-  isUnlocked: 0
+  isUnlocked: 1
   Atacado: {fileID: 603629796347817875}
+  sprite: {fileID: 3829738358529845138}
 --- !u!114 &1899013230873059424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6226,7 +6218,6 @@ MonoBehaviour:
   isPasive: 0
   description: 
   cooldownTime: 5
-  hotkey: 258
   staminaCost: 25
   duration: 5
   isInCooldown: 0
@@ -6235,6 +6226,7 @@ MonoBehaviour:
   Escudobj: {fileID: 2648981663275236285}
   isInShield: 0
   staminaActual: 0
+  inmuniScudo: {fileID: 0}
 --- !u!114 &1533819169538553012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6251,7 +6243,6 @@ MonoBehaviour:
   isPasive: 0
   description: 
   cooldownTime: 5
-  hotkey: 259
   staminaCost: 20
   duration: 0
   isInCooldown: 0
@@ -6261,6 +6252,7 @@ MonoBehaviour:
   parti: {fileID: 960247108246901055}
   isActivated: 0
   empuje: 2000
+  push: {fileID: 0}
 --- !u!114 &1814029372052625239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6277,7 +6269,6 @@ MonoBehaviour:
   isPasive: 1
   description: 
   cooldownTime: 0
-  hotkey: 0
   staminaCost: 0
   duration: 0
   isInCooldown: 0
@@ -6301,14 +6292,13 @@ MonoBehaviour:
   isPasive: 1
   description: 
   cooldownTime: 0
-  hotkey: 0
   staminaCost: 0
   duration: 0
   isInCooldown: 0
   abilityName: 5
   isUnlocked: 0
   IsOverlording: 0
---- !u!114 &1031731497466114772
+--- !u!114 &5818888678663339838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6317,24 +6307,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3829738360394267735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c9b16ef29a39b94ca98cbd2fd6b1f4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 50c42a8f044051e4ca2fd46d8ca2070e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconAbility: {fileID: 21300000, guid: 3de50dc9a35612745a0b7e6185b567bf, type: 3}
-  isPasive: 0
-  description: Esto va a cambiar
-  cooldownTime: 3
-  hotkey: 263
-  staminaCost: 5
-  duration: 0.25
+  isPasive: 1
+  description: 
+  cooldownTime: 0
+  staminaCost: 0
+  duration: 0
   isInCooldown: 0
   abilityName: 11
-  isUnlocked: 0
-  body: {fileID: 3829738358529845164}
-  nico: {fileID: 3829738358529845160}
-  Atacado: {fileID: 603629796347817875}
-  movimiento: 0.1
-  speed: 100000
+  isUnlocked: 1
 --- !u!114 &936999293969563206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6351,7 +6335,6 @@ MonoBehaviour:
   isPasive: 1
   description: 
   cooldownTime: 0
-  hotkey: 0
   staminaCost: 0
   duration: 0
   isInCooldown: 0
@@ -6374,7 +6357,6 @@ MonoBehaviour:
   isPasive: 1
   description: 
   cooldownTime: 0
-  hotkey: 0
   staminaCost: 0
   duration: 0
   isInCooldown: 0
