@@ -180,9 +180,7 @@ public class PlayerManager : Entity
         if(DeathActive){
             if (currentStamina < 1 || currentOxygen < 1)
             {
-                if(!isDeath){
-                    WhenHeDied();
-                }
+                WhenHeDied();
             }
         }
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -424,14 +422,15 @@ public class PlayerManager : Entity
     }*/
     void WhenHeDied()
     {
-        
+        if(isDeath) return;
         Debug.Log("ImdeadTnx4EvEr");
         if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
             isDeath = true;
-            SceneController.instance.prevScene = 34; //Cambiar si int Scene main menu cambia
-            Debug.Log("hi");
             SceneController.instance.SceneChanged += RestoreValuesForDead;
-            SceneController.instance.Load(SaveFilesManager.instance.currentSaveSlot);
+            string path = Application.dataPath + "/Partida" + SaveFilesManager.instance.currentSaveSlot.slotFile;
+            SaveFile newPartida = SaveFilesManager.instance.LoadSaveFile(path);
+            SaveFilesManager.instance.currentSaveSlot = newPartida;
+            SceneController.instance.Load(newPartida);
         }
 
     }
@@ -516,6 +515,7 @@ public class PlayerManager : Entity
         currentGravity = defaultGravity;
         currentStamina = maxStamina;
         currentOxygen = maxOxygen;
+        speedMods = 1f;
         isInWater = false;
         isInDark = false;
         isInSnow = false;  

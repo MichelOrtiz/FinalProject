@@ -203,7 +203,7 @@ public class StatesManager : MonoBehaviour
     public void ClearAllStates(){
         foreach(State state in currentStates){
             RemoveState(state);
-            state.StopAffect();
+            //state.StopAffect();
         }
     }
 }
