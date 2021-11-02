@@ -33,6 +33,8 @@ public class GiantCactus : Enemy
         Item itemChosen = RandomGenerator.MatchedElement<Item>(itemProbabilities);
 
         Inventory.instance.Add(itemChosen);
+        animationManager.ChangeAnimation("shy");
+        
         base.Attack();
     }
 

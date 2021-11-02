@@ -424,7 +424,7 @@ MonoBehaviour:
   fovOrigin: {fileID: 8905826360894656660}
   fovType: 1
   fovAngle: 0
-  viewDistance: 3.5
+  viewDistance: 5
   blockFov: 0
   layerMask:
     serializedVersion: 2
@@ -433,7 +433,7 @@ MonoBehaviour:
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 4864
+    m_Bits: 4352
   obstacleCheckOrigin: {fileID: 8905826360249868720}
   obstacleViewDistance: 1.5
   blockingCollider: {fileID: 0}
@@ -556,6 +556,9 @@ MonoBehaviour:
   jumpForce: {x: 3, y: 4}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 8905826359955445250}
   collisionHandler: {fileID: 8905826360772726491}
   fieldOfView: {fileID: 8905826360248063949}
@@ -765,11 +768,8 @@ MonoBehaviour:
   enemyType: 4
   enemyName: 58
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 0
+  punishDamage: 0
   atackEffect: {fileID: 0}
   canKnockbackPlayer: 0
   knockbackAngle: 15
@@ -893,6 +893,16 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: 5faf4e910337d6b4d8f0c4ef83123897, type: 3}
   shotPos: {fileID: 8905826359806112872}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 0
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!1001 &8905826359585098619
 PrefabInstance:
   m_ObjectHideFlags: 0
