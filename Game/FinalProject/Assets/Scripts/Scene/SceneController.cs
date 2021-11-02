@@ -44,7 +44,7 @@ public class SceneController : MonoBehaviour
 
         prevScene = SceneManager.GetActiveScene().buildIndex;
         currentScene = scene;
-        SceneChanged?.Invoke();
+        //SceneChanged?.Invoke();
         //SceneManager.LoadScene(scene);
         StartCoroutine(LoadAsynchronously(scene));
 
@@ -54,8 +54,6 @@ public class SceneController : MonoBehaviour
     public void Load(SaveFile partida){
         //Instantiate(playerPrefab);
         LoadScene(partida.sceneToLoad);
-
-        
     }
 
 
@@ -76,8 +74,7 @@ public class SceneController : MonoBehaviour
         loadingScreen.SetActive(false);
         
         sceneTitle = FindObjectOfType<SceneTitle>();
-
-
+        SceneChanged?.Invoke();
         //mainCanvas.SetActive(true);
     }
 }

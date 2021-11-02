@@ -9,6 +9,8 @@ namespace Minimap{
         private void Awake()
         {
             instance = this;
+            DontDestroyOnLoad(this);
+            instance?.gameObject?.SetActive(true);
         }
         private void Update()
         {
@@ -19,11 +21,16 @@ namespace Minimap{
         }
         public void Show()
         {
+            if (instance==null)
+            {
+                instance = this;
+            }
             instance?.gameObject?.SetActive(true);
         }
         public void Hide()
         {            
             instance?.gameObject?.SetActive(false);
         }
+        
     }
 }

@@ -24,7 +24,7 @@ public class WaterPhysics : MonoBehaviour
         if (collisionGameObject.tag == "Player")
         {
             player.currentGravity = .5f;
-            player.isInWater = true;
+            //player.isInWater = true;
             //player.walkingSpeed = 3.5f;
             player.statesManager.AddState(waterSlowState);
         }
@@ -34,7 +34,7 @@ public class WaterPhysics : MonoBehaviour
         if (collisionGameObject.tag == "Player")
         {
             player.currentGravity = .5f;
-            player.isInWater = true;
+            //player.isInWater = true;
             //player.walkingSpeed = 3.5f;
             player.statesManager.AddState(waterSlowState);
         }
@@ -44,7 +44,7 @@ public class WaterPhysics : MonoBehaviour
         if (collisionGameObject.tag == "Player")
         {
             player.currentGravity = PlayerManager.defaultGravity;
-            player.isInWater = false;
+            //player.isInWater = false;
             //player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
             player.statesManager.RemoveState(waterSlowState);
         }

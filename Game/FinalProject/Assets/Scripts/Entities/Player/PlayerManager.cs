@@ -180,7 +180,9 @@ public class PlayerManager : Entity
         if(DeathActive){
             if (currentStamina < 1 || currentOxygen < 1)
             {
-                WhenHeDied();
+                if(!isDeath){
+                    WhenHeDied();
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -422,11 +424,13 @@ public class PlayerManager : Entity
     }*/
     void WhenHeDied()
     {
-        RestoreValuesForDead();
+        
         Debug.Log("ImdeadTnx4EvEr");
         if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
             isDeath = true;
             SceneController.instance.prevScene = 34; //Cambiar si int Scene main menu cambia
+            Debug.Log("hi");
+            SceneController.instance.SceneChanged += RestoreValuesForDead;
             SceneController.instance.Load(SaveFilesManager.instance.currentSaveSlot);
         }
 
@@ -505,6 +509,7 @@ public class PlayerManager : Entity
     }
 
     void RestoreValuesForDead(){
+        statesManager.ClearAllStates();
         walkingSpeed = defaultwalkingSpeed;
         currentSpeed = walkingSpeed;
         currentStaminaLimit = maxStamina;
@@ -515,8 +520,10 @@ public class PlayerManager : Entity
         isInDark = false;
         isInSnow = false;  
         isInIce = false;
+        isDeath = false;
         gameObject.GetComponent<SpriteRenderer>().color= new Color(1,1,1,1);
         ResetAnimations();
+        SceneController.instance.SceneChanged -= RestoreValuesForDead;
     }
     #endregion
 }
