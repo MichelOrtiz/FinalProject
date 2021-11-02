@@ -91,7 +91,14 @@ public class Laser : MonoBehaviour
 
         if (targetWarningAvailable)
         {
-            warningObject = Instantiate(warning, endPos, Quaternion.identity);
+            if (warning == null)
+            {
+                Debug.Log("trying to warn laser, but warning prefab is null");
+            }
+            else
+            {
+                warningObject = Instantiate(warning, endPos, Quaternion.identity);
+            }
         }
     }
 
