@@ -28275,7 +28275,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 759f4a27c17591740966bf30690c4c62, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -28437,7 +28437,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 764e2311d1c27644681879d2afce7612, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -28460,11 +28460,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8691792095631442582, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8691792095631442582, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8691792095631442582, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -28473,14 +28473,14 @@ PrefabInstance:
     - target: {fileID: 8691792095631442582, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8884825812507710113}
     - target: {fileID: 8691792095631442582, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8691792095631442582, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: OnBottonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 8691792095631442582, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -28488,7 +28488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8691792095631442582, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: MapSlot, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8691792095631442582, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -28508,6 +28508,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
+--- !u!114 &8884825812507710113 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
+  m_PrefabInstance: {fileID: 825211991392850983}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1145d3ba8f4fce147bbbbec030fea747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6309561375727729411 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6693384010239553316, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
@@ -28739,6 +28750,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ada5bd0349310424a9ccea8f87baf51f, type: 3}
+--- !u!224 &1879503756301310499 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1693009259413199332, guid: ada5bd0349310424a9ccea8f87baf51f, type: 3}
+  m_PrefabInstance: {fileID: 967025178554876871}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1681178783031660473 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1891282547642059902, guid: ada5bd0349310424a9ccea8f87baf51f, type: 3}
@@ -28750,11 +28766,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f2ecda291c6df42a9cb078c4ae883c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1879503756301310499 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1693009259413199332, guid: ada5bd0349310424a9ccea8f87baf51f, type: 3}
-  m_PrefabInstance: {fileID: 967025178554876871}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &975635311477314874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28877,7 +28888,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 2d7aabaa7b1af1e47bac30dce3d50664, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -29235,7 +29246,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: a4117f939b8a18c4492e8fc5a08c5df7, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -29381,7 +29392,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 700263041dd9e6844a9b12bc663d01f7, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -30083,7 +30094,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 96ddb8d5d81fd6646a4f85215cf36f0e, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -30229,7 +30240,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: de75606bcda97c9419fe6e48745b76ec, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -30885,7 +30896,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 4d9c98d2b96c5974db523b64d285a411, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -31242,7 +31253,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 5c60f51c2255b08478834b77ef86e697, type: 3}
+      objectReference: {fileID: 21300000, guid: 3a760ce20de4e144ba5316f1d3e6fba8, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -31909,7 +31920,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 37a126467f47e8c4daa63ba1ad07a566, type: 3}
+      objectReference: {fileID: 21300000, guid: b95fda29451bf6e49bbf15279c425194, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -32286,7 +32297,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: d9378a02dadd97546992934cb0e90c0e, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -33328,7 +33339,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 2204d0c59068bb04ba5cb2b3853eb6f9, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -33826,7 +33837,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 12cc005eea0a00b42801a0a30a220da5, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -33980,7 +33991,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 3122b6660cfc70d48b07a9571b986391, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -34255,7 +34266,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 3eecd5b7e6b8ba04a8de62f4e0a47bfc, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -34530,7 +34541,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: 484be20a15d4a8541a81bc2ebc5b2a53, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
@@ -35141,7 +35152,7 @@ PrefabInstance:
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: zonaMapa
       value: 
-      objectReference: {fileID: 21300000, guid: 18f7adb704650ec44951774a7fc13715, type: 3}
+      objectReference: {fileID: 21300000, guid: c64c47d808d4b6d46bb21489bb56020d, type: 3}
     - target: {fileID: 8088047046392759942, guid: 788ed1a37725ff046a63fb7ae637b4c5, type: 3}
       propertyPath: imagenZona
       value: 
