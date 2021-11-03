@@ -21,22 +21,16 @@ public class Inter : MonoBehaviour
         {
             imagen.sprite = item.icon;
         }
-        
-    }
-    private void Update() {
-        float distance = Vector2.Distance(player.transform.position, transform.position);
-        if(distance <= radius){
-            player.inputs.Interact -= PickUpObj;
-            player.inputs.Interact += PickUpObj;
-        }else{
-            player.inputs.Interact -= PickUpObj;
-        }
+        player.inputs.Interact += PickUpObj;
     }
     public void PickUpObj(){
-        bool IsPicked = Inventory.instance.Add(item);
-        if(IsPicked){
-            player.inputs.Interact -= PickUpObj;
-            Destroy(gameObject);
+        float distance = Vector2.Distance(player.transform.position, transform.position);
+        if(distance <= radius){
+            bool IsPicked = Inventory.instance.Add(item);
+            if(IsPicked){
+                Debug.Log(item.name + " picked");
+                Destroy(gameObject);
+            }
         }
     }
     

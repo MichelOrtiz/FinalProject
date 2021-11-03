@@ -16,7 +16,7 @@ public class SceneController : MonoBehaviour
     public int prevScene { get; set; }
     public int currentScene { get; set; }
     public int altDoor;
-    [SerializeField] private GameObject playerPrefab;
+    [SerializeField]private GameObject playerPrefab;
     SceneManager manager;
     public delegate void onSceneChange();
     public onSceneChange SceneChanged;
@@ -34,24 +34,26 @@ public class SceneController : MonoBehaviour
         if(currentScene==0)
         currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneChanged?.Invoke();
+
         sceneTitle = FindObjectOfType<SceneTitle>();
         //Debug.Log("Start scenecontroller");
 
     }
     public void LoadScene(int scene){
-        sceneTitle = FindObjectOfType<SceneTitle>();
         sceneTitle?.gameObject?.SetActive(false);
+
         prevScene = SceneManager.GetActiveScene().buildIndex;
         currentScene = scene;
+        //SceneChanged?.Invoke();
+        //SceneManager.LoadScene(scene);
         StartCoroutine(LoadAsynchronously(scene));
+
+
+
     }
     public void Load(SaveFile partida){
-        //LoadScene(partida.sceneToLoad);
-        sceneTitle = FindObjectOfType<SceneTitle>();
-        sceneTitle?.gameObject?.SetActive(false);
-        prevScene = 34;
-        currentScene = partida.sceneToLoad;
-        StartCoroutine(LoadAsynchronously(partida.sceneToLoad));
+        //Instantiate(playerPrefab);
+        LoadScene(partida.sceneToLoad);
     }
 
 
@@ -59,7 +61,7 @@ public class SceneController : MonoBehaviour
     IEnumerator LoadAsynchronously (int sceneInd)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneInd);
-        SceneChanged?.Invoke();
+
         loadingScreen.SetActive(true);
         //mainCanvas.SetActive(false);
         while (!operation.isDone)
@@ -70,8 +72,9 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
         loadingScreen.SetActive(false);
-        sceneTitle = FindObjectOfType<SceneTitle>();
         
+        sceneTitle = FindObjectOfType<SceneTitle>();
+        SceneChanged?.Invoke();
         //mainCanvas.SetActive(true);
     }
 }

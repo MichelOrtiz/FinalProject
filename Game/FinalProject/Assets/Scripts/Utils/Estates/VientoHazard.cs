@@ -30,7 +30,6 @@ public class VientoHazard : MonoBehaviour
         i = true;
         duration = 0;
         particleSystem.Stop();
-        hazardState.onEffect = false;
     }
     private void Update() {
         transform.position = player.GetPosition();

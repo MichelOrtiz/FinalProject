@@ -22,6 +22,7 @@ public class AccessMinigame : MonoBehaviour
     void Start()
     {
         available = true;
+        PlayerManager.instance.inputs.Interact += Inputs_interact ;
     }
     private void OnDestroy() {
         PlayerManager.instance.inputs.Interact -= Inputs_interact ;
@@ -30,6 +31,9 @@ public class AccessMinigame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Place where the oject is - place where Nico is
+        
+
         if (!available)
         {
             if (curCooldownTime > cooldownTime)
@@ -41,15 +45,9 @@ public class AccessMinigame : MonoBehaviour
             {
                 curCooldownTime += Time.deltaTime;
             }
-        } 
-        float distance = Vector2.Distance(PlayerManager.instance.transform.position, transform.position);
-        if(!minigameInstantiated && distance<radius)
-        {
-            PlayerManager.instance.inputs.Interact -= Inputs_interact;
-            PlayerManager.instance.inputs.Interact += Inputs_interact;
-        }else{
-            PlayerManager.instance.inputs.Interact -= Inputs_interact;
         }
+        //else 
+        
     }
 
     void minigame_Ended()
@@ -70,23 +68,32 @@ public class AccessMinigame : MonoBehaviour
     }
 
     void Inputs_interact(){
-        if (!available)return;
-        minigameInstantiated = true;
-        Debug.Log("should access minigame from " + minigameObject);
-        //spawns the minigame as a Unity object so that it recognizes its methods, then runs its code.
-        Minigame = Instantiate(minigameObject).GetComponent<Minigame>();  
-        Minigame.StartMinigame();
-        Minigame.MinigameEndedHandler += minigame_Ended;
-        MasterMinigame = Minigame.MasterMinigame;
-        if (MasterMinigame != null)
+        if (!available)
         {
-            MasterMinigame.WinMinigameHandler += masterMinigame_WinMinigame;
-            MasterMinigame.LoseMinigameHandler += masterMinigame_LoseMinigame;
+            return;
         }
-        else
+        float distance = Vector2.Distance(PlayerManager.instance.transform.position, transform.position);
+        if(!minigameInstantiated && distance<radius)
         {
-            Debug.Log("Master minigame null smh");
+            minigameInstantiated = true;
+            Debug.Log("should access minigame from " + minigameObject);
+            //spawns the minigame as a Unity object so that it recognizes its methods, then runs its code.
+            Minigame = Instantiate(minigameObject).GetComponent<Minigame>();  
+            Minigame.StartMinigame();
+            
+            Minigame.MinigameEndedHandler += minigame_Ended;
+
+            MasterMinigame = Minigame.MasterMinigame;
+
+            if (MasterMinigame != null)
+            {
+                MasterMinigame.WinMinigameHandler += masterMinigame_WinMinigame;
+                MasterMinigame.LoseMinigameHandler += masterMinigame_LoseMinigame;
+            }
+            else
+            {
+                Debug.Log("Master minigame null smh");
+            }
         }
-        
     }
 }

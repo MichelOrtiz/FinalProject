@@ -28,7 +28,8 @@ public class StatesManager : MonoBehaviour
     /// <returns>The instantiated state (could be different from the original)</returns>
     public State AddState(State newState){
         if(newState != null){
-            if (!currentStates.Contains(newState) && !bannedStates.Contains(newState))
+            bool isRepited = currentStates.Exists(x=>x.name == newState.name);
+            if (!isRepited && !bannedStates.Contains(newState))
             {
                 if (newState.onEffect)
                 {
@@ -36,16 +37,20 @@ public class StatesManager : MonoBehaviour
                     newState = Instantiate(newState);
                     newState.onEffect = false;
                 }
+
+
                 newState.StartAffect(this);
                 currentStates.Add(newState);
+
+                return newState;
             }
-            return newState;
         }
+
         return null;
     }
     public State AddState(State newState, Entity newEnemy){
         if(newState != null){
-            if (!currentStates.Contains(newState) && !bannedStates.Contains(newState))
+            if (!currentStates.Contains(newState))
             {
                 if (newState.onEffect)
                 {
@@ -53,11 +58,14 @@ public class StatesManager : MonoBehaviour
                     newState = Instantiate(newState);
                     newState.onEffect = false;
                 }
+
                 enemy=newEnemy;
                 newState.StartAffect(this);
                 currentStates.Add(newState);
+
+                return newState;
+
             }
-            return newState;
         }
         return null;
     }
@@ -81,6 +89,7 @@ public class StatesManager : MonoBehaviour
 
                 return newState;
             }
+
             return currentStates.Find( s => s.name == newState.name);
         }
 
@@ -98,19 +107,26 @@ public class StatesManager : MonoBehaviour
                     newState = Instantiate(newState);
                     newState.onEffect = false;
                 }
+
+
                 newState.StartAffect(this);
                 currentStates.Add(newState);
+
                 return newState;
             }
+
             return currentStates.Find( s => s.name == newState.name);
         }
+
         return null;
     }
 
 
     public void RemoveState(State state){
-        if(currentStates.Contains(state)){
-            state.StopAffect();
+        bool isRepited = currentStates.Exists(x=>x.name == state.name);
+        if(isRepited){
+            State newstate = currentStates.Find(x=>x.name == state.name);
+            newstate.StopAffect();
         }
     }
     
@@ -181,6 +197,13 @@ public class StatesManager : MonoBehaviour
                 Destroy(children[index]);
                 children.Remove(children[index]);
             }
+        }
+    }
+
+    public void ClearAllStates(){
+        foreach(State state in currentStates){
+            RemoveState(state);
+            state.StopAffect();
         }
     }
 }
