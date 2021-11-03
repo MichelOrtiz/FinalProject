@@ -25,6 +25,7 @@ public class EquipmentManager : MonoBehaviour
         int numSlots = System.Enum.GetNames(typeof(EquipmentPosition)).Length;
         currentEquipment = new Equipment[numSlots];
         Inventory.instance.onItemChangedCallBack += UpdateUI;
+        UpdateUI();
     }
 
     public void Equip(Equipment newItem){

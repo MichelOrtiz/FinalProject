@@ -37,7 +37,6 @@ public class SaveFilesManager : MonoBehaviour
         else if(instance!=this) Destroy(gameObject);
         DontDestroyOnLoad(this);
     }
-
     public SaveFile LoadSaveFile(string path){
         string jsonString;
         if(File.Exists(path)){

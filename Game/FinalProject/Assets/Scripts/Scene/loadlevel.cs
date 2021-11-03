@@ -18,10 +18,8 @@ public class loadlevel : MonoBehaviour
             PlayerManager.instance.physics.ResetAll();
             if(PlayerManager.instance.isDeath){
                     Debug.Log("Cargando en el ultimo checkpoint");
-
-                    PlayerManager.instance.isDeath = false;
                     PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
-
+                    PlayerManager.instance.RestoreValuesForDead();
             }else{
                 if(SceneController.instance.prevScene != 34 && SceneController.instance.prevScene == iLevelToLoad){
                         if(loadPosition!=null && !PlayerManager.instance.isDeath && SceneController.instance.altDoor == noDoor){
