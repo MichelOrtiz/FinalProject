@@ -60,6 +60,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (PlayerManager.instance.inputs.enabled && PlayerManager.instance.inputs.OpenInventory)
         {
+            focusedSlot = null;
             UI.SetActive(!UI.activeSelf);
             MapUI.instance.mapUI.SetActive(false);
             AbilityUI.instance.UI.SetActive(false);
