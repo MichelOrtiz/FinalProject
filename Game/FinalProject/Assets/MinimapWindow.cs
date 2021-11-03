@@ -6,7 +6,7 @@ namespace Minimap{
     public class MinimapWindow : MonoBehaviour
     {
         public static MinimapWindow instance;
-        public GameObject uI;
+        public GameObject UI;
         private void Awake()
         {
             instance = this;
@@ -15,7 +15,7 @@ namespace Minimap{
         {
             if (PlayerManager.instance.inputs.OpenMiniMap)
             {
-                if (!uI.activeSelf)
+                if (!UI.activeSelf)
                 {
                     Show();
                 }else{
@@ -26,11 +26,11 @@ namespace Minimap{
         public void Show()
         {
         
-            uI.SetActive(true);
+            UI.SetActive(true);
         }
         public void Hide()
         {            
-            uI.SetActive(false);
+            UI.SetActive(false);
         }
     }
 }
