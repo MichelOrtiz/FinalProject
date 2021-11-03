@@ -9,7 +9,7 @@ public class Invisible : Ability
     Color tmp;
     public override void UseAbility()
     {   
-        if(player.currentStamina < staminaCost)return;
+        if(player.currentStamina < staminaCost + 0.1f)return;
         player.isInvisible=true;
         base.UseAbility();
         tmp = sprite.color;

@@ -7,22 +7,17 @@ public class DashH : Ability
     [SerializeField]private Rigidbody2D body;
     public override KeyCode hotkey {get => PlayerManager.instance.inputs.controlBinds["MOVERIGHT"];}
     protected KeyCode altHotkey {get => PlayerManager.instance.inputs.controlBinds["MOVELEFT"];}
-    private float prevGravity;
+    private KeyCode lastKey;
     private float timeKeyPressed;
     public float doubleTimeTap;
-    public float movimiento;
-    public float speed;
-    float currentDashTime;
-    Vector2 target;
-    int nKeyPressed;
+    byte nKeyPressed;
+    [SerializeField] KnockbackState dashH; 
     public override void UseAbility()
     {
-        if(player.currentStamina < staminaCost)return;
+        nKeyPressed = 0;
+        if(player.currentStamina < staminaCost + 0.1f)return;
         base.UseAbility();
-        player.isDashingH = true;
-        prevGravity = body.gravityScale;
-        body.gravityScale = 0;
-        body.velocity = new Vector2(0f,0f);
+        dashH = (KnockbackState)player.statesManager.AddState(dashH);
         if (player.abilityManager.IsUnlocked(Abilities.DodgePerfecto))
         {
             player.SetImmune(duration);
@@ -33,8 +28,7 @@ public class DashH : Ability
     protected override void Start()
     {
         base.Start();
-        body=player.gameObject.GetComponent<Rigidbody2D>();
-        currentDashTime = 0;
+        dashH.onEffect = false;
     }
     protected override void Update(){
         this.enabled = isUnlocked;
@@ -47,57 +41,44 @@ public class DashH : Ability
                 time = 0;
             }
         }
-        if(player.isDashingH){
-            target = new Vector2(movimiento, 0f);
-            currentDashTime += Time.deltaTime;
-            if(currentDashTime >= duration){
-                currentDashTime=0;
-                body.gravityScale = prevGravity;
-                player.isDashingH = false;
-                Debug.Log("DashEnd");
-            }
-        }
-        else{
-            if(timeKeyPressed!=0){
-                timeKeyPressed += Time.deltaTime;
-                if(timeKeyPressed >= doubleTimeTap){
-                    timeKeyPressed=0;
-                    nKeyPressed=0;
-                }
-            }
-            if(Input.GetKeyDown(hotkey)){
-                if(movimiento<0){
-                    movimiento*=-1;
-                    nKeyPressed=0;
-                }
-                nKeyPressed++;
-                timeKeyPressed+=Time.deltaTime;
-                if(nKeyPressed>=2){
-                    nKeyPressed=0;
-                    UseAbility();
-                }
-            }
-            if(Input.GetKeyDown(altHotkey)){
-                if(movimiento>0){
-                    movimiento*=-1;
-                    nKeyPressed=0;
-                }
-                nKeyPressed++;
-                timeKeyPressed+=Time.deltaTime;
-                if(nKeyPressed>=2){
-                    nKeyPressed=0;
-                    UseAbility();
-                }
-            }
-            
-            
-        }
+        player.isDashingH = player.statesManager.currentStates.Contains(dashH);
+        Dash(hotkey);
+        Dash(altHotkey);
         
     }
-    private void FixedUpdate() {
-        if(player.isDashingH){
-            body.AddForce(target * speed);
+
+    private void Dash(KeyCode key){
+        
+        if (Input.GetKeyDown(key))
+        {
+            nKeyPressed++;
+            if (lastKey != key)
+            {
+                nKeyPressed = 0;
+                timeKeyPressed = 0;
+            }
+            lastKey = key;
+        }
+        if (nKeyPressed == 1)
+        {
+            if (timeKeyPressed<doubleTimeTap)
+            {
+                timeKeyPressed += Time.deltaTime;
+            }else
+            {
+                nKeyPressed = 0;
+                timeKeyPressed = 0;
+            }
+        }
+        if (nKeyPressed >= 2)
+        {
+            UseAbility();
         }
     }
+    /*private void FixedUpdate() {
+        if(player.isDashingH){
+            body.AddForce(target * speed * Time.deltaTime);
+        }
+    }*/
     
 }

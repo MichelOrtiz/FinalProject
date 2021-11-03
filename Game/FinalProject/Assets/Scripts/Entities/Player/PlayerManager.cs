@@ -166,7 +166,7 @@ public class PlayerManager : Entity
             StartCoroutine(Drowning(1f, 0.05f));
         }
         if(DeathActive){
-            if (currentStamina < 1 || currentOxygen < 1)
+            if (currentStamina <= 0 || currentOxygen <= 0)
             {
                 WhenHeDied();
             }
@@ -264,14 +264,7 @@ public class PlayerManager : Entity
         yield return new WaitForSeconds (timeDrowned);
         if (!loosingOxygen)
         {
-            if (currentOxygen>0)
-            {
             currentOxygen -= drown;
-            }
-            if (currentOxygen<0)
-            {
-                currentOxygen = 0;
-            }
         }
         yield return new WaitForSeconds(timeDrowned);
     }
@@ -318,16 +311,8 @@ public class PlayerManager : Entity
     #region Direct stamina changes
     public void TakeTirement(float damage)
     {
-        if (currentStamina>0)
-        {
-            currentStamina -= damage * dmgMod;
-            loosingStamina = true;
-        }
-        if (currentStamina<0)
-        {
-            currentStamina = 0;
-        }
-        
+        currentStamina -= damage * dmgMod;
+        loosingStamina = true;
     }
     public void RegenStamina(float regen)
     {

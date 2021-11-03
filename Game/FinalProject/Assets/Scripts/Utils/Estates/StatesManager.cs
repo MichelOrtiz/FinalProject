@@ -123,6 +123,7 @@ public class StatesManager : MonoBehaviour
 
     public void StopAll( )
     {
+        if (currentStates.Count == 0)return;
         currentStates.ForEach(s => s.StopAffect());
         if (hostEntity?.emotePos?.childCount > 0)
         {

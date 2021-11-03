@@ -9,7 +9,7 @@ public class Escudo : Ability
 
     public override void UseAbility()
     {   
-        if(player.currentStamina < staminaCost)return;
+        if(player.currentStamina < staminaCost + 0.1f)return;
         if(isInShield) return;
         inmuniScudo = PlayerManager.instance.statesManager.AddState(inmuniScudo);
         base.UseAbility();

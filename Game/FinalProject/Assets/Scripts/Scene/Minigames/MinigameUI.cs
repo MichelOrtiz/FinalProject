@@ -24,14 +24,7 @@ public class MinigameUI : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            try
-            {
-                DontDestroyOnLoad(this);
-            }
-            catch (System.Exception)
-            {
-                
-            }
+            
         }
         else if (instance != this)
         {
