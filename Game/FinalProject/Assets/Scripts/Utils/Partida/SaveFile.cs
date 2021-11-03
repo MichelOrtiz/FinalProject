@@ -39,7 +39,7 @@ public class SaveFile
         this.controlBindsKeys = new List<string>();
         this.controlBindsValues = new List<KeyCode>();
         this.staminaLimit = 100f;
-        this.unlockedAbilities = new bool[14];
+        this.unlockedAbilities = new bool[15];
         abilitiesBinds = null;
     }
     public SaveFile(string namePlayer, int slotFile){
@@ -58,7 +58,7 @@ public class SaveFile
         this.controlBindsKeys = new List<string>();
         this.controlBindsValues = new List<KeyCode>();
         this.staminaLimit = 100f;
-        this.unlockedAbilities = new bool[14];
+        this.unlockedAbilities = new bool[15];
         abilitiesBinds = null;
     }
 }

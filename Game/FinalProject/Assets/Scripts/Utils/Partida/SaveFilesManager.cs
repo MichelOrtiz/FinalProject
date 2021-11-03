@@ -92,6 +92,7 @@ public class SaveFilesManager : MonoBehaviour
         currentSaveSlot.staminaLimit = PlayerManager.instance.currentStaminaLimit;
         int i = 0;
         currentSaveSlot.abilitiesBinds = new List<KeyCode>();
+        currentSaveSlot.unlockedAbilities = new bool[AbilityManager.instance.abilities.Count];
         foreach(Ability a in AbilityManager.instance.abilities){
             currentSaveSlot.unlockedAbilities[i] = a.isUnlocked;
             currentSaveSlot.abilitiesBinds.Add(a.hotkey);
