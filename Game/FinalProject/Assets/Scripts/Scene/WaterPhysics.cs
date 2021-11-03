@@ -19,7 +19,7 @@ public class WaterPhysics : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.tag == "Player")
+        if (collisionGameObject.tag == "Playerwater")
         {
             player.currentGravity = .5f;
             waterSlowState = player.statesManager.AddState(waterSlowState);
@@ -27,7 +27,7 @@ public class WaterPhysics : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.tag == "Player")
+        if (collisionGameObject.tag == "Playerwater")
         {
             player.currentGravity = .5f;
             waterSlowState = player.statesManager.AddState(waterSlowState);
@@ -35,7 +35,7 @@ public class WaterPhysics : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision){
             GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.tag == "Player")
+        if (collisionGameObject.tag == "Playerwater")
         {
             player.currentGravity = PlayerManager.defaultGravity;
             player.statesManager.RemoveState(waterSlowState);

@@ -13,7 +13,7 @@ public class Rafaga : Ability
     [SerializeField] KnockbackState push;
     public override void UseAbility()
     {   
-        if(player.currentStamina < staminaCost)return;
+        if(player.currentStamina < staminaCost + 0.1f)return;
         isActivated=true;
         base.UseAbility();
     }

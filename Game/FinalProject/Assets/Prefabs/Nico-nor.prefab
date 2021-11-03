@@ -5615,6 +5615,7 @@ Transform:
   - {fileID: 9222204404642810428}
   - {fileID: 3515353368617961078}
   - {fileID: 9140434770867883638}
+  - {fileID: 8713590153353675585}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6062,8 +6063,7 @@ MonoBehaviour:
   isUnlocked: 0
   body: {fileID: 3829738358529845164}
   doubleTimeTap: 0.5
-  movimiento: 15
-  speed: 100
+  dashH: {fileID: 11400000, guid: a1cd3eff0aac24747bf794c33e82cd59, type: 2}
 --- !u!114 &37527897504467979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6087,8 +6087,7 @@ MonoBehaviour:
   isUnlocked: 0
   body: {fileID: 3829738358529845164}
   doubleTimeTap: 0.5
-  movimiento: 10
-  speed: 50
+  dashV: {fileID: 11400000, guid: 0792b28b74043e64f8d1df89eff8dc56, type: 2}
 --- !u!114 &1618878735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6223,9 +6222,7 @@ MonoBehaviour:
   isInCooldown: 0
   abilityName: 10
   isUnlocked: 0
-  Escudobj: {fileID: 2648981663275236285}
   isInShield: 0
-  staminaActual: 0
   inmuniScudo: {fileID: 11400000, guid: 5a11bc6e40fbb3b44a50cbb141ee16da, type: 2}
 --- !u!114 &1533819169538553012
 MonoBehaviour:
@@ -6719,6 +6716,53 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &7112922648892636305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8713590153353675585}
+  - component: {fileID: 2590306136976825006}
+  m_Layer: 0
+  m_Name: WaterHandler
+  m_TagString: Playerwater
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8713590153353675585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112922648892636305}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.064, y: 0.459, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3829738358529845137}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &2590306136976825006
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112922648892636305}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 0.0001}
+  m_Direction: 0
 --- !u!1 &8624234521466811570
 GameObject:
   m_ObjectHideFlags: 0

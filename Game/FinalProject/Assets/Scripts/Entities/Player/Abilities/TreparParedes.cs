@@ -9,7 +9,7 @@ public class TreparParedes : Ability
     public override void UseAbility()
     {   
         
-        if(player.currentStamina < staminaCost)return;
+        if(player.currentStamina < staminaCost + 0.1f)return;
         NicoFeet.gameObject.GetComponent<GroundChecker>().checkFeetRadius=.15f;
         if (isInCooldown)
         {

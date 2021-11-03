@@ -38,7 +38,7 @@ public class Ability : MonoBehaviour
 
     public virtual void UseAbility()
     {
-        if(player.currentStamina < staminaCost)return;
+        if(player.currentStamina < staminaCost+.1)return;
         isInCooldown = true; 
         //Debug.Log($"Usando {abilityName.ToString()}");
         if (isInCooldown)

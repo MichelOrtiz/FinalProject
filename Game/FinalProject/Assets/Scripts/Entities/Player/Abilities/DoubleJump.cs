@@ -12,7 +12,7 @@ public class DoubleJump : Ability
     public override void UseAbility()
     {
         base.UseAbility();
-        if(player.currentStamina < staminaCost)return;
+        if(player.currentStamina < staminaCost + 0.1f)return;
         body.velocity = new Vector2(0f, 0f);
         body.velocity = new Vector2(body.velocity.x, body.gravityScale + jumpForce);
         //body.AddForce(new Vector2(0f, jumpForce * speed), ForceMode2D.Impulse);

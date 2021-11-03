@@ -27,28 +27,21 @@ public class loadBossLevel : loadlevel
         if (SceneController.instance != null)
         {
             PlayerManager.instance.physics.ResetAll();
-            if(PlayerManager.instance.isDeath){
-                    Debug.Log("Cargando en el ultimo checkpoint");
-                    PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
-                    PlayerManager.instance.RestoreValuesForDead();
-            }else{
-                if(SceneController.instance.prevScene != 34 && SceneController.instance.prevScene == iLevelToLoad){
-                        if(loadPosition!=null && !PlayerManager.instance.isDeath){
-                            PlayerManager.instance.gameObject.transform.position = loadPosition.position;
-                            //Jugador salio de la sala del jefe... entonces lo derroto no?
-                            //worldState.state = true;
-                            //Destroy(gameObject);
-                        }
-                    }
-                    else{
-                        //if loading from 34 spawnpoint = startPosition
-                        if(SceneController.instance.prevScene == 34){
-                            Debug.Log("Cargando desde main menu");
-                            PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
-                        }
-                    }
+            if(SceneController.instance.prevScene != 34 && SceneController.instance.prevScene == iLevelToLoad){
+                if(loadPosition!=null && !PlayerManager.instance.isDeath){
+                    PlayerManager.instance.gameObject.transform.position = loadPosition.position;
+                    //Jugador salio de la sala del jefe... entonces lo derroto no?
+                    //worldState.state = true;
+                    //Destroy(gameObject);
+                }
             }
-            
+            else{
+                //if loading from 34 spawnpoint = startPosition
+                if(SceneController.instance.prevScene == 34){
+                    Debug.Log("Cargando desde main menu");
+                    PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
+                }
+            }
         }
 
         
