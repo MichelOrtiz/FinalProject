@@ -6,24 +6,31 @@ namespace Minimap{
     public class MinimapWindow : MonoBehaviour
     {
         public static MinimapWindow instance;
+        public GameObject uI;
         private void Awake()
         {
             instance = this;
         }
         private void Update()
         {
-            if (instance==null)
+            if (PlayerManager.instance.inputs.OpenMiniMap)
             {
-                instance = this;
+                if (!uI.activeSelf)
+                {
+                    Show();
+                }else{
+                    Hide();
+                }
             }
         }
         public void Show()
         {
-            instance?.gameObject?.SetActive(true);
+        
+            uI.SetActive(true);
         }
         public void Hide()
         {            
-            instance?.gameObject?.SetActive(false);
+            uI.SetActive(false);
         }
     }
 }

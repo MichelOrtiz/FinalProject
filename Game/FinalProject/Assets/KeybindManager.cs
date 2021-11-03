@@ -180,7 +180,7 @@ public class KeybindManager : MonoBehaviour
 
     IEnumerator NaviIsAnnoying(){
             navi.SetActive(true);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSecondsRealtime(2f);
             navi.SetActive(false);
     }
     public static readonly string[] defaultKeys = {"MOVEUP","MOVEDOWN","MOVERIGHT","MOVELEFT","MOVEJUMP","MENUPAUSE","MENUMAP","MENUMINIMAP","MENUINVENTORY","MENUINTERACTION","MENUFASTASSIGN","MENUHABILIDAD","RUN","OBJ1","OBJ2","FOOD1","FOOD2","FOOD3","FOOD4","FOOD5","SKILL1","SKILL2","SKILL3","SKILL4","SKILL5"};

@@ -183,16 +183,6 @@ public class PlayerManager : Entity
                 WhenHeDied();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            MinimapaActivada = !MinimapaActivada;
-            if (MinimapaActivada)
-            {
-                MinimapWindow.instance?.Show();
-            }else{
-                MinimapWindow.instance?.Hide();
-            }
-        }
         base.Update();
     } 
 
