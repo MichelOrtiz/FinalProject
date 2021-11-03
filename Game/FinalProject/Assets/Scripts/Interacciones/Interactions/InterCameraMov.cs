@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new Interaction", menuName = "Interaction/MoveCamera")]
 public class InterCameraMov : Interaction
 {
-    CameraFollow cam = CameraFollow.instance;
+    CameraFollow cam;
     [SerializeField] InterCondition whenEnd;
     [SerializeField] float duration;
     float countdown;
@@ -27,24 +27,33 @@ public class InterCameraMov : Interaction
         cam.cinematicTarget = target;
         cam.isCinematic = true;
         countdown = duration;
+        gameObject.GetComponent<InteractionTrigger>().updateForInteractions -= Countdown;
         gameObject.GetComponent<InteractionTrigger>().updateForInteractions += Countdown;
         onEndInteraction?.Invoke();
     }
     void Countdown(){
         if(countdown <= 0){
-            cam.cinematicTarget = PlayerManager.instance.GetPosition();
-            cam.isCinematic = false;
-            gameObject.GetComponent<InteractionTrigger>().updateForInteractions -= Countdown;
+            ResetCamera();
             Debug.Log("Coutdown ended");
+            return;
         }else if(whenEnd == null){
             countdown -= Time.deltaTime;
         }
         if(!gameObject.GetComponent<InteractionTrigger>().busy){
-            countdown = 0;
+            Debug.Log("Coutdown skiped due busy");
+            ResetCamera();
+            return;
         }
         if(whenEnd != null && whenEnd.isDone){
-            countdown = 0;
+            Debug.Log("Coutdown skiped due condition");
+            ResetCamera();
+            return;
         }
+    }
+    void ResetCamera(){
+        cam.cinematicTarget = PlayerManager.instance.GetPosition();
+        cam.isCinematic = false;
+        gameObject.GetComponent<InteractionTrigger>().updateForInteractions -= Countdown;
     }
     public override void RestardCondition()
     {
@@ -52,5 +61,6 @@ public class InterCameraMov : Interaction
         if(whenEnd != null){
             whenEnd.RestardValues(gameObject);
         }
+        cam = CameraFollow.instance;
     }
 }

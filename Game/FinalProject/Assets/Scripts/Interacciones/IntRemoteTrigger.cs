@@ -12,20 +12,8 @@ public class IntRemoteTrigger : InteractionTrigger
     }
     protected override void TriggerInteraction()
     {
-        if(busy) return;
-        busy = true;
+        base.TriggerInteraction();
         Debug.Log("Interaction Triggered Remotetly");
-        cola.Clear();
-        foreach (Interaction inter in interactions)
-        {
-            cola.Enqueue(inter);
-            inter.onEndInteraction += NextInteraction;
-            inter.gameObject = this.gameObject;
-            if(inter.condition != null){
-                inter.condition.RestardValues(gameObject);
-            }
-        }
-        NextInteraction();
     }
     protected override void Update()
     {

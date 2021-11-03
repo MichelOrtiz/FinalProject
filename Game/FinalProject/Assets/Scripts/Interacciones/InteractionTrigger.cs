@@ -9,7 +9,7 @@ public class InteractionTrigger : MonoBehaviour
     public Interaction currentInter;
     public Interaction lastInter { 
             get{
-                if(currentInter==null) return null;
+                if(currentInter==null) return interactions[interactions.Count-1];
                 int i = interactions.FindIndex( x => x == currentInter);
                 if(i > 0){
                     return interactions[i-1];
@@ -44,6 +44,7 @@ public class InteractionTrigger : MonoBehaviour
         cola.Clear();
         foreach (Interaction inter in interactions)
         {
+            inter.onEndInteraction -= NextInteraction;
             inter.onEndInteraction += NextInteraction;
             inter.gameObject = this.gameObject;
             inter.RestardCondition();
@@ -53,6 +54,7 @@ public class InteractionTrigger : MonoBehaviour
     }
     protected virtual void NextInteraction(){
         if(cola.Count == 0){
+            currentInter = null;
             Debug.Log("No hay mas interacciones");
             busy = false;
             return;
