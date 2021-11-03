@@ -24,7 +24,6 @@ public abstract class State : ScriptableObject
         onEffect=true;
         currentTime = 0;
         manager.statusCheck += Affect;
-
         if (emoteSetter != null)
         {
             emoteSetter.duration = duration;

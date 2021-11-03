@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class Escudo : Ability
 {
-    public GameObject Escudobj;
     public bool isInShield;
-    public float staminaActual;
     [SerializeField] State inmuniScudo;
 
     public override void UseAbility()
     {   
         if(player.currentStamina < staminaCost)return;
-        isInShield=true;
+        if(isInShield) return;
+        inmuniScudo = PlayerManager.instance.statesManager.AddState(inmuniScudo);
         base.UseAbility();
-        staminaActual = player.currentStamina;
     }
     protected override void Start()
     {
         base.Start();
         time = cooldownTime;
         isInShield=false;
+        inmuniScudo.onEffect = false;
     }
     protected override void Update()
     {
@@ -36,36 +35,15 @@ public class Escudo : Ability
                 isInCooldown = false;
                 time = 0;
             }
-        }else
-        {
-            isInShield = false;
-        }
-        if (isInShield)
-        {
-            if (!player.statesManager.currentStates.Exists(x=>x.name == inmuniScudo.name))
-            {
-                player.statesManager.AddState(inmuniScudo);
-            }
-        }else
-        {
-            
-            try
-            {
-                 if (player.statesManager.currentStates.Exists(x=>x.name == inmuniScudo.name))
-                {
-                    player.statesManager.RemoveState(inmuniScudo);
-                }
-            }
-            catch (System.Exception)
-            {
-            }
         }
         if (Input.GetKeyDown(hotkey))
         {
-            if (player.currentStamina > staminaCost)
-            {
-                UseAbility();
-            }
+            UseAbility();
+        }
+        if(player.statesManager.currentStates.Contains(inmuniScudo)){
+            isInShield = true;
+        }else{
+            isInShield = false;
         }
     }
 }

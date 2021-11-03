@@ -58,15 +58,11 @@ public class PlayerManager : Entity
     [SerializeField]private bool loosingStamina;
     [SerializeField]private bool loosingOxygen;
     private float regenCooldown;
-    private bool MinimapaActivada;
     ConveyScript convey;
-    #region Inputs
     public PlayerInputs inputs;
-    #endregion
     public State inmunityState;
     public AbilityManager abilityManager;
     public static PlayerManager instance;
-
     new void Awake()
     {
         base.Awake();
@@ -78,17 +74,9 @@ public class PlayerManager : Entity
     new void Start()
     {
         base.Start();
-        currentStamina = maxStamina;
-        currentOxygen = maxOxygen;
         regenCooldown = 5;
-        currentGravity = defaultGravity;
-        currentMass = defaultMass;
-        dmgMod = defaultDmgMod;
-        //inputs = gameObject.GetComponent<PlayerInputs>();
-        MinimapaActivada = true;
-        isDeath = false;
         GunProjectile.instance.ObjectShot += gun_ObjectShot;
-        walkingSpeed = defaultwalkingSpeed;
+        RestoreValuesForDead();
         //Cargar cosas de la partida
         if(SaveFilesManager.instance!=null && SaveFilesManager.instance.currentSaveSlot!=null){
             SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
@@ -180,24 +168,11 @@ public class PlayerManager : Entity
         if(DeathActive){
             if (currentStamina < 1 || currentOxygen < 1)
             {
-                if(!isDeath){
-                    WhenHeDied();
-                }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            MinimapaActivada = !MinimapaActivada;
-            if (MinimapaActivada)
-            {
-                MinimapWindow.instance?.Show();
-            }else{
-                MinimapWindow.instance?.Hide();
+                WhenHeDied();
             }
         }
         base.Update();
     } 
-
     public void Jump()
     {
         if(!inputs.enabled)return;
@@ -424,14 +399,15 @@ public class PlayerManager : Entity
     }*/
     void WhenHeDied()
     {
-        
+        if(isDeath) return;
         Debug.Log("ImdeadTnx4EvEr");
         if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
             isDeath = true;
-            SceneController.instance.prevScene = 34; //Cambiar si int Scene main menu cambia
-            Debug.Log("hi");
-            SceneController.instance.SceneChanged += RestoreValuesForDead;
-            SceneController.instance.Load(SaveFilesManager.instance.currentSaveSlot);
+            //SceneController.instance.SceneChanged += RestoreValuesForDead;
+            string path = Application.dataPath + "/Partida" + SaveFilesManager.instance.currentSaveSlot.slotFile;
+            SaveFile newPartida = SaveFilesManager.instance.LoadSaveFile(path);
+            SaveFilesManager.instance.currentSaveSlot = newPartida;
+            SceneController.instance.Load(newPartida);
         }
 
     }
@@ -508,14 +484,17 @@ public class PlayerManager : Entity
         animationManager.SetNextAnimation("Nico_idle");
     }
 
-    void RestoreValuesForDead(){
-        statesManager.ClearAllStates();
+    public void RestoreValuesForDead(){
+        statesManager.StopAll();
+        inmunityState.onEffect = false;
         walkingSpeed = defaultwalkingSpeed;
         currentSpeed = walkingSpeed;
         currentStaminaLimit = maxStamina;
         currentGravity = defaultGravity;
         currentStamina = maxStamina;
         currentOxygen = maxOxygen;
+        dmgMod = defaultDmgMod;
+        speedMods = 1f;
         isInWater = false;
         isInDark = false;
         isInSnow = false;  
@@ -523,7 +502,6 @@ public class PlayerManager : Entity
         isDeath = false;
         gameObject.GetComponent<SpriteRenderer>().color= new Color(1,1,1,1);
         ResetAnimations();
-        SceneController.instance.SceneChanged -= RestoreValuesForDead;
     }
     #endregion
 }
