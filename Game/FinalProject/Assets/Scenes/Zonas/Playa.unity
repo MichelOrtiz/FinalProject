@@ -38375,7 +38375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c097263a5aa198b449210c16e237ae4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 0}
+  condition: {fileID: 11400000, guid: 3a9acd5949bba4143bba1be43fd4d11d, type: 2}
 --- !u!1 &1178828490
 GameObject:
   m_ObjectHideFlags: 0
@@ -40663,11 +40663,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -255.76
+      value: -319.1
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.08
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3829738358529845137, guid: 1f25e9ae0919a2742a2d1e8cb49c8fd9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -40955,6 +40955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1755989015}
   - component: {fileID: 1755989016}
+  - component: {fileID: 1755989017}
   m_Layer: 8
   m_Name: B2
   m_TagString: Ground
@@ -40999,6 +41000,19 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &1755989017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755989014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c097263a5aa198b449210c16e237ae4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  condition: {fileID: 0}
 --- !u!1 &1778158981
 GameObject:
   m_ObjectHideFlags: 0
