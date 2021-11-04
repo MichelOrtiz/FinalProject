@@ -6,10 +6,12 @@ public class Inventory : MonoBehaviour
     public static Inventory instance;
     private void Awake() {
         if(instance!=null){
-            Debug.Log("HOW!!!");
+            Debug.Log("Sadly only one can exist");
+            Destroy(gameObject);
             return;
         }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     private int money;
     public Text moneyText;
