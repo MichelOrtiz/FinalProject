@@ -7,7 +7,8 @@ public class CInterDone : InterCondition
     [SerializeField] Interaction interaction;
     protected override bool checkIsDone()
     {
-        InteractionTrigger trigger = gameObject.GetComponent<InteractionTrigger>();
+        if(interaction.gameObject == null) return false;
+        InteractionTrigger trigger = interaction.gameObject.GetComponent<InteractionTrigger>();
         return interaction == trigger.lastInter;
     }
 }

@@ -25,12 +25,21 @@ public class InteractionTrigger : MonoBehaviour
     public RunInUpdate updateForInteractions;
     protected virtual void Start()
     {
-        PlayerManager.instance.inputs.Interact += TriggerInteraction;
         cola = new Queue<Interaction>();
         busy = false;
+        foreach(Interaction inter in interactions){
+            inter.gameObject = this.gameObject;
+        }
     }
     protected virtual void Update(){
         distance = Vector2.Distance(PlayerManager.instance.GetPosition(),transform.position);
+        if(distance <= radius)
+        {
+            PlayerManager.instance.inputs.Interact -= TriggerInteraction;
+            PlayerManager.instance.inputs.Interact += TriggerInteraction;
+        }else{
+            PlayerManager.instance.inputs.Interact -= TriggerInteraction;
+        }     
         updateForInteractions?.Invoke();
     }
     protected virtual void TriggerInteraction(){

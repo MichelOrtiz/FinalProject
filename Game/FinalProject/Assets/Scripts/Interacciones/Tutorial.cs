@@ -19,6 +19,9 @@ public class Tutorial : IntRemoteTrigger
         }else{
             partida.WorldStates.Add(isTutorialDone);
         }
+        foreach(Interaction inter in interactions){
+            inter.gameObject = this.gameObject;
+        }
     }
     protected override void NextInteraction(){
         base.NextInteraction();
