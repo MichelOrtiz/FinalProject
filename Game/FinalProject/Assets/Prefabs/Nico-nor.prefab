@@ -5306,6 +5306,7 @@ GameObject:
   - component: {fileID: 1158249951}
   - component: {fileID: 6562861816641404763}
   - component: {fileID: 5946864857722621958}
+  - component: {fileID: 5321155126525921076}
   m_Layer: 0
   m_Name: Nico-nor
   m_TagString: Player
@@ -5533,7 +5534,7 @@ MonoBehaviour:
   loosingOxygen: 0
   inputs: {fileID: 6562861816641404763}
   inmunityState: {fileID: 11400000, guid: 8c5ce0ce2397d3a4db178116f24195fc, type: 2}
-  abilityManager: {fileID: 1180875131347066391}
+  abilityManager: {fileID: 5321155126525921076}
 --- !u!114 &3829738358529845136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5592,6 +5593,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d6f0d5c8df3664da9097319c49a21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5321155126525921076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829738358529845160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1295dc957455bf44c8ab30b47e22d016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abiltySystem: {fileID: 3829738360394267735}
+  abilityUI: {fileID: 0}
 --- !u!1 &3829738358953819177
 GameObject:
   m_ObjectHideFlags: 0
@@ -5681,7 +5696,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3829738360394267733}
-  - component: {fileID: 1180875131347066391}
   - component: {fileID: 3829738360394267734}
   - component: {fileID: 8716125286967460233}
   - component: {fileID: 37527897504467979}
@@ -5722,20 +5736,6 @@ Transform:
   m_Father: {fileID: 3829738358529845137}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1180875131347066391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3829738360394267735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1295dc957455bf44c8ab30b47e22d016, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abiltySystem: {fileID: 3829738360394267735}
-  abilityUI: {fileID: 0}
 --- !u!114 &3829738360394267734
 MonoBehaviour:
   m_ObjectHideFlags: 0
