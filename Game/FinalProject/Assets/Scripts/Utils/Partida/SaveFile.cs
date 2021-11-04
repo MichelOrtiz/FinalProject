@@ -23,6 +23,11 @@ public class SaveFile
     public int money;
     public float staminaLimit;
     public bool[] unlockedAbilities;
+    public float masterVol;
+    public float hazardVol;
+    public float musicVol;
+    public int qualityIndex;
+    public bool isFullScreen;
     public SaveFile(){
         this.slotFile = 0;
         this.namePlayer = "NoName";
@@ -41,6 +46,11 @@ public class SaveFile
         this.staminaLimit = 100f;
         this.unlockedAbilities = new bool[15];
         abilitiesBinds = null;
+        this.masterVol = 0;
+        this.hazardVol = 0;
+        this.musicVol = 0;
+        this.qualityIndex = 0;
+        this.isFullScreen = false;
     }
     public SaveFile(string namePlayer, int slotFile){
         this.namePlayer = namePlayer;
@@ -60,5 +70,10 @@ public class SaveFile
         this.staminaLimit = 100f;
         this.unlockedAbilities = new bool[15];
         abilitiesBinds = null;
+        this.masterVol = 0;
+        this.hazardVol = 0;
+        this.musicVol = 0;
+        this.qualityIndex = 0;
+        this.isFullScreen = false;
     }
 }

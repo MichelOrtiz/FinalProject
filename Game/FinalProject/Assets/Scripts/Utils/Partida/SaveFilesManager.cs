@@ -76,6 +76,7 @@ public class SaveFilesManager : MonoBehaviour
     }
     public void SaveProgress(){
         if(currentSaveSlot==null)return;
+        //Tiempo de juego
         TimeSpan timePlayed = DateTime.Now - startSession;
         Debug.Log(DateTime.Now.ToString() + " - " + startSession.ToString());
         currentSaveSlot.timeSecondsPlayed += timePlayed.Seconds;
@@ -90,6 +91,7 @@ public class SaveFilesManager : MonoBehaviour
         }
         currentSaveSlot.timeHoursPlayed += timePlayed.Hours;
         currentSaveSlot.staminaLimit = PlayerManager.instance.currentStaminaLimit;
+        //Abilidades
         int i = 0;
         currentSaveSlot.abilitiesBinds = new List<KeyCode>();
         currentSaveSlot.unlockedAbilities = new bool[AbilityManager.instance.abilities.Count];
@@ -98,8 +100,17 @@ public class SaveFilesManager : MonoBehaviour
             currentSaveSlot.abilitiesBinds.Add(a.hotkey);
             i++;
         }
+        //Inventario
         currentSaveSlot.money = Inventory.instance.GetMoney();
         currentSaveSlot.capacidad = Inventory.instance.capacidad;
+        //Configuraciones
+        SettingsMenu sm = FindObjectOfType<Pause>().settingsMenu;
+        currentSaveSlot.masterVol = sm.masterVol;
+        currentSaveSlot.hazardVol = sm.hazardVol;
+        currentSaveSlot.musicVol = sm.musicVol;
+        currentSaveSlot.qualityIndex = sm.qualityIndex;
+        currentSaveSlot.isFullScreen = sm.isFullScreen;
+
         string jsonString = JsonUtility.ToJson(currentSaveSlot);
         string filePath = Application.dataPath + "/Partida" + currentSaveSlot.slotFile;
         using(StreamWriter writer = new StreamWriter(filePath,false)){

@@ -7,12 +7,22 @@ public class Pause : MonoBehaviour
 {
     public static bool active;
     public GameObject panel;
+    public SettingsMenu settingsMenu;
     static PlayerInputs inputs;
     void Start()
     {
-       inputs = PlayerManager.instance.gameObject.GetComponent<PlayerInputs>();
-       active = false;
-       panel.SetActive(false);
+        inputs = PlayerManager.instance.gameObject.GetComponent<PlayerInputs>();
+        active = false;
+        panel.SetActive(true);
+        settingsMenu.gameObject.SetActive(true);
+        SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
+        settingsMenu.SetMasterVolume(partida.masterVol);
+        settingsMenu.SetHazardVolume(partida.hazardVol);
+        settingsMenu.SetMusicVolume(partida.musicVol);
+        settingsMenu.SetQuality(partida.qualityIndex);
+        settingsMenu.SetFullScreen(partida.isFullScreen);
+        panel.SetActive(false);
+        settingsMenu.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

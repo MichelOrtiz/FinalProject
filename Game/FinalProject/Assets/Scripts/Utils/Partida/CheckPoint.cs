@@ -22,7 +22,6 @@ public class CheckPoint : MonoBehaviour
         SaveFile progress = SaveFilesManager.instance.currentSaveSlot;
         progress.inventory = Inventory.instance.items.ToArray();
         progress.money = Inventory.instance.GetMoney();
-        //progress.controlbinds = KeybindManager.instance.controlbinds;
         progress.controlBindsKeys = KeybindManager.instance.controlbinds.Keys.ToList<string>();
         progress.controlBindsValues = KeybindManager.instance.controlbinds.Values.ToList<KeyCode>();
         if(Cofre.instance.savedItems != null){
