@@ -9,6 +9,8 @@ public class CWorldState : InterCondition
     {
         if(SaveFilesManager.instance.currentSaveSlot == null) return false;
         List<WorldState> ws = SaveFilesManager.instance.currentSaveSlot.WorldStates;
-        return ws.Exists(x => x.id == worldState.id && x.state);
+        if(!ws.Exists(x => x.id == worldState.id)) return false;
+        worldState = ws.Find(x => x.id == worldState.id);
+        return worldState.state;
     }
 }

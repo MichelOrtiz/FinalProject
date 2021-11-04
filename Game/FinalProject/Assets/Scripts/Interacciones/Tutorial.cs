@@ -25,7 +25,7 @@ public class Tutorial : IntRemoteTrigger
     }
     protected override void NextInteraction(){
         base.NextInteraction();
-        if(cola.Count == 0) Destroy(gameObject);
+        //if(cola.Count == 0) Destroy(gameObject);
     }
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.magenta;
