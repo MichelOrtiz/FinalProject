@@ -19,10 +19,8 @@ public class InterGWorldState : Interaction
     void GiveWorldState(){
         SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
         if(partida.WorldStates.Exists(x => x.id == giveWorldState.id)){
-            WorldState w = partida.WorldStates.Find(x => x.id == giveWorldState.id);
-            w.state = true;
+            partida.WorldStates.Find(x => x.id == giveWorldState.id).state = true;
         }else{
-            giveWorldState.state = true;
             partida.WorldStates.Add(giveWorldState);
         }
         onEndInteraction?.Invoke();
