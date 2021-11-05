@@ -74,4 +74,7 @@ public class SceneController : MonoBehaviour
         
         //mainCanvas.SetActive(true);
     }
+    public void RealLoasScene(int escena){
+        StartCoroutine(LoadAsynchronously(escena));
+    }
 }
