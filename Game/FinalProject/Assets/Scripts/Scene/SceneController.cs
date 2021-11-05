@@ -43,6 +43,7 @@ public class SceneController : MonoBehaviour
         sceneTitle?.gameObject?.SetActive(false);
         prevScene = SceneManager.GetActiveScene().buildIndex;
         currentScene = scene;
+        StartCoroutine(LoadAsynchronously(partida.sceneToLoad));
     }
     public void Load(SaveFile partida){
         //LoadScene(partida.sceneToLoad);
