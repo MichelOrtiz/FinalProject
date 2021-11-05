@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1515bee64ab7054e96a82945df42184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statesManager: {fileID: 0}
   iLevelToLoad: 2
   noDoor: 1
   loadPosition: {fileID: 1733409318}
@@ -32272,7 +32273,9 @@ MonoBehaviour:
   interactions:
   - {fileID: 11400000, guid: a405cc1f2d2855b46aa56a73c3d122aa, type: 2}
   - {fileID: 11400000, guid: d13372c317277534faeb2ef2a50d2c54, type: 2}
+  currentInter: {fileID: 0}
   radius: 2
+  busy: 0
 --- !u!1 &1048730686
 GameObject:
   m_ObjectHideFlags: 0
@@ -32319,6 +32322,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1088837989
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8924015695689428613, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_Name
+      value: EntityDestroyedFx
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924015695689428615, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: efbbe785d2857d84a9470cb2305a8420, type: 3}
 --- !u!1001 &1140571411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35813,6 +35873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1515bee64ab7054e96a82945df42184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statesManager: {fileID: 0}
   iLevelToLoad: 7
   noDoor: 1
   loadPosition: {fileID: 14630801}
@@ -35941,7 +36002,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5c78b8bceffb594a87c4b08196ab36f, type: 2}
   - {fileID: 11400000, guid: faabd9c600592a94c9116926a6a021d3, type: 2}
   - {fileID: 11400000, guid: 4a7dcf3bf1579d24c866fd25fa5fe510, type: 2}
+  currentInter: {fileID: 0}
   radius: 2
+  busy: 0
 --- !u!1001 &2014024924
 PrefabInstance:
   m_ObjectHideFlags: 0
