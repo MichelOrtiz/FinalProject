@@ -16,7 +16,7 @@ public class Captured : State
         player = PlayerManager.instance;
         inputs = player.gameObject.GetComponent<PlayerInputs>();
         inputs.enabled=false;
-        player.abilityManager.gameObject.SetActive(false);
+        player.abilityManager.SetActive(false);
         capturedPos = manager.hostEntity.GetPosition();
         player = PlayerManager.instance;
         player.GetComponent<PlayerInputs>().enabled=false;
@@ -45,7 +45,7 @@ public class Captured : State
         Debug.Log("captured stopped");
         inputs.enabled=true;
         if(manager.enemy!=null)manager.enemy.enabled=true;
-        player.abilityManager.gameObject.SetActive(true);
+        player.abilityManager.SetActive(true);
         if(manager.enemy!=null){
             manager.enemy.statesManager.AddState(penalization);
         }

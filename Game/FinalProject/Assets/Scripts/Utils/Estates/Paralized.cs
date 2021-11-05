@@ -48,7 +48,7 @@ public class Paralized : State
         if (isPlayer)
         {
             if (player.inputs.enabled != value) player.inputs.enabled = value;
-            if (player.abilityManager.gameObject.activeInHierarchy != value) player.abilityManager.gameObject.SetActive(value);
+            if (player.abilityManager.abiltySystem.activeInHierarchy != value) player.abilityManager.SetActive(value);
         }
         else
         {
