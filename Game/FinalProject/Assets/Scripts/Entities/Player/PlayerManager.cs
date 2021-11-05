@@ -471,6 +471,7 @@ public class PlayerManager : Entity
 
     public void RestoreValuesForDead(){
         statesManager.StopAll();
+        gameObject.GetComponent<SpriteRenderer>().color= new Color(1,1,1,1); 
         inmunityState.onEffect = false;
         walkingSpeed = defaultwalkingSpeed;
         currentSpeed = walkingSpeed;
@@ -480,12 +481,12 @@ public class PlayerManager : Entity
         currentOxygen = maxOxygen;
         dmgMod = defaultDmgMod;
         speedMods = 1f;
+        isInvisible = false;
         isInWater = false;
         isInDark = false;
         isInSnow = false;  
         isInIce = false;
         isDeath = false;
-        gameObject.GetComponent<SpriteRenderer>().color= new Color(1,1,1,1);
         ResetAnimations();
     }
     #endregion
