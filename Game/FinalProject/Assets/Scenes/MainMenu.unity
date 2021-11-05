@@ -213,7 +213,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1139719528}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetHazardVolume
         m_Mode: 0
@@ -3554,8 +3554,8 @@ RectTransform:
   m_Father: {fileID: 1350659966}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.7214485}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4471,7 +4471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &514314531
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5801,6 +5801,7 @@ GameObject:
   - component: {fileID: 749245125}
   - component: {fileID: 749245124}
   - component: {fileID: 749245123}
+  - component: {fileID: 749245126}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5873,6 +5874,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &749245126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749245122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &780053411
 GameObject:
   m_ObjectHideFlags: 0
@@ -5918,7 +5951,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 792303624}
-  - component: {fileID: 792303625}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -5947,21 +5979,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 560, y: 316}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &792303625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792303623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68425ada5a4ba0a438d273d93007c41a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navi: {fileID: 1491315174}
-  optionsMenu: {fileID: 1139719526}
-  keybindUI: {fileID: 514314530}
 --- !u!1 &799308566
 GameObject:
   m_ObjectHideFlags: 0
@@ -8360,7 +8377,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1139719528}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 0
@@ -8534,7 +8551,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 792303625}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: KeybindManager, Assembly-CSharp
         m_MethodName: ResetBindValues
         m_Mode: 1
@@ -8667,7 +8684,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 792303625}
+      - m_Target: {fileID: 2061421797}
         m_TargetAssemblyTypeName: KeybindManager, Assembly-CSharp
         m_MethodName: ExitUI
         m_Mode: 1
@@ -10684,7 +10701,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1139719527}
-  - component: {fileID: 1139719528}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -10718,29 +10734,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 560, y: 316}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1139719528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139719526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05bf88949937c18479715c9a75915d9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 929d2df000209fc46909b1c613de9b16, type: 2}
-  masterVol: 0
-  masterVolSlider: {fileID: 0}
-  hazardVol: 0
-  hazardVolSlider: {fileID: 0}
-  musicVol: 0
-  musicVolSlider: {fileID: 0}
-  qualityIndex: 0
-  qualityDropdown: {fileID: 0}
-  isFullScreen: 0
-  fullScrennToggle: {fileID: 0}
 --- !u!1 &1155393430
 GameObject:
   m_ObjectHideFlags: 0
@@ -12527,18 +12520,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1268008198}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -14925,7 +14906,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1139719528}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetFullScreen
         m_Mode: 0
@@ -15178,7 +15159,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1139719528}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetQuality
         m_Mode: 0
@@ -18064,7 +18045,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1139719528}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
@@ -19208,6 +19189,8 @@ GameObject:
   - component: {fileID: 2061421791}
   - component: {fileID: 2061421795}
   - component: {fileID: 2061421796}
+  - component: {fileID: 2061421797}
+  - component: {fileID: 2061421798}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -19323,6 +19306,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f89c74fc65efcd488623f5adbc16704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2061421797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061421790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68425ada5a4ba0a438d273d93007c41a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navi: {fileID: 1491315174}
+  optionsMenu: {fileID: 1139719526}
+  keybindUI: {fileID: 514314530}
+--- !u!114 &2061421798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061421790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05bf88949937c18479715c9a75915d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 929d2df000209fc46909b1c613de9b16, type: 2}
+  masterVol: 0
+  masterVolSlider: {fileID: 932548367}
+  hazardVol: 0
+  hazardVolSlider: {fileID: 5369034}
+  musicVol: 0
+  musicVolSlider: {fileID: 1934780552}
+  qualityIndex: 0
+  qualityDropdown: {fileID: 1558085814}
+  isFullScreen: 0
+  fullScrennToggle: {fileID: 1508521563}
 --- !u!1 &2075551407
 GameObject:
   m_ObjectHideFlags: 0
