@@ -58,7 +58,17 @@ public class AbilityManager : MonoBehaviour
     /// </summary>
     /// <param name="active"></param>
     public void SetActive(bool active){
-        abiltySystem.SetActive(active);
+        SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
+        int i = 0;
+        foreach(Ability a in abilities){
+            if( i > partida.unlockedAbilities.Length) break;
+            a.isUnlocked = partida.unlockedAbilities[i];
+            a.enabled = a.isUnlocked;
+            i++;
+        }
+        foreach(Ability ab in abilities){
+            ab.enabled = active;
+        }
     }
 
     public void SetActiveSingle(Ability ability, bool active)
