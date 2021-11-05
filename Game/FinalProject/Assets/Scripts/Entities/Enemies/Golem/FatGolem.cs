@@ -32,6 +32,7 @@ public class FatGolem : FatType
         }
         if (curTimeBtwLShot > timeBtwLShot)
         {
+            Debug.Log("should shoot");
             laserShooter.ShootLaser(player.GetPosition());
             curTimeBtwLShot = 0;
         }

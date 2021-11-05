@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 2451933955450246002}
   - component: {fileID: 2451933955450246000}
   - component: {fileID: 2451933955450246001}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: CollisionHandler
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -224,10 +224,6 @@ MonoBehaviour:
   enemyType: 10
   enemyName: 17
   flipToPlayerIfSpotted: 1
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 20
   punishDamage: 10
   atackEffect: {fileID: 0}
@@ -453,6 +449,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: 809f647a6565971408e02d91a8b783de, type: 3}
   shotPos: {fileID: 2451933955874347783}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 0
   rotate: 0
   center: {fileID: 0}
   startingAngle: 0
@@ -908,7 +905,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2451933957375357045}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -789.99, y: -0.13, z: 0}
+  m_LocalPosition: {x: -0.39, y: 1.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 2451933956838061570}

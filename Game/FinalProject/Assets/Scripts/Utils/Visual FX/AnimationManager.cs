@@ -116,6 +116,11 @@ public class AnimationManager : MonoBehaviour
         StartCoroutine(SetNextAnimUntil(checkMethod, nextAnimation));
     }
 
+    public void SetCurrentState(string state, bool filterEnemy)
+    {
+        currentState = filterEnemy? FilterEnemy(state) : state;
+    }
+
 
     IEnumerator SetNextAnimUntil(Func<bool> checkMethod, string nextAnimation)
     {

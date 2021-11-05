@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1140219412943366644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1602755303865671490}
+  m_Layer: 10
+  m_Name: obstacleCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1602755303865671490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140219412943366644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.71, y: -0.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4692736203679018444}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4692736202433260915
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,6 +41,7 @@ GameObject:
   - component: {fileID: 4692736202433260924}
   - component: {fileID: 4692736202433260926}
   - component: {fileID: 4692736202433260925}
+  - component: {fileID: 31390774319708932}
   m_Layer: 10
   m_Name: SpriteFx
   m_TagString: Untagged
@@ -72,7 +103,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b393b3df58f80d84082f440cb5a55a05, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae0aea325ea33d949b2489cbdc0b8ac1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,7 +124,7 @@ Animator:
   m_GameObject: {fileID: 4692736202433260915}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a6bff70b2ba2664b91d7d7f6c51d068, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -102,6 +133,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &31390774319708932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692736202433260915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 4692736204185472523}
+  animator: {fileID: 4692736202433260925}
+  previousState: 
+  currentState: 
+  nextState: 
+  nextStateEnabled: 0
 --- !u!1 &4692736202605937622
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +161,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4692736202605937617}
   - component: {fileID: 4692736202605937623}
-  - component: {fileID: 4692736202605937616}
   - component: {fileID: 4692736202605937618}
   m_Layer: 10
   m_Name: CollisionHandler
@@ -153,22 +201,6 @@ MonoBehaviour:
   touchingEnemy: 0
   touchingGround: 0
   lastEnemyTouched: {fileID: 0}
---- !u!58 &4692736202605937616
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4692736202605937622}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.5
 --- !u!60 &4692736202605937618
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -194,17 +226,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.8511263, y: 1.5634909}
+    - - {x: 1.1120058, y: 1.3398781}
       - {x: 0.29318237, y: 0.47646713}
-      - {x: -0.43566895, y: 2.0105896}
-      - {x: -2.3645926, y: 1.33514}
+      - {x: -0.04563141, y: 0.50324345}
+      - {x: -0.6965561, y: 2.023013}
+      - {x: -2.6378927, y: 1.2978714}
       - {x: -0.4414215, y: 0.2959671}
-      - {x: -3.4407654, y: -0.7344036}
+      - {x: -3.6519547, y: -0.697135}
       - {x: -1.0598526, y: -0.43617058}
-      - {x: -0.692491, y: -0.93466556}
-      - {x: 1.6034409, y: -0.96607566}
-      - {x: 1.1897812, y: 0.037488937}
-      - {x: 1.6865835, y: 1.076807}
+      - {x: -0.8167204, y: -0.89739645}
+      - {x: 0.80837405, y: -0.38219714}
+      - {x: 1.115242, y: 0.49713802}
+      - {x: 1.9101934, y: 0.6668501}
 --- !u!1 &4692736202783434538
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4692736202783434538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.59, y: -0.2, z: 0}
+  m_LocalPosition: {x: -0.4, y: -1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4692736203679018444}
@@ -376,6 +409,16 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: b69da6cbf6e0f104f92e5ec877dfe01a, type: 3}
   shotPos: {fileID: 4692736204158034767}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 0
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!1 &4692736203554600939
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4692736203554600939}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.99, y: 1.96, z: 0}
+  m_LocalPosition: {x: 2.37, y: 1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4692736204185472566}
@@ -435,6 +478,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 4692736202783434539}
+  - {fileID: 1602755303865671490}
   m_Father: {fileID: 4692736204185472566}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -453,7 +497,7 @@ MonoBehaviour:
   fovOrigin: {fileID: 4692736202783434539}
   fovType: 2
   fovAngle: 180
-  viewDistance: 10
+  viewDistance: 13
   blockFov: 0
   layerMask:
     serializedVersion: 2
@@ -462,8 +506,8 @@ MonoBehaviour:
   inFrontOfObstacle: 0
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 4864
-  obstacleCheckOrigin: {fileID: 4692736202783434539}
+    m_Bits: 2102016
+  obstacleCheckOrigin: {fileID: 1602755303865671490}
   obstacleViewDistance: 1
   blockingCollider: {fileID: 0}
   facingDirection: 
@@ -525,6 +569,9 @@ MonoBehaviour:
   jumpForce: {x: 0, y: 0}
   jumpForceMultiplier: {x: 0, y: 0}
   forceMode: 1
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 4692736204097372891}
   collisionHandler: {fileID: 4692736202605937623}
   fieldOfView: {fileID: 4692736203679018435}
@@ -697,7 +744,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4692736204185472522}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 89.9, y: 9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -790,7 +837,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 4692736202433260925}
-  animationManager: {fileID: 0}
+  animationManager: {fileID: 31390774319708932}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 4692736204097372891}
@@ -800,10 +847,6 @@ MonoBehaviour:
   enemyType: 6
   enemyName: 22
   flipToPlayerIfSpotted: 1
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 0
   punishDamage: 10
   atackEffect: {fileID: 0}

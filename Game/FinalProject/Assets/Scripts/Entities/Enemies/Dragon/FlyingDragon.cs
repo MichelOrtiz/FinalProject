@@ -13,10 +13,15 @@ public class FlyingDragon : Enemy
     new void Update()
     {
         base.Update();
+        if (fieldOfView.inFrontOfObstacle)
+        {
+            animationManager.ChangeAnimation("idle");
+        }
     }
 
     protected override void MainRoutine()
     {
+        animationManager.ChangeAnimation("idle", 0.5f);
         enemyMovement.DefaultPatrolInAir();
     }
 

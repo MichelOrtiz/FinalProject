@@ -15,6 +15,7 @@ public class ThiefDragon : Enemy
     {
         base.Start();
         percentageMoneySteal /= 100;
+        InvokeRepeating("Jump", timeBtwJump, timeBtwJump);
     }
 
     new void FixedUpdate()
@@ -33,9 +34,16 @@ public class ThiefDragon : Enemy
         base.FixedUpdate();
     }
 
+    void Jump()
+    {
+        stolenItemIcon.GetComponent<SpriteRenderer>().sprite = null;
+        animationManager.ChangeAnimation("jump");
+        enemyMovement.Jump();
+    }
+
     protected override void MainRoutine()
     {
-        if (curTimeBtwJump > timeBtwJump)
+        /*if (curTimeBtwJump > timeBtwJump)
         {
             stolenItemIcon.GetComponent<SpriteRenderer>().sprite = null;
             if (groundChecker.isNearEdge || fieldOfView.inFrontOfObstacle)
@@ -53,12 +61,12 @@ public class ThiefDragon : Enemy
         else
         {
             curTimeBtwJump += Time.deltaTime;
-        }
+        }*/
     }
 
     protected override void Attack()
     {
-        base.Attack();
+        //base.Attack();
         Inventory inventory = Inventory.instance;
         int money = Inventory.instance.GetMoney();
         if (money >= minMoneyToSteal)
@@ -83,9 +91,7 @@ public class ThiefDragon : Enemy
 
     protected override void groundChecker_Grounded(string groundTag)
     {
-        if (!groundChecker.isNearEdge)
-        {
-            ChangeFacingDirection();
-        }
+        animationManager.ChangeAnimation("idle");
+        ChangeFacingDirection();
     }
 }
