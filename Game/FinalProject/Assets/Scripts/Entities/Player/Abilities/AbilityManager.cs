@@ -30,15 +30,14 @@ public class AbilityManager : MonoBehaviour
                 abilities[i].hotkey = key;
                 i++;
             }
-            if(partida.unlockedAbilities != null){
-                i = 0;
-                foreach(Ability a in abilities){
-                    if( i > partida.unlockedAbilities.Length) break;
-                    a.isUnlocked = partida.unlockedAbilities[i];
-                    a.enabled = a.isUnlocked;
-                    i++;
-                }
+            i = 0;
+            foreach(Ability a in abilities){
+                if( i > partida.unlockedAbilities.Length) break;
+                a.isUnlocked = partida.unlockedAbilities[i];
+                a.enabled = a.isUnlocked;
+                i++;
             }
+            
             abilityUI.SetOpen(true);
             abilityUI.UpdateUI();
             abilityUI.SetOpen(false);
@@ -59,10 +58,7 @@ public class AbilityManager : MonoBehaviour
     /// </summary>
     /// <param name="active"></param>
     public void SetActive(bool active){
-        foreach(Ability a in abilities){
-            //a.isUnlocked=active;
-            a.enabled=active;
-        }
+        abiltySystem.SetActive(active);
     }
 
     public void SetActiveSingle(Ability ability, bool active)
