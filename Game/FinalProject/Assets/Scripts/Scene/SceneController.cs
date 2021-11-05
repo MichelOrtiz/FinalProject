@@ -43,7 +43,6 @@ public class SceneController : MonoBehaviour
         sceneTitle?.gameObject?.SetActive(false);
         prevScene = SceneManager.GetActiveScene().buildIndex;
         currentScene = scene;
-        StartCoroutine(LoadAsynchronously(scene));
     }
     public void Load(SaveFile partida){
         //LoadScene(partida.sceneToLoad);
@@ -73,5 +72,8 @@ public class SceneController : MonoBehaviour
         sceneTitle = FindObjectOfType<SceneTitle>();
         
         //mainCanvas.SetActive(true);
+    }
+    public void RealLoasScene(int escena){
+        StartCoroutine(LoadAsynchronously(escena));
     }
 }

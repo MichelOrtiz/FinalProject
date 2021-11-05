@@ -61,4 +61,11 @@ public class Pause : MonoBehaviour
         PlayerManager.instance.SetEnabledPlayer(!active);
 
     }
+    public void ReturnMenu(){
+        ResumeGame();
+        panel.SetActive(false);
+        SceneController.instance.RealLoasScene(34);
+        Debug.Log("Sup");
+
+    }
 }
