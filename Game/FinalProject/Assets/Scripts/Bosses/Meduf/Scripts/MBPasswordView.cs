@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,21 +8,6 @@ public class MBPasswordView : MonoBehaviour
     [SerializeField] private Sprite down;
     [SerializeField] private Sprite left;
     [SerializeField] private Sprite right;
-
-    [SerializeField] private password password;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void SetImages(List<DireccionMiniJuegoMeduf> directions)
     {

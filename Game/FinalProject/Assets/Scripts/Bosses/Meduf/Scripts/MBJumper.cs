@@ -53,7 +53,7 @@ public class MBJumper : MonoBehaviour
     
         collisionHandler.StayTouchingContactHandler += collisionHandler_TouchingContact;
         groundChecker.GroundedHandler += groundChecker_Grounded;
-        partsHandler.ChangedReferenceHandler += partsHandler_ChangedReference;
+        partsHandler.ChangedReference += partsHandler_ChangedReference;
     }
 
     // Update is called once per frame
@@ -118,25 +118,25 @@ public class MBJumper : MonoBehaviour
         
     }
 
-    void collisionHandler_TouchingContact(GameObject contact)
+void collisionHandler_TouchingContact(GameObject contact)
+{
+    //rb.centerOfMass = partsHandler.Center;
+    if (contact.tag == "Player")
     {
-        //rb.centerOfMass = partsHandler.Center;
-        if (contact.tag == "Player")
+        if (!justGrounded && isReference && groundChecker.isGrounded)
         {
-            if (!justGrounded && isReference && groundChecker.isGrounded)
-            {
-                Debug.Log("should jump");
-                Vector2 jumpDirection = new Vector2
-                (
-                    player.GetPosition().x > transform.position.x ?
-                    jumpForce.x : -jumpForce.x, 
-                    jumpForce.y
-                );
-                rb.AddForce(jumpDirection, ForceMode2D.Impulse);
-            }
+            Debug.Log("should jump");
+            Vector2 jumpDirection = new Vector2
+            (
+                player.GetPosition().x > transform.position.x ?
+                jumpForce.x : -jumpForce.x, 
+                jumpForce.y
+            );
+            rb.AddForce(jumpDirection, ForceMode2D.Impulse);
         }
-        
     }
+    
+}
 
     void groundChecker_Grounded(string groundTag)
     {
@@ -144,24 +144,24 @@ public class MBJumper : MonoBehaviour
         rb.velocity = new Vector2();
     }
 
-    void partsHandler_ChangedReference(GameObject reference)
+void partsHandler_ChangedReference(GameObject reference)
+{
+    if (positionReference.Equals(reference))
     {
-        if (positionReference.Equals(reference))
-        {
-            isReference = true;
-            GetComponent<SpriteRenderer>().enabled = true;
-            machineFx.SetActive(true);
-            transform.position = initialPosition;
+        isReference = true;
+        GetComponent<SpriteRenderer>().enabled = true;
+        machineFx.SetActive(true);
+        transform.position = initialPosition;
 
-        }
-        else
-        {
-            isReference = false;
-            GetComponent<SpriteRenderer>().enabled = false;
-            machineFx.SetActive(false);
-
-            accessMinigame = null;
-        }
     }
+    else
+    {
+        isReference = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        machineFx.SetActive(false);
+
+        accessMinigame = null;
+    }
+}
 
 }

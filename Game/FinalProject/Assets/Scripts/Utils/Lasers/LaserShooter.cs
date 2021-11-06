@@ -68,6 +68,14 @@ public class LaserShooter : MonoBehaviour, ILaser
         laser.Setup(from, to, this);
     }
 
+    public void ShootLaserAndSetShotPos(Transform from, Vector2 to)
+    {
+        endPos = to;
+        shotPos = from;
+        laser = Instantiate(laserPrefab, from.position, laserPrefab.transform.rotation).GetComponent<Laser>();
+        laser.Setup(from.position, to, this);
+    }
+
     public void ShootLaserAndSetEndPos(Transform endPos)
     {
         endPosHolder = endPos;

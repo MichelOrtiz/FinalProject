@@ -1,12 +1,11 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MBMinigameManager : MonoBehaviour
 {
     public GameObject currentHost; 
-    private GameObject lastHost;
-    [SerializeField] private List<AccessMinigame> minigameAccess;
+    [SerializeField] private List<AccessMinigame> minigameAccess; 
     [SerializeReference] private AccessMinigame currentMinigameAccess;
     [SerializeReference] private byte index;
     private bool assignedEvent;
@@ -20,12 +19,7 @@ public class MBMinigameManager : MonoBehaviour
     [SerializeField] private Color disabledColor;
 
     #region Events
-    public delegate void AllMinigamesCompleted();
-    public event AllMinigamesCompleted AllMinigamesCompletedHandler;
-    protected virtual void OnAllMinigamesCompleted()
-    {
-        AllMinigamesCompletedHandler?.Invoke();
-    }
+    public Action AllMinigamesCompleted;
     #endregion
 
     void Start()
@@ -35,7 +29,7 @@ public class MBMinigameManager : MonoBehaviour
         {
             Debug.Log("why");
         }
-        partsHandler.ChangedReferenceHandler += partsHandler_ChangedReference;
+        partsHandler.ChangedReference += partsHandler_ChangedReference;
         
         SetMinigame();
     }
@@ -93,7 +87,6 @@ public class MBMinigameManager : MonoBehaviour
 
     void partsHandler_ChangedReference(GameObject reference)
     {
-        lastHost = currentHost;
         currentHost = reference.transform.parent.gameObject;
         SetMinigame();
     }
@@ -112,13 +105,7 @@ public class MBMinigameManager : MonoBehaviour
         }
         else
         {
-            OnAllMinigamesCompleted();
+            AllMinigamesCompleted?.Invoke();
         }
-    }
-
-    void currentMinigame_Ended()
-    {
-        Debug.Log("ended minigame " + currentMinigameAccess.minigameObject.GetComponent<Minigame>());
-        assignedEvent = false;
     }
 }
