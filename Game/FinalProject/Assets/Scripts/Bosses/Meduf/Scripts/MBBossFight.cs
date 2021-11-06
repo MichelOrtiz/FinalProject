@@ -5,13 +5,6 @@ using UnityEngine;
 public class MBBossFight : BossFight
 {
     private MBMinigameManager minigameManager;
-    
-    // Start is called before the first frame update
-    new void Start()
-    {
-        base.Start();
-        
-    }
 
     // Update is called once per frame
     new void Update()
@@ -28,7 +21,7 @@ public class MBBossFight : BossFight
             try
             {
                 minigameManager = FindObjectOfType<MBMinigameManager>();   
-                minigameManager.AllMinigamesCompletedHandler += minigameManager_AllMinigamesCompleted; 
+                minigameManager.AllMinigamesCompleted += minigameManager_AllMinigamesCompleted; 
             }
             catch (System.NullReferenceException)
             {

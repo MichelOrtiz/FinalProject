@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,9 +7,6 @@ public class MBVolcanoManager : MonoBehaviour
     private int lastActiveZone;
 
     [SerializeField] private float timeBtwActive;
-    private float curTimeBtwActive;
-    /*[SerializeField] private float timeActive;
-    [SerializeField] private float curTimeActive;*/
 
     void Awake()
     {
@@ -22,25 +18,13 @@ public class MBVolcanoManager : MonoBehaviour
                 spore.EmmissionEndedHandler += spore_EndedCollision;
             }
         }
+        InvokeRepeating("ActivateRandomZone", timeBtwActive, timeBtwActive);
     }
 
-    void Start()
+    void ActivateRandomZone()
     {
-        
-    }
-
-    void Update()
-    {
-        if (curTimeBtwActive > timeBtwActive)
-        {
-            lastActiveZone = GetNextZone();
-            waterZones[lastActiveZone].SetActive(true);
-            curTimeBtwActive = 0;
-        }
-        else
-        {
-            curTimeBtwActive += Time.deltaTime;
-        }
+        lastActiveZone = GetNextZone();
+        waterZones[lastActiveZone].SetActive(true);
     }
 
     private int GetNextZone()

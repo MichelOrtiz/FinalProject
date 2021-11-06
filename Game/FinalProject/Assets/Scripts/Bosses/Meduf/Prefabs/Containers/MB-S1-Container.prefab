@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366670989651526
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -477,6 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366671031139298
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -600,6 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366671155834204
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -888,6 +891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366671360764714
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1110,6 +1114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366671425120466
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1231,7 +1236,6 @@ GameObject:
   - component: {fileID: 4819366671458819817}
   - component: {fileID: 4819366671458819816}
   - component: {fileID: 4819366671458819815}
-  - component: {fileID: 4819366671458819814}
   m_Layer: 0
   m_Name: MB-RobotReference-Right
   m_TagString: Untagged
@@ -1357,22 +1361,6 @@ MonoBehaviour:
   notInteractColor: {r: 0.9622642, g: 0.14070843, b: 0.14070843, a: 0.5019608}
   isReference: 0
   inStartPos: 0
---- !u!114 &4819366671458819814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819366671458819812}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ac70b1382bf150488747c8e7837e2cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 7
-  minigameObject: {fileID: 4143911063180315725, guid: 393a4ce09da4b0b47853eeb61e0654fc, type: 3}
-  available: 0
-  cooldownTime: 0
 --- !u!1 &4819366671480428330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,6 +1540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366671496564506
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2296,6 +2285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366671833129840
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2665,6 +2655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366671967291098
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2701,6 +2692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4819366672043607097}
   - component: {fileID: 4819366672043607099}
+  - component: {fileID: 5658396218887164618}
   m_Layer: 0
   m_Name: MB-Robot
   m_TagString: Untagged
@@ -2757,12 +2749,27 @@ MonoBehaviour:
   rightPositionReference: {fileID: 4819366671386918530}
   leftPositionReference: {fileID: 4819366671570613706}
   currentPositionsReference: {fileID: 4819366671570613706}
-  yCheckRange: 0.5
   speedMultiplier: 3
-  distanceSpeedRatio: 3
   timeBtwMove: 0.75
   waitTimeWhenAssembled: 2.5
+  laserShooter: {fileID: 5658396218887164618}
   laserPrefab: {fileID: 930200629637541267, guid: 35a4a211e17d4ee4699c60c7425146f2, type: 3}
+--- !u!114 &5658396218887164618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819366672043607096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35dbe916646486845bc6828e29a507a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 930200629637541267, guid: 35a4a211e17d4ee4699c60c7425146f2, type: 3}
+  laserDamage: 0
+  laserEffect: {fileID: 0}
+  shotPos: {fileID: 0}
 --- !u!1 &4819366672103251999
 GameObject:
   m_ObjectHideFlags: 0
@@ -3824,6 +3831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366672393532762
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3977,6 +3985,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366672407895313
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4264,6 +4273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366672545740124
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4571,6 +4581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366672571597871
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4776,6 +4787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366672666939573
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4981,6 +4993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366672687342722
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5268,6 +5281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366672729111008
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5391,6 +5405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366672761028196
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5514,6 +5529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &4819366672796065403
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092307399151479
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -559,6 +560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092307553209681
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -682,6 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092307617081410
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1051,6 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092307686831305
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1374,6 +1378,10 @@ MonoBehaviour:
   partsHandler: {fileID: 0}
   positionReference: {fileID: 3084092309416185893}
   machineFx: {fileID: 0}
+  accessMinigame: {fileID: 0}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  interactableColor: {r: 0, g: 0, b: 0, a: 0}
+  notInteractColor: {r: 0, g: 0, b: 0, a: 0}
   isReference: 0
   inStartPos: 0
 --- !u!114 &3084092307796075491
@@ -1676,6 +1684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092307846518845
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2551,6 +2560,10 @@ MonoBehaviour:
   partsHandler: {fileID: 3084092309204029340}
   positionReference: {fileID: 3084092309131614916}
   machineFx: {fileID: 3084092308702893815}
+  accessMinigame: {fileID: 0}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  interactableColor: {r: 0, g: 0, b: 0, a: 0}
+  notInteractColor: {r: 0, g: 0, b: 0, a: 0}
   isReference: 0
   inStartPos: 0
 --- !u!1 &3084092308227304298
@@ -2650,6 +2663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092308227304276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2855,6 +2869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092308284494726
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2978,6 +2993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092308358632656
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3101,6 +3117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092308391419587
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3435,6 +3452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092308423528821
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3558,6 +3576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092308428275280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4584,6 +4603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092308777040174
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4963,6 +4983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092309080907081
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5185,6 +5206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092309138750345
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5222,6 +5244,7 @@ GameObject:
   - component: {fileID: 3084092309204029342}
   - component: {fileID: 3084092309204029340}
   - component: {fileID: 3084092309204029341}
+  - component: {fileID: 2742498921491476798}
   m_Layer: 0
   m_Name: MB-Robot
   m_TagString: Untagged
@@ -5278,11 +5301,10 @@ MonoBehaviour:
   rightPositionReference: {fileID: 3084092309131614916}
   leftPositionReference: {fileID: 3084092309416185893}
   currentPositionsReference: {fileID: 3084092309131614916}
-  yCheckRange: 0.5
   speedMultiplier: 4.5
-  distanceSpeedRatio: 3
   timeBtwMove: 0.2
   waitTimeWhenAssembled: 3
+  laserShooter: {fileID: 2742498921491476798}
   laserPrefab: {fileID: 930200629637541267, guid: 35a4a211e17d4ee4699c60c7425146f2, type: 3}
 --- !u!114 &3084092309204029341
 MonoBehaviour:
@@ -5307,6 +5329,22 @@ MonoBehaviour:
   machineFx: {fileID: 0}
   enabledColor: {r: 0, g: 0, b: 0, a: 0}
   disabledColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &2742498921491476798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3084092309204029331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35dbe916646486845bc6828e29a507a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 930200629637541267, guid: 35a4a211e17d4ee4699c60c7425146f2, type: 3}
+  laserDamage: 0
+  laserEffect: {fileID: 0}
+  shotPos: {fileID: 0}
 --- !u!1 &3084092309209418977
 GameObject:
   m_ObjectHideFlags: 0
@@ -5568,6 +5606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092309266232154
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5954,6 +5993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092309427415644
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6077,6 +6117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  drainAllStamina: 0
 --- !u!61 &3084092309448795253
 BoxCollider2D:
   m_ObjectHideFlags: 0
