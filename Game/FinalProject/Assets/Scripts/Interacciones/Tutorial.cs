@@ -8,6 +8,7 @@ public class Tutorial : IntRemoteTrigger
     
     protected override void Start()
     {
+        busy = true;
         cola = new Queue<Interaction>();
         busy = false;
         SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
@@ -22,10 +23,21 @@ public class Tutorial : IntRemoteTrigger
         foreach(Interaction inter in interactions){
             inter.gameObject = this.gameObject;
         }
+        busy = false;
     }
     protected override void NextInteraction(){
-        base.NextInteraction();
-        //if(cola.Count == 0) Destroy(gameObject);
+        if(cola.Count == 0){
+            currentInter = null;
+            Debug.Log("No hay mas interacciones");
+            busy = false;
+            Destroy(gameObject);
+            return;
+        }
+        Interaction inter = cola.Dequeue();
+        currentInter = inter;
+        Debug.Log("Current interaction: " + currentInter.name);
+        inter.RestardCondition();
+        inter.DoInteraction();
     }
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.magenta;
