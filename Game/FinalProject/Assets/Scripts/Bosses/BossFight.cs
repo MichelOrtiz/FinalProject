@@ -87,6 +87,13 @@ public class BossFight : MonoBehaviour
 
             
             PlayerManager.instance.abilityManager.SetActiveSingle(ability, true);
+
+            int i = 0;
+            foreach(Ability ab in PlayerManager.instance.abilityManager.abilities){
+                SaveFilesManager.instance.currentSaveSlot.unlockedAbilities[i] = ab.isUnlocked;
+                i++;
+            }
+            
             endMessageTrigger.popUp.Message = ability.ToString();
             endMessageTrigger.TriggerPopUp(true);
 
