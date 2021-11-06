@@ -59,9 +59,15 @@ public class loadlevel : MonoBehaviour
         }*/
         if (collisionGameObject.tag == "Player")
         {
-            RestoreValuesForOtherScene();
-            LoadScene();
-
+            PlayerManager.instance.inputs.Interact -= cargarEscena;
+            PlayerManager.instance.inputs.Interact += cargarEscena;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision) {
+        GameObject collisionGameObject = collision.gameObject;
+        if (collisionGameObject.tag == "Player")
+        {
+            PlayerManager.instance.inputs.Interact -= cargarEscena;
         }
     }
 
@@ -80,5 +86,11 @@ public class loadlevel : MonoBehaviour
         PlayerManager.instance.isInSnow = false;  
         PlayerManager.instance.isInIce = false;
         PlayerManager.instance.ResetAnimations();
+    }
+    void cargarEscena(){
+        
+        PlayerManager.instance.inputs.Interact -= cargarEscena; 
+        RestoreValuesForOtherScene();
+        LoadScene();
     }
 }
