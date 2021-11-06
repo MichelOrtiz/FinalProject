@@ -152,6 +152,19 @@ public class CameraFollow : MonoBehaviour
         //transform.position = Mathf.Lerp(transform.position, target, Time.fixedDeltaTime * speed);
         camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetBounds.zCam, Time.fixedDeltaTime * zoomSpeed);
         //camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetBounds.zCam, Time.fixedDeltaTime * speed);
+
+        /* Intento de mejorar la camara
+        Vector3 clampedPos = new Vector3(
+            camBox.size.x < targetBounds.Bounds.size.x ? Mathf.Clamp(player.GetPosition().x, targetBounds.Bounds.min.x + camBox.size.x/2, targetBounds.Bounds.max.x - camBox.size.x/2) : 
+            (targetBounds.Bounds.min.x + targetBounds.Bounds.max.x)/2,
+            camBox.size.y < targetBounds.Bounds.size.y ? Mathf.Clamp(player.GetPosition().y, targetBounds.Bounds.min.y + camBox.size.y/2, targetBounds.Bounds.max.y - camBox.size.y/2) : 
+            (targetBounds.Bounds.min.y + targetBounds.Bounds.max.y)/2,
+            Mathf.Clamp(player.GetPosition().z, -10f ,-10f )
+        );
+        
+        transform.position = Vector3.Lerp(transform.position, clampedPos, speed*Time.deltaTime);
+        */
+
     }
 
 
