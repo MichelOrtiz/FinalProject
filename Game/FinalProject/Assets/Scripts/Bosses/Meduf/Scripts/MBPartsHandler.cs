@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MBPartsHandler : MonoBehaviour, ILaser
+public class MBPartsHandler : MonoBehaviour
 {
     #region Part Stuff
     [Header("Part Stuff")]
@@ -22,10 +22,6 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     [SerializeReference] private GameObject currentPositionsReference;
     public GameObject CurrentReference { get => currentPositionsReference; }
 
-    private Vector2 lastPartPosition;
-    [SerializeField] private float yCheckRange;
-
-    public Vector2 Center { get; set; }
 
     #endregion
 
@@ -33,7 +29,6 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     [Header("Speed and Time")]
     [SerializeField] private float speedMultiplier;
     private float speed;
-    [SerializeField] private float distanceSpeedRatio;
     [SerializeField] private float timeBtwMove;
     private float curTimeBtwMove;
 
@@ -43,43 +38,20 @@ public class MBPartsHandler : MonoBehaviour, ILaser
     #endregion
 
     #region LaserWarning
-    [SerializeField] private GameObject laserPrefab;
-    private Laser laser;
+    [SerializeField] private LaserShooter laserShooter;
     public Transform ShotPos {get; set;}
     public Vector2 EndPos {get; set;}
     #endregion
 
     #region Events
-    /*public delegate void HalfPartsReached(Vector2 center);
-    public event HalfPartsReached HalfPartsReachedHandler;
-    protected virtual void OnHalfPartsReached(Vector2 center)
-    {
-        Debug.Log(center);
-        assembledHalf = true;
-        HalfPartsReachedHandler?.Invoke(center);
-    }
-    private bool assembledHalf;*/
-
-    public delegate void ChangedReference(GameObject reference);
-    public event ChangedReference ChangedReferenceHandler;
-    protected virtual void OnChangedReference(GameObject reference)
-    {
-        ChangedReferenceHandler?.Invoke(reference);
-    }
-
-
-    public delegate void AllAssembled();
-    public event AllAssembled AllAssemledHandler;
-    protected virtual void OnAllAssembled()
-    {
-        AllAssemledHandler?.Invoke();
-    }
+    public Action<GameObject> ChangedReference;
     #endregion
 
 
     void Awake()
     {
-        OnChangedReference(currentPositionsReference);
+        ChangedReference?.Invoke(currentPositionsReference);
+        //OnChangedReference(currentPositionsReference);
     }
 
     // Start is called before the first frame update
@@ -92,11 +64,11 @@ public class MBPartsHandler : MonoBehaviour, ILaser
         {
             currentPositionsReference = leftPositionReference;
         }
-        OnChangedReference(currentPositionsReference);
+        //OnChangedReference(currentPositionsReference);
+        ChangedReference?.Invoke(currentPositionsReference);
+
         currentPositionsReference.transform.parent.GetComponent<MBJumper>().isReference = true;
 
-
-        Center = MathUtils.FindCenterOfTransforms(parts.GetRange(0, parts.Count));
 
     }
 
@@ -116,23 +88,9 @@ public class MBPartsHandler : MonoBehaviour, ILaser
                 //UpdateAssembledParts();
                 curTimeBtwMove += Time.deltaTime;
             }
-
-            /*if (assembledParts.Count >= totalParts/2)
-            {
-                //if (!assembledHalf)
-                {
-                    Center = MathUtils.FindCenterOfTransforms(assembledParts.GetRange(0, assembledParts.Count));
-                    //OnHalfPartsReached(center);
-                }
-            }*/
-            /*else
-            {
-                assembledHalf = false;
-            }*/
         }
         else
         {
-            OnAllAssembled();
             if (parts.Count == 0)
             {
                 parts.AddRange(movedParts);
@@ -146,7 +104,8 @@ public class MBPartsHandler : MonoBehaviour, ILaser
                 {
                     movedParts.Clear();
                     ChangePositionReference();
-                    OnChangedReference(currentPositionsReference);
+                    //OnChangedReference(currentPositionsReference);
+                    ChangedReference?.Invoke(currentPositionsReference);
                     curAssembledTime = 0;
                 }
             }
@@ -185,7 +144,7 @@ public class MBPartsHandler : MonoBehaviour, ILaser
             ShotPos = parts[randomPart].transform;
             EndPos = GetTargetReference(parts[randomPart]).transform.position;
 
-            ShootLaser(ShotPos.position, EndPos);
+            laserShooter.ShootLaserAndSetShotPos(ShotPos, EndPos);
 
             if (!movedParts.Contains(parts[randomPart]))
             {
@@ -205,10 +164,6 @@ public class MBPartsHandler : MonoBehaviour, ILaser
 
     private GameObject GetTargetReference(GameObject part)
     {
-        /*Vector2 position = ScenesManagers
-                .GetComponentsInChildrenList<Transform>(currentPositionsReference)
-                .Find(g => g.gameObject.ToString() == part.gameObject.ToString()).position;*/
-
         GameObject reference = ScenesManagers
                 .GetComponentsInChildrenList<Transform>(currentPositionsReference)
                 .Find(g => g.gameObject.ToString() == part.gameObject.ToString()).gameObject;
@@ -238,9 +193,6 @@ public class MBPartsHandler : MonoBehaviour, ILaser
         {
             return false;
         }
-        
-        /*List<GameObject> someParts = new List<GameObject>();
-        someParts.AddRange()*/
 
         foreach (var part in movedParts.GetRange(0, manyParts))
         {
@@ -250,23 +202,5 @@ public class MBPartsHandler : MonoBehaviour, ILaser
             }
         }
         return true;
-    }
-
-    /*void UpdateAssembledParts()
-    {
-        assembledParts.AddRange(movedParts.FindAll(p => (Vector2)p.transform.position == GetTargetPosition(p)));
-        //movedParts.RemoveAll(p => (Vector2)p.transform.position == GetTargetPosition(p));
-    }*/
-
-
-    public void ShootLaser(Vector2 from, Vector2 to)
-    {
-        laser = Instantiate(laserPrefab, from, Quaternion.identity).GetComponent<Laser>();
-        laser.Setup(from, to, this);
-    }
-
-    public void LaserAttack()
-    {
-        //throw new NotImplementedException();
     }
 }
