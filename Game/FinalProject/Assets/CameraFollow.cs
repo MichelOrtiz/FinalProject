@@ -16,7 +16,7 @@ public class CameraFollow : MonoBehaviour
 
     private float waitForSeconds = 0.5f;
     private Vector3 mousePosition;
-    
+    public float dampSpeed;
     public float speed;
     public float zoomSpeed;
 
@@ -146,14 +146,14 @@ public class CameraFollow : MonoBehaviour
 
     void FollowTarget()
     {
-        float xPos = Mathf.Lerp(transform.position.x, target.x, Time.fixedDeltaTime * speed);
+        /*float xPos = Mathf.Lerp(transform.position.x, target.x, Time.fixedDeltaTime * speed);
         float yPos = Mathf.Lerp(transform.position.y, target.y, Time.fixedDeltaTime * speed);
-        transform.position = new Vector3(xPos, yPos, -10f);
+        transform.position = new Vector3(xPos, yPos, -10f);*/
         //transform.position = Mathf.Lerp(transform.position, target, Time.fixedDeltaTime * speed);
         camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetBounds.zCam, Time.fixedDeltaTime * zoomSpeed);
         //camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetBounds.zCam, Time.fixedDeltaTime * speed);
 
-        /* Intento de mejorar la camara
+        // Intento de mejorar la camara
         Vector3 clampedPos = new Vector3(
             camBox.size.x < targetBounds.Bounds.size.x ? Mathf.Clamp(player.GetPosition().x, targetBounds.Bounds.min.x + camBox.size.x/2, targetBounds.Bounds.max.x - camBox.size.x/2) : 
             (targetBounds.Bounds.min.x + targetBounds.Bounds.max.x)/2,
@@ -162,8 +162,8 @@ public class CameraFollow : MonoBehaviour
             Mathf.Clamp(player.GetPosition().z, -10f ,-10f )
         );
         
-        transform.position = Vector3.Lerp(transform.position, clampedPos, speed*Time.deltaTime);
-        */
+        transform.position = Vector3.Lerp(transform.position, clampedPos, Time.fixedDeltaTime * dampSpeed);
+        
 
     }
 
