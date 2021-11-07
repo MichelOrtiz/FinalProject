@@ -20,12 +20,10 @@ public class DialogueManager : InteractionUI
     protected override void Start()
     {
         base.Start();
-        //StartDialogue(new Dialogue());
     }
 
     public void StartDialogue (Dialogue dialogue)
     {
-        Minimap.MinimapWindow.instance.Hide();
         nameText.text = dialogue.name;
         sentences.Clear();
         animator.SetBool("IsOpen", true);
@@ -62,7 +60,6 @@ public class DialogueManager : InteractionUI
     public void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
-        Minimap.MinimapWindow.instance.Show();
         Exit();
     }
 }

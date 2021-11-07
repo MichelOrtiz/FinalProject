@@ -8,8 +8,13 @@ public class InteractionUI : MonoBehaviour
     protected virtual void Start(){
         //Detener al jugador
         PlayerManager.instance.SetEnabledPlayer(false);
+
+        HotbarUI.instance.Hide();
+        Minimap.MinimapWindow.instance.Hide();
     }
     protected virtual void Exit(){
+        HotbarUI.instance.Show();
+        Minimap.MinimapWindow.instance.Show();
         currentInteraction.onEndInteraction?.Invoke();
         Destroy(gameObject);
         //Permitir movimiento al jugador
