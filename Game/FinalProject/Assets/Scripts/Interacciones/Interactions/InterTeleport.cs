@@ -20,6 +20,8 @@ public class InterTeleport : Interaction
 
     void Teleport(){
         PlayerManager.instance.gameObject.transform.position = teleport;
+        //Maybe is better this way
+        CameraFollow.instance.camera.transform.position = teleport;
         onEndInteraction?.Invoke();
     }
 }
