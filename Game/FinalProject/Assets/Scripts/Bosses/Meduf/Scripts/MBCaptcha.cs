@@ -11,7 +11,6 @@ namespace FinalProject.Assets.Scripts.Bosses.Meduf.Scripts
         [SerializeField] private WordGenerator wordGenerator;
         [SerializeField] private Text wordText;
         [SerializeField] private TMPro.TMP_InputField inputField;
-        [SerializeField] private Button button;
         private string word;
 
 
@@ -39,7 +38,6 @@ namespace FinalProject.Assets.Scripts.Bosses.Meduf.Scripts
         void Start()
         {
             PlayerManager.instance.inputs.enabled = false;
-            button.onClick.AddListener(button_Click);
             ResetInput();
         }
 
@@ -54,12 +52,6 @@ namespace FinalProject.Assets.Scripts.Bosses.Meduf.Scripts
         {
             inputField.text = string.Empty;
             inputField.ActivateInputField();
-        }
-
-        public void button_Click()
-        {
-            Debug.Log("button click");
-            input_Submit(inputField.text);
         }
 
         public void input_Submit(string text)
