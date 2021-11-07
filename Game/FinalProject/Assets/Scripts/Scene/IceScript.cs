@@ -16,23 +16,19 @@ public class IceScript : MonoBehaviour
             collisionHandler = GetComponent<CollisionHandler>();
         }
         player = PlayerManager.instance;
-
+        iceState.onEffect = false;
         collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;
         collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
         collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
     }
-
-    void Update()
-    {
-    }
-
+    
     void SetEffects(GameObject contact)
     {
         if (contact.tag == "Player")
         {
             //player.rigidbody2d.AddForce(new Vector2( 300f * player.rigidbody2d.velocity.x, player.rigidbody2d.velocity.y));
             //player.isInIce = true;
-            player.statesManager.AddState(iceState);
+            iceState = player.statesManager.AddState(iceState);
             Debug.Log("esta en ice");
         }
     }
