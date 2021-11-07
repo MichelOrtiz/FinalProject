@@ -8,6 +8,7 @@ public class HotbarUI : MonoBehaviour
     public static HotbarUI instance;
     Inventory inventory;
     InventoryUI inventoryUI;
+    public Animator animator;
     public Transform itemsParentHotbar0;
     public HotbarSlot[] slotsHotbar0;
     [HideInInspector] public float timeKeyPressed;
@@ -21,6 +22,7 @@ public class HotbarUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator.SetBool("IsOpen",true);
         timeKeyPressed=0;
         inventory = Inventory.instance;
         inventoryUI = InventoryUI.instance;
@@ -74,5 +76,11 @@ public class HotbarUI : MonoBehaviour
             //Debug.Log("timeKey1Pressed:" + timeKeyPressed);
             timeKeyPressed += Time.deltaTime;
         }
+    }
+    public void Hide(){
+        animator.SetBool("IsOpen",false);
+    }
+    public void Show(){
+        animator.SetBool("IsOpen",true);
     }
 }
