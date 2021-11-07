@@ -12,7 +12,7 @@ public class SnowScript : MonoBehaviour
     void Start()
     {
         player = PlayerManager.instance;
-        
+        snowState.onEffect = false;
     }
 
     void Update()
@@ -27,7 +27,7 @@ public class SnowScript : MonoBehaviour
             if (!player.isInIce)
             {
                 //player.isInSnow = true;
-                player.statesManager.AddState(snowState);
+                snowState = player.statesManager.AddState(snowState);
             }
         }
     }
@@ -38,7 +38,7 @@ public class SnowScript : MonoBehaviour
             if (!player.isInIce)
             {
                 //player.isInSnow = true;
-                player.statesManager.AddState(snowState);
+                snowState = player.statesManager.AddState(snowState);
             }
         }
     }
