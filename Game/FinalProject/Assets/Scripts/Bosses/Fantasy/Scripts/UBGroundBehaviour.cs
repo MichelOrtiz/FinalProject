@@ -14,21 +14,7 @@ public class UBGroundBehaviour : UBBehaviour
     #region LaserBeam
     [Header("Laser Beam")]
     [SerializeField] private LaserShooter laserShooter;
-    [SerializeField] private Transform shotPos;
-    public Transform ShotPos { get => shotPos; }
-    private Vector2 endPos;
-    public Vector2 EndPos { get => endPos; }
-
-
-    [SerializeField] private float intervalToShot;
-    private float timeToShot;
     private bool shotLaser;
-
-    //[SerializeField] private LineRenderer laser;
-    [SerializeField] private GameObject laserPrefab;
-    private Laser laser;
-
-    [SerializeField] private float laserDamage;
 
     #endregion
     
@@ -45,17 +31,14 @@ public class UBGroundBehaviour : UBBehaviour
     {
         if (!finishedAttack)
         {
-            endPos = player.GetPosition();
             if (ReachedDestination())
             {
                 if (!shotLaser)
                 {
-                    endPos = player.GetPosition();
-                    //ShootLaser(shotPos.position, endPos);
                     laserShooter.ShootLaserAndSetEndPos(player.transform);
                     shotLaser = true;
                 }
-                else if (laser == null)
+                else if (laserShooter.Laser == null)
                 {
                     OnFinishedAttack();
                 }
@@ -78,17 +61,6 @@ public class UBGroundBehaviour : UBBehaviour
     {
         return Vector2.Distance(GetPosition(), positionToGo) <= destinationRadius;
     }
-
-    /*public void ShootLaser(Vector2 from, Vector2 to)
-    {
-        laser = Instantiate(laserPrefab, from, Quaternion.identity).GetComponent<Laser>();
-        laser.Setup(from, to, this);
-    }*/
-
-    /*public void LaserAttack()
-    {
-        player.TakeTirement(laserDamage);
-    }*/
 
     new void OnFinishedAttack()
     {
