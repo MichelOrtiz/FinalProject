@@ -44,6 +44,7 @@ public class SceneController : MonoBehaviour
         prevScene = SceneManager.GetActiveScene().buildIndex;
         currentScene = scene;
         StartCoroutine(LoadAsynchronously(scene));
+        
     }
     public void Load(SaveFile partida){
         //LoadScene(partida.sceneToLoad);
@@ -71,8 +72,8 @@ public class SceneController : MonoBehaviour
         }
         loadingScreen.SetActive(false);
         sceneTitle = FindObjectOfType<SceneTitle>();
-        
         //mainCanvas.SetActive(true);
+        FindObjectOfType<CameraFollow>().transform.position = PlayerManager.instance.transform.position;
     }
     public void RealLoasScene(int escena){
         StartCoroutine(LoadAsynchronously(escena));
