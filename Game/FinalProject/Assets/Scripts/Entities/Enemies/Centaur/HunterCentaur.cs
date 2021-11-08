@@ -46,7 +46,7 @@ public class HunterCentaur : Enemy
             {
                 if (animationManager.currentState != "HunterCentaur_throw")
                 {
-                    Invoke("ShootProjectile", 1.5f);
+                    Invoke("ShootProjectile", 1.8f);
                     animationManager.ChangeAnimation("throw");
                 }
             }

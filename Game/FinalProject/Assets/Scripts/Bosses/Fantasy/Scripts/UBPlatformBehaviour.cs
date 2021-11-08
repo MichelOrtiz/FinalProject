@@ -25,8 +25,6 @@ public class UBPlatformBehaviour : UBBehaviour
     [Header("Params")]
     [SerializeField] private float inPushDamageAmount;
     #endregion
-
-    private bool defaultsSet;
     
     new void Awake()
     {
@@ -35,10 +33,10 @@ public class UBPlatformBehaviour : UBBehaviour
         //eCollisionHandler.TouchedPlayerHandler += eCollisionHandler_Attack;
     }
 
-    void OnEnable()
+    /*void OnEnable()
     {
         SetDefaults();
-    }
+    }*/
     
     new void Start()
     {
@@ -101,18 +99,6 @@ public class UBPlatformBehaviour : UBBehaviour
         }
         player.currentStaminaLimit -= staminaPunish;
         player.SetImmune();
-    }
-
-    
-    new void OnFinishedAttack()
-    {
-        defaultsSet = false;
-        base.OnFinishedAttack();
-    }
-
-    new void SetActive(bool value)
-    {
-        base.SetActive(value);
     }
 
     protected override void SetDefaults()
