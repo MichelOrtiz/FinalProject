@@ -4,11 +4,6 @@ public class AimerUnicorn : Enemy
     [Header("Self Additions")]
     [SerializeField] private float timeBtwShot;
     private float curTimeBtwShot;
-
-    new void Start()
-    {
-        base.Start();
-    }
     protected override void MainRoutine()
     {
         if (laserShooter.Laser == null)
@@ -19,6 +14,7 @@ public class AimerUnicorn : Enemy
 
     protected override void ChasePlayer()
     {
+        enemyMovement.StopMovement();
         if (curTimeBtwShot > timeBtwShot)
         {
             laserShooter.ShootLaserAndSetEndPos(player.transform);
