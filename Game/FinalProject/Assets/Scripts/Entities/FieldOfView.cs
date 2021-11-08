@@ -222,7 +222,7 @@ public class FieldOfView : MonoBehaviour
         //if (!RayHitObstacle(fovOrigin.position, endPos))
         //{
             var hits = Physics2D.LinecastAll(fovOrigin.position, endPos, layerMask);
-            hit = Array.Find(hits, h => h.collider.CompareTag("Player"));
+            hit = Array.Find(hits, h => h.collider.CompareTag("Player") || h.collider.CompareTag("Playerwater"));
             if (hit)
             {
                 var nearestHit = Array.Find(hits, h => h.distance < hit.distance);

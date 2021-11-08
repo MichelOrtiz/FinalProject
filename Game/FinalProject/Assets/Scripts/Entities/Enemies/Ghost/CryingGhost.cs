@@ -4,14 +4,10 @@ public class CryingGhost : Enemy
 {
     [SerializeField] private float startTimeBtwShot;
     private float timeBtwShot;
-
-    protected override void MainRoutine()
-    {
-        return;
-    }
     
     protected override void ChasePlayer()
     {
+        animationManager.ChangeAnimation("start_move");
         if (MathUtils.GetAbsXDistance(player.GetPosition(), GetPosition()) > 0.5f)
         {
             enemyMovement.GoTo(MathUtils.GetXDirection(GetPosition(), player.GetPosition()), chasing: false, gravity: false);
@@ -19,6 +15,7 @@ public class CryingGhost : Enemy
 
         Vector3 shotPos = projectileShooter.ShotPos.position;
         RaycastHit2D hit = Physics2D.Linecast(shotPos, shotPos - projectileShooter.ShotPos.up * fieldOfView.ViewDistance, 1 << LayerMask.NameToLayer("Ground"));
+        
         if (timeBtwShot <= 0)
         {
             projectileShooter.ShootProjectile(hit.point);

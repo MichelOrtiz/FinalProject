@@ -371,6 +371,9 @@ MonoBehaviour:
   jumpForce: {x: 1, y: 2}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 0}
   collisionHandler: {fileID: 8005391966937061642}
   fieldOfView: {fileID: 8005391966016174238}
@@ -514,7 +517,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: f9719b524d571014099ffe2d98e24d46, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a7d6980d4d6f2ae449141ea5c0b8749f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -535,7 +538,7 @@ Animator:
   m_GameObject: {fileID: 8005391967038926447}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4ce3ca0462d4fec4094bb9cb00652aab, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -672,10 +675,6 @@ MonoBehaviour:
   enemyType: 0
   enemyName: 0
   flipToPlayerIfSpotted: 1
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 25
   punishDamage: 10
   atackEffect: {fileID: 0}

@@ -85,6 +85,9 @@ MonoBehaviour:
   jumpForce: {x: 1, y: 2}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 3661693969595658390}
   collisionHandler: {fileID: 2250434616516566897}
   fieldOfView: {fileID: 2250434616738581857}
@@ -113,7 +116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2250434616256812783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.03, y: -1.14, z: 0}
+  m_LocalPosition: {x: -0.03, y: 0.189, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 2250434616993423744}
@@ -130,6 +133,7 @@ GameObject:
   - component: {fileID: 2250434616327506571}
   - component: {fileID: 2250434616327506569}
   - component: {fileID: 2250434616327506570}
+  - component: {fileID: 4816900440215734839}
   m_Layer: 10
   m_Name: SpriteFx
   m_TagString: Untagged
@@ -190,8 +194,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f9719b524d571014099ffe2d98e24d46, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 322d01e1ef8949a45934f9f4394405c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -212,7 +216,7 @@ Animator:
   m_GameObject: {fileID: 2250434616327506676}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d891619b651aef040962b663ea6b0f4f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -221,6 +225,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4816900440215734839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2250434616327506676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 2250434617429894651}
+  animator: {fileID: 2250434616327506570}
+  previousState: 
+  currentState: 
+  nextState: 
+  nextStateEnabled: 0
 --- !u!1 &2250434616463318402
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +496,16 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: af049fa7bf620ca4ab26aaa651d1a939, type: 3}
   shotPos: {fileID: 2250434616256812782}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 0
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!1 &2250434617149746573
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,7 +654,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 2250434616327506570}
-  animationManager: {fileID: 0}
+  animationManager: {fileID: 4816900440215734839}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 3661693969595658390}
@@ -632,10 +664,6 @@ MonoBehaviour:
   enemyType: 8
   enemyName: 4
   flipToPlayerIfSpotted: 1
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 30
   punishDamage: 10
   atackEffect: {fileID: 0}
