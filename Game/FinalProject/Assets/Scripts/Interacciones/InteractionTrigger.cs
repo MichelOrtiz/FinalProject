@@ -6,7 +6,7 @@ public class InteractionTrigger : MonoBehaviour
 {
     [SerializeField] protected List<Interaction> interactions;
     protected Queue<Interaction> cola;
-    public Interaction currentInter;
+    protected Interaction currentInter;
     public Interaction lastInter { 
             get{
                 if(currentInter==null) return interactions[interactions.Count-1];
@@ -20,7 +20,7 @@ public class InteractionTrigger : MonoBehaviour
         }
     [SerializeField] protected float radius;
     protected float distance;
-    public bool busy;
+    [HideInInspector] public bool busy;
     public delegate void RunInUpdate();
     public RunInUpdate updateForInteractions;
     protected virtual void Start()
