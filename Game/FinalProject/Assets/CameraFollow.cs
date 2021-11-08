@@ -64,6 +64,7 @@ public class CameraFollow : MonoBehaviour
         {
             bound.EnterBounds += bound_Enter;
         }
+        
     }
 
     void OnGUI()
@@ -148,7 +149,7 @@ public class CameraFollow : MonoBehaviour
     {
         /*float xPos = Mathf.Lerp(transform.position.x, target.x, Time.fixedDeltaTime * speed);
         float yPos = Mathf.Lerp(transform.position.y, target.y, Time.fixedDeltaTime * speed);
-        transform.position = new Vector3(xPos, yPos, -10f);*/
+        transform.position = new Vector3(transform.position, xPos, yPos, -10f);*/
         //transform.position = Mathf.Lerp(transform.position, target, Time.fixedDeltaTime * speed);
         camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetBounds.zCam, Time.fixedDeltaTime * zoomSpeed);
         //camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, targetBounds.zCam, Time.fixedDeltaTime * speed);
