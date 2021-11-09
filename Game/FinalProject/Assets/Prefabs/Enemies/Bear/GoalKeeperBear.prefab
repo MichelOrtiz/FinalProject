@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6192186557078149577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.856, y: -0.489, z: 0}
+  m_LocalPosition: {x: 0.856, y: -1.016, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8693047189601875634}
@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8693047188186823454}
   - component: {fileID: 8693047188186823455}
-  - component: {fileID: 8693047188186823441}
+  - component: {fileID: 2804385940054227258}
   m_Layer: 6
   m_Name: GroundChecker
   m_TagString: Untagged
@@ -168,8 +168,8 @@ MonoBehaviour:
   edgeCheck: {fileID: 8693047189564895671}
   downCheckDistance: 0.7
   isNearEdge: 0
---- !u!61 &8693047188186823441
-BoxCollider2D:
+--- !u!70 &2804385940054227258
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -181,19 +181,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.08807373, y: 0.8196439}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.82510376, y: 1.1997303}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.07, y: 1.03}
+  m_Size: {x: 1.05, y: 1.66}
+  m_Direction: 0
 --- !u!1 &8693047188222169030
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +301,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 8693047189153445877}
-  animationManager: {fileID: 0}
+  animationManager: {fileID: 2987352136627079577}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 8693047188186823455}
@@ -321,10 +311,6 @@ MonoBehaviour:
   enemyType: 1
   enemyName: 26
   flipToPlayerIfSpotted: 1
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 35
   punishDamage: 10
   atackEffect: {fileID: 0}
@@ -490,6 +476,7 @@ GameObject:
   - component: {fileID: 8693047189153445874}
   - component: {fileID: 8693047189153445876}
   - component: {fileID: 8693047189153445877}
+  - component: {fileID: 2987352136627079577}
   m_Layer: 10
   m_Name: SpriteFx
   m_TagString: Untagged
@@ -551,7 +538,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c470cb5b8b529a64c956c93770dc9e33, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d3f29c5b4a6028b40b78c6c91f424a49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -572,7 +559,7 @@ Animator:
   m_GameObject: {fileID: 8693047189153445875}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb3169768c58ec049aa394127f476d05, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -581,6 +568,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2987352136627079577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693047189153445875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 8693047188222169049}
+  animator: {fileID: 8693047189153445877}
+  previousState: 
+  currentState: 
+  nextState: 
+  nextStateEnabled: 0
 --- !u!1 &8693047189395244613
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,9 +704,12 @@ MonoBehaviour:
   chaseSpeedMultiplier: 15
   chaseSpeed: 0
   currentSpeed: 0
-  jumpForce: {x: 2, y: 3.5}
-  jumpForceMultiplier: {x: 1, y: 1}
+  jumpForce: {x: 1, y: 2}
+  jumpForceMultiplier: {x: 0.8, y: 0.8}
   forceMode: 1
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 8693047188186823455}
   collisionHandler: {fileID: 8693047189395244612}
   fieldOfView: {fileID: 8693047189601875635}

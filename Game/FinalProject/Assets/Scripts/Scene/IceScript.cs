@@ -21,7 +21,7 @@ public class IceScript : MonoBehaviour
         collisionHandler.StayTouchingContactHandler -= collisionHandler_StayContact;
         collisionHandler.ExitTouchingContactHandler -= collisionHandler_ExitContact;
         collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;
-        collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
+        //collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
         collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
     }
     

@@ -8,7 +8,7 @@ public abstract class Enemy : Entity
     [Header("Main parameters")]
     [SerializeField] public EnemyType enemyType;
     [SerializeField] public EnemyName enemyName;
-    [SerializeField] protected bool flipToPlayerIfSpotted;
+    [SerializeField] public bool flipToPlayerIfSpotted;
     /*[SerializeField] protected float normalSpeedMultiplier;
     [SerializeReference] public float normalSpeed;
     [SerializeField] protected float chaseSpeedMultiplier;

@@ -74,6 +74,7 @@ public class AimingUnicorn : Enemy
 
     protected override void ChasePlayer()
     {
+        enemyMovement.StopMovement();
         if (curTimeBtwShot > timeBtwShot)
         {
             laserShooter.ShootLaserAndSetEndPos(player.transform);

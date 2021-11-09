@@ -143,7 +143,7 @@ public class Entity : MonoBehaviour
     #endregion
 
     #region Self state methods
-    protected void  ChangeFacingDirection()
+    public void  ChangeFacingDirection()
     {
         var rotation = Mathf.RoundToInt(transform.eulerAngles.z);
         if (rotation == 0 || rotation == 180)

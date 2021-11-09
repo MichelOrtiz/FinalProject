@@ -78,19 +78,19 @@ public class loadlevel : MonoBehaviour
         //Camera.instance.gameObject.SetActive(true);
     }
     protected void RestoreValuesForOtherScene(){
-        //statesManager.ClearAllStates();
-        PlayerManager.instance.walkingSpeed = PlayerManager.defaultwalkingSpeed;
-        PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
         PlayerManager.instance.isInWater = false;
         PlayerManager.instance.isInDark = false;
         PlayerManager.instance.isInSnow = false;  
         PlayerManager.instance.isInIce = false;
+        PlayerManager.instance.walkingSpeed = PlayerManager.defaultwalkingSpeed;
+        PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
         PlayerManager.instance.ResetAnimations();
+        PlayerManager.instance.statesManager.StopAll();
     }
     void cargarEscena(){
         
         PlayerManager.instance.inputs.Interact -= cargarEscena; 
-        RestoreValuesForOtherScene();
         LoadScene();
+        RestoreValuesForOtherScene();
     }
 }

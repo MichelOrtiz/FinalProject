@@ -45,6 +45,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Vector2 jumpForceMultiplier;
     [SerializeField] private ForceMode2D forceMode;
 
+    [SerializeField] private KnockbackState jumpState;
+
 
     [Header("Push")]
     [SerializeField] private Vector2 pushForce;
@@ -56,6 +58,8 @@ public class EnemyMovement : MonoBehaviour
     
     [SerializeField] private Vector2 pushMultiplier;
     [SerializeField] private ForceMode2D pushForceMode;
+
+    
 
 
     [Header("References")]
@@ -70,6 +74,8 @@ public class EnemyMovement : MonoBehaviour
 
     private PlayerManager player;
     private Entity entity;
+
+
 
     public void SetChaseSpeed(float speed)
     {
@@ -127,6 +133,15 @@ public class EnemyMovement : MonoBehaviour
         {
             Vector2 jumpDirection = new Vector2(facingDirection == "right"? jumpForce.x : - jumpForce.x, jumpForce.y) * rigidbody2d.gravityScale;
             rigidbody2d.AddForce(jumpDirection, forceMode);
+        }
+    }
+
+    public void JumpByKnockback()
+    {
+        if (groundChecker.isGrounded)
+        {
+            var jump = Instantiate(jumpState);
+            entity.statesManager.AddState(jump);
         }
     }
 

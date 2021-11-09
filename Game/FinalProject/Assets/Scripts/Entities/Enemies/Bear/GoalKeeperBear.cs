@@ -12,40 +12,50 @@ public class GoalKeeperBear : Enemy
         base.Start();
     }
 
+
     protected override void MainRoutine()
     {
-        enemyMovement.DefaultPatrol();
+        if (groundChecker.isGrounded)
+        {
+            enemyMovement.DefaultPatrol();
+        }
     }
 
-    new void FixedUpdate()
-    {
-        if (groundChecker.lastGroundTag == "Platform")
-        {
-            if ( (!fieldOfView.canSeePlayer && (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge))
-                || (fieldOfView.canSeePlayer && player.GetPosition().y > GetPosition().y) )
-            {
-                enemyMovement.Jump();
-            }
-        }
-        base.FixedUpdate();
-    }
     protected override void ChasePlayer()
     {
-        float newSpeed = 1 / (MathUtils.GetAbsXDistance(player.GetPosition(), GetPosition())) * speedMultiplier * averageSpeed;
-        if (newSpeed <= speedLimit)
+        if (player.GetPosition().y > GetPosition().y)
         {
-            speed = newSpeed;
-            enemyMovement.SetChaseSpeed(speed);
+            animationManager.ChangeAnimation("jump");
+            enemyMovement.Invoke("JumpByKnockback", 0.02f );
         }
-        if (MathUtils.GetAbsXDistance(player.GetPosition(), GetPosition()) > 1f)
+        else
         {
-            enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: true);
+            float newSpeed = 1 / (MathUtils.GetAbsXDistance(player.GetPosition(), GetPosition())) * speedMultiplier * averageSpeed;
+            if (newSpeed <= speedLimit)
+            {
+                speed = newSpeed;
+                enemyMovement.SetChaseSpeed(speed);
+            }
+            if (groundChecker.isGrounded)
+            {
+                if (MathUtils.GetAbsXDistance(player.GetPosition(), GetPosition()) > 1f)
+                {
+                    enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: false);
+                }
+                animationManager.ChangeAnimation("walk", enemyMovement.ChaseSpeed * 1 / enemyMovement.DefaultSpeed);
+            }
         }
+
     }
 
     protected override void Attack()
     {
         base.Attack();
         statesManager.AddState(touchedPlayerEffect);
+    }
+
+    protected override void groundChecker_Grounded(string groundTag)
+    {
+        enemyMovement.StopMovement();
     }
 }
