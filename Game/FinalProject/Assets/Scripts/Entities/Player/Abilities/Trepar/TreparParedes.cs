@@ -5,12 +5,22 @@ using UnityEngine;
 public class TreparParedes : Ability
 {
     public GameObject NicoFeet;
-
+    public GameObject escalera;
+    public Escalera esca;
     public override void UseAbility()
     {   
         
         if(player.currentStamina < staminaCost + 0.1f)return;
-        NicoFeet.gameObject.GetComponent<GroundChecker>().checkFeetRadius=.15f;
+        escalera.SetActive(true);
+        if (esca.isLadder)
+        {
+            player.currentGravity = 0;
+            player.rigidbody2d.velocity = new Vector2(player.rigidbody2d.velocity.x, player.inputs.movementY * player.currentSpeed);
+        }
+        else
+        {
+            player.currentGravity = 2.5f;
+        }
         if (isInCooldown)
         {
             player.TakeTirement(staminaCost);
@@ -33,7 +43,9 @@ public class TreparParedes : Ability
         }
         if (Input.GetKeyUp(hotkey))
         {
-            NicoFeet.gameObject.GetComponent<GroundChecker>().checkFeetRadius=.12f;
+            player.currentGravity = 2.5f;
+            escalera.SetActive(false);
+            player.isClimbing = false;
         }
         if (Input.GetKey(hotkey))
         {
