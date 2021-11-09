@@ -44,19 +44,28 @@ public class HockeyPlayer : Enemy
 
     protected override void ChasePlayer()
     {
-        if (curTimeBtwShot > timeBtwShot)
+        if (curTimeBtwShot > timeBtwShot && animationManager.currentState != "HockeyPlayer_shoot")
         {
-            Vector2 shotPos = projectileShooter.ShotPos.position;
-            Vector2 direction = MathUtils.GetXDirection(shotPos, player.GetPosition());
-            float distance = MathUtils.GetAbsXDistance(shotPos, player.GetPosition());
-            direction.x = shotPos.x + (facingDirection == RIGHT? distance : -distance);// new Vector2(shotPos.x * (shotPos.x - player.GetPosition().x), 0f);
-            projectileShooter.ShootProjectileAndSetDistance(direction , "Ice");
+            animationManager.ChangeAnimation("shoot");
+            ShootProjectile();
             curTimeBtwShot = 0;
         }
         else
         {
             curTimeBtwShot += Time.deltaTime;
         }
+    }
+
+    void ShootProjectile()
+    {
+        
+        Vector2 shotPos = projectileShooter.ShotPos.position;
+        Vector2 direction = MathUtils.GetXDirection(shotPos, player.GetPosition());
+        float distance = MathUtils.GetAbsXDistance(shotPos, player.GetPosition());
+        direction.x = shotPos.x + (facingDirection == RIGHT? distance : -distance);// new Vector2(shotPos.x * (shotPos.x - player.GetPosition().x), 0f);
+
+        projectileShooter.ShootProjectileAndSetDistance(direction , "Ice");
+        animationManager.SetCurrentState("idle", true);
     }
 
 
@@ -66,11 +75,5 @@ public class HockeyPlayer : Enemy
         Vector2 direction = new Vector2(facingDirection == RIGHT? pushVector.x : -pushVector.x, pushVector.y);
         player.Knockback(pushTime, pushForce, direction);
     }
-    /*public void ProjectileAttack()
-    {
-        player.TakeTirement(projectile.damage);
-        player.Push((facingDirection == RIGHT? -pushForce : pushForce), 0f);
-        
-    }*/
 
 }

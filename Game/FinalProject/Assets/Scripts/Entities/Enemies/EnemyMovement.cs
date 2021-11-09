@@ -243,6 +243,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
+            entity.animationManager?.ChangeAnimation("walk");
             rigidbody2d.transform.position += rigidbody2d.transform.right * Time.deltaTime * defaultSpeed;
         }
     }
