@@ -40,7 +40,6 @@ public class PlayerManager : Entity
     public bool isDashingV;
     public bool isDoubleJumping;
     public bool isDodging;
-    public bool isClimbing;
     public bool DeathActive;
     public bool isDeath;
     public bool isInvisible;

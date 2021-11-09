@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Escalera : MonoBehaviour
 {
-    
-    protected PlayerManager player;
     public bool isLadder;
-    public bool isClimbing;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +27,6 @@ public class Escalera : MonoBehaviour
         if (collision.CompareTag("Ground") || collision.CompareTag("Platform"))
         {
             isLadder = false;
-            player.currentGravity = 2.5f;
         }
     }
 }
