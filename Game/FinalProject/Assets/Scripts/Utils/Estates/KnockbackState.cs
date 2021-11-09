@@ -6,6 +6,9 @@ public class KnockbackState : State
     [SerializeField] public float angle;
     [SerializeField] private float force;
 
+    [Tooltip("If host entity is an enemy that needs to flip to the player")]
+    [SerializeField] private bool flipToPlayer;
+
     public override void StartAffect(StatesManager newManager)
     {
         base.StartAffect(newManager);
@@ -55,10 +58,35 @@ public class KnockbackState : State
         {
             currentTime = 0;
             StopAffect();
+
+
         }
         else
         {
+            HandleFlip();
             currentTime += Time.deltaTime;
+        }
+    }
+
+    void HandleFlip()
+    {
+        if (manager.hostEntity is Enemy && flipToPlayer)
+        {
+            var enemy = manager.hostEntity as Enemy;
+            if (enemy.isChasing)
+            {
+                if (MathUtils.GetAbsXDistance(enemy.GetPosition(), PlayerManager.instance.GetPosition()) > 1f)
+                {
+                    if ((enemy.GetPosition().x > PlayerManager.instance.GetPosition().x && enemy.facingDirection == "right")
+                        || (enemy.GetPosition().x < PlayerManager.instance.GetPosition().x && enemy.facingDirection == "left"))
+                    {
+                        if (enemy.rigidbody2d?.gravityScale == 0 ||  enemy.groundChecker.isGrounded)
+                        {
+                            enemy.ChangeFacingDirection();
+                        }
+                    }
+                }
+            }
         }
     }
 }

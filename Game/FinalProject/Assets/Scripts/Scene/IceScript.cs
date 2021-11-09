@@ -18,7 +18,7 @@ public class IceScript : MonoBehaviour
         player = PlayerManager.instance;
         iceState.onEffect = false;
         collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;
-        collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
+        //collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
         collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
     }
     
