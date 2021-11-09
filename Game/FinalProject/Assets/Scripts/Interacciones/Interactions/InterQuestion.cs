@@ -25,4 +25,10 @@ public class InterQuestion : Interaction
         questionUI.currentInteraction = this;
         questionUI.SetQuestion(question);
     }
+    public override void RestardCondition(){
+        base.RestardCondition();
+        foreach(Answer ans in question.answers){
+            ans.isChosed = false;
+        }
+    }
 }

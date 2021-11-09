@@ -22,7 +22,9 @@ public class loadBossLevel : loadlevel
                     }
                 }
             }
-            partida.WorldStates.Add(worldState);
+            if(!partida.WorldStates.Exists(x => x.id == worldState.id)){
+                partida.WorldStates.Add(worldState);
+            }
         }
         if (SceneController.instance != null)
         {
