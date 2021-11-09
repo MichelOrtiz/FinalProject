@@ -17,6 +17,9 @@ public class IceScript : MonoBehaviour
         }
         player = PlayerManager.instance;
         iceState.onEffect = false;
+        collisionHandler.EnterTouchingContactHandler -= collisionHandler_EnterContact;
+        collisionHandler.StayTouchingContactHandler -= collisionHandler_StayContact;
+        collisionHandler.ExitTouchingContactHandler -= collisionHandler_ExitContact;
         collisionHandler.EnterTouchingContactHandler += collisionHandler_EnterContact;
         collisionHandler.StayTouchingContactHandler += collisionHandler_StayContact;
         collisionHandler.ExitTouchingContactHandler += collisionHandler_ExitContact;
@@ -29,7 +32,7 @@ public class IceScript : MonoBehaviour
             //player.rigidbody2d.AddForce(new Vector2( 300f * player.rigidbody2d.velocity.x, player.rigidbody2d.velocity.y));
             //player.isInIce = true;
             iceState = player.statesManager.AddState(iceState);
-            Debug.Log("esta en ice");
+            //Debug.Log("esta en ice");
         }
     }
 

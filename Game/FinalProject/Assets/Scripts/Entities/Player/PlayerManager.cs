@@ -15,7 +15,7 @@ public class PlayerManager : Entity
     public const float defaultwalkingSpeed = 7f;
     public const float defaultGravity = 2.5f;
     public float currentGravity;
-    public float defaultMass = 10;
+    public const float defaultMass = 10;
     public float currentMass;
     public GameObject dodgePerectCollider;
     public const float defaultDmgMod = 1;
@@ -477,6 +477,7 @@ public class PlayerManager : Entity
         currentSpeed = walkingSpeed;
         currentStaminaLimit = maxStamina;
         currentGravity = defaultGravity;
+        currentMass = defaultMass;
         currentStamina = maxStamina;
         currentOxygen = maxOxygen;
         dmgMod = defaultDmgMod;
