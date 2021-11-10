@@ -26,11 +26,12 @@ public class InterOFM : Interaction
                     atLeastOne = true;
                     inter.gameObject = gameObject;
                     inter.RestardCondition();
+                    inter.onEndInteraction -= onEndInteraction;
+                    inter.onEndInteraction += onEndInteraction;
                     inter.DoInteraction();
                     break;
                 }
             }
         }
-        onEndInteraction();
     }
 }
