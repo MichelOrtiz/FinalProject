@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class OpenSesame : MonoBehaviour
 {
+    Animator animator;
     public float rango = 3f;
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -15,9 +16,15 @@ public class OpenSesame : MonoBehaviour
     {
         float distance = Vector2.Distance(PlayerManager.instance.GetPosition(),transform.position);
         if(distance <= rango){
-            if(Input.GetKeyDown(KeyCode.E)){
-                CofreUI.instance.SetUIActive(true);
-            }
+            animator.Play("Cofre_open");
+            PlayerManager.instance.inputs.Interact -= OpenCofre;
+            PlayerManager.instance.inputs.Interact += OpenCofre;
+        }else{
+            animator.Play("Cofre_close");
+            PlayerManager.instance.inputs.Interact -= OpenCofre;
         }
+    }
+    void OpenCofre(){
+        CofreUI.instance.cofreUI.SetActive(!CofreUI.instance.cofreUI.activeSelf);
     }
 }
