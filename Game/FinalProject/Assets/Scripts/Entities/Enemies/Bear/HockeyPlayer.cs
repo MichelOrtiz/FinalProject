@@ -58,7 +58,6 @@ public class HockeyPlayer : Enemy
 
     void ShootProjectile()
     {
-        
         Vector2 shotPos = projectileShooter.ShotPos.position;
         Vector2 direction = MathUtils.GetXDirection(shotPos, player.GetPosition());
         float distance = MathUtils.GetAbsXDistance(shotPos, player.GetPosition());

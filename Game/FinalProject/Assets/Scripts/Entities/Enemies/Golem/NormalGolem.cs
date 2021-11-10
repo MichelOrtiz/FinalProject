@@ -17,6 +17,9 @@ public class NormalGolem : NormalType
     [SerializeField] private float projectileKnockbackDuration;
     [SerializeField] private float projectileKnockbackForce;
 
+    [SerializeField] private Transform firstShotPos;
+    [SerializeField] private Transform secondShotPos;
+
 
     new void Start()
     {
@@ -27,9 +30,39 @@ public class NormalGolem : NormalType
         projectileShooter.ProjectileTouchedPlayerHandler += projectileShooter_ProjectileTouchedPlayer;
     }
 
+
+    new void Update()
+    {
+
+        base.Update();
+    }
+
+     new protected void FixedUpdate()
+    {
+        if ( (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge) && !isFalling)
+        {
+            rigidbody2d.velocity = Vector3.zero;
+            HandleStopAnimation();
+        }
+        base.EnemyFixedUpdate();
+    }
+
     protected override void ChasePlayer()
     {
-        base.ChasePlayer();
+        if (!touchingPlayer)
+        {
+            if (!fieldOfView.inFrontOfObstacle)
+            {
+                enemyMovement.GoToInGround(player.GetPosition(), chasing: true, checkNearEdge: true);
+            }
+            
+            if (!fieldOfView.inFrontOfObstacle && !groundChecker.isNearEdge && !animationManager.currentState.Contains("shoot"))
+            {
+                animationManager.ChangeAnimation("chase");
+            }
+        }
+
+        //animationManager.ChangeAnimation("chase");
         float distance = Vector2.Distance(GetPosition(), player.GetPosition());
         
         if (distance <= secondFovDistance && distance > thirdFovDistance)
@@ -38,7 +71,8 @@ public class NormalGolem : NormalType
 
             if (curTimeBtwShot > timeBtwShot)
             {
-                projectileShooter.ShootProjectile(player.GetPosition());
+                HandleShootAnimation();
+                Invoke("HandleShootProjectile", 0.65f);
                 curTimeBtwShot = 0;
             }
             else
@@ -49,8 +83,36 @@ public class NormalGolem : NormalType
         else if (distance <= thirdFovSpeed)
         {
             enemyMovement.ChaseSpeed = thirdFovSpeed;
+            curTimeBtwShot = 0;
         }
 
+    }
+
+    void HandleStopAnimation()
+    {
+        if (!animationManager.currentState.Contains("idle_shoot"))
+        {
+            animationManager.ChangeAnimation(fieldOfView.canSeePlayer? "idle_chase" : "idle");
+        }
+    }
+
+    void HandleShootAnimation()
+    {
+        if (fieldOfView.inFrontOfObstacle || groundChecker.isNearEdge)
+        {
+            animationManager.ChangeAnimation( projectileShooter.ShotPos == firstShotPos? "idle_shoot_1" : "idle_shoot_2" );
+        }
+        else
+        {
+            animationManager.ChangeAnimation( projectileShooter.ShotPos == firstShotPos? "chase_shoot_1" : "chase_shoot_2" );
+        }
+    }
+
+    void HandleShootProjectile()
+    {
+        projectileShooter.ShootProjectile(player.GetPosition());
+        projectileShooter.ShotPos = projectileShooter.ShotPos == firstShotPos? secondShotPos : firstShotPos;
+        curTimeBtwShot = 0;
     }
 
 

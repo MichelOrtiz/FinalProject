@@ -11,11 +11,15 @@ public class PointerArrow : MonoBehaviour
         set { originalReference = value; }
     }
     
-    public GameObject ReferenceObject { get; private set; }
+    public GameObject ReferenceObject { get; set; }
     
     private PlayerManager player;
+
+    
     private SpriteRenderer spriteRenderer;
 
+
+    [SerializeField] private float startAngle;
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -24,8 +28,8 @@ public class PointerArrow : MonoBehaviour
     void Start()
     {
         player = PlayerManager.instance;
-        transform.SetParent(player.transform);
-        transform.localPosition = new Vector2(0, 1f);
+        //ransform.SetParent(player.transform);
+        //transform.localPosition = new Vector2(0, 1f);
     }
 
 
@@ -43,7 +47,7 @@ public class PointerArrow : MonoBehaviour
         {
             //float angle = MathUtils.GetAngleBetween(transform.position, referenceSwitch.transform.position);
             float angle = MathUtils.GetAngleBetween(transform.position, ReferenceObject.transform.position);
-            transform.eulerAngles = new Vector3(0,0,angle);
+            transform.eulerAngles = new Vector3(0,0,angle + startAngle);
             //transform.eulerAngles = transform.TransformVector(MathUtils.GetVectorFromAngle(angle));
         }
     }
