@@ -35,7 +35,13 @@ public class PopUpHabUI : MonoBehaviour
             opt.text = "Ninguna";
             options.Add(opt);
             hotkey.AddOptions(options);
-            if(currentHotKey == null) currentHotKey = opt;
+            if(currentHotKey == null) {
+                if(ability.hotkey.ToString() == "None"){
+                    currentHotKey = opt;
+                }else{
+                    currentHotKey = hotkey.options.Find(x => x.text == ability.hotkey.ToString());
+                }
+            }
             hotkey.value = hotkey.options.IndexOf(currentHotKey);
             hotkey.onValueChanged.AddListener(updateAlgo);
         }
@@ -59,7 +65,12 @@ public class PopUpHabUI : MonoBehaviour
         if(key == "Ninguna"){
             ability.hotkey = KeyCode.None;
         }else{
-            ability.hotkey = (KeyCode) System.Enum.Parse(typeof(KeyCode),key);
+            KeyCode newHotkey = (KeyCode) System.Enum.Parse(typeof(KeyCode),key);
+            foreach(Ability ab in AbilityManager.instance.abilities){
+                if(ab.hotkey == newHotkey)
+                ab.hotkey = KeyCode.None;
+            }
+            ability.hotkey = newHotkey;
         }
     }
 }
