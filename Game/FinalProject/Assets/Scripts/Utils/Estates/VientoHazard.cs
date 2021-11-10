@@ -22,6 +22,7 @@ public class VientoHazard : MonoBehaviour
     [SerializeField] private State hazardState;
     private PlayerManager player;
     new private ParticleSystem particleSystem;
+    public GameObject fondo;
     void Start()
     { 
         hazardState.onEffect = false;
@@ -33,14 +34,18 @@ public class VientoHazard : MonoBehaviour
         duration = 0;
         currentDamage = 0;
         particleSystem.Stop();
+        fondo.SetActive(false);
     }
     private void Update() {
         transform.position = player.GetPosition();
-        if(flipDir)
+        if(flipDir){
         active = particleSystem.isPlaying;
-
+        }
         if(duration <= 0 && !i){
-            if(particleSystem.isPlaying)particleSystem.Stop();
+            if(particleSystem.isPlaying){
+                particleSystem.Stop();
+            }
+                fondo.SetActive(false);
             interval = GetTimeValue(minInterval,maxInterval);
             d = false;
             i = true;
@@ -55,6 +60,7 @@ public class VientoHazard : MonoBehaviour
             if (particleSystem.isStopped){
                 currentDamage = 0;
                 particleSystem.Play();
+                fondo.SetActive(true);
             }
             duration = GetTimeValue(minDuration,maxDuration);
             i = false;
