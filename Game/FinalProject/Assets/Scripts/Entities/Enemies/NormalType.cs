@@ -20,6 +20,11 @@ public class NormalType : Enemy
         }
         base.FixedUpdate();
     }
+
+    protected void EnemyFixedUpdate()
+    {
+        base.FixedUpdate();
+    }
     #endregion
 
     #region Behaviour methods

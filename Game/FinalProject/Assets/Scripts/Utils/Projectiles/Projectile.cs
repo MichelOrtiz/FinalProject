@@ -63,6 +63,8 @@ public class Projectile : MonoBehaviour
 
     protected bool aboutToDestroy;
 
+    [SerializeField] private bool rotateTowardsPlayer;
+
     //private Animator animator;
     #endregion
 
@@ -128,6 +130,12 @@ public class Projectile : MonoBehaviour
         if (hasLifeTime)
         {
             Invoke("Destroy", lifeTime);
+        }
+
+        if (rotateTowardsPlayer)
+        {
+            transform.GetComponentInChildren<PointerArrow>().ReferenceObject = PlayerManager.instance.gameObject;
+            transform.GetComponentInChildren<PointerArrow>().enabled = true;
         }
     }
     void Start()
