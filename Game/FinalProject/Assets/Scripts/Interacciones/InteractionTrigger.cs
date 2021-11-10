@@ -7,6 +7,7 @@ public class InteractionTrigger : MonoBehaviour
     [SerializeField] protected List<Interaction> interactions;
     protected Queue<Interaction> cola;
     protected Interaction currentInter;
+    public GameObject signInter;
     public Interaction lastInter { 
             get{
                 if(currentInter==null) return interactions[interactions.Count-1];
@@ -30,6 +31,7 @@ public class InteractionTrigger : MonoBehaviour
         foreach(Interaction inter in interactions){
             inter.gameObject = this.gameObject;
         }
+        HideSign();
     }
     protected virtual void Update(){
         distance = Vector2.Distance(PlayerManager.instance.GetPosition(),transform.position);
@@ -37,8 +39,10 @@ public class InteractionTrigger : MonoBehaviour
         {
             PlayerManager.instance.inputs.Interact -= TriggerInteraction;
             PlayerManager.instance.inputs.Interact += TriggerInteraction;
+            ShowSign();
         }else{
             PlayerManager.instance.inputs.Interact -= TriggerInteraction;
+            HideSign();
         }     
         updateForInteractions?.Invoke();
     }
@@ -72,5 +76,13 @@ public class InteractionTrigger : MonoBehaviour
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+    protected void ShowSign(){
+        if(signInter==null) return;
+        signInter.SetActive(true);
+    }
+    protected void HideSign(){
+        if(signInter==null) return;
+        signInter.SetActive(false);
     }
 }
