@@ -6,13 +6,13 @@ public class Escudo : Ability
 {
     public bool isInShield;
     [SerializeField] State inmuniScudo;
-
+    public GameObject escudo;
     public override void UseAbility()
     {   
         if(player.currentStamina < staminaCost + 0.1f)return;
         if(isInShield) return;
-        inmuniScudo = PlayerManager.instance.statesManager.AddState(inmuniScudo);
         base.UseAbility();
+        inmuniScudo = PlayerManager.instance.statesManager.AddState(inmuniScudo);
     }
     protected override void Start()
     {
@@ -42,8 +42,10 @@ public class Escudo : Ability
         }
         if(player.statesManager.currentStates.Contains(inmuniScudo)){
             isInShield = true;
+            escudo.SetActive(true);
         }else{
             isInShield = false;
+            escudo.SetActive(false);
         }
     }
 }
