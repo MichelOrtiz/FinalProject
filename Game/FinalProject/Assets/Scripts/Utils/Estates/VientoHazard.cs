@@ -18,17 +18,20 @@ public class VientoHazard : MonoBehaviour
     [SerializeField] private float damageAmount;
     [SerializeField] private float damageThreshold = defaultDamageThreshold;
     public const float defaultDamageThreshold = 0; 
+    float currentDamage;
     [SerializeField] private State hazardState;
     private PlayerManager player;
     new private ParticleSystem particleSystem;
     void Start()
     { 
+        hazardState.onEffect = false;
         player = PlayerManager.instance;
         particleSystem = GetComponent<ParticleSystem>();
         interval = GetTimeValue(minInterval,maxInterval);
         d = false;
         i = true;
         duration = 0;
+        currentDamage = 0;
         particleSystem.Stop();
     }
     private void Update() {
@@ -49,7 +52,10 @@ public class VientoHazard : MonoBehaviour
             flipDir = RandomGenerator.MatchProbability(50f);
             if(flipDir) transform.rotation = Quaternion.Euler(Vector3.forward * 180);
             else transform.rotation = Quaternion.Euler(Vector3.forward * 0);
-            if (particleSystem.isStopped)particleSystem.Play();
+            if (particleSystem.isStopped){
+                currentDamage = 0;
+                particleSystem.Play();
+            }
             duration = GetTimeValue(minDuration,maxDuration);
             i = false;
             d = true;
@@ -63,16 +69,17 @@ public class VientoHazard : MonoBehaviour
     {
         if (other.tag == "Player" && !player.isImmune )
         {
-            player.statesManager.AddState(hazardState);
+            hazardState = player.statesManager.AddState(hazardState);
             ParticleSystem.CollisionModule collisionModule = particleSystem.collision;
             if(player.statesManager.currentStates.Contains(hazardState)){
                 collisionModule.colliderForce = windForce;
-                player.TakeTirement(damageAmount);
-                if (damageAmount > damageThreshold)
+                if (currentDamage < damageThreshold)
                 {
-                    player.SetImmune();
+                    currentDamage += damageAmount;
+                    player.TakeTirement(damageAmount);
                 }
             }else{
+                currentDamage = 0;
                 collisionModule.colliderForce = 0f;
             }
         }
