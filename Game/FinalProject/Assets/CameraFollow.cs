@@ -91,7 +91,6 @@ public class CameraFollow : MonoBehaviour
             waitForSeconds -= Time.deltaTime;
         } else {
             SetOneLimit();
-
             FindTarget();
             //if (canFollow)
             {
@@ -116,13 +115,24 @@ public class CameraFollow : MonoBehaviour
 
         for (int i = 0; i < boundaries.Length; i++)
         {
-            if (player.GetPosition().x > boundaries[i].Bounds.min.x && player.GetPosition().x < boundaries[i].Bounds.max.x && player.GetPosition().y > boundaries[i].Bounds.min.y && player.GetPosition().y < boundaries[i].Bounds.max.y)
-            {
-                if (targetBounds != boundaries[i])
+            if(isCinematic){
+                if (cinematicTarget.x > boundaries[i].Bounds.min.x && cinematicTarget.x < boundaries[i].Bounds.max.x && cinematicTarget.y > boundaries[i].Bounds.min.y && cinematicTarget.y < boundaries[i].Bounds.max.y)
                 {
-                    targetBounds = boundaries[i];
+                    if (targetBounds != boundaries[i])
+                    {
+                        targetBounds = boundaries[i];
+                    }
+                    return;
                 }
-                return;
+            }else{
+                if (player.GetPosition().x > boundaries[i].Bounds.min.x && player.GetPosition().x < boundaries[i].Bounds.max.x && player.GetPosition().y > boundaries[i].Bounds.min.y && player.GetPosition().y < boundaries[i].Bounds.max.y)
+                {
+                    if (targetBounds != boundaries[i])
+                    {
+                        targetBounds = boundaries[i];
+                    }
+                    return;
+                }
             }
         }
     }
@@ -156,11 +166,11 @@ public class CameraFollow : MonoBehaviour
 
         // Intento de mejorar la camara
         Vector3 clampedPos = new Vector3(
-            camBox.size.x < targetBounds.Bounds.size.x ? Mathf.Clamp(player.GetPosition().x, targetBounds.Bounds.min.x + camBox.size.x/2, targetBounds.Bounds.max.x - camBox.size.x/2) : 
+            camBox.size.x < targetBounds.Bounds.size.x ? Mathf.Clamp(target.x, targetBounds.Bounds.min.x + camBox.size.x/2, targetBounds.Bounds.max.x - camBox.size.x/2) : 
             (targetBounds.Bounds.min.x + targetBounds.Bounds.max.x)/2,
-            camBox.size.y < targetBounds.Bounds.size.y ? Mathf.Clamp(player.GetPosition().y, targetBounds.Bounds.min.y + camBox.size.y/2, targetBounds.Bounds.max.y - camBox.size.y/2) : 
+            camBox.size.y < targetBounds.Bounds.size.y ? Mathf.Clamp(target.y, targetBounds.Bounds.min.y + camBox.size.y/2, targetBounds.Bounds.max.y - camBox.size.y/2) : 
             (targetBounds.Bounds.min.y + targetBounds.Bounds.max.y)/2,
-            Mathf.Clamp(player.GetPosition().z, -10f ,-10f )
+            Mathf.Clamp(target.z, -10f ,-10f )
         );
         
         transform.position = Vector3.Lerp(transform.position, clampedPos, Time.fixedDeltaTime * dampSpeed);
