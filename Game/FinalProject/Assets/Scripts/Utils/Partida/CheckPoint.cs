@@ -8,14 +8,20 @@ public class CheckPoint : MonoBehaviour
     PlayerManager player;
     //public int forcedSlot;//DELETE THIS
     public float radius = 1f;
+    public GameObject signInter;
     private void Start() {
         player = PlayerManager.instance;
     }
     void Update()
     {
         float distance = Vector2.Distance(player.GetPosition(),transform.position);
-        if(Input.GetKeyDown(KeyCode.E) && distance<=radius){
-            Save();
+        if(distance<=radius){
+            player.inputs.Interact -= Save;
+            player.inputs.Interact += Save;
+            signInter?.SetActive(true);
+        }else{
+            player.inputs.Interact -= Save;
+            signInter?.SetActive(false);
         }
     }
     void Save(){
