@@ -23,7 +23,8 @@ public class FatGolem : FatType
     {
         if (curTimeBtwPShot > timeBtwPShot)
         {
-            projectileShooter.ShootProjectileAndSetDistance(player.GetPosition());
+            animationManager.ChangeAnimation("shoot");
+            Invoke("ShootProjectile", 0.63f);
             curTimeBtwPShot = 0;
         }
         else
@@ -40,6 +41,13 @@ public class FatGolem : FatType
         {
             curTimeBtwLShot += Time.deltaTime;
         }
+    }
+
+    void ShootProjectile()
+    {
+        projectileShooter.ShootProjectileAndSetDistance(player.GetPosition());
+        curTimeBtwPShot = 0;
+        animationManager.SetCurrentState("idle", true);
     }
 
 
