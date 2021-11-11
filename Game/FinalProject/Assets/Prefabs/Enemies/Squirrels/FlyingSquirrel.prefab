@@ -285,11 +285,8 @@ MonoBehaviour:
   enemyType: 14
   enemyName: 23
   flipToPlayerIfSpotted: 1
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 0
+  punishDamage: 0
   atackEffect: {fileID: 11400000, guid: 17f9a26db363b894c9545675e4ed23ca, type: 2}
   canKnockbackPlayer: 0
   knockbackAngle: 0
@@ -457,7 +454,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7800449909574800931}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -0.047, z: 0}
+  m_LocalPosition: {x: -0.565, y: -0.047, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 7800449909542214839}
@@ -729,6 +726,10 @@ MonoBehaviour:
   jumpForce: {x: 0, y: 3}
   jumpForceMultiplier: {x: 0, y: 1.5}
   forceMode: 1
+  jumpState: {fileID: 0}
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 7800449910508260479}
   collisionHandler: {fileID: 7800449908841337845}
   fieldOfView: {fileID: 7800449909542214836}
@@ -759,7 +760,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7800449910508260476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06, y: -0.58, z: 0}
+  m_LocalPosition: {x: 0.06, y: -0.503, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7800449909651264720}
@@ -783,7 +784,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4864
   feetPos: {fileID: 7800449909651264720}
-  checkFeetRadius: 0.1
+  checkFeetRadius: 0.25
   isGrounded: 0
   lastGroundTag: 
   edgeCheck: {fileID: 7800449910001078924}
@@ -802,7 +803,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0118637085, y: 0}
+  m_Offset: {x: 0.0118637085, y: 0.053240195}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -813,8 +814,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34007263, y: 0.10998005}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.34007263, y: 0.21646044}
+  m_EdgeRadius: 0.06
 --- !u!1001 &7800449910463789051
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -322,10 +322,6 @@ MonoBehaviour:
   enemyType: 5
   enemyName: 53
   flipToPlayerIfSpotted: 1
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 35
   punishDamage: 10
   atackEffect: {fileID: 0}
@@ -620,12 +616,16 @@ MonoBehaviour:
   waitTime: 1.5
   defaultSpeedMultiplier: 1.25
   defaultSpeed: 0
-  chaseSpeedMultiplier: 1.25
+  chaseSpeedMultiplier: 2
   chaseSpeed: 0
   currentSpeed: 0
   jumpForce: {x: 0, y: 0}
   jumpForceMultiplier: {x: 0, y: 0}
   forceMode: 1
+  jumpState: {fileID: 0}
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 3910140745184958585}
   collisionHandler: {fileID: 2865413743037272415}
   fieldOfView: {fileID: 2865413743299836421}

@@ -19,6 +19,14 @@ public class FlyingSquirrel : Enemy
 
     new void FixedUpdate()
     {
+        if (isChasing && flipToPlayerIfSpotted && MathUtils.GetAbsXDistance(GetPosition(), player.GetPosition()) > 1f)
+        {
+            if ((GetPosition().x > player.GetPosition().x && facingDirection == RIGHT)
+                || (GetPosition().x < player.GetPosition().x && facingDirection == LEFT))
+                {
+                    ChangeFacingDirection();
+                }
+        }
         base.FixedUpdate();
     }
     #endregion
