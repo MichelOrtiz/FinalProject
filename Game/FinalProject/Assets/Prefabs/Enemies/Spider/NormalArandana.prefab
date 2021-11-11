@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054239757198984474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.495, y: 0.093, z: 0}
+  m_LocalPosition: {x: -0.741, y: 0.093, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 6054239759243001533}
@@ -332,7 +332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054239757795146387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.038, y: -0.006, z: 0}
+  m_LocalPosition: {x: -0.445, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 6054239759243001533}
@@ -362,7 +362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054239757824889772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.758, y: 0, z: 0}
+  m_LocalPosition: {x: 0.827, y: 0.241, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 6054239759193041213}
@@ -423,6 +423,10 @@ MonoBehaviour:
   jumpForce: {x: 3, y: 4}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  jumpState: {fileID: 0}
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 6054239759243001531}
   collisionHandler: {fileID: 6054239758134800268}
   fieldOfView: {fileID: 6054239759193041212}
@@ -453,7 +457,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054239758134800267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.293, y: -0.16, z: 0}
+  m_LocalPosition: {x: 1.06, y: 0.218, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6054239759079425676}
@@ -748,10 +752,6 @@ MonoBehaviour:
   enemyType: 0
   enemyName: 32
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 25
   punishDamage: 10
   atackEffect: {fileID: 0}
@@ -767,6 +767,7 @@ MonoBehaviour:
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   sawPlayerEmote: {fileID: 11400000, guid: 85bd781ef595d39408f5ce69df6b7fb9, type: 2}
+  onRotateForward: {fileID: 11400000, guid: cdea2352dc2a07c42a882468da76f23e, type: 2}
 --- !u!1 &6054239759193041211
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,7 +860,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054239759243001530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.137, y: -0.204, z: 0}
+  m_LocalPosition: {x: 0.76, y: -0.204, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6054239757795146388}
@@ -883,11 +884,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4864
   feetPos: {fileID: 6054239757795146388}
-  checkFeetRadius: 0.65
+  checkFeetRadius: 0.35
   isGrounded: 0
   lastGroundTag: 
   edgeCheck: {fileID: 6054239757198984475}
-  downCheckDistance: 0.45
+  downCheckDistance: 0.35
   isNearEdge: 0
 --- !u!70 &6054239759243001532
 CapsuleCollider2D:
@@ -902,8 +903,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.15, y: -0.23}
-  m_Size: {x: 1.68, y: 0.76}
+  m_Offset: {x: -0.14999999, y: -0.029645666}
+  m_Size: {x: 1.6800004, y: 0.61}
   m_Direction: 1
 --- !u!114 &2609421690726076506
 MonoBehaviour:
