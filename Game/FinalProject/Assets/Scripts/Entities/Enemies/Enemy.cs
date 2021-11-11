@@ -68,7 +68,7 @@ public abstract class Enemy : Entity
 
     void fieldOfView_PlayerUnsighted()
     {
-        if (sawEmote == null) sawEmote = statesManager.currentStates.Find( s => s.ObjectName.Contains(sawPlayerEmote.ObjectName)) as EmoteSetter;
+        if (sawEmote == null) sawEmote = statesManager.currentStates.Find( s => s != null && s.ObjectName.Contains(sawPlayerEmote.ObjectName)) as EmoteSetter;
 
         sawEmote?.StopAffect();
         sawEmote = null;
