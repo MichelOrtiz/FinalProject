@@ -26,14 +26,14 @@ public class WaterPhysics : MonoBehaviour
             waterSlowState = player.statesManager.AddState(waterSlowState);
         }
     }
-    /*private void OnTriggerStay2D(Collider2D collision){
+    private void OnTriggerStay2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Playerwater")
         {
             player.currentGravity = .5f;
             waterSlowState = player.statesManager.AddState(waterSlowState);
         }
-    }*/
+    }
     private void OnTriggerExit2D(Collider2D collision){
             GameObject collisionGameObject = collision.gameObject;
         if (collisionGameObject.tag == "Playerwater")
