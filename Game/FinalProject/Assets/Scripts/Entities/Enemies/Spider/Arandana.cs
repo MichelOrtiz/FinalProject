@@ -3,6 +3,7 @@ public class Arandana : Enemy
 {
     private CollisionHandler groundHandler;
     float rotation;
+    [SerializeField] private KnockbackState onRotateForward;
     new void Start()
     {
         base.Start();
@@ -33,8 +34,19 @@ public class Arandana : Enemy
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y,  transform.eulerAngles.z - 90 );
 
             //}
-
+            //HandleForward();
         }
+    }
+
+    void HandleForward()
+    {
+        var forward = Instantiate(onRotateForward);
+        var rotation = Mathf.RoundToInt(transform.eulerAngles.z);
+        if (rotation == 90 || rotation == 270)
+        {
+            forward.angle = 180;
+        }
+        statesManager.AddState(forward);
     }
 
     new void FixedUpdate()
