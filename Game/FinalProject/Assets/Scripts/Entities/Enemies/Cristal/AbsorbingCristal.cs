@@ -36,7 +36,7 @@ public class AbsorbingCristal : Enemy
         darknessObject = GameObject.Find(darknessName);
         darknessScript = darknessObject.GetComponent<DarknessScript>();
 
-        darknessScript.ExitDarkness += darknessScript_Exit;
+        //darknessScript.ExitDarkness += darknessScript_Exit;
         //darknessObject = player.Darkness;
     }
 
@@ -117,29 +117,29 @@ public class AbsorbingCristal : Enemy
         }
         else
         {
-            ChangeFacingDirection();
-            Vector2 dirToPlayer = (player.GetPosition() - GetPosition()).normalized;
-            Vector2 knockbackDir = new Vector2(dirToPlayer.x, dirToPlayer.y + yOffsetKnockback );
-            Knockback(selfKnockbackDuration, selfKnockBackForce, knockbackDir);
+            if (groundChecker.isGrounded)
+            {
+                ChangeFacingDirection();
+                Vector2 dirToPlayer = (player.GetPosition() - GetPosition()).normalized;
+                Vector2 knockbackDir = new Vector2(dirToPlayer.x, dirToPlayer.y + yOffsetKnockback );
+                Knockback(selfKnockbackDuration, selfKnockBackForce, knockbackDir);
+            }
         }
 
-        if (groundChecker.isNearEdge)
+        /*if (groundChecker.isNearEdge && groundChecker.isGrounded)
         {
-            enemyMovement.Jump();
+            enemyMovement.JumpByKnockback();
             animationManager.ChangeAnimation("jump");
 
-        }
+        }*/
     }
 
     void SetActiveDarkness(bool value)
     {
 
-        if (player.isInDark != value)
-        {
-            curValue = value;
+        
             //darknessObject.GetComponent<DarknessScript>().ObscureLight.SetActive(value);
             darknessScript.SetActiveDarkness(value);
-        }
     }
 
     void ChangeSpriteColor(Color color)
@@ -150,12 +150,12 @@ public class AbsorbingCristal : Enemy
         }
     }
 
-    void darknessScript_Exit()
+    /*void darknessScript_Exit()
     {
         //curValue = false;
         Debug.Log("exit called");
         SetActiveDarkness(false);
-    }
+    }*/
 
     void OnDestroy()
     {
