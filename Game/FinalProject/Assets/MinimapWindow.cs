@@ -7,15 +7,23 @@ namespace Minimap{
     {
         public static MinimapWindow instance;
         public GameObject UI;
+        public Animator animator;
+        bool isOpen;
         private void Awake()
         {
             instance = this;
+            isOpen = true;
+        }
+        private void Start() {
+            animator.SetBool("IsOpen",true);
+            isOpen = true;
         }
         private void Update()
         {
             if (PlayerManager.instance.inputs.OpenMiniMap)
             {
-                if (!UI.activeSelf)
+                isOpen = !isOpen;
+                if (isOpen)
                 {
                     Show();
                 }else{
@@ -25,12 +33,13 @@ namespace Minimap{
         }
         public void Show()
         {
-        
-            UI.SetActive(true);
+            animator.SetBool("IsOpen",true);
+            //UI.SetActive(true);
         }
         public void Hide()
-        {            
-            UI.SetActive(false);
+        {        
+            animator.SetBool("IsOpen",false);    
+            //UI.SetActive(false);
         }
     }
 }
