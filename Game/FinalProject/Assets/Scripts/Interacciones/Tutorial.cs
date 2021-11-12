@@ -30,6 +30,7 @@ public class Tutorial : IntRemoteTrigger
             currentInter = null;
             Debug.Log("No hay mas interacciones");
             busy = false;
+            PlayerManager.instance.inputs.Interact -= TriggerInteraction;
             Destroy(gameObject);
             return;
         }
@@ -42,5 +43,8 @@ public class Tutorial : IntRemoteTrigger
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(triggerPoint.position, radius);
+    }
+    private void OnDestroy() {
+        PlayerManager.instance.inputs.Interact -= TriggerInteraction;
     }
 }

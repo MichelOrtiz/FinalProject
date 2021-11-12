@@ -85,4 +85,7 @@ public class InteractionTrigger : MonoBehaviour
         if(signInter==null) return;
         signInter.SetActive(false);
     }
+    private void OnDestroy() {
+        PlayerManager.instance.inputs.Interact -= TriggerInteraction;
+    }
 }

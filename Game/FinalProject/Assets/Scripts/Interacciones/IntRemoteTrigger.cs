@@ -25,4 +25,7 @@ public class IntRemoteTrigger : InteractionTrigger
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(triggerPoint.position, radius);
     }
+    private void OnDestroy() {
+        PlayerManager.instance.inputs.Interact -= TriggerInteraction;
+    }
 }
