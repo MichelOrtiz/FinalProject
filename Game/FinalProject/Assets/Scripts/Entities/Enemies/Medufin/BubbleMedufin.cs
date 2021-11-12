@@ -52,11 +52,11 @@ public class BubbleMedufin : Enemy
                     if (curShots == 0)
                     {
                         // player position before start shooting
-                        shotTarget = (Vector2) player.GetPosition();
+                        //shotTarget = (Vector2) player.GetPosition();
                     }
                     if (currentTimeBtwShot > timeBtwShot)
                     {
-                        projectileShooter.ShootProjectile(shotTarget);
+                        projectileShooter.ShootProjectile(player.GetPosition());
                         curShots++;
                         currentTimeBtwShot = 0;
                     }

@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1943692799358959584
@@ -137,6 +137,10 @@ MonoBehaviour:
   jumpForce: {x: 1, y: 2}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  jumpState: {fileID: 0}
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 8161217541872406774}
   collisionHandler: {fileID: 1943692800361797559}
   fieldOfView: {fileID: 1943692799724186196}
@@ -270,11 +274,8 @@ MonoBehaviour:
   enemyType: 5
   enemyName: 56
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 0
+  punishDamage: 0
   atackEffect: {fileID: 0}
   canKnockbackPlayer: 0
   knockbackAngle: 0
@@ -461,7 +462,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0f28a79c16d9cdb43bbb8a4a3b529016, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5943396, g: 0.36165005, b: 0.36165005, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

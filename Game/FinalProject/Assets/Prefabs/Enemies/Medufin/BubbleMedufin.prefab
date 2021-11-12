@@ -69,7 +69,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0118637085, y: 0}
+  m_Offset: {x: -0.0048828125, y: 0.51361597}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -80,7 +80,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34007263, y: 0.10998005}
+  m_Size: {x: 0.9902344, y: 1.137212}
   m_EdgeRadius: 0
 --- !u!1 &4950339819693687946
 GameObject:
@@ -318,17 +318,13 @@ MonoBehaviour:
   enemyType: 13
   enemyName: 3
   flipToPlayerIfSpotted: 1
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 30
   punishDamage: 10
   atackEffect: {fileID: 0}
-  canKnockbackPlayer: 0
-  knockbackAngle: 0
-  knockbackDuration: 0
-  knockBackForce: 0
+  canKnockbackPlayer: 1
+  knockbackAngle: 15
+  knockbackDuration: 0.5
+  knockBackForce: 15
   fieldOfView: {fileID: 4950339821490397185}
   enemyMovement: {fileID: 0}
   projectileShooter: {fileID: 4950339821517388448}
@@ -337,7 +333,7 @@ MonoBehaviour:
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   sawPlayerEmote: {fileID: 11400000, guid: 85bd781ef595d39408f5ce69df6b7fb9, type: 2}
-  timeBtwShot: 0.5
+  timeBtwShot: 0.75
   shotsPerBurst: 5
   timeBtwBurst: 1.5
 --- !u!1 &4950339821104507861
@@ -607,6 +603,16 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: 3a91bcf0652041f42853efc62592d9f3, type: 3}
   shotPos: {fileID: 4950339820941239587}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 0
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!1 &4950339821577798657
 GameObject:
   m_ObjectHideFlags: 0
