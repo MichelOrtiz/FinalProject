@@ -29,6 +29,8 @@ public class MBBossFight : BossFight
             }
             
         }
+        // delete later
+        base.Update();
     }
 
     void minigameManager_AllMinigamesCompleted()
