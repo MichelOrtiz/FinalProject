@@ -29,6 +29,7 @@ public class AbilityUI : MonoBehaviour
         foreach(AbilitySlot slot in slots){
             slot.UpdateUISlot();
         }
+        popUp.GetComponent<PopUpHabUI>().UpdateUI();
     }
     public void SetOpen(bool isOpen){
         UI.SetActive(isOpen);
