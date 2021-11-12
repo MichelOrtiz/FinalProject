@@ -297,7 +297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BUY
+  m_text: Comprar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a64f3e201a9a1e4897eae98d9ad54b9, type: 2}
   m_sharedMaterial: {fileID: 5661173162575829839, guid: 0a64f3e201a9a1e4897eae98d9ad54b9, type: 2}
@@ -324,12 +324,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
+  m_fontSize: 11.4
   m_fontSizeBase: 16
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 8
+  m_fontSizeMax: 18
   m_fontStyle: 4
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -453,6 +453,7 @@ GameObject:
   - component: {fileID: 2060849783129994375}
   - component: {fileID: 2060849783129994374}
   - component: {fileID: 2060849783129994373}
+  - component: {fileID: 3108009154875089690}
   m_Layer: 5
   m_Name: Buy
   m_TagString: Untagged
@@ -574,3 +575,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3108009154875089690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060849783129994379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 0
