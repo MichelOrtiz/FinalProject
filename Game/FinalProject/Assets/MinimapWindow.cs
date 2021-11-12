@@ -22,8 +22,7 @@ namespace Minimap{
         {
             if (PlayerManager.instance.inputs.OpenMiniMap)
             {
-                isOpen = !isOpen;
-                if (isOpen)
+                if (!UI.activeSelf)
                 {
                     Show();
                 }else{
