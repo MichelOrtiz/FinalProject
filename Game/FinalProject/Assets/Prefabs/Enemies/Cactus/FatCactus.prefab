@@ -180,6 +180,7 @@ MonoBehaviour:
   jumpForce: {x: 3, y: 4}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  jumpState: {fileID: 0}
   pushForce: {x: 0, y: 0}
   pushMultiplier: {x: 0, y: 0}
   pushForceMode: 0
@@ -453,7 +454,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4416204286152569160}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -530,16 +531,12 @@ MonoBehaviour:
   enemyType: 2
   enemyName: 9
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
-  damageAmount: 0
-  punishDamage: 0
+  damageAmount: 20
+  punishDamage: 10
   atackEffect: {fileID: 0}
   canKnockbackPlayer: 1
   knockbackAngle: 45
-  knockbackDuration: 0.5
+  knockbackDuration: 0.75
   knockBackForce: 15
   fieldOfView: {fileID: 4416204284940779459}
   enemyMovement: {fileID: 4416204284942510639}
@@ -549,14 +546,14 @@ MonoBehaviour:
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   sawPlayerEmote: {fileID: 11400000, guid: 85bd781ef595d39408f5ce69df6b7fb9, type: 2}
-  amount: 1
-  wishedItem: {fileID: 11400000, guid: 641cb724f3339ff488333eff0a622e36, type: 2}
+  amount: 3
+  wishedItem: {fileID: 11400000, guid: e57ca6afc035e7344b6ca88766abb04e, type: 2}
   wishedItemBubble: {fileID: 5049815689284655758}
   worldState:
-    Tag: Default
-    id: 5471460
+    Tag: isCactusGordoDefeated
+    id: 204
     state: 0
-  bubbleRadius: 3.22
+  bubbleRadius: 10
 --- !u!1 &4416204286153756194
 GameObject:
   m_ObjectHideFlags: 0

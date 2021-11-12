@@ -44,6 +44,11 @@ public class ItemInteractionManager : MonoBehaviour
                 entity.DestroyEntity();
             }
         }
+        else
+        {
+            // Make entity leave the scene
+            entity.DestroyEntity();
+        }
     }
 
 

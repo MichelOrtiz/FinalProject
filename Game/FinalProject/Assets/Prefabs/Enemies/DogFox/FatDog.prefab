@@ -665,6 +665,7 @@ MonoBehaviour:
   jumpForce: {x: 3, y: 4}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  jumpState: {fileID: 0}
   pushForce: {x: 0, y: 0}
   pushMultiplier: {x: 0, y: 0}
   pushForceMode: 0
@@ -797,7 +798,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959054844885418766}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -874,16 +875,12 @@ MonoBehaviour:
   enemyType: 5
   enemyName: 12
   flipToPlayerIfSpotted: 1
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 20
   punishDamage: 10
   atackEffect: {fileID: 0}
   canKnockbackPlayer: 1
   knockbackAngle: 45
-  knockbackDuration: 0.5
+  knockbackDuration: 0.75
   knockBackForce: 15
   fieldOfView: {fileID: 1959054842880529539}
   enemyMovement: {fileID: 1959054844719417907}
