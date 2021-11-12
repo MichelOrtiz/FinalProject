@@ -470,7 +470,7 @@ public class PlayerManager : Entity
     }
 
     public void RestoreValuesForDead(){
-        statesManager.StopAll();
+        //statesManager.StopAll();
         gameObject.GetComponent<SpriteRenderer>().color= new Color(1,1,1,1); 
         inmunityState.onEffect = false;
         walkingSpeed = defaultwalkingSpeed;

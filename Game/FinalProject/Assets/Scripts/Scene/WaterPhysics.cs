@@ -40,6 +40,7 @@ public class WaterPhysics : MonoBehaviour
         {
             player.currentGravity = PlayerManager.defaultGravity;
             player.statesManager.RemoveState(waterSlowState);
+            PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
         }
     }
 }
