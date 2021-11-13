@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class loadlevel : MonoBehaviour
 {
-    public StatesManager statesManager;
     public int iLevelToLoad;
     public int noDoor = 1;
     [SerializeField]protected Transform loadPosition;
-    public static loadlevel instance = null;
     protected PlayerManager player;
 
-    protected void Start() {
+    protected virtual void Start() {
         if (SceneController.instance != null)
         {
             PlayerManager.instance.physics.ResetAll();
@@ -38,17 +36,7 @@ public class loadlevel : MonoBehaviour
         }
 
     }
-    private void Awake()
-        {
-            instance = this;
-        }
-    private void Update()
-        {
-            if (instance==null)
-            {
-                instance = this;
-            }
-        }
+    
     protected void OnTriggerEnter2D(Collider2D collision){
         GameObject collisionGameObject = collision.gameObject;
         /*if (collisionGameObject.tag == "Untagged")
@@ -87,7 +75,7 @@ public class loadlevel : MonoBehaviour
         PlayerManager.instance.ResetAnimations();
         //PlayerManager.instance.statesManager.StopAll();
     }
-    void cargarEscena(){
+    protected virtual void cargarEscena(){
         
         PlayerManager.instance.inputs.Interact -= cargarEscena; 
         LoadScene();
