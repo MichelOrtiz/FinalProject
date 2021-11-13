@@ -74,6 +74,7 @@ public class SceneController : MonoBehaviour
         sceneTitle = FindObjectOfType<SceneTitle>();
         //mainCanvas.SetActive(true);
         FindObjectOfType<CameraFollow>().transform.position = PlayerManager.instance.transform.position;
+        PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
     }
     public void RealLoasScene(int escena){
         StartCoroutine(LoadAsynchronously(escena));

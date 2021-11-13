@@ -13,6 +13,7 @@ public class FrutaMiniJuego : MonoBehaviour
     float Tiempoact;
     Rigidbody2D Body;
     private int score;
+    private bool fin = false;
     void Start()
     {
         var miniMaps = GameObject.FindGameObjectsWithTag("MiniMap");
@@ -43,7 +44,8 @@ public class FrutaMiniJuego : MonoBehaviour
         {
             if (tipo == Tipo.Fruta)
             {
-                SceneController.instance.LoadScene(SceneController.instance.prevScene);
+                fin = true;
+                if (fin)SceneController.instance.LoadScene(11);
                 //SceneManager.LoadScene(SceneController.instance.prevScene);
             }else
             {
