@@ -13,6 +13,43 @@ public class PopUpHabUI : MonoBehaviour
     [SerializeField] GameObject groupHotkey;
     [SerializeField] TextMeshProUGUI isPasiveNotice;
     [SerializeField] TMP_Dropdown hotkey;
+    public void UpdateUI(){
+        if(ability == null) return;
+        name_Ab.text = ability.abilityName.ToString();
+        desc_Ab.text = ability.description;
+        if(!ability.isPasive){
+            groupHotkey.SetActive(true);
+            isPasiveNotice.text = "Activa";
+            hotkey.ClearOptions();
+            TMP_Dropdown.OptionData currentHotKey = null;
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+            foreach(KeyCode key in PlayerManager.instance.inputs.skillHotkeys){
+                TMP_Dropdown.OptionData option = new TMP_Dropdown.OptionData();
+                option.text = key.ToString();
+                options.Add(option);
+                if(key.ToString().Equals(ability.hotkey.ToString())){
+                    currentHotKey = option;
+                }
+            }
+            TMP_Dropdown.OptionData opt = new TMP_Dropdown.OptionData();
+            opt.text = "Ninguna";
+            options.Add(opt);
+            hotkey.AddOptions(options);
+            if(currentHotKey == null) {
+                if(ability.hotkey.ToString() == "None"){
+                    currentHotKey = opt;
+                }else{
+                    currentHotKey = hotkey.options.Find(x => x.text == ability.hotkey.ToString());
+                }
+            }
+            hotkey.value = hotkey.options.IndexOf(currentHotKey);
+            hotkey.onValueChanged.AddListener(updateAlgo);
+        }
+        else if(ability.isPasive){
+            groupHotkey.SetActive(false);
+            isPasiveNotice.text = "Pasiva";
+        }
+    }
     public void UpdateUI(Ability ability){
         this.ability = ability;
         name_Ab.text = ability.abilityName.ToString();

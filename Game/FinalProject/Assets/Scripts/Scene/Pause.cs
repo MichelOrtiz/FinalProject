@@ -46,6 +46,7 @@ public class Pause : MonoBehaviour
     public static void ResumeGame()
     {
         HandleActive(false);
+        AbilityUI.instance.UpdateUI();
     }
 
     static void HandleActive(bool value)

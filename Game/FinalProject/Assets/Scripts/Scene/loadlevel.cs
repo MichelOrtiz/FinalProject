@@ -85,7 +85,7 @@ public class loadlevel : MonoBehaviour
         PlayerManager.instance.walkingSpeed = PlayerManager.defaultwalkingSpeed;
         PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
         PlayerManager.instance.ResetAnimations();
-        PlayerManager.instance.statesManager.StopAll();
+        //PlayerManager.instance.statesManager.StopAll();
     }
     void cargarEscena(){
         

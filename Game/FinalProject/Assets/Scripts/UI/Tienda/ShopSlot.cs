@@ -50,6 +50,6 @@ public class ShopSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         txt_toChange.text = price.ToString()+"G";
     }
     public void OnPointerExit(PointerEventData eventData){
-        txt_toChange.text = "BUY";
+        txt_toChange.text = "Comprar";
     }
 }
