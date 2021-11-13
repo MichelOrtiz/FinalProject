@@ -100,6 +100,10 @@ MonoBehaviour:
   jumpForce: {x: 1, y: 2}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  jumpState: {fileID: 0}
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 4515929016024796481}
   collisionHandler: {fileID: 4515929016015080715}
   fieldOfView: {fileID: 4515929015450440938}
@@ -128,7 +132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4515929014682893742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.13, y: -0.75, z: 0}
+  m_LocalPosition: {x: 0.881, y: -1.208, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4515929015450440937}
@@ -158,7 +162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4515929014912204583}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.04, y: 0.25, z: 0}
+  m_LocalPosition: {x: 1.21, y: 0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4515929016024796482}
@@ -175,6 +179,7 @@ GameObject:
   - component: {fileID: 4515929015038559335}
   - component: {fileID: 4515929015038559329}
   - component: {fileID: 4515929015038559328}
+  - component: {fileID: 2229804057396155553}
   m_Layer: 10
   m_Name: SpriteFx
   m_TagString: Untagged
@@ -190,7 +195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4515929015038559334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: -0.33, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4515929015614146942}
@@ -236,7 +241,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 24b3ba47e9b643d4fbe939e4ebdaca60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36996fbc4b4971846b174476ad60f5db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -257,7 +262,7 @@ Animator:
   m_GameObject: {fileID: 4515929015038559334}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 78a530f91156f2543b1cdf8bd9630360, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -266,6 +271,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2229804057396155553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4515929015038559334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b21c67f09506d41838e6dd6af245ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 4515929015614146883}
+  animator: {fileID: 4515929015038559328}
+  previousState: 
+  currentState: 
+  nextState: 
+  nextStateEnabled: 0
 --- !u!1 &4515929015289570580
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +316,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4515929015289570580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.13, y: -0.73, z: 0}
+  m_LocalPosition: {x: 1.124, y: -0.562, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4515929015450440937}
@@ -422,7 +445,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4864
   obstacleCheckOrigin: {fileID: 4515929014682893743}
-  obstacleViewDistance: 2
+  obstacleViewDistance: 0.5
   blockingCollider: {fileID: 0}
   facingDirection: 
   entity: {fileID: 0}
@@ -545,7 +568,7 @@ MonoBehaviour:
   fallingCriteria: 0
   rigidbody2d: {fileID: 0}
   animator: {fileID: 0}
-  animationManager: {fileID: 0}
+  animationManager: {fileID: 2229804057396155553}
   whatIsObstacle: []
   feetPos: {fileID: 0}
   groundChecker: {fileID: 4515929016024796481}
@@ -555,10 +578,6 @@ MonoBehaviour:
   enemyType: 11
   enemyName: 48
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 30
   punishDamage: 10
   atackEffect: {fileID: 0}
@@ -604,7 +623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4515929015717123632}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1, y: 0.05, z: 0}
+  m_LocalPosition: {x: 1.46, y: 0.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4515929015614146942}
@@ -666,7 +685,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4515929016015080714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.57, y: -0.51, z: 0}
+  m_LocalPosition: {x: -0.04, y: -0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4515929015614146942}
@@ -751,7 +770,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4515929016024796480}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.47, y: -2.14, z: 0}
+  m_LocalPosition: {x: -0.19, y: -1.829, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 4515929015792236858}
@@ -775,7 +794,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4864
   feetPos: {fileID: 4515929015792236858}
-  checkFeetRadius: 0.25
+  checkFeetRadius: 0.45
   isGrounded: 0
   lastGroundTag: 
   edgeCheck: {fileID: 4515929014912204576}

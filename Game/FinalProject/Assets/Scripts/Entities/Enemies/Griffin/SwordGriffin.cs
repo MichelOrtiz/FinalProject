@@ -12,6 +12,8 @@ public class SwordGriffin : Enemy
     [SerializeField] private State effectOnDestroyObject;
     private bool destroyedObject;
 
+    bool touchingBreakable;
+
     // private GameObject breakableObject;
 
 
@@ -23,6 +25,14 @@ public class SwordGriffin : Enemy
         base.Start();
     }
 
+    protected override void MainRoutine()
+    {
+        if (!touchingBreakable)
+        {
+            enemyMovement.StopMovement();
+        }
+    }
+
     protected override void ChasePlayer()
     {
         float speed = fieldOfView.GetDistanceFromPlayerFov() >= secondFovDistance ? firstFovSpeed : secondFovSpeed;
@@ -30,13 +40,32 @@ public class SwordGriffin : Enemy
         if (MathUtils.GetAbsXDistance(player.GetPosition(), GetPosition()) > 2f)
         {
             enemyMovement.GoToInGround(player.GetPosition(), speed, checkNearEdge: true);
+
+            if (!touchingBreakable)
+            {
+                if (!groundChecker.isNearEdge && !fieldOfView.inFrontOfObstacle)
+                {
+                    animationManager?.ChangeAnimation("walk", speed * 1 / enemyMovement.DefaultSpeed);
+                }
+                else
+                {
+                    animationManager.ChangeAnimation("idle");
+                }
+            }
         }
+    }
+
+    protected override void Attack()
+    {
+        HandleBreakAnimation();
+        base.Attack();
     }
 
     protected override void collisionHandler_EnterContact(GameObject contact)
     {
         if (contact.tag == "Breakable")
         {
+            HandleBreakAnimation();
             //breakableObject = contact;
             Destroy(contact);
             //destroyedObject = true;
@@ -45,5 +74,18 @@ public class SwordGriffin : Enemy
                 statesManager.AddState(effectOnDestroyObject);
             }
         }
+    }
+
+    void HandleBreakAnimation()
+    {
+        animationManager.ChangeAnimation("break");
+        touchingBreakable = true;
+        Invoke("AfterBreakable", 0.3f);
+    }
+
+    void AfterBreakable()
+    {
+        touchingBreakable = false;
+        animationManager.SetCurrentState("idle", true);
     }
 }

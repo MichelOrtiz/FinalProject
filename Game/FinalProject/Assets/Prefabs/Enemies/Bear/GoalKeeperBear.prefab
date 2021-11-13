@@ -122,8 +122,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8693047188186823454}
   - component: {fileID: 8693047188186823455}
-  - component: {fileID: 1947153706}
   - component: {fileID: 3226085030437297122}
+  - component: {fileID: 8967127832201927856}
   m_Layer: 6
   m_Name: GroundChecker
   m_TagString: Untagged
@@ -169,22 +169,6 @@ MonoBehaviour:
   edgeCheck: {fileID: 8693047189564895671}
   downCheckDistance: 0.7
   isNearEdge: 0
---- !u!58 &1947153706
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8693047188186823452}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: 0.57}
-  serializedVersion: 2
-  m_Radius: 0.41
 --- !u!58 &3226085030437297122
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -201,6 +185,32 @@ CircleCollider2D:
   m_Offset: {x: -0.03, y: 0.57}
   serializedVersion: 2
   m_Radius: 0.41
+--- !u!61 &8967127832201927856
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693047188186823452}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.56}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.48, y: 0.29}
+  m_EdgeRadius: 0.03
 --- !u!1 &8693047188222169030
 GameObject:
   m_ObjectHideFlags: 0

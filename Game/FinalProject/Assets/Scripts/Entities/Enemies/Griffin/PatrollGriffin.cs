@@ -46,8 +46,9 @@ public class PatrollGriffin : Enemy
     {
         //base.MainRoutine();
         
-        if ( (!reachedDestination ) && groundChecker.isGrounded)
+        if ( (!reachedDestination ) && groundChecker.isGrounded && !groundChecker.isNearEdge && !fieldOfView.inFrontOfObstacle)
         {
+            animationManager.ChangeAnimation("walk");
             enemyMovement.GoToInGround(patrolDestination, chasing: false, checkNearEdge: false);
             reachedDestination = MathUtils.GetAbsXDistance(GetPosition(), patrolDestination) < 0.5f;
         }
