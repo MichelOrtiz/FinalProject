@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
@@ -14,7 +15,7 @@ public class Inventory : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
     private int money;
-    public Text moneyText;
+    public TextMeshProUGUI moneyText;
     public List<Item> items = new List<Item>();
     public int capacidad;
 
