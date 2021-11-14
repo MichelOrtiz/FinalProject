@@ -109,6 +109,7 @@ public class Minigame : MonoBehaviour{
 
     void EndMinigameForGood()
     {
+        
         if (MinigameCompleted)
         {
             Debug.Log("Minigame <<" + minigameObject + ">> completed!");
