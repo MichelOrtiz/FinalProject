@@ -66,7 +66,6 @@ public class Pause : MonoBehaviour
         ResumeGame();
         panel.SetActive(false);
         SceneController.instance.RealLoasScene(0);
-        Debug.Log("Sup");
-
+        //Debug.Log("uSSop");
     }
 }

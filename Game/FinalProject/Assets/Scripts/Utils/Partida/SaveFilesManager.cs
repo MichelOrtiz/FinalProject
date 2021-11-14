@@ -21,8 +21,10 @@ public class SaveFilesManager : MonoBehaviour
                     partida.controlBindsKeys = KeybindManager.defaultKeys.ToList<string>();
                     partida.controlBindsValues = KeybindManager.defaultValues.ToList<KeyCode>();
                     WriteSaveFile(partida,filePath);
-                } 
+                }
+                SceneController.instance.prevScene = -1; 
             }
+            
             return partida;
         }
         set{
@@ -78,14 +80,14 @@ public class SaveFilesManager : MonoBehaviour
         if(currentSaveSlot==null)return;
         //Tiempo de juego
         TimeSpan timePlayed = DateTime.Now - startSession;
-        Debug.Log(DateTime.Now.ToString() + " - " + startSession.ToString());
+        //Debug.Log(DateTime.Now.ToString() + " - " + startSession.ToString());
         currentSaveSlot.timeSecondsPlayed += timePlayed.Seconds;
-        if(currentSaveSlot.timeSecondsPlayed >= 60){
+        while(currentSaveSlot.timeSecondsPlayed >= 60){
             currentSaveSlot.timeSecondsPlayed -= 60;
             currentSaveSlot.timeMinutesPlayed += 1;
         }
         currentSaveSlot.timeMinutesPlayed += timePlayed.Minutes;
-        if(currentSaveSlot.timeMinutesPlayed >= 60){
+        while(currentSaveSlot.timeMinutesPlayed >= 60){
             currentSaveSlot.timeMinutesPlayed -= 60;
             currentSaveSlot.timeHoursPlayed += 1;
         }

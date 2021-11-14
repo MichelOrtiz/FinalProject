@@ -21,6 +21,7 @@ public class MapUI : MonoBehaviour
     {
         mapUI.SetActive(true);
         mapitas = GetComponentsInChildren<MapSlot>().ToList<MapSlot>();
+        SceneController.instance.SceneChanged -= CambioEscena;
         SceneController.instance.SceneChanged += CambioEscena;
         CambioEscena();
         loadLoadStuff();
@@ -78,5 +79,8 @@ public class MapUI : MonoBehaviour
                 }
             }
         }
+    }
+    private void OnDestroy() {
+        SceneController.instance.SceneChanged -= CambioEscena;
     }
 }

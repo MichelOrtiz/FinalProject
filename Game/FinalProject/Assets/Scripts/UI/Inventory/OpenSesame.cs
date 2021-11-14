@@ -22,6 +22,7 @@ public class OpenSesame : MonoBehaviour
         }else{
             animator.Play("Cofre_close");
             PlayerManager.instance.inputs.Interact -= OpenCofre;
+            CofreUI.instance.cofreUI.SetActive(false);
         }
     }
     void OpenCofre(){
