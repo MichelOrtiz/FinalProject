@@ -104,7 +104,7 @@ public class Inventory : MonoBehaviour
     }
     public Item GetRandomEdibleItem()
     {
-        Item item = new Item();
+        Item item;
         if (items.Count != 0)
         {
             item = items[RandomGenerator.NewRandom(0, items.Count -1)];

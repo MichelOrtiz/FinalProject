@@ -367,7 +367,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4864
   obstacleCheckOrigin: {fileID: 2894877870738522731}
-  obstacleViewDistance: 2
+  obstacleViewDistance: 1.25
   blockingCollider: {fileID: 0}
   facingDirection: 
   entity: {fileID: 0}
@@ -488,6 +488,10 @@ MonoBehaviour:
   jumpForce: {x: 1, y: 2}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  jumpState: {fileID: 0}
+  pushForce: {x: 0, y: 0}
+  pushMultiplier: {x: 0, y: 0}
+  pushForceMode: 0
   groundChecker: {fileID: 2894877869887478805}
   collisionHandler: {fileID: 2894877870842048744}
   fieldOfView: {fileID: 2894877869465710644}
@@ -763,10 +767,6 @@ MonoBehaviour:
   enemyType: 6
   enemyName: 38
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 40
   punishDamage: 10
   atackEffect: {fileID: 0}
@@ -806,7 +806,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2894877870738522730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1200008, y: -2.790001, z: 0}
+  m_LocalPosition: {x: 2.76, y: -3.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 2894877869465710645}
@@ -945,6 +945,16 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: b69da6cbf6e0f104f92e5ec877dfe01a, type: 3}
   shotPos: {fileID: 2894877869541194777}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 0
+  rotate: 0
+  center: {fileID: 0}
+  startingAngle: 0
+  rotationRate: 0
+  timeToCompleteCircle: 0
+  isClockwise: 0
+  bustSize: 0
+  burstAngle: 0
+  burstClockwise: 0
 --- !u!1001 &2894877870556592151
 PrefabInstance:
   m_ObjectHideFlags: 0

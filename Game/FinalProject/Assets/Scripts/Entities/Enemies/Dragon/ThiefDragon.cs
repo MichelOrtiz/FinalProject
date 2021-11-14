@@ -36,9 +36,16 @@ public class ThiefDragon : Enemy
 
     void Jump()
     {
-        stolenItemIcon.GetComponent<SpriteRenderer>().sprite = null;
-        animationManager.ChangeAnimation("jump");
-        enemyMovement.Jump();
+        if (!groundChecker.isNearEdge && !fieldOfView.inFrontOfObstacle)
+        {
+            stolenItemIcon.GetComponent<SpriteRenderer>().sprite = null;
+            animationManager.ChangeAnimation("jump");
+            enemyMovement.Jump();
+        }
+        else
+        {
+            ChangeFacingDirection();
+        }
     }
 
     protected override void MainRoutine()
@@ -69,7 +76,7 @@ public class ThiefDragon : Enemy
         //base.Attack();
         Inventory inventory = Inventory.instance;
         int money = Inventory.instance.GetMoney();
-        if (money >= minMoneyToSteal)
+        if (money > minMoneyToSteal)
         {
             int moneyToRemove = Mathf.RoundToInt(money * percentageMoneySteal);
             
