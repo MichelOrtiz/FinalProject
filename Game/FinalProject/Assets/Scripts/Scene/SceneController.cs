@@ -50,7 +50,7 @@ public class SceneController : MonoBehaviour
         //LoadScene(partida.sceneToLoad);
         sceneTitle = FindObjectOfType<SceneTitle>();
         sceneTitle?.gameObject?.SetActive(false);
-        prevScene = 34;
+        prevScene = 0;
         currentScene = partida.sceneToLoad;
         StartCoroutine(LoadAsynchronously(partida.sceneToLoad));
     }

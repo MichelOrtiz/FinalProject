@@ -15,7 +15,7 @@ public class loadMinigame : loadlevel
                     PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
                     PlayerManager.instance.RestoreValuesForDead();
             }else{
-                if(SceneController.instance.prevScene != 34 && SceneController.instance.prevScene == iLevelToLoad){
+                if(SceneController.instance.prevScene != 0 && SceneController.instance.prevScene == iLevelToLoad){
                         if(loadPosition!=null && !PlayerManager.instance.isDeath && SceneController.instance.altDoor == noDoor){
                             PlayerManager.instance.gameObject.transform.position = loadPosition.position;
                             isAvailable = false;
@@ -23,8 +23,8 @@ public class loadMinigame : loadlevel
                         }
                     }
                     else{
-                        //if loading from 34 spawnpoint = startPosition
-                        if(SceneController.instance.prevScene == 34){
+                        //if loading from 0 spawnpoint = startPosition
+                        if(SceneController.instance.prevScene == 0){
                             Debug.Log("Cargando desde main menu");
                             PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
                         }

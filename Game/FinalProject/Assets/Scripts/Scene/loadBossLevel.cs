@@ -29,7 +29,7 @@ public class loadBossLevel : loadlevel
         if (SceneController.instance != null)
         {
             PlayerManager.instance.physics.ResetAll();
-            if(SceneController.instance.prevScene != 34 && SceneController.instance.prevScene == iLevelToLoad){
+            if(SceneController.instance.prevScene != 0 && SceneController.instance.prevScene == iLevelToLoad){
                 if(loadPosition!=null && !PlayerManager.instance.isDeath){
                     PlayerManager.instance.gameObject.transform.position = loadPosition.position;
                     //Jugador salio de la sala del jefe... entonces lo derroto no?
@@ -38,8 +38,8 @@ public class loadBossLevel : loadlevel
                 }
             }
             else{
-                //if loading from 34 spawnpoint = startPosition
-                if(SceneController.instance.prevScene == 34){
+                //if loading from 0 spawnpoint = startPosition
+                if(SceneController.instance.prevScene == 0){
                     Debug.Log("Cargando desde main menu");
                     PlayerManager.instance.gameObject.transform.position = SaveFilesManager.instance.currentSaveSlot.positionSpawn;
                 }

@@ -65,7 +65,7 @@ public class Pause : MonoBehaviour
     public void ReturnMenu(){
         ResumeGame();
         panel.SetActive(false);
-        SceneController.instance.RealLoasScene(34);
+        SceneController.instance.RealLoasScene(0);
         Debug.Log("Sup");
 
     }
