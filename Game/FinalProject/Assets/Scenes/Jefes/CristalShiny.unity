@@ -53945,6 +53945,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 915413015280159427, guid: e35a4b74c6eb2f94d848153805b88045, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.723
+      objectReference: {fileID: 0}
+    - target: {fileID: 915413015280159427, guid: e35a4b74c6eb2f94d848153805b88045, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.517
+      objectReference: {fileID: 0}
+    - target: {fileID: 915413015280159427, guid: e35a4b74c6eb2f94d848153805b88045, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 915413015280159427, guid: e35a4b74c6eb2f94d848153805b88045, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 915413015280159427, guid: e35a4b74c6eb2f94d848153805b88045, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226062270087109665, guid: e35a4b74c6eb2f94d848153805b88045, type: 3}
+      propertyPath: interSign
+      value: 
+      objectReference: {fileID: 1783449660}
     - target: {fileID: 8226062270087109665, guid: e35a4b74c6eb2f94d848153805b88045, type: 3}
       propertyPath: iLevelToLoad
       value: 9
@@ -54010,6 +54034,11 @@ PrefabInstance:
 --- !u!1 &1783449659 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8226062270087109666, guid: e35a4b74c6eb2f94d848153805b88045, type: 3}
+  m_PrefabInstance: {fileID: 1783449658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1783449660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4659546321681328718, guid: e35a4b74c6eb2f94d848153805b88045, type: 3}
   m_PrefabInstance: {fileID: 1783449658}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1802429188
@@ -54129,7 +54158,7 @@ Transform:
   - {fileID: 1455344406}
   - {fileID: 1950220761}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1834612059
 MonoBehaviour:
@@ -54153,7 +54182,6 @@ MonoBehaviour:
   loadlevel: {fileID: 1783449659}
   stages:
   - {fileID: 11400000, guid: 03812965d387f004ba37e4b7581d0d35, type: 2}
-  abilityObject: {fileID: 365647301750504064, guid: e405264eb7a0759439665676a17b3711, type: 3}
   ability: 7
   currentStage: {fileID: 0}
   isCleared: 0
