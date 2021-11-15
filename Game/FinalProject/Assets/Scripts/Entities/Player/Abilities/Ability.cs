@@ -27,7 +27,7 @@ public class Ability : MonoBehaviour
     }
     [SerializeField] protected float cooldownTime;
     public virtual KeyCode hotkey {get;set;}
-    [SerializeField] protected float staminaCost;
+    [SerializeField] public float staminaCost;
     [SerializeField] protected float duration;
     [SerializeField] protected bool isInCooldown;
     public Abilities abilityName;
@@ -35,10 +35,15 @@ public class Ability : MonoBehaviour
     protected PlayerManager player;
     protected float time;
     public bool isUnlocked;
+    public bool beenUsed;
 
     public virtual void UseAbility()
     {
         if(player.currentStamina < staminaCost+.1)return;
+        if (player.statesManager.currentStates.Contains(Escudo.scudoState))
+        {
+            beenUsed = true;
+        }
         isInCooldown = true; 
         //Debug.Log($"Usando {abilityName.ToString()}");
         if (isInCooldown)

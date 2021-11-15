@@ -13,7 +13,10 @@ public class Run : Ability
     {
         if (isInCooldown)
         {
-            
+            if (player.statesManager.currentStates.Contains(Escudo.scudoState))
+            {
+                beenUsed = true;
+            }
             player.TakeTirement(staminaCost);
         }
         player.isRunning = true;

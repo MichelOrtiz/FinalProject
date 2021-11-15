@@ -6,6 +6,8 @@ public class Escudo : Ability
 {
     public bool isInShield;
     [SerializeField] State inmuniScudo;
+
+    public static State scudoState;
     public GameObject escudo;
     public override void UseAbility()
     {   
@@ -20,6 +22,7 @@ public class Escudo : Ability
         time = cooldownTime;
         isInShield=false;
         inmuniScudo.onEffect = false;
+        scudoState = inmuniScudo;
     }
     protected override void Update()
     {
