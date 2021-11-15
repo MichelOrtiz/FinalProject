@@ -9,6 +9,7 @@ public class Inter : MonoBehaviour
     public string selfTag = "Berry";
     public Item item;
     private PlayerManager player;
+    [SerializeField] GameObject interSign;
    
     void Awake()
     {
@@ -21,17 +22,26 @@ public class Inter : MonoBehaviour
         {
             imagen.sprite = item.icon;
         }
-        player.inputs.Interact += PickUpObj;
+        
     }
-    public void PickUpObj(){
+    private void Update() {
         float distance = Vector2.Distance(player.transform.position, transform.position);
         if(distance <= radius){
-            bool IsPicked = Inventory.instance.Add(item);
-            if(IsPicked){
-                Debug.Log(item.name + " picked");
-                Destroy(gameObject);
-            }
+            player.inputs.Interact -= PickUpObj;
+            player.inputs.Interact += PickUpObj;
+            interSign?.SetActive(true);
+        }else{
+            player.inputs.Interact -= PickUpObj;
+            interSign?.SetActive(false);
         }
+    }
+    public void PickUpObj(){
+        bool IsPicked = Inventory.instance.Add(item);
+        if(IsPicked){
+            Debug.Log(item.name + " picked");
+            Destroy(gameObject);
+        }
+        
     }
     
     private void OnDrawGizmosSelected() {

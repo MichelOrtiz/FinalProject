@@ -8,6 +8,7 @@ public class loadlevel : MonoBehaviour
     public int iLevelToLoad;
     public int noDoor = 1;
     [SerializeField]public Transform loadPosition;
+    [SerializeField] GameObject interSign;
     protected PlayerManager player;
 
     protected virtual void Start() {
@@ -49,6 +50,7 @@ public class loadlevel : MonoBehaviour
         {
             PlayerManager.instance.inputs.Interact -= cargarEscena;
             PlayerManager.instance.inputs.Interact += cargarEscena;
+            interSign?.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision) {
@@ -56,6 +58,7 @@ public class loadlevel : MonoBehaviour
         if (collisionGameObject.tag == "Player")
         {
             PlayerManager.instance.inputs.Interact -= cargarEscena;
+            interSign?.SetActive(false);
         }
     }
 

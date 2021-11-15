@@ -6,6 +6,7 @@ public class LootInter : MonoBehaviour
 {
     [SerializeField] private LootChest loot;
     [SerializeField] private SpriteRenderer imagen;
+    [SerializeField] GameObject interSign;
     public float radius = 3f;
     private PlayerManager player;
     private void Start() {
@@ -16,11 +17,12 @@ public class LootInter : MonoBehaviour
     private void Update() {
         float distance = Vector2.Distance(player.transform.position, transform.position);
         if(distance <= radius){
-            if(Input.GetKeyDown(KeyCode.E)){
-                loot.SetSpawnPoint(PlayerManager.instance.GetPosition());
-                loot.Open();
-                Destroy(gameObject);
-            }
+            PlayerManager.instance.inputs.Interact -= Open;
+            PlayerManager.instance.inputs.Interact += Open;
+            interSign?.SetActive(true);
+        }else{
+            PlayerManager.instance.inputs.Interact -= Open;
+            interSign?.SetActive(false);
         }
     }
     
@@ -28,5 +30,10 @@ public class LootInter : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
-
+    void Open(){
+        loot.SetSpawnPoint(PlayerManager.instance.GetPosition());
+        loot.Open();
+        PlayerManager.instance.inputs.Interact -= Open;
+        Destroy(gameObject);
+    }
 }
