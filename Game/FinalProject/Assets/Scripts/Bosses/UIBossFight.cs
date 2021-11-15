@@ -22,8 +22,9 @@ public class UIBossFight : BossFight
     {
         base.Start();
         //PopUpUI.Instance.closedPopUp += PopUpUI_Closed;
+        endBattlePopUp.closedPopUp -= PopUpUI_Closed;
         endBattlePopUp.closedPopUp += PopUpUI_Closed;
-        PlayerManager.instance.gameObject?.SetActive(false);
+        PlayerManager.instance.SetEnabledPlayer(false);
     }
 
     new void Update()
@@ -81,7 +82,7 @@ public class UIBossFight : BossFight
         {
             // return to last scene
             ScenesManagers.SetListActive(objectsToHide, true);
-            PlayerManager.instance.gameObject?.SetActive(true);
+            PlayerManager.instance.SetEnabledPlayer(true);
             ReturnToLastScene();
         }
     }

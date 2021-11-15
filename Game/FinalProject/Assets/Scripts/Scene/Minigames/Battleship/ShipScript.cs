@@ -9,6 +9,9 @@ public class ShipScript : MonoBehaviour
     public float yOffset = 0;
     private float nextYRotation = 90f;
     private GameObject clickedTile;
+    //Maybe:
+    int hitCount = 0;
+    int shipSize;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +50,15 @@ public class ShipScript : MonoBehaviour
     public void SetClickedTile(GameObject tile){
         clickedTile = tile;
     }
+    //check to use when we place ships. Probably won't need it...
+    public bool OnGameBoard(){
+        return touchTiles.Count == shipSize;
+    }
 
-    
+    //Check if the ship has sunk??
+    public bool HitCheckSank(){
+        hitCount++;
+        return shipSize <=hitCount;
+    }
+
 }
