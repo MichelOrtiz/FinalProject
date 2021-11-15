@@ -14,8 +14,8 @@ public class TilesScript : MonoBehaviour
     void Start()
     {
         battleshipManager = GameObject.Find("BattleshipManager").GetComponent<BattleshipManager>();
-        hitColor[0] = gameObject.GetComponent<MeshRenderer>().material.color;
-        hitColor[1] = gameObject.GetComponent<MeshRenderer>().material.color;
+        //hitColor[0] = gameObject.GetComponent<MeshRenderer>().material.color;
+        //hitColor[1] = gameObject.GetComponent<MeshRenderer>().material.color;
     }
 
     // Update is called once per frame
