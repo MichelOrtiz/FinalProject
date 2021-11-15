@@ -25,6 +25,8 @@ public class SceneController : MonoBehaviour
 
     private SceneTitle sceneTitle;
 
+
+
     private void Awake() {
         if(instance == null) instance = this;
         else if (instance != this) Destroy(this);
@@ -74,7 +76,13 @@ public class SceneController : MonoBehaviour
         sceneTitle = FindObjectOfType<SceneTitle>();
         //mainCanvas.SetActive(true);
         if(FindObjectOfType<CameraFollow>() != null)
-            FindObjectOfType<CameraFollow>().transform.position = PlayerManager.instance.transform.position;
+        {
+            var camera = FindObjectOfType<CameraFollow>();
+            camera.transform.position = PlayerManager.instance.transform.position;
+            camera.backgroundImage.sprite = FindObjectOfType<SceneTitle>().backgroundSprite;
+        }
+
+
         //PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
     }
     public void RealLoasScene(int escena){

@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CameraFollow : MonoBehaviour
 {
+    
     private PlayerManager player;
     private BoxCollider2D camBox;
     private ZoomCamera[] boundaries;
@@ -35,6 +37,8 @@ public class CameraFollow : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     public bool isCinematic;
     public Vector3 cinematicTarget;
+    
+    public Image backgroundImage;
     void Awake()
     {
         if (camera1)
