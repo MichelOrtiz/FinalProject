@@ -7,7 +7,7 @@ public class loadBossLevel : loadlevel
     public WorldState worldState = new WorldState();
     SaveFilesManager saveFilesManager;
 
-    new private void Start() {
+    protected override void Start() {
         if(SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
             SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
             foreach(WorldState w in partida.WorldStates){
