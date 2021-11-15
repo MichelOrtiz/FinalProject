@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class InterRemoveMoney : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+[CreateAssetMenu(fileName = "new Interaction", menuName = "Interaction/RemoveMoney")]
+public class InterRemoveMoney : Interaction{
+    [SerializeField] int removeAmount;
+    public override void DoInteraction()
     {
-        
+        if(condition != null){
+            if(condition.isDone){
+                RemoveMoney();
+            }else{
+                onEndInteraction?.Invoke();
+            }
+        }else{
+            RemoveMoney();
+        }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void RemoveMoney(){
+        Inventory.instance.RemoveMoney(removeAmount);
+        onEndInteraction?.Invoke();
     }
 }

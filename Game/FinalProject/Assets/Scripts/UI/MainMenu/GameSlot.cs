@@ -36,7 +36,80 @@ public class GameSlot : MonoBehaviour
             lblTime.text = "Tiempo: ";
             lblTime.text += partida.timeHoursPlayed + ":" + partida.timeMinutesPlayed + ":" + partida.timeSecondsPlayed;
             lblZone.text = "Zona: ";
-            lblZone.text += partida.sceneToLoad;
+            switch(partida.sceneToLoad){
+                case 1:{
+                    lblZone.text += "Playa";
+                    break;
+                }
+                case 2:{
+                    lblZone.text += "Pueblo Gnomo";
+                    break;
+                }
+                case 3:{
+                    lblZone.text += "Reino Fungi";
+                    break;
+                }
+                case 4:{
+                    lblZone.text += "Bazar";
+                    break;
+                }
+                case 5:{
+                    lblZone.text += "Dragonsburgo";
+                    break;
+                }
+                case 6:{
+                    lblZone.text += "MedufInc";
+                    break;
+                }
+                case 7:{
+                    lblZone.text += "Pradera";
+                    break;
+                }
+                case 8:{
+                    lblZone.text += "Desierto Zonora";
+                    break;
+                }
+                case 9:{
+                    lblZone.text += "Puerta de Hielo";
+                    break;
+                }
+                case 10:{
+                    lblZone.text += "Inushima";
+                    break;
+                }
+                case 11:{
+                    lblZone.text += "DreamLand";
+                    break;
+                }
+                case 12:{
+                    lblZone.text += "Bosque Oscuro";
+                    break;
+                }
+                case 13:{
+                    lblZone.text += "Mt. Tsereve";
+                    break;
+                }
+                case 14:{
+                    lblZone.text += "Arangentina";
+                    break;
+                }
+                case 15:{
+                    lblZone.text += "Blueland";
+                    break;
+                }
+                case 16:{
+                    lblZone.text += "Jardin Real";
+                    break;
+                }
+                case 17:{
+                    lblZone.text += "Castillo";
+                    break;
+                }
+                default:{
+                    lblZone.text += "Unknowed";
+                    break;
+                }
+            }
         }else{
             //Debug.Log("no hay partida en slot " + slot);
             btnNewGame.gameObject.SetActive(true);
