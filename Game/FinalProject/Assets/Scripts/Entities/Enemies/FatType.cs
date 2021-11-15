@@ -76,6 +76,7 @@ public class FatType : Enemy
         float distance = Vector2.Distance(player.GetPosition(), transform.position);
         if(distance <= bubbleRadius){
             wishedItemBubble.gameObject.SetActive(true);
+            wishedItemBubble.InFrontOfPlayer();
         }else{
             wishedItemBubble.gameObject.SetActive(false);
         }

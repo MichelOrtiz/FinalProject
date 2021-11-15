@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CofreUI : MonoBehaviour
 {
@@ -19,8 +20,8 @@ public class CofreUI : MonoBehaviour
     public Button prevButtonCof;
     public Button nextButtonInv;
     public Button prevButtonInv;
-    public Text description;
-    public Text nametxt;
+    public TextMeshProUGUI description;
+    public TextMeshProUGUI nametxt;
     private Cofre cofre;
     private Inventory inventory;
     public Transform slotsCofUI;
