@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using System.IO;
-using UnityEngine.Serialization;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -50,7 +49,8 @@ public class SaveFilesManager : MonoBehaviour
                 return null;
             } 
         }else{
-            File.Create(path);
+            FileStream stream = File.Create(path);
+            stream.Close();
             WriteSaveFile(null,path);
             return null;
         }
@@ -65,7 +65,10 @@ public class SaveFilesManager : MonoBehaviour
         }else{
             jsonString = "";
         }
-        if(!File.Exists(filePath))File.Create(filePath);
+        if(!File.Exists(filePath)){
+            FileStream stream = File.Create(filePath);
+            stream.Close();
+            }
         using(StreamWriter writer = new StreamWriter(filePath,false)){
             writer.Write(jsonString);
         }
@@ -74,7 +77,8 @@ public class SaveFilesManager : MonoBehaviour
         if(File.Exists(path)){
             File.Delete(path);
         }
-        File.Create(path);
+        FileStream stream = File.Create(path);
+        stream.Close();
     }
     public void SaveProgress(){
         if(currentSaveSlot==null)return;

@@ -11,8 +11,11 @@ namespace Minimap{
         bool isOpen;
         private void Awake()
         {
-            instance = this;
-            isOpen = true;
+            if(instance == null){
+                instance = this;
+                return;
+            }
+            Destroy(gameObject);
         }
         private void Start() {
             //animator.SetBool("IsOpen",true);
