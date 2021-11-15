@@ -7,7 +7,7 @@ public class loadlevel : MonoBehaviour
 {
     public int iLevelToLoad;
     public int noDoor = 1;
-    [SerializeField]protected Transform loadPosition;
+    [SerializeField]public Transform loadPosition;
     protected PlayerManager player;
 
     protected virtual void Start() {

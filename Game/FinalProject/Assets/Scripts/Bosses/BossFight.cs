@@ -44,9 +44,17 @@ public class BossFight : MonoBehaviour
     protected void Start()
     {
         StartBattle();
-        loadlevel?.SetActive(false);
+        PlayerManager.instance.transform.position = loadlevel.GetComponent<loadlevel>().loadPosition.position;
         //AudioManager.instance?.Play("Theme");
+        startMessageTrigger.popUpUI.closedPopUp -= InitializeLoad;
+        startMessageTrigger.popUpUI.closedPopUp += InitializeLoad;
     }
+
+    void InitializeLoad()
+    {
+        loadlevel?.SetActive(false);
+    }
+
     protected void Update() {
         if(Input.GetKeyDown(KeyCode.L)){
             NextStage();
