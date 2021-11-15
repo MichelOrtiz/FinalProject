@@ -11,9 +11,10 @@ public class EquipmentSlot : ItemSlot
         equipmentManager = EquipmentManager.instance;
     }
     public override void OnButtonPress(){
-        if(inventoryUI.moveItem!=null){
-            SetItem(inventoryUI.moveItem.GetItem());
-            inventoryUI.moveItem = null;
+        if(inventoryUI.moveItemIndex != -1){
+            Item newAssign = Inventory.instance.items[inventoryUI.moveItemIndex];
+            SetItem(newAssign);
+            inventoryUI.moveItemIndex = -1;
             inventoryUI.UpdateUI();
         }
     }
