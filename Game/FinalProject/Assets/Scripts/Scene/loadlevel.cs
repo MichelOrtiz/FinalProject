@@ -12,6 +12,7 @@ public class loadlevel : MonoBehaviour
     protected PlayerManager player;
 
     protected virtual void Start() {
+        interSign?.SetActive(false);
         if (SceneController.instance != null)
         {
             PlayerManager.instance.physics.ResetAll();
