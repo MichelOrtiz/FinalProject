@@ -9,6 +9,7 @@ public class CheckPoint : MonoBehaviour
     //public int forcedSlot;//DELETE THIS
     public float radius = 1f;
     public GameObject signInter;
+    public GameObject popUp;
     private void Start() {
         player = PlayerManager.instance;
     }
@@ -25,6 +26,8 @@ public class CheckPoint : MonoBehaviour
         }
     }
     void Save(){
+        Show();
+        Invoke("Hide", 2f);
         SaveFile progress = SaveFilesManager.instance.currentSaveSlot;
         progress.inventory = Inventory.instance.items.ToArray();
         progress.money = Inventory.instance.GetMoney();
@@ -43,5 +46,11 @@ public class CheckPoint : MonoBehaviour
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+    void Show(){
+        popUp.SetActive(true);
+    }
+    void Hide(){
+        popUp.SetActive(false);
     }
 }
