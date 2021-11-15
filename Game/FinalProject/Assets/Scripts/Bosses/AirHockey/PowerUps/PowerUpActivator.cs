@@ -73,7 +73,7 @@ namespace FinalProject.Assets.Scripts.Bosses.AirHockey.PowerUps
         void SetLog(PowerUp powerUp, bool start)
         {
             var affected = powerUp.Affected;
-            string log = $"\n{(start? "Start: ": "Ended: ")} {powerUp.Name}";
+            string log = $"\n{(start? "Inicio: ": "Fin: ")} {powerUp.Name}";
             //playerLog.on
             if (affected == PowerUp.AffectedObject.Player)
             {
