@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleControl : MonoBehaviour
+public class PuzzleControl : MasterMinigame
 {
-    [SerializeField] private Transform[] pictures;
+    [SerializeField] private List<PuzzleRotation> pictures;
 
     public static bool puzzleCompleted;
     public static int completedCount;
@@ -13,21 +13,21 @@ public class PuzzleControl : MonoBehaviour
     {
         completedCount = 0;
         puzzleCompleted = false;
+
+        pictures.ForEach(p => p.Rotated += Rotated);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void Rotated()
     {
-        for (int i = 0; i < 36; i++){
-            if(pictures[i].rotation.z == 0){
-                completedCount ++;
-            }
+        if (!puzzleCompleted)
+        {
+            puzzleCompleted = pictures.TrueForAll(p => p.transform.rotation.z == 0);   
         }
-        if(completedCount == 36){
-            Debug.Log("Puzzle Completed");
-            puzzleCompleted = true;
-        }else{
-            puzzleCompleted = false;
+
+        if (puzzleCompleted)
+        {
+            OnWinMinigame();
         }
     }
 }

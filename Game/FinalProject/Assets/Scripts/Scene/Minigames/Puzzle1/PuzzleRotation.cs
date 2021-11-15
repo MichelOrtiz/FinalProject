@@ -1,14 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-
-public class PuzzleRotation : MonoBehaviour
+using UnityEngine.EventSystems;
+public class PuzzleRotation : MonoBehaviour, IPointerDownHandler
 {
-    
-    private void OnMouseDown()
+    [SerializeField] private PuzzleControl puzzleControl;
+    public Action Rotated;
+
+    public void OnPointerDown(PointerEventData eventData)
     {
+        Debug.Log("rotate " + gameObject);
         if(!PuzzleControl.puzzleCompleted){
             transform.Rotate(0f, 0f, 90f);
+
+            // invokes the method assigned to the action
+            Rotated?.Invoke();
         }
     }
 }
