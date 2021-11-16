@@ -10,9 +10,7 @@ public class Jetpack : Equipment
     [SerializeField] const float defaultForce = 10f;
     [SerializeField] float speed;
     public override void Rutina(){
-        if(player.isGrounded){
-            uses = maxUses;
-        }
+        RestablecerUsos();
     }
 
     public override void StartEquip(){
@@ -38,7 +36,7 @@ public class Jetpack : Equipment
         Impulso();
     }
     void Impulso(){
-        if(uses < 0) return;
+        if(uses <= 0) return;
         uses --;
         Rigidbody2D body = PlayerManager.instance.GetComponent<Rigidbody2D>();
         //Debug.Log("Usando " + this.name);
