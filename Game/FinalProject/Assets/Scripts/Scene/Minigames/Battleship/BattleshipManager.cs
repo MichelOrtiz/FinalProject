@@ -35,31 +35,42 @@ public class BattleshipManager : MonoBehaviour
         rotateButton.onClick.AddListener(() => RotateClicked());
         ////if (Input.GetMouseButtonUp(0)) {
         enemyShips = enemyScript.PlaceEnemyShips();
+
+        
     }
 
     private void NextShipClicked(){
         //Condition to only do this if there are still ships
-        if(shipIndex <= ships.Length - 2){
-            shipIndex++;
-            shipScript = ships[shipIndex].GetComponent<ShipScript>();
-            //shipScript.FlashColor(Color.yellow);
+        if(!shipScript.OnGameBoard()){
+            //place where it would warn you you're out of bounds.....??
         } else{
-            enemyScript.PlaceEnemyShips();
+            //-2, because the smallest is 2 tiles long
+            if(shipIndex <= ships.Length - 2){
+                shipIndex++;
+                shipScript = ships[shipIndex].GetComponent<ShipScript>();
+            }else{
+                rotateButton.gameObject.SetActive(false);
+                nextButton.gameObject.SetActive(false);
+                topText.text = "Selecciona un cuadro del enemigo.";
+                setupComplete = true;
+                for(int i=0; i< ships.Length; i++) ships[i].SetActive(false);
+            }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 
-    public void TileClicked(GameObject tile){
+    public void TileClicked(TilesScript tile){
         if(setupComplete && playerTurn){
-            //Drop missile - BOOM
+            //This is where the Missile is dropped
+            Vector2 tilePos = tile.transform.position;
+            //tilePos.y += 
+            playerTurn = false;
+            var missile = Instantiate(missilePrefab, tilePos, missilePrefab.transform.rotation).GetComponent<MissileScript>();
+            missile.numberId = tile.numberId;
+            CheckHit(missile.numberId);
         } else if(!setupComplete){
-            PlaceShip(tile);
-            shipScript.SetClickedTile(tile);
+            PlaceShip(tile.gameObject);
+            shipScript.SetClickedTile(tile.gameObject);
         }
     } 
 
@@ -78,9 +89,9 @@ public class BattleshipManager : MonoBehaviour
         shipScript.SetClickedTile(tile);
     }
 
-    public void CheckHit(GameObject tile){
+    public void CheckHit(byte tileNum){
         //Take the tile's individual number and name, and compare them with the enemy ships coordinates
-        int tileNum = Int32.Parse(Regex.Match(tile.name, @"\d+").Value);
+        //int tileNum = Int32.Parse(Regex.Match(tile.name, @"\d+").Value);
         int hitCount = 0;
         foreach (int[] tileNumArray in enemyShips){
             if(tileNumArray.Contains(tileNum)){
@@ -95,7 +106,7 @@ public class BattleshipManager : MonoBehaviour
                         //We have already hit the tile
                         hitCount++;
                     }
-                }//check wether we have sunk the ship
+                }//check whether we have sunk the ship
                 if(hitCount == tileNumArray.Length){
                     enemyShipCount--;
                     topText.text = "SUNK!!";

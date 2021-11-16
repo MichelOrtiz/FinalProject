@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MissileScript : MonoBehaviour
 {
+    public byte numberId{get;set;}
+
     // Start is called before the first frame update
     private BattleshipManager battleshipManager;
     void Start()
@@ -11,8 +13,8 @@ public class MissileScript : MonoBehaviour
         battleshipManager = GameObject.Find("BattleshipManager").GetComponent<BattleshipManager>();
     }
 
-    private void OnCollisionEnter(Collision collision){
+    /*private void OnCollisionEnter(Collision collision){
         battleshipManager.CheckHit(collision.gameObject);
         Destroy(gameObject);
-    }
+    }*/
 }

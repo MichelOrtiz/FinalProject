@@ -8,7 +8,7 @@ public class Inter : MonoBehaviour
     public float radius = 3f;
     public string selfTag = "Berry";
     public Item item;
-    private PlayerManager player;
+    protected PlayerManager player;
     [SerializeField] GameObject interSign;
    
     void Awake()
@@ -16,11 +16,12 @@ public class Inter : MonoBehaviour
         tag = selfTag;
     }
 
-    private void Start() {
+    protected virtual void Start() {
         player = PlayerManager.instance;
         if (item != null)
         {
             imagen.sprite = item.icon;
+            
         }
         
     }

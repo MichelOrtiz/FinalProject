@@ -29,6 +29,11 @@ public class DragonHead : MonoBehaviour
             stateInstantiated.StoppedAffect += knockback_Stopped;
             player.SetImmune();
         }
+
+        if (other.gameObject.tag == "Object")
+        {
+            Destroy(other.gameObject);
+        }
     }
 
     void knockback_Stopped()
