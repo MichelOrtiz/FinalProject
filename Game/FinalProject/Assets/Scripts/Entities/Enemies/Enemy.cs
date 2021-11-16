@@ -58,6 +58,7 @@ public abstract class Enemy : Entity
     void fieldOfView_PlayerSighted()
     {
         //sawEmote = (EmoteSetter)statesManager.AddStateDontRepeat(sawPlayerEmote);
+        if (sawPlayerEmote == null) return;
         if (sawEmote == null || !sawEmote.onEffect)
         {
             statesManager.Stop(s => s.ObjectName.Contains(sawPlayerEmote.ObjectName));
@@ -68,7 +69,8 @@ public abstract class Enemy : Entity
 
     void fieldOfView_PlayerUnsighted()
     {
-        if (sawEmote == null) sawEmote = statesManager.currentStates.Find( s => s != null && s.ObjectName.Contains(sawPlayerEmote.ObjectName)) as EmoteSetter;
+        if (sawPlayerEmote == null) return;
+        if (sawEmote == null) sawEmote = statesManager?.currentStates?.Find( s => s != null && s.ObjectName.Contains(sawPlayerEmote?.ObjectName)) as EmoteSetter;
 
         sawEmote?.StopAffect();
         sawEmote = null;
