@@ -21,11 +21,26 @@ public class Inter : MonoBehaviour
         if (item != null)
         {
             imagen.sprite = item.icon;
+            
         }
         
     }
     private void Update() {
         float distance = Vector2.Distance(player.transform.position, transform.position);
+        if(item.type == Item.ItemType.Mision){
+            ItemMission itemMission = (ItemMission) item;
+            if(Inventory.instance.items.Contains(itemMission) || Cofre.instance.savedItems.Contains(itemMission)){
+                Destroy(gameObject);
+            }
+            if(SaveFilesManager.instance.currentSaveSlot.WorldStates.Exists(x => x.id == itemMission.appearWhen.id)){
+                WorldState w = SaveFilesManager.instance.currentSaveSlot.WorldStates.Find(x => x.id == itemMission.appearWhen.id);
+                if(!w.state){
+                    Destroy(gameObject);
+                }
+            }else{
+                Destroy(gameObject);
+            }
+        }
         if(distance <= radius){
             player.inputs.Interact -= PickUpObj;
             player.inputs.Interact += PickUpObj;

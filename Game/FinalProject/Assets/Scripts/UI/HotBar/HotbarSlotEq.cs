@@ -8,7 +8,10 @@ public class HotbarSlotEq : HotbarSlot
 {
     public override void OnButtonPress()
     {
-        if(inventoryUI.moveItemIndex == -1) return;
+        if(inventoryUI.moveItemIndex == -1){
+            SetItem(null);
+            return;
+        }
         Type equipmentType = typeof(Equipment);
         Item newAssign = Inventory.instance.items[inventoryUI.moveItemIndex];
         Type itemType = newAssign.GetType();
