@@ -34,6 +34,7 @@ public class EquipmentManager : MonoBehaviour
         currentEquipment[slotIndex] = newItem;
         currentEquipment[slotIndex].StartEquip();
         if(newItem.isPasive){  
+            equipmentRutines -= currentEquipment[slotIndex].Rutina;
             equipmentRutines += currentEquipment[slotIndex].Rutina;
         }
     }

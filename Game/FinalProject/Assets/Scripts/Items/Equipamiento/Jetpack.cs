@@ -5,14 +5,37 @@ using UnityEngine;
 public class Jetpack : Equipment
 {
     Vector2 empuje;
-    int uses;
+    public int uses;
     [SerializeField] int maxUses = 5;
     [SerializeField] const float defaultForce = 10f;
     [SerializeField] float speed;
     public override void Rutina(){
+        if(player.isGrounded){
+            uses = maxUses;
+        }
+    }
+
+    public override void StartEquip(){
+    }
+    public override void EndEquip(){
+
+    }
+    public void RestablecerUsos()
+    {
         if(PlayerManager.instance.isGrounded){
             uses = maxUses;
         }
+    }
+
+    public override void Use()
+    {
+        if(EquipmentManager.instance.GetCurrentEquipment()[(int)equipmentSlot] != this){
+            EquipmentManager.instance.Unequip((int) equipmentSlot);
+            EquipmentManager.instance.Equip(this);
+        }  
+        Impulso();
+    }
+    void Impulso(){
         if(uses < 0) return;
         uses --;
         Rigidbody2D body = PlayerManager.instance.GetComponent<Rigidbody2D>();
@@ -22,12 +45,5 @@ public class Jetpack : Equipment
         body.velocity = new Vector2(0f,0f);
         body.AddForce(empuje * speed,ForceMode2D.Impulse);
         PlayerManager.instance.isJumping = true;
-        
-    }
-
-    public override void StartEquip(){
-    }
-    public override void EndEquip(){
-
     }
 }
