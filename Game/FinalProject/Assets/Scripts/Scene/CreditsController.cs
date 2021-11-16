@@ -8,10 +8,11 @@ namespace FinalProject.Assets.Scripts.Scene
 
         [SerializeField] private bool hasTime;
         [SerializeField] private float creditsTime;
-
+        bool busy;
 
         void Start()
         {
+            busy = false;
             PlayerManager.instance?.SetEnabledPlayer(false);
             Destroy(PlayerManager.instance?.gameObject);
             Destroy(Inventory.instance?.gameObject);
@@ -26,6 +27,8 @@ namespace FinalProject.Assets.Scripts.Scene
         {
             if (Input.anyKeyDown)
             {
+                if(busy) return;
+                busy = true;
                 EndCredits();
             }
         }

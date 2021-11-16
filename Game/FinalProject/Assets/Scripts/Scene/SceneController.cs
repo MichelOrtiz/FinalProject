@@ -86,6 +86,8 @@ public class SceneController : MonoBehaviour
         //PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
     }
     public void RealLoasScene(int escena){
+        prevScene = 0;
+        currentScene = escena;
         StartCoroutine(LoadAsynchronously(escena));
     }
 }
