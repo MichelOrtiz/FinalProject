@@ -11,6 +11,7 @@ public class ObjProjectile : MonoBehaviour
     public GameObject itemPickPrefab;
     public SpriteRenderer bulletImg;
     private Item item;
+    public Item Item { get => item; }
     public float speed;
     public Rigidbody2D rigidbody;
     [SerializeField] private CollisionHandler collisionHandler;

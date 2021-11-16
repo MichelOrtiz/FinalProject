@@ -15,8 +15,6 @@ public class SingleSpawner : MonoBehaviour
     #region Respawn
     [SerializeField] private bool respawnWhenNullInScene;
     
-    [Obsolete ("Useless. Don't use it")]
-    [Tooltip ("Useless. Don't use it")]
     [SerializeField] private bool respawnWhenNullInInventoryAndScene;
 
     [SerializeField] private bool respawnWhenNullInInventory;
@@ -75,19 +73,36 @@ public class SingleSpawner : MonoBehaviour
 
     void HandleRespawnOptions()
     {
-        if (respawnWhenNullInScene)
+        if (respawnWhenNullInInventoryAndScene)
         {
-            if (!ScenesManagers.ExistsGameObject(spawnedObject))
+            Item item = gmObject.GetComponentInChildren<Inter>()?.item;
+            
+            var objPickUp = ScenesManagers.FindGameObject(gm => gm.GetComponent<Inter>() != null && gm.GetComponent<Inter>().item  == item);
+            var objProjectile = ScenesManagers.FindGameObject(gm => gm.GetComponent<ObjProjectile>() != null && gm.GetComponent<ObjProjectile>().Item  == item);
+
+
+
+            if (!ScenesManagers.ExistsGameObject(spawnedObject) && objPickUp == null && objProjectile == null && !inventory.items.Contains(item))
             {
                 HandleRespawnTime();
             }
         }
-        if (respawnWhenNullInInventory)
+        else
         {
-            Item item = gmObject.GetComponentInChildren<Inter>()?.item;
-            if (!inventory.items.Contains(item))
+            if (respawnWhenNullInScene)
             {
-                HandleRespawnTime();
+                if (!ScenesManagers.ExistsGameObject(spawnedObject))
+                {
+                    HandleRespawnTime();
+                }
+            }
+            if (respawnWhenNullInInventory)
+            {
+                Item item = gmObject.GetComponentInChildren<Inter>()?.item;
+                if (!inventory.items.Contains(item))
+                {
+                    HandleRespawnTime();
+                }
             }
         }
         if (independentOnTime)
