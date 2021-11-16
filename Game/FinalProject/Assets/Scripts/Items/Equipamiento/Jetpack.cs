@@ -10,16 +10,9 @@ public class Jetpack : Equipment
     [SerializeField] const float defaultForce = 10f;
     [SerializeField] float speed;
     public override void Rutina(){
-        if(uses < 0) return;
-        uses --;
-        Rigidbody2D body = PlayerManager.instance.GetComponent<Rigidbody2D>();
-        Debug.Log("Usando " + this.name);
-        empuje = new Vector2(0f,defaultForce);
-        //body.gravityScale *= -1;
-        body.velocity = new Vector2(0f,0f);
-        body.AddForce(empuje * speed,ForceMode2D.Impulse);
-        PlayerManager.instance.isJumping = true;
-        
+        if(player.isGrounded){
+            uses = maxUses;
+        }
     }
 
     public override void StartEquip(){
@@ -36,15 +29,21 @@ public class Jetpack : Equipment
 
     public override void Use()
     {
-        if(isPasive){
-            //solo se equipan los equipamientos pasivos y los activos solo ejecutan su rutina...
-            if(EquipmentManager.instance.GetCurrentEquipment()[(int)equipmentSlot] == this){
-                EquipmentManager.instance.Unequip((int) equipmentSlot);
-                return;
-            }   
+        if(EquipmentManager.instance.GetCurrentEquipment()[(int)equipmentSlot] != this){
+            EquipmentManager.instance.Unequip((int) equipmentSlot);
             EquipmentManager.instance.Equip(this);
-        }else{
-            Rutina();
-        }
+        }  
+        Impulso();
+    }
+    void Impulso(){
+        if(uses < 0) return;
+        uses --;
+        Rigidbody2D body = PlayerManager.instance.GetComponent<Rigidbody2D>();
+        Debug.Log("Usando " + this.name);
+        empuje = new Vector2(0f,defaultForce);
+        //body.gravityScale *= -1;
+        body.velocity = new Vector2(0f,0f);
+        body.AddForce(empuje * speed,ForceMode2D.Impulse);
+        PlayerManager.instance.isJumping = true;
     }
 }
