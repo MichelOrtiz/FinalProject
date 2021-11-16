@@ -4,16 +4,31 @@ using UnityEngine;
 
 public class LethalAllergyHazard : MonoBehaviour
 {
-    private ParticleSystem particles;
-    // Start is called before the first frame update
-    /*void Start()
+    [SerializeField] private float sneezeProbability;
+    [SerializeField] private State sneezeState;
+    [SerializeField] private float interval;
+
+    [SerializeField] private ParticleSystem particles;
+    [SerializeField] private float particlesTime;
+
+    void Start()
     {
-        particleSystem = GetComponent<ParticleSystem>();
+        InvokeRepeating("HandleSneeze", interval, interval);
+    }
+    void HandleSneeze()
+    {
+        if (RandomGenerator.MatchProbability(sneezeProbability))
+        {
+            transform.position = PlayerManager.instance.transform.position;
+            particles.Play();
+            PlayerManager.instance.statesManager.AddState(sneezeState);
+        }
+        Invoke("StopParticles", particlesTime);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void StopParticles()
     {
-        
-    }*/
+        particles.Stop();
+    }
 }
