@@ -34,7 +34,7 @@ public class SaveFile
         this.timeSecondsPlayed = 0;
         this.timeMinutesPlayed = 0;
         this.timeHoursPlayed = 0;
-        this.sceneToLoad = 1;
+        this.sceneToLoad = 38;
         this.positionSpawn = new Vector2(-324f, 0f);
         this.capacidad = 20;
         this.inventory = null;
@@ -58,7 +58,7 @@ public class SaveFile
         this.timeSecondsPlayed = 0;
         this.timeMinutesPlayed = 0;
         this.timeHoursPlayed = 0;
-        this.sceneToLoad = 1;
+        this.sceneToLoad = 38;
         this.positionSpawn = new Vector2(-324f, 0f);
         this.capacidad = 20;
         this.inventory = null;

@@ -5,6 +5,8 @@ namespace FinalProject.Assets.Scripts.Scene
     public class CreditsController : MonoBehaviour
     {
         [SerializeField] private int sceneToLoad;
+
+        [SerializeField] private bool hasTime;
         [SerializeField] private float creditsTime;
 
 
@@ -14,12 +16,15 @@ namespace FinalProject.Assets.Scripts.Scene
             Destroy(PlayerManager.instance?.gameObject);
             Destroy(Inventory.instance?.gameObject);
             Destroy(CameraFollow.instance?.gameObject);
-            Invoke("EndCredits", creditsTime);
+            if (hasTime)
+            {
+                Invoke("EndCredits", creditsTime);
+            }
         }
         
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.anyKeyDown)
             {
                 EndCredits();
             }
