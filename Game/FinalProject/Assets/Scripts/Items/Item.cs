@@ -8,7 +8,7 @@ public class Item : ScriptableObject
         Consumible,
         Equipable,
         Basura,
-        Test
+        Mision
     }
     public ItemType type;
     public string nombre = "Nombre objeto";
