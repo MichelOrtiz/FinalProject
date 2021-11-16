@@ -12,6 +12,7 @@ public class InventorySlot : ItemSlot,IPointerEnterHandler,IPointerExitHandler
     }
     public override void OnButtonPress()
     {
+        if(item.type == Item.ItemType.Basura) return;
         if(item == null) return;
         if(Input.GetKey(PlayerManager.instance.inputs.controlBinds["MENUFASTASSIGN"])){
             Type equipmentType = typeof(Equipment);
@@ -36,7 +37,7 @@ public class InventorySlot : ItemSlot,IPointerEnterHandler,IPointerExitHandler
             }
             return;
         }
-        if(InventoryUI.instance.moveItem != null){
+        if(InventoryUI.instance.moveItemIndex != -1){
             MoveItem();
             return;
         }
@@ -44,17 +45,17 @@ public class InventorySlot : ItemSlot,IPointerEnterHandler,IPointerExitHandler
         inventoryUI.OpenDesMenu(this);
     }
     public override void MoveItem(){
-        if(InventoryUI.instance.moveItem == item){
-            InventoryUI.instance.moveItem = null;
+        if(InventoryUI.instance.moveItemIndex == index){
+            InventoryUI.instance.moveItemIndex = -1;
             //Debug.Log("Same move item");
-        }else if(InventoryUI.instance.moveItem == null){
-            //Debug.Log("New move item");
-            InventoryUI.instance.moveItem = (ItemSlot)this;
-        }else if(InventoryUI.instance.moveItem != null){
+        }else if(InventoryUI.instance.moveItemIndex == -1){
+            Debug.Log("New move item");
+            InventoryUI.instance.moveItemIndex = index;
+        }else if(InventoryUI.instance.moveItemIndex != -1){
             //Debug.Log("Cambiando de lugar");
             //cambiar de lugar objetos dentro del inv?
-            Inventory.instance.SwapItems(InventoryUI.instance.moveItem.GetIndex(),index);
-            InventoryUI.instance.moveItem = null;
+            Inventory.instance.SwapItems(InventoryUI.instance.moveItemIndex,index);
+            InventoryUI.instance.moveItemIndex = -1;
         }
     }
     public void OnPointerEnter(PointerEventData eventData){
@@ -66,5 +67,9 @@ public class InventorySlot : ItemSlot,IPointerEnterHandler,IPointerExitHandler
         if(item == null) return;
         inventoryUI.focusedSlot = null;
         inventoryUI.UpdateText();
+    }
+    public InventorySlot(InventorySlot copy){
+        item = copy.item;
+        index = copy.index;
     }
 }

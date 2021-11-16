@@ -17,8 +17,11 @@ public class BossFight : MonoBehaviour
 
 
     protected void Awake() {
-        startMessageTrigger.popUpUI.exitButton.onClick.RemoveAllListeners();
-        startMessageTrigger.popUpUI.exitButton.onClick.AddListener(ReturnToLastScene);
+        if (startMessageTrigger != null)
+        {
+            startMessageTrigger.popUpUI.exitButton.onClick.RemoveAllListeners();
+            startMessageTrigger.popUpUI.exitButton.onClick.AddListener(ReturnToLastScene);
+        }
         if(instance!=null){
             Debug.Log("this is bad : BossFight");
             return;

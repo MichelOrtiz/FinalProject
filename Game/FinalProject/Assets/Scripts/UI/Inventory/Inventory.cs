@@ -54,6 +54,15 @@ public class Inventory : MonoBehaviour
     public int GetMoney(){
         return money;
     }
+
+    public void SetMoney(int money){
+        if (money < 0)
+        {
+            money = 0;
+        }
+        this.money = money;
+        UpdateMoneyUI();
+    }
     public void AddMoney(int i){
         money+=i;
         UpdateMoneyUI();

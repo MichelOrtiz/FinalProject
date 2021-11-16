@@ -25,7 +25,7 @@ public class InventoryUI : MonoBehaviour
         Inventory inventory;
         List<InventorySlot> slots;
         [SerializeField] int slotsInPage;
-        public ItemSlot moveItem;
+        public int moveItemIndex;
         private int invPage;
     #endregion
     
@@ -41,7 +41,7 @@ public class InventoryUI : MonoBehaviour
         inventory = Inventory.instance;
         inventory.onItemChangedCallBack += UpdateUI;
         invPage = 0;
-        moveItem = null;
+        moveItemIndex = -1;
         menuDesplegable.SetActive(false);
         slots = new List<InventorySlot>();
         for(int i=0; i < slotsInPage; i++){
@@ -68,15 +68,15 @@ public class InventoryUI : MonoBehaviour
        
     }
     public void NextPage(){
-        invPage += 10;
-        if(invPage > inventory.capacidad + 10){
-            invPage -=10;
+        invPage += slotsInPage;
+        if(invPage > inventory.capacidad + slotsInPage){
+            invPage -= slotsInPage;
             return;
         }
         UpdateUI();
     }
     public void PrevPage(){
-        invPage -= 10;
+        invPage -= slotsInPage;
         if(invPage < 0){
             invPage = 0;
             return;

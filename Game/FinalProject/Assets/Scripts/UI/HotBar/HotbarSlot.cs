@@ -14,19 +14,20 @@ public class HotbarSlot : ItemSlot
     }
     public override void OnButtonPress()
     {
-        if(inventoryUI.moveItem == null) return;
+        if(inventoryUI.moveItemIndex == -1) return;
         Type equipmentType = typeof(Equipment);
-        Type itemType = inventoryUI.moveItem.GetItem().GetType();
+        Item newAssign = Inventory.instance.items[inventoryUI.moveItemIndex];
+        Type itemType = newAssign.GetType();
         bool isEquipment = equipmentType.IsAssignableFrom(itemType);
         if(isEquipment){
             Debug.Log("Equipment: " + equipmentType.ToString() + " : " + itemType.ToString());
-            inventoryUI.moveItem = null;
+            inventoryUI.moveItemIndex = -1;
             inventoryUI.UpdateUI();
             return;
         }
 
-        SetItem(inventoryUI.moveItem.GetItem());
-        inventoryUI.moveItem = null;
+        SetItem(newAssign);
+        inventoryUI.moveItemIndex = -1;
         inventoryUI.UpdateUI();
     }
 }
