@@ -488,6 +488,7 @@ public class PlayerManager : Entity
         isInSnow = false;  
         isInIce = false;
         isDeath = false;
+        abilityManager.LoadData();
         ResetAnimations();
     }
     #endregion

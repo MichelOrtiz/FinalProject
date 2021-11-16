@@ -39,7 +39,7 @@ public class Jetpack : Equipment
         if(uses < 0) return;
         uses --;
         Rigidbody2D body = PlayerManager.instance.GetComponent<Rigidbody2D>();
-        Debug.Log("Usando " + this.name);
+        //Debug.Log("Usando " + this.name);
         empuje = new Vector2(0f,defaultForce);
         //body.gravityScale *= -1;
         body.velocity = new Vector2(0f,0f);
