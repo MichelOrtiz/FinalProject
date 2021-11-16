@@ -14,6 +14,8 @@ public class MouseDirPointer : MonoBehaviour
     public Vector2 MouseDirection { get => mouseDirection; }
     private Vector2 pointerPos;
     public Vector2 PointerDir { get => pointerPos; }
+
+    public Vector2 RealMousePos { get; private set; }
     private float angle;
     // Update is called once per frame
     void Update()
@@ -27,5 +29,8 @@ public class MouseDirPointer : MonoBehaviour
             pointerPos = (Vector2)transform.position + mouseDirection * maxRadius;
             pointer.transform.position = pointerPos;
         }
+
+        RealMousePos = CameraFollow.instance.GetMousePosition();
+        
     }
 }

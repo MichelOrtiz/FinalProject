@@ -25,8 +25,11 @@ public class GunProjectile : MonoBehaviour
     }
     private void Update() {
         mousePosition = mouseDirPointer.PointerDir;
-        Vector2 dif = mousePosition - (Vector2)transform.position;
+
+        //Vector2 dif = mousePosition - (Vector2)transform.position;
+        Vector2 dif = mouseDirPointer.MouseDirection;
         float rotZ = Mathf.Atan2(dif.y,dif.x) * Mathf.Rad2Deg;
+        //float rotZ = MathUtils.GetAngleBetween(player.transform.position, mousePosition);
         transform.rotation = Quaternion.Euler(0f,0f,rotZ + offset);
     }
     public void StartAiming(){
