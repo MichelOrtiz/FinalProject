@@ -2,18 +2,31 @@ using UnityEngine;
 public class AbilityInter : MonoBehaviour
 {
     [SerializeField] private AbilityObject abilityObject;
+    [SerializeField]private Ability.Abilities abilityName;
+    private Ability ability;
+    [SerializeField] private PopUpTrigger abilityPopUp;
     [SerializeField] private byte radius;
 
-    private Ability ability;
+    [Header("FX")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject bubble;
+
 
     private PlayerManager player;
     
     void Start()
     {
         player = PlayerManager.instance;
-        ability = player.abilityManager.FindAbility(abilityObject.AbilityName);
+        ability = player.abilityManager.FindAbility(abilityName);
 
-        GetComponent<SpriteRenderer>().sprite = abilityObject.Icon;
+        //GetComponent<SpriteRenderer>().sprite = abilityObject.Icon;
+        spriteRenderer.sprite = ability.iconAbility;
+    
+        if (player.abilityManager.IsUnlocked(abilityName))
+        {
+            Destroy(gameObject);
+        }    
+    
     }
 
     void Update()
@@ -21,19 +34,19 @@ public class AbilityInter : MonoBehaviour
         float distance = Vector2.Distance(player.GetPosition(), transform.position);
         if (distance <= radius)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            bubble.SetActive(true);
+            if (Input.GetKeyDown(player.inputs.controlBinds["MENUINTERACTION"]))
             {
-                
                 if (ability != null)
                 {
                     player.abilityManager.SetActiveSingle(ability, true);
-                    Debug.Log("Obtained ability: " + ability.abilityName);
-
+                    abilityPopUp.popUp.Message = abilityName.ToString();
+                    abilityPopUp.TriggerPopUp(true);
                     Destroy(gameObject);
                 }
-
             }
         }
+        bubble.SetActive(false);
     }
 
 
