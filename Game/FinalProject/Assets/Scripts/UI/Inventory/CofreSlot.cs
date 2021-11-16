@@ -11,6 +11,7 @@ public class CofreSlot : ItemSlot
         cofreUI = CofreUI.instance;
     }
     public override void OnButtonPress(){
+        if(item.type == Item.ItemType.Basura) return;
         if(item!=null){
             //Debug.Log("Press");
             if(origen == Holder.Inventario){
