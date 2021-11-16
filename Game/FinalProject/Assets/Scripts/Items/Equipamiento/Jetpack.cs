@@ -5,14 +5,11 @@ using UnityEngine;
 public class Jetpack : Equipment
 {
     Vector2 empuje;
-    int uses;
+    public int uses;
     [SerializeField] int maxUses = 5;
     [SerializeField] const float defaultForce = 10f;
     [SerializeField] float speed;
     public override void Rutina(){
-        if(PlayerManager.instance.isGrounded){
-            uses = maxUses;
-        }
         if(uses < 0) return;
         uses --;
         Rigidbody2D body = PlayerManager.instance.GetComponent<Rigidbody2D>();
@@ -29,5 +26,25 @@ public class Jetpack : Equipment
     }
     public override void EndEquip(){
 
+    }
+    public void RestablecerUsos()
+    {
+        if(PlayerManager.instance.isGrounded){
+            uses = maxUses;
+        }
+    }
+
+    public override void Use()
+    {
+        if(isPasive){
+            //solo se equipan los equipamientos pasivos y los activos solo ejecutan su rutina...
+            if(EquipmentManager.instance.GetCurrentEquipment()[(int)equipmentSlot] == this){
+                EquipmentManager.instance.Unequip((int) equipmentSlot);
+                return;
+            }   
+            EquipmentManager.instance.Equip(this);
+        }else{
+            Rutina();
+        }
     }
 }
