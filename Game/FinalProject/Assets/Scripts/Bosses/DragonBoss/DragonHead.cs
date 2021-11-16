@@ -30,11 +30,22 @@ public class DragonHead : MonoBehaviour
             player.SetImmune();
         }
 
-        if (other.gameObject.tag == "Object")
+        if (other.gameObject.GetComponent<ObjProjectile>())
         {
             Destroy(other.gameObject);
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.gameObject.GetComponent<ObjProjectile>())
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
+    
 
     void knockback_Stopped()
     {
