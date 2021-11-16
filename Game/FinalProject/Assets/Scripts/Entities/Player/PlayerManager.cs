@@ -471,6 +471,8 @@ public class PlayerManager : Entity
 
     public void RestoreValuesForDead(){
         //statesManager.StopAll();
+        EquipmentManager.instance.UnequipAll();
+        abilityManager.LoadData();
         gameObject.GetComponent<SpriteRenderer>().color= new Color(1,1,1,1); 
         inmunityState.onEffect = false;
         walkingSpeed = defaultwalkingSpeed;
@@ -488,7 +490,6 @@ public class PlayerManager : Entity
         isInSnow = false;  
         isInIce = false;
         isDeath = false;
-        abilityManager.LoadData();
         ResetAnimations();
     }
     #endregion
