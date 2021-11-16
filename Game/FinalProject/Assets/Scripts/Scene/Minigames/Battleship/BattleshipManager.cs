@@ -35,16 +35,25 @@ public class BattleshipManager : MonoBehaviour
         rotateButton.onClick.AddListener(() => RotateClicked());
         ////if (Input.GetMouseButtonUp(0)) {
         enemyShips = enemyScript.PlaceEnemyShips();
+
+        
     }
 
     private void NextShipClicked(){
         //Condition to only do this if there are still ships
-        if(shipIndex <= ships.Length - 2){
-            shipIndex++;
-            shipScript = ships[shipIndex].GetComponent<ShipScript>();
-            //shipScript.FlashColor(Color.yellow);
+        if(!shipScript.OnGameBoard()){
+            //place where it would warn you you're out of bounds.....??
         } else{
-            enemyScript.PlaceEnemyShips();
+            //-2, because the smallest is 2 tiles long
+            if(shipIndex <= ships.Length - 2){
+                shipIndex++;
+                shipScript = ships[shipIndex].GetComponent<ShipScript>();
+            }else{
+                rotateButton.gameObject.SetActive(false);
+                nextButton.gameObject.SetActive(false);
+                topText.text = "Selecciona un cuadro del enemigo.";
+                setupComplete = true;
+            }
         }
     }
 
@@ -56,7 +65,10 @@ public class BattleshipManager : MonoBehaviour
 
     public void TileClicked(GameObject tile){
         if(setupComplete && playerTurn){
-            //Drop missile - BOOM
+            //This is where the Missile appears? Also probaly not needed...
+            Vector2 tilePos = tile.transform.position;
+
+            Instantiate(missilePrefab, tilePos, missilePrefab.transform.rotation);
         } else if(!setupComplete){
             PlaceShip(tile);
             shipScript.SetClickedTile(tile);
@@ -95,7 +107,7 @@ public class BattleshipManager : MonoBehaviour
                         //We have already hit the tile
                         hitCount++;
                     }
-                }//check wether we have sunk the ship
+                }//check whether we have sunk the ship
                 if(hitCount == tileNumArray.Length){
                     enemyShipCount--;
                     topText.text = "SUNK!!";
