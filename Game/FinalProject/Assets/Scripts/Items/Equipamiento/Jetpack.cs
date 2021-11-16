@@ -10,15 +10,15 @@ public class Jetpack : Equipment
     [SerializeField] const float defaultForce = 10f;
     [SerializeField] float speed;
     public override void Rutina(){
-        if(player.isGrounded){
-            uses = maxUses;
-        }
+        RestablecerUsos();
     }
 
     public override void StartEquip(){
+        EquipmentManager.instance.equipmentRutines -= Rutina;
+        EquipmentManager.instance.equipmentRutines += Rutina;
     }
     public override void EndEquip(){
-
+        EquipmentManager.instance.equipmentRutines -= Rutina;
     }
     public void RestablecerUsos()
     {
@@ -36,10 +36,10 @@ public class Jetpack : Equipment
         Impulso();
     }
     void Impulso(){
-        if(uses < 0) return;
+        if(uses <= 0) return;
         uses --;
         Rigidbody2D body = PlayerManager.instance.GetComponent<Rigidbody2D>();
-        Debug.Log("Usando " + this.name);
+        //Debug.Log("Usando " + this.name);
         empuje = new Vector2(0f,defaultForce);
         //body.gravityScale *= -1;
         body.velocity = new Vector2(0f,0f);
