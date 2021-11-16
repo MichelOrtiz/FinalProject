@@ -45,4 +45,7 @@ public class loadMinigame : loadlevel
         if(!isAvailable)return;
         base.cargarEscena();
     }
+    void OnDestroy() {
+        PlayerManager.instance.inputs.Interact -= cargarEscena; 
+    }
 }

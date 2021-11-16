@@ -16,9 +16,11 @@ public class Jetpack : Equipment
     }
 
     public override void StartEquip(){
+        EquipmentManager.instance.equipmentRutines -= Rutina;
+        EquipmentManager.instance.equipmentRutines += Rutina;
     }
     public override void EndEquip(){
-
+        EquipmentManager.instance.equipmentRutines -= Rutina;
     }
     public void RestablecerUsos()
     {

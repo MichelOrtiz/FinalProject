@@ -50,5 +50,8 @@ public class loadBossLevel : loadlevel
 
         
     }
+    void OnDestroy() {
+        PlayerManager.instance.inputs.Interact -= cargarEscena; 
+    }
 
 }
