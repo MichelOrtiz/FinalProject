@@ -10,6 +10,8 @@ public class TilesScript : MonoBehaviour
 
     private bool missileHit = false;
     Color32[] hitColor = new Color32[2];
+    public byte numberId;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,7 @@ public class TilesScript : MonoBehaviour
 
     public void onClickTile(){
         if(missileHit == false){
-            battleshipManager.TileClicked(gameObject);
+            battleshipManager.TileClicked(this);
         }
         
     }

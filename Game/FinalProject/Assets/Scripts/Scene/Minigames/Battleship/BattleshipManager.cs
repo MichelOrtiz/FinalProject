@@ -53,25 +53,24 @@ public class BattleshipManager : MonoBehaviour
                 nextButton.gameObject.SetActive(false);
                 topText.text = "Selecciona un cuadro del enemigo.";
                 setupComplete = true;
+                for(int i=0; i< ships.Length; i++) ships[i].SetActive(false);
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 
-    public void TileClicked(GameObject tile){
+    public void TileClicked(TilesScript tile){
         if(setupComplete && playerTurn){
-            //This is where the Missile appears? Also probaly not needed...
+            //This is where the Missile is dropped
             Vector2 tilePos = tile.transform.position;
-
-            Instantiate(missilePrefab, tilePos, missilePrefab.transform.rotation);
+            //tilePos.y += 
+            playerTurn = false;
+            var missile = Instantiate(missilePrefab, tilePos, missilePrefab.transform.rotation).GetComponent<MissileScript>();
+            missile.numberId = tile.numberId;
+            CheckHit(missile.numberId);
         } else if(!setupComplete){
-            PlaceShip(tile);
-            shipScript.SetClickedTile(tile);
+            PlaceShip(tile.gameObject);
+            shipScript.SetClickedTile(tile.gameObject);
         }
     } 
 
@@ -90,9 +89,9 @@ public class BattleshipManager : MonoBehaviour
         shipScript.SetClickedTile(tile);
     }
 
-    public void CheckHit(GameObject tile){
+    public void CheckHit(byte tileNum){
         //Take the tile's individual number and name, and compare them with the enemy ships coordinates
-        int tileNum = Int32.Parse(Regex.Match(tile.name, @"\d+").Value);
+        //int tileNum = Int32.Parse(Regex.Match(tile.name, @"\d+").Value);
         int hitCount = 0;
         foreach (int[] tileNumArray in enemyShips){
             if(tileNumArray.Contains(tileNum)){

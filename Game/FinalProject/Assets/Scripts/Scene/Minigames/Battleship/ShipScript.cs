@@ -38,13 +38,14 @@ public class ShipScript : MonoBehaviour
     }
 
     public void RotateShip(){
+        if(clickedTile == null) return;
         touchTiles.Clear();
         transform.eulerAngles += new Vector3(0, 0, nextYRotation);
         nextYRotation *= -1;
         float temp = xOffset;
         xOffset = yOffset;
         yOffset = temp;
-        //SetPosition(clickedTile.transform.position);
+        SetPosition(clickedTile.transform.position);
     }
 
     public void SetPosition(Vector2 newVec){
