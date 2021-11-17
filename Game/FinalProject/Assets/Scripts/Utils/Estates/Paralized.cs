@@ -28,6 +28,10 @@ public class Paralized : State
         if (isPlayer)
         {
             player = entity as PlayerManager;
+            if (player.currentStamina < 1f)
+            {
+                StopAffect();
+            }
         }
     }
     public override void Affect()
