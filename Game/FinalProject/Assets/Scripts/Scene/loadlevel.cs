@@ -85,4 +85,7 @@ public class loadlevel : MonoBehaviour
         LoadScene();
         RestoreValuesForOtherScene();
     }
+    void OnDestroy() {
+        PlayerManager.instance.inputs.Interact -= cargarEscena; 
+    }
 }

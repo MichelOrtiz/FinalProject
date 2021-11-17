@@ -61,6 +61,7 @@ public class SceneController : MonoBehaviour
 
     IEnumerator LoadAsynchronously (int sceneInd)
     {
+        PlayerManager.instance?.SetEnabledPlayer(false);
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneInd);
         SceneChanged?.Invoke();
         loadingScreen.SetActive(true);
@@ -73,6 +74,7 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
         loadingScreen.SetActive(false);
+        PlayerManager.instance?.SetEnabledPlayer(true);
         sceneTitle = FindObjectOfType<SceneTitle>();
         //mainCanvas.SetActive(true);
         if(FindObjectOfType<CameraFollow>() != null)
@@ -86,6 +88,8 @@ public class SceneController : MonoBehaviour
         //PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
     }
     public void RealLoasScene(int escena){
+        prevScene = 0;
+        currentScene = escena;
         StartCoroutine(LoadAsynchronously(escena));
     }
 }

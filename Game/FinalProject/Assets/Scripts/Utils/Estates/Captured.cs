@@ -31,6 +31,9 @@ public class Captured : State
         if(currentTime>=duration){
             StopAffect();
         }
+        if(player.currentStamina <= 5){
+            StopAffect();
+        }
         if(Input.GetKeyDown(PlayerManager.instance.inputs.controlBinds["MOVERIGHT"])){
             currentTime++;
         }

@@ -85,7 +85,9 @@ public class EquipmentManager : MonoBehaviour
     }
     public void UpdateUI(){
         foreach(HotbarSlotEq slot in slotsEquipment){
-            slot.UpdateUI();
+            if(!Inventory.instance.items.Contains(slot.GetItem())){
+                slot.SetItem(null);
+            }
         }
     }
 }

@@ -12,8 +12,8 @@ public class InventorySlot : ItemSlot,IPointerEnterHandler,IPointerExitHandler
     }
     public override void OnButtonPress()
     {
-        if(item.type == Item.ItemType.Basura) return;
         if(item == null) return;
+        if(item.type == Item.ItemType.Basura) return;
         if(Input.GetKey(PlayerManager.instance.inputs.controlBinds["MENUFASTASSIGN"])){
             Type equipmentType = typeof(Equipment);
             Type itemType = item.GetType();

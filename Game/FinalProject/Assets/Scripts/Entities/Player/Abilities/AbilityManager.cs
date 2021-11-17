@@ -15,14 +15,16 @@ public class AbilityManager : MonoBehaviour
     public AbilityUI abilityUI;
     private void Awake() {
         if(instance!=null){
-            //Badthings
+            Destroy(gameObject);
             return;
         }
         instance=this;
     }
     private void Start() {
-        //Load saved abilities in savefiles
         abilityUI = AbilityUI.instance;
+        LoadData();
+    }
+    public void LoadData(){
         if(SaveFilesManager.instance != null){
             SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
             int i = 0;
@@ -45,7 +47,6 @@ public class AbilityManager : MonoBehaviour
             abilityUI.UpdateUI();
             abilityUI.SetOpen(false);
         }
-
     }
     private void Update() {
         if(PlayerManager.instance.inputs.OpenAbilites){
