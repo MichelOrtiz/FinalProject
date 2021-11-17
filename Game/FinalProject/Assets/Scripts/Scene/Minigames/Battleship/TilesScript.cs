@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TilesScript : MonoBehaviour
 {
@@ -9,8 +10,12 @@ public class TilesScript : MonoBehaviour
     RaycastHit hit;
 
     private bool missileHit = false;
-    Color32[] hitColor = new Color32[2];
     public byte numberId;
+    public bool tileClicked;
+
+    [Header("FX")]
+    [SerializeField] private Color32 hitColor;
+    [SerializeField] private Color32 missedColor;
 
     // Start is called before the first frame update
     void Start()
@@ -26,24 +31,17 @@ public class TilesScript : MonoBehaviour
 
     }
 
-    public void onClickTile(){
-        if(missileHit == false){
+    public void onClickTile()
+    {
+        if(!tileClicked || GetComponent<Image>().color == battleshipManager.flagColor)
+        {
             battleshipManager.TileClicked(this);
         }
         
     }
 
-    private void OnCollisionEnter(Collision collision){
-        if(collision.gameObject.CompareTag("BattleshipMissile")){
-            missileHit = true;
-        }
-        //else if Where the enemy missile would go
-    }
 
-    public void SetTileColor(int index, Color32 color){
-        hitColor[index] = color;
+    public void SetTileColor(Color32 color){
+        GetComponent<Image>().color = color;
     } 
-    public void SwitchColors(int colorIndex){
-        GetComponent<Renderer>().material.color = hitColor[colorIndex];
-    }   
 }

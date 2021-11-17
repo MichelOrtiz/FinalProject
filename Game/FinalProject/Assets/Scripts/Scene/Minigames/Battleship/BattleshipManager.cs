@@ -6,90 +6,90 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleshipManager : MonoBehaviour
+public class BattleshipManager : MasterMinigame
 {
-    public GameObject[] ships;
-
     [Header("HUD")]
-    public Button nextButton;
-    public Button rotateButton;
     public Text topText;
+
+    [SerializeField] private Text missilesText;
+    [SerializeField] private Text enemyShipsText;
+
+
     [Header("Objects")]
-    public GameObject missilePrefab;
+    public Color32 hitColor;
+    public Color32 missedColor;
+    public Color32 flagColor;
 
 
-    private bool setupComplete = false;
-    private bool playerTurn = true;
-    private int shipIndex = 0;
-    private ShipScript shipScript;
     public EnemyScript enemyScript;
-    private List<int[]> enemyShips;
+    public List<int[]> enemyShips;
 
     private int enemyShipCount = 5;
+    public int EnemyShipCount {
+        get => enemyShipCount; 
+        set
+        {
+            enemyShipCount = value;
+            enemyShipsText.text = enemyShipCount.ToString();
+            if (enemyShipCount == 0)
+            {
+                OnWinMinigame();
+            }
+        } 
+    
+    }
 
-    // Start is called before the first frame update
+
+
+    [Header("Missiles")]
+    [SerializeField] private List<MissileScript> missiles;
+    [SerializeField] private byte playerMissiles;
+    public byte PlayerMissiles { get=>playerMissiles; 
+        set
+        {
+
+            playerMissiles = value;
+            missilesText.text = value.ToString();
+
+        }
+    }
+    byte index;
+        
+    void Awake()
+    {
+        playerMissiles = (byte)missiles.Count;
+        missilesText.text = PlayerMissiles.ToString();
+    }
+
     void Start()
     {
-        shipScript = ships[shipIndex].GetComponent<ShipScript>();
-        nextButton.onClick.AddListener(() => NextShipClicked());
-        rotateButton.onClick.AddListener(() => RotateClicked());
-        ////if (Input.GetMouseButtonUp(0)) {
         enemyShips = enemyScript.PlaceEnemyShips();
-
-        
     }
 
-    private void NextShipClicked(){
-        //Condition to only do this if there are still ships
-        if(!shipScript.OnGameBoard()){
-            //place where it would warn you you're out of bounds.....??
-        } else{
-            //-2, because the smallest is 2 tiles long
-            if(shipIndex <= ships.Length - 2){
-                shipIndex++;
-                shipScript = ships[shipIndex].GetComponent<ShipScript>();
-            }else{
-                rotateButton.gameObject.SetActive(false);
-                nextButton.gameObject.SetActive(false);
-                topText.text = "Selecciona un cuadro del enemigo.";
-                setupComplete = true;
-                for(int i=0; i< ships.Length; i++) ships[i].SetActive(false);
-            }
-        }
-        
-    }
 
-    public void TileClicked(TilesScript tile){
-        if(setupComplete && playerTurn){
-            //This is where the Missile is dropped
+    public void TileClicked(TilesScript tile)
+    {
+        if (index < missiles.Count)
+        {
             Vector2 tilePos = tile.transform.position;
             //tilePos.y += 
-            playerTurn = false;
-            var missile = Instantiate(missilePrefab, tilePos, missilePrefab.transform.rotation).GetComponent<MissileScript>();
+            var missile = Instantiate(missiles[index]);
             missile.numberId = tile.numberId;
-            CheckHit(missile.numberId);
-        } else if(!setupComplete){
-            PlaceShip(tile.gameObject);
-            shipScript.SetClickedTile(tile.gameObject);
+            missile.Affect();
+
+            index++;
+            
+            if (index >= missiles.Count)
+            {
+                if (EnemyShipCount != 0) OnLoseMinigame();
+            }
+            PlayerMissiles--;
         }
     } 
 
-    private void PlaceShip(GameObject tile){
-        shipScript = ships[shipIndex].GetComponent<ShipScript>();
-        shipScript.ClearTileList();
-        Vector2 newVec = shipScript.GetOffsetVec(tile.transform.position);
-        ships[shipIndex].transform.position = newVec;
-    }
-
-    private void RotateClicked(){
-        shipScript.RotateShip();
-    }
-
-    void SetShipClickedTile(GameObject tile){
-        shipScript.SetClickedTile(tile);
-    }
-
-    public void CheckHit(byte tileNum){
+    
+    public bool CheckHit(byte tileNum, bool sinkEnabled)
+    {
         //Take the tile's individual number and name, and compare them with the enemy ships coordinates
         //int tileNum = Int32.Parse(Regex.Match(tile.name, @"\d+").Value);
         int hitCount = 0;
@@ -99,7 +99,10 @@ public class BattleshipManager : MonoBehaviour
                     if(tileNumArray[i]== tileNum){
                         /*if our tile index matches the enemy tile number, 
                         we hit the ship(truck indexes are -5)*/
-                        tileNumArray[i] = -5;
+                        if (sinkEnabled)
+                        {
+                            tileNumArray[i] = -5;
+                        }
                         hitCount++;
                     }
                     else if(tileNumArray[i]==-5){
@@ -107,17 +110,26 @@ public class BattleshipManager : MonoBehaviour
                         hitCount++;
                     }
                 }//check whether we have sunk the ship
-                if(hitCount == tileNumArray.Length){
-                    enemyShipCount--;
-                    topText.text = "SUNK!!";
-                }else{
-                    topText.text = "HIT!!";
+
+
+                if (sinkEnabled)
+                {
+                    if(hitCount == tileNumArray.Length){
+                        EnemyShipCount--;
+                        topText.text = "SUNK!!";
+                    }else{
+                        topText.text = "HIT!!";
+                    }
                 }
+                return true;
                 break;
             }
             if(hitCount == 0){
                 topText.text = "Missed. There is no ship there";
             }
         }
+        return false;
     }
+
+
 }

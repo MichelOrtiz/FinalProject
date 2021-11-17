@@ -2,19 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileScript : MonoBehaviour
+[CreateAssetMenu(fileName="Missile", menuName = "Battleship/Missile")]
+public class MissileScript : ScriptableObject
 {
-    public byte numberId{get;set;}
-
-    // Start is called before the first frame update
-    private BattleshipManager battleshipManager;
-    void Start()
+    public byte numberId {get;set;}
+    public enum Type
     {
-        battleshipManager = GameObject.Find("BattleshipManager").GetComponent<BattleshipManager>();
+        Normal, 
+        Ship, 
+        Radar, 
+        Holy,
+        Smart
     }
+    public Type type = Type.Normal;
 
-    /*private void OnCollisionEnter(Collision collision){
-        battleshipManager.CheckHit(collision.gameObject);
-        Destroy(gameObject);
-    }*/
+    public virtual void Affect()
+    {
+        var manager = FindObjectOfType<BattleshipManager>();
+        var tiles = ScenesManagers.GetObjectsOfType<TilesScript>();
+        var tile = tiles.Find(tile => tile.numberId == numberId);
+        tile.tileClicked = true;
+        if (tile != null)
+        {
+            if (manager.CheckHit(numberId, true))
+            {
+                tile?.SetTileColor(manager.hitColor);
+            }
+            else
+            {
+                tile?.SetTileColor(manager.missedColor);
+            }
+        }
+    }
 }

@@ -10,6 +10,7 @@ public abstract class MasterMinigame : MonoBehaviour
         {
             Debug.Log("WinMinigameHandler null again smh");
         }
+        Debug.Log("win");
         WinMinigameHandler?.Invoke();
     }
 
@@ -18,5 +19,7 @@ public abstract class MasterMinigame : MonoBehaviour
     protected virtual void OnLoseMinigame()
     {
         LoseMinigameHandler?.Invoke();
+        Debug.Log("loose");
+
     }
 }
