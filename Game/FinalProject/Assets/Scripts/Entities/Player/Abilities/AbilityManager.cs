@@ -6,8 +6,10 @@ using System.Linq;
 public class AbilityManager : MonoBehaviour
 {
     public List<Ability> abilities {
-        get{
-            return abiltySystem.GetComponents<Ability>().ToList<Ability>();
+        get
+        {
+            if (abiltySystem == null) return null;
+            return abiltySystem?.GetComponents<Ability>()?.ToList<Ability>();
         }
     }
     public static AbilityManager instance;
@@ -62,6 +64,7 @@ public class AbilityManager : MonoBehaviour
     /// </summary>
     /// <param name="active"></param>
     public void SetActive(bool active){
+        if (abilities == null) return;
         foreach(Ability ab in abilities){
             ab.enabled = active;
         }

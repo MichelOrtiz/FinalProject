@@ -27,15 +27,17 @@ namespace FinalProject.Assets.Scripts.Scene
         {
             if (Input.anyKeyDown)
             {
-                if(busy) return;
-                busy = true;
                 EndCredits();
             }
         }
 
         void EndCredits()
         {
+            if(busy) return;
+            busy = true;
             SceneController.instance.RealLoasScene(sceneToLoad);
         }
+
+
     }
 }
