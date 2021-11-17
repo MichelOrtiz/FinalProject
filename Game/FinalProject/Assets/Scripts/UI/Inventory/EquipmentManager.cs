@@ -50,8 +50,11 @@ public class EquipmentManager : MonoBehaviour
     }
     public void UnequipAll(){
         for(int i=0;i<currentEquipment.Length;i++){
-            equipmentRutines -= currentEquipment[i].Rutina;
-            Unequip(i);
+            if (currentEquipment[i] != null)
+            {
+                equipmentRutines -= currentEquipment[i].Rutina;
+                Unequip(i);
+            }
         }
     }
 
