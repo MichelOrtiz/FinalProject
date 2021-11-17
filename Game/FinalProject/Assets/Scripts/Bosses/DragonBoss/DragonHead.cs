@@ -38,7 +38,13 @@ public class DragonHead : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
+        if(other.gameObject.tag == "Player")
+        {
+            player.TakeTirement(damage);
+            stateInstantiated = player.statesManager.AddState(knockbackState);
+            stateInstantiated.StoppedAffect += knockback_Stopped;
+            player.SetImmune();
+        }
         if (other.gameObject.GetComponent<ObjProjectile>())
         {
             Destroy(other.gameObject);
