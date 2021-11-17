@@ -26,7 +26,7 @@ public class MantisBoss : BossFight
         /****/
         // uncomment if want to test with 'L' to change stage 
         /****/
-        // base.Update();
+        base.Update();
 
         if (ScenesManagers.GetObjectsOfType<Mantis>().Count == 0)
         {

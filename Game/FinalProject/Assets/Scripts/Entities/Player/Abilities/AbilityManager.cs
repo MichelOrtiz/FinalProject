@@ -45,9 +45,9 @@ public class AbilityManager : MonoBehaviour
                 i++;
             }
             
-            abilityUI.SetOpen(true);
-            abilityUI.UpdateUI();
-            abilityUI.SetOpen(false);
+            abilityUI?.SetOpen(true);
+            abilityUI?.UpdateUI();
+            abilityUI?.SetOpen(false);
         }
     }
     private void Update() {

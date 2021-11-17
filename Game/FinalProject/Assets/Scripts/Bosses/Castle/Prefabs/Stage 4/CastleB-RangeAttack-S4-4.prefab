@@ -47,6 +47,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4690660590625237830, guid: 062200d9982b4f749bc065b343d7aeab, type: 3}
   shotPos: {fileID: 5031480226335869723}
   effectOnPlayer: {fileID: 0}
+  punishDamage: 0
   rotate: 0
   center: {fileID: 0}
   startingAngle: 0
@@ -129,7 +130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3640893749351044039}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5899963, y: 1.0599976, z: 0}
+  m_LocalPosition: {x: -1.36, y: 1.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1365501745}
@@ -212,7 +213,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 71a1d7337e837fc49b16b25c89f77561, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 954d24ed6e6dcf14aa30e96b782767b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -261,7 +262,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 3.86}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 5.12, y: 3.86}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -362,6 +363,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8768966933982994946}
     m_Modifications:
+    - target: {fileID: -171326591389980660, guid: 431fe436ea249ea42be1ef6285b5471c, type: 3}
+      propertyPath: m_Size.x
+      value: 1.39
+      objectReference: {fileID: 0}
+    - target: {fileID: -171326591389980660, guid: 431fe436ea249ea42be1ef6285b5471c, type: 3}
+      propertyPath: m_Size.y
+      value: 3.62
+      objectReference: {fileID: 0}
+    - target: {fileID: -171326591389980660, guid: 431fe436ea249ea42be1ef6285b5471c, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.17
+      objectReference: {fileID: 0}
     - target: {fileID: 471269955110339815, guid: 431fe436ea249ea42be1ef6285b5471c, type: 3}
       propertyPath: m_Name
       value: GeneralCollider

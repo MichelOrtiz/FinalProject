@@ -61,7 +61,7 @@ public class SceneController : MonoBehaviour
 
     IEnumerator LoadAsynchronously (int sceneInd)
     {
-        PlayerManager.instance?.SetEnabledPlayer(false);
+        //PlayerManager.instance?.SetEnabledPlayer(false);
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneInd);
         SceneChanged?.Invoke();
         loadingScreen.SetActive(true);
@@ -74,14 +74,14 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
         loadingScreen.SetActive(false);
-        PlayerManager.instance?.SetEnabledPlayer(true);
+        //PlayerManager.instance?.SetEnabledPlayer(true);
         sceneTitle = FindObjectOfType<SceneTitle>();
         //mainCanvas.SetActive(true);
         if(FindObjectOfType<CameraFollow>() != null)
         {
             var camera = FindObjectOfType<CameraFollow>();
             camera.transform.position = PlayerManager.instance.transform.position;
-            camera.backgroundImage.sprite = FindObjectOfType<SceneTitle>().backgroundSprite;
+            camera.backgroundImage.sprite = FindObjectOfType<SceneTitle>()?.backgroundSprite;
         }
 
 
