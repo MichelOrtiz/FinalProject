@@ -70,7 +70,7 @@ public class SceneController : MonoBehaviour
         {
             float progress = Mathf. Clamp01(operation.progress / .9f);
             slider.value = progress;
-            text. text = progress * 100f + "%";
+            text. text = Mathf.Floor(progress * 100f) + "%";
             yield return null;
         }
         loadingScreen.SetActive(false);
