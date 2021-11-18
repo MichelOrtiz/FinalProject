@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using TMPro;
 
 public class GameSlot : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class GameSlot : MonoBehaviour
     private string filePath;
     [SerializeField] private int slot;
     #region UIelements
-    [SerializeField]private Text lblName;
-    [SerializeField]private Text lblTime;
-    [SerializeField]private Text lblZone;
+    [SerializeField]private TextMeshProUGUI lblName;
+    [SerializeField]private TextMeshProUGUI lblTime;
+    [SerializeField]private TextMeshProUGUI lblZone;
     [SerializeField]private Button btnNewGame;
     [SerializeField]private Button btnLoadGame;
     [SerializeField]private Button btnDeleteGame;
@@ -106,7 +107,7 @@ public class GameSlot : MonoBehaviour
                     break;
                 }
                 default:{
-                    lblZone.text += "Unknowed";
+                    lblZone.text += "Desconocida";
                     break;
                 }
             }
