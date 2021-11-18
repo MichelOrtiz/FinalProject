@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PrecisionMinigame : MasterMinigame
 {
     [SerializeField] private byte winScore;
+    [SerializeField] private GameObject text;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,7 @@ public class PrecisionMinigame : MasterMinigame
     {
         if (ScoreController.score == winScore)
         {
+            text.SetActive(true);
             OnWinMinigame();
         }
     }

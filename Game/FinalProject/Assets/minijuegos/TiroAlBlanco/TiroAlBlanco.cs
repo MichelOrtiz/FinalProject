@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TiroAlBlanco : MasterMinigame
 {
+    [SerializeField] GameObject text;
     [SerializeField] private byte scoreToWin;
     void Start()
     {
@@ -14,6 +15,7 @@ public class TiroAlBlanco : MasterMinigame
     {
         if (ScoreController.score >= scoreToWin)
         {
+            text.SetActive(true);
             OnWinMinigame();
         }
     }
