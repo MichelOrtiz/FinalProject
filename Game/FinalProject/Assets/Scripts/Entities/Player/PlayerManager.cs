@@ -62,6 +62,7 @@ public class PlayerManager : Entity
     public PlayerInputs inputs;
     public State inmunityState;
     public AbilityManager abilityManager;
+    [SerializeField] GameObject gameOverPrefab;
     public static PlayerManager instance;
     new void Awake()
     {
@@ -387,6 +388,8 @@ public class PlayerManager : Entity
         if(isDeath) return;
         Debug.Log("ImdeadTnx4EvEr");
         animationManager.ChangeAnimation("Nico_pass_out");
+        SetEnabledPlayer(false);
+        Instantiate(gameOverPrefab);
         /*if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
             isDeath = true;
             //SceneController.instance.SceneChanged += RestoreValuesForDead;
@@ -492,6 +495,8 @@ public class PlayerManager : Entity
         isInSnow = false;  
         isInIce = false;
         isDeath = false;
+        animationManager.ChangeAnimation("Nico_idle");
+        SetEnabledPlayer(true);
         ResetAnimations();
     }
     #endregion
