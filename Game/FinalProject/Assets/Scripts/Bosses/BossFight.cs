@@ -135,6 +135,7 @@ public class BossFight : MonoBehaviour
 
     public void ReturnToLastScene()
     {
+        startMessageTrigger.popUpUI.Hide();
         SceneController.instance.LoadScene(loadlevel.GetComponent<loadlevel>().iLevelToLoad);
         Pause.ResumeGame();
     }
