@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8379419199289331867}
   - component: {fileID: 8379419199289331866}
+  - component: {fileID: 5146356913839491792}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: d281169620c3e5d4cbd688cbe527a34d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -82,6 +83,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5146356913839491792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8379419199289331864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1791fccb7a294b3439bc14508b8fe970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateToReference: 0
+  originalReference: {fileID: 0}
+  rotateToDirection: 1
+  referenceDir: {x: 0, y: 0}
+  startAngle: 35
 --- !u!1 &8379419199720394817
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,6 +172,7 @@ MonoBehaviour:
   sizeByTimeMultiplier: 0
   isOnCollider: 0
   rotateTowardsPlayer: 0
+  rotateTowardsDir: 1
 --- !u!50 &8379419199720394816
 Rigidbody2D:
   serializedVersion: 4

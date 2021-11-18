@@ -64,6 +64,7 @@ public class Projectile : MonoBehaviour
     protected bool aboutToDestroy;
 
     [SerializeField] private bool rotateTowardsPlayer;
+    [SerializeField] private bool rotateTowardsDir;
 
     //private Animator animator;
     #endregion
@@ -149,6 +150,12 @@ public class Projectile : MonoBehaviour
         if (targetWarningAvailable)
         {
             Instantiate(warning, target, Quaternion.identity);
+        }
+
+        if (rotateTowardsDir)
+        {
+            transform.GetComponentInChildren<PointerArrow>().ReferenceDir = target ;
+            transform.GetComponentInChildren<PointerArrow>().enabled = true;
         }
     }
 

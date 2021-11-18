@@ -222,10 +222,6 @@ MonoBehaviour:
   enemyType: 7
   enemyName: 14
   flipToPlayerIfSpotted: 1
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 0
   punishDamage: 0
   atackEffect: {fileID: 0}
@@ -249,7 +245,7 @@ MonoBehaviour:
     id: 5471460
     state: 0
   bubbleRadius: 5
-  maxSpores: 8
+  maxSpores: 4
   currentSpores: 0
   states:
   - {fileID: 11400000, guid: 7b8068372cac5b84fb38ac12e1dc36ce, type: 2}
@@ -636,6 +632,7 @@ MonoBehaviour:
   jumpForce: {x: 3, y: 4}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  jumpState: {fileID: 0}
   pushForce: {x: 0, y: 0}
   pushMultiplier: {x: 0, y: 0}
   pushForceMode: 0
