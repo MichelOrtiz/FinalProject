@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8805213487483752607
+--- !u!1 &2354185969063983560
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,54 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3288392280298096564}
-  - component: {fileID: 6524594571814338891}
-  - component: {fileID: 53733825894341834}
-  - component: {fileID: 2347107957581602761}
-  - component: {fileID: 2500908148272398028}
+  - component: {fileID: 5604923113157337545}
+  - component: {fileID: 2990410987141377719}
+  - component: {fileID: 1017418560657750288}
   m_Layer: 11
-  m_Name: FlyingDragonProjectile
-  m_TagString: Projectile
+  m_Name: spriteFx
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3288392280298096564
+--- !u!4 &5604923113157337545
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8805213487483752607}
+  m_GameObject: {fileID: 2354185969063983560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 3288392280298096564}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6524594571814338891
+--- !u!114 &2990410987141377719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2354185969063983560}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1791fccb7a294b3439bc14508b8fe970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateToReference: 0
+  originalReference: {fileID: 0}
+  rotateToDirection: 1
+  referenceDir: {x: 0, y: 0}
+  startAngle: 35
+--- !u!212 &1017418560657750288
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8805213487483752607}
+  m_GameObject: {fileID: 2354185969063983560}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,18 +88,52 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d4d8da1aa1ea89f47b9db6ebf20b8cdc, type: 3}
-  m_Color: {r: 0.8666667, g: 0.33528528, b: 0.15294117, a: 1}
-  m_FlipX: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: d281169620c3e5d4cbd688cbe527a34d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.94, y: 0.55}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8805213487483752607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3288392280298096564}
+  - component: {fileID: 53733825894341834}
+  - component: {fileID: 2347107957581602761}
+  - component: {fileID: 2500908148272398028}
+  m_Layer: 11
+  m_Name: FlyingDragonProjectile
+  m_TagString: Projectile
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3288392280298096564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805213487483752607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0}
+  m_Children:
+  - {fileID: 5604923113157337545}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &53733825894341834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +155,7 @@ MonoBehaviour:
   targetWarningAvailable: 1
   independentAttackEnabled: 0
   collisionHandler: {fileID: 0}
-  speedMultiplier: 2.5
+  speedMultiplier: 2
   maxShotDistance: 20
   damage: 15
   waitTime: 0.01
@@ -123,6 +172,7 @@ MonoBehaviour:
   sizeByTimeMultiplier: 0
   isOnCollider: 0
   rotateTowardsPlayer: 0
+  rotateTowardsDir: 1
 --- !u!50 &2347107957581602761
 Rigidbody2D:
   serializedVersion: 4
