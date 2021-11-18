@@ -386,14 +386,15 @@ public class PlayerManager : Entity
     {
         if(isDeath) return;
         Debug.Log("ImdeadTnx4EvEr");
-        if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
+        animationManager.ChangeAnimation("Nico_pass_out");
+        /*if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
             isDeath = true;
             //SceneController.instance.SceneChanged += RestoreValuesForDead;
             string path = Application.dataPath + "/Partida" + SaveFilesManager.instance.currentSaveSlot.slotFile;
             SaveFile newPartida = SaveFilesManager.instance.LoadSaveFile(path);
             SaveFilesManager.instance.currentSaveSlot = newPartida;
             SceneController.instance.Load(newPartida);
-        }
+        }*/
 
     }
 
@@ -414,6 +415,7 @@ public class PlayerManager : Entity
     // Not proud of this but what can I do
     void SetAnimationStates()
     {
+        if (isDeath || animationManager.currentState == "Nico_pass_out") return;
         if (isAiming)
         {
             animationManager.ChangeAnimation("Nico_pre_pointing");
