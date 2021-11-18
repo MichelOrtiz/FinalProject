@@ -420,10 +420,6 @@ MonoBehaviour:
   enemyType: 7
   enemyName: 39
   flipToPlayerIfSpotted: 0
-  normalSpeedMultiplier: 0
-  normalSpeed: 0
-  chaseSpeedMultiplier: 0
-  chaseSpeed: 0
   damageAmount: 10
   punishDamage: 5
   atackEffect: {fileID: 0}
@@ -439,7 +435,7 @@ MonoBehaviour:
   eCollisionHandler: {fileID: 0}
   touchingPlayer: 0
   sawPlayerEmote: {fileID: 11400000, guid: 85bd781ef595d39408f5ce69df6b7fb9, type: 2}
-  maxSpores: 8
+  maxSpores: 4
   currentSpores: 0
   states:
   - {fileID: 11400000, guid: 7b8068372cac5b84fb38ac12e1dc36ce, type: 2}
@@ -919,6 +915,7 @@ MonoBehaviour:
   jumpForce: {x: 3, y: 4}
   jumpForceMultiplier: {x: 1, y: 1}
   forceMode: 1
+  jumpState: {fileID: 0}
   pushForce: {x: 0, y: 0}
   pushMultiplier: {x: 0, y: 0}
   pushForceMode: 0
