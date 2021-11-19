@@ -6,7 +6,7 @@ public abstract class ItemSlot : MonoBehaviour
     public Image icon;
     protected Item item;
     protected int index;
-    public void SetItem (Item newItem){
+    public virtual void SetItem (Item newItem){
         item = newItem;
         if(newItem!=null){
             icon.sprite = item.icon;

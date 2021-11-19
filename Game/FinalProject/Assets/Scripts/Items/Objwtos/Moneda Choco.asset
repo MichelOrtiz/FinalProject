@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8dd118349436fc40b262f871527d901, type: 3}
   m_Name: Moneda Choco
   m_EditorClassIdentifier: 
+  type: 0
   nombre: Moneda de chocolate
   descripcion: Una moneda de chocolate cubierta de un alumnio dorado, cualquiera
     pensaria que es de oro.
   icon: {fileID: -857322767054708395, guid: 89f02c9dfcbdaa84db7fb6ec0dfccb02, type: 3}
   isConsumable: 1
+  isInCooldown: 0
+  cooldownTime: 5
+  currentCooldownTime: 0
   staminaGain: 10
   statusForPlayer: {fileID: 0}

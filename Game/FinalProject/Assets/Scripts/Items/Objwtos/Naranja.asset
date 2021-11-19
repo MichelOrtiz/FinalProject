@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8dd118349436fc40b262f871527d901, type: 3}
   m_Name: Naranja
   m_EditorClassIdentifier: 
+  type: 0
   nombre: Naranja de nieve
   descripcion: Bola de nieve con tallo naranja
   icon: {fileID: 1566182162649342352, guid: 89f02c9dfcbdaa84db7fb6ec0dfccb02, type: 3}
   isConsumable: 1
+  isInCooldown: 0
+  cooldownTime: 6
+  currentCooldownTime: 0
   staminaGain: 10
   statusForPlayer: {fileID: 11400000, guid: 87d62b9ea6a62c248a523e70daec16c6, type: 2}
