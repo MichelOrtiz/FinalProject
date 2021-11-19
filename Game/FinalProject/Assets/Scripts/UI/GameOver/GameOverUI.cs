@@ -10,6 +10,9 @@ public class GameOverUI : MonoBehaviour
         //turn off all UI elements?
         
     }
+    void Update(){
+        PlayerManager.instance.SetEnabledPlayer(false);
+    }
     public void SendToMainMenu(){
         SceneController.instance.LoadScene(0);
         Destroy(gameObject);

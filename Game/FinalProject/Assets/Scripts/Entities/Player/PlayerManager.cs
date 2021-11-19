@@ -316,12 +316,14 @@ public class PlayerManager : Entity
     #region Direct stamina changes
     public void TakeTirement(float damage)
     {
+        if(isDeath) return;
         if(currentStamina > currentStaminaLimit) currentStamina = currentStaminaLimit;
         currentStamina -= damage * dmgMod;
         loosingStamina = true;
     }
     public void RegenStamina(float regen)
     {
+        if(isDeath) return;
         if (currentStamina<currentStaminaLimit)
         {
         currentStamina += regen;
@@ -334,7 +336,7 @@ public class PlayerManager : Entity
 
     public void RegenStaminaDontLimit(float regen)
     {
-        
+        if(isDeath) return;
         if (currentStamina<maxStamina )
         {
             currentStamina += regen;
@@ -350,6 +352,7 @@ public class PlayerManager : Entity
     }
     void RegenOxygen(float regen)
     {
+        if(isDeath) return;
         if (currentOxygen<100)
         {
         currentOxygen += regen;

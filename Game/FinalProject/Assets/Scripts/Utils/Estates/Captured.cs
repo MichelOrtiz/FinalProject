@@ -6,7 +6,6 @@ public class Captured : State
 {
     [SerializeField]private float staminaLost;
     PlayerManager player;
-    PlayerInputs inputs;
     public State penalization;
     Vector3 capturedPos;
     public override void StartAffect(StatesManager newManager)
@@ -14,12 +13,8 @@ public class Captured : State
         base.StartAffect(newManager);
         if(manager.enemy!=null)manager.enemy.enabled=false;
         player = PlayerManager.instance;
-        inputs = player.gameObject.GetComponent<PlayerInputs>();
-        inputs.enabled=false;
-        player.abilityManager.SetActive(false);
+        player.SetEnabledPlayer(false);
         capturedPos = manager.hostEntity.GetPosition();
-        player = PlayerManager.instance;
-        player.GetComponent<PlayerInputs>().enabled=false;
         player.ResetAnimations();
         player.isCaptured = true;
     }
@@ -46,14 +41,13 @@ public class Captured : State
         player.SetImmune();
         base.StopAffect();
         Debug.Log("captured stopped");
-        inputs.enabled=true;
         if(manager.enemy!=null)manager.enemy.enabled=true;
-        player.abilityManager.SetActive(true);
         if(manager.enemy!=null){
             manager.enemy.statesManager.AddState(penalization);
         }
         player.walkingSpeed = PlayerManager.defaultwalkingSpeed;
-        inputs.ResetHotbarInputs();
+        player.SetEnabledPlayer(true);
+        player.inputs.ResetHotbarInputs();
         GunProjectile.instance.StopAiming();
         //player.ResetAnimations();
     }
