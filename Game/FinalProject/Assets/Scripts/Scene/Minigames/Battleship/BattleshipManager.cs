@@ -88,6 +88,8 @@ public class BattleshipManager : MasterMinigame
 
             if (index >= missiles.Count)
             {
+                missilesText.text = 0.ToString();
+
                 if (EnemyShipCount != 0)
                 {
                     OnLoseMinigame();
