@@ -24,6 +24,7 @@ public class InteractionTrigger : MonoBehaviour
     [HideInInspector] public bool busy;
     public delegate void RunInUpdate();
     public RunInUpdate updateForInteractions;
+    public RunInUpdate delayMethods;
     protected virtual void Start()
     {
         cola = new Queue<Interaction>();
@@ -87,5 +88,9 @@ public class InteractionTrigger : MonoBehaviour
     }
     private void OnDestroy() {
         PlayerManager.instance.inputs.Interact -= TriggerInteraction;
+    }
+    public void DoDelayMethods(){
+        Debug.Log("Santiago es muy inteligente");
+        delayMethods?.Invoke();
     }
 }

@@ -23,7 +23,13 @@ public class InterWaitCon : Interaction
         if(condition.isDone){
             Debug.Log("Condition cleared");
             gameObject.GetComponent<InteractionTrigger>().updateForInteractions -= CheckIsDone;
-            doThis.DoInteraction();
+            gameObject.GetComponent<InteractionTrigger>().delayMethods -= DelayThis;
+            gameObject.GetComponent<InteractionTrigger>().delayMethods += DelayThis;
+            gameObject.GetComponent<InteractionTrigger>().Invoke("DoDelayMethods",2f);
         }
+    }
+    public void DelayThis(){
+        doThis.DoInteraction();
+        gameObject.GetComponent<InteractionTrigger>().delayMethods -= DelayThis;
     }
 }
