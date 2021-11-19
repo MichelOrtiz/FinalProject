@@ -15,6 +15,8 @@ public class MissileScript : ScriptableObject
         Smart
     }
     public Type type = Type.Normal;
+    public string missileName;
+    [Multiline] public string description;
 
     public virtual void Affect()
     {

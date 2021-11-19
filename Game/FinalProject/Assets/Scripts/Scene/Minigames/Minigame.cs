@@ -23,6 +23,11 @@ public class Minigame : MonoBehaviour{
     private float currentTime;
     [SerializeField] private float endWaitTime;
     private bool ended;
+    
+
+    [SerializeField] private GameObject winPopUp;
+    [SerializeField] private GameObject loosePopUp;
+
 
     public MasterMinigame MasterMinigame { get; set; }
 
@@ -88,6 +93,24 @@ public class Minigame : MonoBehaviour{
     public virtual void EndMinigame(bool isCompleted)
     {
         MinigameCompleted = isCompleted;
+
+        if (isCompleted)
+        {
+            if (winPopUp != null)
+            {
+                var winPop = Instantiate(winPopUp, winPopUp.transform.position, winPopUp.transform.rotation, this.transform);
+                winPop.GetComponentInChildren<TMPro.TextMeshProUGUI>().text += " " + rewardMoney + "G";
+            }
+        }
+        else
+        {
+            if (loosePopUp != null)
+            {
+                Instantiate(loosePopUp, winPopUp.transform.position, winPopUp.transform.rotation, this.transform);
+            }
+        }
+
+
         ended = true;
         if(isUI)
         {

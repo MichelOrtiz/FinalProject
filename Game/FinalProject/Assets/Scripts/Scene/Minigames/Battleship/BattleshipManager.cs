@@ -9,11 +9,14 @@ using UnityEngine.UI;
 public class BattleshipManager : MasterMinigame
 {
     [Header("HUD")]
+    [SerializeField] private GameObject endPopUp;
     public Text topText;
 
     [SerializeField] private Text missilesText;
+    [SerializeField] private TMPro.TextMeshProUGUI currentMissileText;
+    [SerializeField] private TMPro.TextMeshProUGUI currentMissileDescription;
+    
     [SerializeField] private Text enemyShipsText;
-
 
     [Header("Objects")]
     public Color32 hitColor;
@@ -53,6 +56,7 @@ public class BattleshipManager : MasterMinigame
 
         }
     }
+    [SerializeField] private MissileScript currentMissile;
     byte index;
         
     void Awake()
@@ -64,6 +68,9 @@ public class BattleshipManager : MasterMinigame
     void Start()
     {
         enemyShips = enemyScript.PlaceEnemyShips();
+        currentMissile = missiles[index];
+        enemyShipsText.text = enemyShipCount.ToString();
+        UpdateMissileInfo();
     }
 
 
@@ -73,16 +80,22 @@ public class BattleshipManager : MasterMinigame
         {
             Vector2 tilePos = tile.transform.position;
             //tilePos.y += 
-            var missile = Instantiate(missiles[index]);
+            var missile = Instantiate(currentMissile);
             missile.numberId = tile.numberId;
             missile.Affect();
 
             index++;
-            
+
             if (index >= missiles.Count)
             {
-                if (EnemyShipCount != 0) OnLoseMinigame();
+                if (EnemyShipCount != 0)
+                {
+                    OnLoseMinigame();
+                    return;
+                }
             }
+            currentMissile = missiles[index];
+            UpdateMissileInfo();
             PlayerMissiles--;
         }
     } 
@@ -131,5 +144,9 @@ public class BattleshipManager : MasterMinigame
         return false;
     }
 
-
+    void UpdateMissileInfo()
+    {
+        currentMissileText.text = currentMissile.missileName + ":";
+        currentMissileDescription.text = currentMissile.description;
+    }
 }
