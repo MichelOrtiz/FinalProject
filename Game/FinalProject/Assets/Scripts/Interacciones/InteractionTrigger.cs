@@ -5,9 +5,11 @@ using UnityEngine;
 public class InteractionTrigger : MonoBehaviour
 {
     [SerializeField] protected List<Interaction> interactions;
+    [SerializeField] protected List<Interaction> noticeInteractions;
     protected Queue<Interaction> cola;
     protected Interaction currentInter;
     public GameObject signInter;
+    public GameObject signNotice;
     public Interaction lastInter { 
             get{
                 if(currentInter==null) return interactions[interactions.Count-1];
@@ -44,6 +46,7 @@ public class InteractionTrigger : MonoBehaviour
         }else{
             PlayerManager.instance.inputs.Interact -= TriggerInteraction;
             HideSign();
+            NoticeMeSenpai();
         }     
         updateForInteractions?.Invoke();
     }
@@ -78,13 +81,25 @@ public class InteractionTrigger : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
+    protected void NoticeMeSenpai(){
+        if(noticeInteractions.Count == 0) {
+            signNotice?.SetActive(false);
+            return;
+            }
+        foreach(Interaction inter in noticeInteractions){
+            if(inter.condition.isDone){
+                signNotice?.SetActive(true);
+            }else{
+                signNotice?.SetActive(false);
+            }
+        }
+    }
     protected void ShowSign(){
-        if(signInter==null) return;
-        signInter.SetActive(true);
+        signInter?.SetActive(true);
+        signNotice?.SetActive(false);
     }
     protected void HideSign(){
-        if(signInter==null) return;
-        signInter.SetActive(false);
+        signInter?.SetActive(false);
     }
     private void OnDestroy() {
         PlayerManager.instance.inputs.Interact -= TriggerInteraction;
