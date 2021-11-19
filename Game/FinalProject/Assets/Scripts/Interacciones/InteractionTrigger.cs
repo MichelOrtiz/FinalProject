@@ -83,23 +83,29 @@ public class InteractionTrigger : MonoBehaviour
     }
     protected void NoticeMeSenpai(){
         if(noticeInteractions.Count == 0) {
-            signNotice?.SetActive(false);
+            if(signNotice != null)
+                signNotice.SetActive(false);
             return;
             }
         foreach(Interaction inter in noticeInteractions){
             if(inter.condition.isDone){
-                signNotice?.SetActive(true);
+                if(signNotice != null)
+                    signNotice.SetActive(true);
             }else{
-                signNotice?.SetActive(false);
+                if(signNotice != null)
+                    signNotice.SetActive(false);
             }
         }
     }
     protected void ShowSign(){
-        signInter?.SetActive(true);
-        signNotice?.SetActive(false);
+        if(signInter != null)
+            signInter.SetActive(true);
+        if(signNotice != null)
+            signNotice.SetActive(false);
     }
     protected void HideSign(){
-        signInter?.SetActive(false);
+        if(signInter != null)
+            signInter.SetActive(false);
     }
     private void OnDestroy() {
         PlayerManager.instance.inputs.Interact -= TriggerInteraction;
