@@ -17,6 +17,8 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public bool isConsumable = true;
     public bool isInCooldown = false;
+    public float cooldownTime = 3.5f;
+    [HideInInspector] public float currentCooldownTime;
     public virtual void Use(){
         if(!isConsumable)return;
         if(isInCooldown){
@@ -29,8 +31,15 @@ public class Item : ScriptableObject
         Inventory.instance.Remove(this);
     }
     public IEnumerator UndoCooldown(){
-        isInCooldown = true;
-        yield return new WaitForSeconds(15f);
-        isInCooldown = false;
+        if(cooldownTime > 0){
+            isInCooldown = true;
+            currentCooldownTime = 1f;
+            while(currentCooldownTime > 0){
+                currentCooldownTime -= Time.deltaTime / cooldownTime;
+                yield return null;   
+            }
+            isInCooldown = false;
+        }
+        
     }
 }

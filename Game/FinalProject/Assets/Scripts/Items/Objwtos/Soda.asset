@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8dd118349436fc40b262f871527d901, type: 3}
   m_Name: Soda
   m_EditorClassIdentifier: 
+  type: 0
   nombre: Soda chocoka
   descripcion: Bebida mineral endulzada, que se encuentra en las tiendas de los medufines,
     crecen en arrecifes
   icon: {fileID: -1957489238047808075, guid: 89f02c9dfcbdaa84db7fb6ec0dfccb02, type: 3}
   isConsumable: 1
+  isInCooldown: 0
+  cooldownTime: 12
+  currentCooldownTime: 0
   staminaGain: 15
   statusForPlayer: {fileID: 11400000, guid: eda598ead8eb0c749b33b7dfe4f4eb41, type: 2}
