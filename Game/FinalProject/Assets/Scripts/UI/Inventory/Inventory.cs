@@ -23,9 +23,13 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallBack;
     
     private void Start() {
+        items = new List<Item>();
+        LoadSaveData();
+    }
+    public void LoadSaveData(){
         if(SaveFilesManager.instance!= null && SaveFilesManager.instance.currentSaveSlot != null){
             capacidad = SaveFilesManager.instance.currentSaveSlot.capacidad;
-            AddMoney(SaveFilesManager.instance.currentSaveSlot.money);
+            SetMoney(SaveFilesManager.instance.currentSaveSlot.money);
             items.Clear();
             if(SaveFilesManager.instance.currentSaveSlot.inventory != null){
                 for(int i=0;i<SaveFilesManager.instance.currentSaveSlot.inventory.Length;i++){
@@ -38,8 +42,9 @@ public class Inventory : MonoBehaviour
             }
             
         }
+        HotbarUI.instance.UpdateHotbar0UI();
+        EquipmentManager.instance.UpdateUI();
     }
-    
     private void Update() 
     {
         //Cheats

@@ -7,7 +7,16 @@ public class PlayerManager : Entity
 {
     #region Main Parameters
     public float maxStamina = 100;
-    public float currentStaminaLimit = 100;
+    public float currentStaminaLimit {get => realCurrentStaminaLimit; 
+        set{
+            if(value < 10){
+                realCurrentStaminaLimit = 10;
+            }else{
+                realCurrentStaminaLimit = value;
+            }
+        }
+    }
+    private float realCurrentStaminaLimit = 100;
     public float maxOxygen = 100;
     public float walkingSpeed;
     public float currentSpeed;
@@ -74,15 +83,10 @@ public class PlayerManager : Entity
 
     new void Start()
     {
+        RestoreValuesForDead();
         base.Start();
         regenCooldown = 5;
         GunProjectile.instance.ObjectShot += gun_ObjectShot;
-        RestoreValuesForDead();
-        //Cargar cosas de la partida
-        if(SaveFilesManager.instance!=null && SaveFilesManager.instance.currentSaveSlot!=null){
-            SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
-            currentStaminaLimit = partida.staminaLimit;
-        }
     }
 
     new void Update()
@@ -312,6 +316,7 @@ public class PlayerManager : Entity
     #region Direct stamina changes
     public void TakeTirement(float damage)
     {
+        if(currentStamina > currentStaminaLimit) currentStamina = currentStaminaLimit;
         currentStamina -= damage * dmgMod;
         loosingStamina = true;
     }
@@ -389,9 +394,10 @@ public class PlayerManager : Entity
         Debug.Log("ImdeadTnx4EvEr");
         animationManager.ChangeAnimation("Nico_pass_out");
         SetEnabledPlayer(false);
+        isDeath = true;
         Instantiate(gameOverPrefab);
         /*if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
-            isDeath = true;
+            
             //SceneController.instance.SceneChanged += RestoreValuesForDead;
             string path = Application.dataPath + "/Partida" + SaveFilesManager.instance.currentSaveSlot.slotFile;
             SaveFile newPartida = SaveFilesManager.instance.LoadSaveFile(path);
@@ -495,9 +501,12 @@ public class PlayerManager : Entity
         isInSnow = false;  
         isInIce = false;
         isDeath = false;
+        DeathActive = true;
         animationManager.ChangeAnimation("Nico_idle");
         SetEnabledPlayer(true);
         ResetAnimations();
+        Inventory.instance.LoadSaveData();
+        Cofre.instance.LoadSaveData();
     }
     #endregion
 }

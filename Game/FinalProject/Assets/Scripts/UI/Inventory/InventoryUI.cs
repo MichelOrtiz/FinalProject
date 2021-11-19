@@ -22,7 +22,6 @@ public class InventoryUI : MonoBehaviour
     #region variables
         public InventorySlot focusedSlot {get;set;}
         public static InventoryUI instance;
-        Inventory inventory;
         List<InventorySlot> slots;
         [SerializeField] int slotsInPage;
         public int moveItemIndex;
@@ -38,8 +37,7 @@ public class InventoryUI : MonoBehaviour
     }
     void Start()
     {
-        inventory = Inventory.instance;
-        inventory.onItemChangedCallBack += UpdateUI;
+        Inventory.instance.onItemChangedCallBack += UpdateUI;
         invPage = 0;
         moveItemIndex = -1;
         menuDesplegable.SetActive(false);
@@ -50,9 +48,6 @@ public class InventoryUI : MonoBehaviour
             InventorySlot slot = obj.GetComponent<InventorySlot>();
             slots.Add(slot);
         }
-        UI.SetActive(true);
-        UpdateUI();
-        UI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -61,6 +56,7 @@ public class InventoryUI : MonoBehaviour
         if (PlayerManager.instance.inputs.enabled && PlayerManager.instance.inputs.OpenInventory)
         {
             focusedSlot = null;
+            UpdateUI();
             UI.SetActive(!UI.activeSelf);
             MapUI.instance.mapUI.SetActive(false);
             AbilityUI.instance.UI.SetActive(false);
@@ -69,7 +65,7 @@ public class InventoryUI : MonoBehaviour
     }
     public void NextPage(){
         invPage += slotsInPage;
-        if(invPage > inventory.capacidad + slotsInPage){
+        if(invPage > Inventory.instance.capacidad + slotsInPage){
             invPage -= slotsInPage;
             return;
         }
@@ -86,9 +82,9 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateUI(){
         for(int i=0; i < slotsInPage; i++){
-            if((i+invPage) < inventory.items.Count){
+            if((i+invPage) < Inventory.instance.items.Count){
                 InventorySlot slot = slots[i];
-                Item slotItem = inventory.items[i + invPage];
+                Item slotItem = Inventory.instance.items[i + invPage];
                 slot.SetItem(slotItem);
                 slot.SetIndex(i + invPage);
             }else{
@@ -100,7 +96,7 @@ public class InventoryUI : MonoBehaviour
         }
 
         //Next button
-        if(invPage + slotsInPage < inventory.items.Count){
+        if(invPage + slotsInPage < Inventory.instance.items.Count){
             nextButton.gameObject.SetActive(true);
         }
         else{

@@ -121,6 +121,7 @@ public class CofreUI : MonoBehaviour
         UpdateUI();
     }
     public void SetUIActive(bool x){
+        
         cofreUI.SetActive(x);
     }
 }
