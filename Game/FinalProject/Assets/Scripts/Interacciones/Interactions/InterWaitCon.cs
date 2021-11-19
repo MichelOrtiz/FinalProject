@@ -5,6 +5,7 @@ using UnityEngine;
 public class InterWaitCon : Interaction
 {
     [SerializeField] Interaction doThis;
+    [SerializeField] float delay = 0;
     public override void DoInteraction()
     {
         doThis.onEndInteraction -= this.onEndInteraction;
@@ -25,7 +26,7 @@ public class InterWaitCon : Interaction
             gameObject.GetComponent<InteractionTrigger>().updateForInteractions -= CheckIsDone;
             gameObject.GetComponent<InteractionTrigger>().delayMethods -= DelayThis;
             gameObject.GetComponent<InteractionTrigger>().delayMethods += DelayThis;
-            gameObject.GetComponent<InteractionTrigger>().Invoke("DoDelayMethods",2f);
+            gameObject.GetComponent<InteractionTrigger>().Invoke("DoDelayMethods",delay);
         }
     }
     public void DelayThis(){
