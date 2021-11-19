@@ -5,7 +5,6 @@ using UnityEngine;
 public class MasterAmongUs : MasterMinigame
 {   
     private List<PoweredWireStats> wireStats;
-    [SerializeField] GameObject text;
     
     void Start()
     {
@@ -16,7 +15,6 @@ public class MasterAmongUs : MasterMinigame
     {
         if (AllWiresConnected())
         {
-            text.SetActive(true);
             OnWinMinigame();
         }
     }

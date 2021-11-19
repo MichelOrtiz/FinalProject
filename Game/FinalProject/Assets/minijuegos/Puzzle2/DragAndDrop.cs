@@ -8,7 +8,6 @@ public class DragAndDrop : MasterMinigame
    public GameObject LastSelectedPiece;
    int OrderInLayer = 1;
    [SerializeField]int ganar=0;
-   [SerializeField] GameObject text;
     void Start()
     {
         SelectedPiece = null;
@@ -40,7 +39,6 @@ public class DragAndDrop : MasterMinigame
         }
         if (ganar==36)
         {
-            text.SetActive(true);
             Debug.Log("ganaste");
             OnWinMinigame();
         }
