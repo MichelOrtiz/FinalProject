@@ -26,6 +26,7 @@ public class OpenSesame : MonoBehaviour
         }
     }
     void OpenCofre(){
+        CofreUI.instance.UpdateUI();
         CofreUI.instance.cofreUI.SetActive(!CofreUI.instance.cofreUI.activeSelf);
     }
 }

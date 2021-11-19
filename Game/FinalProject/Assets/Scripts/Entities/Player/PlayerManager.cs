@@ -7,7 +7,16 @@ public class PlayerManager : Entity
 {
     #region Main Parameters
     public float maxStamina = 100;
-    public float currentStaminaLimit = 100;
+    public float currentStaminaLimit {get => realCurrentStaminaLimit; 
+        set{
+            if(value < 10){
+                realCurrentStaminaLimit = 10;
+            }else{
+                realCurrentStaminaLimit = value;
+            }
+        }
+    }
+    private float realCurrentStaminaLimit = 100;
     public float maxOxygen = 100;
     public float walkingSpeed;
     public float currentSpeed;
@@ -62,6 +71,7 @@ public class PlayerManager : Entity
     public PlayerInputs inputs;
     public State inmunityState;
     public AbilityManager abilityManager;
+    [SerializeField] GameObject gameOverPrefab;
     public static PlayerManager instance;
     new void Awake()
     {
@@ -73,15 +83,10 @@ public class PlayerManager : Entity
 
     new void Start()
     {
+        RestoreValuesForDead();
         base.Start();
         regenCooldown = 5;
         GunProjectile.instance.ObjectShot += gun_ObjectShot;
-        RestoreValuesForDead();
-        //Cargar cosas de la partida
-        if(SaveFilesManager.instance!=null && SaveFilesManager.instance.currentSaveSlot!=null){
-            SaveFile partida = SaveFilesManager.instance.currentSaveSlot;
-            currentStaminaLimit = partida.staminaLimit;
-        }
     }
 
     new void Update()
@@ -311,11 +316,14 @@ public class PlayerManager : Entity
     #region Direct stamina changes
     public void TakeTirement(float damage)
     {
+        if(isDeath) return;
+        if(currentStamina > currentStaminaLimit) currentStamina = currentStaminaLimit;
         currentStamina -= damage * dmgMod;
         loosingStamina = true;
     }
     public void RegenStamina(float regen)
     {
+        if(isDeath) return;
         if (currentStamina<currentStaminaLimit)
         {
         currentStamina += regen;
@@ -328,7 +336,7 @@ public class PlayerManager : Entity
 
     public void RegenStaminaDontLimit(float regen)
     {
-        
+        if(isDeath) return;
         if (currentStamina<maxStamina )
         {
             currentStamina += regen;
@@ -344,6 +352,7 @@ public class PlayerManager : Entity
     }
     void RegenOxygen(float regen)
     {
+        if(isDeath) return;
         if (currentOxygen<100)
         {
         currentOxygen += regen;
@@ -387,8 +396,11 @@ public class PlayerManager : Entity
         if(isDeath) return;
         Debug.Log("ImdeadTnx4EvEr");
         animationManager.ChangeAnimation("Nico_pass_out");
+        SetEnabledPlayer(false);
+        isDeath = true;
+        Instantiate(gameOverPrefab);
         /*if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
-            isDeath = true;
+            
             //SceneController.instance.SceneChanged += RestoreValuesForDead;
             string path = Application.dataPath + "/Partida" + SaveFilesManager.instance.currentSaveSlot.slotFile;
             SaveFile newPartida = SaveFilesManager.instance.LoadSaveFile(path);
@@ -492,7 +504,12 @@ public class PlayerManager : Entity
         isInSnow = false;  
         isInIce = false;
         isDeath = false;
+        DeathActive = true;
+        animationManager.ChangeAnimation("Nico_idle");
+        SetEnabledPlayer(true);
         ResetAnimations();
+        Inventory.instance.LoadSaveData();
+        Cofre.instance.LoadSaveData();
     }
     #endregion
 }

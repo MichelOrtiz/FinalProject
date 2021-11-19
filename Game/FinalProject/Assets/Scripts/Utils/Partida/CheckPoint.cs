@@ -28,6 +28,7 @@ public class CheckPoint : MonoBehaviour
     void Save(){
         Show();
         Invoke("Hide", 2f);
+        PlayerManager.instance.currentStaminaLimit = PlayerManager.instance.maxStamina;
         SaveFile progress = SaveFilesManager.instance.currentSaveSlot;
         progress.inventory = Inventory.instance.items.ToArray();
         progress.money = Inventory.instance.GetMoney();

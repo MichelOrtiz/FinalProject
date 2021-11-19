@@ -14,9 +14,10 @@ namespace FinalProject.Assets.Scripts.Scene
         {
             busy = false;
             PlayerManager.instance?.SetEnabledPlayer(false);
-            Destroy(PlayerManager.instance?.gameObject);
-            Destroy(Inventory.instance?.gameObject);
-            Destroy(CameraFollow.instance?.gameObject);
+            if(PlayerManager.instance != null)  Destroy(PlayerManager.instance?.gameObject);
+            if(Inventory.instance != null) Destroy(Inventory.instance?.gameObject);
+            if(CameraFollow.instance != null) Destroy(CameraFollow.instance?.gameObject);
+            
             if (hasTime)
             {
                 Invoke("EndCredits", creditsTime);

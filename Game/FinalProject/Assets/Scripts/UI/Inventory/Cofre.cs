@@ -16,6 +16,9 @@ public class Cofre : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallBack;
     private void Start() {
+        LoadSaveData();
+    }
+    public void LoadSaveData(){
         if(SaveFilesManager.instance?.currentSaveSlot != null){
             savedItems.Clear();
             if(SaveFilesManager.instance.currentSaveSlot.chestItems!=null){
@@ -27,7 +30,6 @@ public class Cofre : MonoBehaviour
                     }
                 }
             }
-            
         }
     }
     public void AddItem(Item newItem){

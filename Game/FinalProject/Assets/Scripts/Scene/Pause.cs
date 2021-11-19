@@ -40,12 +40,14 @@ public class Pause : MonoBehaviour
     }
     public static void PauseGame()
     {
+        FindObjectOfType<InteractionUI>()?.gameObject.SetActive(false);
         HandleActive(true);
     }
 
     public static void ResumeGame()
     {
         HandleActive(false);
+        FindObjectOfType<InteractionUI>()?.gameObject.SetActive(true);
         AbilityUI.instance.UpdateUI();
     }
 
