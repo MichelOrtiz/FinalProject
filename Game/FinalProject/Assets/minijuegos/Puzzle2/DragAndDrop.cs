@@ -57,7 +57,7 @@ public class DragAndDrop : MasterMinigame
             }
         }
     }
-    protected override void aboutToEnd(){
+    protected override void AboutToEnd(){
         piecesD.SetActive(false);
     }
 }

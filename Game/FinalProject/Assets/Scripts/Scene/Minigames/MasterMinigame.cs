@@ -26,8 +26,8 @@ public abstract class MasterMinigame : MonoBehaviour
 
     protected void Start() {
         float time = FindObjectOfType<Minigame>().time;
-        Invoke("aboutToEnd", time);
+        Invoke("AboutToEnd", time);
     }
 
-    protected virtual void aboutToEnd(){}
+    protected virtual void AboutToEnd(){}
 }
