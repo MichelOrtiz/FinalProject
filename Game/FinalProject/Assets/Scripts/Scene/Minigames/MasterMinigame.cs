@@ -23,4 +23,11 @@ public abstract class MasterMinigame : MonoBehaviour
         Debug.Log("loose");
 
     }
+
+    protected void Start() {
+        float time = FindObjectOfType<Minigame>().time;
+        Invoke("aboutToEnd", time);
+    }
+
+    protected virtual void aboutToEnd(){}
 }

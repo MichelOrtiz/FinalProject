@@ -26,7 +26,7 @@ public class TiroAlBlanco : MasterMinigame
     {
         if (ScoreController.score >= scoreToWin)
         {
-            spa.SetActive(false);
+            //spa.SetActive(false);
 
             OnWinMinigame();
         }

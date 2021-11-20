@@ -15,7 +15,7 @@ public class Minigame : MonoBehaviour{
 
 
     [SerializeField] private bool hasTime;
-    [SerializeField] private float time;
+    [SerializeField] public float time;
     
 
 
