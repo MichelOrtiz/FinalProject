@@ -6,10 +6,12 @@ public class DragAndDrop : MasterMinigame
 {
    public GameObject SelectedPiece;
    public GameObject LastSelectedPiece;
+   public GameObject piecesD;
    int OrderInLayer = 1;
    [SerializeField]int ganar=0;
-    void Start()
+    new void Start()
     {
+        base.Start();
         SelectedPiece = null;
         LastSelectedPiece = null;
         //WinMinigameHandler += CosasAlGanar;
@@ -54,5 +56,8 @@ public class DragAndDrop : MasterMinigame
                 OrderInLayer++;
             }
         }
+    }
+    protected override void aboutToEnd(){
+        piecesD.SetActive(false);
     }
 }
