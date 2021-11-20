@@ -43,7 +43,7 @@ public class MinigameUI : MonoBehaviour
         if (monos != null)
         {
             var monosArray = ScenesManagers.ArrayToList<MonoBehaviour>(monos);
-            monosArray.RemoveAll(m => (m is Image) || m is TMPro.TextMeshProUGUI || m is Text || m is Button);
+            monosArray.RemoveAll(m => (m is Image) || m is TMPro.TextMeshProUGUI || m is Text || m is Button || m is Mask);
             monosArray.ForEach(m => m.enabled = false);
         }
 

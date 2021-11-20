@@ -8,6 +8,7 @@ public class Minigame : MonoBehaviour{
     //public string name;
     [SerializeField] private bool isUI;
     [SerializeField] private GameObject minigameObject;
+    GameObject minigame;
     //public GameObject MinigameObject { get => minigameObject; }
     [SerializeField] private int sceneIndex;
     public bool MinigameCompleted;
@@ -44,7 +45,7 @@ public class Minigame : MonoBehaviour{
 
 
     public virtual void StartMinigame(){
-        GameObject minigame;
+        
         if(isUI)
         {
             minigame = MinigameUI.instance.RecieveMinigame(minigameObject);
@@ -93,7 +94,6 @@ public class Minigame : MonoBehaviour{
     public virtual void EndMinigame(bool isCompleted)
     {
         MinigameCompleted = isCompleted;
-
         if (isCompleted)
         {
             if (winPopUp != null)
@@ -106,6 +106,7 @@ public class Minigame : MonoBehaviour{
         {
             if (loosePopUp != null)
             {
+                
                 Instantiate(loosePopUp, winPopUp.transform.position, winPopUp.transform.rotation, this.transform);
             }
         }
