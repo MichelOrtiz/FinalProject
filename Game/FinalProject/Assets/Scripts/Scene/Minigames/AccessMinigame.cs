@@ -17,6 +17,9 @@ public class AccessMinigame : MonoBehaviour
     public bool InCooldown { get => curCooldownTime > 0; }
 
     private bool minigameInstantiated;
+
+    [SerializeField] private GameObject signInter;
+
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,8 @@ public class AccessMinigame : MonoBehaviour
 
         if (!available)
         {
+            if (signInter != null) signInter.SetActive(false);
+
             if (curCooldownTime > cooldownTime)
             {
                 available = true;
@@ -46,7 +51,18 @@ public class AccessMinigame : MonoBehaviour
                 curCooldownTime += Time.deltaTime;
             }
         }
-        //else 
+        else
+        {
+            float distance = Vector2.Distance(PlayerManager.instance.transform.position, transform.position);
+            if(!minigameInstantiated && distance<radius)
+            {
+                if (signInter != null) signInter.SetActive(true);
+            }
+            else
+            {
+                if (signInter != null) signInter.SetActive(false);
+            }
+        }
         
     }
 

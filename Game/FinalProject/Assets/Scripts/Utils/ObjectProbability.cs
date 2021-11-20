@@ -11,7 +11,7 @@ public class ObjectProbability<T>
     public float Probability { get => probability; }
 
 
-    readonly float minProbability = 0.0001f;
+    //readonly float minProbability = 0.0001f;
 
     public ObjectProbability(T tObject, float probability)
     {
