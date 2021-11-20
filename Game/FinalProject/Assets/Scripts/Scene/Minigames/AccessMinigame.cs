@@ -19,6 +19,7 @@ public class AccessMinigame : MonoBehaviour
     private bool minigameInstantiated;
 
     [SerializeField] private GameObject signInter;
+    [SerializeField] private GameObject signCooldown;
 
     
     // Start is called before the first frame update
@@ -26,6 +27,7 @@ public class AccessMinigame : MonoBehaviour
     {
         available = true;
         PlayerManager.instance.inputs.Interact += Inputs_interact ;
+        signCooldown.SetActive(false);
     }
     private void OnDestroy() {
         PlayerManager.instance.inputs.Interact -= Inputs_interact ;
@@ -51,17 +53,24 @@ public class AccessMinigame : MonoBehaviour
                 curCooldownTime += Time.deltaTime;
             }
         }
+        float distance = Vector2.Distance(PlayerManager.instance.transform.position, transform.position);
+        if(!minigameInstantiated && distance<radius)
+        {
+            if (signInter != null && available)
+            {
+                signInter.SetActive(true);
+                signCooldown.SetActive(false);
+            }
+            else if (signCooldown != null && !available)
+            {
+                signInter.SetActive(false);
+                signCooldown.SetActive(true);
+            }
+        }
         else
         {
-            float distance = Vector2.Distance(PlayerManager.instance.transform.position, transform.position);
-            if(!minigameInstantiated && distance<radius)
-            {
-                if (signInter != null) signInter.SetActive(true);
-            }
-            else
-            {
-                if (signInter != null) signInter.SetActive(false);
-            }
+            if (signInter != null) signInter.SetActive(false);
+            if (signCooldown != null) signCooldown.SetActive(false);
         }
         
     }
