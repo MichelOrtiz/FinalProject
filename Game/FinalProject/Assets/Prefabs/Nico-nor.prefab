@@ -4963,7 +4963,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5112,7 +5112,7 @@ GameObject:
   - component: {fileID: 7786235240877178925}
   - component: {fileID: 3776072234071749828}
   - component: {fileID: 6346527060564971197}
-  - component: {fileID: 7225441922294991801}
+  - component: {fileID: 3718697398300011019}
   m_Layer: 0
   m_Name: CollisionHandler
   m_TagString: Player
@@ -5164,27 +5164,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastColliderTag: 
   contacts: []
---- !u!50 &7225441922294991801
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!61 &3718697398300011019
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607805279977660824}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.011497498, y: -0.05065775}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.14891052, y: 0.8986845}
+  m_EdgeRadius: 0
 --- !u!1 &2164668729997087961
 GameObject:
   m_ObjectHideFlags: 0
@@ -5466,7 +5471,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5588,7 +5593,6 @@ MonoBehaviour:
   physics: {fileID: 5179934175459153183}
   emotePos: {fileID: 3515353368617961078}
   maxStamina: 100
-  currentStaminaLimit: 100
   maxOxygen: 100
   walkingSpeed: 7
   currentSpeed: 0
@@ -5604,7 +5608,7 @@ MonoBehaviour:
   isDashingV: 0
   isDoubleJumping: 0
   isDodging: 0
-  DeathActive: 1
+  DeathActive: 0
   isDeath: 0
   isInvisible: 0
   camara: {fileID: 2419702810618214030, guid: 6ad7a8c7699cabd4bb73b8ce53a079dd, type: 3}
@@ -6292,7 +6296,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6439,7 +6443,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
