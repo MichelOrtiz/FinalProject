@@ -5663,6 +5663,8 @@ MonoBehaviour:
   ItemHotbarUp: 0000000000
   ItemHotbarDown: 0000000000
   EquipmentHotbar: 0000000000
+  PressedObj1: 0
+  PressedObj2: 0
   Pause: 0
   Map: 0
 --- !u!114 &5946864857722621958
@@ -5834,8 +5836,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: -6658420645580136407, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 1
-  description: Como es que no podia correr antes de esto... Bueno, por lo menos no
-    necesito un calzado especial
+  description: "\xBFC\xF3mo que no podias correr antes? Bueno, por lo menos no necesitas
+    un calzado especial."
   cooldownTime: 0.0625
   staminaCost: 0.625
   duration: 0
@@ -5861,8 +5863,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: -402140561645567826, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 1
-  description: Estas feliz? Ya puedes huir de tus problemas, con presionar  dos veces
-    la tecla hacia la que te quieres desplazar, lo lograras
+  description: Ya puedes huir de tus problemas presionando dos veces una tecla de
+    desplazamiento horizontal.
   cooldownTime: 2
   staminaCost: 10
   duration: 0.25
@@ -5887,8 +5889,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: -1931381378218110234, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 1
-  description: Quien nesecita una mochila cohete, con presionar  dos veces la tecla
-    hacia la que te quieres desplazar
+  description: "\xBFQui\xE9n nesecita una mochila cohete?  S\xF3lo tienes que presionar
+    dos veces una tecla de desplazamiento vertical."
   cooldownTime: 2
   staminaCost: 30
   duration: 0.25
@@ -5913,8 +5915,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: 1666357324617001563, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 1
-  description: Por alguna razon, esto no puede faltar en una aventura, es justo y
-    necesario, puedo realizar otro salto, a pesar de no estar en el suelo
+  description: Esto no puede faltar en una aventura, es justo y necesario. Puedes
+    realizar un salto en el aire.
   cooldownTime: 0
   staminaCost: 0
   duration: 0
@@ -5939,7 +5941,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: 541135984708468706, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 0
-  description: Al infinito y mas alla... Cierto, todo el mapa esta cerrado...
+  description: "Al infinito y m\xE1s alla... Cierto, el mapa est\xE1 cerrado..."
   cooldownTime: 0
   staminaCost: 0
   duration: 0
@@ -5961,8 +5963,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: -6173480338551546165, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 1
-  description: Ahora nadie te detendra, que increibles cosas podras hacer con esta
-    gran habilidad. Estoy seguro de haber visto una caja pesada en algun lugar
+  description: "Ahora nadie te detendr\xE1, podr\xE1s hacer cosas incre\xEDbles podras
+    hacer con esta gran habilidad. Estoy seguro de haber visto una caja pesada en
+    alg\xFAn lugar..."
   cooldownTime: 0
   staminaCost: 0
   duration: 0
@@ -5985,8 +5988,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: 4441501141237884574, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 0
-  description: SpiderNiko, SpiderNiko, al mal ataca, con sus comestibles. Perfecto,
-    ahora solo necesito encontrar una pared para trepar
+  description: "\xBFSpiderNiko? Perfecto, ahora s\xF3lo necesitas encontrar una pared
+    para trepar mientras mantienes presionada la tecla."
   cooldownTime: 0.0625
   staminaCost: 1
   duration: 0
@@ -6011,7 +6014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: 7332713743544363132, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 0
-  description: Que le pasa a mi cuerpo!!!, bueno, de esta forma nadie me vera
+  description: "Ahora nadie ning\xFAn enemigo te ver\xE1."
   cooldownTime: 10
   staminaCost: 15
   duration: 5
@@ -6035,7 +6038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: 5832665023601223022, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 0
-  description: "De donde saque este escudo, bueno, al menos no recibire mas da\xF1o"
+  description: "Un escudo que te proteger\xE1 de todo tipo de ataque."
   cooldownTime: 5
   staminaCost: 30
   duration: 3
@@ -6060,7 +6063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: 7997268501206324300, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 0
-  description: Soplare y soplare y a los enemigos alejare
+  description: Puedes producir un viento que empuja a los enemigos que toca.
   cooldownTime: 5
   staminaCost: 20
   duration: 0
@@ -6087,7 +6090,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: -6329303241003789757, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 1
-  description: Sabia que no dormir por las noches serviria de algo
+  description: "No dormir por las noches sirve de algo. Visi\xF3n aumentada en la
+    oscuridad."
   cooldownTime: 0
   staminaCost: 0
   duration: 0
@@ -6111,8 +6115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: -3051836544754727814, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 1
-  description: LEVEL UP! Mi habilidad en los videojuegos a incremento en un 50%.
-    Minijueegos mas sencillos
+  description: "LEVEL UP! Tu habilidad en los videojuegos increment\xF3 en un 50%.
+    Minijuegos con mayor duraci\xF3n, Batalla Naval m\xE1s sencillo."
   cooldownTime: 0
   staminaCost: 0
   duration: 0
@@ -6135,7 +6139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: 4221030641889981592, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 1
-  description: Puedo atravesar personas con mis dashes
+  description: Los dashes te vuelven invulnerable a enemigos y proyectiles.
   cooldownTime: 0
   staminaCost: 0
   duration: 0
@@ -6157,8 +6161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: 131023910653005607, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 1
-  description: Ese curso de religion si sirvio de algo. Lo que no me mata me hace
-    mas fuerte, recibir tantos impactos de proyectiles no es tan malo como antes
+  description: "Ese curso de religi\xF3n sirvio de algo. Sobrevivir a 4 impactos
+    de proyectil aumenta en 20 tu estamina."
   cooldownTime: 0
   staminaCost: 0
   duration: 0
@@ -6166,6 +6170,7 @@ MonoBehaviour:
   abilityName: 8
   isUnlocked: 0
   beenUsed: 0
+  hitsToActivate: 4
   staminaIncrease: 20
 --- !u!114 &5857950921813008133
 MonoBehaviour:
@@ -6181,8 +6186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconAbility: {fileID: -8528069338324925889, guid: dcdd3936069ff5c409e1a6726757a054, type: 3}
   isPasive: 1
-  description: Siempre estoy un paso adeltante, ahora podre predecir a donde iran
-    los proyectiles
+  description: "Siempre un paso adeltante, puedes predecir la direcci\xF3n de los
+    proyectiles."
   cooldownTime: 0
   staminaCost: 0
   duration: 0

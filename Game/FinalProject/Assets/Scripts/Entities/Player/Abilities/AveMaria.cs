@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AveMaria : Ability
 {
-    private int AvesMarias;
+    [SerializeField] private byte hitsToActivate;
+    private byte AvesMarias;
     [SerializeField] private float staminaIncrease;
     void collisionHandler_EnterContact(GameObject contact){
         if (!isUnlocked) return;
@@ -12,7 +13,7 @@ public class AveMaria : Ability
         if (contact.gameObject.tag == "Projectile")
         {
             AvesMarias++;
-            if (AvesMarias == 4)
+            if (AvesMarias >= hitsToActivate)
             {
                 Debug.Log("Stamina increased by " + staminaIncrease);
                 player.RegenStamina(staminaIncrease);
