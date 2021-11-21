@@ -35,7 +35,7 @@ public class HotbarSlot : ItemSlot
         inventoryUI.UpdateUI();
     }
     private void Update() {
-        if(item == null) return;
+        if(item == null || cooldownBar == null) return;
         if(item.isInCooldown){
             if(item.currentCooldownTime <= cooldownBar.maxValue && item.currentCooldownTime >= cooldownBar.minValue)
                 cooldownBar.value = item.currentCooldownTime;
