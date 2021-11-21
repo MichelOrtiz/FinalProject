@@ -8,6 +8,7 @@ public class Switch : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private List<GameObject> doorsAttached;
     public static List<Door> AllDoors { get; set; }
+    [SerializeField] private GameObject interSign;
     private PlayerManager player;
 
     #region Time
@@ -38,6 +39,7 @@ public class Switch : MonoBehaviour
         float distanceFromPlayer = Vector2.Distance(player.GetPosition(), transform.position);
         if (distanceFromPlayer <= radius)
         {
+            interSign?.SetActive(true);
             if (Input.GetKeyDown(player.inputs.controlBinds["MENUINTERACTION"]))
             {
                 activado = !activado;
@@ -56,6 +58,10 @@ public class Switch : MonoBehaviour
                 // Events :0
                 OnSwitchActivated(this);
             }
+        }
+        else
+        {
+            interSign?.SetActive(false);
         }
         if (activado && hasTime)
         {
