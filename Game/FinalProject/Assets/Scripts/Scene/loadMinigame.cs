@@ -7,7 +7,10 @@ public class loadMinigame : loadlevel
     bool isAvailable;
     [SerializeField] float cooldownTime;
     float curretCooldownTime;
+    [SerializeField] private GameObject signCooldown;
     protected override void Start(){
+        signCooldown?.SetActive(false);
+        interSign?.SetActive(false);
         PlayerManager.instance.physics.ResetAll();
         isAvailable = true;
             if(PlayerManager.instance.isDeath){
@@ -40,6 +43,43 @@ public class loadMinigame : loadlevel
             }
         }
     }
+
+    protected new void OnTriggerEnter2D(Collider2D other)
+    {
+        if (isAvailable)
+        {
+            base.OnTriggerEnter2D(other);
+            signCooldown?.SetActive(false);
+        }
+        else if (other.gameObject.tag == "Player")
+        {
+            signCooldown?.SetActive(true);
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (isAvailable)
+        {
+            base.OnTriggerEnter2D(other);
+            signCooldown?.SetActive(false);
+        }
+        else if (other.gameObject.tag == "Player")
+        {
+            signCooldown?.SetActive(true);
+        }
+    }
+
+    protected new void OnTriggerExit2D(Collider2D other)
+    {
+        base.OnTriggerExit2D(other);
+        if (other.gameObject.tag == "Player")
+        {
+            signCooldown?.SetActive(false);
+        }
+    }
+
+
     protected override void cargarEscena()
     {
         if(!isAvailable)return;

@@ -13,14 +13,8 @@ public class FrutaMiniJuego : MonoBehaviour
     float Tiempoact;
     Rigidbody2D Body;
     private int score;
-    private bool fin = false;
     void Start()
     {
-        var miniMaps = GameObject.FindGameObjectsWithTag("MiniMap");
-        foreach (var x in miniMaps)
-        {
-            x.SetActive(false);
-        }
         Body = GetComponent<Rigidbody2D>();
     }
     void Update()
@@ -35,21 +29,24 @@ public class FrutaMiniJuego : MonoBehaviour
         }
 
     }
-    void OnTriggerEnter2D(Collider2D target){
+    void OnTriggerEnter2D(Collider2D target)
+    {
         if (target.tag == "Ground")
         {
             Destroy(gameObject);
         }
         if (target.tag == "Player")
         {
+            Destroy(gameObject);
+            if (CatchTheFruitManager.instance.minigameEnded) return;
+            
             if (tipo == Tipo.Fruta)
             {
-                fin = true;
-                if (fin)SceneController.instance.LoadScene(11);
+                CatchTheFruitManager.instance.EndMinigame();
                 //SceneManager.LoadScene(SceneController.instance.prevScene);
-            }else
+            }
+            else
             {
-                Destroy(gameObject);
                 Inventory.instance.AddMoney(1);
             }
         }

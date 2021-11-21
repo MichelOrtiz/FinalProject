@@ -32,7 +32,7 @@ public class MinigameUI : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        PlayerManager.instance.SetEnabledPlayer(false);
+        //PlayerManager.instance.SetEnabledPlayer(false);
     }
 
 

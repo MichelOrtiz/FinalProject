@@ -27,7 +27,7 @@ public class AccessMinigame : MonoBehaviour
     {
         available = true;
         PlayerManager.instance.inputs.Interact += Inputs_interact ;
-        signCooldown.SetActive(false);
+        signCooldown?.SetActive(false);
     }
     private void OnDestroy() {
         PlayerManager.instance.inputs.Interact -= Inputs_interact ;
