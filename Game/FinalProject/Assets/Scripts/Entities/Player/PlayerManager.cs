@@ -395,6 +395,8 @@ public class PlayerManager : Entity
     {
         if(isDeath) return;
         Debug.Log("ImdeadTnx4EvEr");
+        currentGravity = defaultGravity;
+        rigidbody2d.gravityScale = currentGravity;
         animationManager.ChangeAnimation("Nico_pass_out");
         SetEnabledPlayer(false);
         isDeath = true;
@@ -455,7 +457,7 @@ public class PlayerManager : Entity
             }
             else
             {
-                if (isJumping)
+                if (isJumping && !isFlying)
                 {
                     animationManager.ChangeAnimation("Nico_jump");
                 }

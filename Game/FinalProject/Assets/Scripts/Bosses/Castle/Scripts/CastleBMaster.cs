@@ -145,6 +145,8 @@ public class CastleBMaster : BossFight
                 partida.WorldStates.Add(worldState);
             }
 
+            endMessageTrigger.TriggerPopUp(true);
+
             loadlevel?.SetActive(true);
             BattleEnded?.Invoke();
         }

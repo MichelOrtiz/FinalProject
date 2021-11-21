@@ -113558,8 +113558,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popUp:
-    Title: Title
-    Message: Message text
+    Title: Tu viaje ha terminado
+    Message: Rey derrotado
   popUpUI: {fileID: 942486416}
 --- !u!1001 &942486415
 PrefabInstance:
@@ -113568,6 +113568,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5921347078260631598, guid: bde3f9f8345affb44b70f2000e167a63, type: 3}
+      propertyPath: m_text
+      value: Tu viaje ha llegado a su fin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921347078400820404, guid: bde3f9f8345affb44b70f2000e167a63, type: 3}
+      propertyPath: m_text
+      value: Rey derrotado
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921347078400820404, guid: bde3f9f8345affb44b70f2000e167a63, type: 3}
+      propertyPath: m_fontSize
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 5921347079415663917, guid: bde3f9f8345affb44b70f2000e167a63, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -113616,6 +113628,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EndBossPopUpUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5921347079923865938, guid: bde3f9f8345affb44b70f2000e167a63, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bde3f9f8345affb44b70f2000e167a63, type: 3}
 --- !u!114 &942486416 stripped
@@ -113636,6 +113652,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 848050179130662634, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 848050179412016181, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 848050180277934930, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 848050180478416269, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 848050180524240584, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2002454112192658917, guid: fd4ac291bd715d64abecf2a190f8088f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
