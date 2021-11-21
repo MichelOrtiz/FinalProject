@@ -54,6 +54,11 @@ namespace FinalProject.Assets.Scripts.Bosses.Meduf.Scripts
             inputField.ActivateInputField();
         }
 
+        public void button_Click()
+        {
+            input_Submit(inputField.text);
+        }
+
         public void input_Submit(string text)
         {
             if (text.Equals(word))

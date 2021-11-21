@@ -66,7 +66,7 @@ public class EquipmentManager : MonoBehaviour
         }
 
         //Activar cosas de la hotbar Q - R
-        if(Input.GetKeyDown(KeyCode.Q)){
+        if(PlayerManager.instance.inputs.PressedObj1){
             if(equipmentQ.GetItem() != null){
                 equipmentQ.GetItem().Use();
                 if(!Inventory.instance.items.Contains(equipmentQ.GetItem())){
@@ -74,7 +74,7 @@ public class EquipmentManager : MonoBehaviour
                 }
             }
         }
-        if(Input.GetKeyDown(KeyCode.R)){
+        if(PlayerManager.instance.inputs.PressedObj2){
             if(equipmentR.GetItem() != null){
                 equipmentR.GetItem().Use();
                 if(!Inventory.instance.items.Contains(equipmentR.GetItem())){

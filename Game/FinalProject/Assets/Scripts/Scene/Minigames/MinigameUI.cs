@@ -32,7 +32,10 @@ public class MinigameUI : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        PlayerManager.instance.SetEnabledPlayer(false);
     }
+
+
 
     public void EndMinigame(float waitTime){
         Inventory.instance.AddMoney(rewardMoney);
@@ -46,7 +49,6 @@ public class MinigameUI : MonoBehaviour
             monosArray.RemoveAll(m => (m is Image) || m is TMPro.TextMeshProUGUI || m is Text || m is Button || m is Mask);
             monosArray.ForEach(m => m.enabled = false);
         }
-
         //Invoke("DestroyMinigame", waitTime);
     }
 

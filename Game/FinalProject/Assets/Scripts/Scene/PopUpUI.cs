@@ -14,6 +14,8 @@ public class PopUpUI : MonoBehaviour
    //public static PopUpUI Instance { get; private set; }
     public Action closedPopUp;
 
+    public bool showing;
+
     void Awake()
     {
         /*if (Instance != null)
@@ -45,6 +47,7 @@ public class PopUpUI : MonoBehaviour
         if (pauseGame)
         {
             Pause.PauseGame();
+            Pause.blocked = true;
         }
         
         title.text = popUp.Title;
@@ -52,12 +55,17 @@ public class PopUpUI : MonoBehaviour
         popUp = new PopUp();
 
         canvas.SetActive(true);
+        showing = true;
     }
 
     public void Hide()
     {
         canvas.SetActive(false);
         Pause.ResumeGame();
+
+        showing = false;
+        Pause.blocked = false;
+
         closedPopUp?.Invoke();
     }
 }

@@ -31,7 +31,7 @@ public class MapUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(PlayerManager.instance.inputs.Map) && !FindObjectOfType<Pause>().panel.activeSelf)
+        if (PlayerManager.instance.inputs.OpenMap && !FindObjectOfType<Pause>().panel.activeSelf)
         {
             mapUI.SetActive(!mapUI.activeSelf);
             InventoryUI.instance.UI.SetActive(false);

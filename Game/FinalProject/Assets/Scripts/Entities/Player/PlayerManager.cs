@@ -420,6 +420,10 @@ public class PlayerManager : Entity
                 inputs.movementY = 0;
             }
         }
+        else
+        {
+            Debug.Log("trying to set " + value + " inputs. Can not do that, they're false for some reason. Called by " + (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name);
+        }
     }
 
 

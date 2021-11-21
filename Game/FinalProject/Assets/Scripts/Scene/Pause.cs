@@ -9,6 +9,9 @@ public class Pause : MonoBehaviour
     public GameObject panel;
     public SettingsMenu settingsMenu;
     static PlayerInputs inputs;
+
+    public static bool blocked;
+
     void Start()
     {
         inputs = PlayerManager.instance.gameObject.GetComponent<PlayerInputs>();
@@ -28,7 +31,7 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(inputs.Pause) && !MinigameUI.instance.InMinigame)
+        if(Input.GetKeyDown(inputs.Pause) && !MinigameUI.instance.InMinigame && !blocked)
         {
             FindObjectOfType<MapUI>().mapUI.SetActive(false);
             //active = !active;

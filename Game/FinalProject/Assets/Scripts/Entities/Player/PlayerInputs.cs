@@ -19,6 +19,11 @@ public class PlayerInputs : MonoBehaviour
     public bool[] ItemHotbarUp = new bool[5];
     public bool[] ItemHotbarDown = new bool[5];
     public bool[] EquipmentHotbar = new bool[5];
+
+
+    public bool PressedObj1;
+    public bool PressedObj2;
+
     public List<KeyCode> skillHotkeys {
         get{
             List<KeyCode> keys = new List<KeyCode>();
@@ -120,6 +125,10 @@ public class PlayerInputs : MonoBehaviour
         OpenMap=Input.GetKeyDown(controlBinds["MENUMAP"]);
         OpenAbilites = Input.GetKeyDown(controlBinds["MENUHABILIDAD"]);
         
+
+
+        PressedObj1 = Input.GetKeyDown(controlBinds["OBJ1"]);
+        PressedObj2 = Input.GetKeyDown(controlBinds["OBJ2"]);
 
         HotbarInputs();
         
