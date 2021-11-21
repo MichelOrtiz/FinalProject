@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class BattleshipManager : MasterMinigame
 {
     [Header("HUD")]
-    [SerializeField] private GameObject endPopUp;
     public Text topText;
 
     [SerializeField] private Text missilesText;
@@ -58,16 +57,23 @@ public class BattleshipManager : MasterMinigame
     }
     [SerializeField] private MissileScript currentMissile;
     byte index;
+
+    [SerializeField] private List<MissileScript> extraSpecialMissiles;
+    [SerializeField] private List<MissileScript> extraNormalMissiles;
         
-    void Awake()
-    {
-        playerMissiles = (byte)missiles.Count;
-        missilesText.text = PlayerMissiles.ToString();
-    }
 
     void Start()
     {
         enemyShips = enemyScript.PlaceEnemyShips();
+
+        if (PlayerManager.instance.abilityManager.IsUnlocked(Ability.Abilities.Overlord))
+        {
+            missiles.InsertRange(0, extraSpecialMissiles);
+            missiles.AddRange(extraNormalMissiles);
+        }
+
+        playerMissiles = (byte)missiles.Count;
+        missilesText.text = PlayerMissiles.ToString();
         currentMissile = missiles[index];
         enemyShipsText.text = enemyShipCount.ToString();
         UpdateMissileInfo();
