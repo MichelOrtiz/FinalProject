@@ -39,7 +39,7 @@ public class Switch : MonoBehaviour
         float distanceFromPlayer = Vector2.Distance(player.GetPosition(), transform.position);
         if (distanceFromPlayer <= radius)
         {
-            interSign?.SetActive(true);
+            if (interSign != null) interSign?.SetActive(true);
             if (Input.GetKeyDown(player.inputs.controlBinds["MENUINTERACTION"]))
             {
                 activado = !activado;
@@ -61,7 +61,7 @@ public class Switch : MonoBehaviour
         }
         else
         {
-            interSign?.SetActive(false);
+            if (interSign != null) interSign?.SetActive(false);
         }
         if (activado && hasTime)
         {

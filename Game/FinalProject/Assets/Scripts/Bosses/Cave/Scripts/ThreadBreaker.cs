@@ -8,6 +8,8 @@ public class ThreadBreaker : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private List<LineRenderer> linesAttached;
 
+    [SerializeField] private GameObject signInter;
+
     private PlayerManager player;
     private SpriteRenderer spriteRenderer;
 
@@ -26,6 +28,7 @@ public class ThreadBreaker : MonoBehaviour
         player = PlayerManager.instance;
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = idleSprite;
+        if (signInter != null) signInter.SetActive(false);
     }
 
     void Update()
@@ -35,6 +38,7 @@ public class ThreadBreaker : MonoBehaviour
             float distance = Vector2.Distance(player.GetPosition(), transform.position);
             if (distance <= radius)
             {
+                if (signInter != null) signInter.SetActive(true);
                 if (Input.GetKeyDown(player.inputs.controlBinds["MENUINTERACTION"]))
                 {
                     isActivated = true;
@@ -42,6 +46,14 @@ public class ThreadBreaker : MonoBehaviour
                     DestroyLines();
                 }
             }
+            else
+            {
+                if (signInter != null) signInter.SetActive(false);
+            }
+        }
+        else
+        {
+            if (signInter != null) signInter.SetActive(false);
         }
     }
 
