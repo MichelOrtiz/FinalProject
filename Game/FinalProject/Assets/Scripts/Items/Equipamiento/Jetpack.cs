@@ -19,6 +19,10 @@ public class Jetpack : Equipment
     }
     public override void EndEquip(){
         EquipmentManager.instance.equipmentRutines -= Rutina;
+        if(reference != null){
+            reference.cooldownBar.value = 0;
+            reference = null;
+        }
     }
     public void RestablecerUsos()
     {
@@ -45,5 +49,9 @@ public class Jetpack : Equipment
         body.velocity = new Vector2(0f,0f);
         body.AddForce(empuje * speed,ForceMode2D.Impulse);
         PlayerManager.instance.isJumping = true;
+        if(reference != null){
+            Debug.Log(uses + "/" + maxUses);
+            reference.cooldownBar.value = 1f - (uses/maxUses);
+        }
     }
 }

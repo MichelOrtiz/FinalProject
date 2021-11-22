@@ -42,4 +42,8 @@ public class Item : ScriptableObject
         }
         
     }
+    public void ResetValues(){
+        isInCooldown = false;
+        currentCooldownTime = 0;
+    }
 }

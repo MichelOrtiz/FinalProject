@@ -76,6 +76,7 @@ public class SceneController : MonoBehaviour
         loadingScreen.SetActive(false);
         //PlayerManager.instance?.SetEnabledPlayer(true);
         sceneTitle = FindObjectOfType<SceneTitle>();
+        if(PlayerManager.instance != null)
         PlayerManager.instance.currentGravity = PlayerManager.defaultGravity;
         //mainCanvas.SetActive(true);
         if(FindObjectOfType<CameraFollow>() != null)

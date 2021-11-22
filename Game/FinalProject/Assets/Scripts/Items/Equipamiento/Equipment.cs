@@ -10,6 +10,7 @@ public abstract class Equipment : Item
     private float cooldown;
     private float currentCooldown = 0;
     protected PlayerManager player;
+    public HotbarSlotEq reference;
     public override void Use()
     {
         if(isPasive){

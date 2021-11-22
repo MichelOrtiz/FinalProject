@@ -8,7 +8,7 @@ public class HotbarSlot : ItemSlot
 {
     private HotbarUI hotbarUI;
     protected InventoryUI inventoryUI;
-    [SerializeField] Slider cooldownBar;
+    public Slider cooldownBar;
     private void Start() {
         inventoryUI = InventoryUI.instance;
         hotbarUI = HotbarUI.instance;

@@ -36,6 +36,7 @@ public class Inventory : MonoBehaviour
                     if(SaveFilesManager.instance.currentSaveSlot.inventory[i] == null){
                         Debug.Log("Corrupted data");
                     }else{
+                        SaveFilesManager.instance.currentSaveSlot.inventory[i].ResetValues();
                         Add(SaveFilesManager.instance.currentSaveSlot.inventory[i]);
                     }
                 }

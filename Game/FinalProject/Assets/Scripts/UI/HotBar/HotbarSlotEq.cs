@@ -6,6 +6,7 @@ using System;
 
 public class HotbarSlotEq : HotbarSlot
 {
+    [SerializeField] GameObject equipedSign;
     public override void OnButtonPress()
     {
         if(inventoryUI.moveItemIndex == -1){
@@ -23,7 +24,18 @@ public class HotbarSlotEq : HotbarSlot
             return;
         }
         SetItem(newAssign);
+        Equipment equipment = (Equipment) newAssign;
+        equipment.reference = this;
         inventoryUI.moveItemIndex = -1;
         inventoryUI.UpdateUI();
+    }
+    private void Update() {
+        if(item == null) return;
+        Equipment equipment = (Equipment) item;
+        if(EquipmentManager.instance.currentEquipment[(int)equipment.equipmentSlot] == equipment){
+            equipedSign.SetActive(true);
+        }else{
+            equipedSign.SetActive(false);
+        }
     }
 }

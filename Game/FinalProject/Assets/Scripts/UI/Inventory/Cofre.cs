@@ -26,6 +26,7 @@ public class Cofre : MonoBehaviour
                     if(SaveFilesManager.instance.currentSaveSlot.chestItems[i] == null){
                         Debug.Log("Corrupted data");
                     }else{
+                        SaveFilesManager.instance.currentSaveSlot.chestItems[i].ResetValues();
                         AddItem(SaveFilesManager.instance.currentSaveSlot.chestItems[i]);
                     }
                 }
