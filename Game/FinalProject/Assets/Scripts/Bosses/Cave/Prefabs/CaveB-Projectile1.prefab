@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 76626ee5e3d427340bc302ecf2a21c89, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,9 +99,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.03, y: -0.03}
   serializedVersion: 2
-  m_Radius: 0.08585203
+  m_Radius: 0.3
 --- !u!50 &-927070410017260167
 Rigidbody2D:
   serializedVersion: 4
@@ -141,7 +141,7 @@ MonoBehaviour:
     m_Bits: 256
   warning: {fileID: 1437622234418612008, guid: e86294fec41aee049b9e3c494465b7c8, type: 3}
   impactEffect: {fileID: 0}
-  targetWarningAvailable: 0
+  targetWarningAvailable: 1
   independentAttackEnabled: 0
   collisionHandler: {fileID: 0}
   speedMultiplier: 3
@@ -160,6 +160,8 @@ MonoBehaviour:
   timeToIncrease: 0
   sizeByTimeMultiplier: 0
   isOnCollider: 0
+  rotateTowardsPlayer: 0
+  rotateTowardsDir: 0
 --- !u!1 &8548390628188919678
 GameObject:
   m_ObjectHideFlags: 0
