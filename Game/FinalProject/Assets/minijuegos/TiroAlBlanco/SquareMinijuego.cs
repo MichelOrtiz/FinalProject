@@ -23,7 +23,7 @@ public class SquareMinijuego : MonoBehaviour
     void Update()
     {
         transform.localPosition += (Vector3)rotation * speed * Time.unscaledDeltaTime;
-        if (transform.localPosition.x<-351 || transform.localPosition.x>351 || transform.localPosition.y<-201 || transform.localPosition.y>201)
+        if (transform.localPosition.x<-351 || transform.localPosition.x>351 || transform.localPosition.y<-201 || transform.localPosition.y>191)
         {
             Destroy(gameObject);
         }
