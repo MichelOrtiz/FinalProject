@@ -11,7 +11,9 @@ public class StatesManager : MonoBehaviour
     public delegate void StatusCheck();
     public StatusCheck statusCheck;   
     private void Start() {
-        hostEntity=gameObject.GetComponent<Entity>();
+        currentStates = new List<State>();
+        bannedStates = new List<State>();
+        hostEntity = gameObject.GetComponent<Entity>();
     } 
     void Update()
     {
@@ -123,8 +125,10 @@ public class StatesManager : MonoBehaviour
 
     public void StopAll( )
     {
-        if (currentStates.Count == 0)return;
-        currentStates.ForEach(s => s.StopAffect());
+        if (currentStates.Count == 0) return;
+        foreach(State s in currentStates){
+            RemoveState(s);
+        }
         if (hostEntity?.emotePos?.childCount > 0)
         {
             if (hostEntity.emotePos.childCount > 0 && !currentStates.Exists( s => s is EmoteSetter))

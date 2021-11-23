@@ -12,17 +12,6 @@ public class Paralized : State
     public override void StartAffect(StatesManager newManager)
     {
         base.StartAffect(newManager);
-        //bool isPlayer = manager.hostEntity.GetComponent<PlayerManager>() != null;
-        //Debug.Log("player: " + isPlayer);
-        /*if(manager.hostEntity is PlayerManager)
-        {
-            player = manager.hostEntity as PlayerManager;
-            player.inputs.enabled=false;
-            player.abilityManager.enabled = false;
-            Debug.Log("kdspajd");
-        }else{
-            manager.hostEntity.enabled=false;
-        }*/
         entity = manager.hostEntity;
         isPlayer = entity is PlayerManager;
         if (isPlayer)
@@ -51,8 +40,7 @@ public class Paralized : State
     {
         if (isPlayer)
         {
-            if (player.inputs.enabled != value) player.inputs.enabled = value;
-            if (player.abilityManager.abiltySystem.activeInHierarchy != value) player.abilityManager.SetActive(value);
+            if (player.inputs.enabled != value) player.SetEnabledPlayer(value);
         }
         else
         {

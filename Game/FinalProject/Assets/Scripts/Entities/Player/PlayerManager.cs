@@ -495,6 +495,7 @@ public class PlayerManager : Entity
         abilityManager.LoadData();
         gameObject.GetComponent<SpriteRenderer>().color= new Color(1,1,1,1); 
         inmunityState.onEffect = false;
+        statesManager.StopAll();
         walkingSpeed = defaultwalkingSpeed;
         currentSpeed = walkingSpeed;
         currentStaminaLimit = maxStamina;
