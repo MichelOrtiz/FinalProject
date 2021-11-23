@@ -84,17 +84,18 @@ public class SaveFilesManager : MonoBehaviour
         if(currentSaveSlot==null)return;
         //Tiempo de juego
         TimeSpan timePlayed = DateTime.Now - startSession;
+        
         //Debug.Log(DateTime.Now.ToString() + " - " + startSession.ToString());
         currentSaveSlot.timeSecondsPlayed += timePlayed.Seconds;
-        while(currentSaveSlot.timeSecondsPlayed >= 60){
+        /*while(currentSaveSlot.timeSecondsPlayed >= 60){
             currentSaveSlot.timeSecondsPlayed -= 60;
             currentSaveSlot.timeMinutesPlayed += 1;
-        }
+        }*/
         currentSaveSlot.timeMinutesPlayed += timePlayed.Minutes;
-        while(currentSaveSlot.timeMinutesPlayed >= 60){
+        /*while(currentSaveSlot.timeMinutesPlayed >= 60){
             currentSaveSlot.timeMinutesPlayed -= 60;
             currentSaveSlot.timeHoursPlayed += 1;
-        }
+        }*/
         currentSaveSlot.timeHoursPlayed += timePlayed.Hours;
         currentSaveSlot.staminaLimit = PlayerManager.instance.currentStaminaLimit;
         //Abilidades
