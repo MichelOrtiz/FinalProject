@@ -101,7 +101,9 @@ public class Inventory : MonoBehaviour
         }
     }
     public void Remove(Item item){
-        StartCoroutine(item.UndoCooldown());
+        if(item.isInCooldown){
+            StartCoroutine(item.UndoCooldown());
+        }
         items.Remove(item);
         if(onItemChangedCallBack != null){
             onItemChangedCallBack.Invoke();
