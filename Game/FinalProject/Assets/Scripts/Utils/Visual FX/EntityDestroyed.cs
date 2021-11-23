@@ -2,7 +2,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class EntityDestroyed : MonoBehaviour
 {
-    public Entity entity;
+    //public GameObject entity;
     [SerializeField] private float lifeTime;
     private float curTime;
     private SpriteRenderer spriteRenderer;
@@ -10,7 +10,7 @@ public class EntityDestroyed : MonoBehaviour
     [SerializeField] private ParticleSystem particles;
 
 
-
+    
 
     public void Setup(Vector3 position, Quaternion rotation, Vector3 scale, SpriteRenderer spriteRenderer)
     {
@@ -53,5 +53,6 @@ public class EntityDestroyed : MonoBehaviour
     public void ParticleSystemStopped(Spore sender)
     {
         Destroy(gameObject);
+
     }
 }

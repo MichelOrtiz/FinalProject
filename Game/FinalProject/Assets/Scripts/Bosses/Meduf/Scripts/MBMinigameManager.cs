@@ -88,6 +88,7 @@ public class MBMinigameManager : MonoBehaviour
     void partsHandler_ChangedReference(GameObject reference)
     {
         currentHost = reference.transform.parent.gameObject;
+        currentHost.GetComponent<MBJumper>().accessMinigame = currentMinigameAccess;
         SetMinigame();
     }
 
