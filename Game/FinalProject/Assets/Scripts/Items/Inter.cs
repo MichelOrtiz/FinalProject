@@ -21,7 +21,7 @@ public class Inter : MonoBehaviour
         if (item != null)
         {
             imagen.sprite = item.icon;
-            
+            item.ResetValues();
         }
         
     }
