@@ -36,10 +36,12 @@ public class CastleBStageFight : BossFight
     new void Update()
     {
         // For testing, remove later
+        /*
         if (Input.GetKeyDown(KeyCode.R))
         {
             NextStage();
         }
+        */
         base.Update();
     }
 
