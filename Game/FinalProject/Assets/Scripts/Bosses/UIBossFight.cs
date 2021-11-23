@@ -11,6 +11,8 @@ public class UIBossFight : BossFight
 
     [SerializeField] private List<GameObject> objectsToHide;
 
+    private GameObject hatedCamera;
+
 
     new void Awake()
     {
@@ -25,6 +27,9 @@ public class UIBossFight : BossFight
         endBattlePopUp.closedPopUp -= PopUpUI_Closed;
         endBattlePopUp.closedPopUp += PopUpUI_Closed;
         PlayerManager.instance.SetEnabledPlayer(false);
+        hatedCamera = FindObjectOfType<CameraFollow>()?.gameObject;
+        hatedCamera?.SetActive(false);
+
     }
 
     new void Update()
@@ -82,6 +87,7 @@ public class UIBossFight : BossFight
         {
             // return to last scene
             ScenesManagers.SetListActive(objectsToHide, true);
+            hatedCamera?.SetActive(true);
             PlayerManager.instance.SetEnabledPlayer(true);
             ReturnToLastScene();
         }
