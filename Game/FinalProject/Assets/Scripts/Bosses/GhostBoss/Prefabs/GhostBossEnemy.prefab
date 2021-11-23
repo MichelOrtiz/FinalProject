@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2507103820491259}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7822935964956746317}
   m_Father: {fileID: 7651909674552066224}
@@ -46,8 +46,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.85, y: 3.21}
+  m_Offset: {x: -0.08160126, y: 0.23852563}
+  m_Size: {x: 2.0132024, y: 2.7329488}
   m_Direction: 0
 --- !u!114 &5281821335268834370
 MonoBehaviour:
@@ -91,7 +91,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303132916695167713}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.48, y: 1.27, z: -0}
+  m_LocalPosition: {x: 0.9, y: 1.91, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 7651909674552066224}
@@ -199,6 +199,7 @@ MonoBehaviour:
   jumpForce: {x: 0, y: 0}
   jumpForceMultiplier: {x: 0, y: 0}
   forceMode: 0
+  jumpState: {fileID: 0}
   pushForce: {x: 10, y: 10}
   pushMultiplier: {x: 15, y: 15}
   pushForceMode: 1
@@ -279,9 +280,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 2e6aa69f72092ba47aeaa3dc03258922, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64e8cbc61f49a064387e8c7e5787be4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2, y: 2}
@@ -487,6 +488,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8805213487483752607, guid: e6e7f9ca99e2a9f458dd9f8386675fbd, type: 3}
   shotPos: {fileID: 7651909674331589603}
   effectOnPlayer: {fileID: 11400000, guid: f2addd2a558feac4886e2824798f34f4, type: 2}
+  punishDamage: 0
   rotate: 0
   center: {fileID: 0}
   startingAngle: 0
@@ -520,7 +522,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7651909673708087745}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.93, y: 0.12, z: 0}
+  m_LocalPosition: {x: -2.47, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7651909674552066224}
@@ -614,7 +616,7 @@ Transform:
   m_GameObject: {fileID: 7651909674552066234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.57, y: 6.32, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5792175871632608985}
   - {fileID: 296710145089992502}
