@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CastleBLamp : MonoBehaviour
 {
+    [SerializeField] private GameObject interSign;
     [SerializeField] private float interactionRadius;
     public bool canActivate;
     public bool activated;
@@ -16,6 +17,7 @@ public class CastleBLamp : MonoBehaviour
     {
         activated = true;
         canActivate = false;
+        interSign.SetActive(false);
         ActivatedHandler?.Invoke();        
     }
 
@@ -28,6 +30,7 @@ public class CastleBLamp : MonoBehaviour
         
 
         player = PlayerManager.instance;
+        interSign.SetActive(false);
     }
 
     // Update is called once per frame
@@ -38,10 +41,15 @@ public class CastleBLamp : MonoBehaviour
         {
             if (Vector2.Distance(player.GetPosition(), transform.position) <= interactionRadius)
             {
+                interSign.SetActive(true);
                 if (Input.GetKeyDown(player.inputs.controlBinds["MENUINTERACTION"]))
                 {
                     OnActivated();
                 }
+            }
+            else
+            {
+                interSign.SetActive(false);
             }
         }
     }

@@ -30,12 +30,16 @@ public class MBBossFight : BossFight
             
         }
         // delete later
-        base.Update();
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            NextStage();
+        }
+        //base.Update();
     }
 
     void minigameManager_AllMinigamesCompleted()
     {
-        EntityDestroyFx.Instance.StartDestroyFx(minigameManager.currentHost);
+        //EntityDestroyFx.Instance.StartDestroyFx(minigameManager.currentHost);
         EndBattle();
     }
 

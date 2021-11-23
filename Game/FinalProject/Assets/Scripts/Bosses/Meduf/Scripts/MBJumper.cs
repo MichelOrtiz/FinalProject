@@ -5,6 +5,7 @@ using UnityEngine;
 public class MBJumper : MonoBehaviour
 {
     #region Physics
+    [SerializeField] private bool enabledDestroyAnimation;
     [Header("Physics")]
     [SerializeField] private Vector2 jumpForce;
     [SerializeField] private float timeBtwJump;
@@ -28,7 +29,7 @@ public class MBJumper : MonoBehaviour
     [SerializeField] private GameObject machineFx;
     public GameObject MachineFx { get => machineFx; }
 
-    [SerializeField] private AccessMinigame accessMinigame;
+    [SerializeField] public AccessMinigame accessMinigame;
 
     private SpriteRenderer spriteRenderer;
     [SerializeField] private Color defaultColor;
@@ -144,24 +145,36 @@ void collisionHandler_TouchingContact(GameObject contact)
         rb.velocity = new Vector2();
     }
 
-void partsHandler_ChangedReference(GameObject reference)
-{
-    if (positionReference.Equals(reference))
+    void partsHandler_ChangedReference(GameObject reference)
     {
-        isReference = true;
-        GetComponent<SpriteRenderer>().enabled = true;
-        machineFx.SetActive(true);
-        transform.position = initialPosition;
+        if (positionReference.Equals(reference))
+        {
+            isReference = true;
+            GetComponent<SpriteRenderer>().enabled = true;
+            machineFx.SetActive(true);
+            transform.position = initialPosition;
 
+
+        }
+        else
+        {
+            isReference = false;
+            GetComponent<SpriteRenderer>().enabled = false;
+            machineFx.SetActive(false);
+
+            accessMinigame = null;
+        }
     }
-    else
+
+    /// <summary>
+    /// This function is called when the MonoBehaviour will be destroyed.
+    /// </summary>
+    void OnDestroy()
     {
-        isReference = false;
-        GetComponent<SpriteRenderer>().enabled = false;
-        machineFx.SetActive(false);
-
-        accessMinigame = null;
+        if (enabledDestroyAnimation && isReference)
+        {
+            EntityDestroyFx.Instance.StartDestroyFx(gameObject);
+        }
     }
-}
 
 }

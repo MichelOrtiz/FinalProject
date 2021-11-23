@@ -69,6 +69,7 @@ public class ItemInteractionManager : MonoBehaviour
                 if (currentState == null)
                 {
                     entity.DestroyEntity();
+                    states.Clear();
                 }
                 else
                 {

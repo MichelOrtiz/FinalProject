@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8dd118349436fc40b262f871527d901, type: 3}
   m_Name: TestStates
   m_EditorClassIdentifier: 
+  type: 0
   nombre: TestParalisis
   descripcion: Este objeto se usa para probar estados en el jugador
-  staminaGain: 0
   icon: {fileID: -2532124686515733147, guid: 89f02c9dfcbdaa84db7fb6ec0dfccb02, type: 3}
-  isDefault: 0
-  statusForPlayer: {fileID: 11400000, guid: 4fd612ba7cc7dc04e9aed3affede6cb3, type: 2}
+  isConsumable: 1
+  isInCooldown: 0
+  restoringCooldown: 0
+  cooldownTime: 3.5
+  currentCooldownTime: -0.0025814585
+  staminaGain: 0
+  statusForPlayer: {fileID: 11400000, guid: 674f4e097f3f2f048a9250daac29d08c, type: 2}

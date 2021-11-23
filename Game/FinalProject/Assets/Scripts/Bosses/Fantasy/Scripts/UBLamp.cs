@@ -5,6 +5,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class UBLamp : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject signInter;
     [SerializeField] private Sprite spriteWhenEnabled;
     [SerializeField] private Sprite spriteWhenDisabled;
 
@@ -57,7 +58,8 @@ public class UBLamp : MonoBehaviour
         player = PlayerManager.instance;
         canActivate = true;
 
-        player.inputs.Interact += inputs_Interact;
+        //player.inputs.Interact += inputs_Interact;
+        signInter.SetActive(false);
     }
 
     // Update is called once per frame
@@ -65,6 +67,7 @@ public class UBLamp : MonoBehaviour
     {
         //distanceFromTarget = Vector2.Distance(transform.position, targetObject.position);
         //Debug.Log(targetObject.position);
+        inputs_Interact();
         if (canActivate)
         {
             //ChangeSprite(spriteWhenEnabled);
@@ -91,17 +94,26 @@ public class UBLamp : MonoBehaviour
     void inputs_Interact()
     {
         float distanceFromPlayer = Vector2.Distance(transform.position, player.GetPosition());
-        if (distanceFromPlayer > interactionRadius || !canActivate) return;
-
-        //ChangeSprite(spriteWhenDisabled);
-        light2D.enabled = true;
-        collisionHandler.gameObject.SetActive(true);
-
-        ChangeSpriteColor(disabledColor);
-        /*else
+        if (distanceFromPlayer > interactionRadius || !canActivate)
         {
-        }*/
-        canActivate = false;
+            signInter.SetActive(false);
+            return;
+        }
+        signInter.SetActive(true);
+
+        if (player.inputs.interacting)
+        {
+            //ChangeSprite(spriteWhenDisabled);
+            light2D.enabled = true;
+            collisionHandler.gameObject.SetActive(true);
+
+            ChangeSpriteColor(disabledColor);
+            /*else
+            {
+            }*/
+            canActivate = false;
+        }
+
     }
 
     void ChangeSprite(Sprite sprite)

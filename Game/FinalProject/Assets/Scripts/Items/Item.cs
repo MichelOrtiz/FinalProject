@@ -17,6 +17,7 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public bool isConsumable = true;
     public bool isInCooldown = false;
+    public bool restoringCooldown = false;
     public float cooldownTime = 3.5f;
     [HideInInspector] public float currentCooldownTime;
     public virtual void Use(){
@@ -25,25 +26,30 @@ public class Item : ScriptableObject
             Debug.Log("Objeto en cooldown");
             return;
         }
+        isInCooldown = true;
         RemoveFromInventory();
     }
     public virtual void RemoveFromInventory(){
         Inventory.instance.Remove(this);
     }
     public IEnumerator UndoCooldown(){
-        if(cooldownTime > 0){
-            isInCooldown = true;
-            currentCooldownTime = 1f;
-            while(currentCooldownTime > 0){
-                currentCooldownTime -= Time.deltaTime / cooldownTime;
-                yield return null;   
+        if(!restoringCooldown){
+            if(cooldownTime > 0){
+                isInCooldown = true;
+                restoringCooldown = true;
+                currentCooldownTime = 1f;
+                while(currentCooldownTime > 0){
+                    currentCooldownTime -= Time.deltaTime / cooldownTime;
+                    yield return null;   
+                }
+                isInCooldown = false;
+                restoringCooldown = false;
             }
-            isInCooldown = false;
         }
-        
     }
     public void ResetValues(){
         isInCooldown = false;
+        restoringCooldown = false;
         currentCooldownTime = 0;
     }
 }
