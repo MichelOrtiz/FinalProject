@@ -31,6 +31,7 @@ public class CristalBossEnemy : Entity
 
     #region Player Interaction
     [Header("Player Interaction")]
+    [SerializeField] private GameObject signInter;
     [SerializeField] private float interactionRadius;
 
     [SerializeField] private Color colorWhenInteractuable;
@@ -67,7 +68,9 @@ public class CristalBossEnemy : Entity
     {
         base.Start();
         player = PlayerManager.instance;
-        player.inputs.Interact += inputs_Interact;
+        //player.inputs.Interact += inputs_Interact;
+        spriteRenderer.color = Color.white;
+        signInter.SetActive(false);
         lastPlatform = GetPosition();
     }
 
@@ -96,6 +99,7 @@ public class CristalBossEnemy : Entity
         
         if (justInteracted)
         {
+            spriteRenderer.color = Color.white;
             if (curCooldown > cooldownAfterInteraction)
             {
                 blinkingSprite.enabled = false;
@@ -116,17 +120,21 @@ public class CristalBossEnemy : Entity
         {
             if (distanceToPlayer <= interactionRadius)
             {
-                if (spriteRenderer.color != colorWhenInteractuable)
+                signInter.SetActive(true);
+                if (!justInteracted)
                 {
-                    spriteRenderer.color = colorWhenInteractuable;
+                    if (player.inputs.interacting)
+                    {
+                        spriteRenderer.color = colorWhenInteractuable;
+                        OnInteraction();
+                    }
                 }
+                spriteRenderer.color = colorWhenInteractuable;
             }
             else
             {
-                if (spriteRenderer.color != Color.white)
-                {
-                    spriteRenderer.color = Color.white;
-                }
+                signInter.SetActive(false);
+                spriteRenderer.color = Color.white;
             }
         }
         base.Update();
@@ -227,7 +235,7 @@ public class CristalBossEnemy : Entity
     }
 
 
-    void inputs_Interact()
+    /*void inputs_Interact()
     {
 
         if (!justInteracted)
@@ -242,10 +250,11 @@ public class CristalBossEnemy : Entity
                 spriteRenderer.color = defaultColor;
             }
         }
-    }
+    }*/
 
     private void OnInteraction()
     {
+        signInter.SetActive(false);
         blinkingSprite.enabled = true;
         spriteRenderer.color = Color.white;
         interactions++;

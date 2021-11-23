@@ -46,6 +46,7 @@ public class PlayerInputs : MonoBehaviour
     public Action MovedDown = delegate(){PlayerManager.instance.inputs.movementY=-1;};
 
     public Action Interact = delegate(){};
+    public bool interacting;
 
     public Action Jump;
     
@@ -129,6 +130,8 @@ public class PlayerInputs : MonoBehaviour
 
         PressedObj1 = Input.GetKeyDown(controlBinds["OBJ1"]);
         PressedObj2 = Input.GetKeyDown(controlBinds["OBJ2"]);
+
+        interacting = Input.GetKeyDown(controlBinds["MENUINTERACTION"]);
 
         HotbarInputs();
         

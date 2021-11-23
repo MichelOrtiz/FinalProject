@@ -176,4 +176,10 @@ public class UnicornHead : MonoBehaviour
         changingAttack = true;
         playerGroundChecker_ChangedGroundTagHandler();
     }
+
+
+    void OnDestroy()
+    {
+        EntityDestroyFx.Instance.StartDestroyFx(child);
+    }
 }

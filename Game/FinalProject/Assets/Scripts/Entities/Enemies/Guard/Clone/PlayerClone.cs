@@ -45,7 +45,7 @@ public abstract class PlayerClone : Enemy
     new void FixedUpdate()
     {
         // Every frame, a Cloner is added to the Queue, storing position, rotation and animation state from player current state
-        if (!player.collisionHandler.Contacts.Exists(c => c.tag == "SafeZone"))
+        if (!player.collisionHandler.Contacts.Exists(c => c != null && c.tag == "SafeZone"))
         {
             cloners.Enqueue( new Cloner { position = player.GetPosition(), rotation = player.transform.rotation, animationState = GetAnimationState() }  );
             if (curTime > delay)

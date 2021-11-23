@@ -4,6 +4,7 @@ public class EntityDestroyFx : MonoBehaviour
 {
     [SerializeField] private EntityDestroyed entityDestroyed;
     public static EntityDestroyFx Instance { get;  private set; }
+    byte count;
 
     void Awake()
     {
@@ -12,24 +13,26 @@ public class EntityDestroyFx : MonoBehaviour
     }
     public void StartDestroyFx(Entity entity)
     {
-        var newEntity = entity;
+        //entity.gameObject.SetActive(false);
         /*if (newEntity == null)
         {
             newEntity = Instantiate(entity, )
         }*/
-        entityDestroyed.Setup(newEntity.transform.position, newEntity.transform.rotation, newEntity.transform.localScale, newEntity.GetComponentInChildren<SpriteRenderer>());
-        Instantiate(entityDestroyed, newEntity.GetPosition(), newEntity.transform.rotation);
+        //entityDestroyed = new EntityDestroyed(newEntity.transform.position, newEntity.transform.rotation, newEntity.transform.localScale, newEntity.GetComponentInChildren<SpriteRenderer>());
+        var entDes = Instantiate(entityDestroyed, entity.transform.position, entity.transform.rotation);
+        entDes.Setup(entity.transform.position, entity.transform.rotation, entity.transform.localScale, entity.GetComponentInChildren<SpriteRenderer>());
     }
 
     public void StartDestroyFx(GameObject gmObj)
     {
-        var newEntity = gmObj;
+        //gmObj.SetActive(false);
         /*if (newEntity == null)
         {
             newEntity = Instantiate(entity, )
         }*/
-        entityDestroyed.Setup(newEntity.transform.position, newEntity.transform.rotation, newEntity.transform.localScale, newEntity.GetComponentInChildren<SpriteRenderer>());
-        Instantiate(entityDestroyed, newEntity.transform.position, newEntity.transform.rotation);
+        //entityDestroyed = new EntityDestroyed(newEntity.transform.position, newEntity.transform.rotation, newEntity.transform.localScale, newEntity.GetComponentInChildren<SpriteRenderer>());
+        var endDes = Instantiate(entityDestroyed, gmObj.transform.position, gmObj.transform.rotation);
+        endDes.Setup(gmObj.transform.position, gmObj.transform.rotation, gmObj.transform.localScale, gmObj.GetComponentInChildren<SpriteRenderer>());
     }
 
     public void DestroyAllEntitiesDestroyed()
