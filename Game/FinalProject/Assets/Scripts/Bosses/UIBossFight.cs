@@ -34,12 +34,10 @@ public class UIBossFight : BossFight
 
     new void Update()
     {
-        /*
         if (Input.GetKey(KeyCode.Return))
         {
             EndBattle();
         }
-        */
         base.Update();
     }
 

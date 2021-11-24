@@ -59,7 +59,6 @@ public class BossFight : MonoBehaviour
     }
 
     protected void Update() {
-        /*
         if(Input.GetKeyDown(KeyCode.L)){
             NextStage();
         }
@@ -67,7 +66,6 @@ public class BossFight : MonoBehaviour
         {
             
         }
-        */
     }
     public virtual void NextStage(){
         if(indexStage<stages.Count-1){

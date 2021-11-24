@@ -49,13 +49,12 @@ public class Inventory : MonoBehaviour
     private void Update() 
     {
         //Cheats
-        /*if(Input.GetKeyDown(KeyCode.P)){
+        if(Input.GetKeyDown(KeyCode.P)){
             AddMoney(1);
         }
         if(Input.GetKeyDown(KeyCode.O)){
             RemoveMoney(1);
         }
-        */
         
     }
     public int GetMoney(){

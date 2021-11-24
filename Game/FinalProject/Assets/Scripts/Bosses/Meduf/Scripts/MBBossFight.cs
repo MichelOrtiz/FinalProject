@@ -30,11 +30,10 @@ public class MBBossFight : BossFight
             
         }
         // delete later
-        /*if (Input.GetKeyDown(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             NextStage();
         }
-        */
         //base.Update();
     }
 
