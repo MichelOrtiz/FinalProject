@@ -18,9 +18,6 @@ public class PlayerInputs : MonoBehaviour
     public bool OpenAbilites {get;set;}
     public bool[] ItemHotbarUp = new bool[5];
     public bool[] ItemHotbarDown = new bool[5];
-    public bool[] EquipmentHotbar = new bool[5];
-
-
     public bool PressedObj1;
     public bool PressedObj2;
 
@@ -50,10 +47,8 @@ public class PlayerInputs : MonoBehaviour
 
     public Action Jump;
     
-    bool checkLag;
     private void Start() {
-        intputLag = defaultInputLag;  
-        checkLag = false;
+        intputLag = defaultInputLag;
     }
     
     void Update()

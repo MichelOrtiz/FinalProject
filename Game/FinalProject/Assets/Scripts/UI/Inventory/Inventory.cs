@@ -18,7 +18,6 @@ public class Inventory : MonoBehaviour
     public TextMeshProUGUI moneyText;
     public List<Item> items = new List<Item>();
     public int capacidad;
-
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallBack;
     

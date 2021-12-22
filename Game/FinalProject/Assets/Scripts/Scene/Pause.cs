@@ -27,8 +27,6 @@ public class Pause : MonoBehaviour
         panel.SetActive(false);
         settingsMenu.gameObject.SetActive(false);
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(inputs.Pause) && !MinigameUI.instance.InMinigame && !blocked)
@@ -46,14 +44,12 @@ public class Pause : MonoBehaviour
         FindObjectOfType<InteractionUI>()?.gameObject.SetActive(false);
         HandleActive(true);
     }
-
     public static void ResumeGame()
     {
         HandleActive(false);
         FindObjectOfType<InteractionUI>()?.gameObject.SetActive(true);
         AbilityUI.instance.UpdateUI();
     }
-
     static void HandleActive(bool value)
     {
         active = value;

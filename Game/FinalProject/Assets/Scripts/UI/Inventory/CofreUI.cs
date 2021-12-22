@@ -28,7 +28,6 @@ public class CofreUI : MonoBehaviour
     public Transform slotsInvUI;
     CofreSlot[] slotsCof;
     CofreSlot[] slotsInv;
-
     public ItemSlot moveItemSlot;
     private int pageCof;
     private int pageInv;
@@ -48,9 +47,6 @@ public class CofreUI : MonoBehaviour
         pageCof = 0;
         pageInv = 0;
         UpdateUI();
-    }
-    private void Update(){
-        
     }
     public void UpdateUI(){
 

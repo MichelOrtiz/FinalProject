@@ -15,11 +15,10 @@ public class InventoryUI : MonoBehaviour
         public Transform slotsParent;
         public Button nextButton;
         public Button prevButton;
-        
         [SerializeField] private GameObject InvSlotPrefab;
-    #endregion
-    
-    #region variables
+        #endregion
+
+        #region variables
         public InventorySlot focusedSlot {get;set;}
         public static InventoryUI instance;
         List<InventorySlot> slots;
@@ -49,8 +48,6 @@ public class InventoryUI : MonoBehaviour
             slots.Add(slot);
         }
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (PlayerManager.instance.inputs.enabled && PlayerManager.instance.inputs.OpenInventory)
@@ -79,7 +76,6 @@ public class InventoryUI : MonoBehaviour
         }
         UpdateUI();
     }
-
     public void UpdateUI(){
         for(int i=0; i < slotsInPage; i++){
             if((i+invPage) < Inventory.instance.items.Count){

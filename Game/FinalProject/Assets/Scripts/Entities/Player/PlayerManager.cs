@@ -26,7 +26,6 @@ public class PlayerManager : Entity
     public float currentGravity;
     public const float defaultMass = 10;
     public float currentMass;
-    public GameObject dodgePerectCollider;
     public const float defaultDmgMod = 1;
     public float dmgMod {get;set;}
     //private GameObject[] players;
@@ -35,7 +34,6 @@ public class PlayerManager : Entity
     #region Constant change Parameters
     public float currentStamina {get;set;}
     public float currentOxygen {get;set;}
-    private float moveInput; 
     private float jumpTimeCounter;
     #endregion
 
@@ -59,15 +57,9 @@ public class PlayerManager : Entity
     public GameObject Darkness;
     #endregion
 
-    #region states params // might be in a different class
-
-    private bool tirementRunning = false;
-    private bool tirementDrowning = false;
-    #endregion
     [SerializeField]private bool loosingStamina;
     [SerializeField]private bool loosingOxygen;
     private float regenCooldown;
-    ConveyScript convey;
     public PlayerInputs inputs;
     public State inmunityState;
     public AbilityManager abilityManager;
@@ -86,6 +78,7 @@ public class PlayerManager : Entity
         RestoreValuesForDead();
         base.Start();
         regenCooldown = 5;
+        GunProjectile.instance.ObjectShot -= gun_ObjectShot;
         GunProjectile.instance.ObjectShot += gun_ObjectShot;
     }
 
@@ -96,14 +89,9 @@ public class PlayerManager : Entity
             SetAnimationStates();
         }
         rigidbody2d.mass = currentMass;
-        /*animator.SetBool("Is Running", isRunning);
-        animator.SetBool("Is Aiming", isAiming);*/
         isStruggling = false;
         isWalking = inputs.movementX != 0 && isGrounded && !isRunning;
-        //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkFeetRadius, whatIsGround);
         isFalling = rigidbody2d.velocity.y < 0f;
-        //UpdateAnimation();
-
         if (!isCaptured)
         {
             if (!isFlying && !isDashingH && !isDashingV)
@@ -189,11 +177,8 @@ public class PlayerManager : Entity
         }   
         if (inputs.jump && isJumping)
         {
-            //animationManager.RestartAnimation();
-
             if (jumpTimeCounter>0)
             {
-                //animationManager.RestartAnimation("Nico_jump");
                 animationManager.RestartAnimation();
                 rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.gravityScale + jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
@@ -205,10 +190,8 @@ public class PlayerManager : Entity
         }
         else
         {
-            //isFalling = true;
             isJumping = false;
         }
-        //if(isGrounded)isJumping=false;
     }
 
     void Move()
@@ -227,8 +210,6 @@ public class PlayerManager : Entity
         {
             rigidbody2d.velocity = new Vector2(inputs.movementX * currentSpeed, rigidbody2d.velocity.y);    
         }
-
-        
     }
 
     void Flying()
@@ -247,20 +228,15 @@ public class PlayerManager : Entity
     /// <returns></returns>
     public IEnumerator Tirement(int timeTired, float damage)
     {
-        tirementRunning = true;
         yield return new WaitForSeconds(timeTired);
         TakeTirement(damage);
-        tirementRunning = false;
         yield return null;
         if (isInWater)
         {
-            tirementDrowning = true;
             yield return new WaitForSeconds(timeTired);
             TakeTirement(damage);
-            tirementDrowning = false;
             yield return null;
         }else{
-            tirementDrowning = false;
             yield return null;
         }
     }
@@ -273,19 +249,7 @@ public class PlayerManager : Entity
         }
         yield return new WaitForSeconds(timeDrowned);
     }
-        /*if (isInWater)
-        {
-            if (currentOxygen>0)
-            {
-                currentOxygen -= 3;
-                loosingOxygen = true;
-                oxygenBar.SetOxygen(currentOxygen);
-            }
-            if (currentOxygen<0)
-            {
-                oxygenBar.SetOxygen(0);
-            }
-        }*/
+        
     /// <summary>
     /// Increases a certain amount of stamina through given time
     /// </summary>
@@ -376,21 +340,7 @@ public class PlayerManager : Entity
         statesManager.AddStateDontRepeat(inmun);
 
     }
-/*
-    private void OnLevelWasLoaded(int level){
-        base.Start();
-        FindStartPos();
-        players = GameObject.FindGameObjectsWithTag("Player");
-        if (players.Length >1)
-        {
-            Destroy(players[1]);
-        }
-    }
 
-    void FindStartPos(){
-        transform.position = GameObject.FindWithTag("StartPos").transform.position;
-        //transform.position = loadlevel.instance.startPosition.transform.position;
-    }*/
     void WhenHeDied()
     {
         if(isDeath) return;
@@ -401,15 +351,6 @@ public class PlayerManager : Entity
         SetEnabledPlayer(false);
         isDeath = true;
         Instantiate(gameOverPrefab);
-        /*if(SceneController.instance != null && SaveFilesManager.instance != null && SaveFilesManager.instance.currentSaveSlot != null){
-            
-            //SceneController.instance.SceneChanged += RestoreValuesForDead;
-            string path = Application.dataPath + "/Partida" + SaveFilesManager.instance.currentSaveSlot.slotFile;
-            SaveFile newPartida = SaveFilesManager.instance.LoadSaveFile(path);
-            SaveFilesManager.instance.currentSaveSlot = newPartida;
-            SceneController.instance.Load(newPartida);
-        }*/
-
     }
 
     public void SetEnabledPlayer(bool value)
@@ -429,7 +370,7 @@ public class PlayerManager : Entity
     }
 
 
-    #region Animatioooon
+    #region Animation
     // Not proud of this but what can I do
     void SetAnimationStates()
     {
@@ -488,7 +429,7 @@ public class PlayerManager : Entity
         animationManager.ChangeAnimation("Nico_throw");
         animationManager.SetNextAnimation("Nico_idle");
     }
-
+    #endregion
     public void RestoreValuesForDead(){
         //statesManager.StopAll();
         EquipmentManager.instance.UnequipAll();
@@ -518,5 +459,4 @@ public class PlayerManager : Entity
         Inventory.instance.LoadSaveData();
         Cofre.instance.LoadSaveData();
     }
-    #endregion
 }
