@@ -126,15 +126,15 @@ public class StatesManager : MonoBehaviour
     public void StopAll( )
     {
         if (currentStates.Count == 0) return;
-        foreach(State s in currentStates){
-            RemoveState(s);
-        }
         if (hostEntity?.emotePos?.childCount > 0)
         {
             if (hostEntity.emotePos.childCount > 0 && !currentStates.Exists( s => s is EmoteSetter))
             {
                     Destroy(hostEntity.emotePos.GetChild(0).gameObject);
             }
+        }
+        foreach(State s in currentStates){
+            RemoveState(s);
         }
     }
 

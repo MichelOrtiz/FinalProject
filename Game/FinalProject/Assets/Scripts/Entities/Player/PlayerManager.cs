@@ -348,6 +348,7 @@ public class PlayerManager : Entity
         currentGravity = defaultGravity;
         rigidbody2d.gravityScale = currentGravity;
         animationManager.ChangeAnimation("Nico_pass_out");
+        statesManager.StopAll();
         SetEnabledPlayer(false);
         isDeath = true;
         Instantiate(gameOverPrefab);
