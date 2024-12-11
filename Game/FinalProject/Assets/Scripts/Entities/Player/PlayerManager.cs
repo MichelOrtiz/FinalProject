@@ -344,6 +344,7 @@ public class PlayerManager : Entity
     void WhenHeDied()
     {
         if(isDeath) return;
+        isDead = true;
         Debug.Log("ImdeadTnx4EvEr");
         currentGravity = defaultGravity;
         rigidbody2d.gravityScale = currentGravity;
@@ -453,6 +454,7 @@ public class PlayerManager : Entity
         isInSnow = false;  
         isInIce = false;
         isDeath = false;
+        isDead = false;
         DeathActive = true;
         animationManager.ChangeAnimation("Nico_idle");
         SetEnabledPlayer(true);

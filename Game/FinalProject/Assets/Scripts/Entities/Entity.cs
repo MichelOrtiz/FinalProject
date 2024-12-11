@@ -22,6 +22,8 @@ public class Entity : MonoBehaviour
     public bool isInSnow = false;
     public bool isInConvey = false;
     public bool isInDark = false;
+
+    public bool isDead = false;
     #endregion 
 
     #region Special States
@@ -185,6 +187,7 @@ public class Entity : MonoBehaviour
 
     public void DestroyEntity()
     {
+        isDead = true;
         EntityDestroyFx.Instance.StartDestroyFx(this);
         Destroy(gameObject);
     }

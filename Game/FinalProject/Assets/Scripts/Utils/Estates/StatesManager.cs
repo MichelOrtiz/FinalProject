@@ -29,6 +29,7 @@ public class StatesManager : MonoBehaviour
     /// <param name="newState">State to add</param>
     /// <returns>The instantiated state (could be different from the original)</returns>
     public State AddState(State newState){
+        if(hostEntity.isDead) return null;
         if(newState != null){
             if (!currentStates.Contains(newState) && !bannedStates.Contains(newState))
             {
@@ -46,6 +47,7 @@ public class StatesManager : MonoBehaviour
         return null;
     }
     public State AddState(State newState, Entity newEnemy){
+        if(hostEntity.isDead) return null;
         if(newState != null){
             if (!currentStates.Contains(newState) && !bannedStates.Contains(newState))
             {
@@ -67,6 +69,7 @@ public class StatesManager : MonoBehaviour
 
     public State AddStateDontRepeat(State newState)
     {
+        if(hostEntity.isDead) return null;
         if(newState != null){
             if (!currentStates.Exists(s => s.name == newState.name))
             {
@@ -91,6 +94,7 @@ public class StatesManager : MonoBehaviour
 
      public State AddStateDontRepeatName(State newState)
     {
+        if(hostEntity.isDead) return null;
         if(newState != null){
             if (!currentStates.Exists(s => s.ObjectName.Contains(newState.ObjectName)) || !currentStates.Exists(s => newState.ObjectName.Contains(s.ObjectName)) )
             {
@@ -126,16 +130,18 @@ public class StatesManager : MonoBehaviour
     public void StopAll( )
     {
         if (currentStates.Count == 0) return;
+        /*for(int i = 0; i < currentStates.Count; i++){
+            RemoveState(currentStates[i]);
+        }*/
+        currentStates.ForEach(state => state.StopAffect());
         if (hostEntity?.emotePos?.childCount > 0)
         {
             if (hostEntity.emotePos.childCount > 0 && !currentStates.Exists( s => s is EmoteSetter))
             {
-                    Destroy(hostEntity.emotePos.GetChild(0).gameObject);
+                Destroy(hostEntity.emotePos.GetChild(0).gameObject);
             }
         }
-        foreach(State s in currentStates){
-            RemoveState(s);
-        }
+        
     }
 
     public void StopAll( Type stateType )
